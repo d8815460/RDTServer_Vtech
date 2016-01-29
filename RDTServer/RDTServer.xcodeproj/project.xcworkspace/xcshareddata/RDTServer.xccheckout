@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>6EF88CF4-DD4E-4804-8E95-DD65F7DB15A0</string>
+	<key>IDESourceControlProjectName</key>
+	<string>project</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>EA3A5F289498B8ECC620F3472CC3A04E742339E6</key>
+		<string>http://stash.tutk.com:7990/scm/demo/ios_rdtserver.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>Sample/iOS/RDTServer/RDTServer.xcodeproj/project.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>EA3A5F289498B8ECC620F3472CC3A04E742339E6</key>
+		<string>../../../../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>http://stash.tutk.com:7990/scm/demo/ios_rdtserver.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>EA3A5F289498B8ECC620F3472CC3A04E742339E6</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>EA3A5F289498B8ECC620F3472CC3A04E742339E6</string>
+			<key>IDESourceControlWCCName</key>
+			<string>RDTServer</string>
+		</dict>
+	</array>
+</dict>
+</plist>
