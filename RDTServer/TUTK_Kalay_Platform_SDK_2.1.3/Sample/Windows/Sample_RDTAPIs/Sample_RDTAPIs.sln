@@ -1,0 +1,56 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "RDTClient", "RDTClient\RDTClient.vcproj", "{8A9FCB0C-61E8-45A9-9CE0-C61D9A76FEAB}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "RDTServer", "RDTServer\RDTServer.vcproj", "{C3D62A7C-2FA6-4BFB-AF07-13BC1C01AFF7}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug_Trace|Win32 = Debug_Trace|Win32
+		Debug_Trace|x64 = Debug_Trace|x64
+		Debug|Win32 = Debug|Win32
+		Debug|x64 = Debug|x64
+		Release_Trace|Win32 = Release_Trace|Win32
+		Release_Trace|x64 = Release_Trace|x64
+		Release|Win32 = Release|Win32
+		Release|x64 = Release|x64
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8A9FCB0C-61E8-45A9-9CE0-C61D9A76FEAB}.Debug_Trace|Win32.ActiveCfg = Debug_Trace|Win32
+		{8A9FCB0C-61E8-45A9-9CE0-C61D9A76FEAB}.Debug_Trace|Win32.Build.0 = Debug_Trace|Win32
+		{8A9FCB0C-61E8-45A9-9CE0-C61D9A76FEAB}.Debug_Trace|x64.ActiveCfg = Debug_Trace|x64
+		{8A9FCB0C-61E8-45A9-9CE0-C61D9A76FEAB}.Debug_Trace|x64.Build.0 = Debug_Trace|x64
+		{8A9FCB0C-61E8-45A9-9CE0-C61D9A76FEAB}.Debug|Win32.ActiveCfg = Debug|Win32
+		{8A9FCB0C-61E8-45A9-9CE0-C61D9A76FEAB}.Debug|Win32.Build.0 = Debug|Win32
+		{8A9FCB0C-61E8-45A9-9CE0-C61D9A76FEAB}.Debug|x64.ActiveCfg = Debug|x64
+		{8A9FCB0C-61E8-45A9-9CE0-C61D9A76FEAB}.Debug|x64.Build.0 = Debug|x64
+		{8A9FCB0C-61E8-45A9-9CE0-C61D9A76FEAB}.Release_Trace|Win32.ActiveCfg = Release_Trace|Win32
+		{8A9FCB0C-61E8-45A9-9CE0-C61D9A76FEAB}.Release_Trace|Win32.Build.0 = Release_Trace|Win32
+		{8A9FCB0C-61E8-45A9-9CE0-C61D9A76FEAB}.Release_Trace|x64.ActiveCfg = Release_Trace|x64
+		{8A9FCB0C-61E8-45A9-9CE0-C61D9A76FEAB}.Release_Trace|x64.Build.0 = Release_Trace|x64
+		{8A9FCB0C-61E8-45A9-9CE0-C61D9A76FEAB}.Release|Win32.ActiveCfg = Release|Win32
+		{8A9FCB0C-61E8-45A9-9CE0-C61D9A76FEAB}.Release|Win32.Build.0 = Release|Win32
+		{8A9FCB0C-61E8-45A9-9CE0-C61D9A76FEAB}.Release|x64.ActiveCfg = Release|x64
+		{8A9FCB0C-61E8-45A9-9CE0-C61D9A76FEAB}.Release|x64.Build.0 = Release|x64
+		{C3D62A7C-2FA6-4BFB-AF07-13BC1C01AFF7}.Debug_Trace|Win32.ActiveCfg = Debug_Trace|Win32
+		{C3D62A7C-2FA6-4BFB-AF07-13BC1C01AFF7}.Debug_Trace|Win32.Build.0 = Debug_Trace|Win32
+		{C3D62A7C-2FA6-4BFB-AF07-13BC1C01AFF7}.Debug_Trace|x64.ActiveCfg = Debug_Trace|x64
+		{C3D62A7C-2FA6-4BFB-AF07-13BC1C01AFF7}.Debug_Trace|x64.Build.0 = Debug_Trace|x64
+		{C3D62A7C-2FA6-4BFB-AF07-13BC1C01AFF7}.Debug|Win32.ActiveCfg = Debug|Win32
+		{C3D62A7C-2FA6-4BFB-AF07-13BC1C01AFF7}.Debug|Win32.Build.0 = Debug|Win32
+		{C3D62A7C-2FA6-4BFB-AF07-13BC1C01AFF7}.Debug|x64.ActiveCfg = Debug|x64
+		{C3D62A7C-2FA6-4BFB-AF07-13BC1C01AFF7}.Debug|x64.Build.0 = Debug|x64
+		{C3D62A7C-2FA6-4BFB-AF07-13BC1C01AFF7}.Release_Trace|Win32.ActiveCfg = Release_Trace|Win32
+		{C3D62A7C-2FA6-4BFB-AF07-13BC1C01AFF7}.Release_Trace|Win32.Build.0 = Release_Trace|Win32
+		{C3D62A7C-2FA6-4BFB-AF07-13BC1C01AFF7}.Release_Trace|x64.ActiveCfg = Release_Trace|x64
+		{C3D62A7C-2FA6-4BFB-AF07-13BC1C01AFF7}.Release_Trace|x64.Build.0 = Release_Trace|x64
+		{C3D62A7C-2FA6-4BFB-AF07-13BC1C01AFF7}.Release|Win32.ActiveCfg = Release|Win32
+		{C3D62A7C-2FA6-4BFB-AF07-13BC1C01AFF7}.Release|Win32.Build.0 = Release|Win32
+		{C3D62A7C-2FA6-4BFB-AF07-13BC1C01AFF7}.Release|x64.ActiveCfg = Release|x64
+		{C3D62A7C-2FA6-4BFB-AF07-13BC1C01AFF7}.Release|x64.Build.0 = Release|x64
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

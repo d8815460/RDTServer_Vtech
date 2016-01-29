@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<!--
+
+-->
+<head>
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="-1">
+  <title>IOTC & RDT Client Example</title>
+  <script type="text/javascript" src="common.js"></script>
+  <script type="text/javascript" src="example.js"></script>
+</head>
+<body data-name="IOTC_RDT" data-tools="pnacl newlib glibc clang-newlib win" data-configs="Debug Release" data-path="{tc}/{config}">
+  <h1>IOTC & RDT Client Example</h1>
+  <h2>Status: <code id="statusField">NO-STATUS</code></h2>
+  <p>The IOTC & RDT Client example demonstrates how to use the IOTC and RDT API.<br>
+     The IOTC & RDT API is normally only available to packaged apps with the requisite
+     socket permission, but can be enabled for debugging purposes using the
+     <code>--allow-nacl-socket-api=&lt;hostname&gt;</code> command line
+     flag.<br>
+     First select a connection type and fill in the device UID, then push the
+     "Connect" button to establish a connection.<br>
+     Any data received back will be output to the status log.<br>
+  </p>
+
+  
+  <form id="connectForm">
+    <h3>Connection type : </h3>
+    <select id="connect_type">
+      <option value="IOTC">IOTC</option>
+      <option value="RDT">RDT</option>
+    </select>
+
+	<h3>Device UID : </h3>
+	<input type="text" id="deviceUID" size="25" value="00000000000000000001">
+    <input type="submit" value="Connect">
+  </form>
+
+  <pre id="log" style="font-weight: bold"></pre>
+  <div id="listener"></div>
+</body>
+</html>

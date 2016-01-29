@@ -1,0 +1,799 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		A24D80151BFD796E00143462 /* json_reader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A24D80121BFD796E00143462 /* json_reader.cpp */; };
+		A24D80161BFD796E00143462 /* json_value.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A24D80131BFD796E00143462 /* json_value.cpp */; };
+		A24D80171BFD796E00143462 /* json_writer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A24D80141BFD796E00143462 /* json_writer.cpp */; };
+		A24FBA471C07143100EF516E /* libcurlpp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A24FBA461C07143100EF516E /* libcurlpp.a */; };
+		A24FBA491C07144400EF516E /* libutilspp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A24FBA481C07144400EF516E /* libutilspp.a */; };
+		A252ECD41C4C94C100772E01 /* BinraryRDTServerCommand.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A252EC851C4C94C100772E01 /* BinraryRDTServerCommand.cpp */; };
+		A252ECD51C4C94C100772E01 /* BinraryRDTServerConnect.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A252EC871C4C94C100772E01 /* BinraryRDTServerConnect.cpp */; };
+		A252ECD61C4C94C100772E01 /* Body.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A252EC891C4C94C100772E01 /* Body.cpp */; };
+		A252ECD71C4C94C100772E01 /* Command.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A252EC8B1C4C94C100772E01 /* Command.cpp */; };
+		A252ECD81C4C94C100772E01 /* Connect.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A252EC8F1C4C94C100772E01 /* Connect.cpp */; };
+		A252ECD91C4C94C100772E01 /* Device.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A252EC921C4C94C100772E01 /* Device.cpp */; };
+		A252ECDA1C4C94C100772E01 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A252EC961C4C94C100772E01 /* main.cpp */; };
+		A252ECDB1C4C94C100772E01 /* SampoDevice.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A252EC981C4C94C100772E01 /* SampoDevice.cpp */; };
+		A252ECDC1C4C94C100772E01 /* TUTKDoorDevice.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A252EC9A1C4C94C100772E01 /* TUTKDoorDevice.cpp */; };
+		A252ECDD1C4C94C100772E01 /* TUTKGasDevice.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A252EC9D1C4C94C100772E01 /* TUTKGasDevice.cpp */; };
+		A252ECDE1C4C94C100772E01 /* TUTKGatewayDevice.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A252ECA01C4C94C100772E01 /* TUTKGatewayDevice.cpp */; };
+		A252ECDF1C4C94C100772E01 /* TUTKLightingDevice.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A252ECA31C4C94C100772E01 /* TUTKLightingDevice.cpp */; };
+		A252ECE01C4C94C100772E01 /* TUTKPIRDevice.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A252ECA61C4C94C100772E01 /* TUTKPIRDevice.cpp */; };
+		A252ECE11C4C94C100772E01 /* TUTKPlugDevice.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A252ECA91C4C94C100772E01 /* TUTKPlugDevice.cpp */; };
+		A252ECE21C4C94C100772E01 /* TUTKSirenDevice.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A252ECAD1C4C94C100772E01 /* TUTKSirenDevice.cpp */; };
+		A252ECE31C4C94C100772E01 /* TUTKSmokeDevice.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A252ECB01C4C94C100772E01 /* TUTKSmokeDevice.cpp */; };
+		A252ECE41C4C94C100772E01 /* TUTKVibrateDevice.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A252ECB31C4C94C100772E01 /* TUTKVibrateDevice.cpp */; };
+		A252ECE51C4C94C100772E01 /* TUTKWaterLeakDevice.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A252ECB61C4C94C100772E01 /* TUTKWaterLeakDevice.cpp */; };
+		A252ECE61C4C94C100772E01 /* UTF.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A252ECB91C4C94C100772E01 /* UTF.cpp */; };
+		A252ECE71C4C94C100772E01 /* Utility.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A252ECBB1C4C94C100772E01 /* Utility.cpp */; };
+		A252ECE81C4C94C100772E01 /* VtechGarageDoorDevice.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A252ECBD1C4C94C100772E01 /* VtechGarageDoorDevice.cpp */; };
+		A252ECE91C4C94C100772E01 /* VtechIPHubGatewayDevice.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A252ECC01C4C94C100772E01 /* VtechIPHubGatewayDevice.cpp */; };
+		A252ECEA1C4C94C100772E01 /* VtechLightBulbDevice.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A252ECC31C4C94C100772E01 /* VtechLightBulbDevice.cpp */; };
+		A252ECEB1C4C94C100772E01 /* VtechMotionSensorDevice.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A252ECC61C4C94C100772E01 /* VtechMotionSensorDevice.cpp */; };
+		A252ECEC1C4C94C100772E01 /* VtechOpenClosedDevice.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A252ECC91C4C94C100772E01 /* VtechOpenClosedDevice.cpp */; };
+		A252ECED1C4C94C100772E01 /* VtechVirtualGroupDevice.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A252ECCC1C4C94C100772E01 /* VtechVirtualGroupDevice.cpp */; };
+		A252ECEE1C4C94C100772E01 /* VtechWallSwitchDevice.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A252ECCF1C4C94C100772E01 /* VtechWallSwitchDevice.cpp */; };
+		A252ECEF1C4C94C100772E01 /* ZhongHanDevice.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A252ECD21C4C94C100772E01 /* ZhongHanDevice.cpp */; };
+		A25CDE901C50CD630027F37E /* JsonRDTServerCommand.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A25CDE8E1C50CD630027F37E /* JsonRDTServerCommand.cpp */; };
+		A25CDE961C50D1900027F37E /* BinraryRDTClientConnect.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A25CDE951C50D1900027F37E /* BinraryRDTClientConnect.cpp */; };
+		A25CDE9C1C50D3B20027F37E /* JsonRDTClientDevice.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A25CDE9A1C50D3B20027F37E /* JsonRDTClientDevice.cpp */; };
+		A25CDE9F1C50D4EF0027F37E /* BinraryRDTClientCommand.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A25CDE9D1C50D4EF0027F37E /* BinraryRDTClientCommand.cpp */; };
+		A278363D1C3B8A9700283F81 /* MQTTConnectClient.c in Sources */ = {isa = PBXBuildFile; fileRef = A278362D1C3B8A9700283F81 /* MQTTConnectClient.c */; };
+		A278363E1C3B8A9700283F81 /* MQTTConnectServer.c in Sources */ = {isa = PBXBuildFile; fileRef = A278362E1C3B8A9700283F81 /* MQTTConnectServer.c */; };
+		A278363F1C3B8A9700283F81 /* MQTTDeserializePublish.c in Sources */ = {isa = PBXBuildFile; fileRef = A278362F1C3B8A9700283F81 /* MQTTDeserializePublish.c */; };
+		A27836401C3B8A9700283F81 /* MQTTFormat.c in Sources */ = {isa = PBXBuildFile; fileRef = A27836301C3B8A9700283F81 /* MQTTFormat.c */; };
+		A27836411C3B8A9700283F81 /* MQTTPacket.c in Sources */ = {isa = PBXBuildFile; fileRef = A27836321C3B8A9700283F81 /* MQTTPacket.c */; };
+		A27836421C3B8A9700283F81 /* MQTTSerializePublish.c in Sources */ = {isa = PBXBuildFile; fileRef = A27836351C3B8A9700283F81 /* MQTTSerializePublish.c */; };
+		A27836431C3B8A9700283F81 /* MQTTSubscribeClient.c in Sources */ = {isa = PBXBuildFile; fileRef = A27836371C3B8A9700283F81 /* MQTTSubscribeClient.c */; };
+		A27836441C3B8A9700283F81 /* MQTTSubscribeServer.c in Sources */ = {isa = PBXBuildFile; fileRef = A27836381C3B8A9700283F81 /* MQTTSubscribeServer.c */; };
+		A27836451C3B8A9700283F81 /* MQTTUnsubscribeClient.c in Sources */ = {isa = PBXBuildFile; fileRef = A278363A1C3B8A9700283F81 /* MQTTUnsubscribeClient.c */; };
+		A27836461C3B8A9700283F81 /* MQTTUnsubscribeServer.c in Sources */ = {isa = PBXBuildFile; fileRef = A278363B1C3B8A9700283F81 /* MQTTUnsubscribeServer.c */; };
+		A27836491C3B8AC900283F81 /* linux.h in Sources */ = {isa = PBXBuildFile; fileRef = A27836481C3B8AC900283F81 /* linux.h */; };
+		A29A73591C571F910038D98A /* JsonRDTClientCommand.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A29A73571C571F910038D98A /* JsonRDTClientCommand.cpp */; };
+		A2ECA4981C59F49400F7215B /* JsonRDTCommand.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A2ECA4961C59F49400F7215B /* JsonRDTCommand.cpp */; };
+		A2ECA4AC1C5A23EA00F7215B /* Hardward.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A2ECA4A61C5A23EA00F7215B /* Hardward.cpp */; };
+		A2ECA4AE1C5A23EA00F7215B /* VtechHardward.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A2ECA4AA1C5A23EA00F7215B /* VtechHardward.cpp */; };
+		A2F639261C5B578500992AFC /* JsonRDTServerHardward.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A2F639241C5B578500992AFC /* JsonRDTServerHardward.cpp */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		A2BF71781AC95A4600379199 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		A24D80071BFD791A00143462 /* assertions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = assertions.h; path = "3th_party/jsoncpp-1.6.5/include/json/assertions.h"; sourceTree = "<group>"; };
+		A24D80081BFD791A00143462 /* autolink.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = autolink.h; path = "3th_party/jsoncpp-1.6.5/include/json/autolink.h"; sourceTree = "<group>"; };
+		A24D80091BFD791A00143462 /* config.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = config.h; path = "3th_party/jsoncpp-1.6.5/include/json/config.h"; sourceTree = "<group>"; };
+		A24D800A1BFD791A00143462 /* features.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = features.h; path = "3th_party/jsoncpp-1.6.5/include/json/features.h"; sourceTree = "<group>"; };
+		A24D800B1BFD791A00143462 /* forwards.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = forwards.h; path = "3th_party/jsoncpp-1.6.5/include/json/forwards.h"; sourceTree = "<group>"; };
+		A24D800C1BFD791A00143462 /* json.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = json.h; path = "3th_party/jsoncpp-1.6.5/include/json/json.h"; sourceTree = "<group>"; };
+		A24D800D1BFD791A00143462 /* reader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = reader.h; path = "3th_party/jsoncpp-1.6.5/include/json/reader.h"; sourceTree = "<group>"; };
+		A24D800E1BFD791A00143462 /* value.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = value.h; path = "3th_party/jsoncpp-1.6.5/include/json/value.h"; sourceTree = "<group>"; };
+		A24D800F1BFD791A00143462 /* version.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = version.h; path = "3th_party/jsoncpp-1.6.5/include/json/version.h"; sourceTree = "<group>"; };
+		A24D80101BFD791A00143462 /* writer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = writer.h; path = "3th_party/jsoncpp-1.6.5/include/json/writer.h"; sourceTree = "<group>"; };
+		A24D80121BFD796E00143462 /* json_reader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = json_reader.cpp; path = "3th_party/jsoncpp-1.6.5/src/lib_json/json_reader.cpp"; sourceTree = "<group>"; };
+		A24D80131BFD796E00143462 /* json_value.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = json_value.cpp; path = "3th_party/jsoncpp-1.6.5/src/lib_json/json_value.cpp"; sourceTree = "<group>"; };
+		A24D80141BFD796E00143462 /* json_writer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = json_writer.cpp; path = "3th_party/jsoncpp-1.6.5/src/lib_json/json_writer.cpp"; sourceTree = "<group>"; };
+		A24D80181BFD799400143462 /* json_tool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = json_tool.h; path = "3th_party/jsoncpp-1.6.5/src/lib_json/json_tool.h"; sourceTree = "<group>"; };
+		A24FBA461C07143100EF516E /* libcurlpp.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libcurlpp.a; path = "RDTServer/3th_party/curlpp-0.7.3/Librarys/libcurlpp.a"; sourceTree = "<group>"; };
+		A24FBA481C07144400EF516E /* libutilspp.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libutilspp.a; path = "RDTServer/3th_party/curlpp-0.7.3/Librarys/libutilspp.a"; sourceTree = "<group>"; };
+		A252EC821C4C946500772E01 /* PrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PrefixHeader.pch; path = src/PrefixHeader.pch; sourceTree = "<group>"; };
+		A252EC831C4C94C100772E01 /* AccessoryTypeEnum.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = AccessoryTypeEnum.hpp; path = src/AccessoryTypeEnum.hpp; sourceTree = "<group>"; };
+		A252EC851C4C94C100772E01 /* BinraryRDTServerCommand.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = BinraryRDTServerCommand.cpp; path = src/BinraryRDTServerCommand.cpp; sourceTree = "<group>"; };
+		A252EC861C4C94C100772E01 /* BinraryRDTServerCommand.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = BinraryRDTServerCommand.hpp; path = src/BinraryRDTServerCommand.hpp; sourceTree = "<group>"; };
+		A252EC871C4C94C100772E01 /* BinraryRDTServerConnect.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = BinraryRDTServerConnect.cpp; path = src/BinraryRDTServerConnect.cpp; sourceTree = "<group>"; };
+		A252EC881C4C94C100772E01 /* BinraryRDTServerConnect.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = BinraryRDTServerConnect.hpp; path = src/BinraryRDTServerConnect.hpp; sourceTree = "<group>"; };
+		A252EC891C4C94C100772E01 /* Body.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Body.cpp; path = src/Body.cpp; sourceTree = "<group>"; };
+		A252EC8A1C4C94C100772E01 /* Body.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = Body.hpp; path = src/Body.hpp; sourceTree = "<group>"; };
+		A252EC8B1C4C94C100772E01 /* Command.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Command.cpp; path = src/Command.cpp; sourceTree = "<group>"; };
+		A252EC8C1C4C94C100772E01 /* Command.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = Command.hpp; path = src/Command.hpp; sourceTree = "<group>"; };
+		A252EC8D1C4C94C100772E01 /* CommandEvent.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = CommandEvent.hpp; path = src/CommandEvent.hpp; sourceTree = "<group>"; };
+		A252EC8E1C4C94C100772E01 /* Common.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = Common.hpp; path = src/Common.hpp; sourceTree = "<group>"; };
+		A252EC8F1C4C94C100772E01 /* Connect.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Connect.cpp; path = src/Connect.cpp; sourceTree = "<group>"; };
+		A252EC901C4C94C100772E01 /* Connect.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = Connect.hpp; path = src/Connect.hpp; sourceTree = "<group>"; };
+		A252EC911C4C94C100772E01 /* ConnectEvent.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = ConnectEvent.hpp; path = src/ConnectEvent.hpp; sourceTree = "<group>"; };
+		A252EC921C4C94C100772E01 /* Device.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Device.cpp; path = src/Device.cpp; sourceTree = "<group>"; };
+		A252EC931C4C94C100772E01 /* Device.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = Device.hpp; path = src/Device.hpp; sourceTree = "<group>"; };
+		A252EC951C4C94C100772E01 /* Event.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = Event.hpp; path = src/Event.hpp; sourceTree = "<group>"; };
+		A252EC961C4C94C100772E01 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = src/main.cpp; sourceTree = "<group>"; };
+		A252EC981C4C94C100772E01 /* SampoDevice.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = SampoDevice.cpp; path = src/SampoDevice.cpp; sourceTree = "<group>"; };
+		A252EC991C4C94C100772E01 /* SampoDevice.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = SampoDevice.hpp; path = src/SampoDevice.hpp; sourceTree = "<group>"; };
+		A252EC9A1C4C94C100772E01 /* TUTKDoorDevice.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TUTKDoorDevice.cpp; path = src/TUTKDoorDevice.cpp; sourceTree = "<group>"; };
+		A252EC9B1C4C94C100772E01 /* TUTKDoorDevice.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = TUTKDoorDevice.hpp; path = src/TUTKDoorDevice.hpp; sourceTree = "<group>"; };
+		A252EC9C1C4C94C100772E01 /* TUTKDoorEnum.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = TUTKDoorEnum.hpp; path = src/TUTKDoorEnum.hpp; sourceTree = "<group>"; };
+		A252EC9D1C4C94C100772E01 /* TUTKGasDevice.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TUTKGasDevice.cpp; path = src/TUTKGasDevice.cpp; sourceTree = "<group>"; };
+		A252EC9E1C4C94C100772E01 /* TUTKGasDevice.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = TUTKGasDevice.hpp; path = src/TUTKGasDevice.hpp; sourceTree = "<group>"; };
+		A252EC9F1C4C94C100772E01 /* TUTKGasEnum.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = TUTKGasEnum.hpp; path = src/TUTKGasEnum.hpp; sourceTree = "<group>"; };
+		A252ECA01C4C94C100772E01 /* TUTKGatewayDevice.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TUTKGatewayDevice.cpp; path = src/TUTKGatewayDevice.cpp; sourceTree = "<group>"; };
+		A252ECA11C4C94C100772E01 /* TUTKGatewayDevice.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = TUTKGatewayDevice.hpp; path = src/TUTKGatewayDevice.hpp; sourceTree = "<group>"; };
+		A252ECA21C4C94C100772E01 /* TUTKGatewayEnum.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = TUTKGatewayEnum.hpp; path = src/TUTKGatewayEnum.hpp; sourceTree = "<group>"; };
+		A252ECA31C4C94C100772E01 /* TUTKLightingDevice.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TUTKLightingDevice.cpp; path = src/TUTKLightingDevice.cpp; sourceTree = "<group>"; };
+		A252ECA41C4C94C100772E01 /* TUTKLightingDevice.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = TUTKLightingDevice.hpp; path = src/TUTKLightingDevice.hpp; sourceTree = "<group>"; };
+		A252ECA51C4C94C100772E01 /* TUTKLightingEnum.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = TUTKLightingEnum.hpp; path = src/TUTKLightingEnum.hpp; sourceTree = "<group>"; };
+		A252ECA61C4C94C100772E01 /* TUTKPIRDevice.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TUTKPIRDevice.cpp; path = src/TUTKPIRDevice.cpp; sourceTree = "<group>"; };
+		A252ECA71C4C94C100772E01 /* TUTKPIRDevice.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = TUTKPIRDevice.hpp; path = src/TUTKPIRDevice.hpp; sourceTree = "<group>"; };
+		A252ECA81C4C94C100772E01 /* TUTKPIREnum.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = TUTKPIREnum.hpp; path = src/TUTKPIREnum.hpp; sourceTree = "<group>"; };
+		A252ECA91C4C94C100772E01 /* TUTKPlugDevice.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TUTKPlugDevice.cpp; path = src/TUTKPlugDevice.cpp; sourceTree = "<group>"; };
+		A252ECAA1C4C94C100772E01 /* TUTKPlugDevice.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = TUTKPlugDevice.hpp; path = src/TUTKPlugDevice.hpp; sourceTree = "<group>"; };
+		A252ECAB1C4C94C100772E01 /* TUTKPlugEnum.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = TUTKPlugEnum.hpp; path = src/TUTKPlugEnum.hpp; sourceTree = "<group>"; };
+		A252ECAC1C4C94C100772E01 /* TUTKSampoEnum.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = TUTKSampoEnum.hpp; path = src/TUTKSampoEnum.hpp; sourceTree = "<group>"; };
+		A252ECAD1C4C94C100772E01 /* TUTKSirenDevice.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TUTKSirenDevice.cpp; path = src/TUTKSirenDevice.cpp; sourceTree = "<group>"; };
+		A252ECAE1C4C94C100772E01 /* TUTKSirenDevice.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = TUTKSirenDevice.hpp; path = src/TUTKSirenDevice.hpp; sourceTree = "<group>"; };
+		A252ECAF1C4C94C100772E01 /* TUTKSirenEnum.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = TUTKSirenEnum.hpp; path = src/TUTKSirenEnum.hpp; sourceTree = "<group>"; };
+		A252ECB01C4C94C100772E01 /* TUTKSmokeDevice.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TUTKSmokeDevice.cpp; path = src/TUTKSmokeDevice.cpp; sourceTree = "<group>"; };
+		A252ECB11C4C94C100772E01 /* TUTKSmokeDevice.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = TUTKSmokeDevice.hpp; path = src/TUTKSmokeDevice.hpp; sourceTree = "<group>"; };
+		A252ECB21C4C94C100772E01 /* TUTKSmokeEnum.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = TUTKSmokeEnum.hpp; path = src/TUTKSmokeEnum.hpp; sourceTree = "<group>"; };
+		A252ECB31C4C94C100772E01 /* TUTKVibrateDevice.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TUTKVibrateDevice.cpp; path = src/TUTKVibrateDevice.cpp; sourceTree = "<group>"; };
+		A252ECB41C4C94C100772E01 /* TUTKVibrateDevice.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = TUTKVibrateDevice.hpp; path = src/TUTKVibrateDevice.hpp; sourceTree = "<group>"; };
+		A252ECB51C4C94C100772E01 /* TUTKVibrateEnum.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = TUTKVibrateEnum.hpp; path = src/TUTKVibrateEnum.hpp; sourceTree = "<group>"; };
+		A252ECB61C4C94C100772E01 /* TUTKWaterLeakDevice.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TUTKWaterLeakDevice.cpp; path = src/TUTKWaterLeakDevice.cpp; sourceTree = "<group>"; };
+		A252ECB71C4C94C100772E01 /* TUTKWaterLeakDevice.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = TUTKWaterLeakDevice.hpp; path = src/TUTKWaterLeakDevice.hpp; sourceTree = "<group>"; };
+		A252ECB81C4C94C100772E01 /* TUTKWaterLeakEnum.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = TUTKWaterLeakEnum.hpp; path = src/TUTKWaterLeakEnum.hpp; sourceTree = "<group>"; };
+		A252ECB91C4C94C100772E01 /* UTF.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = UTF.cpp; path = src/UTF.cpp; sourceTree = "<group>"; };
+		A252ECBA1C4C94C100772E01 /* UTF.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = UTF.hpp; path = src/UTF.hpp; sourceTree = "<group>"; };
+		A252ECBB1C4C94C100772E01 /* Utility.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Utility.cpp; path = src/Utility.cpp; sourceTree = "<group>"; };
+		A252ECBC1C4C94C100772E01 /* Utility.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = Utility.hpp; path = src/Utility.hpp; sourceTree = "<group>"; };
+		A252ECBD1C4C94C100772E01 /* VtechGarageDoorDevice.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = VtechGarageDoorDevice.cpp; path = src/VtechGarageDoorDevice.cpp; sourceTree = "<group>"; };
+		A252ECBE1C4C94C100772E01 /* VtechGarageDoorDevice.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = VtechGarageDoorDevice.hpp; path = src/VtechGarageDoorDevice.hpp; sourceTree = "<group>"; };
+		A252ECBF1C4C94C100772E01 /* VtechGarageDoorEnum.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = VtechGarageDoorEnum.hpp; path = src/VtechGarageDoorEnum.hpp; sourceTree = "<group>"; };
+		A252ECC01C4C94C100772E01 /* VtechIPHubGatewayDevice.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = VtechIPHubGatewayDevice.cpp; path = src/VtechIPHubGatewayDevice.cpp; sourceTree = "<group>"; };
+		A252ECC11C4C94C100772E01 /* VtechIPHubGatewayDevice.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = VtechIPHubGatewayDevice.hpp; path = src/VtechIPHubGatewayDevice.hpp; sourceTree = "<group>"; };
+		A252ECC21C4C94C100772E01 /* VtechIPHubGatewayEnum.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = VtechIPHubGatewayEnum.hpp; path = src/VtechIPHubGatewayEnum.hpp; sourceTree = "<group>"; };
+		A252ECC31C4C94C100772E01 /* VtechLightBulbDevice.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = VtechLightBulbDevice.cpp; path = src/VtechLightBulbDevice.cpp; sourceTree = "<group>"; };
+		A252ECC41C4C94C100772E01 /* VtechLightBulbDevice.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = VtechLightBulbDevice.hpp; path = src/VtechLightBulbDevice.hpp; sourceTree = "<group>"; };
+		A252ECC51C4C94C100772E01 /* VtechLightBulbEnum.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = VtechLightBulbEnum.hpp; path = src/VtechLightBulbEnum.hpp; sourceTree = "<group>"; };
+		A252ECC61C4C94C100772E01 /* VtechMotionSensorDevice.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = VtechMotionSensorDevice.cpp; path = src/VtechMotionSensorDevice.cpp; sourceTree = "<group>"; };
+		A252ECC71C4C94C100772E01 /* VtechMotionSensorDevice.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = VtechMotionSensorDevice.hpp; path = src/VtechMotionSensorDevice.hpp; sourceTree = "<group>"; };
+		A252ECC81C4C94C100772E01 /* VtechMotionSensorEnum.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = VtechMotionSensorEnum.hpp; path = src/VtechMotionSensorEnum.hpp; sourceTree = "<group>"; };
+		A252ECC91C4C94C100772E01 /* VtechOpenClosedDevice.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = VtechOpenClosedDevice.cpp; path = src/VtechOpenClosedDevice.cpp; sourceTree = "<group>"; };
+		A252ECCA1C4C94C100772E01 /* VtechOpenClosedDevice.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = VtechOpenClosedDevice.hpp; path = src/VtechOpenClosedDevice.hpp; sourceTree = "<group>"; };
+		A252ECCB1C4C94C100772E01 /* VtechOpenClosedEnum.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = VtechOpenClosedEnum.hpp; path = src/VtechOpenClosedEnum.hpp; sourceTree = "<group>"; };
+		A252ECCC1C4C94C100772E01 /* VtechVirtualGroupDevice.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = VtechVirtualGroupDevice.cpp; path = src/VtechVirtualGroupDevice.cpp; sourceTree = "<group>"; };
+		A252ECCD1C4C94C100772E01 /* VtechVirtualGroupDevice.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = VtechVirtualGroupDevice.hpp; path = src/VtechVirtualGroupDevice.hpp; sourceTree = "<group>"; };
+		A252ECCE1C4C94C100772E01 /* VtechVirtualGroupEnum.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = VtechVirtualGroupEnum.hpp; path = src/VtechVirtualGroupEnum.hpp; sourceTree = "<group>"; };
+		A252ECCF1C4C94C100772E01 /* VtechWallSwitchDevice.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = VtechWallSwitchDevice.cpp; path = src/VtechWallSwitchDevice.cpp; sourceTree = "<group>"; };
+		A252ECD01C4C94C100772E01 /* VtechWallSwitchDevice.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = VtechWallSwitchDevice.hpp; path = src/VtechWallSwitchDevice.hpp; sourceTree = "<group>"; };
+		A252ECD11C4C94C100772E01 /* VtechWallSwitchEnum.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = VtechWallSwitchEnum.hpp; path = src/VtechWallSwitchEnum.hpp; sourceTree = "<group>"; };
+		A252ECD21C4C94C100772E01 /* ZhongHanDevice.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ZhongHanDevice.cpp; path = src/ZhongHanDevice.cpp; sourceTree = "<group>"; };
+		A252ECD31C4C94C100772E01 /* ZhongHanDevice.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = ZhongHanDevice.hpp; path = src/ZhongHanDevice.hpp; sourceTree = "<group>"; };
+		A252ECF01C4CC86600772E01 /* platform_Config.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = platform_Config.h; path = src/platform_Config.h; sourceTree = "<group>"; };
+		A256252B1C3CFB250036692B /* MQTTEthernet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MQTTEthernet.h; sourceTree = "<group>"; };
+		A256252C1C3CFB250036692B /* MQTTSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MQTTSocket.h; sourceTree = "<group>"; };
+		A256252E1C3CFB310036692B /* Countdown.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Countdown.h; sourceTree = "<group>"; };
+		A256252F1C3CFB310036692B /* IPStack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPStack.h; sourceTree = "<group>"; };
+		A25625301C3CFB310036692B /* WifiIPStack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WifiIPStack.h; sourceTree = "<group>"; };
+		A25CDE8E1C50CD630027F37E /* JsonRDTServerCommand.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = JsonRDTServerCommand.cpp; path = src/JsonRDTServerCommand.cpp; sourceTree = "<group>"; };
+		A25CDE8F1C50CD630027F37E /* JsonRDTServerCommand.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = JsonRDTServerCommand.hpp; path = src/JsonRDTServerCommand.hpp; sourceTree = "<group>"; };
+		A25CDE941C50D18A0027F37E /* BinraryRDTClientConnect.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = BinraryRDTClientConnect.hpp; path = src/BinraryRDTClientConnect.hpp; sourceTree = "<group>"; };
+		A25CDE951C50D1900027F37E /* BinraryRDTClientConnect.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = BinraryRDTClientConnect.cpp; path = src/BinraryRDTClientConnect.cpp; sourceTree = "<group>"; };
+		A25CDE9A1C50D3B20027F37E /* JsonRDTClientDevice.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = JsonRDTClientDevice.cpp; path = src/JsonRDTClientDevice.cpp; sourceTree = "<group>"; };
+		A25CDE9B1C50D3B20027F37E /* JsonRDTClientDevice.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = JsonRDTClientDevice.hpp; path = src/JsonRDTClientDevice.hpp; sourceTree = "<group>"; };
+		A25CDE9D1C50D4EF0027F37E /* BinraryRDTClientCommand.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = BinraryRDTClientCommand.cpp; path = src/BinraryRDTClientCommand.cpp; sourceTree = "<group>"; };
+		A25CDE9E1C50D4EF0027F37E /* BinraryRDTClientCommand.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = BinraryRDTClientCommand.hpp; path = src/BinraryRDTClientCommand.hpp; sourceTree = "<group>"; };
+		A27836281C3B8A6500283F81 /* FP.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FP.h; path = RDTServer/3th_party/Paho_MQTT/MQTTClient/FP.h; sourceTree = "<group>"; };
+		A27836291C3B8A6500283F81 /* MQTTClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MQTTClient.h; path = RDTServer/3th_party/Paho_MQTT/MQTTClient/MQTTClient.h; sourceTree = "<group>"; };
+		A278362A1C3B8A6500283F81 /* MQTTLogging.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MQTTLogging.h; path = RDTServer/3th_party/Paho_MQTT/MQTTClient/MQTTLogging.h; sourceTree = "<group>"; };
+		A278362C1C3B8A9700283F81 /* MQTTConnect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MQTTConnect.h; path = RDTServer/3th_party/Paho_MQTT/MQTTPacket/src/MQTTConnect.h; sourceTree = "<group>"; };
+		A278362D1C3B8A9700283F81 /* MQTTConnectClient.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = MQTTConnectClient.c; path = RDTServer/3th_party/Paho_MQTT/MQTTPacket/src/MQTTConnectClient.c; sourceTree = "<group>"; };
+		A278362E1C3B8A9700283F81 /* MQTTConnectServer.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = MQTTConnectServer.c; path = RDTServer/3th_party/Paho_MQTT/MQTTPacket/src/MQTTConnectServer.c; sourceTree = "<group>"; };
+		A278362F1C3B8A9700283F81 /* MQTTDeserializePublish.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = MQTTDeserializePublish.c; path = RDTServer/3th_party/Paho_MQTT/MQTTPacket/src/MQTTDeserializePublish.c; sourceTree = "<group>"; };
+		A27836301C3B8A9700283F81 /* MQTTFormat.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = MQTTFormat.c; path = RDTServer/3th_party/Paho_MQTT/MQTTPacket/src/MQTTFormat.c; sourceTree = "<group>"; };
+		A27836311C3B8A9700283F81 /* MQTTFormat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MQTTFormat.h; path = RDTServer/3th_party/Paho_MQTT/MQTTPacket/src/MQTTFormat.h; sourceTree = "<group>"; };
+		A27836321C3B8A9700283F81 /* MQTTPacket.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = MQTTPacket.c; path = RDTServer/3th_party/Paho_MQTT/MQTTPacket/src/MQTTPacket.c; sourceTree = "<group>"; };
+		A27836331C3B8A9700283F81 /* MQTTPacket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MQTTPacket.h; path = RDTServer/3th_party/Paho_MQTT/MQTTPacket/src/MQTTPacket.h; sourceTree = "<group>"; };
+		A27836341C3B8A9700283F81 /* MQTTPublish.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MQTTPublish.h; path = RDTServer/3th_party/Paho_MQTT/MQTTPacket/src/MQTTPublish.h; sourceTree = "<group>"; };
+		A27836351C3B8A9700283F81 /* MQTTSerializePublish.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = MQTTSerializePublish.c; path = RDTServer/3th_party/Paho_MQTT/MQTTPacket/src/MQTTSerializePublish.c; sourceTree = "<group>"; };
+		A27836361C3B8A9700283F81 /* MQTTSubscribe.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MQTTSubscribe.h; path = RDTServer/3th_party/Paho_MQTT/MQTTPacket/src/MQTTSubscribe.h; sourceTree = "<group>"; };
+		A27836371C3B8A9700283F81 /* MQTTSubscribeClient.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = MQTTSubscribeClient.c; path = RDTServer/3th_party/Paho_MQTT/MQTTPacket/src/MQTTSubscribeClient.c; sourceTree = "<group>"; };
+		A27836381C3B8A9700283F81 /* MQTTSubscribeServer.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = MQTTSubscribeServer.c; path = RDTServer/3th_party/Paho_MQTT/MQTTPacket/src/MQTTSubscribeServer.c; sourceTree = "<group>"; };
+		A27836391C3B8A9700283F81 /* MQTTUnsubscribe.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MQTTUnsubscribe.h; path = RDTServer/3th_party/Paho_MQTT/MQTTPacket/src/MQTTUnsubscribe.h; sourceTree = "<group>"; };
+		A278363A1C3B8A9700283F81 /* MQTTUnsubscribeClient.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = MQTTUnsubscribeClient.c; path = RDTServer/3th_party/Paho_MQTT/MQTTPacket/src/MQTTUnsubscribeClient.c; sourceTree = "<group>"; };
+		A278363B1C3B8A9700283F81 /* MQTTUnsubscribeServer.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = MQTTUnsubscribeServer.c; path = RDTServer/3th_party/Paho_MQTT/MQTTPacket/src/MQTTUnsubscribeServer.c; sourceTree = "<group>"; };
+		A278363C1C3B8A9700283F81 /* StackTrace.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StackTrace.h; path = RDTServer/3th_party/Paho_MQTT/MQTTPacket/src/StackTrace.h; sourceTree = "<group>"; };
+		A27836481C3B8AC900283F81 /* linux.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = linux.h; path = RDTServer/3th_party/Paho_MQTT/MQTTClient/linux/linux.h; sourceTree = "<group>"; };
+		A29A73571C571F910038D98A /* JsonRDTClientCommand.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = JsonRDTClientCommand.cpp; path = src/JsonRDTClientCommand.cpp; sourceTree = "<group>"; };
+		A29A73581C571F910038D98A /* JsonRDTClientCommand.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = JsonRDTClientCommand.hpp; path = src/JsonRDTClientCommand.hpp; sourceTree = "<group>"; };
+		A2BF717A1AC95A4600379199 /* RDTServer */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = RDTServer; sourceTree = BUILT_PRODUCTS_DIR; };
+		A2ECA4961C59F49400F7215B /* JsonRDTCommand.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = JsonRDTCommand.cpp; path = src/JsonRDTCommand.cpp; sourceTree = "<group>"; };
+		A2ECA4971C59F49400F7215B /* JsonRDTCommand.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = JsonRDTCommand.hpp; path = src/JsonRDTCommand.hpp; sourceTree = "<group>"; };
+		A2ECA4A61C5A23EA00F7215B /* Hardward.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Hardward.cpp; path = src/Hardward.cpp; sourceTree = "<group>"; };
+		A2ECA4A71C5A23EA00F7215B /* Hardward.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = Hardward.hpp; path = src/Hardward.hpp; sourceTree = "<group>"; };
+		A2ECA4A91C5A23EA00F7215B /* HardwardEvent.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = HardwardEvent.hpp; path = src/HardwardEvent.hpp; sourceTree = "<group>"; };
+		A2ECA4AA1C5A23EA00F7215B /* VtechHardward.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = VtechHardward.cpp; path = src/VtechHardward.cpp; sourceTree = "<group>"; };
+		A2ECA4AB1C5A23EA00F7215B /* VtechHardward.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = VtechHardward.hpp; path = src/VtechHardward.hpp; sourceTree = "<group>"; };
+		A2F639241C5B578500992AFC /* JsonRDTServerHardward.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = JsonRDTServerHardward.cpp; path = src/JsonRDTServerHardward.cpp; sourceTree = "<group>"; };
+		A2F639251C5B578500992AFC /* JsonRDTServerHardward.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = JsonRDTServerHardward.hpp; path = src/JsonRDTServerHardward.hpp; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		A2BF71771AC95A4600379199 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A24FBA491C07144400EF516E /* libutilspp.a in Frameworks */,
+				A24FBA471C07143100EF516E /* libcurlpp.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		A24CEDE31C46248900496452 /* Connect */ = {
+			isa = PBXGroup;
+			children = (
+				A252EC911C4C94C100772E01 /* ConnectEvent.hpp */,
+				A252EC901C4C94C100772E01 /* Connect.hpp */,
+				A252EC8F1C4C94C100772E01 /* Connect.cpp */,
+				A252EC881C4C94C100772E01 /* BinraryRDTServerConnect.hpp */,
+				A252EC871C4C94C100772E01 /* BinraryRDTServerConnect.cpp */,
+				A25CDE941C50D18A0027F37E /* BinraryRDTClientConnect.hpp */,
+				A25CDE951C50D1900027F37E /* BinraryRDTClientConnect.cpp */,
+			);
+			name = Connect;
+			sourceTree = "<group>";
+		};
+		A24D7FF81BFD6DB600143462 /* 3th Party */ = {
+			isa = PBXGroup;
+			children = (
+				A27836201C3B765500283F81 /* Paho_MQTT */,
+				A24FBA4A1C07145000EF516E /* Librarys */,
+				A24D80061BFD790900143462 /* jsoncpp */,
+			);
+			name = "3th Party";
+			sourceTree = "<group>";
+		};
+		A24D80061BFD790900143462 /* jsoncpp */ = {
+			isa = PBXGroup;
+			children = (
+				A24D80071BFD791A00143462 /* assertions.h */,
+				A24D80081BFD791A00143462 /* autolink.h */,
+				A24D80091BFD791A00143462 /* config.h */,
+				A24D800A1BFD791A00143462 /* features.h */,
+				A24D800B1BFD791A00143462 /* forwards.h */,
+				A24D800C1BFD791A00143462 /* json.h */,
+				A24D800D1BFD791A00143462 /* reader.h */,
+				A24D800E1BFD791A00143462 /* value.h */,
+				A24D800F1BFD791A00143462 /* version.h */,
+				A24D80101BFD791A00143462 /* writer.h */,
+				A24D80181BFD799400143462 /* json_tool.h */,
+				A24D80121BFD796E00143462 /* json_reader.cpp */,
+				A24D80131BFD796E00143462 /* json_value.cpp */,
+				A24D80141BFD796E00143462 /* json_writer.cpp */,
+			);
+			name = jsoncpp;
+			path = RDTServer;
+			sourceTree = "<group>";
+		};
+		A24F5A421C05B194004D7764 /* Vtech */ = {
+			isa = PBXGroup;
+			children = (
+				A252ECC21C4C94C100772E01 /* VtechIPHubGatewayEnum.hpp */,
+				A252ECC11C4C94C100772E01 /* VtechIPHubGatewayDevice.hpp */,
+				A252ECC01C4C94C100772E01 /* VtechIPHubGatewayDevice.cpp */,
+				A252ECBF1C4C94C100772E01 /* VtechGarageDoorEnum.hpp */,
+				A252ECBE1C4C94C100772E01 /* VtechGarageDoorDevice.hpp */,
+				A252ECBD1C4C94C100772E01 /* VtechGarageDoorDevice.cpp */,
+				A252ECCB1C4C94C100772E01 /* VtechOpenClosedEnum.hpp */,
+				A252ECCA1C4C94C100772E01 /* VtechOpenClosedDevice.hpp */,
+				A252ECC91C4C94C100772E01 /* VtechOpenClosedDevice.cpp */,
+				A252ECC81C4C94C100772E01 /* VtechMotionSensorEnum.hpp */,
+				A252ECC71C4C94C100772E01 /* VtechMotionSensorDevice.hpp */,
+				A252ECC61C4C94C100772E01 /* VtechMotionSensorDevice.cpp */,
+				A252ECC51C4C94C100772E01 /* VtechLightBulbEnum.hpp */,
+				A252ECC41C4C94C100772E01 /* VtechLightBulbDevice.hpp */,
+				A252ECC31C4C94C100772E01 /* VtechLightBulbDevice.cpp */,
+				A252ECD11C4C94C100772E01 /* VtechWallSwitchEnum.hpp */,
+				A252ECD01C4C94C100772E01 /* VtechWallSwitchDevice.hpp */,
+				A252ECCF1C4C94C100772E01 /* VtechWallSwitchDevice.cpp */,
+				A252ECCE1C4C94C100772E01 /* VtechVirtualGroupEnum.hpp */,
+				A252ECCD1C4C94C100772E01 /* VtechVirtualGroupDevice.hpp */,
+				A252ECCC1C4C94C100772E01 /* VtechVirtualGroupDevice.cpp */,
+			);
+			name = Vtech;
+			sourceTree = "<group>";
+		};
+		A24F5A521C05BD18004D7764 /* TUTK */ = {
+			isa = PBXGroup;
+			children = (
+				A252ECA21C4C94C100772E01 /* TUTKGatewayEnum.hpp */,
+				A252ECA11C4C94C100772E01 /* TUTKGatewayDevice.hpp */,
+				A252ECA01C4C94C100772E01 /* TUTKGatewayDevice.cpp */,
+				A252ECAB1C4C94C100772E01 /* TUTKPlugEnum.hpp */,
+				A252ECAA1C4C94C100772E01 /* TUTKPlugDevice.hpp */,
+				A252ECA91C4C94C100772E01 /* TUTKPlugDevice.cpp */,
+				A252ECA51C4C94C100772E01 /* TUTKLightingEnum.hpp */,
+				A252ECA41C4C94C100772E01 /* TUTKLightingDevice.hpp */,
+				A252ECA31C4C94C100772E01 /* TUTKLightingDevice.cpp */,
+				A252ECA81C4C94C100772E01 /* TUTKPIREnum.hpp */,
+				A252ECA71C4C94C100772E01 /* TUTKPIRDevice.hpp */,
+				A252ECA61C4C94C100772E01 /* TUTKPIRDevice.cpp */,
+				A252EC9C1C4C94C100772E01 /* TUTKDoorEnum.hpp */,
+				A252EC9B1C4C94C100772E01 /* TUTKDoorDevice.hpp */,
+				A252EC9A1C4C94C100772E01 /* TUTKDoorDevice.cpp */,
+				A252ECB81C4C94C100772E01 /* TUTKWaterLeakEnum.hpp */,
+				A252ECB71C4C94C100772E01 /* TUTKWaterLeakDevice.hpp */,
+				A252ECB61C4C94C100772E01 /* TUTKWaterLeakDevice.cpp */,
+				A252EC9F1C4C94C100772E01 /* TUTKGasEnum.hpp */,
+				A252EC9E1C4C94C100772E01 /* TUTKGasDevice.hpp */,
+				A252EC9D1C4C94C100772E01 /* TUTKGasDevice.cpp */,
+				A252ECAF1C4C94C100772E01 /* TUTKSirenEnum.hpp */,
+				A252ECAE1C4C94C100772E01 /* TUTKSirenDevice.hpp */,
+				A252ECAD1C4C94C100772E01 /* TUTKSirenDevice.cpp */,
+				A252ECB21C4C94C100772E01 /* TUTKSmokeEnum.hpp */,
+				A252ECB11C4C94C100772E01 /* TUTKSmokeDevice.hpp */,
+				A252ECB01C4C94C100772E01 /* TUTKSmokeDevice.cpp */,
+				A252ECB51C4C94C100772E01 /* TUTKVibrateEnum.hpp */,
+				A252ECB41C4C94C100772E01 /* TUTKVibrateDevice.hpp */,
+				A252ECB31C4C94C100772E01 /* TUTKVibrateDevice.cpp */,
+			);
+			name = TUTK;
+			sourceTree = "<group>";
+		};
+		A24FBA4A1C07145000EF516E /* Librarys */ = {
+			isa = PBXGroup;
+			children = (
+				A24FBA481C07144400EF516E /* libutilspp.a */,
+				A24FBA461C07143100EF516E /* libcurlpp.a */,
+			);
+			name = Librarys;
+			sourceTree = "<group>";
+		};
+		A256252A1C3CFB250036692B /* mbed */ = {
+			isa = PBXGroup;
+			children = (
+				A256252B1C3CFB250036692B /* MQTTEthernet.h */,
+				A256252C1C3CFB250036692B /* MQTTSocket.h */,
+			);
+			name = mbed;
+			path = RDTServer/3th_party/Paho_MQTT/MQTTClient/mbed;
+			sourceTree = "<group>";
+		};
+		A256252D1C3CFB310036692B /* arduino */ = {
+			isa = PBXGroup;
+			children = (
+				A256252E1C3CFB310036692B /* Countdown.h */,
+				A256252F1C3CFB310036692B /* IPStack.h */,
+				A25625301C3CFB310036692B /* WifiIPStack.h */,
+			);
+			name = arduino;
+			path = RDTServer/3th_party/Paho_MQTT/MQTTClient/arduino;
+			sourceTree = "<group>";
+		};
+		A27836201C3B765500283F81 /* Paho_MQTT */ = {
+			isa = PBXGroup;
+			children = (
+				A278362B1C3B8A6F00283F81 /* MQTTPacket */,
+				A27836271C3B8A5200283F81 /* MQTTClient */,
+			);
+			name = Paho_MQTT;
+			sourceTree = "<group>";
+		};
+		A27836271C3B8A5200283F81 /* MQTTClient */ = {
+			isa = PBXGroup;
+			children = (
+				A256252D1C3CFB310036692B /* arduino */,
+				A256252A1C3CFB250036692B /* mbed */,
+				A27836471C3B8ABF00283F81 /* linux */,
+				A27836281C3B8A6500283F81 /* FP.h */,
+				A27836291C3B8A6500283F81 /* MQTTClient.h */,
+				A278362A1C3B8A6500283F81 /* MQTTLogging.h */,
+			);
+			name = MQTTClient;
+			sourceTree = "<group>";
+		};
+		A278362B1C3B8A6F00283F81 /* MQTTPacket */ = {
+			isa = PBXGroup;
+			children = (
+				A278362C1C3B8A9700283F81 /* MQTTConnect.h */,
+				A278362D1C3B8A9700283F81 /* MQTTConnectClient.c */,
+				A278362E1C3B8A9700283F81 /* MQTTConnectServer.c */,
+				A278362F1C3B8A9700283F81 /* MQTTDeserializePublish.c */,
+				A27836301C3B8A9700283F81 /* MQTTFormat.c */,
+				A27836311C3B8A9700283F81 /* MQTTFormat.h */,
+				A27836321C3B8A9700283F81 /* MQTTPacket.c */,
+				A27836331C3B8A9700283F81 /* MQTTPacket.h */,
+				A27836341C3B8A9700283F81 /* MQTTPublish.h */,
+				A27836351C3B8A9700283F81 /* MQTTSerializePublish.c */,
+				A27836361C3B8A9700283F81 /* MQTTSubscribe.h */,
+				A27836371C3B8A9700283F81 /* MQTTSubscribeClient.c */,
+				A27836381C3B8A9700283F81 /* MQTTSubscribeServer.c */,
+				A27836391C3B8A9700283F81 /* MQTTUnsubscribe.h */,
+				A278363A1C3B8A9700283F81 /* MQTTUnsubscribeClient.c */,
+				A278363B1C3B8A9700283F81 /* MQTTUnsubscribeServer.c */,
+				A278363C1C3B8A9700283F81 /* StackTrace.h */,
+			);
+			name = MQTTPacket;
+			sourceTree = "<group>";
+		};
+		A27836471C3B8ABF00283F81 /* linux */ = {
+			isa = PBXGroup;
+			children = (
+				A27836481C3B8AC900283F81 /* linux.h */,
+			);
+			name = linux;
+			sourceTree = "<group>";
+		};
+		A2A709B81C44D2570090FF5F /* Command */ = {
+			isa = PBXGroup;
+			children = (
+				A252EC8D1C4C94C100772E01 /* CommandEvent.hpp */,
+				A252EC8C1C4C94C100772E01 /* Command.hpp */,
+				A252EC8B1C4C94C100772E01 /* Command.cpp */,
+				A25CDE9E1C50D4EF0027F37E /* BinraryRDTClientCommand.hpp */,
+				A25CDE9D1C50D4EF0027F37E /* BinraryRDTClientCommand.cpp */,
+				A252EC861C4C94C100772E01 /* BinraryRDTServerCommand.hpp */,
+				A252EC851C4C94C100772E01 /* BinraryRDTServerCommand.cpp */,
+				A2ECA4971C59F49400F7215B /* JsonRDTCommand.hpp */,
+				A2ECA4961C59F49400F7215B /* JsonRDTCommand.cpp */,
+				A29A73581C571F910038D98A /* JsonRDTClientCommand.hpp */,
+				A29A73571C571F910038D98A /* JsonRDTClientCommand.cpp */,
+				A25CDE8F1C50CD630027F37E /* JsonRDTServerCommand.hpp */,
+				A25CDE8E1C50CD630027F37E /* JsonRDTServerCommand.cpp */,
+			);
+			name = Command;
+			sourceTree = "<group>";
+		};
+		A2BF71711AC95A4600379199 = {
+			isa = PBXGroup;
+			children = (
+				A2BF717C1AC95A4600379199 /* RDTServer */,
+				A24D7FF81BFD6DB600143462 /* 3th Party */,
+				A2BF717B1AC95A4600379199 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		A2BF717B1AC95A4600379199 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				A2BF717A1AC95A4600379199 /* RDTServer */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		A2BF717C1AC95A4600379199 /* RDTServer */ = {
+			isa = PBXGroup;
+			children = (
+				A252ECF01C4CC86600772E01 /* platform_Config.h */,
+				A252EC821C4C946500772E01 /* PrefixHeader.pch */,
+				A252ECBA1C4C94C100772E01 /* UTF.hpp */,
+				A252ECB91C4C94C100772E01 /* UTF.cpp */,
+				A252ECBC1C4C94C100772E01 /* Utility.hpp */,
+				A252ECBB1C4C94C100772E01 /* Utility.cpp */,
+				A252EC8A1C4C94C100772E01 /* Body.hpp */,
+				A252EC891C4C94C100772E01 /* Body.cpp */,
+				A252EC8E1C4C94C100772E01 /* Common.hpp */,
+				A252EC931C4C94C100772E01 /* Device.hpp */,
+				A252EC921C4C94C100772E01 /* Device.cpp */,
+				A252EC951C4C94C100772E01 /* Event.hpp */,
+				A252EC961C4C94C100772E01 /* main.cpp */,
+				A24CEDE31C46248900496452 /* Connect */,
+				A2A709B81C44D2570090FF5F /* Command */,
+				A2ECA4A51C5A140100F7215B /* Hardward */,
+				A2EB62921B3293D800D7553C /* Devices */,
+			);
+			path = RDTServer;
+			sourceTree = "<group>";
+		};
+		A2EB62921B3293D800D7553C /* Devices */ = {
+			isa = PBXGroup;
+			children = (
+				A25CDE9B1C50D3B20027F37E /* JsonRDTClientDevice.hpp */,
+				A25CDE9A1C50D3B20027F37E /* JsonRDTClientDevice.cpp */,
+				A24F5A421C05B194004D7764 /* Vtech */,
+				A24F5A521C05BD18004D7764 /* TUTK */,
+				A252EC831C4C94C100772E01 /* AccessoryTypeEnum.hpp */,
+				A252ECAC1C4C94C100772E01 /* TUTKSampoEnum.hpp */,
+				A252EC991C4C94C100772E01 /* SampoDevice.hpp */,
+				A252EC981C4C94C100772E01 /* SampoDevice.cpp */,
+				A252ECD31C4C94C100772E01 /* ZhongHanDevice.hpp */,
+				A252ECD21C4C94C100772E01 /* ZhongHanDevice.cpp */,
+			);
+			name = Devices;
+			sourceTree = "<group>";
+		};
+		A2ECA4A51C5A140100F7215B /* Hardward */ = {
+			isa = PBXGroup;
+			children = (
+				A2ECA4A91C5A23EA00F7215B /* HardwardEvent.hpp */,
+				A2ECA4A71C5A23EA00F7215B /* Hardward.hpp */,
+				A2ECA4A61C5A23EA00F7215B /* Hardward.cpp */,
+				A2ECA4AB1C5A23EA00F7215B /* VtechHardward.hpp */,
+				A2ECA4AA1C5A23EA00F7215B /* VtechHardward.cpp */,
+				A2F639251C5B578500992AFC /* JsonRDTServerHardward.hpp */,
+				A2F639241C5B578500992AFC /* JsonRDTServerHardward.cpp */,
+			);
+			name = Hardward;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		A2BF71791AC95A4600379199 /* RDTServer */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A2BF71811AC95A4600379199 /* Build configuration list for PBXNativeTarget "RDTServer" */;
+			buildPhases = (
+				A2BF71761AC95A4600379199 /* Sources */,
+				A2BF71771AC95A4600379199 /* Frameworks */,
+				A2BF71781AC95A4600379199 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = RDTServer;
+			productName = RDTServer;
+			productReference = A2BF717A1AC95A4600379199 /* RDTServer */;
+			productType = "com.apple.product-type.tool";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		A2BF71721AC95A4600379199 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0630;
+				ORGANIZATIONNAME = jakey;
+				TargetAttributes = {
+					A2BF71791AC95A4600379199 = {
+						CreatedOnToolsVersion = 6.1.1;
+					};
+				};
+			};
+			buildConfigurationList = A2BF71751AC95A4600379199 /* Build configuration list for PBXProject "RDTServer" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = A2BF71711AC95A4600379199;
+			productRefGroup = A2BF717B1AC95A4600379199 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				A2BF71791AC95A4600379199 /* RDTServer */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		A2BF71761AC95A4600379199 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A24D80151BFD796E00143462 /* json_reader.cpp in Sources */,
+				A2ECA4AC1C5A23EA00F7215B /* Hardward.cpp in Sources */,
+				A25CDE9F1C50D4EF0027F37E /* BinraryRDTClientCommand.cpp in Sources */,
+				A24D80171BFD796E00143462 /* json_writer.cpp in Sources */,
+				A252ECE61C4C94C100772E01 /* UTF.cpp in Sources */,
+				A252ECE81C4C94C100772E01 /* VtechGarageDoorDevice.cpp in Sources */,
+				A252ECEE1C4C94C100772E01 /* VtechWallSwitchDevice.cpp in Sources */,
+				A29A73591C571F910038D98A /* JsonRDTClientCommand.cpp in Sources */,
+				A252ECE01C4C94C100772E01 /* TUTKPIRDevice.cpp in Sources */,
+				A25CDE961C50D1900027F37E /* BinraryRDTClientConnect.cpp in Sources */,
+				A27836441C3B8A9700283F81 /* MQTTSubscribeServer.c in Sources */,
+				A25CDE9C1C50D3B20027F37E /* JsonRDTClientDevice.cpp in Sources */,
+				A27836491C3B8AC900283F81 /* linux.h in Sources */,
+				A252ECE41C4C94C100772E01 /* TUTKVibrateDevice.cpp in Sources */,
+				A252ECD61C4C94C100772E01 /* Body.cpp in Sources */,
+				A252ECEA1C4C94C100772E01 /* VtechLightBulbDevice.cpp in Sources */,
+				A252ECDB1C4C94C100772E01 /* SampoDevice.cpp in Sources */,
+				A2F639261C5B578500992AFC /* JsonRDTServerHardward.cpp in Sources */,
+				A252ECED1C4C94C100772E01 /* VtechVirtualGroupDevice.cpp in Sources */,
+				A252ECD81C4C94C100772E01 /* Connect.cpp in Sources */,
+				A252ECEF1C4C94C100772E01 /* ZhongHanDevice.cpp in Sources */,
+				A252ECEB1C4C94C100772E01 /* VtechMotionSensorDevice.cpp in Sources */,
+				A278363E1C3B8A9700283F81 /* MQTTConnectServer.c in Sources */,
+				A24D80161BFD796E00143462 /* json_value.cpp in Sources */,
+				A2ECA4981C59F49400F7215B /* JsonRDTCommand.cpp in Sources */,
+				A27836421C3B8A9700283F81 /* MQTTSerializePublish.c in Sources */,
+				A278363D1C3B8A9700283F81 /* MQTTConnectClient.c in Sources */,
+				A252ECD51C4C94C100772E01 /* BinraryRDTServerConnect.cpp in Sources */,
+				A252ECDA1C4C94C100772E01 /* main.cpp in Sources */,
+				A252ECE21C4C94C100772E01 /* TUTKSirenDevice.cpp in Sources */,
+				A252ECE91C4C94C100772E01 /* VtechIPHubGatewayDevice.cpp in Sources */,
+				A252ECDC1C4C94C100772E01 /* TUTKDoorDevice.cpp in Sources */,
+				A27836431C3B8A9700283F81 /* MQTTSubscribeClient.c in Sources */,
+				A252ECDE1C4C94C100772E01 /* TUTKGatewayDevice.cpp in Sources */,
+				A27836451C3B8A9700283F81 /* MQTTUnsubscribeClient.c in Sources */,
+				A252ECDD1C4C94C100772E01 /* TUTKGasDevice.cpp in Sources */,
+				A252ECD71C4C94C100772E01 /* Command.cpp in Sources */,
+				A278363F1C3B8A9700283F81 /* MQTTDeserializePublish.c in Sources */,
+				A252ECE31C4C94C100772E01 /* TUTKSmokeDevice.cpp in Sources */,
+				A252ECE51C4C94C100772E01 /* TUTKWaterLeakDevice.cpp in Sources */,
+				A252ECD41C4C94C100772E01 /* BinraryRDTServerCommand.cpp in Sources */,
+				A2ECA4AE1C5A23EA00F7215B /* VtechHardward.cpp in Sources */,
+				A252ECE11C4C94C100772E01 /* TUTKPlugDevice.cpp in Sources */,
+				A252ECE71C4C94C100772E01 /* Utility.cpp in Sources */,
+				A27836461C3B8A9700283F81 /* MQTTUnsubscribeServer.c in Sources */,
+				A27836401C3B8A9700283F81 /* MQTTFormat.c in Sources */,
+				A27836411C3B8A9700283F81 /* MQTTPacket.c in Sources */,
+				A252ECD91C4C94C100772E01 /* Device.cpp in Sources */,
+				A252ECEC1C4C94C100772E01 /* VtechOpenClosedDevice.cpp in Sources */,
+				A252ECDF1C4C94C100772E01 /* TUTKLightingDevice.cpp in Sources */,
+				A25CDE901C50CD630027F37E /* JsonRDTServerCommand.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		A2BF717F1AC95A4600379199 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		A2BF71801AC95A4600379199 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		A2BF71821AC95A4600379199 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD)";
+				FRAMEWORK_SEARCH_PATHS = "";
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SRCROOT)/RDTServer/src/PrefixHeader.pch";
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					../TUTK_Kalay_Platform_SDK_2.1.3/Include,
+					"./RDTServer/3th_party/jsoncpp-1.6.5/include",
+					"./RDTServer/3th_party/curlpp-0.7.3/include",
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					../TUTK_Kalay_Platform_SDK_2.1.3/Lib/MAC,
+					"$(PROJECT_DIR)/RDTServer/3th_party/curlpp-0.7.3/Librarys",
+					"$(PROJECT_DIR)/RDTServer/lib/mac",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				ONLY_ACTIVE_ARCH = NO;
+				OTHER_LDFLAGS = (
+					"-lIOTCAPIs_ALL",
+					"-lcurl",
+				);
+				OTHER_LIBTOOLFLAGS = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				VALID_ARCHS = x86_64;
+			};
+			name = Debug;
+		};
+		A2BF71831AC95A4600379199 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD)";
+				FRAMEWORK_SEARCH_PATHS = "";
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SRCROOT)/RDTServer/src/PrefixHeader.pch";
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					../TUTK_Kalay_Platform_SDK_2.1.3/Include,
+					"./RDTServer/3th_party/jsoncpp-1.6.5/include",
+					"./RDTServer/3th_party/curlpp-0.7.3/include",
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					../TUTK_Kalay_Platform_SDK_2.1.3/Lib/MAC,
+					"$(PROJECT_DIR)/RDTServer/3th_party/curlpp-0.7.3/Librarys",
+					"$(PROJECT_DIR)/RDTServer/lib/mac",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				ONLY_ACTIVE_ARCH = NO;
+				OTHER_LDFLAGS = (
+					"-lIOTCAPIs_ALL",
+					"-lcurl",
+				);
+				OTHER_LIBTOOLFLAGS = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				VALID_ARCHS = x86_64;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		A2BF71751AC95A4600379199 /* Build configuration list for PBXProject "RDTServer" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A2BF717F1AC95A4600379199 /* Debug */,
+				A2BF71801AC95A4600379199 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A2BF71811AC95A4600379199 /* Build configuration list for PBXNativeTarget "RDTServer" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A2BF71821AC95A4600379199 /* Debug */,
+				A2BF71831AC95A4600379199 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = A2BF71721AC95A4600379199 /* Project object */;
+}
