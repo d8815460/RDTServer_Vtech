@@ -7,6 +7,8 @@
 //
 
 #include "JsonRDTCommand.hpp"
+#include <cstring>
+#include <unistd.h>
 #include "Common.hpp"
 #include "Utility.hpp"
 #include "IOTCAPIs.h"
