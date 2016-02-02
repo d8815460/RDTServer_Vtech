@@ -18,12 +18,25 @@
 #include "BinraryRDTServerConnect.hpp"
 #include "VtechVirtualGroupDevice.hpp"
 
+#include "unixclientstream.hpp"
+#include "exception.hpp"
+
+using namespace std;
+using libsocket::unix_stream_client; // need libsocket++
+using std::string;
+
+string socket_path = "/tmp/unixsocket";
+unix_stream_client sock(socket_path); // need libsocket++
+
+
 JsonRDTClientCommand::JsonRDTClientCommand(CommandEvent* pCommandEvent, Connect* pConnect, CommandData* pCommandData) : JsonRDTCommand(pCommandEvent, pConnect, pCommandData)
 {
     LOGD("JsonRDTClientCommand");
         
     pthread_t pThreadInput;
+	pthread_t pThreadsocketInput;
     pthread_create(&pThreadInput, NULL, &JsonRDTClientCommand::threadInput, (void*)this);
+	pthread_create(&pThreadsocketInput, NULL, &JsonRDTClientCommand::socketInput, (void*)this);
 }
 
 #pragma mark - ConnectEvent
@@ -126,22 +139,61 @@ void* JsonRDTClientCommand::threadInput(void *arg)
             //
             //        sleep(5);
         }
+
     }
     
     return NULL;
 }
 
+void* JsonRDTClientCommand::socketInput(void *arg)
+{
+
+    while(true) {
+		unsigned char buffer[BUFFER_SIZE];
+		memset(buffer, 0, BUFFER_SIZE);
+	
+		try {
+		sock.rcv(buffer,BUFFER_SIZE-1);
+		LOGD("we found the received payload = %s \n",buffer);
+		} catch (const libsocket::socket_exception& exc)
+		{
+		std::cerr << exc.mesg;
+		}
+	}
+	return NULL;
+
+}
+
+
 #pragma mark - Method
 
 #pragma mark - Command
 
+
+void JsonRDTClientCommand::sendToGateway(char* payload, int length)
+{
+
+	LOGD("Vtech call to send to gateway");
+
+	try {
+	sock.snd(payload,length-2);
+    } catch (const libsocket::socket_exception& exc)
+    {
+	std::cerr << exc.mesg;
+    }
+
+
+}
+
 void JsonRDTClientCommand::recvData(int channelID, BYTE* buffer, int totalLength)
 {
 //    LOGD("recvData");
-    
+
     char* json = (char*) (buffer + 11 - 1);
     int jsonLen = (int) strlen(json);
     
+	sendToGateway(json,jsonLen);
+
     // 清除最後header end 0x03 0x04
     json[jsonLen-1] = NULL;
     json[jsonLen-2] = NULL;

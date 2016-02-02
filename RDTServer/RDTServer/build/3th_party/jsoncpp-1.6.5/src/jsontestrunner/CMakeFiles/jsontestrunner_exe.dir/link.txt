@@ -1,1 +1,1 @@
-/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++    -std=c++11 -Werror -Wall -Wconversion -Wshadow -Wno-sign-conversion -O3 -DNDEBUG -Wl,-search_paths_first -Wl,-headerpad_max_install_names  CMakeFiles/jsontestrunner_exe.dir/main.cpp.o  -o jsontestrunner_exe  ../lib_json/libjsoncpp.a 
+/usr/bin/c++    -std=c++11 -Werror -Wall -Wconversion -Wshadow -Wextra -pedantic -O3 -DNDEBUG    CMakeFiles/jsontestrunner_exe.dir/main.cpp.o  -o jsontestrunner_exe -rdynamic ../lib_json/libjsoncpp.a 

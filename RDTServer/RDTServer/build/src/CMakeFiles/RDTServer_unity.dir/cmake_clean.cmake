@@ -1,4 +1,4 @@
-file(REMOVE_RECURSE
+FILE(REMOVE_RECURSE
   "cotire/RDTServer_CXX_prefix.hxx"
   "cotire/RDTServer_CXX_unity.cxx"
   "cotire/RDTServer_CXX_prefix.cxx"
@@ -8,6 +8,6 @@ file(REMOVE_RECURSE
 )
 
 # Per-language clean rules from dependency scanning.
-foreach(lang CXX)
-  include(CMakeFiles/RDTServer_unity.dir/cmake_clean_${lang}.cmake OPTIONAL)
-endforeach()
+FOREACH(lang CXX)
+  INCLUDE(CMakeFiles/RDTServer_unity.dir/cmake_clean_${lang}.cmake OPTIONAL)
+ENDFOREACH(lang)

@@ -1,60 +1,60 @@
 # The set of languages for which implicit dependencies are needed:
-set(CMAKE_DEPENDS_LANGUAGES
+SET(CMAKE_DEPENDS_LANGUAGES
   "CXX"
   )
 # The set of files for implicit dependencies of each language:
-set(CMAKE_DEPENDS_CHECK_CXX
-  "/Users/jakey/Documents/SyncData/Repository/TUTK/RDTServer/RDTServer/RDTServer/src/BinraryRDTClientCommand.cpp" "/Users/jakey/Documents/SyncData/Repository/TUTK/RDTServer/RDTServer/RDTServer/build/src/CMakeFiles/RDTServer.dir/BinraryRDTClientCommand.cpp.o"
-  "/Users/jakey/Documents/SyncData/Repository/TUTK/RDTServer/RDTServer/RDTServer/src/BinraryRDTClientConnect.cpp" "/Users/jakey/Documents/SyncData/Repository/TUTK/RDTServer/RDTServer/RDTServer/build/src/CMakeFiles/RDTServer.dir/BinraryRDTClientConnect.cpp.o"
-  "/Users/jakey/Documents/SyncData/Repository/TUTK/RDTServer/RDTServer/RDTServer/src/BinraryRDTServerCommand.cpp" "/Users/jakey/Documents/SyncData/Repository/TUTK/RDTServer/RDTServer/RDTServer/build/src/CMakeFiles/RDTServer.dir/BinraryRDTServerCommand.cpp.o"
-  "/Users/jakey/Documents/SyncData/Repository/TUTK/RDTServer/RDTServer/RDTServer/src/BinraryRDTServerConnect.cpp" "/Users/jakey/Documents/SyncData/Repository/TUTK/RDTServer/RDTServer/RDTServer/build/src/CMakeFiles/RDTServer.dir/BinraryRDTServerConnect.cpp.o"
-  "/Users/jakey/Documents/SyncData/Repository/TUTK/RDTServer/RDTServer/RDTServer/src/Body.cpp" "/Users/jakey/Documents/SyncData/Repository/TUTK/RDTServer/RDTServer/RDTServer/build/src/CMakeFiles/RDTServer.dir/Body.cpp.o"
-  "/Users/jakey/Documents/SyncData/Repository/TUTK/RDTServer/RDTServer/RDTServer/src/Command.cpp" "/Users/jakey/Documents/SyncData/Repository/TUTK/RDTServer/RDTServer/RDTServer/build/src/CMakeFiles/RDTServer.dir/Command.cpp.o"
-  "/Users/jakey/Documents/SyncData/Repository/TUTK/RDTServer/RDTServer/RDTServer/src/Connect.cpp" "/Users/jakey/Documents/SyncData/Repository/TUTK/RDTServer/RDTServer/RDTServer/build/src/CMakeFiles/RDTServer.dir/Connect.cpp.o"
-  "/Users/jakey/Documents/SyncData/Repository/TUTK/RDTServer/RDTServer/RDTServer/src/Device.cpp" "/Users/jakey/Documents/SyncData/Repository/TUTK/RDTServer/RDTServer/RDTServer/build/src/CMakeFiles/RDTServer.dir/Device.cpp.o"
-  "/Users/jakey/Documents/SyncData/Repository/TUTK/RDTServer/RDTServer/RDTServer/src/Hardward.cpp" "/Users/jakey/Documents/SyncData/Repository/TUTK/RDTServer/RDTServer/RDTServer/build/src/CMakeFiles/RDTServer.dir/Hardward.cpp.o"
-  "/Users/jakey/Documents/SyncData/Repository/TUTK/RDTServer/RDTServer/RDTServer/src/JsonRDTClientCommand.cpp" "/Users/jakey/Documents/SyncData/Repository/TUTK/RDTServer/RDTServer/RDTServer/build/src/CMakeFiles/RDTServer.dir/JsonRDTClientCommand.cpp.o"
-  "/Users/jakey/Documents/SyncData/Repository/TUTK/RDTServer/RDTServer/RDTServer/src/JsonRDTClientDevice.cpp" "/Users/jakey/Documents/SyncData/Repository/TUTK/RDTServer/RDTServer/RDTServer/build/src/CMakeFiles/RDTServer.dir/JsonRDTClientDevice.cpp.o"
-  "/Users/jakey/Documents/SyncData/Repository/TUTK/RDTServer/RDTServer/RDTServer/src/JsonRDTCommand.cpp" "/Users/jakey/Documents/SyncData/Repository/TUTK/RDTServer/RDTServer/RDTServer/build/src/CMakeFiles/RDTServer.dir/JsonRDTCommand.cpp.o"
-  "/Users/jakey/Documents/SyncData/Repository/TUTK/RDTServer/RDTServer/RDTServer/src/JsonRDTServerCommand.cpp" "/Users/jakey/Documents/SyncData/Repository/TUTK/RDTServer/RDTServer/RDTServer/build/src/CMakeFiles/RDTServer.dir/JsonRDTServerCommand.cpp.o"
-  "/Users/jakey/Documents/SyncData/Repository/TUTK/RDTServer/RDTServer/RDTServer/src/JsonRDTServerHardward.cpp" "/Users/jakey/Documents/SyncData/Repository/TUTK/RDTServer/RDTServer/RDTServer/build/src/CMakeFiles/RDTServer.dir/JsonRDTServerHardward.cpp.o"
-  "/Users/jakey/Documents/SyncData/Repository/TUTK/RDTServer/RDTServer/RDTServer/src/SampoDevice.cpp" "/Users/jakey/Documents/SyncData/Repository/TUTK/RDTServer/RDTServer/RDTServer/build/src/CMakeFiles/RDTServer.dir/SampoDevice.cpp.o"
-  "/Users/jakey/Documents/SyncData/Repository/TUTK/RDTServer/RDTServer/RDTServer/src/TUTKDoorDevice.cpp" "/Users/jakey/Documents/SyncData/Repository/TUTK/RDTServer/RDTServer/RDTServer/build/src/CMakeFiles/RDTServer.dir/TUTKDoorDevice.cpp.o"
-  "/Users/jakey/Documents/SyncData/Repository/TUTK/RDTServer/RDTServer/RDTServer/src/TUTKGasDevice.cpp" "/Users/jakey/Documents/SyncData/Repository/TUTK/RDTServer/RDTServer/RDTServer/build/src/CMakeFiles/RDTServer.dir/TUTKGasDevice.cpp.o"
-  "/Users/jakey/Documents/SyncData/Repository/TUTK/RDTServer/RDTServer/RDTServer/src/TUTKGatewayDevice.cpp" "/Users/jakey/Documents/SyncData/Repository/TUTK/RDTServer/RDTServer/RDTServer/build/src/CMakeFiles/RDTServer.dir/TUTKGatewayDevice.cpp.o"
-  "/Users/jakey/Documents/SyncData/Repository/TUTK/RDTServer/RDTServer/RDTServer/src/TUTKLightingDevice.cpp" "/Users/jakey/Documents/SyncData/Repository/TUTK/RDTServer/RDTServer/RDTServer/build/src/CMakeFiles/RDTServer.dir/TUTKLightingDevice.cpp.o"
-  "/Users/jakey/Documents/SyncData/Repository/TUTK/RDTServer/RDTServer/RDTServer/src/TUTKPIRDevice.cpp" "/Users/jakey/Documents/SyncData/Repository/TUTK/RDTServer/RDTServer/RDTServer/build/src/CMakeFiles/RDTServer.dir/TUTKPIRDevice.cpp.o"
-  "/Users/jakey/Documents/SyncData/Repository/TUTK/RDTServer/RDTServer/RDTServer/src/TUTKPlugDevice.cpp" "/Users/jakey/Documents/SyncData/Repository/TUTK/RDTServer/RDTServer/RDTServer/build/src/CMakeFiles/RDTServer.dir/TUTKPlugDevice.cpp.o"
-  "/Users/jakey/Documents/SyncData/Repository/TUTK/RDTServer/RDTServer/RDTServer/src/TUTKSirenDevice.cpp" "/Users/jakey/Documents/SyncData/Repository/TUTK/RDTServer/RDTServer/RDTServer/build/src/CMakeFiles/RDTServer.dir/TUTKSirenDevice.cpp.o"
-  "/Users/jakey/Documents/SyncData/Repository/TUTK/RDTServer/RDTServer/RDTServer/src/TUTKSmokeDevice.cpp" "/Users/jakey/Documents/SyncData/Repository/TUTK/RDTServer/RDTServer/RDTServer/build/src/CMakeFiles/RDTServer.dir/TUTKSmokeDevice.cpp.o"
-  "/Users/jakey/Documents/SyncData/Repository/TUTK/RDTServer/RDTServer/RDTServer/src/TUTKVibrateDevice.cpp" "/Users/jakey/Documents/SyncData/Repository/TUTK/RDTServer/RDTServer/RDTServer/build/src/CMakeFiles/RDTServer.dir/TUTKVibrateDevice.cpp.o"
-  "/Users/jakey/Documents/SyncData/Repository/TUTK/RDTServer/RDTServer/RDTServer/src/TUTKWaterLeakDevice.cpp" "/Users/jakey/Documents/SyncData/Repository/TUTK/RDTServer/RDTServer/RDTServer/build/src/CMakeFiles/RDTServer.dir/TUTKWaterLeakDevice.cpp.o"
-  "/Users/jakey/Documents/SyncData/Repository/TUTK/RDTServer/RDTServer/RDTServer/src/UTF.cpp" "/Users/jakey/Documents/SyncData/Repository/TUTK/RDTServer/RDTServer/RDTServer/build/src/CMakeFiles/RDTServer.dir/UTF.cpp.o"
-  "/Users/jakey/Documents/SyncData/Repository/TUTK/RDTServer/RDTServer/RDTServer/src/Utility.cpp" "/Users/jakey/Documents/SyncData/Repository/TUTK/RDTServer/RDTServer/RDTServer/build/src/CMakeFiles/RDTServer.dir/Utility.cpp.o"
-  "/Users/jakey/Documents/SyncData/Repository/TUTK/RDTServer/RDTServer/RDTServer/src/VtechGarageDoorDevice.cpp" "/Users/jakey/Documents/SyncData/Repository/TUTK/RDTServer/RDTServer/RDTServer/build/src/CMakeFiles/RDTServer.dir/VtechGarageDoorDevice.cpp.o"
-  "/Users/jakey/Documents/SyncData/Repository/TUTK/RDTServer/RDTServer/RDTServer/src/VtechHardward.cpp" "/Users/jakey/Documents/SyncData/Repository/TUTK/RDTServer/RDTServer/RDTServer/build/src/CMakeFiles/RDTServer.dir/VtechHardward.cpp.o"
-  "/Users/jakey/Documents/SyncData/Repository/TUTK/RDTServer/RDTServer/RDTServer/src/VtechIPHubGatewayDevice.cpp" "/Users/jakey/Documents/SyncData/Repository/TUTK/RDTServer/RDTServer/RDTServer/build/src/CMakeFiles/RDTServer.dir/VtechIPHubGatewayDevice.cpp.o"
-  "/Users/jakey/Documents/SyncData/Repository/TUTK/RDTServer/RDTServer/RDTServer/src/VtechLightBulbDevice.cpp" "/Users/jakey/Documents/SyncData/Repository/TUTK/RDTServer/RDTServer/RDTServer/build/src/CMakeFiles/RDTServer.dir/VtechLightBulbDevice.cpp.o"
-  "/Users/jakey/Documents/SyncData/Repository/TUTK/RDTServer/RDTServer/RDTServer/src/VtechMotionSensorDevice.cpp" "/Users/jakey/Documents/SyncData/Repository/TUTK/RDTServer/RDTServer/RDTServer/build/src/CMakeFiles/RDTServer.dir/VtechMotionSensorDevice.cpp.o"
-  "/Users/jakey/Documents/SyncData/Repository/TUTK/RDTServer/RDTServer/RDTServer/src/VtechOpenClosedDevice.cpp" "/Users/jakey/Documents/SyncData/Repository/TUTK/RDTServer/RDTServer/RDTServer/build/src/CMakeFiles/RDTServer.dir/VtechOpenClosedDevice.cpp.o"
-  "/Users/jakey/Documents/SyncData/Repository/TUTK/RDTServer/RDTServer/RDTServer/src/VtechVirtualGroupDevice.cpp" "/Users/jakey/Documents/SyncData/Repository/TUTK/RDTServer/RDTServer/RDTServer/build/src/CMakeFiles/RDTServer.dir/VtechVirtualGroupDevice.cpp.o"
-  "/Users/jakey/Documents/SyncData/Repository/TUTK/RDTServer/RDTServer/RDTServer/src/VtechWallSwitchDevice.cpp" "/Users/jakey/Documents/SyncData/Repository/TUTK/RDTServer/RDTServer/RDTServer/build/src/CMakeFiles/RDTServer.dir/VtechWallSwitchDevice.cpp.o"
-  "/Users/jakey/Documents/SyncData/Repository/TUTK/RDTServer/RDTServer/RDTServer/src/ZhongHanDevice.cpp" "/Users/jakey/Documents/SyncData/Repository/TUTK/RDTServer/RDTServer/RDTServer/build/src/CMakeFiles/RDTServer.dir/ZhongHanDevice.cpp.o"
-  "/Users/jakey/Documents/SyncData/Repository/TUTK/RDTServer/RDTServer/RDTServer/src/main.cpp" "/Users/jakey/Documents/SyncData/Repository/TUTK/RDTServer/RDTServer/RDTServer/build/src/CMakeFiles/RDTServer.dir/main.cpp.o"
-  "/Users/jakey/Documents/SyncData/Repository/TUTK/RDTServer/RDTServer/RDTServer/build/src/cotire/RDTServer_CXX_prefix.hxx" "/Users/jakey/Documents/SyncData/Repository/TUTK/RDTServer/RDTServer/RDTServer/build/src/cotire/RDTServer_CXX_prefix.hxx.pch"
+SET(CMAKE_DEPENDS_CHECK_CXX
+  "/home/baldwin/test/tutk/RDTServer_Vtech/RDTServer/RDTServer/src/BinraryRDTClientCommand.cpp" "/home/baldwin/test/tutk/RDTServer_Vtech/RDTServer/RDTServer/build/src/CMakeFiles/RDTServer.dir/BinraryRDTClientCommand.cpp.o"
+  "/home/baldwin/test/tutk/RDTServer_Vtech/RDTServer/RDTServer/src/BinraryRDTClientConnect.cpp" "/home/baldwin/test/tutk/RDTServer_Vtech/RDTServer/RDTServer/build/src/CMakeFiles/RDTServer.dir/BinraryRDTClientConnect.cpp.o"
+  "/home/baldwin/test/tutk/RDTServer_Vtech/RDTServer/RDTServer/src/BinraryRDTServerCommand.cpp" "/home/baldwin/test/tutk/RDTServer_Vtech/RDTServer/RDTServer/build/src/CMakeFiles/RDTServer.dir/BinraryRDTServerCommand.cpp.o"
+  "/home/baldwin/test/tutk/RDTServer_Vtech/RDTServer/RDTServer/src/BinraryRDTServerConnect.cpp" "/home/baldwin/test/tutk/RDTServer_Vtech/RDTServer/RDTServer/build/src/CMakeFiles/RDTServer.dir/BinraryRDTServerConnect.cpp.o"
+  "/home/baldwin/test/tutk/RDTServer_Vtech/RDTServer/RDTServer/src/Body.cpp" "/home/baldwin/test/tutk/RDTServer_Vtech/RDTServer/RDTServer/build/src/CMakeFiles/RDTServer.dir/Body.cpp.o"
+  "/home/baldwin/test/tutk/RDTServer_Vtech/RDTServer/RDTServer/src/Command.cpp" "/home/baldwin/test/tutk/RDTServer_Vtech/RDTServer/RDTServer/build/src/CMakeFiles/RDTServer.dir/Command.cpp.o"
+  "/home/baldwin/test/tutk/RDTServer_Vtech/RDTServer/RDTServer/src/Connect.cpp" "/home/baldwin/test/tutk/RDTServer_Vtech/RDTServer/RDTServer/build/src/CMakeFiles/RDTServer.dir/Connect.cpp.o"
+  "/home/baldwin/test/tutk/RDTServer_Vtech/RDTServer/RDTServer/src/Device.cpp" "/home/baldwin/test/tutk/RDTServer_Vtech/RDTServer/RDTServer/build/src/CMakeFiles/RDTServer.dir/Device.cpp.o"
+  "/home/baldwin/test/tutk/RDTServer_Vtech/RDTServer/RDTServer/src/Hardward.cpp" "/home/baldwin/test/tutk/RDTServer_Vtech/RDTServer/RDTServer/build/src/CMakeFiles/RDTServer.dir/Hardward.cpp.o"
+  "/home/baldwin/test/tutk/RDTServer_Vtech/RDTServer/RDTServer/src/JsonRDTClientCommand.cpp" "/home/baldwin/test/tutk/RDTServer_Vtech/RDTServer/RDTServer/build/src/CMakeFiles/RDTServer.dir/JsonRDTClientCommand.cpp.o"
+  "/home/baldwin/test/tutk/RDTServer_Vtech/RDTServer/RDTServer/src/JsonRDTClientDevice.cpp" "/home/baldwin/test/tutk/RDTServer_Vtech/RDTServer/RDTServer/build/src/CMakeFiles/RDTServer.dir/JsonRDTClientDevice.cpp.o"
+  "/home/baldwin/test/tutk/RDTServer_Vtech/RDTServer/RDTServer/src/JsonRDTCommand.cpp" "/home/baldwin/test/tutk/RDTServer_Vtech/RDTServer/RDTServer/build/src/CMakeFiles/RDTServer.dir/JsonRDTCommand.cpp.o"
+  "/home/baldwin/test/tutk/RDTServer_Vtech/RDTServer/RDTServer/src/JsonRDTServerCommand.cpp" "/home/baldwin/test/tutk/RDTServer_Vtech/RDTServer/RDTServer/build/src/CMakeFiles/RDTServer.dir/JsonRDTServerCommand.cpp.o"
+  "/home/baldwin/test/tutk/RDTServer_Vtech/RDTServer/RDTServer/src/JsonRDTServerHardward.cpp" "/home/baldwin/test/tutk/RDTServer_Vtech/RDTServer/RDTServer/build/src/CMakeFiles/RDTServer.dir/JsonRDTServerHardward.cpp.o"
+  "/home/baldwin/test/tutk/RDTServer_Vtech/RDTServer/RDTServer/src/SampoDevice.cpp" "/home/baldwin/test/tutk/RDTServer_Vtech/RDTServer/RDTServer/build/src/CMakeFiles/RDTServer.dir/SampoDevice.cpp.o"
+  "/home/baldwin/test/tutk/RDTServer_Vtech/RDTServer/RDTServer/src/TUTKDoorDevice.cpp" "/home/baldwin/test/tutk/RDTServer_Vtech/RDTServer/RDTServer/build/src/CMakeFiles/RDTServer.dir/TUTKDoorDevice.cpp.o"
+  "/home/baldwin/test/tutk/RDTServer_Vtech/RDTServer/RDTServer/src/TUTKGasDevice.cpp" "/home/baldwin/test/tutk/RDTServer_Vtech/RDTServer/RDTServer/build/src/CMakeFiles/RDTServer.dir/TUTKGasDevice.cpp.o"
+  "/home/baldwin/test/tutk/RDTServer_Vtech/RDTServer/RDTServer/src/TUTKGatewayDevice.cpp" "/home/baldwin/test/tutk/RDTServer_Vtech/RDTServer/RDTServer/build/src/CMakeFiles/RDTServer.dir/TUTKGatewayDevice.cpp.o"
+  "/home/baldwin/test/tutk/RDTServer_Vtech/RDTServer/RDTServer/src/TUTKLightingDevice.cpp" "/home/baldwin/test/tutk/RDTServer_Vtech/RDTServer/RDTServer/build/src/CMakeFiles/RDTServer.dir/TUTKLightingDevice.cpp.o"
+  "/home/baldwin/test/tutk/RDTServer_Vtech/RDTServer/RDTServer/src/TUTKPIRDevice.cpp" "/home/baldwin/test/tutk/RDTServer_Vtech/RDTServer/RDTServer/build/src/CMakeFiles/RDTServer.dir/TUTKPIRDevice.cpp.o"
+  "/home/baldwin/test/tutk/RDTServer_Vtech/RDTServer/RDTServer/src/TUTKPlugDevice.cpp" "/home/baldwin/test/tutk/RDTServer_Vtech/RDTServer/RDTServer/build/src/CMakeFiles/RDTServer.dir/TUTKPlugDevice.cpp.o"
+  "/home/baldwin/test/tutk/RDTServer_Vtech/RDTServer/RDTServer/src/TUTKSirenDevice.cpp" "/home/baldwin/test/tutk/RDTServer_Vtech/RDTServer/RDTServer/build/src/CMakeFiles/RDTServer.dir/TUTKSirenDevice.cpp.o"
+  "/home/baldwin/test/tutk/RDTServer_Vtech/RDTServer/RDTServer/src/TUTKSmokeDevice.cpp" "/home/baldwin/test/tutk/RDTServer_Vtech/RDTServer/RDTServer/build/src/CMakeFiles/RDTServer.dir/TUTKSmokeDevice.cpp.o"
+  "/home/baldwin/test/tutk/RDTServer_Vtech/RDTServer/RDTServer/src/TUTKVibrateDevice.cpp" "/home/baldwin/test/tutk/RDTServer_Vtech/RDTServer/RDTServer/build/src/CMakeFiles/RDTServer.dir/TUTKVibrateDevice.cpp.o"
+  "/home/baldwin/test/tutk/RDTServer_Vtech/RDTServer/RDTServer/src/TUTKWaterLeakDevice.cpp" "/home/baldwin/test/tutk/RDTServer_Vtech/RDTServer/RDTServer/build/src/CMakeFiles/RDTServer.dir/TUTKWaterLeakDevice.cpp.o"
+  "/home/baldwin/test/tutk/RDTServer_Vtech/RDTServer/RDTServer/src/UTF.cpp" "/home/baldwin/test/tutk/RDTServer_Vtech/RDTServer/RDTServer/build/src/CMakeFiles/RDTServer.dir/UTF.cpp.o"
+  "/home/baldwin/test/tutk/RDTServer_Vtech/RDTServer/RDTServer/src/Utility.cpp" "/home/baldwin/test/tutk/RDTServer_Vtech/RDTServer/RDTServer/build/src/CMakeFiles/RDTServer.dir/Utility.cpp.o"
+  "/home/baldwin/test/tutk/RDTServer_Vtech/RDTServer/RDTServer/src/VtechGarageDoorDevice.cpp" "/home/baldwin/test/tutk/RDTServer_Vtech/RDTServer/RDTServer/build/src/CMakeFiles/RDTServer.dir/VtechGarageDoorDevice.cpp.o"
+  "/home/baldwin/test/tutk/RDTServer_Vtech/RDTServer/RDTServer/src/VtechHardward.cpp" "/home/baldwin/test/tutk/RDTServer_Vtech/RDTServer/RDTServer/build/src/CMakeFiles/RDTServer.dir/VtechHardward.cpp.o"
+  "/home/baldwin/test/tutk/RDTServer_Vtech/RDTServer/RDTServer/src/VtechIPHubGatewayDevice.cpp" "/home/baldwin/test/tutk/RDTServer_Vtech/RDTServer/RDTServer/build/src/CMakeFiles/RDTServer.dir/VtechIPHubGatewayDevice.cpp.o"
+  "/home/baldwin/test/tutk/RDTServer_Vtech/RDTServer/RDTServer/src/VtechLightBulbDevice.cpp" "/home/baldwin/test/tutk/RDTServer_Vtech/RDTServer/RDTServer/build/src/CMakeFiles/RDTServer.dir/VtechLightBulbDevice.cpp.o"
+  "/home/baldwin/test/tutk/RDTServer_Vtech/RDTServer/RDTServer/src/VtechMotionSensorDevice.cpp" "/home/baldwin/test/tutk/RDTServer_Vtech/RDTServer/RDTServer/build/src/CMakeFiles/RDTServer.dir/VtechMotionSensorDevice.cpp.o"
+  "/home/baldwin/test/tutk/RDTServer_Vtech/RDTServer/RDTServer/src/VtechOpenClosedDevice.cpp" "/home/baldwin/test/tutk/RDTServer_Vtech/RDTServer/RDTServer/build/src/CMakeFiles/RDTServer.dir/VtechOpenClosedDevice.cpp.o"
+  "/home/baldwin/test/tutk/RDTServer_Vtech/RDTServer/RDTServer/src/VtechVirtualGroupDevice.cpp" "/home/baldwin/test/tutk/RDTServer_Vtech/RDTServer/RDTServer/build/src/CMakeFiles/RDTServer.dir/VtechVirtualGroupDevice.cpp.o"
+  "/home/baldwin/test/tutk/RDTServer_Vtech/RDTServer/RDTServer/src/VtechWallSwitchDevice.cpp" "/home/baldwin/test/tutk/RDTServer_Vtech/RDTServer/RDTServer/build/src/CMakeFiles/RDTServer.dir/VtechWallSwitchDevice.cpp.o"
+  "/home/baldwin/test/tutk/RDTServer_Vtech/RDTServer/RDTServer/src/ZhongHanDevice.cpp" "/home/baldwin/test/tutk/RDTServer_Vtech/RDTServer/RDTServer/build/src/CMakeFiles/RDTServer.dir/ZhongHanDevice.cpp.o"
+  "/home/baldwin/test/tutk/RDTServer_Vtech/RDTServer/RDTServer/src/main.cpp" "/home/baldwin/test/tutk/RDTServer_Vtech/RDTServer/RDTServer/build/src/CMakeFiles/RDTServer.dir/main.cpp.o"
+  "/home/baldwin/test/tutk/RDTServer_Vtech/RDTServer/RDTServer/build/src/cotire/RDTServer_CXX_prefix.hxx" "/home/baldwin/test/tutk/RDTServer_Vtech/RDTServer/RDTServer/build/src/cotire/RDTServer_CXX_prefix.hxx.gch"
   )
-set(CMAKE_CXX_COMPILER_ID "Clang")
+SET(CMAKE_CXX_COMPILER_ID "GNU")
+
+# Targets to which this target links.
+SET(CMAKE_TARGET_LINKED_INFO_FILES
+  )
 
 # The include file search paths:
-set(CMAKE_CXX_TARGET_INCLUDE_PATH
+SET(CMAKE_C_TARGET_INCLUDE_PATH
   "../src"
   "../src/../../../TUTK_Kalay_Platform_SDK_2.1.3/Include"
   "../src/../3th_party/jsoncpp-1.6.5/include"
   )
-
-# Targets to which this target links.
-set(CMAKE_TARGET_LINKED_INFO_FILES
-  )
-
-# Fortran module output directory.
-set(CMAKE_Fortran_TARGET_MODULE_DIR "")
+SET(CMAKE_CXX_TARGET_INCLUDE_PATH ${CMAKE_C_TARGET_INCLUDE_PATH})
+SET(CMAKE_Fortran_TARGET_INCLUDE_PATH ${CMAKE_C_TARGET_INCLUDE_PATH})
+SET(CMAKE_ASM_TARGET_INCLUDE_PATH ${CMAKE_C_TARGET_INCLUDE_PATH})

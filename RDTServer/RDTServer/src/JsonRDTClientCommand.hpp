@@ -13,6 +13,10 @@
 #include "JsonRDTCommand.hpp"
 #include <json/reader.h>
 
+#include "unixclientstream.hpp"
+#include "exception.hpp"
+
+
 using namespace std;
 
 struct JsonRDTClientCommand_CommandRecvData : CommandRecvData
@@ -62,10 +66,12 @@ public:
     
 #pragma mark - Thread
     static void* threadInput(void *arg);
+	static void* socketInput(void *arg);
     
 #pragma mark - Protected
 protected:
     virtual void recvData(int channelID, BYTE* buffer, int totalLength);
+	void sendToGateway(char* payload, int length);
     
 #pragma mark - member
 private:

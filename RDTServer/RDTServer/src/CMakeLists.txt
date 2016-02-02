@@ -59,7 +59,8 @@ if (CMAKE_SYSTEM_NAME MATCHES "WIN32")
 elseif (CMAKE_SYSTEM_NAME MATCHES "Darwin")
     target_link_libraries(RDTServer IOTCAPIs_ALL jsoncpp)
 elseif (CMAKE_SYSTEM_NAME MATCHES "Linux")
-    target_link_libraries(RDTServer RDTAPIs IOTCAPIs pthread jsoncpp)
+#    target_link_libraries(RDTServer RDTAPIs IOTCAPIs pthread jsoncpp)
+    target_link_libraries(RDTServer RDTAPIs IOTCAPIs pthread jsoncpp socket++)
 endif()
 ###################### Base #############################
 

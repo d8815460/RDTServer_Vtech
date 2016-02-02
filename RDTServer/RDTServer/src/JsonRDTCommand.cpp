@@ -12,6 +12,9 @@
 #include "IOTCAPIs.h"
 #include "RDTAPIs.h"
 
+#include <stdio.h>
+#include <string.h>
+
 JsonRDTCommand::JsonRDTCommand(CommandEvent* pCommandEvent, Connect* pConnect, CommandData* pCommandData) : Command(pCommandEvent, pConnect, pCommandData)
 {
     LOGD("JsonRDTServerCommand");
