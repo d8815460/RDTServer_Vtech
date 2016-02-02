@@ -3,6 +3,13 @@ Message("CMAKE_CURRENT_SOURCE_DIR = ${CMAKE_CURRENT_SOURCE_DIR}")
 project(RDTServer)
 #project(RDTServer C CXX)
 
+###################### Solar #############################
+set (CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/../CMake")
+include(Solar)
+
+Message("CMAKE_TARGET_ARCHITECTURES = ${CMAKE_TARGET_ARCHITECTURES}")
+###################### Solar #############################
+
 ###################### CXX11 #############################
 include(CheckCXXCompilerFlag)
 CHECK_CXX_COMPILER_FLAG("-std=c++11" COMPILER_SUPPORTS_CXX11)
@@ -15,7 +22,6 @@ else()
     message(STATUS "The compiler ${CMAKE_CXX_COMPILER} has no C++11 support. Please use a different C++ compiler.")
 endif()
 ###################### CXX11 #############################
-
 
 ###################### Base #############################
 #set(DEBUG_FLAGS "-g -O0 -Wall")
@@ -41,7 +47,11 @@ if (CMAKE_SYSTEM_NAME MATCHES "WIN32")
 elseif (CMAKE_SYSTEM_NAME MATCHES "Darwin")
     link_directories(${CMAKE_CURRENT_SOURCE_DIR}/../../../TUTK_Kalay_Platform_SDK_2.1.3/Lib/MAC)
 elseif (CMAKE_SYSTEM_NAME MATCHES "Linux")
-    link_directories(${CMAKE_CURRENT_SOURCE_DIR}/../../../TUTK_Kalay_Platform_SDK_2.1.3/Lib/Linux/x64)
+    if (CMAKE_TARGET_ARCHITECTURES MATCHES "i386")
+        link_directories(${CMAKE_CURRENT_SOURCE_DIR}/../../../TUTK_Kalay_Platform_SDK_2.1.3/Lib/Linux/x86)
+    elseif (CMAKE_TARGET_ARCHITECTURES MATCHES "x86_64")
+        link_directories(${CMAKE_CURRENT_SOURCE_DIR}/../../../TUTK_Kalay_Platform_SDK_2.1.3/Lib/Linux/x64)
+    endif()
 endif()
 
 find_package (Threads)
@@ -64,7 +74,6 @@ endif()
 ###################### Base #############################
 
 ######################## cotire ###########################
-set (CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/../CMake")
 include(cotire)
 
 # enable warnings
