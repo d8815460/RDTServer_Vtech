@@ -3,6 +3,6 @@ cmake ..
 make
 
 cd src
-./RDTServer VtechIPHubGatewayDevice ELYU954WZZZC9G6GUHFJ
+./RDTServer VtechIPHubGatewayDevice C7KUB944VZFMUH6GYHDJ
 
 

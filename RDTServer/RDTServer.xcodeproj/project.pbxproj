@@ -75,6 +75,10 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		A20067EF1C61FAF900FEEA08 /* runClient.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = runClient.sh; sourceTree = "<group>"; };
+		A20067F01C61FAF900FEEA08 /* runServer.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = runServer.sh; sourceTree = "<group>"; };
+		A20067F11C61FCC300FEEA08 /* CMakeLists.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = CMakeLists.txt; sourceTree = "<group>"; };
+		A20067F21C61FCD400FEEA08 /* CMakeLists.txt */ = {isa = PBXFileReference; lastKnownFileType = text; name = CMakeLists.txt; path = src/CMakeLists.txt; sourceTree = "<group>"; };
 		A24D80071BFD791A00143462 /* assertions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = assertions.h; path = "3th_party/jsoncpp-1.6.5/include/json/assertions.h"; sourceTree = "<group>"; };
 		A24D80081BFD791A00143462 /* autolink.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = autolink.h; path = "3th_party/jsoncpp-1.6.5/include/json/autolink.h"; sourceTree = "<group>"; };
 		A24D80091BFD791A00143462 /* config.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = config.h; path = "3th_party/jsoncpp-1.6.5/include/json/config.h"; sourceTree = "<group>"; };
@@ -232,6 +236,18 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		A20067EE1C61FADF00FEEA08 /* Other */ = {
+			isa = PBXGroup;
+			children = (
+				A20067F11C61FCC300FEEA08 /* CMakeLists.txt */,
+				A20067F21C61FCD400FEEA08 /* CMakeLists.txt */,
+				A20067EF1C61FAF900FEEA08 /* runClient.sh */,
+				A20067F01C61FAF900FEEA08 /* runServer.sh */,
+			);
+			name = Other;
+			path = RDTServer;
+			sourceTree = "<group>";
+		};
 		A24CEDE31C46248900496452 /* Connect */ = {
 			isa = PBXGroup;
 			children = (
@@ -451,6 +467,7 @@
 			isa = PBXGroup;
 			children = (
 				A2BF717C1AC95A4600379199 /* RDTServer */,
+				A20067EE1C61FADF00FEEA08 /* Other */,
 				A24D7FF81BFD6DB600143462 /* 3th Party */,
 				A2BF717B1AC95A4600379199 /* Products */,
 			);
