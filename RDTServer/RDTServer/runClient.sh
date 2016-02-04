@@ -2,5 +2,5 @@ cd build
 cmake ..
 make
 
-cd src
-./RDTServer JsonRDTClientDevice C7KUB944VZFMUH6GYHDJ
+cd Main
+./Main JsonRDTClientDevice C7KUB944VZFMUH6GYHDJ

@@ -2,7 +2,7 @@ cd build
 cmake ..
 make
 
-cd src
-./RDTServer VtechIPHubGatewayDevice C7KUB944VZFMUH6GYHDJ
+cd Main
+./Main VtechIPHubGatewayDevice C7KUB944VZFMUH6GYHDJ
 
 

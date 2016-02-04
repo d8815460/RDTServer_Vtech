@@ -17,7 +17,7 @@
                BlueprintIdentifier = "A2BF71791AC95A4600379199"
                BuildableName = "RDTServer"
                BlueprintName = "RDTServer"
-               ReferencedContainer = "container:RDTServer.xcodeproj">
+               ReferencedContainer = "container:DeviceAPI.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -35,7 +35,7 @@
             BlueprintIdentifier = "A2BF71791AC95A4600379199"
             BuildableName = "RDTServer"
             BlueprintName = "RDTServer"
-            ReferencedContainer = "container:RDTServer.xcodeproj">
+            ReferencedContainer = "container:DeviceAPI.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -58,7 +58,7 @@
             BlueprintIdentifier = "A2BF71791AC95A4600379199"
             BuildableName = "RDTServer"
             BlueprintName = "RDTServer"
-            ReferencedContainer = "container:RDTServer.xcodeproj">
+            ReferencedContainer = "container:DeviceAPI.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <CommandLineArguments>
@@ -159,7 +159,7 @@
             BlueprintIdentifier = "A2BF71791AC95A4600379199"
             BuildableName = "RDTServer"
             BlueprintName = "RDTServer"
-            ReferencedContainer = "container:RDTServer.xcodeproj">
+            ReferencedContainer = "container:DeviceAPI.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>
