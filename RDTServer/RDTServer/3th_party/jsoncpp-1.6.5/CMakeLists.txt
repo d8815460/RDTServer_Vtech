@@ -4,7 +4,15 @@ CMAKE_MINIMUM_REQUIRED(VERSION 2.8.5)
 PROJECT(jsoncpp)
 ENABLE_TESTING()
 
-OPTION(JSONCPP_WITH_TESTS "Compile and (for jsoncpp_check) run JsonCpp test executables" ON)
+IF(DEFINED ENV{IPHUB})
+    message("...using cross compile to IP-hub")
+    OPTION(JSONCPP_WITH_TESTS "Compile and (for jsoncpp_check) run JsonCpp test executables" OFF)
+ELSE()
+    message("...using native compile")
+    OPTION(JSONCPP_WITH_TESTS "Compile and (for jsoncpp_check) run JsonCpp test executables" ON)
+ENDIF()
+
+
 OPTION(JSONCPP_WITH_POST_BUILD_UNITTEST "Automatically run unit-tests as a post build step" ON)
 OPTION(JSONCPP_WITH_WARNING_AS_ERROR "Force compilation to fail if a warning occurs" OFF)
 OPTION(JSONCPP_WITH_PKGCONFIG_SUPPORT "Generate and install .pc files" ON)
@@ -100,7 +108,13 @@ if (CMAKE_CXX_COMPILER_ID MATCHES "Clang")
   set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -Werror -Wall -Wconversion -Wshadow -Wno-sign-conversion")
 elseif ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU")
   # using GCC
-  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -Werror -Wall -Wconversion -Wshadow -Wextra -pedantic")
+	if(DEFINED ENV{IPHUB})
+        set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++0x -fpermissive -Wall -Wconversion -Wshadow -Wextra -pedantic")
+    else()
+        set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -Werror -Wall -Wconversion -Wshadow -Wextra -pedantic")
+    endif()
+
+
   # not yet ready for -Wsign-conversion
 endif()
 
