@@ -15,7 +15,6 @@
 #include <algorithm>
 #include "Utility.hpp"
 #include <wchar.h>
-#include "TUTKGatewayEnum.hpp"
 #include "AccessoryTypeEnum.hpp"
 #include "BinraryRDTServerConnect.hpp"
 #include "BinraryRDTServerCommand.hpp"

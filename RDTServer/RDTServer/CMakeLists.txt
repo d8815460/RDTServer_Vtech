@@ -29,4 +29,5 @@ endif()
 
 add_subdirectory(3th_party/jsoncpp-1.6.5)
 add_subdirectory(DeviceAPI)
-add_subdirectory(Main)
+add_subdirectory(Targate/TUTKDevice)
+add_subdirectory(Targate/VtechDevice)

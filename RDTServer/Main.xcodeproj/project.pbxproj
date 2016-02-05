@@ -242,27 +242,27 @@
 		A24F5A421C05B194004D7764 /* Vtech */ = {
 			isa = PBXGroup;
 			children = (
-				A26FB7061C6367E4007E3648 /* VtechGarageDoorEnum.hpp */,
-				A26FB7041C6367E4007E3648 /* VtechGarageDoorDevice.cpp */,
-				A26FB7051C6367E4007E3648 /* VtechGarageDoorDevice.hpp */,
 				A26FB7091C6367E4007E3648 /* VtechIPHubGatewayEnum.hpp */,
-				A26FB7071C6367E4007E3648 /* VtechIPHubGatewayDevice.cpp */,
 				A26FB7081C6367E4007E3648 /* VtechIPHubGatewayDevice.hpp */,
+				A26FB7071C6367E4007E3648 /* VtechIPHubGatewayDevice.cpp */,
+				A26FB7061C6367E4007E3648 /* VtechGarageDoorEnum.hpp */,
+				A26FB7051C6367E4007E3648 /* VtechGarageDoorDevice.hpp */,
+				A26FB7041C6367E4007E3648 /* VtechGarageDoorDevice.cpp */,
 				A26FB70C1C6367E4007E3648 /* VtechLightBulbEnum.hpp */,
-				A26FB70A1C6367E4007E3648 /* VtechLightBulbDevice.cpp */,
 				A26FB70B1C6367E4007E3648 /* VtechLightBulbDevice.hpp */,
+				A26FB70A1C6367E4007E3648 /* VtechLightBulbDevice.cpp */,
 				A26FB70F1C6367E4007E3648 /* VtechMotionSensorEnum.hpp */,
-				A26FB70D1C6367E4007E3648 /* VtechMotionSensorDevice.cpp */,
 				A26FB70E1C6367E4007E3648 /* VtechMotionSensorDevice.hpp */,
+				A26FB70D1C6367E4007E3648 /* VtechMotionSensorDevice.cpp */,
 				A26FB7121C6367E4007E3648 /* VtechOpenClosedEnum.hpp */,
-				A26FB7101C6367E4007E3648 /* VtechOpenClosedDevice.cpp */,
 				A26FB7111C6367E4007E3648 /* VtechOpenClosedDevice.hpp */,
+				A26FB7101C6367E4007E3648 /* VtechOpenClosedDevice.cpp */,
 				A26FB7151C6367E4007E3648 /* VtechVirtualGroupEnum.hpp */,
-				A26FB7131C6367E4007E3648 /* VtechVirtualGroupDevice.cpp */,
 				A26FB7141C6367E4007E3648 /* VtechVirtualGroupDevice.hpp */,
+				A26FB7131C6367E4007E3648 /* VtechVirtualGroupDevice.cpp */,
 				A26FB7181C6367E4007E3648 /* VtechWallSwitchEnum.hpp */,
-				A26FB7161C6367E4007E3648 /* VtechWallSwitchDevice.cpp */,
 				A26FB7171C6367E4007E3648 /* VtechWallSwitchDevice.hpp */,
+				A26FB7161C6367E4007E3648 /* VtechWallSwitchDevice.cpp */,
 			);
 			name = Vtech;
 			sourceTree = "<group>";
@@ -449,9 +449,9 @@
 				A24F5A521C05BD18004D7764 /* TUTK */,
 				A26FB6FB1C6367A5007E3648 /* JsonRDTClientDevice.hpp */,
 				A26FB6FA1C6367A5007E3648 /* JsonRDTClientDevice.cpp */,
+				A26FB6FE1C6367A5007E3648 /* TUTKSampoEnum.hpp */,
 				A26FB6FD1C6367A5007E3648 /* SampoDevice.hpp */,
 				A26FB6FC1C6367A5007E3648 /* SampoDevice.cpp */,
-				A26FB6FE1C6367A5007E3648 /* TUTKSampoEnum.hpp */,
 				A26FB7001C6367A5007E3648 /* ZhongHanDevice.hpp */,
 				A26FB6FF1C6367A5007E3648 /* ZhongHanDevice.cpp */,
 			);

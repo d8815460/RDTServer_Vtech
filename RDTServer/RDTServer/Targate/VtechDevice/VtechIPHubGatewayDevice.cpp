@@ -10,7 +10,6 @@
 #include <map>
 #include "Common.hpp"
 #include "Utility.hpp"
-#include "TUTKGatewayDevice.hpp"
 #include "AccessoryTypeEnum.hpp"
 #include "VtechIPHubGatewayEnum.hpp"
 

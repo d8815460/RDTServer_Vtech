@@ -22,7 +22,6 @@
 #include "TUTKSirenDevice.hpp"
 #include "TUTKGasDevice.hpp"
 #include "TUTKVibrateDevice.hpp"
-#include "VtechIPHubGatewayDevice.hpp"
 #include "JsonRDTClientDevice.hpp"
 
 #define DECLARE_CLASS_CREATE(class_name) \
@@ -90,9 +89,6 @@ void Body::runBody(Device **ppOutDevice, char deviceName[20])
     else if (strcmp(deviceName, "TUTKSmokeDevice") == 0) {
         *ppOutDevice = new TUTKSmokeDevice();
     }
-    else if (strcmp(deviceName, "VtechIPHubGatewayDevice") == 0) {
-        *ppOutDevice = new VtechIPHubGatewayDevice();
-    }
     else if (strcmp(deviceName, "JsonRDTClientDevice") == 0) {
         *ppOutDevice = new JsonRDTClientDevice();
     }
@@ -100,9 +96,8 @@ void Body::runBody(Device **ppOutDevice, char deviceName[20])
         LOGE("Device Not Found!");
         
         LOGE("請使用RDTServer Device ");
-        LOGE("如:RDTServer PowerStripDevice 00000000000000000000");
+        LOGE("如:Command TUTKGatewayDevice 00000000000000000000");
         LOGE("可以使用的Devices:");
-        LOGE("PowerStripDevice");
         LOGE("AbocomDevice");
         LOGE("ZhongHanDevice");
         LOGE("PhilipsDevice");
@@ -116,7 +111,6 @@ void Body::runBody(Device **ppOutDevice, char deviceName[20])
         LOGE("TUTKGasDevice");
         LOGE("TUTKVibrateDevice");
         LOGE("TUTKSmokeDevice");
-        LOGE("VtechIPHubGatewayDevice");
         LOGE("JsonRDTClientDevice");
     }
 }
