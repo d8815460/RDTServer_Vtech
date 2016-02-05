@@ -12,13 +12,11 @@
 #include <unistd.h>
 #include "Common.hpp"
 #include "Utility.hpp"
-#include "AccessoryTypeEnum.hpp"
 #include "IOTCAPIs.h"
 #include "RDTAPIs.h"
 #include "BinraryRDTServerConnect.hpp"
-#include "VtechVirtualGroupDevice.hpp"
-
 #include "VtechHardward.hpp"
+#include "AccessoryTypeEnum.hpp"
 
 JsonRDTServerCommand::JsonRDTServerCommand(CommandEvent* pCommandEvent, Connect* pConnect, CommandData* pCommandData) : JsonRDTCommand(pCommandEvent, pConnect, pCommandData)
 {

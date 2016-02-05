@@ -17,7 +17,6 @@
 #include <wchar.h>
 #include "TUTKGatewayEnum.hpp"
 #include "AccessoryTypeEnum.hpp"
-#include "VtechGarageDoorEnum.hpp"
 #include "BinraryRDTServerConnect.hpp"
 #include "BinraryRDTServerCommand.hpp"
 #include "JsonRDTServerHardward.hpp"

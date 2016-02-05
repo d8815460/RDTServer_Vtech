@@ -16,7 +16,6 @@
 #include "IOTCAPIs.h"
 #include "RDTAPIs.h"
 #include "BinraryRDTServerConnect.hpp"
-#include "VtechVirtualGroupDevice.hpp"
 
 BinraryRDTClientCommand::BinraryRDTClientCommand(CommandEvent* pCommandEvent, Connect* pConnect, CommandData* pCommandData) : Command(pCommandEvent, pConnect, pCommandData)
 {
@@ -1025,7 +1024,7 @@ void BinraryRDTClientCommand::recvData(int channelID, BYTE* buffer, int totalLen
                         // 加入Sensor
                         //                    TUTKPIRDevice::generatorDataInfoList(m_nMaxAID++, &m_CommandData.DataInfoList, &m_TypeSet);
                         //                    TUTKSmokeDevice::generatorDataInfoList(m_nMaxAID++, &m_CommandData.DataInfoList, &m_TypeSet);
-                        VtechVirtualGroupDevice::generatorDataInfoList(this);
+//                        VtechVirtualGroupDevice::generatorDataInfoList(this);
                         
                         // 取最後一個
                         //                    data[4 - 1] = ++amount;

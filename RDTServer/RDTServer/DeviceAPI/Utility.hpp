@@ -23,8 +23,6 @@ public:
     
     static void printData(const char* function, int line, const BYTE* data, const int length);
     
-    static void runBody(Device **ppOutDevice, char deviceName[20], char uid[20]);
-    
 //    template <typename T>
 //    static T setValue(BYTE* pBuffer, int* pIndex, T value);
     

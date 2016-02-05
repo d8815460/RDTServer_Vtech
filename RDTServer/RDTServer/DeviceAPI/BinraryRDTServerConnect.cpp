@@ -12,7 +12,6 @@
 #include "Common.hpp"
 #include "IOTCAPIs.h"
 #include "RDTAPIs.h"
-#include "AccessoryTypeEnum.hpp"
 #include "BinraryRDTServerCommand.hpp"
 
 BinraryRDTServerConnect::BinraryRDTServerConnect(ConnectData* pConnectData) : Connect(pConnectData), m_nMaxClientNumber(MAX_CLIENT_NUM)

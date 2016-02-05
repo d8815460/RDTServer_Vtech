@@ -16,7 +16,6 @@
 #include "IOTCAPIs.h"
 #include "RDTAPIs.h"
 #include "BinraryRDTServerConnect.hpp"
-#include "VtechVirtualGroupDevice.hpp"
 
 JsonRDTClientCommand::JsonRDTClientCommand(CommandEvent* pCommandEvent, Connect* pConnect, CommandData* pCommandData) : JsonRDTCommand(pCommandEvent, pConnect, pCommandData)
 {
