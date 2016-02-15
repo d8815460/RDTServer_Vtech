@@ -128,7 +128,6 @@
 		A26FB60A1C635E30007E3648 /* JsonRDTServerHardward.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = JsonRDTServerHardward.hpp; path = RDTServer/DeviceAPI/JsonRDTServerHardward.hpp; sourceTree = SOURCE_ROOT; };
 		A26FB60B1C635E30007E3648 /* JsonRDTServerHardward.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = JsonRDTServerHardward.cpp; path = RDTServer/DeviceAPI/JsonRDTServerHardward.cpp; sourceTree = SOURCE_ROOT; };
 		A26FB6901C635EDD007E3648 /* CMakeLists.txt */ = {isa = PBXFileReference; lastKnownFileType = text; name = CMakeLists.txt; path = RDTServer/DeviceAPI/CMakeLists.txt; sourceTree = "<group>"; };
-		A26FB6911C635EEB007E3648 /* CMakeLists.txt */ = {isa = PBXFileReference; lastKnownFileType = text; name = CMakeLists.txt; path = RDTServer/main/CMakeLists.txt; sourceTree = "<group>"; };
 		A26FB6921C635F02007E3648 /* runClient.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; name = runClient.sh; path = RDTServer/runClient.sh; sourceTree = "<group>"; };
 		A26FB6931C635F02007E3648 /* runServer.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; name = runServer.sh; path = RDTServer/runServer.sh; sourceTree = "<group>"; };
 		A26FB6941C635F02007E3648 /* CMakeLists.txt */ = {isa = PBXFileReference; lastKnownFileType = text; name = CMakeLists.txt; path = RDTServer/CMakeLists.txt; sourceTree = "<group>"; };
@@ -176,6 +175,7 @@
 		A26FB6E31C63600A007E3648 /* json_writer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = json_writer.cpp; path = "RDTServer/3th_party/jsoncpp-1.6.5/src/lib_json/json_writer.cpp"; sourceTree = "<group>"; };
 		A2913D911C635CFF00AF81AF /* libDeviceAPI.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libDeviceAPI.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		A2B03D201C6444F8002CFA38 /* AccessoryTypeEnum.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = AccessoryTypeEnum.hpp; path = RDTServer/DeviceAPI/AccessoryTypeEnum.hpp; sourceTree = SOURCE_ROOT; };
+		A2BED36F1C719B5000AF9D4E /* CMakeLists.txt */ = {isa = PBXFileReference; lastKnownFileType = text; name = CMakeLists.txt; path = RDTServer/CMakeLists.txt; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -242,21 +242,13 @@
 		A26FB68C1C635EB0007E3648 /* Other */ = {
 			isa = PBXGroup;
 			children = (
-				A26FB68D1C635EC1007E3648 /* Main */,
+				A2BED36F1C719B5000AF9D4E /* CMakeLists.txt */,
 				A26FB68F1C635ED2007E3648 /* DeviceAPI */,
 				A26FB6921C635F02007E3648 /* runClient.sh */,
 				A26FB6931C635F02007E3648 /* runServer.sh */,
 				A26FB6941C635F02007E3648 /* CMakeLists.txt */,
 			);
 			name = Other;
-			sourceTree = "<group>";
-		};
-		A26FB68D1C635EC1007E3648 /* Main */ = {
-			isa = PBXGroup;
-			children = (
-				A26FB6911C635EEB007E3648 /* CMakeLists.txt */,
-			);
-			name = Main;
 			sourceTree = "<group>";
 		};
 		A26FB68F1C635ED2007E3648 /* DeviceAPI */ = {

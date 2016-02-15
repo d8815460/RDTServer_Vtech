@@ -135,11 +135,7 @@
             isEnabled = "NO">
          </CommandLineArgument>
          <CommandLineArgument
-            argument = "VtechIPHubGatewayDevice ELYU954WZZZC9G6GUHFJ"
-            isEnabled = "NO">
-         </CommandLineArgument>
-         <CommandLineArgument
-            argument = "JsonRDTClientDevice ELYU954WZZZC9G6GUHFJ"
+            argument = "JsonRDTClientDevice E7YAB554YTZCAH6GY1E1"
             isEnabled = "YES">
          </CommandLineArgument>
       </CommandLineArguments>

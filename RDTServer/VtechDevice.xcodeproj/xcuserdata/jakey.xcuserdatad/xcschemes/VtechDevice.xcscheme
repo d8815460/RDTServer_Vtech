@@ -14,10 +14,10 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "A2BED2E11C71749700AF9D4E"
-               BuildableName = "RDTServer"
-               BlueprintName = "RDTServer"
-               ReferencedContainer = "container:RDTServer.xcodeproj">
+               BlueprintIdentifier = "A2BED32C1C717AAD00AF9D4E"
+               BuildableName = "VtechDevice"
+               BlueprintName = "VtechDevice"
+               ReferencedContainer = "container:VtechDevice.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -32,10 +32,10 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "A2BED2E11C71749700AF9D4E"
-            BuildableName = "RDTServer"
-            BlueprintName = "RDTServer"
-            ReferencedContainer = "container:RDTServer.xcodeproj">
+            BlueprintIdentifier = "A2BED32C1C717AAD00AF9D4E"
+            BuildableName = "VtechDevice"
+            BlueprintName = "VtechDevice"
+            ReferencedContainer = "container:VtechDevice.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -55,12 +55,22 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "A2BED2E11C71749700AF9D4E"
-            BuildableName = "RDTServer"
-            BlueprintName = "RDTServer"
-            ReferencedContainer = "container:RDTServer.xcodeproj">
+            BlueprintIdentifier = "A2BED32C1C717AAD00AF9D4E"
+            BuildableName = "VtechDevice"
+            BlueprintName = "VtechDevice"
+            ReferencedContainer = "container:VtechDevice.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
+      <CommandLineArguments>
+         <CommandLineArgument
+            argument = "VtechIPHubGatewayDevice E7YAB554YTZCAH6GY1E1"
+            isEnabled = "NO">
+         </CommandLineArgument>
+         <CommandLineArgument
+            argument = "VtechIPHubGatewayDevice  C7KUB944VZFMUH6GYHDJ"
+            isEnabled = "YES">
+         </CommandLineArgument>
+      </CommandLineArguments>
       <AdditionalOptions>
       </AdditionalOptions>
    </LaunchAction>
@@ -74,10 +84,10 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "A2BED2E11C71749700AF9D4E"
-            BuildableName = "RDTServer"
-            BlueprintName = "RDTServer"
-            ReferencedContainer = "container:RDTServer.xcodeproj">
+            BlueprintIdentifier = "A2BED32C1C717AAD00AF9D4E"
+            BuildableName = "VtechDevice"
+            BlueprintName = "VtechDevice"
+            ReferencedContainer = "container:VtechDevice.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>
