@@ -10,6 +10,7 @@
 #define CommandHardwardEvent_hpp
 
 #include <stdio.h>
+#include <string>
 
 struct CommandHardwardNotifyData
 {
@@ -18,7 +19,7 @@ struct CommandHardwardNotifyData
 
 struct CommandHardwardRecvProductName
 {
-    char* pProductName;
+    std::string productName;
 };
 
 class CommandHardwardEvent

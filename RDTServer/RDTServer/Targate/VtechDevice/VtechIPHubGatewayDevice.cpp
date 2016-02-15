@@ -85,7 +85,9 @@ void VtechIPHubGatewayDevice::onCommandHardwardNotify(CommandHardwardNotifyData*
 
 void VtechIPHubGatewayDevice::onCommandHardwardRecvProductName(CommandHardwardRecvProductName* pCommandHardwardRecvProductName)
 {
-    LOGD("onCommandHardwardRecvProductName");
+    LOGD("onCommandHardwardRecvProductName: pCommandHardwardRecvProductName:%s", pCommandHardwardRecvProductName->productName.c_str());
+    
+    pCommandHardwardRecvProductName->productName = "VtechIPHubGatewayDevice";
 }
 
 #pragma mark - CommandEvent

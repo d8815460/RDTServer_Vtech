@@ -19,6 +19,8 @@ Command::Command(CommandEvent* pCommandEvent, CommandHardwardEvent* pCommandHard
         memcpy(&m_CommandData, pCommandData, sizeof(CommandData));
     }
     else {
+        m_CommandData.productName = "Device";
+        
         // 必須設定ConnectEvent
         m_pConnect->setConnectEvent(this);
         

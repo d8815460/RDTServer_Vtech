@@ -69,6 +69,8 @@ struct FunctionInfo
 
 struct CommandData
 {
+    std::string             productName;
+    
     unsigned short          version1;
     unsigned short          version2;
     unsigned short          version3;

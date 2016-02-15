@@ -66,7 +66,11 @@ public:
 #pragma mark - Protected
 protected:
     virtual void recvData(int channelID, BYTE* buffer, int totalLength);
-        
+    
+#pragma mark - Private Method
+private:
+    void processCommandTarget(const Json::Value& jsonObject, Json::Value& outJsonObject);
+    
 #pragma mark - member
 private:
     set<int>                m_nChannelIDList;

@@ -66,10 +66,11 @@ void* JsonRDTClientCommand::threadInput(void *arg)
             it--;
             
             Json::Value root;
-            Json::Value arrayObject;
-            Json::Value arraryItems;
+//            Json::Value arrayObject;
+//            Json::Value arraryItems;
             
-            root["serno"] = "87654321";
+            unsigned int serno = 87654321;
+            root["serno"] = serno;
             
             root["operation"] = "read";
             root["target"] = "/accessory/0/product_name/";
@@ -83,7 +84,7 @@ void* JsonRDTClientCommand::threadInput(void *arg)
             std::string json = root.toStyledString();
             JsonRDTClientCommand_ParseSendData parseSendData;
             parseSendData.channelID = *it;
-            parseSendData.serno = 1;
+            parseSendData.serno = serno;
             parseSendData.totalCount = 1;
             parseSendData.count = 1;
             parseSendData.pData = (BYTE*) json.c_str();

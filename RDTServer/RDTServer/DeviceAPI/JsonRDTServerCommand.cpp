@@ -106,7 +106,54 @@ void* JsonRDTServerCommand::threadInput(void *arg)
     return NULL;
 }
 
-#pragma mark - Method
+#pragma mark - Private Method
+
+void JsonRDTServerCommand::processCommandTarget(const Json::Value& inJsonObject, Json::Value& outJsonObject)
+{
+    string target = inJsonObject["target"].asString();
+    
+    if (target.find("product_name") != std::string::npos) {
+        CommandHardwardRecvProductName commandHardwardRecvProductName;
+        
+        // 預設ProductName
+        commandHardwardRecvProductName.productName = m_CommandData.productName;
+    
+        // 通知Device
+        m_pCommandHardwardEvent->onCommandHardwardRecvProductName(&commandHardwardRecvProductName);
+        
+        // 修改預設ProductName
+        m_CommandData.productName = commandHardwardRecvProductName.productName;
+        
+        // 上報通知
+//        m_pCommandHardwardEvent->onCommandHardwardNotify(<#CommandHardwardNotifyData *pCommandHardwardNotifyData#>);
+
+        // 輸出 JSON
+        Json::Value arraryItems;
+        Json::Value arrayObject;
+        arraryItems["index"] = "0";
+        arraryItems["value"] = m_CommandData.productName;
+        arrayObject.append(arraryItems);
+        outJsonObject["response"] = arrayObject;
+    }
+    else {
+        LOGE("processCommandTarget Error");
+        return;
+    }
+    
+    // Common
+    outJsonObject["serno"] = inJsonObject["serno"];
+    outJsonObject["operation"] = "read";
+    outJsonObject["target"] = target;
+    
+    // Version
+    char version[20];
+    sprintf(version, "%d.%d.%d", m_CommandData.version1, m_CommandData.version2, m_CommandData.version3);
+//    LOGD("version:%s", version);
+    outJsonObject["version"] = version;
+    
+    // Error Code
+    outJsonObject["error_code"] = 0;
+}
 
 #pragma mark - Command
 
@@ -125,38 +172,29 @@ void JsonRDTServerCommand::recvData(int channelID, BYTE* buffer, int totalLength
     json[jsonLen-1] = NULL;
     json[jsonLen-2] = NULL;
     
-    LOGD("JSON Binrary 資料");
-    Utility::printData(__PRETTY_FUNCTION__, __LINE__, (BYTE*)json, jsonLen-2);
-    
-    LOGD("JSON長度:%d", jsonLen);
-    LOGD("json資料:%s", json);
+//    LOGD("JSON 接收 Binrary 資料");
+//    Utility::printData(__PRETTY_FUNCTION__, __LINE__, (BYTE*)json, jsonLen-2);
+//    
+//    LOGD("JSON接收長度:%d", jsonLen);
+    LOGD("JSON接收資料:%s", json);
     
     Json::Reader reader;
     Json::Value inJsonObject;
     Json::Value outJsonObject;
     if (reader.parse(json, inJsonObject))
     {
-//        VtechHardward_SendHardwardData vtechHardward;
-//        vtechHardward.pInJsonObject = &inJsonObject;
-//        vtechHardward.pOutJsonObject = &outJsonObject;
-        
-//        m_pCommandEvent->onCommandSendHardward(&vtechHardward);
-        
-//        if (m_pHardward != NULL) {
-//            m_pHardward->sendHardward(&vtechHardward);
-//
-//            std::string serno = outJsonObject["serno"].asString();
-//            LOGD("serno:%s", serno.c_str());
-//        }
+        processCommandTarget(inJsonObject, outJsonObject);
     }
     
     set<int>::iterator it = m_nChannelIDList.end();
     it--;
     
     std::string jsonString = outJsonObject.toStyledString();
+    LOGD("JSON傳送資料:%s", jsonString.c_str());
+    
     JsonRDTServerCommand_ParseSendData jsonParseSendData;
     jsonParseSendData.channelID = *it;
-    jsonParseSendData.serno = 1;
+    jsonParseSendData.serno = outJsonObject["serno"].asUInt();
     jsonParseSendData.totalCount = 1;
     jsonParseSendData.count = 1;
     jsonParseSendData.pData = (BYTE*) jsonString.c_str();
