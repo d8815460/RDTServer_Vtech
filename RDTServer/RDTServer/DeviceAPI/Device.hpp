@@ -50,6 +50,7 @@ public:
 
 #pragma mark - CommandHardwardEvent
     virtual void onCommandHardwardNotify(CommandHardwardNotifyData* pCommandHardwardNotifyData);
+    virtual void onCommandHardwardRecvProductName(CommandHardwardRecvProductName* pCommandHardwardRecvProductName);
     
 // 成員變數
 protected:

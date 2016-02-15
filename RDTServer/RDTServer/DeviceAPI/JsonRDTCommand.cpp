@@ -17,7 +17,7 @@
 #include <stdio.h>
 #include <string.h>
 
-JsonRDTCommand::JsonRDTCommand(CommandEvent* pCommandEvent, Connect* pConnect, CommandData* pCommandData) : Command(pCommandEvent, pConnect, pCommandData)
+JsonRDTCommand::JsonRDTCommand(CommandEvent* pCommandEvent, CommandHardwardEvent* pCommandHardwardEvent, Connect* pConnect, CommandData* pCommandData) : Command(pCommandEvent, pCommandHardwardEvent, pConnect, pCommandData)
 {
     LOGD("JsonRDTServerCommand");
     

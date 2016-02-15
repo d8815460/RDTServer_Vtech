@@ -69,19 +69,24 @@ void VtechIPHubGatewayDevice::reset()
 Command* VtechIPHubGatewayDevice::createCommand(Connect* pConnect)
 {
 //    return new BinraryRDTServerCommand(this, pConnect);
-    return new JsonRDTServerCommand(this, pConnect);
+    return new JsonRDTServerCommand(this, this, pConnect);
 }
 
 #pragma mark - CommandHardwardEvent
 
-//void VtechIPHubGatewayDevice::onCommandHardwardNotify(CommandHardwardNotifyData* pCommandHardwardNotifyData)
-//{
-//    LOGD("onCommandHardwardNotify");
+void VtechIPHubGatewayDevice::onCommandHardwardNotify(CommandHardwardNotifyData* pCommandHardwardNotifyData)
+{
+    LOGD("onCommandHardwardNotify");
 
 //    JsonRDTServerHardward_HardwardNotifyData* jsonRDTServerHardwardHardwardNotifyData = (JsonRDTServerHardward_HardwardNotifyData*) pHardwardRecvData;
 //    std::string jsonString = jsonRDTServerHardwardHardwardNotifyData->pOutJsonObject->toStyledString();
 //    LOGD("jsonString:%s", jsonString.c_str());
-//}
+}
+
+void VtechIPHubGatewayDevice::onCommandHardwardRecvProductName(CommandHardwardRecvProductName* pCommandHardwardRecvProductName)
+{
+    LOGD("onCommandHardwardRecvProductName");
+}
 
 #pragma mark - CommandEvent
 

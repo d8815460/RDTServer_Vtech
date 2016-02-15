@@ -26,7 +26,8 @@ public:
     virtual void constructorFinish() { reset(); }
 
 #pragma mark - CommandHardwardEvent
-//    virtual void onCommandHardwardNotify(CommandHardwardNotifyData* pCommandHardwardNotifyData);
+    virtual void onCommandHardwardNotify(CommandHardwardNotifyData* pCommandHardwardNotifyData);
+    virtual void onCommandHardwardRecvProductName(CommandHardwardRecvProductName* pCommandHardwardRecvProductName);
     
 #pragma mark - CommandEvent
 protected:

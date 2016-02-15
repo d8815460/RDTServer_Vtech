@@ -11,7 +11,7 @@
 #include <unistd.h>
 #include "Utility.hpp"
 
-Command::Command(CommandEvent* pCommandEvent, Connect* pConnect, CommandData* pCommandData) : m_pCommandEvent(pCommandEvent), m_pConnect(pConnect)
+Command::Command(CommandEvent* pCommandEvent, CommandHardwardEvent* pCommandHardwardEvent, Connect* pConnect, CommandData* pCommandData) : m_pCommandEvent(pCommandEvent), m_pCommandHardwardEvent(pCommandHardwardEvent), m_pConnect(pConnect)
 {
     LOGD("Command");
         

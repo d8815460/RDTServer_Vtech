@@ -37,7 +37,7 @@ Connect* JsonRDTClientDevice::createConnect(ConnectData* pConnectData)
 
 Command* JsonRDTClientDevice::createCommand(Connect* pConnect)
 {
-    return new JsonRDTClientCommand(this, pConnect);
+    return new JsonRDTClientCommand(this, this, pConnect);
 }
 
 #pragma mark - CommandEvent

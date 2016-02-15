@@ -25,8 +25,7 @@ class CommandHardwardEvent
 {
 public:
     virtual void onCommandHardwardNotify(CommandHardwardNotifyData* pCommandHardwardNotifyData) = 0;
-    
-//    virtual void onCommandHardwardRecvProductName(CommandHardwardRecvProductName* pCommandHardwardRecvProductName) = 0;
+    virtual void onCommandHardwardRecvProductName(CommandHardwardRecvProductName* pCommandHardwardRecvProductName) = 0;
 };
 
 #endif /* CommandHardwardEvent_hpp */

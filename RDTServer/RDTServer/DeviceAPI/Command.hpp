@@ -13,6 +13,7 @@
 #include <set>
 #include <vector>
 #include "CommandEvent.hpp"
+#include "CommandHardwardEvent.hpp"
 #include "Connect.hpp"
 
 using namespace std;
@@ -90,7 +91,7 @@ struct ParseRecvData { };
 class Command : public ConnectEvent
 {
 public:
-    Command(CommandEvent* pCommandEvent, Connect* pConnect, CommandData* pCommandData = NULL);
+    Command(CommandEvent* pCommandEvent, CommandHardwardEvent* pCommandHardwardEvent, Connect* pConnect, CommandData* pCommandData = NULL);
     virtual ~Command();
     
     Connect* getConnect();
@@ -136,6 +137,7 @@ public:
 // 變數
 protected:
     CommandEvent*           m_pCommandEvent;
+    CommandHardwardEvent*   m_pCommandHardwardEvent;
     Connect*                m_pConnect;
     
     CommandData             m_CommandData;

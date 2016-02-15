@@ -32,7 +32,7 @@ struct JsonRDTCommand_ParseRecvData : ParseRecvData
 class JsonRDTCommand : public Command
 {
 public:
-    JsonRDTCommand(CommandEvent* pCommandEvent, Connect* pConnect, CommandData* pCommandData = NULL);
+    JsonRDTCommand(CommandEvent* pCommandEvent, CommandHardwardEvent* pCommandHardwardEvent, Connect* pConnect, CommandData* pCommandData = NULL);
     
 #pragma mark - Command
     virtual void parseSendData(ParseSendData* pParseSendData);

@@ -17,7 +17,7 @@
 #include "BinraryRDTServerConnect.hpp"
 #include "AccessoryTypeEnum.hpp"
 
-JsonRDTServerCommand::JsonRDTServerCommand(CommandEvent* pCommandEvent, Connect* pConnect, CommandData* pCommandData) : JsonRDTCommand(pCommandEvent, pConnect, pCommandData)
+JsonRDTServerCommand::JsonRDTServerCommand(CommandEvent* pCommandEvent, CommandHardwardEvent* pCommandHardwardEvent, Connect* pConnect, CommandData* pCommandData) : JsonRDTCommand(pCommandEvent, pCommandHardwardEvent, pConnect, pCommandData)
 {
     LOGD("JsonRDTServerCommand");
     

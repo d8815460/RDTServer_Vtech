@@ -58,7 +58,7 @@ Connect* Device::createConnect(ConnectData* pConnectData)
 
 Command* Device::createCommand(Connect* pConnect)
 {
-    return new BinraryRDTServerCommand(this, pConnect);
+    return new BinraryRDTServerCommand(this, this, pConnect);
 }
 
 #pragma mark - CommandEvent
@@ -84,6 +84,11 @@ void Device::onCommandRecvFullCommand28(int channelID, vector<FunctionInfo*>* pD
 void Device::onCommandHardwardNotify(CommandHardwardNotifyData* pCommandHardwardNotifyData)
 {
     LOGD("onCommandHardwardNotify");
+}
+
+void Device::onCommandHardwardRecvProductName(CommandHardwardRecvProductName* pCommandHardwardRecvProductName)
+{
+    LOGD("onCommandHardwardRecvProductName");
 }
 
 #pragma mark - Normal Method

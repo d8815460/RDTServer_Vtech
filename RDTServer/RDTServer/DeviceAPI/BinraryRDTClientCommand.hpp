@@ -48,7 +48,7 @@ struct BinraryRDTClientCommand_ConnectCreateClient : ConnectCreateClient
 class BinraryRDTClientCommand : public Command
 {
 public:
-    BinraryRDTClientCommand(CommandEvent* pCommandEvent, Connect* pConnect, CommandData* pCommandData = NULL);
+    BinraryRDTClientCommand(CommandEvent* pCommandEvent, CommandHardwardEvent* pCommandHardwardEvent, Connect* pConnect, CommandData* pCommandData = NULL);
     
 public:
     bool isLength2Byte(BYTE* buffer, int length);

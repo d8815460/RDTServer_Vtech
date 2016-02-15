@@ -17,7 +17,7 @@
 #include "BinraryRDTServerConnect.hpp"
 #include "AccessoryTypeEnum.hpp"
 
-BinraryRDTServerCommand::BinraryRDTServerCommand(CommandEvent* pCommandEvent, Connect* pConnect, CommandData* pCommandData) : Command(pCommandEvent, pConnect, pCommandData)
+BinraryRDTServerCommand::BinraryRDTServerCommand(CommandEvent* pCommandEvent, CommandHardwardEvent* pCommandHardwardEvent, Connect* pConnect, CommandData* pCommandData) : Command(pCommandEvent, pCommandHardwardEvent, pConnect, pCommandData)
 {
     LOGD("BinraryRDTServerCommand");
     

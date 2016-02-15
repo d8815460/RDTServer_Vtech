@@ -17,7 +17,7 @@
 #include "RDTAPIs.h"
 #include "BinraryRDTServerConnect.hpp"
 
-JsonRDTClientCommand::JsonRDTClientCommand(CommandEvent* pCommandEvent, Connect* pConnect, CommandData* pCommandData) : JsonRDTCommand(pCommandEvent, pConnect, pCommandData)
+JsonRDTClientCommand::JsonRDTClientCommand(CommandEvent* pCommandEvent, CommandHardwardEvent* pCommandHardwardEvent, Connect* pConnect, CommandData* pCommandData) : JsonRDTCommand(pCommandEvent, pCommandHardwardEvent, pConnect, pCommandData)
 {
     LOGD("JsonRDTClientCommand");
         

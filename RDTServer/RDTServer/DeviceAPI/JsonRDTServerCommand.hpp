@@ -38,7 +38,7 @@ struct JsonRDTServerCommand_ConnectCreateClient : ConnectCreateClient
 class JsonRDTServerCommand : public JsonRDTCommand
 {
 public:
-    JsonRDTServerCommand(CommandEvent* pCommandEvent, Connect* pConnect, CommandData* pCommandData = NULL);
+    JsonRDTServerCommand(CommandEvent* pCommandEvent, CommandHardwardEvent* pCommandHardwardEvent, Connect* pConnect, CommandData* pCommandData = NULL);
     
 public:    
 #pragma mark - Report

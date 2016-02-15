@@ -17,7 +17,7 @@
 #include "RDTAPIs.h"
 #include "BinraryRDTServerConnect.hpp"
 
-BinraryRDTClientCommand::BinraryRDTClientCommand(CommandEvent* pCommandEvent, Connect* pConnect, CommandData* pCommandData) : Command(pCommandEvent, pConnect, pCommandData)
+BinraryRDTClientCommand::BinraryRDTClientCommand(CommandEvent* pCommandEvent, CommandHardwardEvent* pCommandHardwardEvent, Connect* pConnect, CommandData* pCommandData) : Command(pCommandEvent, pCommandHardwardEvent, pConnect, pCommandData)
 {
     LOGD("BinraryRDTClientCommand");
     
