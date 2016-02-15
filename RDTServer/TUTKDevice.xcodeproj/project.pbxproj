@@ -13,18 +13,6 @@
 		A24FBA471C07143100EF516E /* libcurlpp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A24FBA461C07143100EF516E /* libcurlpp.a */; };
 		A24FBA491C07144400EF516E /* libutilspp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A24FBA481C07144400EF516E /* libutilspp.a */; };
 		A26FB6F31C636627007E3648 /* libDeviceAPI.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A26FB6F21C636627007E3648 /* libDeviceAPI.a */; };
-		A26FB6F71C636646007E3648 /* Body.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A26FB6F41C636646007E3648 /* Body.cpp */; };
-		A26FB6F81C636646007E3648 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A26FB6F61C636646007E3648 /* main.cpp */; };
-		A26FB7011C6367A5007E3648 /* JsonRDTClientDevice.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A26FB6FA1C6367A5007E3648 /* JsonRDTClientDevice.cpp */; };
-		A26FB7021C6367A5007E3648 /* SampoDevice.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A26FB6FC1C6367A5007E3648 /* SampoDevice.cpp */; };
-		A26FB7031C6367A5007E3648 /* ZhongHanDevice.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A26FB6FF1C6367A5007E3648 /* ZhongHanDevice.cpp */; };
-		A26FB7191C6367E4007E3648 /* VtechGarageDoorDevice.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A26FB7041C6367E4007E3648 /* VtechGarageDoorDevice.cpp */; };
-		A26FB71A1C6367E4007E3648 /* VtechIPHubGatewayDevice.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A26FB7071C6367E4007E3648 /* VtechIPHubGatewayDevice.cpp */; };
-		A26FB71B1C6367E4007E3648 /* VtechLightBulbDevice.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A26FB70A1C6367E4007E3648 /* VtechLightBulbDevice.cpp */; };
-		A26FB71C1C6367E4007E3648 /* VtechMotionSensorDevice.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A26FB70D1C6367E4007E3648 /* VtechMotionSensorDevice.cpp */; };
-		A26FB71D1C6367E4007E3648 /* VtechOpenClosedDevice.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A26FB7101C6367E4007E3648 /* VtechOpenClosedDevice.cpp */; };
-		A26FB71E1C6367E4007E3648 /* VtechVirtualGroupDevice.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A26FB7131C6367E4007E3648 /* VtechVirtualGroupDevice.cpp */; };
-		A26FB71F1C6367E4007E3648 /* VtechWallSwitchDevice.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A26FB7161C6367E4007E3648 /* VtechWallSwitchDevice.cpp */; };
 		A278363D1C3B8A9700283F81 /* MQTTConnectClient.c in Sources */ = {isa = PBXBuildFile; fileRef = A278362D1C3B8A9700283F81 /* MQTTConnectClient.c */; };
 		A278363E1C3B8A9700283F81 /* MQTTConnectServer.c in Sources */ = {isa = PBXBuildFile; fileRef = A278362E1C3B8A9700283F81 /* MQTTConnectServer.c */; };
 		A278363F1C3B8A9700283F81 /* MQTTDeserializePublish.c in Sources */ = {isa = PBXBuildFile; fileRef = A278362F1C3B8A9700283F81 /* MQTTDeserializePublish.c */; };
@@ -36,16 +24,21 @@
 		A27836451C3B8A9700283F81 /* MQTTUnsubscribeClient.c in Sources */ = {isa = PBXBuildFile; fileRef = A278363A1C3B8A9700283F81 /* MQTTUnsubscribeClient.c */; };
 		A27836461C3B8A9700283F81 /* MQTTUnsubscribeServer.c in Sources */ = {isa = PBXBuildFile; fileRef = A278363B1C3B8A9700283F81 /* MQTTUnsubscribeServer.c */; };
 		A27836491C3B8AC900283F81 /* linux.h in Sources */ = {isa = PBXBuildFile; fileRef = A27836481C3B8AC900283F81 /* linux.h */; };
-		A2913D701C63532500AF81AF /* TUTKDoorDevice.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A2913D241C63532500AF81AF /* TUTKDoorDevice.cpp */; };
-		A2913D711C63532500AF81AF /* TUTKGasDevice.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A2913D271C63532500AF81AF /* TUTKGasDevice.cpp */; };
-		A2913D721C63532500AF81AF /* TUTKGatewayDevice.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A2913D2A1C63532500AF81AF /* TUTKGatewayDevice.cpp */; };
-		A2913D731C63532500AF81AF /* TUTKLightingDevice.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A2913D2D1C63532500AF81AF /* TUTKLightingDevice.cpp */; };
-		A2913D741C63532500AF81AF /* TUTKPIRDevice.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A2913D301C63532500AF81AF /* TUTKPIRDevice.cpp */; };
-		A2913D751C63532500AF81AF /* TUTKPlugDevice.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A2913D331C63532500AF81AF /* TUTKPlugDevice.cpp */; };
-		A2913D761C63532500AF81AF /* TUTKSirenDevice.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A2913D371C63532500AF81AF /* TUTKSirenDevice.cpp */; };
-		A2913D771C63532500AF81AF /* TUTKSmokeDevice.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A2913D3A1C63532500AF81AF /* TUTKSmokeDevice.cpp */; };
-		A2913D781C63532500AF81AF /* TUTKVibrateDevice.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A2913D3D1C63532500AF81AF /* TUTKVibrateDevice.cpp */; };
-		A2913D791C63532500AF81AF /* TUTKWaterLeakDevice.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A2913D401C63532500AF81AF /* TUTKWaterLeakDevice.cpp */; };
+		A2BED3141C71769300AF9D4E /* Body.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A2BED2EC1C71769300AF9D4E /* Body.cpp */; };
+		A2BED3151C71769300AF9D4E /* JsonRDTClientDevice.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A2BED2EE1C71769300AF9D4E /* JsonRDTClientDevice.cpp */; };
+		A2BED3161C71769300AF9D4E /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A2BED2F01C71769300AF9D4E /* main.cpp */; };
+		A2BED3171C71769300AF9D4E /* SampoDevice.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A2BED2F11C71769300AF9D4E /* SampoDevice.cpp */; };
+		A2BED3181C71769300AF9D4E /* TUTKDoorDevice.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A2BED2F31C71769300AF9D4E /* TUTKDoorDevice.cpp */; };
+		A2BED3191C71769300AF9D4E /* TUTKGasDevice.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A2BED2F61C71769300AF9D4E /* TUTKGasDevice.cpp */; };
+		A2BED31A1C71769300AF9D4E /* TUTKGatewayDevice.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A2BED2F91C71769300AF9D4E /* TUTKGatewayDevice.cpp */; };
+		A2BED31B1C71769300AF9D4E /* TUTKLightingDevice.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A2BED2FC1C71769300AF9D4E /* TUTKLightingDevice.cpp */; };
+		A2BED31C1C71769300AF9D4E /* TUTKPIRDevice.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A2BED2FF1C71769300AF9D4E /* TUTKPIRDevice.cpp */; };
+		A2BED31D1C71769300AF9D4E /* TUTKPlugDevice.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A2BED3021C71769300AF9D4E /* TUTKPlugDevice.cpp */; };
+		A2BED31E1C71769300AF9D4E /* TUTKSirenDevice.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A2BED3061C71769300AF9D4E /* TUTKSirenDevice.cpp */; };
+		A2BED31F1C71769300AF9D4E /* TUTKSmokeDevice.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A2BED3091C71769300AF9D4E /* TUTKSmokeDevice.cpp */; };
+		A2BED3201C71769300AF9D4E /* TUTKVibrateDevice.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A2BED30C1C71769300AF9D4E /* TUTKVibrateDevice.cpp */; };
+		A2BED3211C71769300AF9D4E /* TUTKWaterLeakDevice.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A2BED30F1C71769300AF9D4E /* TUTKWaterLeakDevice.cpp */; };
+		A2BED3221C71769300AF9D4E /* ZhongHanDevice.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A2BED3121C71769300AF9D4E /* ZhongHanDevice.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -86,37 +79,6 @@
 		A256252F1C3CFB310036692B /* IPStack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPStack.h; sourceTree = "<group>"; };
 		A25625301C3CFB310036692B /* WifiIPStack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WifiIPStack.h; sourceTree = "<group>"; };
 		A26FB6F21C636627007E3648 /* libDeviceAPI.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libDeviceAPI.a; path = RDTServer/lib/mac/libDeviceAPI.a; sourceTree = "<group>"; };
-		A26FB6F41C636646007E3648 /* Body.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Body.cpp; path = Main/Body.cpp; sourceTree = "<group>"; };
-		A26FB6F51C636646007E3648 /* Body.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = Body.hpp; path = Main/Body.hpp; sourceTree = "<group>"; };
-		A26FB6F61C636646007E3648 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = Main/main.cpp; sourceTree = "<group>"; };
-		A26FB6FA1C6367A5007E3648 /* JsonRDTClientDevice.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = JsonRDTClientDevice.cpp; path = Main/JsonRDTClientDevice.cpp; sourceTree = "<group>"; };
-		A26FB6FB1C6367A5007E3648 /* JsonRDTClientDevice.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = JsonRDTClientDevice.hpp; path = Main/JsonRDTClientDevice.hpp; sourceTree = "<group>"; };
-		A26FB6FC1C6367A5007E3648 /* SampoDevice.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = SampoDevice.cpp; path = Main/SampoDevice.cpp; sourceTree = "<group>"; };
-		A26FB6FD1C6367A5007E3648 /* SampoDevice.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = SampoDevice.hpp; path = Main/SampoDevice.hpp; sourceTree = "<group>"; };
-		A26FB6FE1C6367A5007E3648 /* TUTKSampoEnum.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = TUTKSampoEnum.hpp; path = Main/TUTKSampoEnum.hpp; sourceTree = "<group>"; };
-		A26FB6FF1C6367A5007E3648 /* ZhongHanDevice.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ZhongHanDevice.cpp; path = Main/ZhongHanDevice.cpp; sourceTree = "<group>"; };
-		A26FB7001C6367A5007E3648 /* ZhongHanDevice.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = ZhongHanDevice.hpp; path = Main/ZhongHanDevice.hpp; sourceTree = "<group>"; };
-		A26FB7041C6367E4007E3648 /* VtechGarageDoorDevice.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = VtechGarageDoorDevice.cpp; path = Main/VtechGarageDoorDevice.cpp; sourceTree = "<group>"; };
-		A26FB7051C6367E4007E3648 /* VtechGarageDoorDevice.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = VtechGarageDoorDevice.hpp; path = Main/VtechGarageDoorDevice.hpp; sourceTree = "<group>"; };
-		A26FB7061C6367E4007E3648 /* VtechGarageDoorEnum.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = VtechGarageDoorEnum.hpp; path = Main/VtechGarageDoorEnum.hpp; sourceTree = "<group>"; };
-		A26FB7071C6367E4007E3648 /* VtechIPHubGatewayDevice.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = VtechIPHubGatewayDevice.cpp; path = Main/VtechIPHubGatewayDevice.cpp; sourceTree = "<group>"; };
-		A26FB7081C6367E4007E3648 /* VtechIPHubGatewayDevice.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = VtechIPHubGatewayDevice.hpp; path = Main/VtechIPHubGatewayDevice.hpp; sourceTree = "<group>"; };
-		A26FB7091C6367E4007E3648 /* VtechIPHubGatewayEnum.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = VtechIPHubGatewayEnum.hpp; path = Main/VtechIPHubGatewayEnum.hpp; sourceTree = "<group>"; };
-		A26FB70A1C6367E4007E3648 /* VtechLightBulbDevice.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = VtechLightBulbDevice.cpp; path = Main/VtechLightBulbDevice.cpp; sourceTree = "<group>"; };
-		A26FB70B1C6367E4007E3648 /* VtechLightBulbDevice.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = VtechLightBulbDevice.hpp; path = Main/VtechLightBulbDevice.hpp; sourceTree = "<group>"; };
-		A26FB70C1C6367E4007E3648 /* VtechLightBulbEnum.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = VtechLightBulbEnum.hpp; path = Main/VtechLightBulbEnum.hpp; sourceTree = "<group>"; };
-		A26FB70D1C6367E4007E3648 /* VtechMotionSensorDevice.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = VtechMotionSensorDevice.cpp; path = Main/VtechMotionSensorDevice.cpp; sourceTree = "<group>"; };
-		A26FB70E1C6367E4007E3648 /* VtechMotionSensorDevice.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = VtechMotionSensorDevice.hpp; path = Main/VtechMotionSensorDevice.hpp; sourceTree = "<group>"; };
-		A26FB70F1C6367E4007E3648 /* VtechMotionSensorEnum.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = VtechMotionSensorEnum.hpp; path = Main/VtechMotionSensorEnum.hpp; sourceTree = "<group>"; };
-		A26FB7101C6367E4007E3648 /* VtechOpenClosedDevice.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = VtechOpenClosedDevice.cpp; path = Main/VtechOpenClosedDevice.cpp; sourceTree = "<group>"; };
-		A26FB7111C6367E4007E3648 /* VtechOpenClosedDevice.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = VtechOpenClosedDevice.hpp; path = Main/VtechOpenClosedDevice.hpp; sourceTree = "<group>"; };
-		A26FB7121C6367E4007E3648 /* VtechOpenClosedEnum.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = VtechOpenClosedEnum.hpp; path = Main/VtechOpenClosedEnum.hpp; sourceTree = "<group>"; };
-		A26FB7131C6367E4007E3648 /* VtechVirtualGroupDevice.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = VtechVirtualGroupDevice.cpp; path = Main/VtechVirtualGroupDevice.cpp; sourceTree = "<group>"; };
-		A26FB7141C6367E4007E3648 /* VtechVirtualGroupDevice.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = VtechVirtualGroupDevice.hpp; path = Main/VtechVirtualGroupDevice.hpp; sourceTree = "<group>"; };
-		A26FB7151C6367E4007E3648 /* VtechVirtualGroupEnum.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = VtechVirtualGroupEnum.hpp; path = Main/VtechVirtualGroupEnum.hpp; sourceTree = "<group>"; };
-		A26FB7161C6367E4007E3648 /* VtechWallSwitchDevice.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = VtechWallSwitchDevice.cpp; path = Main/VtechWallSwitchDevice.cpp; sourceTree = "<group>"; };
-		A26FB7171C6367E4007E3648 /* VtechWallSwitchDevice.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = VtechWallSwitchDevice.hpp; path = Main/VtechWallSwitchDevice.hpp; sourceTree = "<group>"; };
-		A26FB7181C6367E4007E3648 /* VtechWallSwitchEnum.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = VtechWallSwitchEnum.hpp; path = Main/VtechWallSwitchEnum.hpp; sourceTree = "<group>"; };
 		A27836281C3B8A6500283F81 /* FP.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FP.h; path = RDTServer/3th_party/Paho_MQTT/MQTTClient/FP.h; sourceTree = "<group>"; };
 		A27836291C3B8A6500283F81 /* MQTTClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MQTTClient.h; path = RDTServer/3th_party/Paho_MQTT/MQTTClient/MQTTClient.h; sourceTree = "<group>"; };
 		A278362A1C3B8A6500283F81 /* MQTTLogging.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MQTTLogging.h; path = RDTServer/3th_party/Paho_MQTT/MQTTClient/MQTTLogging.h; sourceTree = "<group>"; };
@@ -138,45 +100,48 @@
 		A278363B1C3B8A9700283F81 /* MQTTUnsubscribeServer.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = MQTTUnsubscribeServer.c; path = RDTServer/3th_party/Paho_MQTT/MQTTPacket/src/MQTTUnsubscribeServer.c; sourceTree = "<group>"; };
 		A278363C1C3B8A9700283F81 /* StackTrace.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StackTrace.h; path = RDTServer/3th_party/Paho_MQTT/MQTTPacket/src/StackTrace.h; sourceTree = "<group>"; };
 		A27836481C3B8AC900283F81 /* linux.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = linux.h; path = RDTServer/3th_party/Paho_MQTT/MQTTClient/linux/linux.h; sourceTree = "<group>"; };
-		A2913CD71C63216400AF81AF /* CMakeLists.txt */ = {isa = PBXFileReference; lastKnownFileType = text; name = CMakeLists.txt; path = main/CMakeLists.txt; sourceTree = "<group>"; };
 		A2913CF91C6348ED00AF81AF /* CMakeLists.txt */ = {isa = PBXFileReference; lastKnownFileType = text; name = CMakeLists.txt; path = DeviceAPI/CMakeLists.txt; sourceTree = "<group>"; };
-		A2913D0F1C63532500AF81AF /* exception.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = exception.hpp; path = DeviceAPI/exception.hpp; sourceTree = "<group>"; };
-		A2913D1D1C63532500AF81AF /* libunixsocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = libunixsocket.h; path = DeviceAPI/libunixsocket.h; sourceTree = "<group>"; };
-		A2913D1E1C63532500AF81AF /* platform_Config.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = platform_Config.h; path = DeviceAPI/platform_Config.h; sourceTree = "<group>"; };
-		A2913D221C63532500AF81AF /* socket.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = socket.hpp; path = DeviceAPI/socket.hpp; sourceTree = "<group>"; };
-		A2913D231C63532500AF81AF /* streamclient.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = streamclient.hpp; path = DeviceAPI/streamclient.hpp; sourceTree = "<group>"; };
-		A2913D241C63532500AF81AF /* TUTKDoorDevice.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TUTKDoorDevice.cpp; path = DeviceAPI/TUTKDoorDevice.cpp; sourceTree = "<group>"; };
-		A2913D251C63532500AF81AF /* TUTKDoorDevice.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = TUTKDoorDevice.hpp; path = DeviceAPI/TUTKDoorDevice.hpp; sourceTree = "<group>"; };
-		A2913D261C63532500AF81AF /* TUTKDoorEnum.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = TUTKDoorEnum.hpp; path = DeviceAPI/TUTKDoorEnum.hpp; sourceTree = "<group>"; };
-		A2913D271C63532500AF81AF /* TUTKGasDevice.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TUTKGasDevice.cpp; path = DeviceAPI/TUTKGasDevice.cpp; sourceTree = "<group>"; };
-		A2913D281C63532500AF81AF /* TUTKGasDevice.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = TUTKGasDevice.hpp; path = DeviceAPI/TUTKGasDevice.hpp; sourceTree = "<group>"; };
-		A2913D291C63532500AF81AF /* TUTKGasEnum.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = TUTKGasEnum.hpp; path = DeviceAPI/TUTKGasEnum.hpp; sourceTree = "<group>"; };
-		A2913D2A1C63532500AF81AF /* TUTKGatewayDevice.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TUTKGatewayDevice.cpp; path = DeviceAPI/TUTKGatewayDevice.cpp; sourceTree = "<group>"; };
-		A2913D2B1C63532500AF81AF /* TUTKGatewayDevice.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = TUTKGatewayDevice.hpp; path = DeviceAPI/TUTKGatewayDevice.hpp; sourceTree = "<group>"; };
-		A2913D2C1C63532500AF81AF /* TUTKGatewayEnum.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = TUTKGatewayEnum.hpp; path = DeviceAPI/TUTKGatewayEnum.hpp; sourceTree = "<group>"; };
-		A2913D2D1C63532500AF81AF /* TUTKLightingDevice.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TUTKLightingDevice.cpp; path = DeviceAPI/TUTKLightingDevice.cpp; sourceTree = "<group>"; };
-		A2913D2E1C63532500AF81AF /* TUTKLightingDevice.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = TUTKLightingDevice.hpp; path = DeviceAPI/TUTKLightingDevice.hpp; sourceTree = "<group>"; };
-		A2913D2F1C63532500AF81AF /* TUTKLightingEnum.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = TUTKLightingEnum.hpp; path = DeviceAPI/TUTKLightingEnum.hpp; sourceTree = "<group>"; };
-		A2913D301C63532500AF81AF /* TUTKPIRDevice.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TUTKPIRDevice.cpp; path = DeviceAPI/TUTKPIRDevice.cpp; sourceTree = "<group>"; };
-		A2913D311C63532500AF81AF /* TUTKPIRDevice.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = TUTKPIRDevice.hpp; path = DeviceAPI/TUTKPIRDevice.hpp; sourceTree = "<group>"; };
-		A2913D321C63532500AF81AF /* TUTKPIREnum.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = TUTKPIREnum.hpp; path = DeviceAPI/TUTKPIREnum.hpp; sourceTree = "<group>"; };
-		A2913D331C63532500AF81AF /* TUTKPlugDevice.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TUTKPlugDevice.cpp; path = DeviceAPI/TUTKPlugDevice.cpp; sourceTree = "<group>"; };
-		A2913D341C63532500AF81AF /* TUTKPlugDevice.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = TUTKPlugDevice.hpp; path = DeviceAPI/TUTKPlugDevice.hpp; sourceTree = "<group>"; };
-		A2913D351C63532500AF81AF /* TUTKPlugEnum.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = TUTKPlugEnum.hpp; path = DeviceAPI/TUTKPlugEnum.hpp; sourceTree = "<group>"; };
-		A2913D371C63532500AF81AF /* TUTKSirenDevice.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TUTKSirenDevice.cpp; path = DeviceAPI/TUTKSirenDevice.cpp; sourceTree = "<group>"; };
-		A2913D381C63532500AF81AF /* TUTKSirenDevice.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = TUTKSirenDevice.hpp; path = DeviceAPI/TUTKSirenDevice.hpp; sourceTree = "<group>"; };
-		A2913D391C63532500AF81AF /* TUTKSirenEnum.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = TUTKSirenEnum.hpp; path = DeviceAPI/TUTKSirenEnum.hpp; sourceTree = "<group>"; };
-		A2913D3A1C63532500AF81AF /* TUTKSmokeDevice.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TUTKSmokeDevice.cpp; path = DeviceAPI/TUTKSmokeDevice.cpp; sourceTree = "<group>"; };
-		A2913D3B1C63532500AF81AF /* TUTKSmokeDevice.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = TUTKSmokeDevice.hpp; path = DeviceAPI/TUTKSmokeDevice.hpp; sourceTree = "<group>"; };
-		A2913D3C1C63532500AF81AF /* TUTKSmokeEnum.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = TUTKSmokeEnum.hpp; path = DeviceAPI/TUTKSmokeEnum.hpp; sourceTree = "<group>"; };
-		A2913D3D1C63532500AF81AF /* TUTKVibrateDevice.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TUTKVibrateDevice.cpp; path = DeviceAPI/TUTKVibrateDevice.cpp; sourceTree = "<group>"; };
-		A2913D3E1C63532500AF81AF /* TUTKVibrateDevice.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = TUTKVibrateDevice.hpp; path = DeviceAPI/TUTKVibrateDevice.hpp; sourceTree = "<group>"; };
-		A2913D3F1C63532500AF81AF /* TUTKVibrateEnum.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = TUTKVibrateEnum.hpp; path = DeviceAPI/TUTKVibrateEnum.hpp; sourceTree = "<group>"; };
-		A2913D401C63532500AF81AF /* TUTKWaterLeakDevice.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TUTKWaterLeakDevice.cpp; path = DeviceAPI/TUTKWaterLeakDevice.cpp; sourceTree = "<group>"; };
-		A2913D411C63532500AF81AF /* TUTKWaterLeakDevice.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = TUTKWaterLeakDevice.hpp; path = DeviceAPI/TUTKWaterLeakDevice.hpp; sourceTree = "<group>"; };
-		A2913D421C63532500AF81AF /* TUTKWaterLeakEnum.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = TUTKWaterLeakEnum.hpp; path = DeviceAPI/TUTKWaterLeakEnum.hpp; sourceTree = "<group>"; };
-		A2913D431C63532500AF81AF /* unixbase.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = unixbase.hpp; path = DeviceAPI/unixbase.hpp; sourceTree = "<group>"; };
-		A2913D441C63532500AF81AF /* unixclientstream.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = unixclientstream.hpp; path = DeviceAPI/unixclientstream.hpp; sourceTree = "<group>"; };
+		A2BED2EC1C71769300AF9D4E /* Body.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Body.cpp; path = Targate/TUTKDevice/Body.cpp; sourceTree = "<group>"; };
+		A2BED2ED1C71769300AF9D4E /* Body.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = Body.hpp; path = Targate/TUTKDevice/Body.hpp; sourceTree = "<group>"; };
+		A2BED2EE1C71769300AF9D4E /* JsonRDTClientDevice.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = JsonRDTClientDevice.cpp; path = Targate/TUTKDevice/JsonRDTClientDevice.cpp; sourceTree = "<group>"; };
+		A2BED2EF1C71769300AF9D4E /* JsonRDTClientDevice.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = JsonRDTClientDevice.hpp; path = Targate/TUTKDevice/JsonRDTClientDevice.hpp; sourceTree = "<group>"; };
+		A2BED2F01C71769300AF9D4E /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = Targate/TUTKDevice/main.cpp; sourceTree = "<group>"; };
+		A2BED2F11C71769300AF9D4E /* SampoDevice.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = SampoDevice.cpp; path = Targate/TUTKDevice/SampoDevice.cpp; sourceTree = "<group>"; };
+		A2BED2F21C71769300AF9D4E /* SampoDevice.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = SampoDevice.hpp; path = Targate/TUTKDevice/SampoDevice.hpp; sourceTree = "<group>"; };
+		A2BED2F31C71769300AF9D4E /* TUTKDoorDevice.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TUTKDoorDevice.cpp; path = Targate/TUTKDevice/TUTKDoorDevice.cpp; sourceTree = "<group>"; };
+		A2BED2F41C71769300AF9D4E /* TUTKDoorDevice.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = TUTKDoorDevice.hpp; path = Targate/TUTKDevice/TUTKDoorDevice.hpp; sourceTree = "<group>"; };
+		A2BED2F51C71769300AF9D4E /* TUTKDoorEnum.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = TUTKDoorEnum.hpp; path = Targate/TUTKDevice/TUTKDoorEnum.hpp; sourceTree = "<group>"; };
+		A2BED2F61C71769300AF9D4E /* TUTKGasDevice.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TUTKGasDevice.cpp; path = Targate/TUTKDevice/TUTKGasDevice.cpp; sourceTree = "<group>"; };
+		A2BED2F71C71769300AF9D4E /* TUTKGasDevice.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = TUTKGasDevice.hpp; path = Targate/TUTKDevice/TUTKGasDevice.hpp; sourceTree = "<group>"; };
+		A2BED2F81C71769300AF9D4E /* TUTKGasEnum.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = TUTKGasEnum.hpp; path = Targate/TUTKDevice/TUTKGasEnum.hpp; sourceTree = "<group>"; };
+		A2BED2F91C71769300AF9D4E /* TUTKGatewayDevice.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TUTKGatewayDevice.cpp; path = Targate/TUTKDevice/TUTKGatewayDevice.cpp; sourceTree = "<group>"; };
+		A2BED2FA1C71769300AF9D4E /* TUTKGatewayDevice.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = TUTKGatewayDevice.hpp; path = Targate/TUTKDevice/TUTKGatewayDevice.hpp; sourceTree = "<group>"; };
+		A2BED2FB1C71769300AF9D4E /* TUTKGatewayEnum.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = TUTKGatewayEnum.hpp; path = Targate/TUTKDevice/TUTKGatewayEnum.hpp; sourceTree = "<group>"; };
+		A2BED2FC1C71769300AF9D4E /* TUTKLightingDevice.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TUTKLightingDevice.cpp; path = Targate/TUTKDevice/TUTKLightingDevice.cpp; sourceTree = "<group>"; };
+		A2BED2FD1C71769300AF9D4E /* TUTKLightingDevice.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = TUTKLightingDevice.hpp; path = Targate/TUTKDevice/TUTKLightingDevice.hpp; sourceTree = "<group>"; };
+		A2BED2FE1C71769300AF9D4E /* TUTKLightingEnum.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = TUTKLightingEnum.hpp; path = Targate/TUTKDevice/TUTKLightingEnum.hpp; sourceTree = "<group>"; };
+		A2BED2FF1C71769300AF9D4E /* TUTKPIRDevice.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TUTKPIRDevice.cpp; path = Targate/TUTKDevice/TUTKPIRDevice.cpp; sourceTree = "<group>"; };
+		A2BED3001C71769300AF9D4E /* TUTKPIRDevice.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = TUTKPIRDevice.hpp; path = Targate/TUTKDevice/TUTKPIRDevice.hpp; sourceTree = "<group>"; };
+		A2BED3011C71769300AF9D4E /* TUTKPIREnum.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = TUTKPIREnum.hpp; path = Targate/TUTKDevice/TUTKPIREnum.hpp; sourceTree = "<group>"; };
+		A2BED3021C71769300AF9D4E /* TUTKPlugDevice.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TUTKPlugDevice.cpp; path = Targate/TUTKDevice/TUTKPlugDevice.cpp; sourceTree = "<group>"; };
+		A2BED3031C71769300AF9D4E /* TUTKPlugDevice.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = TUTKPlugDevice.hpp; path = Targate/TUTKDevice/TUTKPlugDevice.hpp; sourceTree = "<group>"; };
+		A2BED3041C71769300AF9D4E /* TUTKPlugEnum.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = TUTKPlugEnum.hpp; path = Targate/TUTKDevice/TUTKPlugEnum.hpp; sourceTree = "<group>"; };
+		A2BED3051C71769300AF9D4E /* TUTKSampoEnum.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = TUTKSampoEnum.hpp; path = Targate/TUTKDevice/TUTKSampoEnum.hpp; sourceTree = "<group>"; };
+		A2BED3061C71769300AF9D4E /* TUTKSirenDevice.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TUTKSirenDevice.cpp; path = Targate/TUTKDevice/TUTKSirenDevice.cpp; sourceTree = "<group>"; };
+		A2BED3071C71769300AF9D4E /* TUTKSirenDevice.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = TUTKSirenDevice.hpp; path = Targate/TUTKDevice/TUTKSirenDevice.hpp; sourceTree = "<group>"; };
+		A2BED3081C71769300AF9D4E /* TUTKSirenEnum.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = TUTKSirenEnum.hpp; path = Targate/TUTKDevice/TUTKSirenEnum.hpp; sourceTree = "<group>"; };
+		A2BED3091C71769300AF9D4E /* TUTKSmokeDevice.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TUTKSmokeDevice.cpp; path = Targate/TUTKDevice/TUTKSmokeDevice.cpp; sourceTree = "<group>"; };
+		A2BED30A1C71769300AF9D4E /* TUTKSmokeDevice.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = TUTKSmokeDevice.hpp; path = Targate/TUTKDevice/TUTKSmokeDevice.hpp; sourceTree = "<group>"; };
+		A2BED30B1C71769300AF9D4E /* TUTKSmokeEnum.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = TUTKSmokeEnum.hpp; path = Targate/TUTKDevice/TUTKSmokeEnum.hpp; sourceTree = "<group>"; };
+		A2BED30C1C71769300AF9D4E /* TUTKVibrateDevice.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TUTKVibrateDevice.cpp; path = Targate/TUTKDevice/TUTKVibrateDevice.cpp; sourceTree = "<group>"; };
+		A2BED30D1C71769300AF9D4E /* TUTKVibrateDevice.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = TUTKVibrateDevice.hpp; path = Targate/TUTKDevice/TUTKVibrateDevice.hpp; sourceTree = "<group>"; };
+		A2BED30E1C71769300AF9D4E /* TUTKVibrateEnum.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = TUTKVibrateEnum.hpp; path = Targate/TUTKDevice/TUTKVibrateEnum.hpp; sourceTree = "<group>"; };
+		A2BED30F1C71769300AF9D4E /* TUTKWaterLeakDevice.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TUTKWaterLeakDevice.cpp; path = Targate/TUTKDevice/TUTKWaterLeakDevice.cpp; sourceTree = "<group>"; };
+		A2BED3101C71769300AF9D4E /* TUTKWaterLeakDevice.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = TUTKWaterLeakDevice.hpp; path = Targate/TUTKDevice/TUTKWaterLeakDevice.hpp; sourceTree = "<group>"; };
+		A2BED3111C71769300AF9D4E /* TUTKWaterLeakEnum.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = TUTKWaterLeakEnum.hpp; path = Targate/TUTKDevice/TUTKWaterLeakEnum.hpp; sourceTree = "<group>"; };
+		A2BED3121C71769300AF9D4E /* ZhongHanDevice.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ZhongHanDevice.cpp; path = Targate/TUTKDevice/ZhongHanDevice.cpp; sourceTree = "<group>"; };
+		A2BED3131C71769300AF9D4E /* ZhongHanDevice.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = ZhongHanDevice.hpp; path = Targate/TUTKDevice/ZhongHanDevice.hpp; sourceTree = "<group>"; };
+		A2BED3231C71770000AF9D4E /* CMakeLists.txt */ = {isa = PBXFileReference; lastKnownFileType = text; name = CMakeLists.txt; path = Targate/TUTKDevice/CMakeLists.txt; sourceTree = "<group>"; };
 		A2BF717A1AC95A4600379199 /* RDTServer */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = RDTServer; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -197,7 +162,7 @@
 		A20067EE1C61FADF00FEEA08 /* Other */ = {
 			isa = PBXGroup;
 			children = (
-				A2913CF71C6335C900AF81AF /* Main */,
+				A2913CF71C6335C900AF81AF /* TUTKDevice */,
 				A2913CF81C6335CF00AF81AF /* DeviceAPI */,
 				A20067EF1C61FAF900FEEA08 /* runClient.sh */,
 				A20067F01C61FAF900FEEA08 /* runServer.sh */,
@@ -239,67 +204,39 @@
 			path = RDTServer;
 			sourceTree = "<group>";
 		};
-		A24F5A421C05B194004D7764 /* Vtech */ = {
-			isa = PBXGroup;
-			children = (
-				A26FB7091C6367E4007E3648 /* VtechIPHubGatewayEnum.hpp */,
-				A26FB7081C6367E4007E3648 /* VtechIPHubGatewayDevice.hpp */,
-				A26FB7071C6367E4007E3648 /* VtechIPHubGatewayDevice.cpp */,
-				A26FB7061C6367E4007E3648 /* VtechGarageDoorEnum.hpp */,
-				A26FB7051C6367E4007E3648 /* VtechGarageDoorDevice.hpp */,
-				A26FB7041C6367E4007E3648 /* VtechGarageDoorDevice.cpp */,
-				A26FB70C1C6367E4007E3648 /* VtechLightBulbEnum.hpp */,
-				A26FB70B1C6367E4007E3648 /* VtechLightBulbDevice.hpp */,
-				A26FB70A1C6367E4007E3648 /* VtechLightBulbDevice.cpp */,
-				A26FB70F1C6367E4007E3648 /* VtechMotionSensorEnum.hpp */,
-				A26FB70E1C6367E4007E3648 /* VtechMotionSensorDevice.hpp */,
-				A26FB70D1C6367E4007E3648 /* VtechMotionSensorDevice.cpp */,
-				A26FB7121C6367E4007E3648 /* VtechOpenClosedEnum.hpp */,
-				A26FB7111C6367E4007E3648 /* VtechOpenClosedDevice.hpp */,
-				A26FB7101C6367E4007E3648 /* VtechOpenClosedDevice.cpp */,
-				A26FB7151C6367E4007E3648 /* VtechVirtualGroupEnum.hpp */,
-				A26FB7141C6367E4007E3648 /* VtechVirtualGroupDevice.hpp */,
-				A26FB7131C6367E4007E3648 /* VtechVirtualGroupDevice.cpp */,
-				A26FB7181C6367E4007E3648 /* VtechWallSwitchEnum.hpp */,
-				A26FB7171C6367E4007E3648 /* VtechWallSwitchDevice.hpp */,
-				A26FB7161C6367E4007E3648 /* VtechWallSwitchDevice.cpp */,
-			);
-			name = Vtech;
-			sourceTree = "<group>";
-		};
 		A24F5A521C05BD18004D7764 /* TUTK */ = {
 			isa = PBXGroup;
 			children = (
-				A2913D261C63532500AF81AF /* TUTKDoorEnum.hpp */,
-				A2913D251C63532500AF81AF /* TUTKDoorDevice.hpp */,
-				A2913D241C63532500AF81AF /* TUTKDoorDevice.cpp */,
-				A2913D291C63532500AF81AF /* TUTKGasEnum.hpp */,
-				A2913D281C63532500AF81AF /* TUTKGasDevice.hpp */,
-				A2913D271C63532500AF81AF /* TUTKGasDevice.cpp */,
-				A2913D2C1C63532500AF81AF /* TUTKGatewayEnum.hpp */,
-				A2913D2B1C63532500AF81AF /* TUTKGatewayDevice.hpp */,
-				A2913D2A1C63532500AF81AF /* TUTKGatewayDevice.cpp */,
-				A2913D2F1C63532500AF81AF /* TUTKLightingEnum.hpp */,
-				A2913D2E1C63532500AF81AF /* TUTKLightingDevice.hpp */,
-				A2913D2D1C63532500AF81AF /* TUTKLightingDevice.cpp */,
-				A2913D321C63532500AF81AF /* TUTKPIREnum.hpp */,
-				A2913D311C63532500AF81AF /* TUTKPIRDevice.hpp */,
-				A2913D301C63532500AF81AF /* TUTKPIRDevice.cpp */,
-				A2913D351C63532500AF81AF /* TUTKPlugEnum.hpp */,
-				A2913D341C63532500AF81AF /* TUTKPlugDevice.hpp */,
-				A2913D331C63532500AF81AF /* TUTKPlugDevice.cpp */,
-				A2913D391C63532500AF81AF /* TUTKSirenEnum.hpp */,
-				A2913D381C63532500AF81AF /* TUTKSirenDevice.hpp */,
-				A2913D371C63532500AF81AF /* TUTKSirenDevice.cpp */,
-				A2913D3C1C63532500AF81AF /* TUTKSmokeEnum.hpp */,
-				A2913D3B1C63532500AF81AF /* TUTKSmokeDevice.hpp */,
-				A2913D3A1C63532500AF81AF /* TUTKSmokeDevice.cpp */,
-				A2913D3F1C63532500AF81AF /* TUTKVibrateEnum.hpp */,
-				A2913D3E1C63532500AF81AF /* TUTKVibrateDevice.hpp */,
-				A2913D3D1C63532500AF81AF /* TUTKVibrateDevice.cpp */,
-				A2913D421C63532500AF81AF /* TUTKWaterLeakEnum.hpp */,
-				A2913D411C63532500AF81AF /* TUTKWaterLeakDevice.hpp */,
-				A2913D401C63532500AF81AF /* TUTKWaterLeakDevice.cpp */,
+				A2BED2F51C71769300AF9D4E /* TUTKDoorEnum.hpp */,
+				A2BED2F41C71769300AF9D4E /* TUTKDoorDevice.hpp */,
+				A2BED2F31C71769300AF9D4E /* TUTKDoorDevice.cpp */,
+				A2BED2F81C71769300AF9D4E /* TUTKGasEnum.hpp */,
+				A2BED2F71C71769300AF9D4E /* TUTKGasDevice.hpp */,
+				A2BED2F61C71769300AF9D4E /* TUTKGasDevice.cpp */,
+				A2BED2FB1C71769300AF9D4E /* TUTKGatewayEnum.hpp */,
+				A2BED2FA1C71769300AF9D4E /* TUTKGatewayDevice.hpp */,
+				A2BED2F91C71769300AF9D4E /* TUTKGatewayDevice.cpp */,
+				A2BED2FE1C71769300AF9D4E /* TUTKLightingEnum.hpp */,
+				A2BED2FD1C71769300AF9D4E /* TUTKLightingDevice.hpp */,
+				A2BED2FC1C71769300AF9D4E /* TUTKLightingDevice.cpp */,
+				A2BED3011C71769300AF9D4E /* TUTKPIREnum.hpp */,
+				A2BED3001C71769300AF9D4E /* TUTKPIRDevice.hpp */,
+				A2BED2FF1C71769300AF9D4E /* TUTKPIRDevice.cpp */,
+				A2BED3041C71769300AF9D4E /* TUTKPlugEnum.hpp */,
+				A2BED3031C71769300AF9D4E /* TUTKPlugDevice.hpp */,
+				A2BED3021C71769300AF9D4E /* TUTKPlugDevice.cpp */,
+				A2BED3081C71769300AF9D4E /* TUTKSirenEnum.hpp */,
+				A2BED3071C71769300AF9D4E /* TUTKSirenDevice.hpp */,
+				A2BED3061C71769300AF9D4E /* TUTKSirenDevice.cpp */,
+				A2BED30B1C71769300AF9D4E /* TUTKSmokeEnum.hpp */,
+				A2BED30A1C71769300AF9D4E /* TUTKSmokeDevice.hpp */,
+				A2BED3091C71769300AF9D4E /* TUTKSmokeDevice.cpp */,
+				A2BED30E1C71769300AF9D4E /* TUTKVibrateEnum.hpp */,
+				A2BED30D1C71769300AF9D4E /* TUTKVibrateDevice.hpp */,
+				A2BED30C1C71769300AF9D4E /* TUTKVibrateDevice.cpp */,
+				A2BED3111C71769300AF9D4E /* TUTKWaterLeakEnum.hpp */,
+				A2BED3101C71769300AF9D4E /* TUTKWaterLeakDevice.hpp */,
+				A2BED30F1C71769300AF9D4E /* TUTKWaterLeakDevice.cpp */,
 			);
 			name = TUTK;
 			sourceTree = "<group>";
@@ -389,12 +326,12 @@
 			name = linux;
 			sourceTree = "<group>";
 		};
-		A2913CF71C6335C900AF81AF /* Main */ = {
+		A2913CF71C6335C900AF81AF /* TUTKDevice */ = {
 			isa = PBXGroup;
 			children = (
-				A2913CD71C63216400AF81AF /* CMakeLists.txt */,
+				A2BED3231C71770000AF9D4E /* CMakeLists.txt */,
 			);
-			name = Main;
+			name = TUTKDevice;
 			sourceTree = "<group>";
 		};
 		A2913CF81C6335CF00AF81AF /* DeviceAPI */ = {
@@ -408,7 +345,7 @@
 		A2BF71711AC95A4600379199 = {
 			isa = PBXGroup;
 			children = (
-				A2BF717C1AC95A4600379199 /* Main */,
+				A2BF717C1AC95A4600379199 /* TUTKDevice */,
 				A20067EE1C61FADF00FEEA08 /* Other */,
 				A24D7FF81BFD6DB600143462 /* 3th Party */,
 				A2BF717B1AC95A4600379199 /* Products */,
@@ -423,37 +360,29 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		A2BF717C1AC95A4600379199 /* Main */ = {
+		A2BF717C1AC95A4600379199 /* TUTKDevice */ = {
 			isa = PBXGroup;
 			children = (
-				A2913D0F1C63532500AF81AF /* exception.hpp */,
-				A2913D431C63532500AF81AF /* unixbase.hpp */,
-				A2913D1D1C63532500AF81AF /* libunixsocket.h */,
-				A2913D441C63532500AF81AF /* unixclientstream.hpp */,
-				A2913D221C63532500AF81AF /* socket.hpp */,
-				A2913D231C63532500AF81AF /* streamclient.hpp */,
-				A2913D1E1C63532500AF81AF /* platform_Config.h */,
-				A26FB6F51C636646007E3648 /* Body.hpp */,
-				A26FB6F41C636646007E3648 /* Body.cpp */,
-				A26FB6F61C636646007E3648 /* main.cpp */,
+				A2BED2F01C71769300AF9D4E /* main.cpp */,
+				A2BED2ED1C71769300AF9D4E /* Body.hpp */,
+				A2BED2EC1C71769300AF9D4E /* Body.cpp */,
 				A2EB62921B3293D800D7553C /* Devices */,
 			);
-			name = Main;
+			name = TUTKDevice;
 			path = RDTServer;
 			sourceTree = "<group>";
 		};
 		A2EB62921B3293D800D7553C /* Devices */ = {
 			isa = PBXGroup;
 			children = (
-				A24F5A421C05B194004D7764 /* Vtech */,
+				A2BED2EF1C71769300AF9D4E /* JsonRDTClientDevice.hpp */,
+				A2BED2EE1C71769300AF9D4E /* JsonRDTClientDevice.cpp */,
+				A2BED3051C71769300AF9D4E /* TUTKSampoEnum.hpp */,
+				A2BED2F21C71769300AF9D4E /* SampoDevice.hpp */,
+				A2BED2F11C71769300AF9D4E /* SampoDevice.cpp */,
+				A2BED3131C71769300AF9D4E /* ZhongHanDevice.hpp */,
+				A2BED3121C71769300AF9D4E /* ZhongHanDevice.cpp */,
 				A24F5A521C05BD18004D7764 /* TUTK */,
-				A26FB6FB1C6367A5007E3648 /* JsonRDTClientDevice.hpp */,
-				A26FB6FA1C6367A5007E3648 /* JsonRDTClientDevice.cpp */,
-				A26FB6FE1C6367A5007E3648 /* TUTKSampoEnum.hpp */,
-				A26FB6FD1C6367A5007E3648 /* SampoDevice.hpp */,
-				A26FB6FC1C6367A5007E3648 /* SampoDevice.cpp */,
-				A26FB7001C6367A5007E3648 /* ZhongHanDevice.hpp */,
-				A26FB6FF1C6367A5007E3648 /* ZhongHanDevice.cpp */,
 			);
 			name = Devices;
 			sourceTree = "<group>";
@@ -492,7 +421,7 @@
 					};
 				};
 			};
-			buildConfigurationList = A2BF71751AC95A4600379199 /* Build configuration list for PBXProject "Main" */;
+			buildConfigurationList = A2BF71751AC95A4600379199 /* Build configuration list for PBXProject "TUTKDevice" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -515,41 +444,34 @@
 			buildActionMask = 2147483647;
 			files = (
 				A24D80151BFD796E00143462 /* json_reader.cpp in Sources */,
-				A2913D781C63532500AF81AF /* TUTKVibrateDevice.cpp in Sources */,
-				A26FB71E1C6367E4007E3648 /* VtechVirtualGroupDevice.cpp in Sources */,
-				A26FB6F81C636646007E3648 /* main.cpp in Sources */,
 				A24D80171BFD796E00143462 /* json_writer.cpp in Sources */,
-				A26FB7011C6367A5007E3648 /* JsonRDTClientDevice.cpp in Sources */,
-				A26FB7191C6367E4007E3648 /* VtechGarageDoorDevice.cpp in Sources */,
+				A2BED31A1C71769300AF9D4E /* TUTKGatewayDevice.cpp in Sources */,
+				A2BED31E1C71769300AF9D4E /* TUTKSirenDevice.cpp in Sources */,
+				A2BED31C1C71769300AF9D4E /* TUTKPIRDevice.cpp in Sources */,
+				A2BED31F1C71769300AF9D4E /* TUTKSmokeDevice.cpp in Sources */,
 				A27836441C3B8A9700283F81 /* MQTTSubscribeServer.c in Sources */,
 				A27836491C3B8AC900283F81 /* linux.h in Sources */,
-				A2913D751C63532500AF81AF /* TUTKPlugDevice.cpp in Sources */,
-				A2913D771C63532500AF81AF /* TUTKSmokeDevice.cpp in Sources */,
-				A26FB7031C6367A5007E3648 /* ZhongHanDevice.cpp in Sources */,
-				A26FB71C1C6367E4007E3648 /* VtechMotionSensorDevice.cpp in Sources */,
+				A2BED31D1C71769300AF9D4E /* TUTKPlugDevice.cpp in Sources */,
+				A2BED3171C71769300AF9D4E /* SampoDevice.cpp in Sources */,
+				A2BED3201C71769300AF9D4E /* TUTKVibrateDevice.cpp in Sources */,
+				A2BED3141C71769300AF9D4E /* Body.cpp in Sources */,
 				A278363E1C3B8A9700283F81 /* MQTTConnectServer.c in Sources */,
 				A24D80161BFD796E00143462 /* json_value.cpp in Sources */,
+				A2BED3221C71769300AF9D4E /* ZhongHanDevice.cpp in Sources */,
 				A27836421C3B8A9700283F81 /* MQTTSerializePublish.c in Sources */,
-				A2913D731C63532500AF81AF /* TUTKLightingDevice.cpp in Sources */,
 				A278363D1C3B8A9700283F81 /* MQTTConnectClient.c in Sources */,
-				A2913D741C63532500AF81AF /* TUTKPIRDevice.cpp in Sources */,
-				A2913D721C63532500AF81AF /* TUTKGatewayDevice.cpp in Sources */,
 				A27836431C3B8A9700283F81 /* MQTTSubscribeClient.c in Sources */,
-				A26FB7021C6367A5007E3648 /* SampoDevice.cpp in Sources */,
 				A27836451C3B8A9700283F81 /* MQTTUnsubscribeClient.c in Sources */,
-				A2913D711C63532500AF81AF /* TUTKGasDevice.cpp in Sources */,
+				A2BED3151C71769300AF9D4E /* JsonRDTClientDevice.cpp in Sources */,
 				A278363F1C3B8A9700283F81 /* MQTTDeserializePublish.c in Sources */,
-				A26FB71D1C6367E4007E3648 /* VtechOpenClosedDevice.cpp in Sources */,
-				A26FB6F71C636646007E3648 /* Body.cpp in Sources */,
-				A2913D701C63532500AF81AF /* TUTKDoorDevice.cpp in Sources */,
-				A26FB71B1C6367E4007E3648 /* VtechLightBulbDevice.cpp in Sources */,
+				A2BED3191C71769300AF9D4E /* TUTKGasDevice.cpp in Sources */,
+				A2BED31B1C71769300AF9D4E /* TUTKLightingDevice.cpp in Sources */,
+				A2BED3181C71769300AF9D4E /* TUTKDoorDevice.cpp in Sources */,
 				A27836461C3B8A9700283F81 /* MQTTUnsubscribeServer.c in Sources */,
+				A2BED3211C71769300AF9D4E /* TUTKWaterLeakDevice.cpp in Sources */,
 				A27836401C3B8A9700283F81 /* MQTTFormat.c in Sources */,
 				A27836411C3B8A9700283F81 /* MQTTPacket.c in Sources */,
-				A2913D761C63532500AF81AF /* TUTKSirenDevice.cpp in Sources */,
-				A2913D791C63532500AF81AF /* TUTKWaterLeakDevice.cpp in Sources */,
-				A26FB71A1C6367E4007E3648 /* VtechIPHubGatewayDevice.cpp in Sources */,
-				A26FB71F1C6367E4007E3648 /* VtechWallSwitchDevice.cpp in Sources */,
+				A2BED3161C71769300AF9D4E /* main.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -701,7 +623,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		A2BF71751AC95A4600379199 /* Build configuration list for PBXProject "Main" */ = {
+		A2BF71751AC95A4600379199 /* Build configuration list for PBXProject "TUTKDevice" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				A2BF717F1AC95A4600379199 /* Debug */,

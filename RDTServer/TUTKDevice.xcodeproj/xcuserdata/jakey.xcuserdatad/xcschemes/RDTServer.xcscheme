@@ -17,7 +17,7 @@
                BlueprintIdentifier = "A2BF71791AC95A4600379199"
                BuildableName = "RDTServer"
                BlueprintName = "RDTServer"
-               ReferencedContainer = "container:Main.xcodeproj">
+               ReferencedContainer = "container:TUTKDevice.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -35,7 +35,7 @@
             BlueprintIdentifier = "A2BF71791AC95A4600379199"
             BuildableName = "RDTServer"
             BlueprintName = "RDTServer"
-            ReferencedContainer = "container:Main.xcodeproj">
+            ReferencedContainer = "container:TUTKDevice.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -58,7 +58,7 @@
             BlueprintIdentifier = "A2BF71791AC95A4600379199"
             BuildableName = "RDTServer"
             BlueprintName = "RDTServer"
-            ReferencedContainer = "container:Main.xcodeproj">
+            ReferencedContainer = "container:TUTKDevice.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <CommandLineArguments>
@@ -136,11 +136,11 @@
          </CommandLineArgument>
          <CommandLineArgument
             argument = "VtechIPHubGatewayDevice ELYU954WZZZC9G6GUHFJ"
-            isEnabled = "YES">
+            isEnabled = "NO">
          </CommandLineArgument>
          <CommandLineArgument
             argument = "JsonRDTClientDevice ELYU954WZZZC9G6GUHFJ"
-            isEnabled = "NO">
+            isEnabled = "YES">
          </CommandLineArgument>
       </CommandLineArguments>
       <AdditionalOptions>
@@ -159,7 +159,7 @@
             BlueprintIdentifier = "A2BF71791AC95A4600379199"
             BuildableName = "RDTServer"
             BlueprintName = "RDTServer"
-            ReferencedContainer = "container:Main.xcodeproj">
+            ReferencedContainer = "container:TUTKDevice.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

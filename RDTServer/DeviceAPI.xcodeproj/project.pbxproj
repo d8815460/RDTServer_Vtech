@@ -7,12 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		A26FB5CA1C635DD1007E3648 /* exception.hpp in Headers */ = {isa = PBXBuildFile; fileRef = A26FB5BA1C635DD1007E3648 /* exception.hpp */; };
-		A26FB5CB1C635DD1007E3648 /* libunixsocket.h in Headers */ = {isa = PBXBuildFile; fileRef = A26FB5BB1C635DD1007E3648 /* libunixsocket.h */; };
-		A26FB5CC1C635DD1007E3648 /* socket.hpp in Headers */ = {isa = PBXBuildFile; fileRef = A26FB5BC1C635DD1007E3648 /* socket.hpp */; };
-		A26FB5CD1C635DD1007E3648 /* streamclient.hpp in Headers */ = {isa = PBXBuildFile; fileRef = A26FB5BD1C635DD1007E3648 /* streamclient.hpp */; };
-		A26FB5CE1C635DD1007E3648 /* unixbase.hpp in Headers */ = {isa = PBXBuildFile; fileRef = A26FB5BE1C635DD1007E3648 /* unixbase.hpp */; };
-		A26FB5CF1C635DD1007E3648 /* unixclientstream.hpp in Headers */ = {isa = PBXBuildFile; fileRef = A26FB5BF1C635DD1007E3648 /* unixclientstream.hpp */; };
 		A26FB5D01C635DD1007E3648 /* platform_Config.h in Headers */ = {isa = PBXBuildFile; fileRef = A26FB5C01C635DD1007E3648 /* platform_Config.h */; };
 		A26FB5D11C635DD1007E3648 /* PrefixHeader.pch in Headers */ = {isa = PBXBuildFile; fileRef = A26FB5C11C635DD1007E3648 /* PrefixHeader.pch */; };
 		A26FB5D21C635DD1007E3648 /* UTF.hpp in Headers */ = {isa = PBXBuildFile; fileRef = A26FB5C21C635DD1007E3648 /* UTF.hpp */; };
@@ -96,12 +90,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		A26FB5BA1C635DD1007E3648 /* exception.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = exception.hpp; path = RDTServer/DeviceAPI/exception.hpp; sourceTree = SOURCE_ROOT; };
-		A26FB5BB1C635DD1007E3648 /* libunixsocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = libunixsocket.h; path = RDTServer/DeviceAPI/libunixsocket.h; sourceTree = SOURCE_ROOT; };
-		A26FB5BC1C635DD1007E3648 /* socket.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = socket.hpp; path = RDTServer/DeviceAPI/socket.hpp; sourceTree = SOURCE_ROOT; };
-		A26FB5BD1C635DD1007E3648 /* streamclient.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = streamclient.hpp; path = RDTServer/DeviceAPI/streamclient.hpp; sourceTree = SOURCE_ROOT; };
-		A26FB5BE1C635DD1007E3648 /* unixbase.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = unixbase.hpp; path = RDTServer/DeviceAPI/unixbase.hpp; sourceTree = SOURCE_ROOT; };
-		A26FB5BF1C635DD1007E3648 /* unixclientstream.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = unixclientstream.hpp; path = RDTServer/DeviceAPI/unixclientstream.hpp; sourceTree = SOURCE_ROOT; };
 		A26FB5C01C635DD1007E3648 /* platform_Config.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = platform_Config.h; path = RDTServer/DeviceAPI/platform_Config.h; sourceTree = SOURCE_ROOT; };
 		A26FB5C11C635DD1007E3648 /* PrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PrefixHeader.pch; path = RDTServer/DeviceAPI/PrefixHeader.pch; sourceTree = SOURCE_ROOT; };
 		A26FB5C21C635DD1007E3648 /* UTF.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = UTF.hpp; path = RDTServer/DeviceAPI/UTF.hpp; sourceTree = SOURCE_ROOT; };
@@ -413,12 +401,6 @@
 		A2913D931C635CFF00AF81AF /* DeviceAPI */ = {
 			isa = PBXGroup;
 			children = (
-				A26FB5BA1C635DD1007E3648 /* exception.hpp */,
-				A26FB5BB1C635DD1007E3648 /* libunixsocket.h */,
-				A26FB5BC1C635DD1007E3648 /* socket.hpp */,
-				A26FB5BD1C635DD1007E3648 /* streamclient.hpp */,
-				A26FB5BE1C635DD1007E3648 /* unixbase.hpp */,
-				A26FB5BF1C635DD1007E3648 /* unixclientstream.hpp */,
 				A26FB5C01C635DD1007E3648 /* platform_Config.h */,
 				A26FB5C11C635DD1007E3648 /* PrefixHeader.pch */,
 				A26FB5C21C635DD1007E3648 /* UTF.hpp */,
@@ -466,7 +448,6 @@
 				A26FB6CD1C635FB7007E3648 /* FP.h in Headers */,
 				A26FB5F81C635E08007E3648 /* Command.hpp in Headers */,
 				A26FB6B61C635F67007E3648 /* MQTTUnsubscribe.h in Headers */,
-				A26FB5CA1C635DD1007E3648 /* exception.hpp in Headers */,
 				A26FB5D01C635DD1007E3648 /* platform_Config.h in Headers */,
 				A26FB6111C635E30007E3648 /* JsonRDTServerHardward.hpp in Headers */,
 				A26FB6A91C635F67007E3648 /* MQTTConnect.h in Headers */,
@@ -475,12 +456,9 @@
 				A26FB6B91C635F67007E3648 /* StackTrace.h in Headers */,
 				A26FB6EE1C63600B007E3648 /* json_tool.h in Headers */,
 				A26FB6C01C635F8B007E3648 /* IPStack.h in Headers */,
-				A26FB5CE1C635DD1007E3648 /* unixbase.hpp in Headers */,
 				A26FB5D61C635DD1007E3648 /* Common.hpp in Headers */,
 				A26FB6C11C635F8C007E3648 /* WifiIPStack.h in Headers */,
 				A26FB5FC1C635E08007E3648 /* BinraryRDTServerCommand.hpp in Headers */,
-				A26FB5CD1C635DD1007E3648 /* streamclient.hpp in Headers */,
-				A26FB5CF1C635DD1007E3648 /* unixclientstream.hpp in Headers */,
 				A26FB6E71C63600A007E3648 /* features.h in Headers */,
 				A26FB6E81C63600A007E3648 /* forwards.h in Headers */,
 				A26FB6E41C63600A007E3648 /* assertions.h in Headers */,
@@ -494,12 +472,10 @@
 				A26FB5E51C635DEB007E3648 /* BinraryRDTClientConnect.hpp in Headers */,
 				A26FB6B31C635F67007E3648 /* MQTTSubscribe.h in Headers */,
 				A26FB6001C635E08007E3648 /* JsonRDTClientCommand.hpp in Headers */,
-				A26FB5CB1C635DD1007E3648 /* libunixsocket.h in Headers */,
 				A26FB6EA1C63600A007E3648 /* reader.h in Headers */,
 				A26FB5D91C635DD1007E3648 /* Event.hpp in Headers */,
 				A26FB6BF1C635F8B007E3648 /* Countdown.h in Headers */,
 				A26FB5E21C635DEB007E3648 /* ConnectEvent.hpp in Headers */,
-				A26FB5CC1C635DD1007E3648 /* socket.hpp in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
