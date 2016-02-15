@@ -15,13 +15,11 @@
 #include "IOTCAPIs.h"
 #include "RDTAPIs.h"
 #include "BinraryRDTServerConnect.hpp"
-#include "VtechHardward.hpp"
 #include "AccessoryTypeEnum.hpp"
 
 JsonRDTServerCommand::JsonRDTServerCommand(CommandEvent* pCommandEvent, Connect* pConnect, CommandData* pCommandData) : JsonRDTCommand(pCommandEvent, pConnect, pCommandData)
 {
     LOGD("JsonRDTServerCommand");
-    
     
     pthread_t pThreadInput;
     pthread_create(&pThreadInput, NULL, &JsonRDTServerCommand::threadInput, (void*)this);
@@ -138,11 +136,11 @@ void JsonRDTServerCommand::recvData(int channelID, BYTE* buffer, int totalLength
     Json::Value outJsonObject;
     if (reader.parse(json, inJsonObject))
     {
-        VtechHardward_SendHardwardData vtechHardward;
-        vtechHardward.pInJsonObject = &inJsonObject;
-        vtechHardward.pOutJsonObject = &outJsonObject;
+//        VtechHardward_SendHardwardData vtechHardward;
+//        vtechHardward.pInJsonObject = &inJsonObject;
+//        vtechHardward.pOutJsonObject = &outJsonObject;
         
-        m_pCommandEvent->onCommandSendHardward(&vtechHardward);
+//        m_pCommandEvent->onCommandSendHardward(&vtechHardward);
         
 //        if (m_pHardward != NULL) {
 //            m_pHardward->sendHardward(&vtechHardward);

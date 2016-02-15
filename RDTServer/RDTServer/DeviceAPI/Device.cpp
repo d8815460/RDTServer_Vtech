@@ -18,7 +18,6 @@
 #include "AccessoryTypeEnum.hpp"
 #include "BinraryRDTServerConnect.hpp"
 #include "BinraryRDTServerCommand.hpp"
-#include "JsonRDTServerHardward.hpp"
 
 using namespace std;
 
@@ -43,7 +42,7 @@ void Device::run(const char* parameter)
     
     Connect* pConnect = createConnect(&binraryConnectData);
     m_pCommand = createCommand(pConnect);
-    m_pHardward = createHardward();
+//    m_pHardward = createHardward();
     
     constructorFinish();
     
@@ -60,12 +59,6 @@ Connect* Device::createConnect(ConnectData* pConnectData)
 Command* Device::createCommand(Connect* pConnect)
 {
     return new BinraryRDTServerCommand(this, pConnect);
-}
-
-Hardward* Device::createHardward()
-{
-    JsonRDTServerHardward_HardwardData jsonRDTServerHardwardHardwardData;
-    return new JsonRDTServerHardward(this, &jsonRDTServerHardwardHardwardData);
 }
 
 #pragma mark - CommandEvent
@@ -86,16 +79,11 @@ void Device::onCommandRecvFullCommand28(int channelID, vector<FunctionInfo*>* pD
     
 }
 
-void Device::onCommandSendHardward(SendHardwardData* pSendHardwardData)
-{
-    m_pHardward->sendHardward(pSendHardwardData);
-}
+#pragma mark - CommandHardwardEvent
 
-#pragma mark - HardwardEvent
-
-void Device::onHardwardNotify(HardwardNotifyData* pHardwardRecvData)
+void Device::onCommandHardwardNotify(CommandHardwardNotifyData* pCommandHardwardNotifyData)
 {
-    LOGD("onHardwardNotify");
+    LOGD("onCommandHardwardNotify");
 }
 
 #pragma mark - Normal Method

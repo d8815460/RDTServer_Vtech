@@ -15,8 +15,6 @@
 
 #include "BinraryRDTServerCommand.hpp"
 #include "JsonRDTServerCommand.hpp"
-#include "VtechHardward.hpp"
-#include "JsonRDTServerHardward.hpp"
 
 // Devices
 #include "VtechGarageDoorDevice.hpp"
@@ -74,22 +72,16 @@ Command* VtechIPHubGatewayDevice::createCommand(Connect* pConnect)
     return new JsonRDTServerCommand(this, pConnect);
 }
 
-Hardward* VtechIPHubGatewayDevice::createHardward()
-{
-    JsonRDTServerHardward_HardwardData jsonRDTServerHardwardHardwardData;
-    return new JsonRDTServerHardward(this, &jsonRDTServerHardwardHardwardData);
-}
+#pragma mark - CommandHardwardEvent
 
-#pragma mark - HardwardEvent
+//void VtechIPHubGatewayDevice::onCommandHardwardNotify(CommandHardwardNotifyData* pCommandHardwardNotifyData)
+//{
+//    LOGD("onCommandHardwardNotify");
 
-void VtechIPHubGatewayDevice::onHardwardNotify(HardwardNotifyData* pHardwardRecvData)
-{
-    LOGD("onHardwardNotify");
-    
-    JsonRDTServerHardward_HardwardNotifyData* jsonRDTServerHardwardHardwardNotifyData = (JsonRDTServerHardward_HardwardNotifyData*) pHardwardRecvData;
-    std::string jsonString = jsonRDTServerHardwardHardwardNotifyData->pOutJsonObject->toStyledString();
-    LOGD("jsonString:%s", jsonString.c_str());
-}
+//    JsonRDTServerHardward_HardwardNotifyData* jsonRDTServerHardwardHardwardNotifyData = (JsonRDTServerHardward_HardwardNotifyData*) pHardwardRecvData;
+//    std::string jsonString = jsonRDTServerHardwardHardwardNotifyData->pOutJsonObject->toStyledString();
+//    LOGD("jsonString:%s", jsonString.c_str());
+//}
 
 #pragma mark - CommandEvent
 

@@ -11,7 +11,6 @@
 
 #include <stdio.h>
 #include <vector>
-#include "Hardward.hpp"
 
 class FunctionStatus;
 class FunctionInfo;
@@ -27,9 +26,7 @@ public:
     virtual unsigned short onCommandGetProductCode() = 0;
     virtual const char* onCommandGetProductName() = 0;
     virtual void onCommandRecvData(CommandRecvData* pCommandRecvData) = 0;
-    
-    virtual void onCommandSendHardward(SendHardwardData* pSendHardwardData) = 0;
-    
+        
     virtual void onCommandRecvCommand28(FunctionStatus* pFunctionStatus) = 0;
     virtual void onCommandRecvFullCommand28(int channelID, vector<FunctionInfo*>* pDataInfoList) = 0;
 };

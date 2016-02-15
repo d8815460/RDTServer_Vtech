@@ -63,11 +63,11 @@
       </BuildableProductRunnable>
       <CommandLineArguments>
          <CommandLineArgument
-            argument = "VtechIPHubGatewayDevice E7YAB554YTZCAH6GY1E1"
+            argument = "C7KUB944VZFMUH6GYHDJ"
             isEnabled = "NO">
          </CommandLineArgument>
          <CommandLineArgument
-            argument = "VtechIPHubGatewayDevice  C7KUB944VZFMUH6GYHDJ"
+            argument = "E7YAB554YTZCAH6GY1E1"
             isEnabled = "YES">
          </CommandLineArgument>
       </CommandLineArguments>

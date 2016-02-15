@@ -37,13 +37,7 @@
 		A26FB6011C635E08007E3648 /* JsonRDTClientCommand.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A26FB5F41C635E08007E3648 /* JsonRDTClientCommand.cpp */; };
 		A26FB6021C635E08007E3648 /* JsonRDTServerCommand.hpp in Headers */ = {isa = PBXBuildFile; fileRef = A26FB5F51C635E08007E3648 /* JsonRDTServerCommand.hpp */; };
 		A26FB6031C635E08007E3648 /* JsonRDTServerCommand.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A26FB5F61C635E08007E3648 /* JsonRDTServerCommand.cpp */; };
-		A26FB60C1C635E30007E3648 /* HardwardEvent.hpp in Headers */ = {isa = PBXBuildFile; fileRef = A26FB6051C635E30007E3648 /* HardwardEvent.hpp */; };
-		A26FB60D1C635E30007E3648 /* Hardward.hpp in Headers */ = {isa = PBXBuildFile; fileRef = A26FB6061C635E30007E3648 /* Hardward.hpp */; };
-		A26FB60E1C635E30007E3648 /* Hardward.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A26FB6071C635E30007E3648 /* Hardward.cpp */; };
-		A26FB60F1C635E30007E3648 /* VtechHardward.hpp in Headers */ = {isa = PBXBuildFile; fileRef = A26FB6081C635E30007E3648 /* VtechHardward.hpp */; };
-		A26FB6101C635E30007E3648 /* VtechHardward.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A26FB6091C635E30007E3648 /* VtechHardward.cpp */; };
-		A26FB6111C635E30007E3648 /* JsonRDTServerHardward.hpp in Headers */ = {isa = PBXBuildFile; fileRef = A26FB60A1C635E30007E3648 /* JsonRDTServerHardward.hpp */; };
-		A26FB6121C635E30007E3648 /* JsonRDTServerHardward.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A26FB60B1C635E30007E3648 /* JsonRDTServerHardward.cpp */; };
+		A26FB60C1C635E30007E3648 /* CommandHardwardEvent.hpp in Headers */ = {isa = PBXBuildFile; fileRef = A26FB6051C635E30007E3648 /* CommandHardwardEvent.hpp */; };
 		A26FB6A91C635F67007E3648 /* MQTTConnect.h in Headers */ = {isa = PBXBuildFile; fileRef = A26FB6981C635F67007E3648 /* MQTTConnect.h */; };
 		A26FB6AA1C635F67007E3648 /* MQTTConnectClient.c in Sources */ = {isa = PBXBuildFile; fileRef = A26FB6991C635F67007E3648 /* MQTTConnectClient.c */; };
 		A26FB6AB1C635F67007E3648 /* MQTTConnectServer.c in Sources */ = {isa = PBXBuildFile; fileRef = A26FB69A1C635F67007E3648 /* MQTTConnectServer.c */; };
@@ -120,13 +114,7 @@
 		A26FB5F41C635E08007E3648 /* JsonRDTClientCommand.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = JsonRDTClientCommand.cpp; path = RDTServer/DeviceAPI/JsonRDTClientCommand.cpp; sourceTree = SOURCE_ROOT; };
 		A26FB5F51C635E08007E3648 /* JsonRDTServerCommand.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = JsonRDTServerCommand.hpp; path = RDTServer/DeviceAPI/JsonRDTServerCommand.hpp; sourceTree = SOURCE_ROOT; };
 		A26FB5F61C635E08007E3648 /* JsonRDTServerCommand.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = JsonRDTServerCommand.cpp; path = RDTServer/DeviceAPI/JsonRDTServerCommand.cpp; sourceTree = SOURCE_ROOT; };
-		A26FB6051C635E30007E3648 /* HardwardEvent.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = HardwardEvent.hpp; path = RDTServer/DeviceAPI/HardwardEvent.hpp; sourceTree = SOURCE_ROOT; };
-		A26FB6061C635E30007E3648 /* Hardward.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = Hardward.hpp; path = RDTServer/DeviceAPI/Hardward.hpp; sourceTree = SOURCE_ROOT; };
-		A26FB6071C635E30007E3648 /* Hardward.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Hardward.cpp; path = RDTServer/DeviceAPI/Hardward.cpp; sourceTree = SOURCE_ROOT; };
-		A26FB6081C635E30007E3648 /* VtechHardward.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = VtechHardward.hpp; path = RDTServer/DeviceAPI/VtechHardward.hpp; sourceTree = SOURCE_ROOT; };
-		A26FB6091C635E30007E3648 /* VtechHardward.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = VtechHardward.cpp; path = RDTServer/DeviceAPI/VtechHardward.cpp; sourceTree = SOURCE_ROOT; };
-		A26FB60A1C635E30007E3648 /* JsonRDTServerHardward.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = JsonRDTServerHardward.hpp; path = RDTServer/DeviceAPI/JsonRDTServerHardward.hpp; sourceTree = SOURCE_ROOT; };
-		A26FB60B1C635E30007E3648 /* JsonRDTServerHardward.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = JsonRDTServerHardward.cpp; path = RDTServer/DeviceAPI/JsonRDTServerHardward.cpp; sourceTree = SOURCE_ROOT; };
+		A26FB6051C635E30007E3648 /* CommandHardwardEvent.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = CommandHardwardEvent.hpp; path = RDTServer/DeviceAPI/CommandHardwardEvent.hpp; sourceTree = SOURCE_ROOT; };
 		A26FB6901C635EDD007E3648 /* CMakeLists.txt */ = {isa = PBXFileReference; lastKnownFileType = text; name = CMakeLists.txt; path = RDTServer/DeviceAPI/CMakeLists.txt; sourceTree = "<group>"; };
 		A26FB6921C635F02007E3648 /* runClient.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; name = runClient.sh; path = RDTServer/runClient.sh; sourceTree = "<group>"; };
 		A26FB6931C635F02007E3648 /* runServer.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; name = runServer.sh; path = RDTServer/runServer.sh; sourceTree = "<group>"; };
@@ -209,6 +197,7 @@
 			isa = PBXGroup;
 			children = (
 				A26FB5EA1C635E08007E3648 /* CommandEvent.hpp */,
+				A26FB6051C635E30007E3648 /* CommandHardwardEvent.hpp */,
 				A26FB5EB1C635E08007E3648 /* Command.hpp */,
 				A26FB5EC1C635E08007E3648 /* Command.cpp */,
 				A26FB5ED1C635E08007E3648 /* BinraryRDTClientCommand.hpp */,
@@ -223,20 +212,6 @@
 				A26FB5F61C635E08007E3648 /* JsonRDTServerCommand.cpp */,
 			);
 			name = Command;
-			sourceTree = "<group>";
-		};
-		A26FB6041C635E17007E3648 /* Hardward */ = {
-			isa = PBXGroup;
-			children = (
-				A26FB6051C635E30007E3648 /* HardwardEvent.hpp */,
-				A26FB6061C635E30007E3648 /* Hardward.hpp */,
-				A26FB6071C635E30007E3648 /* Hardward.cpp */,
-				A26FB6081C635E30007E3648 /* VtechHardward.hpp */,
-				A26FB6091C635E30007E3648 /* VtechHardward.cpp */,
-				A26FB60A1C635E30007E3648 /* JsonRDTServerHardward.hpp */,
-				A26FB60B1C635E30007E3648 /* JsonRDTServerHardward.cpp */,
-			);
-			name = Hardward;
 			sourceTree = "<group>";
 		};
 		A26FB68C1C635EB0007E3648 /* Other */ = {
@@ -406,7 +381,6 @@
 				A2B03D201C6444F8002CFA38 /* AccessoryTypeEnum.hpp */,
 				A26FB5DA1C635DE2007E3648 /* Connect */,
 				A26FB5E91C635DF7007E3648 /* Command */,
-				A26FB6041C635E17007E3648 /* Hardward */,
 			);
 			path = DeviceAPI;
 			sourceTree = "<group>";
@@ -418,7 +392,6 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A26FB60F1C635E30007E3648 /* VtechHardward.hpp in Headers */,
 				A26FB5FA1C635E08007E3648 /* BinraryRDTClientCommand.hpp in Headers */,
 				A26FB6B01C635F67007E3648 /* MQTTPacket.h in Headers */,
 				A26FB6ED1C63600A007E3648 /* writer.h in Headers */,
@@ -432,7 +405,6 @@
 				A26FB6CF1C635FB7007E3648 /* MQTTLogging.h in Headers */,
 				A26FB6E51C63600A007E3648 /* autolink.h in Headers */,
 				A26FB5D11C635DD1007E3648 /* PrefixHeader.pch in Headers */,
-				A26FB60D1C635E30007E3648 /* Hardward.hpp in Headers */,
 				A26FB6EB1C63600A007E3648 /* value.h in Headers */,
 				A26FB6C51C635F9D007E3648 /* MQTTEthernet.h in Headers */,
 				A26FB5FE1C635E08007E3648 /* JsonRDTCommand.hpp in Headers */,
@@ -441,7 +413,6 @@
 				A26FB5F81C635E08007E3648 /* Command.hpp in Headers */,
 				A26FB6B61C635F67007E3648 /* MQTTUnsubscribe.h in Headers */,
 				A26FB5D01C635DD1007E3648 /* platform_Config.h in Headers */,
-				A26FB6111C635E30007E3648 /* JsonRDTServerHardward.hpp in Headers */,
 				A26FB6A91C635F67007E3648 /* MQTTConnect.h in Headers */,
 				A26FB6B11C635F67007E3648 /* MQTTPublish.h in Headers */,
 				A26FB6EC1C63600A007E3648 /* version.h in Headers */,
@@ -458,7 +429,7 @@
 				A26FB6C61C635F9D007E3648 /* MQTTSocket.h in Headers */,
 				A26FB5D71C635DD1007E3648 /* Device.hpp in Headers */,
 				A26FB6021C635E08007E3648 /* JsonRDTServerCommand.hpp in Headers */,
-				A26FB60C1C635E30007E3648 /* HardwardEvent.hpp in Headers */,
+				A26FB60C1C635E30007E3648 /* CommandHardwardEvent.hpp in Headers */,
 				A26FB6C91C635FAF007E3648 /* linux.h in Headers */,
 				A26FB5D41C635DD1007E3648 /* Utility.hpp in Headers */,
 				A26FB5E51C635DEB007E3648 /* BinraryRDTClientConnect.hpp in Headers */,
@@ -533,8 +504,6 @@
 				A26FB6AD1C635F67007E3648 /* MQTTFormat.c in Sources */,
 				A26FB6B71C635F67007E3648 /* MQTTUnsubscribeClient.c in Sources */,
 				A26FB5E61C635DEB007E3648 /* BinraryRDTClientConnect.cpp in Sources */,
-				A26FB6121C635E30007E3648 /* JsonRDTServerHardward.cpp in Sources */,
-				A26FB6101C635E30007E3648 /* VtechHardward.cpp in Sources */,
 				A26FB6031C635E08007E3648 /* JsonRDTServerCommand.cpp in Sources */,
 				A26FB6B41C635F67007E3648 /* MQTTSubscribeClient.c in Sources */,
 				A26FB6AF1C635F67007E3648 /* MQTTPacket.c in Sources */,
@@ -544,7 +513,6 @@
 				A26FB6F01C63600B007E3648 /* json_value.cpp in Sources */,
 				A26FB6AB1C635F67007E3648 /* MQTTConnectServer.c in Sources */,
 				A26FB6F11C63600B007E3648 /* json_writer.cpp in Sources */,
-				A26FB60E1C635E30007E3648 /* Hardward.cpp in Sources */,
 				A26FB6011C635E08007E3648 /* JsonRDTClientCommand.cpp in Sources */,
 				A26FB5D81C635DD1007E3648 /* Device.cpp in Sources */,
 				A26FB6EF1C63600B007E3648 /* json_reader.cpp in Sources */,

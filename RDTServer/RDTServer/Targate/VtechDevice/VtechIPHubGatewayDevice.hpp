@@ -11,7 +11,6 @@
 
 #include <stdio.h>
 #include "Device.hpp"
-#include "HardwardEvent.hpp"
 
 using namespace std;
 
@@ -24,11 +23,10 @@ public:
     
 #pragma mark - Device
     virtual Command* createCommand(Connect* pConnect);
-    virtual Hardward* createHardward();
     virtual void constructorFinish() { reset(); }
 
-#pragma mark - HardwardEvent
-    virtual void onHardwardNotify(HardwardNotifyData* pHardwardRecvData);
+#pragma mark - CommandHardwardEvent
+//    virtual void onCommandHardwardNotify(CommandHardwardNotifyData* pCommandHardwardNotifyData);
     
 #pragma mark - CommandEvent
 protected:

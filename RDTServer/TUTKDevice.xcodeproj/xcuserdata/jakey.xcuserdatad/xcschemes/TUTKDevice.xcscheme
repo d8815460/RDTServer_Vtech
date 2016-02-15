@@ -15,8 +15,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "A2BF71791AC95A4600379199"
-               BuildableName = "RDTServer"
-               BlueprintName = "RDTServer"
+               BuildableName = "TUTKDevice"
+               BlueprintName = "TUTKDevice"
                ReferencedContainer = "container:TUTKDevice.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -33,8 +33,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "A2BF71791AC95A4600379199"
-            BuildableName = "RDTServer"
-            BlueprintName = "RDTServer"
+            BuildableName = "TUTKDevice"
+            BlueprintName = "TUTKDevice"
             ReferencedContainer = "container:TUTKDevice.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -56,8 +56,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "A2BF71791AC95A4600379199"
-            BuildableName = "RDTServer"
-            BlueprintName = "RDTServer"
+            BuildableName = "TUTKDevice"
+            BlueprintName = "TUTKDevice"
             ReferencedContainer = "container:TUTKDevice.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
@@ -153,8 +153,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "A2BF71791AC95A4600379199"
-            BuildableName = "RDTServer"
-            BlueprintName = "RDTServer"
+            BuildableName = "TUTKDevice"
+            BlueprintName = "TUTKDevice"
             ReferencedContainer = "container:TUTKDevice.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>

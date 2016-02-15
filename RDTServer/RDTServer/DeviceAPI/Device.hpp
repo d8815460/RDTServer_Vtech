@@ -12,9 +12,9 @@
 #include <set>
 #include <map>
 #include <pthread.h>
-#include "CommandEvent.hpp"
 #include "Command.hpp"
-#include "Hardward.hpp"
+#include "CommandEvent.hpp"
+#include "CommandHardwardEvent.hpp"
 
 using namespace std;
 
@@ -22,7 +22,7 @@ using namespace std;
 
 //static map<int, int> g_sidChannelIDMap;
 
-class Device : public CommandEvent, public HardwardEvent
+class Device : public CommandEvent, public CommandHardwardEvent
 {
 // 建構式
 public:
@@ -37,7 +37,6 @@ public:
 #pragma mark - Device
     virtual Connect* createConnect(ConnectData* pConnectData);
     virtual Command* createCommand(Connect* pConnect);
-    virtual Hardward* createHardward();
     virtual void constructorFinish() = 0;
     
 #pragma mark - CommandEvent
@@ -45,19 +44,17 @@ public:
     virtual unsigned short onCommandGetProductCode() = 0;
     virtual const char* onCommandGetProductName() = 0;
     virtual void onCommandRecvData(CommandRecvData* pCommandRecvData);
-    
-    virtual void onCommandSendHardward(SendHardwardData* pSendHardwardData);
-    
+        
     virtual void onCommandRecvCommand28(FunctionStatus* pFunctionStatus);
     virtual void onCommandRecvFullCommand28(int channelID, vector<FunctionInfo*>* pDataInfoList);
 
-#pragma mark - HardwardEvent
-    virtual void onHardwardNotify(HardwardNotifyData* pHardwardRecvData);
+#pragma mark - CommandHardwardEvent
+    virtual void onCommandHardwardNotify(CommandHardwardNotifyData* pCommandHardwardNotifyData);
     
 // 成員變數
 protected:
     Command* m_pCommand;
-    Hardward* m_pHardward;
+//    Hardward* m_pHardward;
     
 //    Callback m_callback;
 };

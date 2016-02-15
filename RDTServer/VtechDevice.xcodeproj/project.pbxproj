@@ -17,10 +17,27 @@
 		A2BED3541C717AE100AF9D4E /* VtechWallSwitchDevice.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A2BED34A1C717AE100AF9D4E /* VtechWallSwitchDevice.cpp */; };
 		A2BED3661C7199B900AF9D4E /* libcurlpp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A2BED3641C7199B900AF9D4E /* libcurlpp.a */; };
 		A2BED3671C7199B900AF9D4E /* libutilspp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A2BED3651C7199B900AF9D4E /* libutilspp.a */; };
-		A2BED36A1C7199C800AF9D4E /* libDeviceAPI.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A2BED3681C7199C800AF9D4E /* libDeviceAPI.a */; };
 		A2BED36B1C7199C800AF9D4E /* libjsoncpp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A2BED3691C7199C800AF9D4E /* libjsoncpp.a */; };
 		A2BED36D1C7199E400AF9D4E /* libIOTCAPIs_ALL.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A2BED36C1C7199E400AF9D4E /* libIOTCAPIs_ALL.a */; };
+		A2BED3881C71AF9A00AF9D4E /* libDeviceAPI.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A2BED3851C71AF4E00AF9D4E /* libDeviceAPI.a */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		A2BED3841C71AF4E00AF9D4E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A2BED3801C71AF4E00AF9D4E /* DeviceAPI.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = A2913D911C635CFF00AF81AF;
+			remoteInfo = DeviceAPI;
+		};
+		A2BED3861C71AF8500AF9D4E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A2BED3801C71AF4E00AF9D4E /* DeviceAPI.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = A2913D901C635CFF00AF81AF;
+			remoteInfo = DeviceAPI;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
 		A2BED32B1C717AAD00AF9D4E /* CopyFiles */ = {
@@ -65,6 +82,7 @@
 		A2BED36C1C7199E400AF9D4E /* libIOTCAPIs_ALL.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libIOTCAPIs_ALL.a; path = ../../TUTK_Kalay_Platform_SDK_2.1.3/Lib/MAC/libIOTCAPIs_ALL.a; sourceTree = "<group>"; };
 		A2BED3711C719B6C00AF9D4E /* CMakeLists.txt */ = {isa = PBXFileReference; lastKnownFileType = text; name = CMakeLists.txt; path = RDTServer/CMakeLists.txt; sourceTree = "<group>"; };
 		A2BED3721C719B7800AF9D4E /* CMakeLists.txt */ = {isa = PBXFileReference; lastKnownFileType = text; name = CMakeLists.txt; path = RDTServer/Targate/VtechDevice/CMakeLists.txt; sourceTree = "<group>"; };
+		A2BED3801C71AF4E00AF9D4E /* DeviceAPI.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = DeviceAPI.xcodeproj; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -72,8 +90,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A2BED3881C71AF9A00AF9D4E /* libDeviceAPI.a in Frameworks */,
 				A2BED36D1C7199E400AF9D4E /* libIOTCAPIs_ALL.a in Frameworks */,
-				A2BED36A1C7199C800AF9D4E /* libDeviceAPI.a in Frameworks */,
 				A2BED3661C7199B900AF9D4E /* libcurlpp.a in Frameworks */,
 				A2BED3671C7199B900AF9D4E /* libutilspp.a in Frameworks */,
 				A2BED36B1C7199C800AF9D4E /* libjsoncpp.a in Frameworks */,
@@ -86,6 +104,7 @@
 		A2BED3241C717AAD00AF9D4E = {
 			isa = PBXGroup;
 			children = (
+				A2BED3801C71AF4E00AF9D4E /* DeviceAPI.xcodeproj */,
 				A2BED3371C717AE100AF9D4E /* main.cpp */,
 				A2BED32F1C717AAD00AF9D4E /* VtechDevice */,
 				A2BED3701C719B5D00AF9D4E /* Other */,
@@ -160,6 +179,14 @@
 			name = VtechDevice;
 			sourceTree = "<group>";
 		};
+		A2BED3811C71AF4E00AF9D4E /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				A2BED3851C71AF4E00AF9D4E /* libDeviceAPI.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -174,6 +201,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				A2BED3871C71AF8500AF9D4E /* PBXTargetDependency */,
 			);
 			name = VtechDevice;
 			productName = VtechDevice;
@@ -204,12 +232,28 @@
 			mainGroup = A2BED3241C717AAD00AF9D4E;
 			productRefGroup = A2BED32E1C717AAD00AF9D4E /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = A2BED3811C71AF4E00AF9D4E /* Products */;
+					ProjectRef = A2BED3801C71AF4E00AF9D4E /* DeviceAPI.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				A2BED32C1C717AAD00AF9D4E /* VtechDevice */,
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		A2BED3851C71AF4E00AF9D4E /* libDeviceAPI.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libDeviceAPI.a;
+			remoteRef = A2BED3841C71AF4E00AF9D4E /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXSourcesBuildPhase section */
 		A2BED3291C717AAD00AF9D4E /* Sources */ = {
@@ -228,6 +272,14 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		A2BED3871C71AF8500AF9D4E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = DeviceAPI;
+			targetProxy = A2BED3861C71AF8500AF9D4E /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		A2BED3321C717AAD00AF9D4E /* Debug */ = {

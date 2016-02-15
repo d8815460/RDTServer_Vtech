@@ -12,7 +12,6 @@
 		A24D80171BFD796E00143462 /* json_writer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A24D80141BFD796E00143462 /* json_writer.cpp */; };
 		A24FBA471C07143100EF516E /* libcurlpp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A24FBA461C07143100EF516E /* libcurlpp.a */; };
 		A24FBA491C07144400EF516E /* libutilspp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A24FBA481C07144400EF516E /* libutilspp.a */; };
-		A26FB6F31C636627007E3648 /* libDeviceAPI.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A26FB6F21C636627007E3648 /* libDeviceAPI.a */; };
 		A278363D1C3B8A9700283F81 /* MQTTConnectClient.c in Sources */ = {isa = PBXBuildFile; fileRef = A278362D1C3B8A9700283F81 /* MQTTConnectClient.c */; };
 		A278363E1C3B8A9700283F81 /* MQTTConnectServer.c in Sources */ = {isa = PBXBuildFile; fileRef = A278362E1C3B8A9700283F81 /* MQTTConnectServer.c */; };
 		A278363F1C3B8A9700283F81 /* MQTTDeserializePublish.c in Sources */ = {isa = PBXBuildFile; fileRef = A278362F1C3B8A9700283F81 /* MQTTDeserializePublish.c */; };
@@ -39,7 +38,25 @@
 		A2BED3201C71769300AF9D4E /* TUTKVibrateDevice.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A2BED30C1C71769300AF9D4E /* TUTKVibrateDevice.cpp */; };
 		A2BED3211C71769300AF9D4E /* TUTKWaterLeakDevice.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A2BED30F1C71769300AF9D4E /* TUTKWaterLeakDevice.cpp */; };
 		A2BED3221C71769300AF9D4E /* ZhongHanDevice.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A2BED3121C71769300AF9D4E /* ZhongHanDevice.cpp */; };
+		A2BED3911C71B01A00AF9D4E /* libDeviceAPI.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A2BED38E1C71AFF100AF9D4E /* libDeviceAPI.a */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		A2BED38D1C71AFF100AF9D4E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A2BED3891C71AFF100AF9D4E /* DeviceAPI.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = A2913D911C635CFF00AF81AF;
+			remoteInfo = DeviceAPI;
+		};
+		A2BED38F1C71B01200AF9D4E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A2BED3891C71AFF100AF9D4E /* DeviceAPI.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = A2913D901C635CFF00AF81AF;
+			remoteInfo = DeviceAPI;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
 		A2BF71781AC95A4600379199 /* CopyFiles */ = {
@@ -142,7 +159,8 @@
 		A2BED3121C71769300AF9D4E /* ZhongHanDevice.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ZhongHanDevice.cpp; path = Targate/TUTKDevice/ZhongHanDevice.cpp; sourceTree = "<group>"; };
 		A2BED3131C71769300AF9D4E /* ZhongHanDevice.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = ZhongHanDevice.hpp; path = Targate/TUTKDevice/ZhongHanDevice.hpp; sourceTree = "<group>"; };
 		A2BED3231C71770000AF9D4E /* CMakeLists.txt */ = {isa = PBXFileReference; lastKnownFileType = text; name = CMakeLists.txt; path = Targate/TUTKDevice/CMakeLists.txt; sourceTree = "<group>"; };
-		A2BF717A1AC95A4600379199 /* RDTServer */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = RDTServer; sourceTree = BUILT_PRODUCTS_DIR; };
+		A2BED3891C71AFF100AF9D4E /* DeviceAPI.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = DeviceAPI.xcodeproj; sourceTree = "<group>"; };
+		A2BF717A1AC95A4600379199 /* TUTKDevice */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = TUTKDevice; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -150,9 +168,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A2BED3911C71B01A00AF9D4E /* libDeviceAPI.a in Frameworks */,
 				A24FBA491C07144400EF516E /* libutilspp.a in Frameworks */,
 				A24FBA471C07143100EF516E /* libcurlpp.a in Frameworks */,
-				A26FB6F31C636627007E3648 /* libDeviceAPI.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -342,9 +360,18 @@
 			name = DeviceAPI;
 			sourceTree = "<group>";
 		};
+		A2BED38A1C71AFF100AF9D4E /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				A2BED38E1C71AFF100AF9D4E /* libDeviceAPI.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		A2BF71711AC95A4600379199 = {
 			isa = PBXGroup;
 			children = (
+				A2BED3891C71AFF100AF9D4E /* DeviceAPI.xcodeproj */,
 				A2BF717C1AC95A4600379199 /* TUTKDevice */,
 				A20067EE1C61FADF00FEEA08 /* Other */,
 				A24D7FF81BFD6DB600143462 /* 3th Party */,
@@ -355,7 +382,7 @@
 		A2BF717B1AC95A4600379199 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				A2BF717A1AC95A4600379199 /* RDTServer */,
+				A2BF717A1AC95A4600379199 /* TUTKDevice */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -390,9 +417,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		A2BF71791AC95A4600379199 /* RDTServer */ = {
+		A2BF71791AC95A4600379199 /* TUTKDevice */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = A2BF71811AC95A4600379199 /* Build configuration list for PBXNativeTarget "RDTServer" */;
+			buildConfigurationList = A2BF71811AC95A4600379199 /* Build configuration list for PBXNativeTarget "TUTKDevice" */;
 			buildPhases = (
 				A2BF71761AC95A4600379199 /* Sources */,
 				A2BF71771AC95A4600379199 /* Frameworks */,
@@ -401,10 +428,11 @@
 			buildRules = (
 			);
 			dependencies = (
+				A2BED3901C71B01200AF9D4E /* PBXTargetDependency */,
 			);
-			name = RDTServer;
+			name = TUTKDevice;
 			productName = RDTServer;
-			productReference = A2BF717A1AC95A4600379199 /* RDTServer */;
+			productReference = A2BF717A1AC95A4600379199 /* TUTKDevice */;
 			productType = "com.apple.product-type.tool";
 		};
 /* End PBXNativeTarget section */
@@ -431,12 +459,28 @@
 			mainGroup = A2BF71711AC95A4600379199;
 			productRefGroup = A2BF717B1AC95A4600379199 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = A2BED38A1C71AFF100AF9D4E /* Products */;
+					ProjectRef = A2BED3891C71AFF100AF9D4E /* DeviceAPI.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
-				A2BF71791AC95A4600379199 /* RDTServer */,
+				A2BF71791AC95A4600379199 /* TUTKDevice */,
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		A2BED38E1C71AFF100AF9D4E /* libDeviceAPI.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libDeviceAPI.a;
+			remoteRef = A2BED38D1C71AFF100AF9D4E /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXSourcesBuildPhase section */
 		A2BF71761AC95A4600379199 /* Sources */ = {
@@ -476,6 +520,14 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		A2BED3901C71B01200AF9D4E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = DeviceAPI;
+			targetProxy = A2BED38F1C71B01200AF9D4E /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		A2BF717F1AC95A4600379199 /* Debug */ = {
@@ -632,7 +684,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		A2BF71811AC95A4600379199 /* Build configuration list for PBXNativeTarget "RDTServer" */ = {
+		A2BF71811AC95A4600379199 /* Build configuration list for PBXNativeTarget "TUTKDevice" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				A2BF71821AC95A4600379199 /* Debug */,
