@@ -136,6 +136,10 @@
          </CommandLineArgument>
          <CommandLineArgument
             argument = "JsonRDTClientDevice E7YAB554YTZCAH6GY1E1"
+            isEnabled = "NO">
+         </CommandLineArgument>
+         <CommandLineArgument
+            argument = "JsonRDTClientDevice C7KUB944VZFMUH6GYHDJ"
             isEnabled = "YES">
          </CommandLineArgument>
       </CommandLineArguments>
