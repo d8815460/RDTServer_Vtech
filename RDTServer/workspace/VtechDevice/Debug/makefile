@@ -11,6 +11,7 @@ RM := rm -rf
 -include src/subdir.mk
 -include subdir.mk
 -include objects.mk
+CPP_DEPS += src/stdafx.h.gch.d
 
 ifneq ($(MAKECMDGOALS),clean)
 ifneq ($(strip $(C++_DEPS)),)
@@ -50,6 +51,7 @@ VtechDevice: $(OBJS) $(USER_OBJS)
 
 # Other Targets
 clean:
+	rm -f src/stdafx.h.gch.d ../src/stdafx.h.gch
 	-$(RM) $(C++_DEPS)$(OBJS)$(C_DEPS)$(CC_DEPS)$(CPP_DEPS)$(EXECUTABLES)$(CXX_DEPS)$(C_UPPER_DEPS) VtechDevice
 	-@echo ' '
 
@@ -57,3 +59,9 @@ clean:
 .SECONDARY:
 
 -include ../makefile.targets
+
+$(OBJS):%.o:../src/stdafx.h.gch
+
+
+../src/stdafx.h.gch: ../src/stdafx.h ../.cproject ../.project
+	g++ -I"/home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/DeviceAPI" -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"src/stdafx.h.gch.d" -MT"src/stdafx.h.gch.d" -o "$@" "$<"
