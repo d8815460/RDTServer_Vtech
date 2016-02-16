@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section name="Workbench">
+	<item value="/media/sf_RDTServer_Vtech/TUTK_Kalay_Platform_SDK_2.1.3/Include" key="org.eclipse.cdt.utils.ui.controls.FileListControl"/>
+	<section name="completion_proposal_size">
+	</section>
 	<section name="IncludeSysmbolsPropertyPage">
 		<item value="0" key="pageIndex"/>
-	</section>
-	<section name="completion_proposal_size">
 	</section>
 	<section name="CPathsPropertyPage">
 		<item value="2" key="pageIndex"/>
