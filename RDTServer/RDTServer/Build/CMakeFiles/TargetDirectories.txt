@@ -1,0 +1,17 @@
+/home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build/DeviceAPI/CMakeFiles/DeviceAPI.dir
+/home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build/DeviceAPI/CMakeFiles/DeviceAPI_pch.dir
+/home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build/DeviceAPI/CMakeFiles/DeviceAPI_unity.dir
+/home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build/Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir
+/home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build/Targate/TUTKDevice/CMakeFiles/TUTKDevice_pch.dir
+/home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build/Targate/TUTKDevice/CMakeFiles/TUTKDevice_unity.dir
+/home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build/Targate/VtechDevice/CMakeFiles/VtechDevice.dir
+/home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build/Targate/VtechDevice/CMakeFiles/VtechDevice_pch.dir
+/home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build/Targate/VtechDevice/CMakeFiles/VtechDevice_unity.dir
+/home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build/DeviceAPI/CMakeFiles/all_pch.dir
+/home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build/DeviceAPI/CMakeFiles/all_unity.dir
+/home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build/DeviceAPI/CMakeFiles/clean_cotire.dir
+/home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build/3th_party/jsoncpp-1.6.5/src/jsontestrunner/CMakeFiles/jsoncpp_check.dir
+/home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build/3th_party/jsoncpp-1.6.5/src/lib_json/CMakeFiles/jsoncpp_lib_static.dir
+/home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build/3th_party/jsoncpp-1.6.5/src/jsontestrunner/CMakeFiles/jsoncpp_readerwriter_tests.dir
+/home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build/3th_party/jsoncpp-1.6.5/src/test_lib_json/CMakeFiles/jsoncpp_test.dir
+/home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build/3th_party/jsoncpp-1.6.5/src/jsontestrunner/CMakeFiles/jsontestrunner_exe.dir

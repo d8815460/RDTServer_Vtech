@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-	<name>Project-Debug@Build</name>
+	<name>Project-Debug@build</name>
 	<comment></comment>
 	<projects>
 	</projects>
@@ -47,7 +47,7 @@
 				</dictionary>
 				<dictionary>
 					<key>org.eclipse.cdt.make.core.buildLocation</key>
-					<value>/media/sf_RDTServer_Vtech/RDTServer/RDTServer/Build</value>
+					<value>/home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build</value>
 				</dictionary>
 				<dictionary>
 					<key>org.eclipse.cdt.make.core.useDefaultBuildCmd</key>
@@ -83,7 +83,7 @@
 				</dictionary>
 				<dictionary>
 					<key>org.eclipse.cdt.make.core.build.location</key>
-					<value>/media/sf_RDTServer_Vtech/RDTServer/RDTServer/Build</value>
+					<value>/home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build</value>
 				</dictionary>
 				<dictionary>
 					<key>org.eclipse.cdt.make.core.autoBuildTarget</key>
@@ -116,22 +116,22 @@
 		<link>
 			<name>[Subprojects]/DeviceAPI</name>
 			<type>2</type>
-			<location>/media/sf_RDTServer_Vtech/RDTServer/RDTServer/DeviceAPI</location>
+			<location>/home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/DeviceAPI</location>
 		</link>
 		<link>
 			<name>[Subprojects]/TUTKDevice</name>
 			<type>2</type>
-			<location>/media/sf_RDTServer_Vtech/RDTServer/RDTServer/Targate/TUTKDevice</location>
+			<location>/home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Targate/TUTKDevice</location>
 		</link>
 		<link>
 			<name>[Subprojects]/VtechDevice</name>
 			<type>2</type>
-			<location>/media/sf_RDTServer_Vtech/RDTServer/RDTServer/Targate/VtechDevice</location>
+			<location>/home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Targate/VtechDevice</location>
 		</link>
 		<link>
 			<name>[Subprojects]/jsoncpp</name>
 			<type>2</type>
-			<location>/media/sf_RDTServer_Vtech/RDTServer/RDTServer/3th_party/jsoncpp-1.6.5</location>
+			<location>/home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/3th_party/jsoncpp-1.6.5</location>
 		</link>
 		<link>
 			<name>[Targets]</name>
@@ -156,17 +156,17 @@
 		<link>
 			<name>[Targets]/[lib] jsoncpp_lib_static/Source Files/json_reader.cpp</name>
 			<type>1</type>
-			<location>/media/sf_RDTServer_Vtech/RDTServer/RDTServer/3th_party/jsoncpp-1.6.5/src/lib_json/json_reader.cpp</location>
+			<location>/home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/3th_party/jsoncpp-1.6.5/src/lib_json/json_reader.cpp</location>
 		</link>
 		<link>
 			<name>[Targets]/[lib] jsoncpp_lib_static/Source Files/json_value.cpp</name>
 			<type>1</type>
-			<location>/media/sf_RDTServer_Vtech/RDTServer/RDTServer/3th_party/jsoncpp-1.6.5/src/lib_json/json_value.cpp</location>
+			<location>/home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/3th_party/jsoncpp-1.6.5/src/lib_json/json_value.cpp</location>
 		</link>
 		<link>
 			<name>[Targets]/[lib] jsoncpp_lib_static/Source Files/json_writer.cpp</name>
 			<type>1</type>
-			<location>/media/sf_RDTServer_Vtech/RDTServer/RDTServer/3th_party/jsoncpp-1.6.5/src/lib_json/json_writer.cpp</location>
+			<location>/home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/3th_party/jsoncpp-1.6.5/src/lib_json/json_writer.cpp</location>
 		</link>
 		<link>
 			<name>[Targets]/[lib] jsoncpp_lib_static/Header Files</name>
@@ -176,17 +176,17 @@
 		<link>
 			<name>[Targets]/[lib] jsoncpp_lib_static/Header Files/json_tool.h</name>
 			<type>1</type>
-			<location>/media/sf_RDTServer_Vtech/RDTServer/RDTServer/3th_party/jsoncpp-1.6.5/src/lib_json/json_tool.h</location>
+			<location>/home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/3th_party/jsoncpp-1.6.5/src/lib_json/json_tool.h</location>
 		</link>
 		<link>
 			<name>[Targets]/[lib] jsoncpp_lib_static/Header Files/json_valueiterator.inl</name>
 			<type>1</type>
-			<location>/media/sf_RDTServer_Vtech/RDTServer/RDTServer/3th_party/jsoncpp-1.6.5/src/lib_json/json_valueiterator.inl</location>
+			<location>/home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/3th_party/jsoncpp-1.6.5/src/lib_json/json_valueiterator.inl</location>
 		</link>
 		<link>
 			<name>[Targets]/[lib] jsoncpp_lib_static/Header Files/version.h.in</name>
 			<type>1</type>
-			<location>/media/sf_RDTServer_Vtech/RDTServer/RDTServer/3th_party/jsoncpp-1.6.5/src/lib_json/version.h.in</location>
+			<location>/home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/3th_party/jsoncpp-1.6.5/src/lib_json/version.h.in</location>
 		</link>
 		<link>
 			<name>[Targets]/[lib] jsoncpp_lib_static/CMake Rules</name>
@@ -211,42 +211,42 @@
 		<link>
 			<name>[Targets]/[lib] jsoncpp_lib_static/Public API/config.h</name>
 			<type>1</type>
-			<location>/media/sf_RDTServer_Vtech/RDTServer/RDTServer/3th_party/jsoncpp-1.6.5/include/json/config.h</location>
+			<location>/home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/3th_party/jsoncpp-1.6.5/include/json/config.h</location>
 		</link>
 		<link>
 			<name>[Targets]/[lib] jsoncpp_lib_static/Public API/forwards.h</name>
 			<type>1</type>
-			<location>/media/sf_RDTServer_Vtech/RDTServer/RDTServer/3th_party/jsoncpp-1.6.5/include/json/forwards.h</location>
+			<location>/home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/3th_party/jsoncpp-1.6.5/include/json/forwards.h</location>
 		</link>
 		<link>
 			<name>[Targets]/[lib] jsoncpp_lib_static/Public API/features.h</name>
 			<type>1</type>
-			<location>/media/sf_RDTServer_Vtech/RDTServer/RDTServer/3th_party/jsoncpp-1.6.5/include/json/features.h</location>
+			<location>/home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/3th_party/jsoncpp-1.6.5/include/json/features.h</location>
 		</link>
 		<link>
 			<name>[Targets]/[lib] jsoncpp_lib_static/Public API/value.h</name>
 			<type>1</type>
-			<location>/media/sf_RDTServer_Vtech/RDTServer/RDTServer/3th_party/jsoncpp-1.6.5/include/json/value.h</location>
+			<location>/home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/3th_party/jsoncpp-1.6.5/include/json/value.h</location>
 		</link>
 		<link>
 			<name>[Targets]/[lib] jsoncpp_lib_static/Public API/reader.h</name>
 			<type>1</type>
-			<location>/media/sf_RDTServer_Vtech/RDTServer/RDTServer/3th_party/jsoncpp-1.6.5/include/json/reader.h</location>
+			<location>/home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/3th_party/jsoncpp-1.6.5/include/json/reader.h</location>
 		</link>
 		<link>
 			<name>[Targets]/[lib] jsoncpp_lib_static/Public API/writer.h</name>
 			<type>1</type>
-			<location>/media/sf_RDTServer_Vtech/RDTServer/RDTServer/3th_party/jsoncpp-1.6.5/include/json/writer.h</location>
+			<location>/home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/3th_party/jsoncpp-1.6.5/include/json/writer.h</location>
 		</link>
 		<link>
 			<name>[Targets]/[lib] jsoncpp_lib_static/Public API/assertions.h</name>
 			<type>1</type>
-			<location>/media/sf_RDTServer_Vtech/RDTServer/RDTServer/3th_party/jsoncpp-1.6.5/include/json/assertions.h</location>
+			<location>/home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/3th_party/jsoncpp-1.6.5/include/json/assertions.h</location>
 		</link>
 		<link>
 			<name>[Targets]/[lib] jsoncpp_lib_static/Public API/version.h</name>
 			<type>1</type>
-			<location>/media/sf_RDTServer_Vtech/RDTServer/RDTServer/3th_party/jsoncpp-1.6.5/include/json/version.h</location>
+			<location>/home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/3th_party/jsoncpp-1.6.5/include/json/version.h</location>
 		</link>
 		<link>
 			<name>[Targets]/[exe] jsontestrunner_exe</name>
@@ -266,7 +266,7 @@
 		<link>
 			<name>[Targets]/[exe] jsontestrunner_exe/Source Files/main.cpp</name>
 			<type>1</type>
-			<location>/media/sf_RDTServer_Vtech/RDTServer/RDTServer/3th_party/jsoncpp-1.6.5/src/jsontestrunner/main.cpp</location>
+			<location>/home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/3th_party/jsoncpp-1.6.5/src/jsontestrunner/main.cpp</location>
 		</link>
 		<link>
 			<name>[Targets]/[exe] jsontestrunner_exe/Header Files</name>
@@ -306,12 +306,12 @@
 		<link>
 			<name>[Targets]/[exe] jsoncpp_test/Source Files/jsontest.cpp</name>
 			<type>1</type>
-			<location>/media/sf_RDTServer_Vtech/RDTServer/RDTServer/3th_party/jsoncpp-1.6.5/src/test_lib_json/jsontest.cpp</location>
+			<location>/home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/3th_party/jsoncpp-1.6.5/src/test_lib_json/jsontest.cpp</location>
 		</link>
 		<link>
 			<name>[Targets]/[exe] jsoncpp_test/Source Files/main.cpp</name>
 			<type>1</type>
-			<location>/media/sf_RDTServer_Vtech/RDTServer/RDTServer/3th_party/jsoncpp-1.6.5/src/test_lib_json/main.cpp</location>
+			<location>/home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/3th_party/jsoncpp-1.6.5/src/test_lib_json/main.cpp</location>
 		</link>
 		<link>
 			<name>[Targets]/[exe] jsoncpp_test/Header Files</name>
@@ -321,7 +321,7 @@
 		<link>
 			<name>[Targets]/[exe] jsoncpp_test/Header Files/jsontest.h</name>
 			<type>1</type>
-			<location>/media/sf_RDTServer_Vtech/RDTServer/RDTServer/3th_party/jsoncpp-1.6.5/src/test_lib_json/jsontest.h</location>
+			<location>/home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/3th_party/jsoncpp-1.6.5/src/test_lib_json/jsontest.h</location>
 		</link>
 		<link>
 			<name>[Targets]/[exe] jsoncpp_test/CMake Rules</name>
@@ -356,62 +356,62 @@
 		<link>
 			<name>[Targets]/[lib] DeviceAPI/Source Files/BinraryRDTClientCommand.cpp</name>
 			<type>1</type>
-			<location>/media/sf_RDTServer_Vtech/RDTServer/RDTServer/DeviceAPI/BinraryRDTClientCommand.cpp</location>
+			<location>/home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/DeviceAPI/BinraryRDTClientCommand.cpp</location>
 		</link>
 		<link>
 			<name>[Targets]/[lib] DeviceAPI/Source Files/BinraryRDTClientConnect.cpp</name>
 			<type>1</type>
-			<location>/media/sf_RDTServer_Vtech/RDTServer/RDTServer/DeviceAPI/BinraryRDTClientConnect.cpp</location>
+			<location>/home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/DeviceAPI/BinraryRDTClientConnect.cpp</location>
 		</link>
 		<link>
 			<name>[Targets]/[lib] DeviceAPI/Source Files/BinraryRDTServerCommand.cpp</name>
 			<type>1</type>
-			<location>/media/sf_RDTServer_Vtech/RDTServer/RDTServer/DeviceAPI/BinraryRDTServerCommand.cpp</location>
+			<location>/home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/DeviceAPI/BinraryRDTServerCommand.cpp</location>
 		</link>
 		<link>
 			<name>[Targets]/[lib] DeviceAPI/Source Files/BinraryRDTServerConnect.cpp</name>
 			<type>1</type>
-			<location>/media/sf_RDTServer_Vtech/RDTServer/RDTServer/DeviceAPI/BinraryRDTServerConnect.cpp</location>
+			<location>/home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/DeviceAPI/BinraryRDTServerConnect.cpp</location>
 		</link>
 		<link>
 			<name>[Targets]/[lib] DeviceAPI/Source Files/Command.cpp</name>
 			<type>1</type>
-			<location>/media/sf_RDTServer_Vtech/RDTServer/RDTServer/DeviceAPI/Command.cpp</location>
+			<location>/home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/DeviceAPI/Command.cpp</location>
 		</link>
 		<link>
 			<name>[Targets]/[lib] DeviceAPI/Source Files/Connect.cpp</name>
 			<type>1</type>
-			<location>/media/sf_RDTServer_Vtech/RDTServer/RDTServer/DeviceAPI/Connect.cpp</location>
+			<location>/home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/DeviceAPI/Connect.cpp</location>
 		</link>
 		<link>
 			<name>[Targets]/[lib] DeviceAPI/Source Files/Device.cpp</name>
 			<type>1</type>
-			<location>/media/sf_RDTServer_Vtech/RDTServer/RDTServer/DeviceAPI/Device.cpp</location>
+			<location>/home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/DeviceAPI/Device.cpp</location>
 		</link>
 		<link>
 			<name>[Targets]/[lib] DeviceAPI/Source Files/JsonRDTClientCommand.cpp</name>
 			<type>1</type>
-			<location>/media/sf_RDTServer_Vtech/RDTServer/RDTServer/DeviceAPI/JsonRDTClientCommand.cpp</location>
+			<location>/home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/DeviceAPI/JsonRDTClientCommand.cpp</location>
 		</link>
 		<link>
 			<name>[Targets]/[lib] DeviceAPI/Source Files/JsonRDTCommand.cpp</name>
 			<type>1</type>
-			<location>/media/sf_RDTServer_Vtech/RDTServer/RDTServer/DeviceAPI/JsonRDTCommand.cpp</location>
+			<location>/home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/DeviceAPI/JsonRDTCommand.cpp</location>
 		</link>
 		<link>
 			<name>[Targets]/[lib] DeviceAPI/Source Files/JsonRDTServerCommand.cpp</name>
 			<type>1</type>
-			<location>/media/sf_RDTServer_Vtech/RDTServer/RDTServer/DeviceAPI/JsonRDTServerCommand.cpp</location>
+			<location>/home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/DeviceAPI/JsonRDTServerCommand.cpp</location>
 		</link>
 		<link>
 			<name>[Targets]/[lib] DeviceAPI/Source Files/UTF.cpp</name>
 			<type>1</type>
-			<location>/media/sf_RDTServer_Vtech/RDTServer/RDTServer/DeviceAPI/UTF.cpp</location>
+			<location>/home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/DeviceAPI/UTF.cpp</location>
 		</link>
 		<link>
 			<name>[Targets]/[lib] DeviceAPI/Source Files/Utility.cpp</name>
 			<type>1</type>
-			<location>/media/sf_RDTServer_Vtech/RDTServer/RDTServer/DeviceAPI/Utility.cpp</location>
+			<location>/home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/DeviceAPI/Utility.cpp</location>
 		</link>
 		<link>
 			<name>[Targets]/[lib] DeviceAPI/Header Files</name>
@@ -421,7 +421,7 @@
 		<link>
 			<name>[Targets]/[lib] DeviceAPI/Header Files/platform_Config.h</name>
 			<type>1</type>
-			<location>/media/sf_RDTServer_Vtech/RDTServer/RDTServer/DeviceAPI/platform_Config.h</location>
+			<location>/home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/DeviceAPI/platform_Config.h</location>
 		</link>
 		<link>
 			<name>[Targets]/[lib] DeviceAPI/CMake Rules</name>
@@ -431,17 +431,17 @@
 		<link>
 			<name>[Targets]/[lib] DeviceAPI/CMake Rules/DeviceAPI_CXX_prefix.hxx.gch.rule</name>
 			<type>1</type>
-			<location>/media/sf_RDTServer_Vtech/RDTServer/RDTServer/Build/DeviceAPI/cotire/DeviceAPI_CXX_prefix.hxx.gch.rule</location>
+			<location>/home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build/DeviceAPI/cotire/DeviceAPI_CXX_prefix.hxx.gch.rule</location>
 		</link>
 		<link>
 			<name>[Targets]/[lib] DeviceAPI/CMake Rules/DeviceAPI_CXX_prefix.hxx.rule</name>
 			<type>1</type>
-			<location>/media/sf_RDTServer_Vtech/RDTServer/RDTServer/Build/DeviceAPI/cotire/DeviceAPI_CXX_prefix.hxx.rule</location>
+			<location>/home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build/DeviceAPI/cotire/DeviceAPI_CXX_prefix.hxx.rule</location>
 		</link>
 		<link>
 			<name>[Targets]/[lib] DeviceAPI/CMake Rules/DeviceAPI_CXX_prefix.cxx.rule</name>
 			<type>1</type>
-			<location>/media/sf_RDTServer_Vtech/RDTServer/RDTServer/Build/DeviceAPI/cotire/DeviceAPI_CXX_prefix.cxx.rule</location>
+			<location>/home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build/DeviceAPI/cotire/DeviceAPI_CXX_prefix.cxx.rule</location>
 		</link>
 		<link>
 			<name>[Targets]/[lib] DeviceAPI/Resources</name>
@@ -471,7 +471,7 @@
 		<link>
 			<name>[Targets]/[lib] DeviceAPI_unity/Source Files/DeviceAPI_CXX_unity.cxx</name>
 			<type>1</type>
-			<location>/media/sf_RDTServer_Vtech/RDTServer/RDTServer/Build/DeviceAPI/cotire/DeviceAPI_CXX_unity.cxx</location>
+			<location>/home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build/DeviceAPI/cotire/DeviceAPI_CXX_unity.cxx</location>
 		</link>
 		<link>
 			<name>[Targets]/[lib] DeviceAPI_unity/Header Files</name>
@@ -481,7 +481,7 @@
 		<link>
 			<name>[Targets]/[lib] DeviceAPI_unity/Header Files/platform_Config.h</name>
 			<type>1</type>
-			<location>/media/sf_RDTServer_Vtech/RDTServer/RDTServer/DeviceAPI/platform_Config.h</location>
+			<location>/home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/DeviceAPI/platform_Config.h</location>
 		</link>
 		<link>
 			<name>[Targets]/[lib] DeviceAPI_unity/CMake Rules</name>
@@ -491,17 +491,17 @@
 		<link>
 			<name>[Targets]/[lib] DeviceAPI_unity/CMake Rules/DeviceAPI_CXX_prefix.hxx.rule</name>
 			<type>1</type>
-			<location>/media/sf_RDTServer_Vtech/RDTServer/RDTServer/Build/DeviceAPI/cotire/DeviceAPI_CXX_prefix.hxx.rule</location>
+			<location>/home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build/DeviceAPI/cotire/DeviceAPI_CXX_prefix.hxx.rule</location>
 		</link>
 		<link>
 			<name>[Targets]/[lib] DeviceAPI_unity/CMake Rules/DeviceAPI_CXX_unity.cxx.rule</name>
 			<type>1</type>
-			<location>/media/sf_RDTServer_Vtech/RDTServer/RDTServer/Build/DeviceAPI/cotire/DeviceAPI_CXX_unity.cxx.rule</location>
+			<location>/home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build/DeviceAPI/cotire/DeviceAPI_CXX_unity.cxx.rule</location>
 		</link>
 		<link>
 			<name>[Targets]/[lib] DeviceAPI_unity/CMake Rules/DeviceAPI_CXX_prefix.cxx.rule</name>
 			<type>1</type>
-			<location>/media/sf_RDTServer_Vtech/RDTServer/RDTServer/Build/DeviceAPI/cotire/DeviceAPI_CXX_prefix.cxx.rule</location>
+			<location>/home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build/DeviceAPI/cotire/DeviceAPI_CXX_prefix.cxx.rule</location>
 		</link>
 		<link>
 			<name>[Targets]/[lib] DeviceAPI_unity/Resources</name>
@@ -531,77 +531,77 @@
 		<link>
 			<name>[Targets]/[exe] TUTKDevice/Source Files/Body.cpp</name>
 			<type>1</type>
-			<location>/media/sf_RDTServer_Vtech/RDTServer/RDTServer/Targate/TUTKDevice/Body.cpp</location>
+			<location>/home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Targate/TUTKDevice/Body.cpp</location>
 		</link>
 		<link>
 			<name>[Targets]/[exe] TUTKDevice/Source Files/JsonRDTClientDevice.cpp</name>
 			<type>1</type>
-			<location>/media/sf_RDTServer_Vtech/RDTServer/RDTServer/Targate/TUTKDevice/JsonRDTClientDevice.cpp</location>
+			<location>/home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Targate/TUTKDevice/JsonRDTClientDevice.cpp</location>
 		</link>
 		<link>
 			<name>[Targets]/[exe] TUTKDevice/Source Files/main.cpp</name>
 			<type>1</type>
-			<location>/media/sf_RDTServer_Vtech/RDTServer/RDTServer/Targate/TUTKDevice/main.cpp</location>
+			<location>/home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Targate/TUTKDevice/main.cpp</location>
 		</link>
 		<link>
 			<name>[Targets]/[exe] TUTKDevice/Source Files/SampoDevice.cpp</name>
 			<type>1</type>
-			<location>/media/sf_RDTServer_Vtech/RDTServer/RDTServer/Targate/TUTKDevice/SampoDevice.cpp</location>
+			<location>/home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Targate/TUTKDevice/SampoDevice.cpp</location>
 		</link>
 		<link>
 			<name>[Targets]/[exe] TUTKDevice/Source Files/TUTKDoorDevice.cpp</name>
 			<type>1</type>
-			<location>/media/sf_RDTServer_Vtech/RDTServer/RDTServer/Targate/TUTKDevice/TUTKDoorDevice.cpp</location>
+			<location>/home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Targate/TUTKDevice/TUTKDoorDevice.cpp</location>
 		</link>
 		<link>
 			<name>[Targets]/[exe] TUTKDevice/Source Files/TUTKGasDevice.cpp</name>
 			<type>1</type>
-			<location>/media/sf_RDTServer_Vtech/RDTServer/RDTServer/Targate/TUTKDevice/TUTKGasDevice.cpp</location>
+			<location>/home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Targate/TUTKDevice/TUTKGasDevice.cpp</location>
 		</link>
 		<link>
 			<name>[Targets]/[exe] TUTKDevice/Source Files/TUTKGatewayDevice.cpp</name>
 			<type>1</type>
-			<location>/media/sf_RDTServer_Vtech/RDTServer/RDTServer/Targate/TUTKDevice/TUTKGatewayDevice.cpp</location>
+			<location>/home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Targate/TUTKDevice/TUTKGatewayDevice.cpp</location>
 		</link>
 		<link>
 			<name>[Targets]/[exe] TUTKDevice/Source Files/TUTKLightingDevice.cpp</name>
 			<type>1</type>
-			<location>/media/sf_RDTServer_Vtech/RDTServer/RDTServer/Targate/TUTKDevice/TUTKLightingDevice.cpp</location>
+			<location>/home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Targate/TUTKDevice/TUTKLightingDevice.cpp</location>
 		</link>
 		<link>
 			<name>[Targets]/[exe] TUTKDevice/Source Files/TUTKPIRDevice.cpp</name>
 			<type>1</type>
-			<location>/media/sf_RDTServer_Vtech/RDTServer/RDTServer/Targate/TUTKDevice/TUTKPIRDevice.cpp</location>
+			<location>/home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Targate/TUTKDevice/TUTKPIRDevice.cpp</location>
 		</link>
 		<link>
 			<name>[Targets]/[exe] TUTKDevice/Source Files/TUTKPlugDevice.cpp</name>
 			<type>1</type>
-			<location>/media/sf_RDTServer_Vtech/RDTServer/RDTServer/Targate/TUTKDevice/TUTKPlugDevice.cpp</location>
+			<location>/home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Targate/TUTKDevice/TUTKPlugDevice.cpp</location>
 		</link>
 		<link>
 			<name>[Targets]/[exe] TUTKDevice/Source Files/TUTKSirenDevice.cpp</name>
 			<type>1</type>
-			<location>/media/sf_RDTServer_Vtech/RDTServer/RDTServer/Targate/TUTKDevice/TUTKSirenDevice.cpp</location>
+			<location>/home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Targate/TUTKDevice/TUTKSirenDevice.cpp</location>
 		</link>
 		<link>
 			<name>[Targets]/[exe] TUTKDevice/Source Files/TUTKSmokeDevice.cpp</name>
 			<type>1</type>
-			<location>/media/sf_RDTServer_Vtech/RDTServer/RDTServer/Targate/TUTKDevice/TUTKSmokeDevice.cpp</location>
+			<location>/home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Targate/TUTKDevice/TUTKSmokeDevice.cpp</location>
 		</link>
 		<link>
 			<name>[Targets]/[exe] TUTKDevice/Source Files/TUTKVibrateDevice.cpp</name>
 			<type>1</type>
-			<location>/media/sf_RDTServer_Vtech/RDTServer/RDTServer/Targate/TUTKDevice/TUTKVibrateDevice.cpp</location>
+			<location>/home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Targate/TUTKDevice/TUTKVibrateDevice.cpp</location>
 		</link>
 		<link>
 			<name>[Targets]/[exe] TUTKDevice/Source Files/TUTKWaterLeakDevice.cpp</name>
 			<type>1</type>
-			<location>/media/sf_RDTServer_Vtech/RDTServer/RDTServer/Targate/TUTKDevice/TUTKWaterLeakDevice.cpp</location>
+			<location>/home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Targate/TUTKDevice/TUTKWaterLeakDevice.cpp</location>
 		</link>
 		<link>
 			<name>[Targets]/[exe] TUTKDevice/Source Files/ZhongHanDevice.cpp</name>
 			<type>1</type>
-			<location>/media/sf_RDTServer_Vtech/RDTServer/RDTServer/Targate/TUTKDevice/ZhongHanDevice.cpp</location>
+			<location>/home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Targate/TUTKDevice/ZhongHanDevice.cpp</location>
 		</link>
 		<link>
 			<name>[Targets]/[exe] TUTKDevice/Header Files</name>
@@ -616,17 +616,17 @@
 		<link>
 			<name>[Targets]/[exe] TUTKDevice/CMake Rules/TUTKDevice_CXX_prefix.hxx.gch.rule</name>
 			<type>1</type>
-			<location>/media/sf_RDTServer_Vtech/RDTServer/RDTServer/Build/Targate/TUTKDevice/cotire/TUTKDevice_CXX_prefix.hxx.gch.rule</location>
+			<location>/home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build/Targate/TUTKDevice/cotire/TUTKDevice_CXX_prefix.hxx.gch.rule</location>
 		</link>
 		<link>
 			<name>[Targets]/[exe] TUTKDevice/CMake Rules/TUTKDevice_CXX_prefix.hxx.rule</name>
 			<type>1</type>
-			<location>/media/sf_RDTServer_Vtech/RDTServer/RDTServer/Build/Targate/TUTKDevice/cotire/TUTKDevice_CXX_prefix.hxx.rule</location>
+			<location>/home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build/Targate/TUTKDevice/cotire/TUTKDevice_CXX_prefix.hxx.rule</location>
 		</link>
 		<link>
 			<name>[Targets]/[exe] TUTKDevice/CMake Rules/TUTKDevice_CXX_prefix.cxx.rule</name>
 			<type>1</type>
-			<location>/media/sf_RDTServer_Vtech/RDTServer/RDTServer/Build/Targate/TUTKDevice/cotire/TUTKDevice_CXX_prefix.cxx.rule</location>
+			<location>/home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build/Targate/TUTKDevice/cotire/TUTKDevice_CXX_prefix.cxx.rule</location>
 		</link>
 		<link>
 			<name>[Targets]/[exe] TUTKDevice/Resources</name>
@@ -656,7 +656,7 @@
 		<link>
 			<name>[Targets]/[exe] TUTKDevice_unity/Source Files/TUTKDevice_CXX_unity.cxx</name>
 			<type>1</type>
-			<location>/media/sf_RDTServer_Vtech/RDTServer/RDTServer/Build/Targate/TUTKDevice/cotire/TUTKDevice_CXX_unity.cxx</location>
+			<location>/home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build/Targate/TUTKDevice/cotire/TUTKDevice_CXX_unity.cxx</location>
 		</link>
 		<link>
 			<name>[Targets]/[exe] TUTKDevice_unity/Header Files</name>
@@ -671,17 +671,17 @@
 		<link>
 			<name>[Targets]/[exe] TUTKDevice_unity/CMake Rules/TUTKDevice_CXX_prefix.hxx.rule</name>
 			<type>1</type>
-			<location>/media/sf_RDTServer_Vtech/RDTServer/RDTServer/Build/Targate/TUTKDevice/cotire/TUTKDevice_CXX_prefix.hxx.rule</location>
+			<location>/home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build/Targate/TUTKDevice/cotire/TUTKDevice_CXX_prefix.hxx.rule</location>
 		</link>
 		<link>
 			<name>[Targets]/[exe] TUTKDevice_unity/CMake Rules/TUTKDevice_CXX_unity.cxx.rule</name>
 			<type>1</type>
-			<location>/media/sf_RDTServer_Vtech/RDTServer/RDTServer/Build/Targate/TUTKDevice/cotire/TUTKDevice_CXX_unity.cxx.rule</location>
+			<location>/home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build/Targate/TUTKDevice/cotire/TUTKDevice_CXX_unity.cxx.rule</location>
 		</link>
 		<link>
 			<name>[Targets]/[exe] TUTKDevice_unity/CMake Rules/TUTKDevice_CXX_prefix.cxx.rule</name>
 			<type>1</type>
-			<location>/media/sf_RDTServer_Vtech/RDTServer/RDTServer/Build/Targate/TUTKDevice/cotire/TUTKDevice_CXX_prefix.cxx.rule</location>
+			<location>/home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build/Targate/TUTKDevice/cotire/TUTKDevice_CXX_prefix.cxx.rule</location>
 		</link>
 		<link>
 			<name>[Targets]/[exe] TUTKDevice_unity/Resources</name>
@@ -711,42 +711,42 @@
 		<link>
 			<name>[Targets]/[exe] VtechDevice/Source Files/main.cpp</name>
 			<type>1</type>
-			<location>/media/sf_RDTServer_Vtech/RDTServer/RDTServer/Targate/VtechDevice/main.cpp</location>
+			<location>/home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Targate/VtechDevice/main.cpp</location>
 		</link>
 		<link>
 			<name>[Targets]/[exe] VtechDevice/Source Files/VtechGarageDoorDevice.cpp</name>
 			<type>1</type>
-			<location>/media/sf_RDTServer_Vtech/RDTServer/RDTServer/Targate/VtechDevice/VtechGarageDoorDevice.cpp</location>
+			<location>/home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Targate/VtechDevice/VtechGarageDoorDevice.cpp</location>
 		</link>
 		<link>
 			<name>[Targets]/[exe] VtechDevice/Source Files/VtechIPHubGatewayDevice.cpp</name>
 			<type>1</type>
-			<location>/media/sf_RDTServer_Vtech/RDTServer/RDTServer/Targate/VtechDevice/VtechIPHubGatewayDevice.cpp</location>
+			<location>/home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Targate/VtechDevice/VtechIPHubGatewayDevice.cpp</location>
 		</link>
 		<link>
 			<name>[Targets]/[exe] VtechDevice/Source Files/VtechLightBulbDevice.cpp</name>
 			<type>1</type>
-			<location>/media/sf_RDTServer_Vtech/RDTServer/RDTServer/Targate/VtechDevice/VtechLightBulbDevice.cpp</location>
+			<location>/home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Targate/VtechDevice/VtechLightBulbDevice.cpp</location>
 		</link>
 		<link>
 			<name>[Targets]/[exe] VtechDevice/Source Files/VtechMotionSensorDevice.cpp</name>
 			<type>1</type>
-			<location>/media/sf_RDTServer_Vtech/RDTServer/RDTServer/Targate/VtechDevice/VtechMotionSensorDevice.cpp</location>
+			<location>/home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Targate/VtechDevice/VtechMotionSensorDevice.cpp</location>
 		</link>
 		<link>
 			<name>[Targets]/[exe] VtechDevice/Source Files/VtechOpenClosedDevice.cpp</name>
 			<type>1</type>
-			<location>/media/sf_RDTServer_Vtech/RDTServer/RDTServer/Targate/VtechDevice/VtechOpenClosedDevice.cpp</location>
+			<location>/home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Targate/VtechDevice/VtechOpenClosedDevice.cpp</location>
 		</link>
 		<link>
 			<name>[Targets]/[exe] VtechDevice/Source Files/VtechVirtualGroupDevice.cpp</name>
 			<type>1</type>
-			<location>/media/sf_RDTServer_Vtech/RDTServer/RDTServer/Targate/VtechDevice/VtechVirtualGroupDevice.cpp</location>
+			<location>/home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Targate/VtechDevice/VtechVirtualGroupDevice.cpp</location>
 		</link>
 		<link>
 			<name>[Targets]/[exe] VtechDevice/Source Files/VtechWallSwitchDevice.cpp</name>
 			<type>1</type>
-			<location>/media/sf_RDTServer_Vtech/RDTServer/RDTServer/Targate/VtechDevice/VtechWallSwitchDevice.cpp</location>
+			<location>/home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Targate/VtechDevice/VtechWallSwitchDevice.cpp</location>
 		</link>
 		<link>
 			<name>[Targets]/[exe] VtechDevice/Header Files</name>
@@ -761,17 +761,17 @@
 		<link>
 			<name>[Targets]/[exe] VtechDevice/CMake Rules/VtechDevice_CXX_prefix.hxx.gch.rule</name>
 			<type>1</type>
-			<location>/media/sf_RDTServer_Vtech/RDTServer/RDTServer/Build/Targate/VtechDevice/cotire/VtechDevice_CXX_prefix.hxx.gch.rule</location>
+			<location>/home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build/Targate/VtechDevice/cotire/VtechDevice_CXX_prefix.hxx.gch.rule</location>
 		</link>
 		<link>
 			<name>[Targets]/[exe] VtechDevice/CMake Rules/VtechDevice_CXX_prefix.hxx.rule</name>
 			<type>1</type>
-			<location>/media/sf_RDTServer_Vtech/RDTServer/RDTServer/Build/Targate/VtechDevice/cotire/VtechDevice_CXX_prefix.hxx.rule</location>
+			<location>/home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build/Targate/VtechDevice/cotire/VtechDevice_CXX_prefix.hxx.rule</location>
 		</link>
 		<link>
 			<name>[Targets]/[exe] VtechDevice/CMake Rules/VtechDevice_CXX_prefix.cxx.rule</name>
 			<type>1</type>
-			<location>/media/sf_RDTServer_Vtech/RDTServer/RDTServer/Build/Targate/VtechDevice/cotire/VtechDevice_CXX_prefix.cxx.rule</location>
+			<location>/home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build/Targate/VtechDevice/cotire/VtechDevice_CXX_prefix.cxx.rule</location>
 		</link>
 		<link>
 			<name>[Targets]/[exe] VtechDevice/Resources</name>
@@ -801,7 +801,7 @@
 		<link>
 			<name>[Targets]/[exe] VtechDevice_unity/Source Files/VtechDevice_CXX_unity.cxx</name>
 			<type>1</type>
-			<location>/media/sf_RDTServer_Vtech/RDTServer/RDTServer/Build/Targate/VtechDevice/cotire/VtechDevice_CXX_unity.cxx</location>
+			<location>/home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build/Targate/VtechDevice/cotire/VtechDevice_CXX_unity.cxx</location>
 		</link>
 		<link>
 			<name>[Targets]/[exe] VtechDevice_unity/Header Files</name>
@@ -816,17 +816,17 @@
 		<link>
 			<name>[Targets]/[exe] VtechDevice_unity/CMake Rules/VtechDevice_CXX_prefix.hxx.rule</name>
 			<type>1</type>
-			<location>/media/sf_RDTServer_Vtech/RDTServer/RDTServer/Build/Targate/VtechDevice/cotire/VtechDevice_CXX_prefix.hxx.rule</location>
+			<location>/home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build/Targate/VtechDevice/cotire/VtechDevice_CXX_prefix.hxx.rule</location>
 		</link>
 		<link>
 			<name>[Targets]/[exe] VtechDevice_unity/CMake Rules/VtechDevice_CXX_unity.cxx.rule</name>
 			<type>1</type>
-			<location>/media/sf_RDTServer_Vtech/RDTServer/RDTServer/Build/Targate/VtechDevice/cotire/VtechDevice_CXX_unity.cxx.rule</location>
+			<location>/home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build/Targate/VtechDevice/cotire/VtechDevice_CXX_unity.cxx.rule</location>
 		</link>
 		<link>
 			<name>[Targets]/[exe] VtechDevice_unity/CMake Rules/VtechDevice_CXX_prefix.cxx.rule</name>
 			<type>1</type>
-			<location>/media/sf_RDTServer_Vtech/RDTServer/RDTServer/Build/Targate/VtechDevice/cotire/VtechDevice_CXX_prefix.cxx.rule</location>
+			<location>/home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build/Targate/VtechDevice/cotire/VtechDevice_CXX_prefix.cxx.rule</location>
 		</link>
 		<link>
 			<name>[Targets]/[exe] VtechDevice_unity/Resources</name>

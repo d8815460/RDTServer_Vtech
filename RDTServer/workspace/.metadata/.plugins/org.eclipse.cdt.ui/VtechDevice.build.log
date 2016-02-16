@@ -1,0 +1,14 @@
+17:07:36 **** Build of configuration Debug for project VtechDevice ****
+make all 
+Building file: ../src/VtechGarageDoorDevice.cpp
+Invoking: Cross G++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"src/VtechGarageDoorDevice.d" -MT"src/VtechGarageDoorDevice.o" -o "src/VtechGarageDoorDevice.o" "../src/VtechGarageDoorDevice.cpp"
+In file included from ../src/VtechGarageDoorDevice.cpp:9:0:
+../src/VtechGarageDoorDevice.hpp:13:22: fatal error: Device.hpp: 沒有此一檔案或目錄
+ #include "Device.hpp"
+                      ^
+compilation terminated.
+make: *** [src/VtechGarageDoorDevice.o] Error 1
+
+17:07:37 Build Finished (took 201ms)
+

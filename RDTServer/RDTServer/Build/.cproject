@@ -258,12 +258,12 @@
 <pathentry kind="mac" name="__GXX_RTTI" path="" value="1"/>
 <pathentry kind="mac" name="__EXCEPTIONS" path="" value="1"/>
 <pathentry kind="mac" name="_GNU_SOURCE" path="" value="1"/>
-<pathentry include="/media/sf_RDTServer_Vtech/RDTServer/RDTServer/3th_party/jsoncpp-1.6.5/include" kind="inc" path="" system="true"/>
-<pathentry include="/media/sf_RDTServer_Vtech/RDTServer/RDTServer/DeviceAPI" kind="inc" path="" system="true"/>
-<pathentry include="/media/sf_RDTServer_Vtech/TUTK_Kalay_Platform_SDK_2.1.3/Include" kind="inc" path="" system="true"/>
-<pathentry include="/media/sf_RDTServer_Vtech/RDTServer/RDTServer/Targate/TUTKDevice" kind="inc" path="" system="true"/>
-<pathentry include="/media/sf_RDTServer_Vtech/RDTServer/RDTServer/Targate/VtechDevice" kind="inc" path="" system="true"/>
-<pathentry include="/media/sf_RDTServer_Vtech/RDTServer/RDTServer/3th_party/unix_socket" kind="inc" path="" system="true"/>
+<pathentry include="/home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/3th_party/jsoncpp-1.6.5/include" kind="inc" path="" system="true"/>
+<pathentry include="/home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/DeviceAPI" kind="inc" path="" system="true"/>
+<pathentry include="/home/jakey/sf_RDTServer_Vtech/TUTK_Kalay_Platform_SDK_2.1.3/Include" kind="inc" path="" system="true"/>
+<pathentry include="/home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Targate/TUTKDevice" kind="inc" path="" system="true"/>
+<pathentry include="/home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Targate/VtechDevice" kind="inc" path="" system="true"/>
+<pathentry include="/home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/3th_party/unix_socket" kind="inc" path="" system="true"/>
 <pathentry include="/usr/lib/gcc/i686-linux-gnu/4.8/include" kind="inc" path="" system="true"/>
 <pathentry include="/usr/local/include" kind="inc" path="" system="true"/>
 <pathentry include="/usr/lib/gcc/i686-linux-gnu/4.8/include-fixed" kind="inc" path="" system="true"/>
@@ -368,14 +368,14 @@
 </target>
 <target name="Build" path="[Targets]/[lib] jsoncpp_lib_static" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
 <buildCommand>/usr/bin/make</buildCommand>
-<buildArguments>-C "/media/sf_RDTServer_Vtech/RDTServer/RDTServer/Build" -j2</buildArguments>
+<buildArguments>-C "/home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build" -j2</buildArguments>
 <buildTarget>jsoncpp_lib_static</buildTarget>
 <stopOnError>true</stopOnError>
 <useDefaultCommand>false</useDefaultCommand>
 </target>
 <target name="Clean" path="[Targets]/[lib] jsoncpp_lib_static" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
 <buildCommand>/usr/bin/cmake</buildCommand>
-<buildArguments>-E chdir "/media/sf_RDTServer_Vtech/RDTServer/RDTServer/Build/3th_party/jsoncpp-1.6.5/src/lib_json" "/usr/bin/cmake" -P "CMakeFiles/jsoncpp_lib_static.dir/cmake_clean.cmake"</buildArguments>
+<buildArguments>-E chdir "/home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build/3th_party/jsoncpp-1.6.5/src/lib_json" "/usr/bin/cmake" -P "CMakeFiles/jsoncpp_lib_static.dir/cmake_clean.cmake"</buildArguments>
 <buildTarget></buildTarget>
 <stopOnError>true</stopOnError>
 <useDefaultCommand>false</useDefaultCommand>
@@ -487,14 +487,14 @@
 </target>
 <target name="Build" path="[Targets]/[exe] jsontestrunner_exe" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
 <buildCommand>/usr/bin/make</buildCommand>
-<buildArguments>-C "/media/sf_RDTServer_Vtech/RDTServer/RDTServer/Build" -j2</buildArguments>
+<buildArguments>-C "/home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build" -j2</buildArguments>
 <buildTarget>jsontestrunner_exe</buildTarget>
 <stopOnError>true</stopOnError>
 <useDefaultCommand>false</useDefaultCommand>
 </target>
 <target name="Clean" path="[Targets]/[exe] jsontestrunner_exe" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
 <buildCommand>/usr/bin/cmake</buildCommand>
-<buildArguments>-E chdir "/media/sf_RDTServer_Vtech/RDTServer/RDTServer/Build/3th_party/jsoncpp-1.6.5/src/jsontestrunner" "/usr/bin/cmake" -P "CMakeFiles/jsontestrunner_exe.dir/cmake_clean.cmake"</buildArguments>
+<buildArguments>-E chdir "/home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build/3th_party/jsoncpp-1.6.5/src/jsontestrunner" "/usr/bin/cmake" -P "CMakeFiles/jsontestrunner_exe.dir/cmake_clean.cmake"</buildArguments>
 <buildTarget></buildTarget>
 <stopOnError>true</stopOnError>
 <useDefaultCommand>false</useDefaultCommand>
@@ -550,14 +550,14 @@
 </target>
 <target name="Build" path="[Targets]/[exe] jsoncpp_test" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
 <buildCommand>/usr/bin/make</buildCommand>
-<buildArguments>-C "/media/sf_RDTServer_Vtech/RDTServer/RDTServer/Build" -j2</buildArguments>
+<buildArguments>-C "/home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build" -j2</buildArguments>
 <buildTarget>jsoncpp_test</buildTarget>
 <stopOnError>true</stopOnError>
 <useDefaultCommand>false</useDefaultCommand>
 </target>
 <target name="Clean" path="[Targets]/[exe] jsoncpp_test" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
 <buildCommand>/usr/bin/cmake</buildCommand>
-<buildArguments>-E chdir "/media/sf_RDTServer_Vtech/RDTServer/RDTServer/Build/3th_party/jsoncpp-1.6.5/src/test_lib_json" "/usr/bin/cmake" -P "CMakeFiles/jsoncpp_test.dir/cmake_clean.cmake"</buildArguments>
+<buildArguments>-E chdir "/home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build/3th_party/jsoncpp-1.6.5/src/test_lib_json" "/usr/bin/cmake" -P "CMakeFiles/jsoncpp_test.dir/cmake_clean.cmake"</buildArguments>
 <buildTarget></buildTarget>
 <stopOnError>true</stopOnError>
 <useDefaultCommand>false</useDefaultCommand>
@@ -648,14 +648,14 @@
 </target>
 <target name="Build" path="[Targets]/[lib] DeviceAPI" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
 <buildCommand>/usr/bin/make</buildCommand>
-<buildArguments>-C "/media/sf_RDTServer_Vtech/RDTServer/RDTServer/Build" -j2</buildArguments>
+<buildArguments>-C "/home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build" -j2</buildArguments>
 <buildTarget>DeviceAPI</buildTarget>
 <stopOnError>true</stopOnError>
 <useDefaultCommand>false</useDefaultCommand>
 </target>
 <target name="Clean" path="[Targets]/[lib] DeviceAPI" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
 <buildCommand>/usr/bin/cmake</buildCommand>
-<buildArguments>-E chdir "/media/sf_RDTServer_Vtech/RDTServer/RDTServer/Build/DeviceAPI" "/usr/bin/cmake" -P "CMakeFiles/DeviceAPI.dir/cmake_clean.cmake"</buildArguments>
+<buildArguments>-E chdir "/home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build/DeviceAPI" "/usr/bin/cmake" -P "CMakeFiles/DeviceAPI.dir/cmake_clean.cmake"</buildArguments>
 <buildTarget></buildTarget>
 <stopOnError>true</stopOnError>
 <useDefaultCommand>false</useDefaultCommand>
@@ -683,14 +683,14 @@
 </target>
 <target name="Build" path="[Targets]/[lib] DeviceAPI_unity" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
 <buildCommand>/usr/bin/make</buildCommand>
-<buildArguments>-C "/media/sf_RDTServer_Vtech/RDTServer/RDTServer/Build" -j2</buildArguments>
+<buildArguments>-C "/home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build" -j2</buildArguments>
 <buildTarget>DeviceAPI_unity</buildTarget>
 <stopOnError>true</stopOnError>
 <useDefaultCommand>false</useDefaultCommand>
 </target>
 <target name="Clean" path="[Targets]/[lib] DeviceAPI_unity" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
 <buildCommand>/usr/bin/cmake</buildCommand>
-<buildArguments>-E chdir "/media/sf_RDTServer_Vtech/RDTServer/RDTServer/Build/DeviceAPI" "/usr/bin/cmake" -P "CMakeFiles/DeviceAPI_unity.dir/cmake_clean.cmake"</buildArguments>
+<buildArguments>-E chdir "/home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build/DeviceAPI" "/usr/bin/cmake" -P "CMakeFiles/DeviceAPI_unity.dir/cmake_clean.cmake"</buildArguments>
 <buildTarget></buildTarget>
 <stopOnError>true</stopOnError>
 <useDefaultCommand>false</useDefaultCommand>
@@ -1019,14 +1019,14 @@
 </target>
 <target name="Build" path="[Targets]/[exe] TUTKDevice" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
 <buildCommand>/usr/bin/make</buildCommand>
-<buildArguments>-C "/media/sf_RDTServer_Vtech/RDTServer/RDTServer/Build" -j2</buildArguments>
+<buildArguments>-C "/home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build" -j2</buildArguments>
 <buildTarget>TUTKDevice</buildTarget>
 <stopOnError>true</stopOnError>
 <useDefaultCommand>false</useDefaultCommand>
 </target>
 <target name="Clean" path="[Targets]/[exe] TUTKDevice" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
 <buildCommand>/usr/bin/cmake</buildCommand>
-<buildArguments>-E chdir "/media/sf_RDTServer_Vtech/RDTServer/RDTServer/Build/Targate/TUTKDevice" "/usr/bin/cmake" -P "CMakeFiles/TUTKDevice.dir/cmake_clean.cmake"</buildArguments>
+<buildArguments>-E chdir "/home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build/Targate/TUTKDevice" "/usr/bin/cmake" -P "CMakeFiles/TUTKDevice.dir/cmake_clean.cmake"</buildArguments>
 <buildTarget></buildTarget>
 <stopOnError>true</stopOnError>
 <useDefaultCommand>false</useDefaultCommand>
@@ -1054,14 +1054,14 @@
 </target>
 <target name="Build" path="[Targets]/[exe] TUTKDevice_unity" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
 <buildCommand>/usr/bin/make</buildCommand>
-<buildArguments>-C "/media/sf_RDTServer_Vtech/RDTServer/RDTServer/Build" -j2</buildArguments>
+<buildArguments>-C "/home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build" -j2</buildArguments>
 <buildTarget>TUTKDevice_unity</buildTarget>
 <stopOnError>true</stopOnError>
 <useDefaultCommand>false</useDefaultCommand>
 </target>
 <target name="Clean" path="[Targets]/[exe] TUTKDevice_unity" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
 <buildCommand>/usr/bin/cmake</buildCommand>
-<buildArguments>-E chdir "/media/sf_RDTServer_Vtech/RDTServer/RDTServer/Build/Targate/TUTKDevice" "/usr/bin/cmake" -P "CMakeFiles/TUTKDevice_unity.dir/cmake_clean.cmake"</buildArguments>
+<buildArguments>-E chdir "/home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build/Targate/TUTKDevice" "/usr/bin/cmake" -P "CMakeFiles/TUTKDevice_unity.dir/cmake_clean.cmake"</buildArguments>
 <buildTarget></buildTarget>
 <stopOnError>true</stopOnError>
 <useDefaultCommand>false</useDefaultCommand>
@@ -1432,14 +1432,14 @@
 </target>
 <target name="Build" path="[Targets]/[exe] VtechDevice" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
 <buildCommand>/usr/bin/make</buildCommand>
-<buildArguments>-C "/media/sf_RDTServer_Vtech/RDTServer/RDTServer/Build" -j2</buildArguments>
+<buildArguments>-C "/home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build" -j2</buildArguments>
 <buildTarget>VtechDevice</buildTarget>
 <stopOnError>true</stopOnError>
 <useDefaultCommand>false</useDefaultCommand>
 </target>
 <target name="Clean" path="[Targets]/[exe] VtechDevice" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
 <buildCommand>/usr/bin/cmake</buildCommand>
-<buildArguments>-E chdir "/media/sf_RDTServer_Vtech/RDTServer/RDTServer/Build/Targate/VtechDevice" "/usr/bin/cmake" -P "CMakeFiles/VtechDevice.dir/cmake_clean.cmake"</buildArguments>
+<buildArguments>-E chdir "/home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build/Targate/VtechDevice" "/usr/bin/cmake" -P "CMakeFiles/VtechDevice.dir/cmake_clean.cmake"</buildArguments>
 <buildTarget></buildTarget>
 <stopOnError>true</stopOnError>
 <useDefaultCommand>false</useDefaultCommand>
@@ -1467,14 +1467,14 @@
 </target>
 <target name="Build" path="[Targets]/[exe] VtechDevice_unity" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
 <buildCommand>/usr/bin/make</buildCommand>
-<buildArguments>-C "/media/sf_RDTServer_Vtech/RDTServer/RDTServer/Build" -j2</buildArguments>
+<buildArguments>-C "/home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build" -j2</buildArguments>
 <buildTarget>VtechDevice_unity</buildTarget>
 <stopOnError>true</stopOnError>
 <useDefaultCommand>false</useDefaultCommand>
 </target>
 <target name="Clean" path="[Targets]/[exe] VtechDevice_unity" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
 <buildCommand>/usr/bin/cmake</buildCommand>
-<buildArguments>-E chdir "/media/sf_RDTServer_Vtech/RDTServer/RDTServer/Build/Targate/VtechDevice" "/usr/bin/cmake" -P "CMakeFiles/VtechDevice_unity.dir/cmake_clean.cmake"</buildArguments>
+<buildArguments>-E chdir "/home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build/Targate/VtechDevice" "/usr/bin/cmake" -P "CMakeFiles/VtechDevice_unity.dir/cmake_clean.cmake"</buildArguments>
 <buildTarget></buildTarget>
 <stopOnError>true</stopOnError>
 <useDefaultCommand>false</useDefaultCommand>

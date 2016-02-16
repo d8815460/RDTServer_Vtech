@@ -1,0 +1,2 @@
+/usr/bin/ar cr libDeviceAPI.a  CMakeFiles/DeviceAPI_unity.dir/cotire/DeviceAPI_CXX_unity.cxx.o
+/usr/bin/ranlib libDeviceAPI.a
