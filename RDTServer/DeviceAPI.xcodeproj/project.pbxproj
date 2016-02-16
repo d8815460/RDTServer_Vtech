@@ -162,6 +162,7 @@
 		A26FB6E21C63600A007E3648 /* json_value.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = json_value.cpp; path = "RDTServer/3th_party/jsoncpp-1.6.5/src/lib_json/json_value.cpp"; sourceTree = "<group>"; };
 		A26FB6E31C63600A007E3648 /* json_writer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = json_writer.cpp; path = "RDTServer/3th_party/jsoncpp-1.6.5/src/lib_json/json_writer.cpp"; sourceTree = "<group>"; };
 		A2913D911C635CFF00AF81AF /* libDeviceAPI.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libDeviceAPI.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		A2AF26A01C73038B00F30460 /* CMakeLists.txt */ = {isa = PBXFileReference; lastKnownFileType = text; name = CMakeLists.txt; path = RDTServer/Targate/VtechDevice/CMakeLists.txt; sourceTree = "<group>"; };
 		A2B03D201C6444F8002CFA38 /* AccessoryTypeEnum.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = AccessoryTypeEnum.hpp; path = RDTServer/DeviceAPI/AccessoryTypeEnum.hpp; sourceTree = SOURCE_ROOT; };
 		A2BED36F1C719B5000AF9D4E /* CMakeLists.txt */ = {isa = PBXFileReference; lastKnownFileType = text; name = CMakeLists.txt; path = RDTServer/CMakeLists.txt; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -219,6 +220,7 @@
 			children = (
 				A2BED36F1C719B5000AF9D4E /* CMakeLists.txt */,
 				A26FB68F1C635ED2007E3648 /* DeviceAPI */,
+				A2AF26A11C73039A00F30460 /* VtechDevice */,
 				A26FB6921C635F02007E3648 /* runClient.sh */,
 				A26FB6931C635F02007E3648 /* runServer.sh */,
 				A26FB6941C635F02007E3648 /* CMakeLists.txt */,
@@ -383,6 +385,14 @@
 				A26FB5E91C635DF7007E3648 /* Command */,
 			);
 			path = DeviceAPI;
+			sourceTree = "<group>";
+		};
+		A2AF26A11C73039A00F30460 /* VtechDevice */ = {
+			isa = PBXGroup;
+			children = (
+				A2AF26A01C73038B00F30460 /* CMakeLists.txt */,
+			);
+			name = VtechDevice;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
