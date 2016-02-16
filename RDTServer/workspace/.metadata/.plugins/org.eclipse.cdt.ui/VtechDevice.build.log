@@ -1,6 +1,0 @@
-18:26:04 **** Incremental Build of configuration Debug for project VtechDevice ****
-ruby /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/DeviceAPI/cdtgch.rb all 
-make: *** No rule to make target `../src/stdafx.h', needed by `../src/stdafx.h.gch'.  Stop.
-
-18:26:04 Build Finished (took 215ms)
-
