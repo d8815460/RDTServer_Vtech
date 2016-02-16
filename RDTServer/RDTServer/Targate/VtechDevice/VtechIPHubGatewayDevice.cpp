@@ -8,6 +8,9 @@
 
 #include "VtechIPHubGatewayDevice.hpp"
 #include <map>
+#include <iostream>
+#include <cstring>
+//#include <unistd.h>
 #include "Common.hpp"
 #include "Utility.hpp"
 #include "AccessoryTypeEnum.hpp"
@@ -23,6 +26,14 @@
 #include "VtechLightBulbDevice.hpp"
 #include "VtechWallSwitchDevice.hpp"
 #include "VtechVirtualGroupDevice.hpp"
+
+#include "unixclientstream.hpp"
+#include "exception.hpp"
+
+using libsocket::unix_stream_client; // need libsocket++
+
+string socket_path = "/tmp/unixsocket";
+unix_stream_client sock(socket_path); // need libsocket++
 
 VtechIPHubGatewayDevice::~VtechIPHubGatewayDevice()
 {
@@ -62,6 +73,9 @@ void VtechIPHubGatewayDevice::reset()
     VtechGarageDoorDevice::generatorDataInfoList(m_pCommand);
     
     //    VtechVirtualGroupDevice::generatorDataInfoList(m_nMaxAID++, &m_DataInfoList, &m_TypeSet);
+    
+    pthread_t pThreadsocketInput;
+    pthread_create(&pThreadsocketInput, NULL, &VtechIPHubGatewayDevice::socketInput, (void*)this);
 }
 
 #pragma mark - Device
@@ -86,8 +100,58 @@ void VtechIPHubGatewayDevice::onCommandHardwardNotify(CommandHardwardNotifyData*
 void VtechIPHubGatewayDevice::onCommandHardwardRecvProductName(CommandHardwardRecvProductName* pCommandHardwardRecvProductName)
 {
     LOGD("onCommandHardwardRecvProductName: pCommandHardwardRecvProductName:%s", pCommandHardwardRecvProductName->productName.c_str());
-    
     pCommandHardwardRecvProductName->productName = "VtechIPHubGatewayDevice";
+    LOGD("pCommandHardwardRecvProductName->productName:%s", pCommandHardwardRecvProductName->productName.c_str());
+    
+//    const char* productName = pCommandHardwardRecvProductName->productName.c_str();
+//    sendToGateway((char*)productName, strlen(productName));
+    
+    Json::Value root;
+    root["serno"] = "222222";
+    root["operation"] = "read";
+    root["target"] = "/accessory/0/product_name/";
+    
+    const char* json = root.toStyledString().c_str();
+    LOGD("json:%s", json);
+    sendToGateway((char*)json, (int) strlen(json));
+}
+
+#pragma mark - Thread
+
+void* VtechIPHubGatewayDevice::socketInput(void *arg)
+{
+    while(true)
+    {
+        unsigned char buffer[BUFFER_SIZE];
+        memset(buffer, 0, BUFFER_SIZE);
+        
+        try {
+            sock.rcv(buffer,BUFFER_SIZE-1);
+            LOGD("we found the received payload = %s \n",buffer);
+        }
+        catch (const libsocket::socket_exception& exc)
+        {
+            std::cerr << exc.mesg;
+        }
+    }
+    
+    return NULL;
+}
+
+#pragma mark - Method
+
+void VtechIPHubGatewayDevice::sendToGateway(char* payload, int length)
+{
+    LOGD("Vtech call to send to gateway");
+    
+    try
+    {
+        sock.snd(payload,length-2);
+    }
+    catch (const libsocket::socket_exception& exc)
+    {
+        std::cerr << exc.mesg;
+    }
 }
 
 #pragma mark - CommandEvent

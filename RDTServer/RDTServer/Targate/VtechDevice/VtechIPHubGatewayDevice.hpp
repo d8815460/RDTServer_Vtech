@@ -38,6 +38,12 @@ protected:
     virtual void onCommandRecvCommand28(FunctionStatus* pFunctionStatus);
     virtual void onCommandRecvFullCommand28(int channelID, vector<FunctionInfo*>* pDataInfoList);
     
+#pragma mark - Thread
+    static void* socketInput(void *arg);
+    
+#pragma mark - Method
+    void sendToGateway(char* payload, int length);
+    
 private:
 };
 

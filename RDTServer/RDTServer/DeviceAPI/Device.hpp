@@ -51,6 +51,7 @@ public:
 #pragma mark - CommandHardwardEvent
     virtual void onCommandHardwardNotify(CommandHardwardNotifyData* pCommandHardwardNotifyData);
     virtual void onCommandHardwardRecvProductName(CommandHardwardRecvProductName* pCommandHardwardRecvProductName);
+//    virtual void onCommandHardwardRecvJson(const Json::Value& inJsonObject, Json::Value& outJsonObject);
     
 // 成員變數
 protected:

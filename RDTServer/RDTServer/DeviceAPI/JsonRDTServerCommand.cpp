@@ -110,6 +110,8 @@ void* JsonRDTServerCommand::threadInput(void *arg)
 
 void JsonRDTServerCommand::processCommandTarget(const Json::Value& inJsonObject, Json::Value& outJsonObject)
 {
+//    m_pCommandHardwardEvent->onCommandHardwardRecvJson(inJsonObject, outJsonObject);
+    
     string target = inJsonObject["target"].asString();
     
     if (target.find("product_name") != std::string::npos) {

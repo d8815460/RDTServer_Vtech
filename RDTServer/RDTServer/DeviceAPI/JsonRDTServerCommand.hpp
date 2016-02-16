@@ -40,7 +40,7 @@ class JsonRDTServerCommand : public JsonRDTCommand
 public:
     JsonRDTServerCommand(CommandEvent* pCommandEvent, CommandHardwardEvent* pCommandHardwardEvent, Connect* pConnect, CommandData* pCommandData = NULL);
     
-public:    
+public:
 #pragma mark - Report
     void sendReportWithCommand30(int channelID, vector<FunctionInfo*>* pFunctionInfoList);
     void sendReportWithCommand32(int channelID, int operations, int amount, int aids[], unsigned int types[], int statuses[]);
