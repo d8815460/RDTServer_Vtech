@@ -26,6 +26,7 @@ SET(CMAKE_MAKEFILE_DEPENDS
   "../DeviceAPI/CMakeLists.txt"
   "../Targate/TUTKDevice/CMakeLists.txt"
   "../Targate/VtechDevice/CMakeLists.txt"
+  "../Targate/VtechHardwardDevice/CMakeLists.txt"
   "CMakeFiles/2.8.12.2/CMakeCCompiler.cmake"
   "CMakeFiles/2.8.12.2/CMakeCXXCompiler.cmake"
   "CMakeFiles/2.8.12.2/CMakeSystem.cmake"
@@ -77,6 +78,7 @@ SET(CMAKE_MAKEFILE_PRODUCTS
   "DeviceAPI/CMakeFiles/CMakeDirectoryInformation.cmake"
   "Targate/TUTKDevice/CMakeFiles/CMakeDirectoryInformation.cmake"
   "Targate/VtechDevice/CMakeFiles/CMakeDirectoryInformation.cmake"
+  "Targate/VtechHardwardDevice/CMakeFiles/CMakeDirectoryInformation.cmake"
   )
 
 # Dependency information for all targets:
@@ -98,4 +100,6 @@ SET(CMAKE_DEPEND_INFO_FILES
   "Targate/VtechDevice/CMakeFiles/VtechDevice.dir/DependInfo.cmake"
   "Targate/VtechDevice/CMakeFiles/VtechDevice_pch.dir/DependInfo.cmake"
   "Targate/VtechDevice/CMakeFiles/VtechDevice_unity.dir/DependInfo.cmake"
+  "Targate/VtechHardwardDevice/CMakeFiles/VtechHardwardDevice.dir/DependInfo.cmake"
+  "Targate/VtechHardwardDevice/CMakeFiles/VtechHardwardDevice_unity.dir/DependInfo.cmake"
   )

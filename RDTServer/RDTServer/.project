@@ -30,6 +30,11 @@
 			<location>/home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Targate/VtechDevice</location>
 		</link>
 		<link>
+			<name>[Subprojects]/VtechHardwardDevice</name>
+			<type>2</type>
+			<location>/home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Targate/VtechHardwardDevice</location>
+		</link>
+		<link>
 			<name>[Subprojects]/jsoncpp</name>
 			<type>2</type>
 			<location>/home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/3th_party/jsoncpp-1.6.5</location>

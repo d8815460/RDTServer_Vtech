@@ -129,6 +129,11 @@
 			<location>/home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Targate/VtechDevice</location>
 		</link>
 		<link>
+			<name>[Subprojects]/VtechHardwardDevice</name>
+			<type>2</type>
+			<location>/home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Targate/VtechHardwardDevice</location>
+		</link>
+		<link>
 			<name>[Subprojects]/jsoncpp</name>
 			<type>2</type>
 			<location>/home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/3th_party/jsoncpp-1.6.5</location>
@@ -694,147 +699,247 @@
 			<locationURI>virtual:/virtual</locationURI>
 		</link>
 		<link>
-			<name>[Targets]/[exe] VtechDevice</name>
+			<name>[Targets]/[lib] VtechDevice</name>
 			<type>2</type>
 			<locationURI>virtual:/virtual</locationURI>
 		</link>
 		<link>
-			<name>[Targets]/[exe] VtechDevice/</name>
+			<name>[Targets]/[lib] VtechDevice/</name>
 			<type>2</type>
 			<locationURI>virtual:/virtual</locationURI>
 		</link>
 		<link>
-			<name>[Targets]/[exe] VtechDevice/Source Files</name>
+			<name>[Targets]/[lib] VtechDevice/Source Files</name>
 			<type>2</type>
 			<locationURI>virtual:/virtual</locationURI>
 		</link>
 		<link>
-			<name>[Targets]/[exe] VtechDevice/Source Files/main.cpp</name>
+			<name>[Targets]/[lib] VtechDevice/Source Files/main.cpp</name>
 			<type>1</type>
 			<location>/home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Targate/VtechDevice/main.cpp</location>
 		</link>
 		<link>
-			<name>[Targets]/[exe] VtechDevice/Source Files/VtechGarageDoorDevice.cpp</name>
+			<name>[Targets]/[lib] VtechDevice/Source Files/VtechGarageDoorDevice.cpp</name>
 			<type>1</type>
 			<location>/home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Targate/VtechDevice/VtechGarageDoorDevice.cpp</location>
 		</link>
 		<link>
-			<name>[Targets]/[exe] VtechDevice/Source Files/VtechIPHubGatewayDevice.cpp</name>
+			<name>[Targets]/[lib] VtechDevice/Source Files/VtechIPHubGatewayDevice.cpp</name>
 			<type>1</type>
 			<location>/home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Targate/VtechDevice/VtechIPHubGatewayDevice.cpp</location>
 		</link>
 		<link>
-			<name>[Targets]/[exe] VtechDevice/Source Files/VtechLightBulbDevice.cpp</name>
+			<name>[Targets]/[lib] VtechDevice/Source Files/VtechLightBulbDevice.cpp</name>
 			<type>1</type>
 			<location>/home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Targate/VtechDevice/VtechLightBulbDevice.cpp</location>
 		</link>
 		<link>
-			<name>[Targets]/[exe] VtechDevice/Source Files/VtechMotionSensorDevice.cpp</name>
+			<name>[Targets]/[lib] VtechDevice/Source Files/VtechMotionSensorDevice.cpp</name>
 			<type>1</type>
 			<location>/home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Targate/VtechDevice/VtechMotionSensorDevice.cpp</location>
 		</link>
 		<link>
-			<name>[Targets]/[exe] VtechDevice/Source Files/VtechOpenClosedDevice.cpp</name>
+			<name>[Targets]/[lib] VtechDevice/Source Files/VtechOpenClosedDevice.cpp</name>
 			<type>1</type>
 			<location>/home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Targate/VtechDevice/VtechOpenClosedDevice.cpp</location>
 		</link>
 		<link>
-			<name>[Targets]/[exe] VtechDevice/Source Files/VtechVirtualGroupDevice.cpp</name>
+			<name>[Targets]/[lib] VtechDevice/Source Files/VtechVirtualGroupDevice.cpp</name>
 			<type>1</type>
 			<location>/home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Targate/VtechDevice/VtechVirtualGroupDevice.cpp</location>
 		</link>
 		<link>
-			<name>[Targets]/[exe] VtechDevice/Source Files/VtechWallSwitchDevice.cpp</name>
+			<name>[Targets]/[lib] VtechDevice/Source Files/VtechWallSwitchDevice.cpp</name>
 			<type>1</type>
 			<location>/home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Targate/VtechDevice/VtechWallSwitchDevice.cpp</location>
 		</link>
 		<link>
-			<name>[Targets]/[exe] VtechDevice/Header Files</name>
+			<name>[Targets]/[lib] VtechDevice/Header Files</name>
 			<type>2</type>
 			<locationURI>virtual:/virtual</locationURI>
 		</link>
 		<link>
-			<name>[Targets]/[exe] VtechDevice/CMake Rules</name>
+			<name>[Targets]/[lib] VtechDevice/CMake Rules</name>
 			<type>2</type>
 			<locationURI>virtual:/virtual</locationURI>
 		</link>
 		<link>
-			<name>[Targets]/[exe] VtechDevice/CMake Rules/VtechDevice_CXX_prefix.hxx.gch.rule</name>
+			<name>[Targets]/[lib] VtechDevice/CMake Rules/VtechDevice_CXX_prefix.hxx.gch.rule</name>
 			<type>1</type>
 			<location>/home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build/Targate/VtechDevice/cotire/VtechDevice_CXX_prefix.hxx.gch.rule</location>
 		</link>
 		<link>
-			<name>[Targets]/[exe] VtechDevice/CMake Rules/VtechDevice_CXX_prefix.hxx.rule</name>
+			<name>[Targets]/[lib] VtechDevice/CMake Rules/VtechDevice_CXX_prefix.hxx.rule</name>
 			<type>1</type>
 			<location>/home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build/Targate/VtechDevice/cotire/VtechDevice_CXX_prefix.hxx.rule</location>
 		</link>
 		<link>
-			<name>[Targets]/[exe] VtechDevice/CMake Rules/VtechDevice_CXX_prefix.cxx.rule</name>
+			<name>[Targets]/[lib] VtechDevice/CMake Rules/VtechDevice_CXX_prefix.cxx.rule</name>
 			<type>1</type>
 			<location>/home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build/Targate/VtechDevice/cotire/VtechDevice_CXX_prefix.cxx.rule</location>
 		</link>
 		<link>
-			<name>[Targets]/[exe] VtechDevice/Resources</name>
+			<name>[Targets]/[lib] VtechDevice/Resources</name>
 			<type>2</type>
 			<locationURI>virtual:/virtual</locationURI>
 		</link>
 		<link>
-			<name>[Targets]/[exe] VtechDevice/Object Files</name>
+			<name>[Targets]/[lib] VtechDevice/Object Files</name>
 			<type>2</type>
 			<locationURI>virtual:/virtual</locationURI>
 		</link>
 		<link>
-			<name>[Targets]/[exe] VtechDevice_unity</name>
+			<name>[Targets]/[lib] VtechDevice_unity</name>
 			<type>2</type>
 			<locationURI>virtual:/virtual</locationURI>
 		</link>
 		<link>
-			<name>[Targets]/[exe] VtechDevice_unity/</name>
+			<name>[Targets]/[lib] VtechDevice_unity/</name>
 			<type>2</type>
 			<locationURI>virtual:/virtual</locationURI>
 		</link>
 		<link>
-			<name>[Targets]/[exe] VtechDevice_unity/Source Files</name>
+			<name>[Targets]/[lib] VtechDevice_unity/Source Files</name>
 			<type>2</type>
 			<locationURI>virtual:/virtual</locationURI>
 		</link>
 		<link>
-			<name>[Targets]/[exe] VtechDevice_unity/Source Files/VtechDevice_CXX_unity.cxx</name>
+			<name>[Targets]/[lib] VtechDevice_unity/Source Files/VtechDevice_CXX_unity.cxx</name>
 			<type>1</type>
 			<location>/home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build/Targate/VtechDevice/cotire/VtechDevice_CXX_unity.cxx</location>
 		</link>
 		<link>
-			<name>[Targets]/[exe] VtechDevice_unity/Header Files</name>
+			<name>[Targets]/[lib] VtechDevice_unity/Header Files</name>
 			<type>2</type>
 			<locationURI>virtual:/virtual</locationURI>
 		</link>
 		<link>
-			<name>[Targets]/[exe] VtechDevice_unity/CMake Rules</name>
+			<name>[Targets]/[lib] VtechDevice_unity/CMake Rules</name>
 			<type>2</type>
 			<locationURI>virtual:/virtual</locationURI>
 		</link>
 		<link>
-			<name>[Targets]/[exe] VtechDevice_unity/CMake Rules/VtechDevice_CXX_prefix.hxx.rule</name>
+			<name>[Targets]/[lib] VtechDevice_unity/CMake Rules/VtechDevice_CXX_prefix.hxx.rule</name>
 			<type>1</type>
 			<location>/home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build/Targate/VtechDevice/cotire/VtechDevice_CXX_prefix.hxx.rule</location>
 		</link>
 		<link>
-			<name>[Targets]/[exe] VtechDevice_unity/CMake Rules/VtechDevice_CXX_unity.cxx.rule</name>
+			<name>[Targets]/[lib] VtechDevice_unity/CMake Rules/VtechDevice_CXX_unity.cxx.rule</name>
 			<type>1</type>
 			<location>/home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build/Targate/VtechDevice/cotire/VtechDevice_CXX_unity.cxx.rule</location>
 		</link>
 		<link>
-			<name>[Targets]/[exe] VtechDevice_unity/CMake Rules/VtechDevice_CXX_prefix.cxx.rule</name>
+			<name>[Targets]/[lib] VtechDevice_unity/CMake Rules/VtechDevice_CXX_prefix.cxx.rule</name>
 			<type>1</type>
 			<location>/home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build/Targate/VtechDevice/cotire/VtechDevice_CXX_prefix.cxx.rule</location>
 		</link>
 		<link>
-			<name>[Targets]/[exe] VtechDevice_unity/Resources</name>
+			<name>[Targets]/[lib] VtechDevice_unity/Resources</name>
 			<type>2</type>
 			<locationURI>virtual:/virtual</locationURI>
 		</link>
 		<link>
-			<name>[Targets]/[exe] VtechDevice_unity/Object Files</name>
+			<name>[Targets]/[lib] VtechDevice_unity/Object Files</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[exe] VtechHardwardDevice</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[exe] VtechHardwardDevice/</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[exe] VtechHardwardDevice/Source Files</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[exe] VtechHardwardDevice/Source Files/main.cpp</name>
+			<type>1</type>
+			<location>/home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Targate/VtechHardwardDevice/main.cpp</location>
+		</link>
+		<link>
+			<name>[Targets]/[exe] VtechHardwardDevice/Source Files/VtechIPHubGatewayHardwardDevice.cpp</name>
+			<type>1</type>
+			<location>/home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Targate/VtechHardwardDevice/VtechIPHubGatewayHardwardDevice.cpp</location>
+		</link>
+		<link>
+			<name>[Targets]/[exe] VtechHardwardDevice/Header Files</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[exe] VtechHardwardDevice/CMake Rules</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[exe] VtechHardwardDevice/CMake Rules/VtechHardwardDevice_CXX_prefix.hxx.rule</name>
+			<type>1</type>
+			<location>/home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build/Targate/VtechHardwardDevice/cotire/VtechHardwardDevice_CXX_prefix.hxx.rule</location>
+		</link>
+		<link>
+			<name>[Targets]/[exe] VtechHardwardDevice/CMake Rules/VtechHardwardDevice_CXX_prefix.cxx.rule</name>
+			<type>1</type>
+			<location>/home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build/Targate/VtechHardwardDevice/cotire/VtechHardwardDevice_CXX_prefix.cxx.rule</location>
+		</link>
+		<link>
+			<name>[Targets]/[exe] VtechHardwardDevice/Resources</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[exe] VtechHardwardDevice/Object Files</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[exe] VtechHardwardDevice_unity</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[exe] VtechHardwardDevice_unity/</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[exe] VtechHardwardDevice_unity/Source Files</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[exe] VtechHardwardDevice_unity/Source Files/VtechHardwardDevice_CXX_unity.cxx</name>
+			<type>1</type>
+			<location>/home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build/Targate/VtechHardwardDevice/cotire/VtechHardwardDevice_CXX_unity.cxx</location>
+		</link>
+		<link>
+			<name>[Targets]/[exe] VtechHardwardDevice_unity/Header Files</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[exe] VtechHardwardDevice_unity/CMake Rules</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[exe] VtechHardwardDevice_unity/CMake Rules/VtechHardwardDevice_CXX_unity.cxx.rule</name>
+			<type>1</type>
+			<location>/home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build/Targate/VtechHardwardDevice/cotire/VtechHardwardDevice_CXX_unity.cxx.rule</location>
+		</link>
+		<link>
+			<name>[Targets]/[exe] VtechHardwardDevice_unity/Resources</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Targets]/[exe] VtechHardwardDevice_unity/Object Files</name>
 			<type>2</type>
 			<locationURI>virtual:/virtual</locationURI>
 		</link>

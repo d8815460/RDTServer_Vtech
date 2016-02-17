@@ -144,6 +144,8 @@ stdio.h
 Device.hpp
 ../Targate/TUTKDevice/../../DeviceAPI/Device.hpp
 
+/home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/DeviceAPI/PrefixHeader.pch
+
 /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Targate/TUTKDevice/Body.cpp
 Body.hpp
 /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Targate/TUTKDevice/Body.hpp
@@ -467,4 +469,20 @@ Device.hpp
 /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Targate/TUTKDevice/Device.hpp
 Body.hpp
 /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Targate/TUTKDevice/Body.hpp
+
+/home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build/DeviceAPI/cotire/DeviceAPI_CXX_prefix.cxx
+/home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/DeviceAPI/PrefixHeader.pch
+-
+
+/home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build/DeviceAPI/cotire/DeviceAPI_CXX_prefix.hxx
+/home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build/DeviceAPI/cotire/DeviceAPI_CXX_prefix.cxx
+-
+
+/home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build/Targate/TUTKDevice/cotire/TUTKDevice_CXX_prefix.cxx
+/home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build/DeviceAPI/cotire/DeviceAPI_CXX_prefix.hxx
+-
+
+/home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build/Targate/TUTKDevice/cotire/TUTKDevice_CXX_prefix.hxx
+/home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build/Targate/TUTKDevice/cotire/TUTKDevice_CXX_prefix.cxx
+-
 

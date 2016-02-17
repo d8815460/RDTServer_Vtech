@@ -264,6 +264,7 @@
 <pathentry include="/home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Targate/TUTKDevice" kind="inc" path="" system="true"/>
 <pathentry include="/home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Targate/VtechDevice" kind="inc" path="" system="true"/>
 <pathentry include="/home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/3th_party/unix_socket" kind="inc" path="" system="true"/>
+<pathentry include="/home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Targate/VtechHardwardDevice" kind="inc" path="" system="true"/>
 <pathentry include="/usr/lib/gcc/i686-linux-gnu/4.8/include" kind="inc" path="" system="true"/>
 <pathentry include="/usr/local/include" kind="inc" path="" system="true"/>
 <pathentry include="/usr/lib/gcc/i686-linux-gnu/4.8/include-fixed" kind="inc" path="" system="true"/>
@@ -1416,28 +1417,28 @@
 <stopOnError>true</stopOnError>
 <useDefaultCommand>false</useDefaultCommand>
 </target>
-<target name="[exe] VtechDevice" path="Targate/VtechDevice" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<target name="[lib] VtechDevice" path="Targate/VtechDevice" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
 <buildCommand>/usr/bin/make</buildCommand>
 <buildArguments>-j2</buildArguments>
 <buildTarget>VtechDevice</buildTarget>
 <stopOnError>true</stopOnError>
 <useDefaultCommand>false</useDefaultCommand>
 </target>
-<target name="[exe] VtechDevice/fast" path="Targate/VtechDevice" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<target name="[lib] VtechDevice/fast" path="Targate/VtechDevice" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
 <buildCommand>/usr/bin/make</buildCommand>
 <buildArguments>-j2</buildArguments>
 <buildTarget>VtechDevice/fast</buildTarget>
 <stopOnError>true</stopOnError>
 <useDefaultCommand>false</useDefaultCommand>
 </target>
-<target name="Build" path="[Targets]/[exe] VtechDevice" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<target name="Build" path="[Targets]/[lib] VtechDevice" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
 <buildCommand>/usr/bin/make</buildCommand>
 <buildArguments>-C "/home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build" -j2</buildArguments>
 <buildTarget>VtechDevice</buildTarget>
 <stopOnError>true</stopOnError>
 <useDefaultCommand>false</useDefaultCommand>
 </target>
-<target name="Clean" path="[Targets]/[exe] VtechDevice" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<target name="Clean" path="[Targets]/[lib] VtechDevice" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
 <buildCommand>/usr/bin/cmake</buildCommand>
 <buildArguments>-E chdir "/home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build/Targate/VtechDevice" "/usr/bin/cmake" -P "CMakeFiles/VtechDevice.dir/cmake_clean.cmake"</buildArguments>
 <buildTarget></buildTarget>
@@ -1451,28 +1452,28 @@
 <stopOnError>true</stopOnError>
 <useDefaultCommand>false</useDefaultCommand>
 </target>
-<target name="[exe] VtechDevice_unity" path="Targate/VtechDevice" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<target name="[lib] VtechDevice_unity" path="Targate/VtechDevice" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
 <buildCommand>/usr/bin/make</buildCommand>
 <buildArguments>-j2</buildArguments>
 <buildTarget>VtechDevice_unity</buildTarget>
 <stopOnError>true</stopOnError>
 <useDefaultCommand>false</useDefaultCommand>
 </target>
-<target name="[exe] VtechDevice_unity/fast" path="Targate/VtechDevice" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<target name="[lib] VtechDevice_unity/fast" path="Targate/VtechDevice" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
 <buildCommand>/usr/bin/make</buildCommand>
 <buildArguments>-j2</buildArguments>
 <buildTarget>VtechDevice_unity/fast</buildTarget>
 <stopOnError>true</stopOnError>
 <useDefaultCommand>false</useDefaultCommand>
 </target>
-<target name="Build" path="[Targets]/[exe] VtechDevice_unity" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<target name="Build" path="[Targets]/[lib] VtechDevice_unity" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
 <buildCommand>/usr/bin/make</buildCommand>
 <buildArguments>-C "/home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build" -j2</buildArguments>
 <buildTarget>VtechDevice_unity</buildTarget>
 <stopOnError>true</stopOnError>
 <useDefaultCommand>false</useDefaultCommand>
 </target>
-<target name="Clean" path="[Targets]/[exe] VtechDevice_unity" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<target name="Clean" path="[Targets]/[lib] VtechDevice_unity" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
 <buildCommand>/usr/bin/cmake</buildCommand>
 <buildArguments>-E chdir "/home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build/Targate/VtechDevice" "/usr/bin/cmake" -P "CMakeFiles/VtechDevice_unity.dir/cmake_clean.cmake"</buildArguments>
 <buildTarget></buildTarget>
@@ -1676,6 +1677,139 @@
 <useDefaultCommand>false</useDefaultCommand>
 </target>
 <target name="[to asm] main.cpp.s" path="Targate/VtechDevice" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>/usr/bin/make</buildCommand>
+<buildArguments>-j2</buildArguments>
+<buildTarget>main.cpp.s</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="[exe] VtechHardwardDevice" path="Targate/VtechHardwardDevice" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>/usr/bin/make</buildCommand>
+<buildArguments>-j2</buildArguments>
+<buildTarget>VtechHardwardDevice</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="[exe] VtechHardwardDevice/fast" path="Targate/VtechHardwardDevice" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>/usr/bin/make</buildCommand>
+<buildArguments>-j2</buildArguments>
+<buildTarget>VtechHardwardDevice/fast</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="Build" path="[Targets]/[exe] VtechHardwardDevice" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>/usr/bin/make</buildCommand>
+<buildArguments>-C "/home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build" -j2</buildArguments>
+<buildTarget>VtechHardwardDevice</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="Clean" path="[Targets]/[exe] VtechHardwardDevice" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>/usr/bin/cmake</buildCommand>
+<buildArguments>-E chdir "/home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build/Targate/VtechHardwardDevice" "/usr/bin/cmake" -P "CMakeFiles/VtechHardwardDevice.dir/cmake_clean.cmake"</buildArguments>
+<buildTarget></buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="[exe] VtechHardwardDevice_unity" path="Targate/VtechHardwardDevice" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>/usr/bin/make</buildCommand>
+<buildArguments>-j2</buildArguments>
+<buildTarget>VtechHardwardDevice_unity</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="[exe] VtechHardwardDevice_unity/fast" path="Targate/VtechHardwardDevice" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>/usr/bin/make</buildCommand>
+<buildArguments>-j2</buildArguments>
+<buildTarget>VtechHardwardDevice_unity/fast</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="Build" path="[Targets]/[exe] VtechHardwardDevice_unity" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>/usr/bin/make</buildCommand>
+<buildArguments>-C "/home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build" -j2</buildArguments>
+<buildTarget>VtechHardwardDevice_unity</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="Clean" path="[Targets]/[exe] VtechHardwardDevice_unity" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>/usr/bin/cmake</buildCommand>
+<buildArguments>-E chdir "/home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build/Targate/VtechHardwardDevice" "/usr/bin/cmake" -P "CMakeFiles/VtechHardwardDevice_unity.dir/cmake_clean.cmake"</buildArguments>
+<buildTarget></buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name=": all" path="Targate/VtechHardwardDevice" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>/usr/bin/make</buildCommand>
+<buildArguments>-j2</buildArguments>
+<buildTarget>all</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name=": clean" path="Targate/VtechHardwardDevice" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>/usr/bin/make</buildCommand>
+<buildArguments>-j2</buildArguments>
+<buildTarget>clean</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="[obj] VtechIPHubGatewayHardwardDevice.cpp.o" path="Targate/VtechHardwardDevice" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>/usr/bin/make</buildCommand>
+<buildArguments>-j2</buildArguments>
+<buildTarget>VtechIPHubGatewayHardwardDevice.cpp.o</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="[pre] VtechIPHubGatewayHardwardDevice.cpp.i" path="Targate/VtechHardwardDevice" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>/usr/bin/make</buildCommand>
+<buildArguments>-j2</buildArguments>
+<buildTarget>VtechIPHubGatewayHardwardDevice.cpp.i</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="[to asm] VtechIPHubGatewayHardwardDevice.cpp.s" path="Targate/VtechHardwardDevice" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>/usr/bin/make</buildCommand>
+<buildArguments>-j2</buildArguments>
+<buildTarget>VtechIPHubGatewayHardwardDevice.cpp.s</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="[obj] cotire/VtechHardwardDevice_CXX_unity.cxx.o" path="Targate/VtechHardwardDevice" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>/usr/bin/make</buildCommand>
+<buildArguments>-j2</buildArguments>
+<buildTarget>cotire/VtechHardwardDevice_CXX_unity.cxx.o</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="[pre] cotire/VtechHardwardDevice_CXX_unity.cxx.i" path="Targate/VtechHardwardDevice" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>/usr/bin/make</buildCommand>
+<buildArguments>-j2</buildArguments>
+<buildTarget>cotire/VtechHardwardDevice_CXX_unity.cxx.i</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="[to asm] cotire/VtechHardwardDevice_CXX_unity.cxx.s" path="Targate/VtechHardwardDevice" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>/usr/bin/make</buildCommand>
+<buildArguments>-j2</buildArguments>
+<buildTarget>cotire/VtechHardwardDevice_CXX_unity.cxx.s</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="[obj] main.cpp.o" path="Targate/VtechHardwardDevice" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>/usr/bin/make</buildCommand>
+<buildArguments>-j2</buildArguments>
+<buildTarget>main.cpp.o</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="[pre] main.cpp.i" path="Targate/VtechHardwardDevice" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
+<buildCommand>/usr/bin/make</buildCommand>
+<buildArguments>-j2</buildArguments>
+<buildTarget>main.cpp.i</buildTarget>
+<stopOnError>true</stopOnError>
+<useDefaultCommand>false</useDefaultCommand>
+</target>
+<target name="[to asm] main.cpp.s" path="Targate/VtechHardwardDevice" targetID="org.eclipse.cdt.make.MakeTargetBuilder">
 <buildCommand>/usr/bin/make</buildCommand>
 <buildArguments>-j2</buildArguments>
 <buildTarget>main.cpp.s</buildTarget>

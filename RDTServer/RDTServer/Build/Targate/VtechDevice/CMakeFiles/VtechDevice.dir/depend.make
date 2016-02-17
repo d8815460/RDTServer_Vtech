@@ -23,12 +23,6 @@ Targate/VtechDevice/CMakeFiles/VtechDevice.dir/VtechIPHubGatewayDevice.cpp.o: ..
 Targate/VtechDevice/CMakeFiles/VtechDevice.dir/VtechIPHubGatewayDevice.cpp.o: ../Targate/VtechDevice/../../3th_party/jsoncpp-1.6.5/include/json/forwards.h
 Targate/VtechDevice/CMakeFiles/VtechDevice.dir/VtechIPHubGatewayDevice.cpp.o: ../Targate/VtechDevice/../../3th_party/jsoncpp-1.6.5/include/json/reader.h
 Targate/VtechDevice/CMakeFiles/VtechDevice.dir/VtechIPHubGatewayDevice.cpp.o: ../Targate/VtechDevice/../../3th_party/jsoncpp-1.6.5/include/json/value.h
-Targate/VtechDevice/CMakeFiles/VtechDevice.dir/VtechIPHubGatewayDevice.cpp.o: ../Targate/VtechDevice/../../3th_party/unix_socket/exception.hpp
-Targate/VtechDevice/CMakeFiles/VtechDevice.dir/VtechIPHubGatewayDevice.cpp.o: ../Targate/VtechDevice/../../3th_party/unix_socket/libunixsocket.h
-Targate/VtechDevice/CMakeFiles/VtechDevice.dir/VtechIPHubGatewayDevice.cpp.o: ../Targate/VtechDevice/../../3th_party/unix_socket/socket.hpp
-Targate/VtechDevice/CMakeFiles/VtechDevice.dir/VtechIPHubGatewayDevice.cpp.o: ../Targate/VtechDevice/../../3th_party/unix_socket/streamclient.hpp
-Targate/VtechDevice/CMakeFiles/VtechDevice.dir/VtechIPHubGatewayDevice.cpp.o: ../Targate/VtechDevice/../../3th_party/unix_socket/unixbase.hpp
-Targate/VtechDevice/CMakeFiles/VtechDevice.dir/VtechIPHubGatewayDevice.cpp.o: ../Targate/VtechDevice/../../3th_party/unix_socket/unixclientstream.hpp
 Targate/VtechDevice/CMakeFiles/VtechDevice.dir/VtechIPHubGatewayDevice.cpp.o: ../Targate/VtechDevice/../../DeviceAPI/AccessoryTypeEnum.hpp
 Targate/VtechDevice/CMakeFiles/VtechDevice.dir/VtechIPHubGatewayDevice.cpp.o: ../Targate/VtechDevice/../../DeviceAPI/BinraryRDTServerCommand.hpp
 Targate/VtechDevice/CMakeFiles/VtechDevice.dir/VtechIPHubGatewayDevice.cpp.o: ../Targate/VtechDevice/../../DeviceAPI/Command.hpp

@@ -113,7 +113,7 @@ CMAKE_BINARY_DIR = /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build
 3th_party/jsoncpp-1.6.5/src/lib_json/CMakeFiles/jsoncpp_lib_static.dir/all:
 	$(MAKE) -f 3th_party/jsoncpp-1.6.5/src/lib_json/CMakeFiles/jsoncpp_lib_static.dir/build.make 3th_party/jsoncpp-1.6.5/src/lib_json/CMakeFiles/jsoncpp_lib_static.dir/depend
 	$(MAKE) -f 3th_party/jsoncpp-1.6.5/src/lib_json/CMakeFiles/jsoncpp_lib_static.dir/build.make 3th_party/jsoncpp-1.6.5/src/lib_json/CMakeFiles/jsoncpp_lib_static.dir/build
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build/CMakeFiles  67 68 69
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build/CMakeFiles  73 74 75
 	@echo "Built target jsoncpp_lib_static"
 .PHONY : 3th_party/jsoncpp-1.6.5/src/lib_json/CMakeFiles/jsoncpp_lib_static.dir/all
 
@@ -228,7 +228,7 @@ clean: 3th_party/jsoncpp-1.6.5/src/jsontestrunner/CMakeFiles/jsoncpp_readerwrite
 3th_party/jsoncpp-1.6.5/src/jsontestrunner/CMakeFiles/jsontestrunner_exe.dir/all: 3th_party/jsoncpp-1.6.5/src/lib_json/CMakeFiles/jsoncpp_lib_static.dir/all
 	$(MAKE) -f 3th_party/jsoncpp-1.6.5/src/jsontestrunner/CMakeFiles/jsontestrunner_exe.dir/build.make 3th_party/jsoncpp-1.6.5/src/jsontestrunner/CMakeFiles/jsontestrunner_exe.dir/depend
 	$(MAKE) -f 3th_party/jsoncpp-1.6.5/src/jsontestrunner/CMakeFiles/jsontestrunner_exe.dir/build.make 3th_party/jsoncpp-1.6.5/src/jsontestrunner/CMakeFiles/jsontestrunner_exe.dir/build
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build/CMakeFiles  72
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build/CMakeFiles  78
 	@echo "Built target jsontestrunner_exe"
 .PHONY : 3th_party/jsoncpp-1.6.5/src/jsontestrunner/CMakeFiles/jsontestrunner_exe.dir/all
 
@@ -278,7 +278,7 @@ clean: 3th_party/jsoncpp-1.6.5/src/jsontestrunner/CMakeFiles/jsontestrunner_exe.
 3th_party/jsoncpp-1.6.5/src/test_lib_json/CMakeFiles/jsoncpp_test.dir/all: 3th_party/jsoncpp-1.6.5/src/lib_json/CMakeFiles/jsoncpp_lib_static.dir/all
 	$(MAKE) -f 3th_party/jsoncpp-1.6.5/src/test_lib_json/CMakeFiles/jsoncpp_test.dir/build.make 3th_party/jsoncpp-1.6.5/src/test_lib_json/CMakeFiles/jsoncpp_test.dir/depend
 	$(MAKE) -f 3th_party/jsoncpp-1.6.5/src/test_lib_json/CMakeFiles/jsoncpp_test.dir/build.make 3th_party/jsoncpp-1.6.5/src/test_lib_json/CMakeFiles/jsoncpp_test.dir/build
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build/CMakeFiles  70 71
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build/CMakeFiles  76 77
 	@echo "Built target jsoncpp_test"
 .PHONY : 3th_party/jsoncpp-1.6.5/src/test_lib_json/CMakeFiles/jsoncpp_test.dir/all
 
@@ -443,8 +443,8 @@ clean: DeviceAPI/CMakeFiles/DeviceAPI_unity.dir/clean
 
 # All Build rule for target.
 DeviceAPI/CMakeFiles/all_pch.dir/all: DeviceAPI/CMakeFiles/DeviceAPI_pch.dir/all
-DeviceAPI/CMakeFiles/all_pch.dir/all: Targate/TUTKDevice/CMakeFiles/TUTKDevice_pch.dir/all
 DeviceAPI/CMakeFiles/all_pch.dir/all: Targate/VtechDevice/CMakeFiles/VtechDevice_pch.dir/all
+DeviceAPI/CMakeFiles/all_pch.dir/all: Targate/TUTKDevice/CMakeFiles/TUTKDevice_pch.dir/all
 	$(MAKE) -f DeviceAPI/CMakeFiles/all_pch.dir/build.make DeviceAPI/CMakeFiles/all_pch.dir/depend
 	$(MAKE) -f DeviceAPI/CMakeFiles/all_pch.dir/build.make DeviceAPI/CMakeFiles/all_pch.dir/build
 	$(CMAKE_COMMAND) -E cmake_progress_report /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build/CMakeFiles 
@@ -475,9 +475,10 @@ clean: DeviceAPI/CMakeFiles/all_pch.dir/clean
 # Target rules for target DeviceAPI/CMakeFiles/all_unity.dir
 
 # All Build rule for target.
-DeviceAPI/CMakeFiles/all_unity.dir/all: DeviceAPI/CMakeFiles/DeviceAPI_unity.dir/all
 DeviceAPI/CMakeFiles/all_unity.dir/all: Targate/TUTKDevice/CMakeFiles/TUTKDevice_unity.dir/all
+DeviceAPI/CMakeFiles/all_unity.dir/all: DeviceAPI/CMakeFiles/DeviceAPI_unity.dir/all
 DeviceAPI/CMakeFiles/all_unity.dir/all: Targate/VtechDevice/CMakeFiles/VtechDevice_unity.dir/all
+DeviceAPI/CMakeFiles/all_unity.dir/all: Targate/VtechHardwardDevice/CMakeFiles/VtechHardwardDevice_unity.dir/all
 	$(MAKE) -f DeviceAPI/CMakeFiles/all_unity.dir/build.make DeviceAPI/CMakeFiles/all_unity.dir/depend
 	$(MAKE) -f DeviceAPI/CMakeFiles/all_unity.dir/build.make DeviceAPI/CMakeFiles/all_unity.dir/build
 	$(CMAKE_COMMAND) -E cmake_progress_report /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build/CMakeFiles 
@@ -486,7 +487,7 @@ DeviceAPI/CMakeFiles/all_unity.dir/all: Targate/VtechDevice/CMakeFiles/VtechDevi
 
 # Build rule for subdir invocation for target.
 DeviceAPI/CMakeFiles/all_unity.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build/CMakeFiles 12
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build/CMakeFiles 14
 	$(MAKE) -f CMakeFiles/Makefile2 DeviceAPI/CMakeFiles/all_unity.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build/CMakeFiles 0
 .PHONY : DeviceAPI/CMakeFiles/all_unity.dir/rule
@@ -511,7 +512,7 @@ clean: DeviceAPI/CMakeFiles/all_unity.dir/clean
 DeviceAPI/CMakeFiles/clean_cotire.dir/all:
 	$(MAKE) -f DeviceAPI/CMakeFiles/clean_cotire.dir/build.make DeviceAPI/CMakeFiles/clean_cotire.dir/depend
 	$(MAKE) -f DeviceAPI/CMakeFiles/clean_cotire.dir/build.make DeviceAPI/CMakeFiles/clean_cotire.dir/build
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build/CMakeFiles  66
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build/CMakeFiles  72
 	@echo "Built target clean_cotire"
 .PHONY : DeviceAPI/CMakeFiles/clean_cotire.dir/all
 
@@ -761,6 +762,90 @@ Targate/VtechDevice/CMakeFiles/VtechDevice_unity.dir/clean:
 
 # clean rule for target.
 clean: Targate/VtechDevice/CMakeFiles/VtechDevice_unity.dir/clean
+.PHONY : clean
+
+#=============================================================================
+# Directory level rules for directory Targate/VtechHardwardDevice
+
+# Convenience name for "all" pass in the directory.
+Targate/VtechHardwardDevice/all: Targate/VtechHardwardDevice/CMakeFiles/VtechHardwardDevice.dir/all
+.PHONY : Targate/VtechHardwardDevice/all
+
+# Convenience name for "clean" pass in the directory.
+Targate/VtechHardwardDevice/clean: Targate/VtechHardwardDevice/CMakeFiles/VtechHardwardDevice.dir/clean
+Targate/VtechHardwardDevice/clean: Targate/VtechHardwardDevice/CMakeFiles/VtechHardwardDevice_unity.dir/clean
+.PHONY : Targate/VtechHardwardDevice/clean
+
+# Convenience name for "preinstall" pass in the directory.
+Targate/VtechHardwardDevice/preinstall:
+.PHONY : Targate/VtechHardwardDevice/preinstall
+
+#=============================================================================
+# Target rules for target Targate/VtechHardwardDevice/CMakeFiles/VtechHardwardDevice.dir
+
+# All Build rule for target.
+Targate/VtechHardwardDevice/CMakeFiles/VtechHardwardDevice.dir/all: DeviceAPI/CMakeFiles/DeviceAPI.dir/all
+Targate/VtechHardwardDevice/CMakeFiles/VtechHardwardDevice.dir/all: Targate/VtechDevice/CMakeFiles/VtechDevice.dir/all
+	$(MAKE) -f Targate/VtechHardwardDevice/CMakeFiles/VtechHardwardDevice.dir/build.make Targate/VtechHardwardDevice/CMakeFiles/VtechHardwardDevice.dir/depend
+	$(MAKE) -f Targate/VtechHardwardDevice/CMakeFiles/VtechHardwardDevice.dir/build.make Targate/VtechHardwardDevice/CMakeFiles/VtechHardwardDevice.dir/build
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build/CMakeFiles  66 67 68 69
+	@echo "Built target VtechHardwardDevice"
+.PHONY : Targate/VtechHardwardDevice/CMakeFiles/VtechHardwardDevice.dir/all
+
+# Include target in all.
+all: Targate/VtechHardwardDevice/CMakeFiles/VtechHardwardDevice.dir/all
+.PHONY : all
+
+# Build rule for subdir invocation for target.
+Targate/VtechHardwardDevice/CMakeFiles/VtechHardwardDevice.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build/CMakeFiles 30
+	$(MAKE) -f CMakeFiles/Makefile2 Targate/VtechHardwardDevice/CMakeFiles/VtechHardwardDevice.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build/CMakeFiles 0
+.PHONY : Targate/VtechHardwardDevice/CMakeFiles/VtechHardwardDevice.dir/rule
+
+# Convenience name for target.
+VtechHardwardDevice: Targate/VtechHardwardDevice/CMakeFiles/VtechHardwardDevice.dir/rule
+.PHONY : VtechHardwardDevice
+
+# clean rule for target.
+Targate/VtechHardwardDevice/CMakeFiles/VtechHardwardDevice.dir/clean:
+	$(MAKE) -f Targate/VtechHardwardDevice/CMakeFiles/VtechHardwardDevice.dir/build.make Targate/VtechHardwardDevice/CMakeFiles/VtechHardwardDevice.dir/clean
+.PHONY : Targate/VtechHardwardDevice/CMakeFiles/VtechHardwardDevice.dir/clean
+
+# clean rule for target.
+clean: Targate/VtechHardwardDevice/CMakeFiles/VtechHardwardDevice.dir/clean
+.PHONY : clean
+
+#=============================================================================
+# Target rules for target Targate/VtechHardwardDevice/CMakeFiles/VtechHardwardDevice_unity.dir
+
+# All Build rule for target.
+Targate/VtechHardwardDevice/CMakeFiles/VtechHardwardDevice_unity.dir/all: DeviceAPI/CMakeFiles/DeviceAPI_unity.dir/all
+Targate/VtechHardwardDevice/CMakeFiles/VtechHardwardDevice_unity.dir/all: Targate/VtechDevice/CMakeFiles/VtechDevice_unity.dir/all
+	$(MAKE) -f Targate/VtechHardwardDevice/CMakeFiles/VtechHardwardDevice_unity.dir/build.make Targate/VtechHardwardDevice/CMakeFiles/VtechHardwardDevice_unity.dir/depend
+	$(MAKE) -f Targate/VtechHardwardDevice/CMakeFiles/VtechHardwardDevice_unity.dir/build.make Targate/VtechHardwardDevice/CMakeFiles/VtechHardwardDevice_unity.dir/build
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build/CMakeFiles  70 71
+	@echo "Built target VtechHardwardDevice_unity"
+.PHONY : Targate/VtechHardwardDevice/CMakeFiles/VtechHardwardDevice_unity.dir/all
+
+# Build rule for subdir invocation for target.
+Targate/VtechHardwardDevice/CMakeFiles/VtechHardwardDevice_unity.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build/CMakeFiles 10
+	$(MAKE) -f CMakeFiles/Makefile2 Targate/VtechHardwardDevice/CMakeFiles/VtechHardwardDevice_unity.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build/CMakeFiles 0
+.PHONY : Targate/VtechHardwardDevice/CMakeFiles/VtechHardwardDevice_unity.dir/rule
+
+# Convenience name for target.
+VtechHardwardDevice_unity: Targate/VtechHardwardDevice/CMakeFiles/VtechHardwardDevice_unity.dir/rule
+.PHONY : VtechHardwardDevice_unity
+
+# clean rule for target.
+Targate/VtechHardwardDevice/CMakeFiles/VtechHardwardDevice_unity.dir/clean:
+	$(MAKE) -f Targate/VtechHardwardDevice/CMakeFiles/VtechHardwardDevice_unity.dir/build.make Targate/VtechHardwardDevice/CMakeFiles/VtechHardwardDevice_unity.dir/clean
+.PHONY : Targate/VtechHardwardDevice/CMakeFiles/VtechHardwardDevice_unity.dir/clean
+
+# clean rule for target.
+clean: Targate/VtechHardwardDevice/CMakeFiles/VtechHardwardDevice_unity.dir/clean
 .PHONY : clean
 
 #=============================================================================

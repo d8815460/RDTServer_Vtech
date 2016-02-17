@@ -6,8 +6,8 @@
 //  Copyright © 2015年 jakey. All rights reserved.
 //
 
-#ifndef MotionSensorDevice_hpp
-#define MotionSensorDevice_hpp
+#ifndef VtechMotionSensorDevice_hpp
+#define VtechMotionSensorDevice_hpp
 
 #include <stdio.h>
 #include "Device.hpp"
@@ -28,4 +28,4 @@ private:
     bool m_bOnOff;
 };
 
-#endif /* MotionSensorDevice_hpp */
+#endif /* VtechMotionSensorDevice_hpp */

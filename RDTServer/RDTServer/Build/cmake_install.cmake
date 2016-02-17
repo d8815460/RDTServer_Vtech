@@ -38,6 +38,7 @@ IF(NOT CMAKE_INSTALL_LOCAL_ONLY)
   INCLUDE("/home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build/DeviceAPI/cmake_install.cmake")
   INCLUDE("/home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build/Targate/TUTKDevice/cmake_install.cmake")
   INCLUDE("/home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build/Targate/VtechDevice/cmake_install.cmake")
+  INCLUDE("/home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build/Targate/VtechHardwardDevice/cmake_install.cmake")
 
 ENDIF(NOT CMAKE_INSTALL_LOCAL_ONLY)
 
