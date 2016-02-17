@@ -127,6 +127,8 @@ stdio.h
 -
 string
 -
+json/reader.h
+-
 
 ../Targate/VtechDevice/../../DeviceAPI/Common.hpp
 
@@ -179,8 +181,6 @@ stdio.h
 -
 Device.hpp
 ../Targate/VtechDevice/../../DeviceAPI/Device.hpp
-
-/home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/DeviceAPI/PrefixHeader.pch
 
 /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Targate/VtechDevice/VtechGarageDoorDevice.cpp
 VtechGarageDoorDevice.hpp
@@ -351,20 +351,4 @@ iostream
 -
 VtechIPHubGatewayDevice.hpp
 /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Targate/VtechDevice/VtechIPHubGatewayDevice.hpp
-
-/home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build/DeviceAPI/cotire/DeviceAPI_CXX_prefix.cxx
-/home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/DeviceAPI/PrefixHeader.pch
--
-
-/home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build/DeviceAPI/cotire/DeviceAPI_CXX_prefix.hxx
-/home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build/DeviceAPI/cotire/DeviceAPI_CXX_prefix.cxx
--
-
-/home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build/Targate/VtechDevice/cotire/VtechDevice_CXX_prefix.cxx
-/home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build/DeviceAPI/cotire/DeviceAPI_CXX_prefix.hxx
--
-
-/home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build/Targate/VtechDevice/cotire/VtechDevice_CXX_prefix.hxx
-/home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build/Targate/VtechDevice/cotire/VtechDevice_CXX_prefix.cxx
--
 

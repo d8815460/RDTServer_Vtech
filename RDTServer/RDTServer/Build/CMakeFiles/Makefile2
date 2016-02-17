@@ -442,8 +442,8 @@ clean: DeviceAPI/CMakeFiles/DeviceAPI_unity.dir/clean
 # Target rules for target DeviceAPI/CMakeFiles/all_pch.dir
 
 # All Build rule for target.
-DeviceAPI/CMakeFiles/all_pch.dir/all: Targate/TUTKDevice/CMakeFiles/TUTKDevice_pch.dir/all
 DeviceAPI/CMakeFiles/all_pch.dir/all: DeviceAPI/CMakeFiles/DeviceAPI_pch.dir/all
+DeviceAPI/CMakeFiles/all_pch.dir/all: Targate/TUTKDevice/CMakeFiles/TUTKDevice_pch.dir/all
 DeviceAPI/CMakeFiles/all_pch.dir/all: Targate/VtechDevice/CMakeFiles/VtechDevice_pch.dir/all
 	$(MAKE) -f DeviceAPI/CMakeFiles/all_pch.dir/build.make DeviceAPI/CMakeFiles/all_pch.dir/depend
 	$(MAKE) -f DeviceAPI/CMakeFiles/all_pch.dir/build.make DeviceAPI/CMakeFiles/all_pch.dir/build
@@ -475,9 +475,9 @@ clean: DeviceAPI/CMakeFiles/all_pch.dir/clean
 # Target rules for target DeviceAPI/CMakeFiles/all_unity.dir
 
 # All Build rule for target.
+DeviceAPI/CMakeFiles/all_unity.dir/all: DeviceAPI/CMakeFiles/DeviceAPI_unity.dir/all
 DeviceAPI/CMakeFiles/all_unity.dir/all: Targate/TUTKDevice/CMakeFiles/TUTKDevice_unity.dir/all
 DeviceAPI/CMakeFiles/all_unity.dir/all: Targate/VtechDevice/CMakeFiles/VtechDevice_unity.dir/all
-DeviceAPI/CMakeFiles/all_unity.dir/all: DeviceAPI/CMakeFiles/DeviceAPI_unity.dir/all
 	$(MAKE) -f DeviceAPI/CMakeFiles/all_unity.dir/build.make DeviceAPI/CMakeFiles/all_unity.dir/depend
 	$(MAKE) -f DeviceAPI/CMakeFiles/all_unity.dir/build.make DeviceAPI/CMakeFiles/all_unity.dir/build
 	$(CMAKE_COMMAND) -E cmake_progress_report /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build/CMakeFiles 

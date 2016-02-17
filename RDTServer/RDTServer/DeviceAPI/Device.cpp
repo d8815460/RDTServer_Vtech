@@ -86,6 +86,16 @@ void Device::onCommandHardwardNotify(CommandHardwardNotifyData* pCommandHardward
     LOGD("onCommandHardwardNotify");
 }
 
+void Device::onCommandHardwardRecvJson(CommandHardwardRecvJsonData* pCommandHardwardRecvJsonData)
+{
+    LOGD("onCommandHardwardRecvJson");
+}
+
+void Device::onCommandHardwardRecvProductCode(CommandHardwardRecvProductCode* pCommandHardwardRecvProductCode)
+{
+    LOGD("onCommandHardwardRecvProductCode");
+}
+
 void Device::onCommandHardwardRecvProductName(CommandHardwardRecvProductName* pCommandHardwardRecvProductName)
 {
     LOGD("onCommandHardwardRecvProductName");

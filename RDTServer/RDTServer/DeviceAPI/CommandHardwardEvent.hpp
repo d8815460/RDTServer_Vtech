@@ -11,24 +11,36 @@
 
 #include <stdio.h>
 #include <string>
+#include <json/reader.h>
 
 struct CommandHardwardNotifyData
 {
-    
+    Json::Value* pJsonObject;
+};
+
+struct CommandHardwardRecvJsonData
+{
+    Json::Value* pJsonObject;
+};
+
+struct CommandHardwardRecvProductCode
+{
+    int productCode;
 };
 
 struct CommandHardwardRecvProductName
 {
-    std::string productName;
+    string productName;
 };
 
 class CommandHardwardEvent
 {
 public:
     virtual void onCommandHardwardNotify(CommandHardwardNotifyData* pCommandHardwardNotifyData) = 0;
+    virtual void onCommandHardwardRecvJson(CommandHardwardRecvJsonData* pCommandHardwardRecvJsonData) = 0;
+    
+    virtual void onCommandHardwardRecvProductCode(CommandHardwardRecvProductCode* pCommandHardwardRecvProductCode) = 0;
     virtual void onCommandHardwardRecvProductName(CommandHardwardRecvProductName* pCommandHardwardRecvProductName) = 0;
-//    virtual void onCommandHardwardRecvData();
-    //    virtual void onCommandHardwardRecvJson(const Json::Value& inJsonObject, Json::Value& outJsonObject);
 };
 
 #endif /* CommandHardwardEvent_hpp */
