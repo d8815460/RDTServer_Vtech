@@ -38,16 +38,16 @@ EQUALS = =
 CMAKE_SOURCE_DIR = /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build
+CMAKE_BINARY_DIR = /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build
 
 # Utility rule file for jsoncpp_readerwriter_tests.
 
 # Include the progress variables for this target.
 include 3th_party/jsoncpp-1.6.5/src/jsontestrunner/CMakeFiles/jsoncpp_readerwriter_tests.dir/progress.make
 
-3th_party/jsoncpp-1.6.5/src/jsontestrunner/CMakeFiles/jsoncpp_readerwriter_tests: 3th_party/jsoncpp-1.6.5/src/jsontestrunner/jsontestrunner_exe
-3th_party/jsoncpp-1.6.5/src/jsontestrunner/CMakeFiles/jsoncpp_readerwriter_tests: 3th_party/jsoncpp-1.6.5/src/test_lib_json/jsoncpp_test
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build/3th_party/jsoncpp-1.6.5/src/jsontestrunner && /usr/bin/python2 -B /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/3th_party/jsoncpp-1.6.5/src/jsontestrunner/../../test/runjsontests.py /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build/3th_party/jsoncpp-1.6.5/src/jsontestrunner/jsontestrunner_exe /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/3th_party/jsoncpp-1.6.5/src/jsontestrunner/../../test/data
+3th_party/jsoncpp-1.6.5/src/jsontestrunner/CMakeFiles/jsoncpp_readerwriter_tests: ../bin/jsontestrunner_exe
+3th_party/jsoncpp-1.6.5/src/jsontestrunner/CMakeFiles/jsoncpp_readerwriter_tests: ../bin/jsoncpp_test
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build/3th_party/jsoncpp-1.6.5/src/jsontestrunner && /usr/bin/python2 -B /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/3th_party/jsoncpp-1.6.5/src/jsontestrunner/../../test/runjsontests.py /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/bin/jsontestrunner_exe /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/3th_party/jsoncpp-1.6.5/src/jsontestrunner/../../test/data
 
 jsoncpp_readerwriter_tests: 3th_party/jsoncpp-1.6.5/src/jsontestrunner/CMakeFiles/jsoncpp_readerwriter_tests
 jsoncpp_readerwriter_tests: 3th_party/jsoncpp-1.6.5/src/jsontestrunner/CMakeFiles/jsoncpp_readerwriter_tests.dir/build.make
@@ -58,10 +58,10 @@ jsoncpp_readerwriter_tests: 3th_party/jsoncpp-1.6.5/src/jsontestrunner/CMakeFile
 .PHONY : 3th_party/jsoncpp-1.6.5/src/jsontestrunner/CMakeFiles/jsoncpp_readerwriter_tests.dir/build
 
 3th_party/jsoncpp-1.6.5/src/jsontestrunner/CMakeFiles/jsoncpp_readerwriter_tests.dir/clean:
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build/3th_party/jsoncpp-1.6.5/src/jsontestrunner && $(CMAKE_COMMAND) -P CMakeFiles/jsoncpp_readerwriter_tests.dir/cmake_clean.cmake
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build/3th_party/jsoncpp-1.6.5/src/jsontestrunner && $(CMAKE_COMMAND) -P CMakeFiles/jsoncpp_readerwriter_tests.dir/cmake_clean.cmake
 .PHONY : 3th_party/jsoncpp-1.6.5/src/jsontestrunner/CMakeFiles/jsoncpp_readerwriter_tests.dir/clean
 
 3th_party/jsoncpp-1.6.5/src/jsontestrunner/CMakeFiles/jsoncpp_readerwriter_tests.dir/depend:
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/3th_party/jsoncpp-1.6.5/src/jsontestrunner /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build/3th_party/jsoncpp-1.6.5/src/jsontestrunner /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build/3th_party/jsoncpp-1.6.5/src/jsontestrunner/CMakeFiles/jsoncpp_readerwriter_tests.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/3th_party/jsoncpp-1.6.5/src/jsontestrunner /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build/3th_party/jsoncpp-1.6.5/src/jsontestrunner /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build/3th_party/jsoncpp-1.6.5/src/jsontestrunner/CMakeFiles/jsoncpp_readerwriter_tests.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : 3th_party/jsoncpp-1.6.5/src/jsontestrunner/CMakeFiles/jsoncpp_readerwriter_tests.dir/depend
 

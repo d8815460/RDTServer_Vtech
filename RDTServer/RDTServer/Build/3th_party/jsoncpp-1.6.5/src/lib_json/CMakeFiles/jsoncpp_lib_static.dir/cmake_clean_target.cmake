@@ -1,3 +1,3 @@
 FILE(REMOVE_RECURSE
-  "libjsoncpp.a"
+  "../../../../../lib/libjsoncpp.a"
 )

@@ -3,8 +3,8 @@ FILE(REMOVE_RECURSE
   "cotire/TUTKDevice_CXX_unity.cxx"
   "cotire/TUTKDevice_CXX_prefix.cxx"
   "CMakeFiles/TUTKDevice_unity.dir/cotire/TUTKDevice_CXX_unity.cxx.o"
-  "TUTKDevice.pdb"
-  "TUTKDevice"
+  "../../../bin/TUTKDevice.pdb"
+  "../../../bin/TUTKDevice"
 )
 
 # Per-language clean rules from dependency scanning.

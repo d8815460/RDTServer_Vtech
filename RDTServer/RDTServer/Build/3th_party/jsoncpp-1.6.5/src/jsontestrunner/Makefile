@@ -42,7 +42,7 @@ EQUALS = =
 CMAKE_SOURCE_DIR = /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build
+CMAKE_BINARY_DIR = /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -110,14 +110,14 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build && $(CMAKE_COMMAND) -E cmake_progress_start /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build/CMakeFiles /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build/3th_party/jsoncpp-1.6.5/src/jsontestrunner/CMakeFiles/progress.marks
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build && $(MAKE) -f CMakeFiles/Makefile2 3th_party/jsoncpp-1.6.5/src/jsontestrunner/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build/CMakeFiles 0
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build && $(CMAKE_COMMAND) -E cmake_progress_start /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build/CMakeFiles /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build/3th_party/jsoncpp-1.6.5/src/jsontestrunner/CMakeFiles/progress.marks
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build && $(MAKE) -f CMakeFiles/Makefile2 3th_party/jsoncpp-1.6.5/src/jsontestrunner/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
 clean:
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build && $(MAKE) -f CMakeFiles/Makefile2 3th_party/jsoncpp-1.6.5/src/jsontestrunner/clean
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build && $(MAKE) -f CMakeFiles/Makefile2 3th_party/jsoncpp-1.6.5/src/jsontestrunner/clean
 .PHONY : clean
 
 # The main clean target
@@ -126,22 +126,22 @@ clean/fast: clean
 
 # Prepare targets for installation.
 preinstall: all
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build && $(MAKE) -f CMakeFiles/Makefile2 3th_party/jsoncpp-1.6.5/src/jsontestrunner/preinstall
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build && $(MAKE) -f CMakeFiles/Makefile2 3th_party/jsoncpp-1.6.5/src/jsontestrunner/preinstall
 .PHONY : preinstall
 
 # Prepare targets for installation.
 preinstall/fast:
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build && $(MAKE) -f CMakeFiles/Makefile2 3th_party/jsoncpp-1.6.5/src/jsontestrunner/preinstall
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build && $(MAKE) -f CMakeFiles/Makefile2 3th_party/jsoncpp-1.6.5/src/jsontestrunner/preinstall
 .PHONY : preinstall/fast
 
 # clear depends
 depend:
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
 .PHONY : depend
 
 # Convenience name for target.
 3th_party/jsoncpp-1.6.5/src/jsontestrunner/CMakeFiles/jsoncpp_check.dir/rule:
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build && $(MAKE) -f CMakeFiles/Makefile2 3th_party/jsoncpp-1.6.5/src/jsontestrunner/CMakeFiles/jsoncpp_check.dir/rule
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build && $(MAKE) -f CMakeFiles/Makefile2 3th_party/jsoncpp-1.6.5/src/jsontestrunner/CMakeFiles/jsoncpp_check.dir/rule
 .PHONY : 3th_party/jsoncpp-1.6.5/src/jsontestrunner/CMakeFiles/jsoncpp_check.dir/rule
 
 # Convenience name for target.
@@ -150,12 +150,12 @@ jsoncpp_check: 3th_party/jsoncpp-1.6.5/src/jsontestrunner/CMakeFiles/jsoncpp_che
 
 # fast build rule for target.
 jsoncpp_check/fast:
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build && $(MAKE) -f 3th_party/jsoncpp-1.6.5/src/jsontestrunner/CMakeFiles/jsoncpp_check.dir/build.make 3th_party/jsoncpp-1.6.5/src/jsontestrunner/CMakeFiles/jsoncpp_check.dir/build
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build && $(MAKE) -f 3th_party/jsoncpp-1.6.5/src/jsontestrunner/CMakeFiles/jsoncpp_check.dir/build.make 3th_party/jsoncpp-1.6.5/src/jsontestrunner/CMakeFiles/jsoncpp_check.dir/build
 .PHONY : jsoncpp_check/fast
 
 # Convenience name for target.
 3th_party/jsoncpp-1.6.5/src/jsontestrunner/CMakeFiles/jsoncpp_readerwriter_tests.dir/rule:
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build && $(MAKE) -f CMakeFiles/Makefile2 3th_party/jsoncpp-1.6.5/src/jsontestrunner/CMakeFiles/jsoncpp_readerwriter_tests.dir/rule
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build && $(MAKE) -f CMakeFiles/Makefile2 3th_party/jsoncpp-1.6.5/src/jsontestrunner/CMakeFiles/jsoncpp_readerwriter_tests.dir/rule
 .PHONY : 3th_party/jsoncpp-1.6.5/src/jsontestrunner/CMakeFiles/jsoncpp_readerwriter_tests.dir/rule
 
 # Convenience name for target.
@@ -164,12 +164,12 @@ jsoncpp_readerwriter_tests: 3th_party/jsoncpp-1.6.5/src/jsontestrunner/CMakeFile
 
 # fast build rule for target.
 jsoncpp_readerwriter_tests/fast:
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build && $(MAKE) -f 3th_party/jsoncpp-1.6.5/src/jsontestrunner/CMakeFiles/jsoncpp_readerwriter_tests.dir/build.make 3th_party/jsoncpp-1.6.5/src/jsontestrunner/CMakeFiles/jsoncpp_readerwriter_tests.dir/build
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build && $(MAKE) -f 3th_party/jsoncpp-1.6.5/src/jsontestrunner/CMakeFiles/jsoncpp_readerwriter_tests.dir/build.make 3th_party/jsoncpp-1.6.5/src/jsontestrunner/CMakeFiles/jsoncpp_readerwriter_tests.dir/build
 .PHONY : jsoncpp_readerwriter_tests/fast
 
 # Convenience name for target.
 3th_party/jsoncpp-1.6.5/src/jsontestrunner/CMakeFiles/jsontestrunner_exe.dir/rule:
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build && $(MAKE) -f CMakeFiles/Makefile2 3th_party/jsoncpp-1.6.5/src/jsontestrunner/CMakeFiles/jsontestrunner_exe.dir/rule
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build && $(MAKE) -f CMakeFiles/Makefile2 3th_party/jsoncpp-1.6.5/src/jsontestrunner/CMakeFiles/jsontestrunner_exe.dir/rule
 .PHONY : 3th_party/jsoncpp-1.6.5/src/jsontestrunner/CMakeFiles/jsontestrunner_exe.dir/rule
 
 # Convenience name for target.
@@ -178,7 +178,7 @@ jsontestrunner_exe: 3th_party/jsoncpp-1.6.5/src/jsontestrunner/CMakeFiles/jsonte
 
 # fast build rule for target.
 jsontestrunner_exe/fast:
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build && $(MAKE) -f 3th_party/jsoncpp-1.6.5/src/jsontestrunner/CMakeFiles/jsontestrunner_exe.dir/build.make 3th_party/jsoncpp-1.6.5/src/jsontestrunner/CMakeFiles/jsontestrunner_exe.dir/build
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build && $(MAKE) -f 3th_party/jsoncpp-1.6.5/src/jsontestrunner/CMakeFiles/jsontestrunner_exe.dir/build.make 3th_party/jsoncpp-1.6.5/src/jsontestrunner/CMakeFiles/jsontestrunner_exe.dir/build
 .PHONY : jsontestrunner_exe/fast
 
 main.o: main.cpp.o
@@ -186,7 +186,7 @@ main.o: main.cpp.o
 
 # target to build an object file
 main.cpp.o:
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build && $(MAKE) -f 3th_party/jsoncpp-1.6.5/src/jsontestrunner/CMakeFiles/jsontestrunner_exe.dir/build.make 3th_party/jsoncpp-1.6.5/src/jsontestrunner/CMakeFiles/jsontestrunner_exe.dir/main.cpp.o
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build && $(MAKE) -f 3th_party/jsoncpp-1.6.5/src/jsontestrunner/CMakeFiles/jsontestrunner_exe.dir/build.make 3th_party/jsoncpp-1.6.5/src/jsontestrunner/CMakeFiles/jsontestrunner_exe.dir/main.cpp.o
 .PHONY : main.cpp.o
 
 main.i: main.cpp.i
@@ -194,7 +194,7 @@ main.i: main.cpp.i
 
 # target to preprocess a source file
 main.cpp.i:
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build && $(MAKE) -f 3th_party/jsoncpp-1.6.5/src/jsontestrunner/CMakeFiles/jsontestrunner_exe.dir/build.make 3th_party/jsoncpp-1.6.5/src/jsontestrunner/CMakeFiles/jsontestrunner_exe.dir/main.cpp.i
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build && $(MAKE) -f 3th_party/jsoncpp-1.6.5/src/jsontestrunner/CMakeFiles/jsontestrunner_exe.dir/build.make 3th_party/jsoncpp-1.6.5/src/jsontestrunner/CMakeFiles/jsontestrunner_exe.dir/main.cpp.i
 .PHONY : main.cpp.i
 
 main.s: main.cpp.s
@@ -202,7 +202,7 @@ main.s: main.cpp.s
 
 # target to generate assembly for a file
 main.cpp.s:
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build && $(MAKE) -f 3th_party/jsoncpp-1.6.5/src/jsontestrunner/CMakeFiles/jsontestrunner_exe.dir/build.make 3th_party/jsoncpp-1.6.5/src/jsontestrunner/CMakeFiles/jsontestrunner_exe.dir/main.cpp.s
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build && $(MAKE) -f 3th_party/jsoncpp-1.6.5/src/jsontestrunner/CMakeFiles/jsontestrunner_exe.dir/build.make 3th_party/jsoncpp-1.6.5/src/jsontestrunner/CMakeFiles/jsontestrunner_exe.dir/main.cpp.s
 .PHONY : main.cpp.s
 
 # Help Target
@@ -234,6 +234,6 @@ help:
 # No rule that depends on this can have commands that come from listfiles
 # because they might be regenerated.
 cmake_check_build_system:
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
 .PHONY : cmake_check_build_system
 

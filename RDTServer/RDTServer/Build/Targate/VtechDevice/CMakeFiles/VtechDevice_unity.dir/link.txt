@@ -1,2 +1,2 @@
-/usr/bin/ar cr libVtechDevice.a  CMakeFiles/VtechDevice_unity.dir/cotire/VtechDevice_CXX_unity.cxx.o
-/usr/bin/ranlib libVtechDevice.a
+/usr/bin/ar cr ../../../lib/libVtechDevice.a  CMakeFiles/VtechDevice_unity.dir/cotire/VtechDevice_CXX_unity.cxx.o
+/usr/bin/ranlib ../../../lib/libVtechDevice.a

@@ -38,7 +38,7 @@ EQUALS = =
 CMAKE_SOURCE_DIR = /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build
+CMAKE_BINARY_DIR = /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build
 
 # Include any dependencies generated for this target.
 include 3th_party/jsoncpp-1.6.5/src/lib_json/CMakeFiles/jsoncpp_lib_static.dir/depend.make
@@ -51,17 +51,17 @@ include 3th_party/jsoncpp-1.6.5/src/lib_json/CMakeFiles/jsoncpp_lib_static.dir/f
 
 3th_party/jsoncpp-1.6.5/src/lib_json/CMakeFiles/jsoncpp_lib_static.dir/json_reader.cpp.o: 3th_party/jsoncpp-1.6.5/src/lib_json/CMakeFiles/jsoncpp_lib_static.dir/flags.make
 3th_party/jsoncpp-1.6.5/src/lib_json/CMakeFiles/jsoncpp_lib_static.dir/json_reader.cpp.o: ../3th_party/jsoncpp-1.6.5/src/lib_json/json_reader.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build/CMakeFiles $(CMAKE_PROGRESS_1)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build/CMakeFiles $(CMAKE_PROGRESS_1)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object 3th_party/jsoncpp-1.6.5/src/lib_json/CMakeFiles/jsoncpp_lib_static.dir/json_reader.cpp.o"
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build/3th_party/jsoncpp-1.6.5/src/lib_json && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/jsoncpp_lib_static.dir/json_reader.cpp.o -c /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/3th_party/jsoncpp-1.6.5/src/lib_json/json_reader.cpp
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build/3th_party/jsoncpp-1.6.5/src/lib_json && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/jsoncpp_lib_static.dir/json_reader.cpp.o -c /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/3th_party/jsoncpp-1.6.5/src/lib_json/json_reader.cpp
 
 3th_party/jsoncpp-1.6.5/src/lib_json/CMakeFiles/jsoncpp_lib_static.dir/json_reader.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/jsoncpp_lib_static.dir/json_reader.cpp.i"
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build/3th_party/jsoncpp-1.6.5/src/lib_json && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/3th_party/jsoncpp-1.6.5/src/lib_json/json_reader.cpp > CMakeFiles/jsoncpp_lib_static.dir/json_reader.cpp.i
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build/3th_party/jsoncpp-1.6.5/src/lib_json && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/3th_party/jsoncpp-1.6.5/src/lib_json/json_reader.cpp > CMakeFiles/jsoncpp_lib_static.dir/json_reader.cpp.i
 
 3th_party/jsoncpp-1.6.5/src/lib_json/CMakeFiles/jsoncpp_lib_static.dir/json_reader.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/jsoncpp_lib_static.dir/json_reader.cpp.s"
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build/3th_party/jsoncpp-1.6.5/src/lib_json && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/3th_party/jsoncpp-1.6.5/src/lib_json/json_reader.cpp -o CMakeFiles/jsoncpp_lib_static.dir/json_reader.cpp.s
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build/3th_party/jsoncpp-1.6.5/src/lib_json && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/3th_party/jsoncpp-1.6.5/src/lib_json/json_reader.cpp -o CMakeFiles/jsoncpp_lib_static.dir/json_reader.cpp.s
 
 3th_party/jsoncpp-1.6.5/src/lib_json/CMakeFiles/jsoncpp_lib_static.dir/json_reader.cpp.o.requires:
 .PHONY : 3th_party/jsoncpp-1.6.5/src/lib_json/CMakeFiles/jsoncpp_lib_static.dir/json_reader.cpp.o.requires
@@ -74,17 +74,17 @@ include 3th_party/jsoncpp-1.6.5/src/lib_json/CMakeFiles/jsoncpp_lib_static.dir/f
 
 3th_party/jsoncpp-1.6.5/src/lib_json/CMakeFiles/jsoncpp_lib_static.dir/json_value.cpp.o: 3th_party/jsoncpp-1.6.5/src/lib_json/CMakeFiles/jsoncpp_lib_static.dir/flags.make
 3th_party/jsoncpp-1.6.5/src/lib_json/CMakeFiles/jsoncpp_lib_static.dir/json_value.cpp.o: ../3th_party/jsoncpp-1.6.5/src/lib_json/json_value.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build/CMakeFiles $(CMAKE_PROGRESS_2)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build/CMakeFiles $(CMAKE_PROGRESS_2)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object 3th_party/jsoncpp-1.6.5/src/lib_json/CMakeFiles/jsoncpp_lib_static.dir/json_value.cpp.o"
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build/3th_party/jsoncpp-1.6.5/src/lib_json && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/jsoncpp_lib_static.dir/json_value.cpp.o -c /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/3th_party/jsoncpp-1.6.5/src/lib_json/json_value.cpp
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build/3th_party/jsoncpp-1.6.5/src/lib_json && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/jsoncpp_lib_static.dir/json_value.cpp.o -c /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/3th_party/jsoncpp-1.6.5/src/lib_json/json_value.cpp
 
 3th_party/jsoncpp-1.6.5/src/lib_json/CMakeFiles/jsoncpp_lib_static.dir/json_value.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/jsoncpp_lib_static.dir/json_value.cpp.i"
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build/3th_party/jsoncpp-1.6.5/src/lib_json && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/3th_party/jsoncpp-1.6.5/src/lib_json/json_value.cpp > CMakeFiles/jsoncpp_lib_static.dir/json_value.cpp.i
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build/3th_party/jsoncpp-1.6.5/src/lib_json && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/3th_party/jsoncpp-1.6.5/src/lib_json/json_value.cpp > CMakeFiles/jsoncpp_lib_static.dir/json_value.cpp.i
 
 3th_party/jsoncpp-1.6.5/src/lib_json/CMakeFiles/jsoncpp_lib_static.dir/json_value.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/jsoncpp_lib_static.dir/json_value.cpp.s"
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build/3th_party/jsoncpp-1.6.5/src/lib_json && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/3th_party/jsoncpp-1.6.5/src/lib_json/json_value.cpp -o CMakeFiles/jsoncpp_lib_static.dir/json_value.cpp.s
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build/3th_party/jsoncpp-1.6.5/src/lib_json && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/3th_party/jsoncpp-1.6.5/src/lib_json/json_value.cpp -o CMakeFiles/jsoncpp_lib_static.dir/json_value.cpp.s
 
 3th_party/jsoncpp-1.6.5/src/lib_json/CMakeFiles/jsoncpp_lib_static.dir/json_value.cpp.o.requires:
 .PHONY : 3th_party/jsoncpp-1.6.5/src/lib_json/CMakeFiles/jsoncpp_lib_static.dir/json_value.cpp.o.requires
@@ -97,17 +97,17 @@ include 3th_party/jsoncpp-1.6.5/src/lib_json/CMakeFiles/jsoncpp_lib_static.dir/f
 
 3th_party/jsoncpp-1.6.5/src/lib_json/CMakeFiles/jsoncpp_lib_static.dir/json_writer.cpp.o: 3th_party/jsoncpp-1.6.5/src/lib_json/CMakeFiles/jsoncpp_lib_static.dir/flags.make
 3th_party/jsoncpp-1.6.5/src/lib_json/CMakeFiles/jsoncpp_lib_static.dir/json_writer.cpp.o: ../3th_party/jsoncpp-1.6.5/src/lib_json/json_writer.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build/CMakeFiles $(CMAKE_PROGRESS_3)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build/CMakeFiles $(CMAKE_PROGRESS_3)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object 3th_party/jsoncpp-1.6.5/src/lib_json/CMakeFiles/jsoncpp_lib_static.dir/json_writer.cpp.o"
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build/3th_party/jsoncpp-1.6.5/src/lib_json && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/jsoncpp_lib_static.dir/json_writer.cpp.o -c /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/3th_party/jsoncpp-1.6.5/src/lib_json/json_writer.cpp
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build/3th_party/jsoncpp-1.6.5/src/lib_json && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/jsoncpp_lib_static.dir/json_writer.cpp.o -c /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/3th_party/jsoncpp-1.6.5/src/lib_json/json_writer.cpp
 
 3th_party/jsoncpp-1.6.5/src/lib_json/CMakeFiles/jsoncpp_lib_static.dir/json_writer.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/jsoncpp_lib_static.dir/json_writer.cpp.i"
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build/3th_party/jsoncpp-1.6.5/src/lib_json && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/3th_party/jsoncpp-1.6.5/src/lib_json/json_writer.cpp > CMakeFiles/jsoncpp_lib_static.dir/json_writer.cpp.i
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build/3th_party/jsoncpp-1.6.5/src/lib_json && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/3th_party/jsoncpp-1.6.5/src/lib_json/json_writer.cpp > CMakeFiles/jsoncpp_lib_static.dir/json_writer.cpp.i
 
 3th_party/jsoncpp-1.6.5/src/lib_json/CMakeFiles/jsoncpp_lib_static.dir/json_writer.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/jsoncpp_lib_static.dir/json_writer.cpp.s"
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build/3th_party/jsoncpp-1.6.5/src/lib_json && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/3th_party/jsoncpp-1.6.5/src/lib_json/json_writer.cpp -o CMakeFiles/jsoncpp_lib_static.dir/json_writer.cpp.s
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build/3th_party/jsoncpp-1.6.5/src/lib_json && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/3th_party/jsoncpp-1.6.5/src/lib_json/json_writer.cpp -o CMakeFiles/jsoncpp_lib_static.dir/json_writer.cpp.s
 
 3th_party/jsoncpp-1.6.5/src/lib_json/CMakeFiles/jsoncpp_lib_static.dir/json_writer.cpp.o.requires:
 .PHONY : 3th_party/jsoncpp-1.6.5/src/lib_json/CMakeFiles/jsoncpp_lib_static.dir/json_writer.cpp.o.requires
@@ -127,17 +127,17 @@ jsoncpp_lib_static_OBJECTS = \
 # External object files for target jsoncpp_lib_static
 jsoncpp_lib_static_EXTERNAL_OBJECTS =
 
-3th_party/jsoncpp-1.6.5/src/lib_json/libjsoncpp.a: 3th_party/jsoncpp-1.6.5/src/lib_json/CMakeFiles/jsoncpp_lib_static.dir/json_reader.cpp.o
-3th_party/jsoncpp-1.6.5/src/lib_json/libjsoncpp.a: 3th_party/jsoncpp-1.6.5/src/lib_json/CMakeFiles/jsoncpp_lib_static.dir/json_value.cpp.o
-3th_party/jsoncpp-1.6.5/src/lib_json/libjsoncpp.a: 3th_party/jsoncpp-1.6.5/src/lib_json/CMakeFiles/jsoncpp_lib_static.dir/json_writer.cpp.o
-3th_party/jsoncpp-1.6.5/src/lib_json/libjsoncpp.a: 3th_party/jsoncpp-1.6.5/src/lib_json/CMakeFiles/jsoncpp_lib_static.dir/build.make
-3th_party/jsoncpp-1.6.5/src/lib_json/libjsoncpp.a: 3th_party/jsoncpp-1.6.5/src/lib_json/CMakeFiles/jsoncpp_lib_static.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --red --bold "Linking CXX static library libjsoncpp.a"
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build/3th_party/jsoncpp-1.6.5/src/lib_json && $(CMAKE_COMMAND) -P CMakeFiles/jsoncpp_lib_static.dir/cmake_clean_target.cmake
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build/3th_party/jsoncpp-1.6.5/src/lib_json && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/jsoncpp_lib_static.dir/link.txt --verbose=$(VERBOSE)
+../lib/libjsoncpp.a: 3th_party/jsoncpp-1.6.5/src/lib_json/CMakeFiles/jsoncpp_lib_static.dir/json_reader.cpp.o
+../lib/libjsoncpp.a: 3th_party/jsoncpp-1.6.5/src/lib_json/CMakeFiles/jsoncpp_lib_static.dir/json_value.cpp.o
+../lib/libjsoncpp.a: 3th_party/jsoncpp-1.6.5/src/lib_json/CMakeFiles/jsoncpp_lib_static.dir/json_writer.cpp.o
+../lib/libjsoncpp.a: 3th_party/jsoncpp-1.6.5/src/lib_json/CMakeFiles/jsoncpp_lib_static.dir/build.make
+../lib/libjsoncpp.a: 3th_party/jsoncpp-1.6.5/src/lib_json/CMakeFiles/jsoncpp_lib_static.dir/link.txt
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --red --bold "Linking CXX static library ../../../../../lib/libjsoncpp.a"
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build/3th_party/jsoncpp-1.6.5/src/lib_json && $(CMAKE_COMMAND) -P CMakeFiles/jsoncpp_lib_static.dir/cmake_clean_target.cmake
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build/3th_party/jsoncpp-1.6.5/src/lib_json && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/jsoncpp_lib_static.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
-3th_party/jsoncpp-1.6.5/src/lib_json/CMakeFiles/jsoncpp_lib_static.dir/build: 3th_party/jsoncpp-1.6.5/src/lib_json/libjsoncpp.a
+3th_party/jsoncpp-1.6.5/src/lib_json/CMakeFiles/jsoncpp_lib_static.dir/build: ../lib/libjsoncpp.a
 .PHONY : 3th_party/jsoncpp-1.6.5/src/lib_json/CMakeFiles/jsoncpp_lib_static.dir/build
 
 3th_party/jsoncpp-1.6.5/src/lib_json/CMakeFiles/jsoncpp_lib_static.dir/requires: 3th_party/jsoncpp-1.6.5/src/lib_json/CMakeFiles/jsoncpp_lib_static.dir/json_reader.cpp.o.requires
@@ -146,10 +146,10 @@ jsoncpp_lib_static_EXTERNAL_OBJECTS =
 .PHONY : 3th_party/jsoncpp-1.6.5/src/lib_json/CMakeFiles/jsoncpp_lib_static.dir/requires
 
 3th_party/jsoncpp-1.6.5/src/lib_json/CMakeFiles/jsoncpp_lib_static.dir/clean:
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build/3th_party/jsoncpp-1.6.5/src/lib_json && $(CMAKE_COMMAND) -P CMakeFiles/jsoncpp_lib_static.dir/cmake_clean.cmake
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build/3th_party/jsoncpp-1.6.5/src/lib_json && $(CMAKE_COMMAND) -P CMakeFiles/jsoncpp_lib_static.dir/cmake_clean.cmake
 .PHONY : 3th_party/jsoncpp-1.6.5/src/lib_json/CMakeFiles/jsoncpp_lib_static.dir/clean
 
 3th_party/jsoncpp-1.6.5/src/lib_json/CMakeFiles/jsoncpp_lib_static.dir/depend:
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/3th_party/jsoncpp-1.6.5/src/lib_json /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build/3th_party/jsoncpp-1.6.5/src/lib_json /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build/3th_party/jsoncpp-1.6.5/src/lib_json/CMakeFiles/jsoncpp_lib_static.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/3th_party/jsoncpp-1.6.5/src/lib_json /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build/3th_party/jsoncpp-1.6.5/src/lib_json /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build/3th_party/jsoncpp-1.6.5/src/lib_json/CMakeFiles/jsoncpp_lib_static.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : 3th_party/jsoncpp-1.6.5/src/lib_json/CMakeFiles/jsoncpp_lib_static.dir/depend
 

@@ -201,7 +201,7 @@ DeviceAPI/CMakeFiles/DeviceAPI.dir/Utility.cpp.o: ../DeviceAPI/Event.hpp
 DeviceAPI/CMakeFiles/DeviceAPI.dir/Utility.cpp.o: ../DeviceAPI/Utility.cpp
 DeviceAPI/CMakeFiles/DeviceAPI.dir/Utility.cpp.o: ../DeviceAPI/Utility.hpp
 
-DeviceAPI/cotire/DeviceAPI_CXX_prefix.hxx.gch: ../DeviceAPI/PrefixHeader.pch
 DeviceAPI/cotire/DeviceAPI_CXX_prefix.hxx.gch: DeviceAPI/cotire/DeviceAPI_CXX_prefix.cxx
 DeviceAPI/cotire/DeviceAPI_CXX_prefix.hxx.gch: DeviceAPI/cotire/DeviceAPI_CXX_prefix.hxx
+DeviceAPI/cotire/DeviceAPI_CXX_prefix.hxx.gch: ../DeviceAPI/PrefixHeader.pch
 

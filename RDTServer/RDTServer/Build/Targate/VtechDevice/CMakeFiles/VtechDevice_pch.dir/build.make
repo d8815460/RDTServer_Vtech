@@ -38,7 +38,7 @@ EQUALS = =
 CMAKE_SOURCE_DIR = /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build
+CMAKE_BINARY_DIR = /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build
 
 # Utility rule file for VtechDevice_pch.
 
@@ -49,19 +49,19 @@ Targate/VtechDevice/CMakeFiles/VtechDevice_pch: Targate/VtechDevice/cotire/Vtech
 
 Targate/VtechDevice/cotire/VtechDevice_CXX_prefix.hxx.gch: Targate/VtechDevice/cotire/VtechDevice_CXX_prefix.hxx
 Targate/VtechDevice/cotire/VtechDevice_CXX_prefix.hxx.gch: Targate/VtechDevice/cotire/VtechDevice_CXX_prefix.hxx
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build/CMakeFiles $(CMAKE_PROGRESS_1)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build/CMakeFiles $(CMAKE_PROGRESS_1)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Building CXX precompiled header Targate/VtechDevice/cotire/VtechDevice_CXX_prefix.hxx.gch"
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Targate/VtechDevice && /usr/bin/cmake -DCOTIRE_BUILD_TYPE:STRING=Debug -DCOTIRE_VERBOSE:BOOL=$(VERBOSE) -P /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/CMake/cotire.cmake precompile /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build/Targate/VtechDevice/VtechDevice_CXX_cotire.cmake /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build/Targate/VtechDevice/cotire/VtechDevice_CXX_prefix.hxx /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build/Targate/VtechDevice/cotire/VtechDevice_CXX_prefix.hxx.gch /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Targate/VtechDevice/main.cpp
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Targate/VtechDevice && /usr/bin/cmake -DCOTIRE_BUILD_TYPE:STRING=Release -DCOTIRE_VERBOSE:BOOL=$(VERBOSE) -P /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/CMake/cotire.cmake precompile /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build/Targate/VtechDevice/VtechDevice_CXX_cotire.cmake /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build/Targate/VtechDevice/cotire/VtechDevice_CXX_prefix.hxx /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build/Targate/VtechDevice/cotire/VtechDevice_CXX_prefix.hxx.gch /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Targate/VtechDevice/main.cpp
 
 Targate/VtechDevice/cotire/VtechDevice_CXX_prefix.hxx: Targate/VtechDevice/cotire/VtechDevice_CXX_prefix.cxx
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build/CMakeFiles $(CMAKE_PROGRESS_2)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build/CMakeFiles $(CMAKE_PROGRESS_2)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Generating CXX prefix header Targate/VtechDevice/cotire/VtechDevice_CXX_prefix.hxx"
-	/usr/bin/cmake -DCOTIRE_BUILD_TYPE:STRING=Debug -DCOTIRE_VERBOSE:BOOL=$(VERBOSE) -P /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/CMake/cotire.cmake combine /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build/Targate/VtechDevice/VtechDevice_CXX_cotire.cmake /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build/Targate/VtechDevice/cotire/VtechDevice_CXX_prefix.hxx /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build/Targate/VtechDevice/cotire/VtechDevice_CXX_prefix.cxx
+	/usr/bin/cmake -DCOTIRE_BUILD_TYPE:STRING=Release -DCOTIRE_VERBOSE:BOOL=$(VERBOSE) -P /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/CMake/cotire.cmake combine /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build/Targate/VtechDevice/VtechDevice_CXX_cotire.cmake /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build/Targate/VtechDevice/cotire/VtechDevice_CXX_prefix.hxx /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build/Targate/VtechDevice/cotire/VtechDevice_CXX_prefix.cxx
 
 Targate/VtechDevice/cotire/VtechDevice_CXX_prefix.cxx: DeviceAPI/cotire/DeviceAPI_CXX_prefix.hxx
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build/CMakeFiles $(CMAKE_PROGRESS_3)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build/CMakeFiles $(CMAKE_PROGRESS_3)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Generating CXX prefix source Targate/VtechDevice/cotire/VtechDevice_CXX_prefix.cxx"
-	/usr/bin/cmake -DCOTIRE_BUILD_TYPE:STRING=Debug -DCOTIRE_VERBOSE:BOOL=$(VERBOSE) -P /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/CMake/cotire.cmake combine /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build/Targate/VtechDevice/VtechDevice_CXX_cotire.cmake /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build/Targate/VtechDevice/cotire/VtechDevice_CXX_prefix.cxx /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build/DeviceAPI/cotire/DeviceAPI_CXX_prefix.hxx
+	/usr/bin/cmake -DCOTIRE_BUILD_TYPE:STRING=Release -DCOTIRE_VERBOSE:BOOL=$(VERBOSE) -P /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/CMake/cotire.cmake combine /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build/Targate/VtechDevice/VtechDevice_CXX_cotire.cmake /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build/Targate/VtechDevice/cotire/VtechDevice_CXX_prefix.cxx /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build/DeviceAPI/cotire/DeviceAPI_CXX_prefix.hxx
 
 VtechDevice_pch: Targate/VtechDevice/CMakeFiles/VtechDevice_pch
 VtechDevice_pch: Targate/VtechDevice/cotire/VtechDevice_CXX_prefix.hxx.gch
@@ -75,10 +75,10 @@ Targate/VtechDevice/CMakeFiles/VtechDevice_pch.dir/build: VtechDevice_pch
 .PHONY : Targate/VtechDevice/CMakeFiles/VtechDevice_pch.dir/build
 
 Targate/VtechDevice/CMakeFiles/VtechDevice_pch.dir/clean:
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build/Targate/VtechDevice && $(CMAKE_COMMAND) -P CMakeFiles/VtechDevice_pch.dir/cmake_clean.cmake
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build/Targate/VtechDevice && $(CMAKE_COMMAND) -P CMakeFiles/VtechDevice_pch.dir/cmake_clean.cmake
 .PHONY : Targate/VtechDevice/CMakeFiles/VtechDevice_pch.dir/clean
 
 Targate/VtechDevice/CMakeFiles/VtechDevice_pch.dir/depend:
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Targate/VtechDevice /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build/Targate/VtechDevice /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build/Targate/VtechDevice/CMakeFiles/VtechDevice_pch.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Targate/VtechDevice /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build/Targate/VtechDevice /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build/Targate/VtechDevice/CMakeFiles/VtechDevice_pch.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : Targate/VtechDevice/CMakeFiles/VtechDevice_pch.dir/depend
 

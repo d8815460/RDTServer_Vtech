@@ -38,7 +38,7 @@ EQUALS = =
 CMAKE_SOURCE_DIR = /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build
+CMAKE_BINARY_DIR = /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build
 
 # Include any dependencies generated for this target.
 include Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/depend.make
@@ -51,34 +51,34 @@ include Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/flags.make
 
 Targate/TUTKDevice/cotire/TUTKDevice_CXX_prefix.hxx.gch: Targate/TUTKDevice/cotire/TUTKDevice_CXX_prefix.hxx
 Targate/TUTKDevice/cotire/TUTKDevice_CXX_prefix.hxx.gch: Targate/TUTKDevice/cotire/TUTKDevice_CXX_prefix.hxx
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build/CMakeFiles $(CMAKE_PROGRESS_1)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build/CMakeFiles $(CMAKE_PROGRESS_1)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Building CXX precompiled header Targate/TUTKDevice/cotire/TUTKDevice_CXX_prefix.hxx.gch"
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Targate/TUTKDevice && /usr/bin/cmake -DCOTIRE_BUILD_TYPE:STRING=Debug -DCOTIRE_VERBOSE:BOOL=$(VERBOSE) -P /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/CMake/cotire.cmake precompile /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build/Targate/TUTKDevice/TUTKDevice_CXX_cotire.cmake /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build/Targate/TUTKDevice/cotire/TUTKDevice_CXX_prefix.hxx /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build/Targate/TUTKDevice/cotire/TUTKDevice_CXX_prefix.hxx.gch /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Targate/TUTKDevice/Body.cpp
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Targate/TUTKDevice && /usr/bin/cmake -DCOTIRE_BUILD_TYPE:STRING=Release -DCOTIRE_VERBOSE:BOOL=$(VERBOSE) -P /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/CMake/cotire.cmake precompile /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build/Targate/TUTKDevice/TUTKDevice_CXX_cotire.cmake /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build/Targate/TUTKDevice/cotire/TUTKDevice_CXX_prefix.hxx /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build/Targate/TUTKDevice/cotire/TUTKDevice_CXX_prefix.hxx.gch /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Targate/TUTKDevice/Body.cpp
 
 Targate/TUTKDevice/cotire/TUTKDevice_CXX_prefix.hxx: Targate/TUTKDevice/cotire/TUTKDevice_CXX_prefix.cxx
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build/CMakeFiles $(CMAKE_PROGRESS_2)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build/CMakeFiles $(CMAKE_PROGRESS_2)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Generating CXX prefix header Targate/TUTKDevice/cotire/TUTKDevice_CXX_prefix.hxx"
-	/usr/bin/cmake -DCOTIRE_BUILD_TYPE:STRING=Debug -DCOTIRE_VERBOSE:BOOL=$(VERBOSE) -P /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/CMake/cotire.cmake combine /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build/Targate/TUTKDevice/TUTKDevice_CXX_cotire.cmake /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build/Targate/TUTKDevice/cotire/TUTKDevice_CXX_prefix.hxx /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build/Targate/TUTKDevice/cotire/TUTKDevice_CXX_prefix.cxx
+	/usr/bin/cmake -DCOTIRE_BUILD_TYPE:STRING=Release -DCOTIRE_VERBOSE:BOOL=$(VERBOSE) -P /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/CMake/cotire.cmake combine /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build/Targate/TUTKDevice/TUTKDevice_CXX_cotire.cmake /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build/Targate/TUTKDevice/cotire/TUTKDevice_CXX_prefix.hxx /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build/Targate/TUTKDevice/cotire/TUTKDevice_CXX_prefix.cxx
 
 Targate/TUTKDevice/cotire/TUTKDevice_CXX_prefix.cxx: DeviceAPI/cotire/DeviceAPI_CXX_prefix.hxx
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build/CMakeFiles $(CMAKE_PROGRESS_3)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build/CMakeFiles $(CMAKE_PROGRESS_3)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Generating CXX prefix source Targate/TUTKDevice/cotire/TUTKDevice_CXX_prefix.cxx"
-	/usr/bin/cmake -DCOTIRE_BUILD_TYPE:STRING=Debug -DCOTIRE_VERBOSE:BOOL=$(VERBOSE) -P /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/CMake/cotire.cmake combine /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build/Targate/TUTKDevice/TUTKDevice_CXX_cotire.cmake /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build/Targate/TUTKDevice/cotire/TUTKDevice_CXX_prefix.cxx /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build/DeviceAPI/cotire/DeviceAPI_CXX_prefix.hxx
+	/usr/bin/cmake -DCOTIRE_BUILD_TYPE:STRING=Release -DCOTIRE_VERBOSE:BOOL=$(VERBOSE) -P /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/CMake/cotire.cmake combine /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build/Targate/TUTKDevice/TUTKDevice_CXX_cotire.cmake /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build/Targate/TUTKDevice/cotire/TUTKDevice_CXX_prefix.cxx /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build/DeviceAPI/cotire/DeviceAPI_CXX_prefix.hxx
 
 Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/Body.cpp.o: Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/flags.make
 Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/Body.cpp.o: ../Targate/TUTKDevice/Body.cpp
 Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/Body.cpp.o: Targate/TUTKDevice/cotire/TUTKDevice_CXX_prefix.hxx.gch
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build/CMakeFiles $(CMAKE_PROGRESS_4)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build/CMakeFiles $(CMAKE_PROGRESS_4)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/Body.cpp.o"
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build/Targate/TUTKDevice && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/TUTKDevice.dir/Body.cpp.o -c /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Targate/TUTKDevice/Body.cpp
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build/Targate/TUTKDevice && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/TUTKDevice.dir/Body.cpp.o -c /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Targate/TUTKDevice/Body.cpp
 
 Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/Body.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/TUTKDevice.dir/Body.cpp.i"
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build/Targate/TUTKDevice && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Targate/TUTKDevice/Body.cpp > CMakeFiles/TUTKDevice.dir/Body.cpp.i
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build/Targate/TUTKDevice && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Targate/TUTKDevice/Body.cpp > CMakeFiles/TUTKDevice.dir/Body.cpp.i
 
 Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/Body.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/TUTKDevice.dir/Body.cpp.s"
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build/Targate/TUTKDevice && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Targate/TUTKDevice/Body.cpp -o CMakeFiles/TUTKDevice.dir/Body.cpp.s
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build/Targate/TUTKDevice && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Targate/TUTKDevice/Body.cpp -o CMakeFiles/TUTKDevice.dir/Body.cpp.s
 
 Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/Body.cpp.o.requires:
 .PHONY : Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/Body.cpp.o.requires
@@ -92,17 +92,17 @@ Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/Body.cpp.o.provides.build: Targate/
 Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/JsonRDTClientDevice.cpp.o: Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/flags.make
 Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/JsonRDTClientDevice.cpp.o: ../Targate/TUTKDevice/JsonRDTClientDevice.cpp
 Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/JsonRDTClientDevice.cpp.o: Targate/TUTKDevice/cotire/TUTKDevice_CXX_prefix.hxx.gch
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build/CMakeFiles $(CMAKE_PROGRESS_5)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build/CMakeFiles $(CMAKE_PROGRESS_5)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/JsonRDTClientDevice.cpp.o"
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build/Targate/TUTKDevice && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/TUTKDevice.dir/JsonRDTClientDevice.cpp.o -c /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Targate/TUTKDevice/JsonRDTClientDevice.cpp
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build/Targate/TUTKDevice && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/TUTKDevice.dir/JsonRDTClientDevice.cpp.o -c /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Targate/TUTKDevice/JsonRDTClientDevice.cpp
 
 Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/JsonRDTClientDevice.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/TUTKDevice.dir/JsonRDTClientDevice.cpp.i"
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build/Targate/TUTKDevice && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Targate/TUTKDevice/JsonRDTClientDevice.cpp > CMakeFiles/TUTKDevice.dir/JsonRDTClientDevice.cpp.i
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build/Targate/TUTKDevice && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Targate/TUTKDevice/JsonRDTClientDevice.cpp > CMakeFiles/TUTKDevice.dir/JsonRDTClientDevice.cpp.i
 
 Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/JsonRDTClientDevice.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/TUTKDevice.dir/JsonRDTClientDevice.cpp.s"
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build/Targate/TUTKDevice && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Targate/TUTKDevice/JsonRDTClientDevice.cpp -o CMakeFiles/TUTKDevice.dir/JsonRDTClientDevice.cpp.s
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build/Targate/TUTKDevice && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Targate/TUTKDevice/JsonRDTClientDevice.cpp -o CMakeFiles/TUTKDevice.dir/JsonRDTClientDevice.cpp.s
 
 Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/JsonRDTClientDevice.cpp.o.requires:
 .PHONY : Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/JsonRDTClientDevice.cpp.o.requires
@@ -116,17 +116,17 @@ Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/JsonRDTClientDevice.cpp.o.provides.
 Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/main.cpp.o: Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/flags.make
 Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/main.cpp.o: ../Targate/TUTKDevice/main.cpp
 Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/main.cpp.o: Targate/TUTKDevice/cotire/TUTKDevice_CXX_prefix.hxx.gch
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build/CMakeFiles $(CMAKE_PROGRESS_6)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build/CMakeFiles $(CMAKE_PROGRESS_6)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/main.cpp.o"
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build/Targate/TUTKDevice && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/TUTKDevice.dir/main.cpp.o -c /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Targate/TUTKDevice/main.cpp
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build/Targate/TUTKDevice && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/TUTKDevice.dir/main.cpp.o -c /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Targate/TUTKDevice/main.cpp
 
 Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/main.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/TUTKDevice.dir/main.cpp.i"
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build/Targate/TUTKDevice && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Targate/TUTKDevice/main.cpp > CMakeFiles/TUTKDevice.dir/main.cpp.i
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build/Targate/TUTKDevice && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Targate/TUTKDevice/main.cpp > CMakeFiles/TUTKDevice.dir/main.cpp.i
 
 Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/main.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/TUTKDevice.dir/main.cpp.s"
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build/Targate/TUTKDevice && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Targate/TUTKDevice/main.cpp -o CMakeFiles/TUTKDevice.dir/main.cpp.s
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build/Targate/TUTKDevice && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Targate/TUTKDevice/main.cpp -o CMakeFiles/TUTKDevice.dir/main.cpp.s
 
 Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/main.cpp.o.requires:
 .PHONY : Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/main.cpp.o.requires
@@ -140,17 +140,17 @@ Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/main.cpp.o.provides.build: Targate/
 Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/SampoDevice.cpp.o: Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/flags.make
 Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/SampoDevice.cpp.o: ../Targate/TUTKDevice/SampoDevice.cpp
 Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/SampoDevice.cpp.o: Targate/TUTKDevice/cotire/TUTKDevice_CXX_prefix.hxx.gch
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build/CMakeFiles $(CMAKE_PROGRESS_7)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build/CMakeFiles $(CMAKE_PROGRESS_7)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/SampoDevice.cpp.o"
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build/Targate/TUTKDevice && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/TUTKDevice.dir/SampoDevice.cpp.o -c /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Targate/TUTKDevice/SampoDevice.cpp
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build/Targate/TUTKDevice && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/TUTKDevice.dir/SampoDevice.cpp.o -c /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Targate/TUTKDevice/SampoDevice.cpp
 
 Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/SampoDevice.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/TUTKDevice.dir/SampoDevice.cpp.i"
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build/Targate/TUTKDevice && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Targate/TUTKDevice/SampoDevice.cpp > CMakeFiles/TUTKDevice.dir/SampoDevice.cpp.i
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build/Targate/TUTKDevice && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Targate/TUTKDevice/SampoDevice.cpp > CMakeFiles/TUTKDevice.dir/SampoDevice.cpp.i
 
 Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/SampoDevice.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/TUTKDevice.dir/SampoDevice.cpp.s"
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build/Targate/TUTKDevice && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Targate/TUTKDevice/SampoDevice.cpp -o CMakeFiles/TUTKDevice.dir/SampoDevice.cpp.s
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build/Targate/TUTKDevice && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Targate/TUTKDevice/SampoDevice.cpp -o CMakeFiles/TUTKDevice.dir/SampoDevice.cpp.s
 
 Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/SampoDevice.cpp.o.requires:
 .PHONY : Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/SampoDevice.cpp.o.requires
@@ -164,17 +164,17 @@ Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/SampoDevice.cpp.o.provides.build: T
 Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/TUTKDoorDevice.cpp.o: Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/flags.make
 Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/TUTKDoorDevice.cpp.o: ../Targate/TUTKDevice/TUTKDoorDevice.cpp
 Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/TUTKDoorDevice.cpp.o: Targate/TUTKDevice/cotire/TUTKDevice_CXX_prefix.hxx.gch
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build/CMakeFiles $(CMAKE_PROGRESS_8)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build/CMakeFiles $(CMAKE_PROGRESS_8)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/TUTKDoorDevice.cpp.o"
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build/Targate/TUTKDevice && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/TUTKDevice.dir/TUTKDoorDevice.cpp.o -c /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Targate/TUTKDevice/TUTKDoorDevice.cpp
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build/Targate/TUTKDevice && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/TUTKDevice.dir/TUTKDoorDevice.cpp.o -c /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Targate/TUTKDevice/TUTKDoorDevice.cpp
 
 Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/TUTKDoorDevice.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/TUTKDevice.dir/TUTKDoorDevice.cpp.i"
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build/Targate/TUTKDevice && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Targate/TUTKDevice/TUTKDoorDevice.cpp > CMakeFiles/TUTKDevice.dir/TUTKDoorDevice.cpp.i
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build/Targate/TUTKDevice && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Targate/TUTKDevice/TUTKDoorDevice.cpp > CMakeFiles/TUTKDevice.dir/TUTKDoorDevice.cpp.i
 
 Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/TUTKDoorDevice.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/TUTKDevice.dir/TUTKDoorDevice.cpp.s"
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build/Targate/TUTKDevice && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Targate/TUTKDevice/TUTKDoorDevice.cpp -o CMakeFiles/TUTKDevice.dir/TUTKDoorDevice.cpp.s
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build/Targate/TUTKDevice && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Targate/TUTKDevice/TUTKDoorDevice.cpp -o CMakeFiles/TUTKDevice.dir/TUTKDoorDevice.cpp.s
 
 Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/TUTKDoorDevice.cpp.o.requires:
 .PHONY : Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/TUTKDoorDevice.cpp.o.requires
@@ -188,17 +188,17 @@ Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/TUTKDoorDevice.cpp.o.provides.build
 Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/TUTKGasDevice.cpp.o: Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/flags.make
 Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/TUTKGasDevice.cpp.o: ../Targate/TUTKDevice/TUTKGasDevice.cpp
 Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/TUTKGasDevice.cpp.o: Targate/TUTKDevice/cotire/TUTKDevice_CXX_prefix.hxx.gch
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build/CMakeFiles $(CMAKE_PROGRESS_9)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build/CMakeFiles $(CMAKE_PROGRESS_9)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/TUTKGasDevice.cpp.o"
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build/Targate/TUTKDevice && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/TUTKDevice.dir/TUTKGasDevice.cpp.o -c /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Targate/TUTKDevice/TUTKGasDevice.cpp
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build/Targate/TUTKDevice && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/TUTKDevice.dir/TUTKGasDevice.cpp.o -c /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Targate/TUTKDevice/TUTKGasDevice.cpp
 
 Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/TUTKGasDevice.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/TUTKDevice.dir/TUTKGasDevice.cpp.i"
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build/Targate/TUTKDevice && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Targate/TUTKDevice/TUTKGasDevice.cpp > CMakeFiles/TUTKDevice.dir/TUTKGasDevice.cpp.i
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build/Targate/TUTKDevice && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Targate/TUTKDevice/TUTKGasDevice.cpp > CMakeFiles/TUTKDevice.dir/TUTKGasDevice.cpp.i
 
 Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/TUTKGasDevice.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/TUTKDevice.dir/TUTKGasDevice.cpp.s"
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build/Targate/TUTKDevice && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Targate/TUTKDevice/TUTKGasDevice.cpp -o CMakeFiles/TUTKDevice.dir/TUTKGasDevice.cpp.s
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build/Targate/TUTKDevice && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Targate/TUTKDevice/TUTKGasDevice.cpp -o CMakeFiles/TUTKDevice.dir/TUTKGasDevice.cpp.s
 
 Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/TUTKGasDevice.cpp.o.requires:
 .PHONY : Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/TUTKGasDevice.cpp.o.requires
@@ -212,17 +212,17 @@ Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/TUTKGasDevice.cpp.o.provides.build:
 Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/TUTKGatewayDevice.cpp.o: Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/flags.make
 Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/TUTKGatewayDevice.cpp.o: ../Targate/TUTKDevice/TUTKGatewayDevice.cpp
 Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/TUTKGatewayDevice.cpp.o: Targate/TUTKDevice/cotire/TUTKDevice_CXX_prefix.hxx.gch
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build/CMakeFiles $(CMAKE_PROGRESS_10)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build/CMakeFiles $(CMAKE_PROGRESS_10)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/TUTKGatewayDevice.cpp.o"
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build/Targate/TUTKDevice && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/TUTKDevice.dir/TUTKGatewayDevice.cpp.o -c /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Targate/TUTKDevice/TUTKGatewayDevice.cpp
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build/Targate/TUTKDevice && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/TUTKDevice.dir/TUTKGatewayDevice.cpp.o -c /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Targate/TUTKDevice/TUTKGatewayDevice.cpp
 
 Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/TUTKGatewayDevice.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/TUTKDevice.dir/TUTKGatewayDevice.cpp.i"
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build/Targate/TUTKDevice && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Targate/TUTKDevice/TUTKGatewayDevice.cpp > CMakeFiles/TUTKDevice.dir/TUTKGatewayDevice.cpp.i
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build/Targate/TUTKDevice && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Targate/TUTKDevice/TUTKGatewayDevice.cpp > CMakeFiles/TUTKDevice.dir/TUTKGatewayDevice.cpp.i
 
 Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/TUTKGatewayDevice.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/TUTKDevice.dir/TUTKGatewayDevice.cpp.s"
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build/Targate/TUTKDevice && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Targate/TUTKDevice/TUTKGatewayDevice.cpp -o CMakeFiles/TUTKDevice.dir/TUTKGatewayDevice.cpp.s
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build/Targate/TUTKDevice && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Targate/TUTKDevice/TUTKGatewayDevice.cpp -o CMakeFiles/TUTKDevice.dir/TUTKGatewayDevice.cpp.s
 
 Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/TUTKGatewayDevice.cpp.o.requires:
 .PHONY : Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/TUTKGatewayDevice.cpp.o.requires
@@ -236,17 +236,17 @@ Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/TUTKGatewayDevice.cpp.o.provides.bu
 Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/TUTKLightingDevice.cpp.o: Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/flags.make
 Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/TUTKLightingDevice.cpp.o: ../Targate/TUTKDevice/TUTKLightingDevice.cpp
 Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/TUTKLightingDevice.cpp.o: Targate/TUTKDevice/cotire/TUTKDevice_CXX_prefix.hxx.gch
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build/CMakeFiles $(CMAKE_PROGRESS_11)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build/CMakeFiles $(CMAKE_PROGRESS_11)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/TUTKLightingDevice.cpp.o"
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build/Targate/TUTKDevice && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/TUTKDevice.dir/TUTKLightingDevice.cpp.o -c /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Targate/TUTKDevice/TUTKLightingDevice.cpp
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build/Targate/TUTKDevice && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/TUTKDevice.dir/TUTKLightingDevice.cpp.o -c /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Targate/TUTKDevice/TUTKLightingDevice.cpp
 
 Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/TUTKLightingDevice.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/TUTKDevice.dir/TUTKLightingDevice.cpp.i"
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build/Targate/TUTKDevice && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Targate/TUTKDevice/TUTKLightingDevice.cpp > CMakeFiles/TUTKDevice.dir/TUTKLightingDevice.cpp.i
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build/Targate/TUTKDevice && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Targate/TUTKDevice/TUTKLightingDevice.cpp > CMakeFiles/TUTKDevice.dir/TUTKLightingDevice.cpp.i
 
 Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/TUTKLightingDevice.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/TUTKDevice.dir/TUTKLightingDevice.cpp.s"
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build/Targate/TUTKDevice && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Targate/TUTKDevice/TUTKLightingDevice.cpp -o CMakeFiles/TUTKDevice.dir/TUTKLightingDevice.cpp.s
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build/Targate/TUTKDevice && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Targate/TUTKDevice/TUTKLightingDevice.cpp -o CMakeFiles/TUTKDevice.dir/TUTKLightingDevice.cpp.s
 
 Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/TUTKLightingDevice.cpp.o.requires:
 .PHONY : Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/TUTKLightingDevice.cpp.o.requires
@@ -260,17 +260,17 @@ Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/TUTKLightingDevice.cpp.o.provides.b
 Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/TUTKPIRDevice.cpp.o: Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/flags.make
 Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/TUTKPIRDevice.cpp.o: ../Targate/TUTKDevice/TUTKPIRDevice.cpp
 Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/TUTKPIRDevice.cpp.o: Targate/TUTKDevice/cotire/TUTKDevice_CXX_prefix.hxx.gch
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build/CMakeFiles $(CMAKE_PROGRESS_12)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build/CMakeFiles $(CMAKE_PROGRESS_12)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/TUTKPIRDevice.cpp.o"
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build/Targate/TUTKDevice && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/TUTKDevice.dir/TUTKPIRDevice.cpp.o -c /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Targate/TUTKDevice/TUTKPIRDevice.cpp
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build/Targate/TUTKDevice && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/TUTKDevice.dir/TUTKPIRDevice.cpp.o -c /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Targate/TUTKDevice/TUTKPIRDevice.cpp
 
 Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/TUTKPIRDevice.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/TUTKDevice.dir/TUTKPIRDevice.cpp.i"
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build/Targate/TUTKDevice && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Targate/TUTKDevice/TUTKPIRDevice.cpp > CMakeFiles/TUTKDevice.dir/TUTKPIRDevice.cpp.i
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build/Targate/TUTKDevice && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Targate/TUTKDevice/TUTKPIRDevice.cpp > CMakeFiles/TUTKDevice.dir/TUTKPIRDevice.cpp.i
 
 Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/TUTKPIRDevice.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/TUTKDevice.dir/TUTKPIRDevice.cpp.s"
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build/Targate/TUTKDevice && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Targate/TUTKDevice/TUTKPIRDevice.cpp -o CMakeFiles/TUTKDevice.dir/TUTKPIRDevice.cpp.s
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build/Targate/TUTKDevice && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Targate/TUTKDevice/TUTKPIRDevice.cpp -o CMakeFiles/TUTKDevice.dir/TUTKPIRDevice.cpp.s
 
 Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/TUTKPIRDevice.cpp.o.requires:
 .PHONY : Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/TUTKPIRDevice.cpp.o.requires
@@ -284,17 +284,17 @@ Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/TUTKPIRDevice.cpp.o.provides.build:
 Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/TUTKPlugDevice.cpp.o: Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/flags.make
 Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/TUTKPlugDevice.cpp.o: ../Targate/TUTKDevice/TUTKPlugDevice.cpp
 Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/TUTKPlugDevice.cpp.o: Targate/TUTKDevice/cotire/TUTKDevice_CXX_prefix.hxx.gch
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build/CMakeFiles $(CMAKE_PROGRESS_13)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build/CMakeFiles $(CMAKE_PROGRESS_13)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/TUTKPlugDevice.cpp.o"
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build/Targate/TUTKDevice && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/TUTKDevice.dir/TUTKPlugDevice.cpp.o -c /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Targate/TUTKDevice/TUTKPlugDevice.cpp
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build/Targate/TUTKDevice && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/TUTKDevice.dir/TUTKPlugDevice.cpp.o -c /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Targate/TUTKDevice/TUTKPlugDevice.cpp
 
 Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/TUTKPlugDevice.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/TUTKDevice.dir/TUTKPlugDevice.cpp.i"
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build/Targate/TUTKDevice && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Targate/TUTKDevice/TUTKPlugDevice.cpp > CMakeFiles/TUTKDevice.dir/TUTKPlugDevice.cpp.i
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build/Targate/TUTKDevice && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Targate/TUTKDevice/TUTKPlugDevice.cpp > CMakeFiles/TUTKDevice.dir/TUTKPlugDevice.cpp.i
 
 Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/TUTKPlugDevice.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/TUTKDevice.dir/TUTKPlugDevice.cpp.s"
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build/Targate/TUTKDevice && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Targate/TUTKDevice/TUTKPlugDevice.cpp -o CMakeFiles/TUTKDevice.dir/TUTKPlugDevice.cpp.s
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build/Targate/TUTKDevice && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Targate/TUTKDevice/TUTKPlugDevice.cpp -o CMakeFiles/TUTKDevice.dir/TUTKPlugDevice.cpp.s
 
 Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/TUTKPlugDevice.cpp.o.requires:
 .PHONY : Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/TUTKPlugDevice.cpp.o.requires
@@ -308,17 +308,17 @@ Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/TUTKPlugDevice.cpp.o.provides.build
 Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/TUTKSirenDevice.cpp.o: Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/flags.make
 Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/TUTKSirenDevice.cpp.o: ../Targate/TUTKDevice/TUTKSirenDevice.cpp
 Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/TUTKSirenDevice.cpp.o: Targate/TUTKDevice/cotire/TUTKDevice_CXX_prefix.hxx.gch
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build/CMakeFiles $(CMAKE_PROGRESS_14)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build/CMakeFiles $(CMAKE_PROGRESS_14)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/TUTKSirenDevice.cpp.o"
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build/Targate/TUTKDevice && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/TUTKDevice.dir/TUTKSirenDevice.cpp.o -c /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Targate/TUTKDevice/TUTKSirenDevice.cpp
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build/Targate/TUTKDevice && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/TUTKDevice.dir/TUTKSirenDevice.cpp.o -c /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Targate/TUTKDevice/TUTKSirenDevice.cpp
 
 Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/TUTKSirenDevice.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/TUTKDevice.dir/TUTKSirenDevice.cpp.i"
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build/Targate/TUTKDevice && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Targate/TUTKDevice/TUTKSirenDevice.cpp > CMakeFiles/TUTKDevice.dir/TUTKSirenDevice.cpp.i
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build/Targate/TUTKDevice && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Targate/TUTKDevice/TUTKSirenDevice.cpp > CMakeFiles/TUTKDevice.dir/TUTKSirenDevice.cpp.i
 
 Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/TUTKSirenDevice.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/TUTKDevice.dir/TUTKSirenDevice.cpp.s"
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build/Targate/TUTKDevice && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Targate/TUTKDevice/TUTKSirenDevice.cpp -o CMakeFiles/TUTKDevice.dir/TUTKSirenDevice.cpp.s
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build/Targate/TUTKDevice && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Targate/TUTKDevice/TUTKSirenDevice.cpp -o CMakeFiles/TUTKDevice.dir/TUTKSirenDevice.cpp.s
 
 Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/TUTKSirenDevice.cpp.o.requires:
 .PHONY : Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/TUTKSirenDevice.cpp.o.requires
@@ -332,17 +332,17 @@ Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/TUTKSirenDevice.cpp.o.provides.buil
 Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/TUTKSmokeDevice.cpp.o: Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/flags.make
 Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/TUTKSmokeDevice.cpp.o: ../Targate/TUTKDevice/TUTKSmokeDevice.cpp
 Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/TUTKSmokeDevice.cpp.o: Targate/TUTKDevice/cotire/TUTKDevice_CXX_prefix.hxx.gch
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build/CMakeFiles $(CMAKE_PROGRESS_15)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build/CMakeFiles $(CMAKE_PROGRESS_15)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/TUTKSmokeDevice.cpp.o"
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build/Targate/TUTKDevice && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/TUTKDevice.dir/TUTKSmokeDevice.cpp.o -c /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Targate/TUTKDevice/TUTKSmokeDevice.cpp
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build/Targate/TUTKDevice && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/TUTKDevice.dir/TUTKSmokeDevice.cpp.o -c /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Targate/TUTKDevice/TUTKSmokeDevice.cpp
 
 Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/TUTKSmokeDevice.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/TUTKDevice.dir/TUTKSmokeDevice.cpp.i"
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build/Targate/TUTKDevice && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Targate/TUTKDevice/TUTKSmokeDevice.cpp > CMakeFiles/TUTKDevice.dir/TUTKSmokeDevice.cpp.i
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build/Targate/TUTKDevice && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Targate/TUTKDevice/TUTKSmokeDevice.cpp > CMakeFiles/TUTKDevice.dir/TUTKSmokeDevice.cpp.i
 
 Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/TUTKSmokeDevice.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/TUTKDevice.dir/TUTKSmokeDevice.cpp.s"
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build/Targate/TUTKDevice && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Targate/TUTKDevice/TUTKSmokeDevice.cpp -o CMakeFiles/TUTKDevice.dir/TUTKSmokeDevice.cpp.s
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build/Targate/TUTKDevice && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Targate/TUTKDevice/TUTKSmokeDevice.cpp -o CMakeFiles/TUTKDevice.dir/TUTKSmokeDevice.cpp.s
 
 Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/TUTKSmokeDevice.cpp.o.requires:
 .PHONY : Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/TUTKSmokeDevice.cpp.o.requires
@@ -356,17 +356,17 @@ Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/TUTKSmokeDevice.cpp.o.provides.buil
 Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/TUTKVibrateDevice.cpp.o: Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/flags.make
 Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/TUTKVibrateDevice.cpp.o: ../Targate/TUTKDevice/TUTKVibrateDevice.cpp
 Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/TUTKVibrateDevice.cpp.o: Targate/TUTKDevice/cotire/TUTKDevice_CXX_prefix.hxx.gch
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build/CMakeFiles $(CMAKE_PROGRESS_16)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build/CMakeFiles $(CMAKE_PROGRESS_16)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/TUTKVibrateDevice.cpp.o"
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build/Targate/TUTKDevice && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/TUTKDevice.dir/TUTKVibrateDevice.cpp.o -c /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Targate/TUTKDevice/TUTKVibrateDevice.cpp
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build/Targate/TUTKDevice && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/TUTKDevice.dir/TUTKVibrateDevice.cpp.o -c /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Targate/TUTKDevice/TUTKVibrateDevice.cpp
 
 Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/TUTKVibrateDevice.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/TUTKDevice.dir/TUTKVibrateDevice.cpp.i"
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build/Targate/TUTKDevice && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Targate/TUTKDevice/TUTKVibrateDevice.cpp > CMakeFiles/TUTKDevice.dir/TUTKVibrateDevice.cpp.i
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build/Targate/TUTKDevice && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Targate/TUTKDevice/TUTKVibrateDevice.cpp > CMakeFiles/TUTKDevice.dir/TUTKVibrateDevice.cpp.i
 
 Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/TUTKVibrateDevice.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/TUTKDevice.dir/TUTKVibrateDevice.cpp.s"
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build/Targate/TUTKDevice && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Targate/TUTKDevice/TUTKVibrateDevice.cpp -o CMakeFiles/TUTKDevice.dir/TUTKVibrateDevice.cpp.s
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build/Targate/TUTKDevice && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Targate/TUTKDevice/TUTKVibrateDevice.cpp -o CMakeFiles/TUTKDevice.dir/TUTKVibrateDevice.cpp.s
 
 Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/TUTKVibrateDevice.cpp.o.requires:
 .PHONY : Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/TUTKVibrateDevice.cpp.o.requires
@@ -380,17 +380,17 @@ Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/TUTKVibrateDevice.cpp.o.provides.bu
 Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/TUTKWaterLeakDevice.cpp.o: Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/flags.make
 Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/TUTKWaterLeakDevice.cpp.o: ../Targate/TUTKDevice/TUTKWaterLeakDevice.cpp
 Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/TUTKWaterLeakDevice.cpp.o: Targate/TUTKDevice/cotire/TUTKDevice_CXX_prefix.hxx.gch
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build/CMakeFiles $(CMAKE_PROGRESS_17)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build/CMakeFiles $(CMAKE_PROGRESS_17)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/TUTKWaterLeakDevice.cpp.o"
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build/Targate/TUTKDevice && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/TUTKDevice.dir/TUTKWaterLeakDevice.cpp.o -c /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Targate/TUTKDevice/TUTKWaterLeakDevice.cpp
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build/Targate/TUTKDevice && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/TUTKDevice.dir/TUTKWaterLeakDevice.cpp.o -c /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Targate/TUTKDevice/TUTKWaterLeakDevice.cpp
 
 Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/TUTKWaterLeakDevice.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/TUTKDevice.dir/TUTKWaterLeakDevice.cpp.i"
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build/Targate/TUTKDevice && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Targate/TUTKDevice/TUTKWaterLeakDevice.cpp > CMakeFiles/TUTKDevice.dir/TUTKWaterLeakDevice.cpp.i
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build/Targate/TUTKDevice && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Targate/TUTKDevice/TUTKWaterLeakDevice.cpp > CMakeFiles/TUTKDevice.dir/TUTKWaterLeakDevice.cpp.i
 
 Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/TUTKWaterLeakDevice.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/TUTKDevice.dir/TUTKWaterLeakDevice.cpp.s"
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build/Targate/TUTKDevice && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Targate/TUTKDevice/TUTKWaterLeakDevice.cpp -o CMakeFiles/TUTKDevice.dir/TUTKWaterLeakDevice.cpp.s
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build/Targate/TUTKDevice && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Targate/TUTKDevice/TUTKWaterLeakDevice.cpp -o CMakeFiles/TUTKDevice.dir/TUTKWaterLeakDevice.cpp.s
 
 Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/TUTKWaterLeakDevice.cpp.o.requires:
 .PHONY : Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/TUTKWaterLeakDevice.cpp.o.requires
@@ -404,17 +404,17 @@ Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/TUTKWaterLeakDevice.cpp.o.provides.
 Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/ZhongHanDevice.cpp.o: Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/flags.make
 Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/ZhongHanDevice.cpp.o: ../Targate/TUTKDevice/ZhongHanDevice.cpp
 Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/ZhongHanDevice.cpp.o: Targate/TUTKDevice/cotire/TUTKDevice_CXX_prefix.hxx.gch
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build/CMakeFiles $(CMAKE_PROGRESS_18)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build/CMakeFiles $(CMAKE_PROGRESS_18)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/ZhongHanDevice.cpp.o"
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build/Targate/TUTKDevice && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/TUTKDevice.dir/ZhongHanDevice.cpp.o -c /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Targate/TUTKDevice/ZhongHanDevice.cpp
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build/Targate/TUTKDevice && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/TUTKDevice.dir/ZhongHanDevice.cpp.o -c /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Targate/TUTKDevice/ZhongHanDevice.cpp
 
 Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/ZhongHanDevice.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/TUTKDevice.dir/ZhongHanDevice.cpp.i"
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build/Targate/TUTKDevice && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Targate/TUTKDevice/ZhongHanDevice.cpp > CMakeFiles/TUTKDevice.dir/ZhongHanDevice.cpp.i
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build/Targate/TUTKDevice && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Targate/TUTKDevice/ZhongHanDevice.cpp > CMakeFiles/TUTKDevice.dir/ZhongHanDevice.cpp.i
 
 Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/ZhongHanDevice.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/TUTKDevice.dir/ZhongHanDevice.cpp.s"
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build/Targate/TUTKDevice && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Targate/TUTKDevice/ZhongHanDevice.cpp -o CMakeFiles/TUTKDevice.dir/ZhongHanDevice.cpp.s
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build/Targate/TUTKDevice && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Targate/TUTKDevice/ZhongHanDevice.cpp -o CMakeFiles/TUTKDevice.dir/ZhongHanDevice.cpp.s
 
 Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/ZhongHanDevice.cpp.o.requires:
 .PHONY : Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/ZhongHanDevice.cpp.o.requires
@@ -446,29 +446,29 @@ TUTKDevice_OBJECTS = \
 # External object files for target TUTKDevice
 TUTKDevice_EXTERNAL_OBJECTS =
 
-Targate/TUTKDevice/TUTKDevice: Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/Body.cpp.o
-Targate/TUTKDevice/TUTKDevice: Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/JsonRDTClientDevice.cpp.o
-Targate/TUTKDevice/TUTKDevice: Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/main.cpp.o
-Targate/TUTKDevice/TUTKDevice: Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/SampoDevice.cpp.o
-Targate/TUTKDevice/TUTKDevice: Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/TUTKDoorDevice.cpp.o
-Targate/TUTKDevice/TUTKDevice: Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/TUTKGasDevice.cpp.o
-Targate/TUTKDevice/TUTKDevice: Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/TUTKGatewayDevice.cpp.o
-Targate/TUTKDevice/TUTKDevice: Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/TUTKLightingDevice.cpp.o
-Targate/TUTKDevice/TUTKDevice: Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/TUTKPIRDevice.cpp.o
-Targate/TUTKDevice/TUTKDevice: Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/TUTKPlugDevice.cpp.o
-Targate/TUTKDevice/TUTKDevice: Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/TUTKSirenDevice.cpp.o
-Targate/TUTKDevice/TUTKDevice: Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/TUTKSmokeDevice.cpp.o
-Targate/TUTKDevice/TUTKDevice: Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/TUTKVibrateDevice.cpp.o
-Targate/TUTKDevice/TUTKDevice: Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/TUTKWaterLeakDevice.cpp.o
-Targate/TUTKDevice/TUTKDevice: Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/ZhongHanDevice.cpp.o
-Targate/TUTKDevice/TUTKDevice: Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/build.make
-Targate/TUTKDevice/TUTKDevice: DeviceAPI/libDeviceAPI.a
-Targate/TUTKDevice/TUTKDevice: Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --red --bold "Linking CXX executable TUTKDevice"
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build/Targate/TUTKDevice && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/TUTKDevice.dir/link.txt --verbose=$(VERBOSE)
+../bin/TUTKDevice: Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/Body.cpp.o
+../bin/TUTKDevice: Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/JsonRDTClientDevice.cpp.o
+../bin/TUTKDevice: Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/main.cpp.o
+../bin/TUTKDevice: Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/SampoDevice.cpp.o
+../bin/TUTKDevice: Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/TUTKDoorDevice.cpp.o
+../bin/TUTKDevice: Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/TUTKGasDevice.cpp.o
+../bin/TUTKDevice: Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/TUTKGatewayDevice.cpp.o
+../bin/TUTKDevice: Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/TUTKLightingDevice.cpp.o
+../bin/TUTKDevice: Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/TUTKPIRDevice.cpp.o
+../bin/TUTKDevice: Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/TUTKPlugDevice.cpp.o
+../bin/TUTKDevice: Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/TUTKSirenDevice.cpp.o
+../bin/TUTKDevice: Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/TUTKSmokeDevice.cpp.o
+../bin/TUTKDevice: Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/TUTKVibrateDevice.cpp.o
+../bin/TUTKDevice: Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/TUTKWaterLeakDevice.cpp.o
+../bin/TUTKDevice: Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/ZhongHanDevice.cpp.o
+../bin/TUTKDevice: Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/build.make
+../bin/TUTKDevice: ../lib/libDeviceAPI.a
+../bin/TUTKDevice: Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/link.txt
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --red --bold "Linking CXX executable ../../../bin/TUTKDevice"
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build/Targate/TUTKDevice && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/TUTKDevice.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
-Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/build: Targate/TUTKDevice/TUTKDevice
+Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/build: ../bin/TUTKDevice
 .PHONY : Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/build
 
 Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/requires: Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/Body.cpp.o.requires
@@ -489,12 +489,12 @@ Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/requires: Targate/TUTKDevice/CMakeF
 .PHONY : Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/requires
 
 Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/clean:
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build/Targate/TUTKDevice && $(CMAKE_COMMAND) -P CMakeFiles/TUTKDevice.dir/cmake_clean.cmake
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build/Targate/TUTKDevice && $(CMAKE_COMMAND) -P CMakeFiles/TUTKDevice.dir/cmake_clean.cmake
 .PHONY : Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/clean
 
 Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/depend: Targate/TUTKDevice/cotire/TUTKDevice_CXX_prefix.hxx.gch
 Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/depend: Targate/TUTKDevice/cotire/TUTKDevice_CXX_prefix.hxx
 Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/depend: Targate/TUTKDevice/cotire/TUTKDevice_CXX_prefix.cxx
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Targate/TUTKDevice /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build/Targate/TUTKDevice /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build/Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Targate/TUTKDevice /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build/Targate/TUTKDevice /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build/Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/depend
 

@@ -17,8 +17,8 @@ FILE(REMOVE_RECURSE
   "CMakeFiles/TUTKDevice.dir/TUTKVibrateDevice.cpp.o"
   "CMakeFiles/TUTKDevice.dir/TUTKWaterLeakDevice.cpp.o"
   "CMakeFiles/TUTKDevice.dir/ZhongHanDevice.cpp.o"
-  "TUTKDevice.pdb"
-  "TUTKDevice"
+  "../../../bin/TUTKDevice.pdb"
+  "../../../bin/TUTKDevice"
 )
 
 # Per-language clean rules from dependency scanning.

@@ -1,3 +1,3 @@
 FILE(REMOVE_RECURSE
-  "libVtechDevice.a"
+  "../../../lib/libVtechDevice.a"
 )

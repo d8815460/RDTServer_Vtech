@@ -1,3 +1,3 @@
 FILE(REMOVE_RECURSE
-  "libDeviceAPI.a"
+  "../../lib/libDeviceAPI.a"
 )

@@ -42,7 +42,7 @@ EQUALS = =
 CMAKE_SOURCE_DIR = /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build
+CMAKE_BINARY_DIR = /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -110,14 +110,14 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build && $(CMAKE_COMMAND) -E cmake_progress_start /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build/CMakeFiles /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build/Targate/VtechDevice/CMakeFiles/progress.marks
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build && $(MAKE) -f CMakeFiles/Makefile2 Targate/VtechDevice/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build/CMakeFiles 0
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build && $(CMAKE_COMMAND) -E cmake_progress_start /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build/CMakeFiles /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build/Targate/VtechDevice/CMakeFiles/progress.marks
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build && $(MAKE) -f CMakeFiles/Makefile2 Targate/VtechDevice/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
 clean:
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build && $(MAKE) -f CMakeFiles/Makefile2 Targate/VtechDevice/clean
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build && $(MAKE) -f CMakeFiles/Makefile2 Targate/VtechDevice/clean
 .PHONY : clean
 
 # The main clean target
@@ -126,22 +126,22 @@ clean/fast: clean
 
 # Prepare targets for installation.
 preinstall: all
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build && $(MAKE) -f CMakeFiles/Makefile2 Targate/VtechDevice/preinstall
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build && $(MAKE) -f CMakeFiles/Makefile2 Targate/VtechDevice/preinstall
 .PHONY : preinstall
 
 # Prepare targets for installation.
 preinstall/fast:
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build && $(MAKE) -f CMakeFiles/Makefile2 Targate/VtechDevice/preinstall
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build && $(MAKE) -f CMakeFiles/Makefile2 Targate/VtechDevice/preinstall
 .PHONY : preinstall/fast
 
 # clear depends
 depend:
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
 .PHONY : depend
 
 # Convenience name for target.
 Targate/VtechDevice/CMakeFiles/VtechDevice.dir/rule:
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build && $(MAKE) -f CMakeFiles/Makefile2 Targate/VtechDevice/CMakeFiles/VtechDevice.dir/rule
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build && $(MAKE) -f CMakeFiles/Makefile2 Targate/VtechDevice/CMakeFiles/VtechDevice.dir/rule
 .PHONY : Targate/VtechDevice/CMakeFiles/VtechDevice.dir/rule
 
 # Convenience name for target.
@@ -150,12 +150,12 @@ VtechDevice: Targate/VtechDevice/CMakeFiles/VtechDevice.dir/rule
 
 # fast build rule for target.
 VtechDevice/fast:
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build && $(MAKE) -f Targate/VtechDevice/CMakeFiles/VtechDevice.dir/build.make Targate/VtechDevice/CMakeFiles/VtechDevice.dir/build
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build && $(MAKE) -f Targate/VtechDevice/CMakeFiles/VtechDevice.dir/build.make Targate/VtechDevice/CMakeFiles/VtechDevice.dir/build
 .PHONY : VtechDevice/fast
 
 # Convenience name for target.
 Targate/VtechDevice/CMakeFiles/VtechDevice_pch.dir/rule:
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build && $(MAKE) -f CMakeFiles/Makefile2 Targate/VtechDevice/CMakeFiles/VtechDevice_pch.dir/rule
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build && $(MAKE) -f CMakeFiles/Makefile2 Targate/VtechDevice/CMakeFiles/VtechDevice_pch.dir/rule
 .PHONY : Targate/VtechDevice/CMakeFiles/VtechDevice_pch.dir/rule
 
 # Convenience name for target.
@@ -164,12 +164,12 @@ VtechDevice_pch: Targate/VtechDevice/CMakeFiles/VtechDevice_pch.dir/rule
 
 # fast build rule for target.
 VtechDevice_pch/fast:
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build && $(MAKE) -f Targate/VtechDevice/CMakeFiles/VtechDevice_pch.dir/build.make Targate/VtechDevice/CMakeFiles/VtechDevice_pch.dir/build
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build && $(MAKE) -f Targate/VtechDevice/CMakeFiles/VtechDevice_pch.dir/build.make Targate/VtechDevice/CMakeFiles/VtechDevice_pch.dir/build
 .PHONY : VtechDevice_pch/fast
 
 # Convenience name for target.
 Targate/VtechDevice/CMakeFiles/VtechDevice_unity.dir/rule:
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build && $(MAKE) -f CMakeFiles/Makefile2 Targate/VtechDevice/CMakeFiles/VtechDevice_unity.dir/rule
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build && $(MAKE) -f CMakeFiles/Makefile2 Targate/VtechDevice/CMakeFiles/VtechDevice_unity.dir/rule
 .PHONY : Targate/VtechDevice/CMakeFiles/VtechDevice_unity.dir/rule
 
 # Convenience name for target.
@@ -178,7 +178,7 @@ VtechDevice_unity: Targate/VtechDevice/CMakeFiles/VtechDevice_unity.dir/rule
 
 # fast build rule for target.
 VtechDevice_unity/fast:
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build && $(MAKE) -f Targate/VtechDevice/CMakeFiles/VtechDevice_unity.dir/build.make Targate/VtechDevice/CMakeFiles/VtechDevice_unity.dir/build
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build && $(MAKE) -f Targate/VtechDevice/CMakeFiles/VtechDevice_unity.dir/build.make Targate/VtechDevice/CMakeFiles/VtechDevice_unity.dir/build
 .PHONY : VtechDevice_unity/fast
 
 VtechGarageDoorDevice.o: VtechGarageDoorDevice.cpp.o
@@ -186,7 +186,7 @@ VtechGarageDoorDevice.o: VtechGarageDoorDevice.cpp.o
 
 # target to build an object file
 VtechGarageDoorDevice.cpp.o:
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build && $(MAKE) -f Targate/VtechDevice/CMakeFiles/VtechDevice.dir/build.make Targate/VtechDevice/CMakeFiles/VtechDevice.dir/VtechGarageDoorDevice.cpp.o
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build && $(MAKE) -f Targate/VtechDevice/CMakeFiles/VtechDevice.dir/build.make Targate/VtechDevice/CMakeFiles/VtechDevice.dir/VtechGarageDoorDevice.cpp.o
 .PHONY : VtechGarageDoorDevice.cpp.o
 
 VtechGarageDoorDevice.i: VtechGarageDoorDevice.cpp.i
@@ -194,7 +194,7 @@ VtechGarageDoorDevice.i: VtechGarageDoorDevice.cpp.i
 
 # target to preprocess a source file
 VtechGarageDoorDevice.cpp.i:
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build && $(MAKE) -f Targate/VtechDevice/CMakeFiles/VtechDevice.dir/build.make Targate/VtechDevice/CMakeFiles/VtechDevice.dir/VtechGarageDoorDevice.cpp.i
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build && $(MAKE) -f Targate/VtechDevice/CMakeFiles/VtechDevice.dir/build.make Targate/VtechDevice/CMakeFiles/VtechDevice.dir/VtechGarageDoorDevice.cpp.i
 .PHONY : VtechGarageDoorDevice.cpp.i
 
 VtechGarageDoorDevice.s: VtechGarageDoorDevice.cpp.s
@@ -202,7 +202,7 @@ VtechGarageDoorDevice.s: VtechGarageDoorDevice.cpp.s
 
 # target to generate assembly for a file
 VtechGarageDoorDevice.cpp.s:
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build && $(MAKE) -f Targate/VtechDevice/CMakeFiles/VtechDevice.dir/build.make Targate/VtechDevice/CMakeFiles/VtechDevice.dir/VtechGarageDoorDevice.cpp.s
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build && $(MAKE) -f Targate/VtechDevice/CMakeFiles/VtechDevice.dir/build.make Targate/VtechDevice/CMakeFiles/VtechDevice.dir/VtechGarageDoorDevice.cpp.s
 .PHONY : VtechGarageDoorDevice.cpp.s
 
 VtechIPHubGatewayDevice.o: VtechIPHubGatewayDevice.cpp.o
@@ -210,7 +210,7 @@ VtechIPHubGatewayDevice.o: VtechIPHubGatewayDevice.cpp.o
 
 # target to build an object file
 VtechIPHubGatewayDevice.cpp.o:
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build && $(MAKE) -f Targate/VtechDevice/CMakeFiles/VtechDevice.dir/build.make Targate/VtechDevice/CMakeFiles/VtechDevice.dir/VtechIPHubGatewayDevice.cpp.o
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build && $(MAKE) -f Targate/VtechDevice/CMakeFiles/VtechDevice.dir/build.make Targate/VtechDevice/CMakeFiles/VtechDevice.dir/VtechIPHubGatewayDevice.cpp.o
 .PHONY : VtechIPHubGatewayDevice.cpp.o
 
 VtechIPHubGatewayDevice.i: VtechIPHubGatewayDevice.cpp.i
@@ -218,7 +218,7 @@ VtechIPHubGatewayDevice.i: VtechIPHubGatewayDevice.cpp.i
 
 # target to preprocess a source file
 VtechIPHubGatewayDevice.cpp.i:
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build && $(MAKE) -f Targate/VtechDevice/CMakeFiles/VtechDevice.dir/build.make Targate/VtechDevice/CMakeFiles/VtechDevice.dir/VtechIPHubGatewayDevice.cpp.i
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build && $(MAKE) -f Targate/VtechDevice/CMakeFiles/VtechDevice.dir/build.make Targate/VtechDevice/CMakeFiles/VtechDevice.dir/VtechIPHubGatewayDevice.cpp.i
 .PHONY : VtechIPHubGatewayDevice.cpp.i
 
 VtechIPHubGatewayDevice.s: VtechIPHubGatewayDevice.cpp.s
@@ -226,7 +226,7 @@ VtechIPHubGatewayDevice.s: VtechIPHubGatewayDevice.cpp.s
 
 # target to generate assembly for a file
 VtechIPHubGatewayDevice.cpp.s:
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build && $(MAKE) -f Targate/VtechDevice/CMakeFiles/VtechDevice.dir/build.make Targate/VtechDevice/CMakeFiles/VtechDevice.dir/VtechIPHubGatewayDevice.cpp.s
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build && $(MAKE) -f Targate/VtechDevice/CMakeFiles/VtechDevice.dir/build.make Targate/VtechDevice/CMakeFiles/VtechDevice.dir/VtechIPHubGatewayDevice.cpp.s
 .PHONY : VtechIPHubGatewayDevice.cpp.s
 
 VtechLightBulbDevice.o: VtechLightBulbDevice.cpp.o
@@ -234,7 +234,7 @@ VtechLightBulbDevice.o: VtechLightBulbDevice.cpp.o
 
 # target to build an object file
 VtechLightBulbDevice.cpp.o:
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build && $(MAKE) -f Targate/VtechDevice/CMakeFiles/VtechDevice.dir/build.make Targate/VtechDevice/CMakeFiles/VtechDevice.dir/VtechLightBulbDevice.cpp.o
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build && $(MAKE) -f Targate/VtechDevice/CMakeFiles/VtechDevice.dir/build.make Targate/VtechDevice/CMakeFiles/VtechDevice.dir/VtechLightBulbDevice.cpp.o
 .PHONY : VtechLightBulbDevice.cpp.o
 
 VtechLightBulbDevice.i: VtechLightBulbDevice.cpp.i
@@ -242,7 +242,7 @@ VtechLightBulbDevice.i: VtechLightBulbDevice.cpp.i
 
 # target to preprocess a source file
 VtechLightBulbDevice.cpp.i:
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build && $(MAKE) -f Targate/VtechDevice/CMakeFiles/VtechDevice.dir/build.make Targate/VtechDevice/CMakeFiles/VtechDevice.dir/VtechLightBulbDevice.cpp.i
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build && $(MAKE) -f Targate/VtechDevice/CMakeFiles/VtechDevice.dir/build.make Targate/VtechDevice/CMakeFiles/VtechDevice.dir/VtechLightBulbDevice.cpp.i
 .PHONY : VtechLightBulbDevice.cpp.i
 
 VtechLightBulbDevice.s: VtechLightBulbDevice.cpp.s
@@ -250,7 +250,7 @@ VtechLightBulbDevice.s: VtechLightBulbDevice.cpp.s
 
 # target to generate assembly for a file
 VtechLightBulbDevice.cpp.s:
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build && $(MAKE) -f Targate/VtechDevice/CMakeFiles/VtechDevice.dir/build.make Targate/VtechDevice/CMakeFiles/VtechDevice.dir/VtechLightBulbDevice.cpp.s
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build && $(MAKE) -f Targate/VtechDevice/CMakeFiles/VtechDevice.dir/build.make Targate/VtechDevice/CMakeFiles/VtechDevice.dir/VtechLightBulbDevice.cpp.s
 .PHONY : VtechLightBulbDevice.cpp.s
 
 VtechMotionSensorDevice.o: VtechMotionSensorDevice.cpp.o
@@ -258,7 +258,7 @@ VtechMotionSensorDevice.o: VtechMotionSensorDevice.cpp.o
 
 # target to build an object file
 VtechMotionSensorDevice.cpp.o:
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build && $(MAKE) -f Targate/VtechDevice/CMakeFiles/VtechDevice.dir/build.make Targate/VtechDevice/CMakeFiles/VtechDevice.dir/VtechMotionSensorDevice.cpp.o
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build && $(MAKE) -f Targate/VtechDevice/CMakeFiles/VtechDevice.dir/build.make Targate/VtechDevice/CMakeFiles/VtechDevice.dir/VtechMotionSensorDevice.cpp.o
 .PHONY : VtechMotionSensorDevice.cpp.o
 
 VtechMotionSensorDevice.i: VtechMotionSensorDevice.cpp.i
@@ -266,7 +266,7 @@ VtechMotionSensorDevice.i: VtechMotionSensorDevice.cpp.i
 
 # target to preprocess a source file
 VtechMotionSensorDevice.cpp.i:
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build && $(MAKE) -f Targate/VtechDevice/CMakeFiles/VtechDevice.dir/build.make Targate/VtechDevice/CMakeFiles/VtechDevice.dir/VtechMotionSensorDevice.cpp.i
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build && $(MAKE) -f Targate/VtechDevice/CMakeFiles/VtechDevice.dir/build.make Targate/VtechDevice/CMakeFiles/VtechDevice.dir/VtechMotionSensorDevice.cpp.i
 .PHONY : VtechMotionSensorDevice.cpp.i
 
 VtechMotionSensorDevice.s: VtechMotionSensorDevice.cpp.s
@@ -274,7 +274,7 @@ VtechMotionSensorDevice.s: VtechMotionSensorDevice.cpp.s
 
 # target to generate assembly for a file
 VtechMotionSensorDevice.cpp.s:
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build && $(MAKE) -f Targate/VtechDevice/CMakeFiles/VtechDevice.dir/build.make Targate/VtechDevice/CMakeFiles/VtechDevice.dir/VtechMotionSensorDevice.cpp.s
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build && $(MAKE) -f Targate/VtechDevice/CMakeFiles/VtechDevice.dir/build.make Targate/VtechDevice/CMakeFiles/VtechDevice.dir/VtechMotionSensorDevice.cpp.s
 .PHONY : VtechMotionSensorDevice.cpp.s
 
 VtechOpenClosedDevice.o: VtechOpenClosedDevice.cpp.o
@@ -282,7 +282,7 @@ VtechOpenClosedDevice.o: VtechOpenClosedDevice.cpp.o
 
 # target to build an object file
 VtechOpenClosedDevice.cpp.o:
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build && $(MAKE) -f Targate/VtechDevice/CMakeFiles/VtechDevice.dir/build.make Targate/VtechDevice/CMakeFiles/VtechDevice.dir/VtechOpenClosedDevice.cpp.o
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build && $(MAKE) -f Targate/VtechDevice/CMakeFiles/VtechDevice.dir/build.make Targate/VtechDevice/CMakeFiles/VtechDevice.dir/VtechOpenClosedDevice.cpp.o
 .PHONY : VtechOpenClosedDevice.cpp.o
 
 VtechOpenClosedDevice.i: VtechOpenClosedDevice.cpp.i
@@ -290,7 +290,7 @@ VtechOpenClosedDevice.i: VtechOpenClosedDevice.cpp.i
 
 # target to preprocess a source file
 VtechOpenClosedDevice.cpp.i:
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build && $(MAKE) -f Targate/VtechDevice/CMakeFiles/VtechDevice.dir/build.make Targate/VtechDevice/CMakeFiles/VtechDevice.dir/VtechOpenClosedDevice.cpp.i
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build && $(MAKE) -f Targate/VtechDevice/CMakeFiles/VtechDevice.dir/build.make Targate/VtechDevice/CMakeFiles/VtechDevice.dir/VtechOpenClosedDevice.cpp.i
 .PHONY : VtechOpenClosedDevice.cpp.i
 
 VtechOpenClosedDevice.s: VtechOpenClosedDevice.cpp.s
@@ -298,7 +298,7 @@ VtechOpenClosedDevice.s: VtechOpenClosedDevice.cpp.s
 
 # target to generate assembly for a file
 VtechOpenClosedDevice.cpp.s:
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build && $(MAKE) -f Targate/VtechDevice/CMakeFiles/VtechDevice.dir/build.make Targate/VtechDevice/CMakeFiles/VtechDevice.dir/VtechOpenClosedDevice.cpp.s
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build && $(MAKE) -f Targate/VtechDevice/CMakeFiles/VtechDevice.dir/build.make Targate/VtechDevice/CMakeFiles/VtechDevice.dir/VtechOpenClosedDevice.cpp.s
 .PHONY : VtechOpenClosedDevice.cpp.s
 
 VtechVirtualGroupDevice.o: VtechVirtualGroupDevice.cpp.o
@@ -306,7 +306,7 @@ VtechVirtualGroupDevice.o: VtechVirtualGroupDevice.cpp.o
 
 # target to build an object file
 VtechVirtualGroupDevice.cpp.o:
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build && $(MAKE) -f Targate/VtechDevice/CMakeFiles/VtechDevice.dir/build.make Targate/VtechDevice/CMakeFiles/VtechDevice.dir/VtechVirtualGroupDevice.cpp.o
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build && $(MAKE) -f Targate/VtechDevice/CMakeFiles/VtechDevice.dir/build.make Targate/VtechDevice/CMakeFiles/VtechDevice.dir/VtechVirtualGroupDevice.cpp.o
 .PHONY : VtechVirtualGroupDevice.cpp.o
 
 VtechVirtualGroupDevice.i: VtechVirtualGroupDevice.cpp.i
@@ -314,7 +314,7 @@ VtechVirtualGroupDevice.i: VtechVirtualGroupDevice.cpp.i
 
 # target to preprocess a source file
 VtechVirtualGroupDevice.cpp.i:
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build && $(MAKE) -f Targate/VtechDevice/CMakeFiles/VtechDevice.dir/build.make Targate/VtechDevice/CMakeFiles/VtechDevice.dir/VtechVirtualGroupDevice.cpp.i
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build && $(MAKE) -f Targate/VtechDevice/CMakeFiles/VtechDevice.dir/build.make Targate/VtechDevice/CMakeFiles/VtechDevice.dir/VtechVirtualGroupDevice.cpp.i
 .PHONY : VtechVirtualGroupDevice.cpp.i
 
 VtechVirtualGroupDevice.s: VtechVirtualGroupDevice.cpp.s
@@ -322,7 +322,7 @@ VtechVirtualGroupDevice.s: VtechVirtualGroupDevice.cpp.s
 
 # target to generate assembly for a file
 VtechVirtualGroupDevice.cpp.s:
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build && $(MAKE) -f Targate/VtechDevice/CMakeFiles/VtechDevice.dir/build.make Targate/VtechDevice/CMakeFiles/VtechDevice.dir/VtechVirtualGroupDevice.cpp.s
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build && $(MAKE) -f Targate/VtechDevice/CMakeFiles/VtechDevice.dir/build.make Targate/VtechDevice/CMakeFiles/VtechDevice.dir/VtechVirtualGroupDevice.cpp.s
 .PHONY : VtechVirtualGroupDevice.cpp.s
 
 VtechWallSwitchDevice.o: VtechWallSwitchDevice.cpp.o
@@ -330,7 +330,7 @@ VtechWallSwitchDevice.o: VtechWallSwitchDevice.cpp.o
 
 # target to build an object file
 VtechWallSwitchDevice.cpp.o:
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build && $(MAKE) -f Targate/VtechDevice/CMakeFiles/VtechDevice.dir/build.make Targate/VtechDevice/CMakeFiles/VtechDevice.dir/VtechWallSwitchDevice.cpp.o
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build && $(MAKE) -f Targate/VtechDevice/CMakeFiles/VtechDevice.dir/build.make Targate/VtechDevice/CMakeFiles/VtechDevice.dir/VtechWallSwitchDevice.cpp.o
 .PHONY : VtechWallSwitchDevice.cpp.o
 
 VtechWallSwitchDevice.i: VtechWallSwitchDevice.cpp.i
@@ -338,7 +338,7 @@ VtechWallSwitchDevice.i: VtechWallSwitchDevice.cpp.i
 
 # target to preprocess a source file
 VtechWallSwitchDevice.cpp.i:
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build && $(MAKE) -f Targate/VtechDevice/CMakeFiles/VtechDevice.dir/build.make Targate/VtechDevice/CMakeFiles/VtechDevice.dir/VtechWallSwitchDevice.cpp.i
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build && $(MAKE) -f Targate/VtechDevice/CMakeFiles/VtechDevice.dir/build.make Targate/VtechDevice/CMakeFiles/VtechDevice.dir/VtechWallSwitchDevice.cpp.i
 .PHONY : VtechWallSwitchDevice.cpp.i
 
 VtechWallSwitchDevice.s: VtechWallSwitchDevice.cpp.s
@@ -346,7 +346,7 @@ VtechWallSwitchDevice.s: VtechWallSwitchDevice.cpp.s
 
 # target to generate assembly for a file
 VtechWallSwitchDevice.cpp.s:
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build && $(MAKE) -f Targate/VtechDevice/CMakeFiles/VtechDevice.dir/build.make Targate/VtechDevice/CMakeFiles/VtechDevice.dir/VtechWallSwitchDevice.cpp.s
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build && $(MAKE) -f Targate/VtechDevice/CMakeFiles/VtechDevice.dir/build.make Targate/VtechDevice/CMakeFiles/VtechDevice.dir/VtechWallSwitchDevice.cpp.s
 .PHONY : VtechWallSwitchDevice.cpp.s
 
 cotire/VtechDevice_CXX_unity.o: cotire/VtechDevice_CXX_unity.cxx.o
@@ -354,7 +354,7 @@ cotire/VtechDevice_CXX_unity.o: cotire/VtechDevice_CXX_unity.cxx.o
 
 # target to build an object file
 cotire/VtechDevice_CXX_unity.cxx.o:
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build && $(MAKE) -f Targate/VtechDevice/CMakeFiles/VtechDevice_unity.dir/build.make Targate/VtechDevice/CMakeFiles/VtechDevice_unity.dir/cotire/VtechDevice_CXX_unity.cxx.o
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build && $(MAKE) -f Targate/VtechDevice/CMakeFiles/VtechDevice_unity.dir/build.make Targate/VtechDevice/CMakeFiles/VtechDevice_unity.dir/cotire/VtechDevice_CXX_unity.cxx.o
 .PHONY : cotire/VtechDevice_CXX_unity.cxx.o
 
 cotire/VtechDevice_CXX_unity.i: cotire/VtechDevice_CXX_unity.cxx.i
@@ -362,7 +362,7 @@ cotire/VtechDevice_CXX_unity.i: cotire/VtechDevice_CXX_unity.cxx.i
 
 # target to preprocess a source file
 cotire/VtechDevice_CXX_unity.cxx.i:
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build && $(MAKE) -f Targate/VtechDevice/CMakeFiles/VtechDevice_unity.dir/build.make Targate/VtechDevice/CMakeFiles/VtechDevice_unity.dir/cotire/VtechDevice_CXX_unity.cxx.i
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build && $(MAKE) -f Targate/VtechDevice/CMakeFiles/VtechDevice_unity.dir/build.make Targate/VtechDevice/CMakeFiles/VtechDevice_unity.dir/cotire/VtechDevice_CXX_unity.cxx.i
 .PHONY : cotire/VtechDevice_CXX_unity.cxx.i
 
 cotire/VtechDevice_CXX_unity.s: cotire/VtechDevice_CXX_unity.cxx.s
@@ -370,7 +370,7 @@ cotire/VtechDevice_CXX_unity.s: cotire/VtechDevice_CXX_unity.cxx.s
 
 # target to generate assembly for a file
 cotire/VtechDevice_CXX_unity.cxx.s:
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build && $(MAKE) -f Targate/VtechDevice/CMakeFiles/VtechDevice_unity.dir/build.make Targate/VtechDevice/CMakeFiles/VtechDevice_unity.dir/cotire/VtechDevice_CXX_unity.cxx.s
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build && $(MAKE) -f Targate/VtechDevice/CMakeFiles/VtechDevice_unity.dir/build.make Targate/VtechDevice/CMakeFiles/VtechDevice_unity.dir/cotire/VtechDevice_CXX_unity.cxx.s
 .PHONY : cotire/VtechDevice_CXX_unity.cxx.s
 
 main.o: main.cpp.o
@@ -378,7 +378,7 @@ main.o: main.cpp.o
 
 # target to build an object file
 main.cpp.o:
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build && $(MAKE) -f Targate/VtechDevice/CMakeFiles/VtechDevice.dir/build.make Targate/VtechDevice/CMakeFiles/VtechDevice.dir/main.cpp.o
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build && $(MAKE) -f Targate/VtechDevice/CMakeFiles/VtechDevice.dir/build.make Targate/VtechDevice/CMakeFiles/VtechDevice.dir/main.cpp.o
 .PHONY : main.cpp.o
 
 main.i: main.cpp.i
@@ -386,7 +386,7 @@ main.i: main.cpp.i
 
 # target to preprocess a source file
 main.cpp.i:
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build && $(MAKE) -f Targate/VtechDevice/CMakeFiles/VtechDevice.dir/build.make Targate/VtechDevice/CMakeFiles/VtechDevice.dir/main.cpp.i
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build && $(MAKE) -f Targate/VtechDevice/CMakeFiles/VtechDevice.dir/build.make Targate/VtechDevice/CMakeFiles/VtechDevice.dir/main.cpp.i
 .PHONY : main.cpp.i
 
 main.s: main.cpp.s
@@ -394,7 +394,7 @@ main.s: main.cpp.s
 
 # target to generate assembly for a file
 main.cpp.s:
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build && $(MAKE) -f Targate/VtechDevice/CMakeFiles/VtechDevice.dir/build.make Targate/VtechDevice/CMakeFiles/VtechDevice.dir/main.cpp.s
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build && $(MAKE) -f Targate/VtechDevice/CMakeFiles/VtechDevice.dir/build.make Targate/VtechDevice/CMakeFiles/VtechDevice.dir/main.cpp.s
 .PHONY : main.cpp.s
 
 # Help Target
@@ -450,6 +450,6 @@ help:
 # No rule that depends on this can have commands that come from listfiles
 # because they might be regenerated.
 cmake_check_build_system:
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
 .PHONY : cmake_check_build_system
 

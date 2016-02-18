@@ -140,11 +140,39 @@ stdio.h
 Device.hpp
 ../Targate/VtechDevice/../../DeviceAPI/Device.hpp
 
+/home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build/DeviceAPI/cotire/DeviceAPI_CXX_prefix.cxx
+/home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/DeviceAPI/PrefixHeader.pch
+-
+
+/home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build/DeviceAPI/cotire/DeviceAPI_CXX_prefix.hxx
+/home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build/DeviceAPI/cotire/DeviceAPI_CXX_prefix.cxx
+-
+
+/home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build/Targate/VtechDevice/cotire/VtechDevice_CXX_prefix.cxx
+/home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build/DeviceAPI/cotire/DeviceAPI_CXX_prefix.hxx
+-
+
+/home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build/Targate/VtechDevice/cotire/VtechDevice_CXX_prefix.hxx
+/home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build/Targate/VtechDevice/cotire/VtechDevice_CXX_prefix.cxx
+-
+
+/home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/DeviceAPI/PrefixHeader.pch
+
+/home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Targate/VtechDevice/VtechGarageDoorDevice.cpp
+VtechGarageDoorDevice.hpp
+/home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Targate/VtechDevice/VtechGarageDoorDevice.hpp
+AccessoryTypeEnum.hpp
+/home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Targate/VtechDevice/AccessoryTypeEnum.hpp
+VtechGarageDoorEnum.hpp
+/home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Targate/VtechDevice/VtechGarageDoorEnum.hpp
+
 /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Targate/VtechDevice/VtechGarageDoorDevice.hpp
 stdio.h
 -
 Device.hpp
 /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Targate/VtechDevice/Device.hpp
+
+/home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Targate/VtechDevice/VtechGarageDoorEnum.hpp
 
 /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Targate/VtechDevice/VtechIPHubGatewayDevice.cpp
 VtechIPHubGatewayDevice.hpp
@@ -188,11 +216,29 @@ Device.hpp
 
 /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Targate/VtechDevice/VtechIPHubGatewayEnum.hpp
 
+/home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Targate/VtechDevice/VtechLightBulbDevice.cpp
+VtechLightBulbDevice.hpp
+/home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Targate/VtechDevice/VtechLightBulbDevice.hpp
+VtechLightBulbEnum.hpp
+/home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Targate/VtechDevice/VtechLightBulbEnum.hpp
+AccessoryTypeEnum.hpp
+/home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Targate/VtechDevice/AccessoryTypeEnum.hpp
+
 /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Targate/VtechDevice/VtechLightBulbDevice.hpp
 stdio.h
 -
 Device.hpp
 /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Targate/VtechDevice/Device.hpp
+
+/home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Targate/VtechDevice/VtechLightBulbEnum.hpp
+
+/home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Targate/VtechDevice/VtechMotionSensorDevice.cpp
+VtechMotionSensorDevice.hpp
+/home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Targate/VtechDevice/VtechMotionSensorDevice.hpp
+VtechMotionSensorEnum.hpp
+/home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Targate/VtechDevice/VtechMotionSensorEnum.hpp
+AccessoryTypeEnum.hpp
+/home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Targate/VtechDevice/AccessoryTypeEnum.hpp
 
 /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Targate/VtechDevice/VtechMotionSensorDevice.hpp
 stdio.h
@@ -200,11 +246,31 @@ stdio.h
 Device.hpp
 /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Targate/VtechDevice/Device.hpp
 
+/home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Targate/VtechDevice/VtechMotionSensorEnum.hpp
+
+/home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Targate/VtechDevice/VtechOpenClosedDevice.cpp
+VtechOpenClosedDevice.hpp
+/home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Targate/VtechDevice/VtechOpenClosedDevice.hpp
+VtechOpenClosedEnum.hpp
+/home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Targate/VtechDevice/VtechOpenClosedEnum.hpp
+AccessoryTypeEnum.hpp
+/home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Targate/VtechDevice/AccessoryTypeEnum.hpp
+
 /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Targate/VtechDevice/VtechOpenClosedDevice.hpp
 stdio.h
 -
 Device.hpp
 /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Targate/VtechDevice/Device.hpp
+
+/home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Targate/VtechDevice/VtechOpenClosedEnum.hpp
+
+/home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Targate/VtechDevice/VtechVirtualGroupDevice.cpp
+VtechVirtualGroupDevice.hpp
+/home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Targate/VtechDevice/VtechVirtualGroupDevice.hpp
+AccessoryTypeEnum.hpp
+/home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Targate/VtechDevice/AccessoryTypeEnum.hpp
+VtechVirtualGroupEnum.hpp
+/home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Targate/VtechDevice/VtechVirtualGroupEnum.hpp
 
 /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Targate/VtechDevice/VtechVirtualGroupDevice.hpp
 stdio.h
@@ -212,11 +278,23 @@ stdio.h
 Device.hpp
 /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Targate/VtechDevice/Device.hpp
 
+/home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Targate/VtechDevice/VtechVirtualGroupEnum.hpp
+
+/home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Targate/VtechDevice/VtechWallSwitchDevice.cpp
+VtechWallSwitchDevice.hpp
+/home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Targate/VtechDevice/VtechWallSwitchDevice.hpp
+VtechWallSwitchEnum.hpp
+/home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Targate/VtechDevice/VtechWallSwitchEnum.hpp
+AccessoryTypeEnum.hpp
+/home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Targate/VtechDevice/AccessoryTypeEnum.hpp
+
 /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Targate/VtechDevice/VtechWallSwitchDevice.hpp
 stdio.h
 -
 Device.hpp
 /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Targate/VtechDevice/Device.hpp
+
+/home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Targate/VtechDevice/VtechWallSwitchEnum.hpp
 
 /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Targate/VtechDevice/main.cpp
 stdio.h

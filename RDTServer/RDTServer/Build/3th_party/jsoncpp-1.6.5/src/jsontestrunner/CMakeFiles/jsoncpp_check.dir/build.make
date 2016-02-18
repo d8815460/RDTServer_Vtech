@@ -38,7 +38,7 @@ EQUALS = =
 CMAKE_SOURCE_DIR = /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build
+CMAKE_BINARY_DIR = /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build
 
 # Utility rule file for jsoncpp_check.
 
@@ -56,10 +56,10 @@ jsoncpp_check: 3th_party/jsoncpp-1.6.5/src/jsontestrunner/CMakeFiles/jsoncpp_che
 .PHONY : 3th_party/jsoncpp-1.6.5/src/jsontestrunner/CMakeFiles/jsoncpp_check.dir/build
 
 3th_party/jsoncpp-1.6.5/src/jsontestrunner/CMakeFiles/jsoncpp_check.dir/clean:
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build/3th_party/jsoncpp-1.6.5/src/jsontestrunner && $(CMAKE_COMMAND) -P CMakeFiles/jsoncpp_check.dir/cmake_clean.cmake
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build/3th_party/jsoncpp-1.6.5/src/jsontestrunner && $(CMAKE_COMMAND) -P CMakeFiles/jsoncpp_check.dir/cmake_clean.cmake
 .PHONY : 3th_party/jsoncpp-1.6.5/src/jsontestrunner/CMakeFiles/jsoncpp_check.dir/clean
 
 3th_party/jsoncpp-1.6.5/src/jsontestrunner/CMakeFiles/jsoncpp_check.dir/depend:
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/3th_party/jsoncpp-1.6.5/src/jsontestrunner /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build/3th_party/jsoncpp-1.6.5/src/jsontestrunner /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build/3th_party/jsoncpp-1.6.5/src/jsontestrunner/CMakeFiles/jsoncpp_check.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/3th_party/jsoncpp-1.6.5/src/jsontestrunner /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build/3th_party/jsoncpp-1.6.5/src/jsontestrunner /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build/3th_party/jsoncpp-1.6.5/src/jsontestrunner/CMakeFiles/jsoncpp_check.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : 3th_party/jsoncpp-1.6.5/src/jsontestrunner/CMakeFiles/jsoncpp_check.dir/depend
 

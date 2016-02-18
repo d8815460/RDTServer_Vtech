@@ -146,9 +146,9 @@ Targate/VtechDevice/CMakeFiles/VtechDevice.dir/main.cpp.o: ../Targate/VtechDevic
 Targate/VtechDevice/CMakeFiles/VtechDevice.dir/main.cpp.o: ../Targate/VtechDevice/VtechIPHubGatewayDevice.hpp
 Targate/VtechDevice/CMakeFiles/VtechDevice.dir/main.cpp.o: ../Targate/VtechDevice/main.cpp
 
-Targate/VtechDevice/cotire/VtechDevice_CXX_prefix.hxx.gch: ../DeviceAPI/PrefixHeader.pch
 Targate/VtechDevice/cotire/VtechDevice_CXX_prefix.hxx.gch: DeviceAPI/cotire/DeviceAPI_CXX_prefix.cxx
 Targate/VtechDevice/cotire/VtechDevice_CXX_prefix.hxx.gch: DeviceAPI/cotire/DeviceAPI_CXX_prefix.hxx
 Targate/VtechDevice/cotire/VtechDevice_CXX_prefix.hxx.gch: Targate/VtechDevice/cotire/VtechDevice_CXX_prefix.cxx
 Targate/VtechDevice/cotire/VtechDevice_CXX_prefix.hxx.gch: Targate/VtechDevice/cotire/VtechDevice_CXX_prefix.hxx
+Targate/VtechDevice/cotire/VtechDevice_CXX_prefix.hxx.gch: ../DeviceAPI/PrefixHeader.pch
 

@@ -38,7 +38,7 @@ EQUALS = =
 CMAKE_SOURCE_DIR = /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build
+CMAKE_BINARY_DIR = /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build
 
 # Utility rule file for all_unity.
 
@@ -56,10 +56,10 @@ DeviceAPI/CMakeFiles/all_unity.dir/build: all_unity
 .PHONY : DeviceAPI/CMakeFiles/all_unity.dir/build
 
 DeviceAPI/CMakeFiles/all_unity.dir/clean:
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build/DeviceAPI && $(CMAKE_COMMAND) -P CMakeFiles/all_unity.dir/cmake_clean.cmake
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build/DeviceAPI && $(CMAKE_COMMAND) -P CMakeFiles/all_unity.dir/cmake_clean.cmake
 .PHONY : DeviceAPI/CMakeFiles/all_unity.dir/clean
 
 DeviceAPI/CMakeFiles/all_unity.dir/depend:
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/DeviceAPI /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build/DeviceAPI /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build/DeviceAPI/CMakeFiles/all_unity.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/DeviceAPI /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build/DeviceAPI /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build/DeviceAPI/CMakeFiles/all_unity.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : DeviceAPI/CMakeFiles/all_unity.dir/depend
 

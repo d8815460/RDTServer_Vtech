@@ -38,7 +38,7 @@ EQUALS = =
 CMAKE_SOURCE_DIR = /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build
+CMAKE_BINARY_DIR = /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build
 
 # Include any dependencies generated for this target.
 include DeviceAPI/CMakeFiles/DeviceAPI_unity.dir/depend.make
@@ -50,34 +50,34 @@ include DeviceAPI/CMakeFiles/DeviceAPI_unity.dir/progress.make
 include DeviceAPI/CMakeFiles/DeviceAPI_unity.dir/flags.make
 
 DeviceAPI/cotire/DeviceAPI_CXX_prefix.hxx: DeviceAPI/cotire/DeviceAPI_CXX_prefix.cxx
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build/CMakeFiles $(CMAKE_PROGRESS_1)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build/CMakeFiles $(CMAKE_PROGRESS_1)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Generating CXX prefix header DeviceAPI/cotire/DeviceAPI_CXX_prefix.hxx"
-	/usr/bin/cmake -DCOTIRE_BUILD_TYPE:STRING=Debug -DCOTIRE_VERBOSE:BOOL=$(VERBOSE) -P /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/CMake/cotire.cmake combine /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build/DeviceAPI/DeviceAPI_CXX_cotire.cmake /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build/DeviceAPI/cotire/DeviceAPI_CXX_prefix.hxx /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build/DeviceAPI/cotire/DeviceAPI_CXX_prefix.cxx
+	/usr/bin/cmake -DCOTIRE_BUILD_TYPE:STRING=Release -DCOTIRE_VERBOSE:BOOL=$(VERBOSE) -P /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/CMake/cotire.cmake combine /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build/DeviceAPI/DeviceAPI_CXX_cotire.cmake /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build/DeviceAPI/cotire/DeviceAPI_CXX_prefix.hxx /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build/DeviceAPI/cotire/DeviceAPI_CXX_prefix.cxx
 
 DeviceAPI/cotire/DeviceAPI_CXX_unity.cxx: DeviceAPI/DeviceAPI_CXX_cotire.cmake
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build/CMakeFiles $(CMAKE_PROGRESS_2)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build/CMakeFiles $(CMAKE_PROGRESS_2)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Generating CXX unity source DeviceAPI/cotire/DeviceAPI_CXX_unity.cxx"
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/DeviceAPI && /usr/bin/cmake -DCOTIRE_BUILD_TYPE:STRING=Debug -DCOTIRE_VERBOSE:BOOL=$(VERBOSE) -P /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/CMake/cotire.cmake unity /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build/DeviceAPI/DeviceAPI_CXX_cotire.cmake /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build/DeviceAPI/cotire/DeviceAPI_CXX_unity.cxx
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/DeviceAPI && /usr/bin/cmake -DCOTIRE_BUILD_TYPE:STRING=Release -DCOTIRE_VERBOSE:BOOL=$(VERBOSE) -P /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/CMake/cotire.cmake unity /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build/DeviceAPI/DeviceAPI_CXX_cotire.cmake /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build/DeviceAPI/cotire/DeviceAPI_CXX_unity.cxx
 
 DeviceAPI/cotire/DeviceAPI_CXX_prefix.cxx: ../DeviceAPI/PrefixHeader.pch
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build/CMakeFiles $(CMAKE_PROGRESS_3)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build/CMakeFiles $(CMAKE_PROGRESS_3)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Generating CXX prefix source DeviceAPI/cotire/DeviceAPI_CXX_prefix.cxx"
-	/usr/bin/cmake -DCOTIRE_BUILD_TYPE:STRING=Debug -DCOTIRE_VERBOSE:BOOL=$(VERBOSE) -P /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/CMake/cotire.cmake combine /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build/DeviceAPI/DeviceAPI_CXX_cotire.cmake /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build/DeviceAPI/cotire/DeviceAPI_CXX_prefix.cxx /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/DeviceAPI/PrefixHeader.pch
+	/usr/bin/cmake -DCOTIRE_BUILD_TYPE:STRING=Release -DCOTIRE_VERBOSE:BOOL=$(VERBOSE) -P /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/CMake/cotire.cmake combine /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build/DeviceAPI/DeviceAPI_CXX_cotire.cmake /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build/DeviceAPI/cotire/DeviceAPI_CXX_prefix.cxx /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/DeviceAPI/PrefixHeader.pch
 
 DeviceAPI/CMakeFiles/DeviceAPI_unity.dir/cotire/DeviceAPI_CXX_unity.cxx.o: DeviceAPI/CMakeFiles/DeviceAPI_unity.dir/flags.make
 DeviceAPI/CMakeFiles/DeviceAPI_unity.dir/cotire/DeviceAPI_CXX_unity.cxx.o: DeviceAPI/cotire/DeviceAPI_CXX_unity.cxx
 DeviceAPI/CMakeFiles/DeviceAPI_unity.dir/cotire/DeviceAPI_CXX_unity.cxx.o: DeviceAPI/cotire/DeviceAPI_CXX_prefix.hxx
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build/CMakeFiles $(CMAKE_PROGRESS_4)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build/CMakeFiles $(CMAKE_PROGRESS_4)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object DeviceAPI/CMakeFiles/DeviceAPI_unity.dir/cotire/DeviceAPI_CXX_unity.cxx.o"
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build/DeviceAPI && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS)  -Winvalid-pch -include "/home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build/DeviceAPI/cotire/DeviceAPI_CXX_prefix.hxx"  -o CMakeFiles/DeviceAPI_unity.dir/cotire/DeviceAPI_CXX_unity.cxx.o -c /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build/DeviceAPI/cotire/DeviceAPI_CXX_unity.cxx
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build/DeviceAPI && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS)  -Winvalid-pch -include "/home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build/DeviceAPI/cotire/DeviceAPI_CXX_prefix.hxx"  -o CMakeFiles/DeviceAPI_unity.dir/cotire/DeviceAPI_CXX_unity.cxx.o -c /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build/DeviceAPI/cotire/DeviceAPI_CXX_unity.cxx
 
 DeviceAPI/CMakeFiles/DeviceAPI_unity.dir/cotire/DeviceAPI_CXX_unity.cxx.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/DeviceAPI_unity.dir/cotire/DeviceAPI_CXX_unity.cxx.i"
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build/DeviceAPI && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS)  -Winvalid-pch -include "/home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build/DeviceAPI/cotire/DeviceAPI_CXX_prefix.hxx"  -E /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build/DeviceAPI/cotire/DeviceAPI_CXX_unity.cxx > CMakeFiles/DeviceAPI_unity.dir/cotire/DeviceAPI_CXX_unity.cxx.i
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build/DeviceAPI && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS)  -Winvalid-pch -include "/home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build/DeviceAPI/cotire/DeviceAPI_CXX_prefix.hxx"  -E /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build/DeviceAPI/cotire/DeviceAPI_CXX_unity.cxx > CMakeFiles/DeviceAPI_unity.dir/cotire/DeviceAPI_CXX_unity.cxx.i
 
 DeviceAPI/CMakeFiles/DeviceAPI_unity.dir/cotire/DeviceAPI_CXX_unity.cxx.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/DeviceAPI_unity.dir/cotire/DeviceAPI_CXX_unity.cxx.s"
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build/DeviceAPI && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS)  -Winvalid-pch -include "/home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build/DeviceAPI/cotire/DeviceAPI_CXX_prefix.hxx"  -S /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build/DeviceAPI/cotire/DeviceAPI_CXX_unity.cxx -o CMakeFiles/DeviceAPI_unity.dir/cotire/DeviceAPI_CXX_unity.cxx.s
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build/DeviceAPI && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS)  -Winvalid-pch -include "/home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build/DeviceAPI/cotire/DeviceAPI_CXX_prefix.hxx"  -S /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build/DeviceAPI/cotire/DeviceAPI_CXX_unity.cxx -o CMakeFiles/DeviceAPI_unity.dir/cotire/DeviceAPI_CXX_unity.cxx.s
 
 DeviceAPI/CMakeFiles/DeviceAPI_unity.dir/cotire/DeviceAPI_CXX_unity.cxx.o.requires:
 .PHONY : DeviceAPI/CMakeFiles/DeviceAPI_unity.dir/cotire/DeviceAPI_CXX_unity.cxx.o.requires
@@ -95,27 +95,27 @@ DeviceAPI_unity_OBJECTS = \
 # External object files for target DeviceAPI_unity
 DeviceAPI_unity_EXTERNAL_OBJECTS =
 
-DeviceAPI/libDeviceAPI.a: DeviceAPI/CMakeFiles/DeviceAPI_unity.dir/cotire/DeviceAPI_CXX_unity.cxx.o
-DeviceAPI/libDeviceAPI.a: DeviceAPI/CMakeFiles/DeviceAPI_unity.dir/build.make
-DeviceAPI/libDeviceAPI.a: DeviceAPI/CMakeFiles/DeviceAPI_unity.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --red --bold "Linking CXX static library libDeviceAPI.a"
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build/DeviceAPI && $(CMAKE_COMMAND) -P CMakeFiles/DeviceAPI_unity.dir/cmake_clean_target.cmake
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build/DeviceAPI && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/DeviceAPI_unity.dir/link.txt --verbose=$(VERBOSE)
+../lib/libDeviceAPI.a: DeviceAPI/CMakeFiles/DeviceAPI_unity.dir/cotire/DeviceAPI_CXX_unity.cxx.o
+../lib/libDeviceAPI.a: DeviceAPI/CMakeFiles/DeviceAPI_unity.dir/build.make
+../lib/libDeviceAPI.a: DeviceAPI/CMakeFiles/DeviceAPI_unity.dir/link.txt
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --red --bold "Linking CXX static library ../../lib/libDeviceAPI.a"
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build/DeviceAPI && $(CMAKE_COMMAND) -P CMakeFiles/DeviceAPI_unity.dir/cmake_clean_target.cmake
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build/DeviceAPI && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/DeviceAPI_unity.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
-DeviceAPI/CMakeFiles/DeviceAPI_unity.dir/build: DeviceAPI/libDeviceAPI.a
+DeviceAPI/CMakeFiles/DeviceAPI_unity.dir/build: ../lib/libDeviceAPI.a
 .PHONY : DeviceAPI/CMakeFiles/DeviceAPI_unity.dir/build
 
 DeviceAPI/CMakeFiles/DeviceAPI_unity.dir/requires: DeviceAPI/CMakeFiles/DeviceAPI_unity.dir/cotire/DeviceAPI_CXX_unity.cxx.o.requires
 .PHONY : DeviceAPI/CMakeFiles/DeviceAPI_unity.dir/requires
 
 DeviceAPI/CMakeFiles/DeviceAPI_unity.dir/clean:
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build/DeviceAPI && $(CMAKE_COMMAND) -P CMakeFiles/DeviceAPI_unity.dir/cmake_clean.cmake
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build/DeviceAPI && $(CMAKE_COMMAND) -P CMakeFiles/DeviceAPI_unity.dir/cmake_clean.cmake
 .PHONY : DeviceAPI/CMakeFiles/DeviceAPI_unity.dir/clean
 
 DeviceAPI/CMakeFiles/DeviceAPI_unity.dir/depend: DeviceAPI/cotire/DeviceAPI_CXX_prefix.hxx
 DeviceAPI/CMakeFiles/DeviceAPI_unity.dir/depend: DeviceAPI/cotire/DeviceAPI_CXX_unity.cxx
 DeviceAPI/CMakeFiles/DeviceAPI_unity.dir/depend: DeviceAPI/cotire/DeviceAPI_CXX_prefix.cxx
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/DeviceAPI /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build/DeviceAPI /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build/DeviceAPI/CMakeFiles/DeviceAPI_unity.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/DeviceAPI /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build/DeviceAPI /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build/DeviceAPI/CMakeFiles/DeviceAPI_unity.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : DeviceAPI/CMakeFiles/DeviceAPI_unity.dir/depend
 

@@ -42,7 +42,7 @@ EQUALS = =
 CMAKE_SOURCE_DIR = /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build
+CMAKE_BINARY_DIR = /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -110,14 +110,14 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build && $(CMAKE_COMMAND) -E cmake_progress_start /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build/CMakeFiles /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build/DeviceAPI/CMakeFiles/progress.marks
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build && $(MAKE) -f CMakeFiles/Makefile2 DeviceAPI/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build/CMakeFiles 0
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build && $(CMAKE_COMMAND) -E cmake_progress_start /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build/CMakeFiles /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build/DeviceAPI/CMakeFiles/progress.marks
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build && $(MAKE) -f CMakeFiles/Makefile2 DeviceAPI/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
 clean:
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build && $(MAKE) -f CMakeFiles/Makefile2 DeviceAPI/clean
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build && $(MAKE) -f CMakeFiles/Makefile2 DeviceAPI/clean
 .PHONY : clean
 
 # The main clean target
@@ -126,22 +126,22 @@ clean/fast: clean
 
 # Prepare targets for installation.
 preinstall: all
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build && $(MAKE) -f CMakeFiles/Makefile2 DeviceAPI/preinstall
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build && $(MAKE) -f CMakeFiles/Makefile2 DeviceAPI/preinstall
 .PHONY : preinstall
 
 # Prepare targets for installation.
 preinstall/fast:
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build && $(MAKE) -f CMakeFiles/Makefile2 DeviceAPI/preinstall
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build && $(MAKE) -f CMakeFiles/Makefile2 DeviceAPI/preinstall
 .PHONY : preinstall/fast
 
 # clear depends
 depend:
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
 .PHONY : depend
 
 # Convenience name for target.
 DeviceAPI/CMakeFiles/DeviceAPI.dir/rule:
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build && $(MAKE) -f CMakeFiles/Makefile2 DeviceAPI/CMakeFiles/DeviceAPI.dir/rule
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build && $(MAKE) -f CMakeFiles/Makefile2 DeviceAPI/CMakeFiles/DeviceAPI.dir/rule
 .PHONY : DeviceAPI/CMakeFiles/DeviceAPI.dir/rule
 
 # Convenience name for target.
@@ -150,12 +150,12 @@ DeviceAPI: DeviceAPI/CMakeFiles/DeviceAPI.dir/rule
 
 # fast build rule for target.
 DeviceAPI/fast:
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build && $(MAKE) -f DeviceAPI/CMakeFiles/DeviceAPI.dir/build.make DeviceAPI/CMakeFiles/DeviceAPI.dir/build
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build && $(MAKE) -f DeviceAPI/CMakeFiles/DeviceAPI.dir/build.make DeviceAPI/CMakeFiles/DeviceAPI.dir/build
 .PHONY : DeviceAPI/fast
 
 # Convenience name for target.
 DeviceAPI/CMakeFiles/DeviceAPI_pch.dir/rule:
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build && $(MAKE) -f CMakeFiles/Makefile2 DeviceAPI/CMakeFiles/DeviceAPI_pch.dir/rule
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build && $(MAKE) -f CMakeFiles/Makefile2 DeviceAPI/CMakeFiles/DeviceAPI_pch.dir/rule
 .PHONY : DeviceAPI/CMakeFiles/DeviceAPI_pch.dir/rule
 
 # Convenience name for target.
@@ -164,12 +164,12 @@ DeviceAPI_pch: DeviceAPI/CMakeFiles/DeviceAPI_pch.dir/rule
 
 # fast build rule for target.
 DeviceAPI_pch/fast:
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build && $(MAKE) -f DeviceAPI/CMakeFiles/DeviceAPI_pch.dir/build.make DeviceAPI/CMakeFiles/DeviceAPI_pch.dir/build
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build && $(MAKE) -f DeviceAPI/CMakeFiles/DeviceAPI_pch.dir/build.make DeviceAPI/CMakeFiles/DeviceAPI_pch.dir/build
 .PHONY : DeviceAPI_pch/fast
 
 # Convenience name for target.
 DeviceAPI/CMakeFiles/DeviceAPI_unity.dir/rule:
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build && $(MAKE) -f CMakeFiles/Makefile2 DeviceAPI/CMakeFiles/DeviceAPI_unity.dir/rule
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build && $(MAKE) -f CMakeFiles/Makefile2 DeviceAPI/CMakeFiles/DeviceAPI_unity.dir/rule
 .PHONY : DeviceAPI/CMakeFiles/DeviceAPI_unity.dir/rule
 
 # Convenience name for target.
@@ -178,12 +178,12 @@ DeviceAPI_unity: DeviceAPI/CMakeFiles/DeviceAPI_unity.dir/rule
 
 # fast build rule for target.
 DeviceAPI_unity/fast:
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build && $(MAKE) -f DeviceAPI/CMakeFiles/DeviceAPI_unity.dir/build.make DeviceAPI/CMakeFiles/DeviceAPI_unity.dir/build
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build && $(MAKE) -f DeviceAPI/CMakeFiles/DeviceAPI_unity.dir/build.make DeviceAPI/CMakeFiles/DeviceAPI_unity.dir/build
 .PHONY : DeviceAPI_unity/fast
 
 # Convenience name for target.
 DeviceAPI/CMakeFiles/all_pch.dir/rule:
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build && $(MAKE) -f CMakeFiles/Makefile2 DeviceAPI/CMakeFiles/all_pch.dir/rule
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build && $(MAKE) -f CMakeFiles/Makefile2 DeviceAPI/CMakeFiles/all_pch.dir/rule
 .PHONY : DeviceAPI/CMakeFiles/all_pch.dir/rule
 
 # Convenience name for target.
@@ -192,12 +192,12 @@ all_pch: DeviceAPI/CMakeFiles/all_pch.dir/rule
 
 # fast build rule for target.
 all_pch/fast:
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build && $(MAKE) -f DeviceAPI/CMakeFiles/all_pch.dir/build.make DeviceAPI/CMakeFiles/all_pch.dir/build
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build && $(MAKE) -f DeviceAPI/CMakeFiles/all_pch.dir/build.make DeviceAPI/CMakeFiles/all_pch.dir/build
 .PHONY : all_pch/fast
 
 # Convenience name for target.
 DeviceAPI/CMakeFiles/all_unity.dir/rule:
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build && $(MAKE) -f CMakeFiles/Makefile2 DeviceAPI/CMakeFiles/all_unity.dir/rule
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build && $(MAKE) -f CMakeFiles/Makefile2 DeviceAPI/CMakeFiles/all_unity.dir/rule
 .PHONY : DeviceAPI/CMakeFiles/all_unity.dir/rule
 
 # Convenience name for target.
@@ -206,12 +206,12 @@ all_unity: DeviceAPI/CMakeFiles/all_unity.dir/rule
 
 # fast build rule for target.
 all_unity/fast:
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build && $(MAKE) -f DeviceAPI/CMakeFiles/all_unity.dir/build.make DeviceAPI/CMakeFiles/all_unity.dir/build
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build && $(MAKE) -f DeviceAPI/CMakeFiles/all_unity.dir/build.make DeviceAPI/CMakeFiles/all_unity.dir/build
 .PHONY : all_unity/fast
 
 # Convenience name for target.
 DeviceAPI/CMakeFiles/clean_cotire.dir/rule:
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build && $(MAKE) -f CMakeFiles/Makefile2 DeviceAPI/CMakeFiles/clean_cotire.dir/rule
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build && $(MAKE) -f CMakeFiles/Makefile2 DeviceAPI/CMakeFiles/clean_cotire.dir/rule
 .PHONY : DeviceAPI/CMakeFiles/clean_cotire.dir/rule
 
 # Convenience name for target.
@@ -220,7 +220,7 @@ clean_cotire: DeviceAPI/CMakeFiles/clean_cotire.dir/rule
 
 # fast build rule for target.
 clean_cotire/fast:
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build && $(MAKE) -f DeviceAPI/CMakeFiles/clean_cotire.dir/build.make DeviceAPI/CMakeFiles/clean_cotire.dir/build
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build && $(MAKE) -f DeviceAPI/CMakeFiles/clean_cotire.dir/build.make DeviceAPI/CMakeFiles/clean_cotire.dir/build
 .PHONY : clean_cotire/fast
 
 BinraryRDTClientCommand.o: BinraryRDTClientCommand.cpp.o
@@ -228,7 +228,7 @@ BinraryRDTClientCommand.o: BinraryRDTClientCommand.cpp.o
 
 # target to build an object file
 BinraryRDTClientCommand.cpp.o:
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build && $(MAKE) -f DeviceAPI/CMakeFiles/DeviceAPI.dir/build.make DeviceAPI/CMakeFiles/DeviceAPI.dir/BinraryRDTClientCommand.cpp.o
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build && $(MAKE) -f DeviceAPI/CMakeFiles/DeviceAPI.dir/build.make DeviceAPI/CMakeFiles/DeviceAPI.dir/BinraryRDTClientCommand.cpp.o
 .PHONY : BinraryRDTClientCommand.cpp.o
 
 BinraryRDTClientCommand.i: BinraryRDTClientCommand.cpp.i
@@ -236,7 +236,7 @@ BinraryRDTClientCommand.i: BinraryRDTClientCommand.cpp.i
 
 # target to preprocess a source file
 BinraryRDTClientCommand.cpp.i:
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build && $(MAKE) -f DeviceAPI/CMakeFiles/DeviceAPI.dir/build.make DeviceAPI/CMakeFiles/DeviceAPI.dir/BinraryRDTClientCommand.cpp.i
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build && $(MAKE) -f DeviceAPI/CMakeFiles/DeviceAPI.dir/build.make DeviceAPI/CMakeFiles/DeviceAPI.dir/BinraryRDTClientCommand.cpp.i
 .PHONY : BinraryRDTClientCommand.cpp.i
 
 BinraryRDTClientCommand.s: BinraryRDTClientCommand.cpp.s
@@ -244,7 +244,7 @@ BinraryRDTClientCommand.s: BinraryRDTClientCommand.cpp.s
 
 # target to generate assembly for a file
 BinraryRDTClientCommand.cpp.s:
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build && $(MAKE) -f DeviceAPI/CMakeFiles/DeviceAPI.dir/build.make DeviceAPI/CMakeFiles/DeviceAPI.dir/BinraryRDTClientCommand.cpp.s
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build && $(MAKE) -f DeviceAPI/CMakeFiles/DeviceAPI.dir/build.make DeviceAPI/CMakeFiles/DeviceAPI.dir/BinraryRDTClientCommand.cpp.s
 .PHONY : BinraryRDTClientCommand.cpp.s
 
 BinraryRDTClientConnect.o: BinraryRDTClientConnect.cpp.o
@@ -252,7 +252,7 @@ BinraryRDTClientConnect.o: BinraryRDTClientConnect.cpp.o
 
 # target to build an object file
 BinraryRDTClientConnect.cpp.o:
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build && $(MAKE) -f DeviceAPI/CMakeFiles/DeviceAPI.dir/build.make DeviceAPI/CMakeFiles/DeviceAPI.dir/BinraryRDTClientConnect.cpp.o
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build && $(MAKE) -f DeviceAPI/CMakeFiles/DeviceAPI.dir/build.make DeviceAPI/CMakeFiles/DeviceAPI.dir/BinraryRDTClientConnect.cpp.o
 .PHONY : BinraryRDTClientConnect.cpp.o
 
 BinraryRDTClientConnect.i: BinraryRDTClientConnect.cpp.i
@@ -260,7 +260,7 @@ BinraryRDTClientConnect.i: BinraryRDTClientConnect.cpp.i
 
 # target to preprocess a source file
 BinraryRDTClientConnect.cpp.i:
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build && $(MAKE) -f DeviceAPI/CMakeFiles/DeviceAPI.dir/build.make DeviceAPI/CMakeFiles/DeviceAPI.dir/BinraryRDTClientConnect.cpp.i
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build && $(MAKE) -f DeviceAPI/CMakeFiles/DeviceAPI.dir/build.make DeviceAPI/CMakeFiles/DeviceAPI.dir/BinraryRDTClientConnect.cpp.i
 .PHONY : BinraryRDTClientConnect.cpp.i
 
 BinraryRDTClientConnect.s: BinraryRDTClientConnect.cpp.s
@@ -268,7 +268,7 @@ BinraryRDTClientConnect.s: BinraryRDTClientConnect.cpp.s
 
 # target to generate assembly for a file
 BinraryRDTClientConnect.cpp.s:
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build && $(MAKE) -f DeviceAPI/CMakeFiles/DeviceAPI.dir/build.make DeviceAPI/CMakeFiles/DeviceAPI.dir/BinraryRDTClientConnect.cpp.s
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build && $(MAKE) -f DeviceAPI/CMakeFiles/DeviceAPI.dir/build.make DeviceAPI/CMakeFiles/DeviceAPI.dir/BinraryRDTClientConnect.cpp.s
 .PHONY : BinraryRDTClientConnect.cpp.s
 
 BinraryRDTServerCommand.o: BinraryRDTServerCommand.cpp.o
@@ -276,7 +276,7 @@ BinraryRDTServerCommand.o: BinraryRDTServerCommand.cpp.o
 
 # target to build an object file
 BinraryRDTServerCommand.cpp.o:
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build && $(MAKE) -f DeviceAPI/CMakeFiles/DeviceAPI.dir/build.make DeviceAPI/CMakeFiles/DeviceAPI.dir/BinraryRDTServerCommand.cpp.o
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build && $(MAKE) -f DeviceAPI/CMakeFiles/DeviceAPI.dir/build.make DeviceAPI/CMakeFiles/DeviceAPI.dir/BinraryRDTServerCommand.cpp.o
 .PHONY : BinraryRDTServerCommand.cpp.o
 
 BinraryRDTServerCommand.i: BinraryRDTServerCommand.cpp.i
@@ -284,7 +284,7 @@ BinraryRDTServerCommand.i: BinraryRDTServerCommand.cpp.i
 
 # target to preprocess a source file
 BinraryRDTServerCommand.cpp.i:
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build && $(MAKE) -f DeviceAPI/CMakeFiles/DeviceAPI.dir/build.make DeviceAPI/CMakeFiles/DeviceAPI.dir/BinraryRDTServerCommand.cpp.i
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build && $(MAKE) -f DeviceAPI/CMakeFiles/DeviceAPI.dir/build.make DeviceAPI/CMakeFiles/DeviceAPI.dir/BinraryRDTServerCommand.cpp.i
 .PHONY : BinraryRDTServerCommand.cpp.i
 
 BinraryRDTServerCommand.s: BinraryRDTServerCommand.cpp.s
@@ -292,7 +292,7 @@ BinraryRDTServerCommand.s: BinraryRDTServerCommand.cpp.s
 
 # target to generate assembly for a file
 BinraryRDTServerCommand.cpp.s:
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build && $(MAKE) -f DeviceAPI/CMakeFiles/DeviceAPI.dir/build.make DeviceAPI/CMakeFiles/DeviceAPI.dir/BinraryRDTServerCommand.cpp.s
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build && $(MAKE) -f DeviceAPI/CMakeFiles/DeviceAPI.dir/build.make DeviceAPI/CMakeFiles/DeviceAPI.dir/BinraryRDTServerCommand.cpp.s
 .PHONY : BinraryRDTServerCommand.cpp.s
 
 BinraryRDTServerConnect.o: BinraryRDTServerConnect.cpp.o
@@ -300,7 +300,7 @@ BinraryRDTServerConnect.o: BinraryRDTServerConnect.cpp.o
 
 # target to build an object file
 BinraryRDTServerConnect.cpp.o:
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build && $(MAKE) -f DeviceAPI/CMakeFiles/DeviceAPI.dir/build.make DeviceAPI/CMakeFiles/DeviceAPI.dir/BinraryRDTServerConnect.cpp.o
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build && $(MAKE) -f DeviceAPI/CMakeFiles/DeviceAPI.dir/build.make DeviceAPI/CMakeFiles/DeviceAPI.dir/BinraryRDTServerConnect.cpp.o
 .PHONY : BinraryRDTServerConnect.cpp.o
 
 BinraryRDTServerConnect.i: BinraryRDTServerConnect.cpp.i
@@ -308,7 +308,7 @@ BinraryRDTServerConnect.i: BinraryRDTServerConnect.cpp.i
 
 # target to preprocess a source file
 BinraryRDTServerConnect.cpp.i:
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build && $(MAKE) -f DeviceAPI/CMakeFiles/DeviceAPI.dir/build.make DeviceAPI/CMakeFiles/DeviceAPI.dir/BinraryRDTServerConnect.cpp.i
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build && $(MAKE) -f DeviceAPI/CMakeFiles/DeviceAPI.dir/build.make DeviceAPI/CMakeFiles/DeviceAPI.dir/BinraryRDTServerConnect.cpp.i
 .PHONY : BinraryRDTServerConnect.cpp.i
 
 BinraryRDTServerConnect.s: BinraryRDTServerConnect.cpp.s
@@ -316,7 +316,7 @@ BinraryRDTServerConnect.s: BinraryRDTServerConnect.cpp.s
 
 # target to generate assembly for a file
 BinraryRDTServerConnect.cpp.s:
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build && $(MAKE) -f DeviceAPI/CMakeFiles/DeviceAPI.dir/build.make DeviceAPI/CMakeFiles/DeviceAPI.dir/BinraryRDTServerConnect.cpp.s
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build && $(MAKE) -f DeviceAPI/CMakeFiles/DeviceAPI.dir/build.make DeviceAPI/CMakeFiles/DeviceAPI.dir/BinraryRDTServerConnect.cpp.s
 .PHONY : BinraryRDTServerConnect.cpp.s
 
 Command.o: Command.cpp.o
@@ -324,7 +324,7 @@ Command.o: Command.cpp.o
 
 # target to build an object file
 Command.cpp.o:
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build && $(MAKE) -f DeviceAPI/CMakeFiles/DeviceAPI.dir/build.make DeviceAPI/CMakeFiles/DeviceAPI.dir/Command.cpp.o
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build && $(MAKE) -f DeviceAPI/CMakeFiles/DeviceAPI.dir/build.make DeviceAPI/CMakeFiles/DeviceAPI.dir/Command.cpp.o
 .PHONY : Command.cpp.o
 
 Command.i: Command.cpp.i
@@ -332,7 +332,7 @@ Command.i: Command.cpp.i
 
 # target to preprocess a source file
 Command.cpp.i:
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build && $(MAKE) -f DeviceAPI/CMakeFiles/DeviceAPI.dir/build.make DeviceAPI/CMakeFiles/DeviceAPI.dir/Command.cpp.i
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build && $(MAKE) -f DeviceAPI/CMakeFiles/DeviceAPI.dir/build.make DeviceAPI/CMakeFiles/DeviceAPI.dir/Command.cpp.i
 .PHONY : Command.cpp.i
 
 Command.s: Command.cpp.s
@@ -340,7 +340,7 @@ Command.s: Command.cpp.s
 
 # target to generate assembly for a file
 Command.cpp.s:
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build && $(MAKE) -f DeviceAPI/CMakeFiles/DeviceAPI.dir/build.make DeviceAPI/CMakeFiles/DeviceAPI.dir/Command.cpp.s
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build && $(MAKE) -f DeviceAPI/CMakeFiles/DeviceAPI.dir/build.make DeviceAPI/CMakeFiles/DeviceAPI.dir/Command.cpp.s
 .PHONY : Command.cpp.s
 
 Connect.o: Connect.cpp.o
@@ -348,7 +348,7 @@ Connect.o: Connect.cpp.o
 
 # target to build an object file
 Connect.cpp.o:
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build && $(MAKE) -f DeviceAPI/CMakeFiles/DeviceAPI.dir/build.make DeviceAPI/CMakeFiles/DeviceAPI.dir/Connect.cpp.o
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build && $(MAKE) -f DeviceAPI/CMakeFiles/DeviceAPI.dir/build.make DeviceAPI/CMakeFiles/DeviceAPI.dir/Connect.cpp.o
 .PHONY : Connect.cpp.o
 
 Connect.i: Connect.cpp.i
@@ -356,7 +356,7 @@ Connect.i: Connect.cpp.i
 
 # target to preprocess a source file
 Connect.cpp.i:
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build && $(MAKE) -f DeviceAPI/CMakeFiles/DeviceAPI.dir/build.make DeviceAPI/CMakeFiles/DeviceAPI.dir/Connect.cpp.i
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build && $(MAKE) -f DeviceAPI/CMakeFiles/DeviceAPI.dir/build.make DeviceAPI/CMakeFiles/DeviceAPI.dir/Connect.cpp.i
 .PHONY : Connect.cpp.i
 
 Connect.s: Connect.cpp.s
@@ -364,7 +364,7 @@ Connect.s: Connect.cpp.s
 
 # target to generate assembly for a file
 Connect.cpp.s:
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build && $(MAKE) -f DeviceAPI/CMakeFiles/DeviceAPI.dir/build.make DeviceAPI/CMakeFiles/DeviceAPI.dir/Connect.cpp.s
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build && $(MAKE) -f DeviceAPI/CMakeFiles/DeviceAPI.dir/build.make DeviceAPI/CMakeFiles/DeviceAPI.dir/Connect.cpp.s
 .PHONY : Connect.cpp.s
 
 Device.o: Device.cpp.o
@@ -372,7 +372,7 @@ Device.o: Device.cpp.o
 
 # target to build an object file
 Device.cpp.o:
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build && $(MAKE) -f DeviceAPI/CMakeFiles/DeviceAPI.dir/build.make DeviceAPI/CMakeFiles/DeviceAPI.dir/Device.cpp.o
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build && $(MAKE) -f DeviceAPI/CMakeFiles/DeviceAPI.dir/build.make DeviceAPI/CMakeFiles/DeviceAPI.dir/Device.cpp.o
 .PHONY : Device.cpp.o
 
 Device.i: Device.cpp.i
@@ -380,7 +380,7 @@ Device.i: Device.cpp.i
 
 # target to preprocess a source file
 Device.cpp.i:
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build && $(MAKE) -f DeviceAPI/CMakeFiles/DeviceAPI.dir/build.make DeviceAPI/CMakeFiles/DeviceAPI.dir/Device.cpp.i
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build && $(MAKE) -f DeviceAPI/CMakeFiles/DeviceAPI.dir/build.make DeviceAPI/CMakeFiles/DeviceAPI.dir/Device.cpp.i
 .PHONY : Device.cpp.i
 
 Device.s: Device.cpp.s
@@ -388,7 +388,7 @@ Device.s: Device.cpp.s
 
 # target to generate assembly for a file
 Device.cpp.s:
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build && $(MAKE) -f DeviceAPI/CMakeFiles/DeviceAPI.dir/build.make DeviceAPI/CMakeFiles/DeviceAPI.dir/Device.cpp.s
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build && $(MAKE) -f DeviceAPI/CMakeFiles/DeviceAPI.dir/build.make DeviceAPI/CMakeFiles/DeviceAPI.dir/Device.cpp.s
 .PHONY : Device.cpp.s
 
 JsonRDTClientCommand.o: JsonRDTClientCommand.cpp.o
@@ -396,7 +396,7 @@ JsonRDTClientCommand.o: JsonRDTClientCommand.cpp.o
 
 # target to build an object file
 JsonRDTClientCommand.cpp.o:
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build && $(MAKE) -f DeviceAPI/CMakeFiles/DeviceAPI.dir/build.make DeviceAPI/CMakeFiles/DeviceAPI.dir/JsonRDTClientCommand.cpp.o
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build && $(MAKE) -f DeviceAPI/CMakeFiles/DeviceAPI.dir/build.make DeviceAPI/CMakeFiles/DeviceAPI.dir/JsonRDTClientCommand.cpp.o
 .PHONY : JsonRDTClientCommand.cpp.o
 
 JsonRDTClientCommand.i: JsonRDTClientCommand.cpp.i
@@ -404,7 +404,7 @@ JsonRDTClientCommand.i: JsonRDTClientCommand.cpp.i
 
 # target to preprocess a source file
 JsonRDTClientCommand.cpp.i:
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build && $(MAKE) -f DeviceAPI/CMakeFiles/DeviceAPI.dir/build.make DeviceAPI/CMakeFiles/DeviceAPI.dir/JsonRDTClientCommand.cpp.i
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build && $(MAKE) -f DeviceAPI/CMakeFiles/DeviceAPI.dir/build.make DeviceAPI/CMakeFiles/DeviceAPI.dir/JsonRDTClientCommand.cpp.i
 .PHONY : JsonRDTClientCommand.cpp.i
 
 JsonRDTClientCommand.s: JsonRDTClientCommand.cpp.s
@@ -412,7 +412,7 @@ JsonRDTClientCommand.s: JsonRDTClientCommand.cpp.s
 
 # target to generate assembly for a file
 JsonRDTClientCommand.cpp.s:
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build && $(MAKE) -f DeviceAPI/CMakeFiles/DeviceAPI.dir/build.make DeviceAPI/CMakeFiles/DeviceAPI.dir/JsonRDTClientCommand.cpp.s
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build && $(MAKE) -f DeviceAPI/CMakeFiles/DeviceAPI.dir/build.make DeviceAPI/CMakeFiles/DeviceAPI.dir/JsonRDTClientCommand.cpp.s
 .PHONY : JsonRDTClientCommand.cpp.s
 
 JsonRDTCommand.o: JsonRDTCommand.cpp.o
@@ -420,7 +420,7 @@ JsonRDTCommand.o: JsonRDTCommand.cpp.o
 
 # target to build an object file
 JsonRDTCommand.cpp.o:
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build && $(MAKE) -f DeviceAPI/CMakeFiles/DeviceAPI.dir/build.make DeviceAPI/CMakeFiles/DeviceAPI.dir/JsonRDTCommand.cpp.o
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build && $(MAKE) -f DeviceAPI/CMakeFiles/DeviceAPI.dir/build.make DeviceAPI/CMakeFiles/DeviceAPI.dir/JsonRDTCommand.cpp.o
 .PHONY : JsonRDTCommand.cpp.o
 
 JsonRDTCommand.i: JsonRDTCommand.cpp.i
@@ -428,7 +428,7 @@ JsonRDTCommand.i: JsonRDTCommand.cpp.i
 
 # target to preprocess a source file
 JsonRDTCommand.cpp.i:
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build && $(MAKE) -f DeviceAPI/CMakeFiles/DeviceAPI.dir/build.make DeviceAPI/CMakeFiles/DeviceAPI.dir/JsonRDTCommand.cpp.i
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build && $(MAKE) -f DeviceAPI/CMakeFiles/DeviceAPI.dir/build.make DeviceAPI/CMakeFiles/DeviceAPI.dir/JsonRDTCommand.cpp.i
 .PHONY : JsonRDTCommand.cpp.i
 
 JsonRDTCommand.s: JsonRDTCommand.cpp.s
@@ -436,7 +436,7 @@ JsonRDTCommand.s: JsonRDTCommand.cpp.s
 
 # target to generate assembly for a file
 JsonRDTCommand.cpp.s:
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build && $(MAKE) -f DeviceAPI/CMakeFiles/DeviceAPI.dir/build.make DeviceAPI/CMakeFiles/DeviceAPI.dir/JsonRDTCommand.cpp.s
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build && $(MAKE) -f DeviceAPI/CMakeFiles/DeviceAPI.dir/build.make DeviceAPI/CMakeFiles/DeviceAPI.dir/JsonRDTCommand.cpp.s
 .PHONY : JsonRDTCommand.cpp.s
 
 JsonRDTServerCommand.o: JsonRDTServerCommand.cpp.o
@@ -444,7 +444,7 @@ JsonRDTServerCommand.o: JsonRDTServerCommand.cpp.o
 
 # target to build an object file
 JsonRDTServerCommand.cpp.o:
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build && $(MAKE) -f DeviceAPI/CMakeFiles/DeviceAPI.dir/build.make DeviceAPI/CMakeFiles/DeviceAPI.dir/JsonRDTServerCommand.cpp.o
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build && $(MAKE) -f DeviceAPI/CMakeFiles/DeviceAPI.dir/build.make DeviceAPI/CMakeFiles/DeviceAPI.dir/JsonRDTServerCommand.cpp.o
 .PHONY : JsonRDTServerCommand.cpp.o
 
 JsonRDTServerCommand.i: JsonRDTServerCommand.cpp.i
@@ -452,7 +452,7 @@ JsonRDTServerCommand.i: JsonRDTServerCommand.cpp.i
 
 # target to preprocess a source file
 JsonRDTServerCommand.cpp.i:
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build && $(MAKE) -f DeviceAPI/CMakeFiles/DeviceAPI.dir/build.make DeviceAPI/CMakeFiles/DeviceAPI.dir/JsonRDTServerCommand.cpp.i
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build && $(MAKE) -f DeviceAPI/CMakeFiles/DeviceAPI.dir/build.make DeviceAPI/CMakeFiles/DeviceAPI.dir/JsonRDTServerCommand.cpp.i
 .PHONY : JsonRDTServerCommand.cpp.i
 
 JsonRDTServerCommand.s: JsonRDTServerCommand.cpp.s
@@ -460,7 +460,7 @@ JsonRDTServerCommand.s: JsonRDTServerCommand.cpp.s
 
 # target to generate assembly for a file
 JsonRDTServerCommand.cpp.s:
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build && $(MAKE) -f DeviceAPI/CMakeFiles/DeviceAPI.dir/build.make DeviceAPI/CMakeFiles/DeviceAPI.dir/JsonRDTServerCommand.cpp.s
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build && $(MAKE) -f DeviceAPI/CMakeFiles/DeviceAPI.dir/build.make DeviceAPI/CMakeFiles/DeviceAPI.dir/JsonRDTServerCommand.cpp.s
 .PHONY : JsonRDTServerCommand.cpp.s
 
 UTF.o: UTF.cpp.o
@@ -468,7 +468,7 @@ UTF.o: UTF.cpp.o
 
 # target to build an object file
 UTF.cpp.o:
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build && $(MAKE) -f DeviceAPI/CMakeFiles/DeviceAPI.dir/build.make DeviceAPI/CMakeFiles/DeviceAPI.dir/UTF.cpp.o
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build && $(MAKE) -f DeviceAPI/CMakeFiles/DeviceAPI.dir/build.make DeviceAPI/CMakeFiles/DeviceAPI.dir/UTF.cpp.o
 .PHONY : UTF.cpp.o
 
 UTF.i: UTF.cpp.i
@@ -476,7 +476,7 @@ UTF.i: UTF.cpp.i
 
 # target to preprocess a source file
 UTF.cpp.i:
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build && $(MAKE) -f DeviceAPI/CMakeFiles/DeviceAPI.dir/build.make DeviceAPI/CMakeFiles/DeviceAPI.dir/UTF.cpp.i
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build && $(MAKE) -f DeviceAPI/CMakeFiles/DeviceAPI.dir/build.make DeviceAPI/CMakeFiles/DeviceAPI.dir/UTF.cpp.i
 .PHONY : UTF.cpp.i
 
 UTF.s: UTF.cpp.s
@@ -484,7 +484,7 @@ UTF.s: UTF.cpp.s
 
 # target to generate assembly for a file
 UTF.cpp.s:
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build && $(MAKE) -f DeviceAPI/CMakeFiles/DeviceAPI.dir/build.make DeviceAPI/CMakeFiles/DeviceAPI.dir/UTF.cpp.s
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build && $(MAKE) -f DeviceAPI/CMakeFiles/DeviceAPI.dir/build.make DeviceAPI/CMakeFiles/DeviceAPI.dir/UTF.cpp.s
 .PHONY : UTF.cpp.s
 
 Utility.o: Utility.cpp.o
@@ -492,7 +492,7 @@ Utility.o: Utility.cpp.o
 
 # target to build an object file
 Utility.cpp.o:
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build && $(MAKE) -f DeviceAPI/CMakeFiles/DeviceAPI.dir/build.make DeviceAPI/CMakeFiles/DeviceAPI.dir/Utility.cpp.o
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build && $(MAKE) -f DeviceAPI/CMakeFiles/DeviceAPI.dir/build.make DeviceAPI/CMakeFiles/DeviceAPI.dir/Utility.cpp.o
 .PHONY : Utility.cpp.o
 
 Utility.i: Utility.cpp.i
@@ -500,7 +500,7 @@ Utility.i: Utility.cpp.i
 
 # target to preprocess a source file
 Utility.cpp.i:
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build && $(MAKE) -f DeviceAPI/CMakeFiles/DeviceAPI.dir/build.make DeviceAPI/CMakeFiles/DeviceAPI.dir/Utility.cpp.i
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build && $(MAKE) -f DeviceAPI/CMakeFiles/DeviceAPI.dir/build.make DeviceAPI/CMakeFiles/DeviceAPI.dir/Utility.cpp.i
 .PHONY : Utility.cpp.i
 
 Utility.s: Utility.cpp.s
@@ -508,7 +508,7 @@ Utility.s: Utility.cpp.s
 
 # target to generate assembly for a file
 Utility.cpp.s:
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build && $(MAKE) -f DeviceAPI/CMakeFiles/DeviceAPI.dir/build.make DeviceAPI/CMakeFiles/DeviceAPI.dir/Utility.cpp.s
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build && $(MAKE) -f DeviceAPI/CMakeFiles/DeviceAPI.dir/build.make DeviceAPI/CMakeFiles/DeviceAPI.dir/Utility.cpp.s
 .PHONY : Utility.cpp.s
 
 cotire/DeviceAPI_CXX_unity.o: cotire/DeviceAPI_CXX_unity.cxx.o
@@ -516,7 +516,7 @@ cotire/DeviceAPI_CXX_unity.o: cotire/DeviceAPI_CXX_unity.cxx.o
 
 # target to build an object file
 cotire/DeviceAPI_CXX_unity.cxx.o:
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build && $(MAKE) -f DeviceAPI/CMakeFiles/DeviceAPI_unity.dir/build.make DeviceAPI/CMakeFiles/DeviceAPI_unity.dir/cotire/DeviceAPI_CXX_unity.cxx.o
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build && $(MAKE) -f DeviceAPI/CMakeFiles/DeviceAPI_unity.dir/build.make DeviceAPI/CMakeFiles/DeviceAPI_unity.dir/cotire/DeviceAPI_CXX_unity.cxx.o
 .PHONY : cotire/DeviceAPI_CXX_unity.cxx.o
 
 cotire/DeviceAPI_CXX_unity.i: cotire/DeviceAPI_CXX_unity.cxx.i
@@ -524,7 +524,7 @@ cotire/DeviceAPI_CXX_unity.i: cotire/DeviceAPI_CXX_unity.cxx.i
 
 # target to preprocess a source file
 cotire/DeviceAPI_CXX_unity.cxx.i:
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build && $(MAKE) -f DeviceAPI/CMakeFiles/DeviceAPI_unity.dir/build.make DeviceAPI/CMakeFiles/DeviceAPI_unity.dir/cotire/DeviceAPI_CXX_unity.cxx.i
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build && $(MAKE) -f DeviceAPI/CMakeFiles/DeviceAPI_unity.dir/build.make DeviceAPI/CMakeFiles/DeviceAPI_unity.dir/cotire/DeviceAPI_CXX_unity.cxx.i
 .PHONY : cotire/DeviceAPI_CXX_unity.cxx.i
 
 cotire/DeviceAPI_CXX_unity.s: cotire/DeviceAPI_CXX_unity.cxx.s
@@ -532,7 +532,7 @@ cotire/DeviceAPI_CXX_unity.s: cotire/DeviceAPI_CXX_unity.cxx.s
 
 # target to generate assembly for a file
 cotire/DeviceAPI_CXX_unity.cxx.s:
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build && $(MAKE) -f DeviceAPI/CMakeFiles/DeviceAPI_unity.dir/build.make DeviceAPI/CMakeFiles/DeviceAPI_unity.dir/cotire/DeviceAPI_CXX_unity.cxx.s
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build && $(MAKE) -f DeviceAPI/CMakeFiles/DeviceAPI_unity.dir/build.make DeviceAPI/CMakeFiles/DeviceAPI_unity.dir/cotire/DeviceAPI_CXX_unity.cxx.s
 .PHONY : cotire/DeviceAPI_CXX_unity.cxx.s
 
 # Help Target
@@ -603,6 +603,6 @@ help:
 # No rule that depends on this can have commands that come from listfiles
 # because they might be regenerated.
 cmake_check_build_system:
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
 .PHONY : cmake_check_build_system
 

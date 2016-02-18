@@ -38,7 +38,7 @@ EQUALS = =
 CMAKE_SOURCE_DIR = /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build
+CMAKE_BINARY_DIR = /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build
 
 # Utility rule file for clean_cotire.
 
@@ -46,9 +46,9 @@ CMAKE_BINARY_DIR = /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build
 include DeviceAPI/CMakeFiles/clean_cotire.dir/progress.make
 
 DeviceAPI/CMakeFiles/clean_cotire:
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build/CMakeFiles $(CMAKE_PROGRESS_1)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build/CMakeFiles $(CMAKE_PROGRESS_1)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold "Cleaning up all cotire generated files"
-	/usr/bin/cmake -DCOTIRE_BUILD_TYPE:STRING=Debug -DCOTIRE_VERBOSE:BOOL=$(VERBOSE) -P /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/CMake/cotire.cmake cleanup /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build cotire
+	/usr/bin/cmake -DCOTIRE_BUILD_TYPE:STRING=Release -DCOTIRE_VERBOSE:BOOL=$(VERBOSE) -P /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/CMake/cotire.cmake cleanup /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build cotire
 
 clean_cotire: DeviceAPI/CMakeFiles/clean_cotire
 clean_cotire: DeviceAPI/CMakeFiles/clean_cotire.dir/build.make
@@ -59,10 +59,10 @@ DeviceAPI/CMakeFiles/clean_cotire.dir/build: clean_cotire
 .PHONY : DeviceAPI/CMakeFiles/clean_cotire.dir/build
 
 DeviceAPI/CMakeFiles/clean_cotire.dir/clean:
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build/DeviceAPI && $(CMAKE_COMMAND) -P CMakeFiles/clean_cotire.dir/cmake_clean.cmake
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build/DeviceAPI && $(CMAKE_COMMAND) -P CMakeFiles/clean_cotire.dir/cmake_clean.cmake
 .PHONY : DeviceAPI/CMakeFiles/clean_cotire.dir/clean
 
 DeviceAPI/CMakeFiles/clean_cotire.dir/depend:
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/DeviceAPI /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build/DeviceAPI /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build/DeviceAPI/CMakeFiles/clean_cotire.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/DeviceAPI /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build/DeviceAPI /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build/DeviceAPI/CMakeFiles/clean_cotire.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : DeviceAPI/CMakeFiles/clean_cotire.dir/depend
 

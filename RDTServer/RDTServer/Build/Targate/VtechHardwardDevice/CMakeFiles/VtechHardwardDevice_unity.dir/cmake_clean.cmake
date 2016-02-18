@@ -1,8 +1,8 @@
 FILE(REMOVE_RECURSE
   "cotire/VtechHardwardDevice_CXX_unity.cxx"
   "CMakeFiles/VtechHardwardDevice_unity.dir/cotire/VtechHardwardDevice_CXX_unity.cxx.o"
-  "VtechHardwardDevice.pdb"
-  "VtechHardwardDevice"
+  "../../../bin/VtechHardwardDevice.pdb"
+  "../../../bin/VtechHardwardDevice"
 )
 
 # Per-language clean rules from dependency scanning.

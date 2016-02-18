@@ -42,7 +42,7 @@ EQUALS = =
 CMAKE_SOURCE_DIR = /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build
+CMAKE_BINARY_DIR = /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -110,14 +110,14 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build && $(CMAKE_COMMAND) -E cmake_progress_start /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build/CMakeFiles /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build/Targate/VtechHardwardDevice/CMakeFiles/progress.marks
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build && $(MAKE) -f CMakeFiles/Makefile2 Targate/VtechHardwardDevice/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build/CMakeFiles 0
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build && $(CMAKE_COMMAND) -E cmake_progress_start /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build/CMakeFiles /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build/Targate/VtechHardwardDevice/CMakeFiles/progress.marks
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build && $(MAKE) -f CMakeFiles/Makefile2 Targate/VtechHardwardDevice/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
 clean:
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build && $(MAKE) -f CMakeFiles/Makefile2 Targate/VtechHardwardDevice/clean
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build && $(MAKE) -f CMakeFiles/Makefile2 Targate/VtechHardwardDevice/clean
 .PHONY : clean
 
 # The main clean target
@@ -126,22 +126,22 @@ clean/fast: clean
 
 # Prepare targets for installation.
 preinstall: all
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build && $(MAKE) -f CMakeFiles/Makefile2 Targate/VtechHardwardDevice/preinstall
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build && $(MAKE) -f CMakeFiles/Makefile2 Targate/VtechHardwardDevice/preinstall
 .PHONY : preinstall
 
 # Prepare targets for installation.
 preinstall/fast:
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build && $(MAKE) -f CMakeFiles/Makefile2 Targate/VtechHardwardDevice/preinstall
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build && $(MAKE) -f CMakeFiles/Makefile2 Targate/VtechHardwardDevice/preinstall
 .PHONY : preinstall/fast
 
 # clear depends
 depend:
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
 .PHONY : depend
 
 # Convenience name for target.
 Targate/VtechHardwardDevice/CMakeFiles/VtechHardwardDevice.dir/rule:
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build && $(MAKE) -f CMakeFiles/Makefile2 Targate/VtechHardwardDevice/CMakeFiles/VtechHardwardDevice.dir/rule
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build && $(MAKE) -f CMakeFiles/Makefile2 Targate/VtechHardwardDevice/CMakeFiles/VtechHardwardDevice.dir/rule
 .PHONY : Targate/VtechHardwardDevice/CMakeFiles/VtechHardwardDevice.dir/rule
 
 # Convenience name for target.
@@ -150,12 +150,12 @@ VtechHardwardDevice: Targate/VtechHardwardDevice/CMakeFiles/VtechHardwardDevice.
 
 # fast build rule for target.
 VtechHardwardDevice/fast:
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build && $(MAKE) -f Targate/VtechHardwardDevice/CMakeFiles/VtechHardwardDevice.dir/build.make Targate/VtechHardwardDevice/CMakeFiles/VtechHardwardDevice.dir/build
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build && $(MAKE) -f Targate/VtechHardwardDevice/CMakeFiles/VtechHardwardDevice.dir/build.make Targate/VtechHardwardDevice/CMakeFiles/VtechHardwardDevice.dir/build
 .PHONY : VtechHardwardDevice/fast
 
 # Convenience name for target.
 Targate/VtechHardwardDevice/CMakeFiles/VtechHardwardDevice_unity.dir/rule:
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build && $(MAKE) -f CMakeFiles/Makefile2 Targate/VtechHardwardDevice/CMakeFiles/VtechHardwardDevice_unity.dir/rule
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build && $(MAKE) -f CMakeFiles/Makefile2 Targate/VtechHardwardDevice/CMakeFiles/VtechHardwardDevice_unity.dir/rule
 .PHONY : Targate/VtechHardwardDevice/CMakeFiles/VtechHardwardDevice_unity.dir/rule
 
 # Convenience name for target.
@@ -164,7 +164,7 @@ VtechHardwardDevice_unity: Targate/VtechHardwardDevice/CMakeFiles/VtechHardwardD
 
 # fast build rule for target.
 VtechHardwardDevice_unity/fast:
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build && $(MAKE) -f Targate/VtechHardwardDevice/CMakeFiles/VtechHardwardDevice_unity.dir/build.make Targate/VtechHardwardDevice/CMakeFiles/VtechHardwardDevice_unity.dir/build
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build && $(MAKE) -f Targate/VtechHardwardDevice/CMakeFiles/VtechHardwardDevice_unity.dir/build.make Targate/VtechHardwardDevice/CMakeFiles/VtechHardwardDevice_unity.dir/build
 .PHONY : VtechHardwardDevice_unity/fast
 
 VtechIPHubGatewayHardwardDevice.o: VtechIPHubGatewayHardwardDevice.cpp.o
@@ -172,7 +172,7 @@ VtechIPHubGatewayHardwardDevice.o: VtechIPHubGatewayHardwardDevice.cpp.o
 
 # target to build an object file
 VtechIPHubGatewayHardwardDevice.cpp.o:
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build && $(MAKE) -f Targate/VtechHardwardDevice/CMakeFiles/VtechHardwardDevice.dir/build.make Targate/VtechHardwardDevice/CMakeFiles/VtechHardwardDevice.dir/VtechIPHubGatewayHardwardDevice.cpp.o
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build && $(MAKE) -f Targate/VtechHardwardDevice/CMakeFiles/VtechHardwardDevice.dir/build.make Targate/VtechHardwardDevice/CMakeFiles/VtechHardwardDevice.dir/VtechIPHubGatewayHardwardDevice.cpp.o
 .PHONY : VtechIPHubGatewayHardwardDevice.cpp.o
 
 VtechIPHubGatewayHardwardDevice.i: VtechIPHubGatewayHardwardDevice.cpp.i
@@ -180,7 +180,7 @@ VtechIPHubGatewayHardwardDevice.i: VtechIPHubGatewayHardwardDevice.cpp.i
 
 # target to preprocess a source file
 VtechIPHubGatewayHardwardDevice.cpp.i:
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build && $(MAKE) -f Targate/VtechHardwardDevice/CMakeFiles/VtechHardwardDevice.dir/build.make Targate/VtechHardwardDevice/CMakeFiles/VtechHardwardDevice.dir/VtechIPHubGatewayHardwardDevice.cpp.i
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build && $(MAKE) -f Targate/VtechHardwardDevice/CMakeFiles/VtechHardwardDevice.dir/build.make Targate/VtechHardwardDevice/CMakeFiles/VtechHardwardDevice.dir/VtechIPHubGatewayHardwardDevice.cpp.i
 .PHONY : VtechIPHubGatewayHardwardDevice.cpp.i
 
 VtechIPHubGatewayHardwardDevice.s: VtechIPHubGatewayHardwardDevice.cpp.s
@@ -188,7 +188,7 @@ VtechIPHubGatewayHardwardDevice.s: VtechIPHubGatewayHardwardDevice.cpp.s
 
 # target to generate assembly for a file
 VtechIPHubGatewayHardwardDevice.cpp.s:
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build && $(MAKE) -f Targate/VtechHardwardDevice/CMakeFiles/VtechHardwardDevice.dir/build.make Targate/VtechHardwardDevice/CMakeFiles/VtechHardwardDevice.dir/VtechIPHubGatewayHardwardDevice.cpp.s
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build && $(MAKE) -f Targate/VtechHardwardDevice/CMakeFiles/VtechHardwardDevice.dir/build.make Targate/VtechHardwardDevice/CMakeFiles/VtechHardwardDevice.dir/VtechIPHubGatewayHardwardDevice.cpp.s
 .PHONY : VtechIPHubGatewayHardwardDevice.cpp.s
 
 cotire/VtechHardwardDevice_CXX_unity.o: cotire/VtechHardwardDevice_CXX_unity.cxx.o
@@ -196,7 +196,7 @@ cotire/VtechHardwardDevice_CXX_unity.o: cotire/VtechHardwardDevice_CXX_unity.cxx
 
 # target to build an object file
 cotire/VtechHardwardDevice_CXX_unity.cxx.o:
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build && $(MAKE) -f Targate/VtechHardwardDevice/CMakeFiles/VtechHardwardDevice_unity.dir/build.make Targate/VtechHardwardDevice/CMakeFiles/VtechHardwardDevice_unity.dir/cotire/VtechHardwardDevice_CXX_unity.cxx.o
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build && $(MAKE) -f Targate/VtechHardwardDevice/CMakeFiles/VtechHardwardDevice_unity.dir/build.make Targate/VtechHardwardDevice/CMakeFiles/VtechHardwardDevice_unity.dir/cotire/VtechHardwardDevice_CXX_unity.cxx.o
 .PHONY : cotire/VtechHardwardDevice_CXX_unity.cxx.o
 
 cotire/VtechHardwardDevice_CXX_unity.i: cotire/VtechHardwardDevice_CXX_unity.cxx.i
@@ -204,7 +204,7 @@ cotire/VtechHardwardDevice_CXX_unity.i: cotire/VtechHardwardDevice_CXX_unity.cxx
 
 # target to preprocess a source file
 cotire/VtechHardwardDevice_CXX_unity.cxx.i:
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build && $(MAKE) -f Targate/VtechHardwardDevice/CMakeFiles/VtechHardwardDevice_unity.dir/build.make Targate/VtechHardwardDevice/CMakeFiles/VtechHardwardDevice_unity.dir/cotire/VtechHardwardDevice_CXX_unity.cxx.i
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build && $(MAKE) -f Targate/VtechHardwardDevice/CMakeFiles/VtechHardwardDevice_unity.dir/build.make Targate/VtechHardwardDevice/CMakeFiles/VtechHardwardDevice_unity.dir/cotire/VtechHardwardDevice_CXX_unity.cxx.i
 .PHONY : cotire/VtechHardwardDevice_CXX_unity.cxx.i
 
 cotire/VtechHardwardDevice_CXX_unity.s: cotire/VtechHardwardDevice_CXX_unity.cxx.s
@@ -212,7 +212,7 @@ cotire/VtechHardwardDevice_CXX_unity.s: cotire/VtechHardwardDevice_CXX_unity.cxx
 
 # target to generate assembly for a file
 cotire/VtechHardwardDevice_CXX_unity.cxx.s:
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build && $(MAKE) -f Targate/VtechHardwardDevice/CMakeFiles/VtechHardwardDevice_unity.dir/build.make Targate/VtechHardwardDevice/CMakeFiles/VtechHardwardDevice_unity.dir/cotire/VtechHardwardDevice_CXX_unity.cxx.s
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build && $(MAKE) -f Targate/VtechHardwardDevice/CMakeFiles/VtechHardwardDevice_unity.dir/build.make Targate/VtechHardwardDevice/CMakeFiles/VtechHardwardDevice_unity.dir/cotire/VtechHardwardDevice_CXX_unity.cxx.s
 .PHONY : cotire/VtechHardwardDevice_CXX_unity.cxx.s
 
 main.o: main.cpp.o
@@ -220,7 +220,7 @@ main.o: main.cpp.o
 
 # target to build an object file
 main.cpp.o:
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build && $(MAKE) -f Targate/VtechHardwardDevice/CMakeFiles/VtechHardwardDevice.dir/build.make Targate/VtechHardwardDevice/CMakeFiles/VtechHardwardDevice.dir/main.cpp.o
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build && $(MAKE) -f Targate/VtechHardwardDevice/CMakeFiles/VtechHardwardDevice.dir/build.make Targate/VtechHardwardDevice/CMakeFiles/VtechHardwardDevice.dir/main.cpp.o
 .PHONY : main.cpp.o
 
 main.i: main.cpp.i
@@ -228,7 +228,7 @@ main.i: main.cpp.i
 
 # target to preprocess a source file
 main.cpp.i:
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build && $(MAKE) -f Targate/VtechHardwardDevice/CMakeFiles/VtechHardwardDevice.dir/build.make Targate/VtechHardwardDevice/CMakeFiles/VtechHardwardDevice.dir/main.cpp.i
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build && $(MAKE) -f Targate/VtechHardwardDevice/CMakeFiles/VtechHardwardDevice.dir/build.make Targate/VtechHardwardDevice/CMakeFiles/VtechHardwardDevice.dir/main.cpp.i
 .PHONY : main.cpp.i
 
 main.s: main.cpp.s
@@ -236,7 +236,7 @@ main.s: main.cpp.s
 
 # target to generate assembly for a file
 main.cpp.s:
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build && $(MAKE) -f Targate/VtechHardwardDevice/CMakeFiles/VtechHardwardDevice.dir/build.make Targate/VtechHardwardDevice/CMakeFiles/VtechHardwardDevice.dir/main.cpp.s
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build && $(MAKE) -f Targate/VtechHardwardDevice/CMakeFiles/VtechHardwardDevice.dir/build.make Targate/VtechHardwardDevice/CMakeFiles/VtechHardwardDevice.dir/main.cpp.s
 .PHONY : main.cpp.s
 
 # Help Target
@@ -273,6 +273,6 @@ help:
 # No rule that depends on this can have commands that come from listfiles
 # because they might be regenerated.
 cmake_check_build_system:
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
 .PHONY : cmake_check_build_system
 

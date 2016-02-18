@@ -1,7 +1,7 @@
 FILE(REMOVE_RECURSE
   "CMakeFiles/jsontestrunner_exe.dir/main.cpp.o"
-  "jsontestrunner_exe.pdb"
-  "jsontestrunner_exe"
+  "../../../../../bin/jsontestrunner_exe.pdb"
+  "../../../../../bin/jsontestrunner_exe"
 )
 
 # Per-language clean rules from dependency scanning.

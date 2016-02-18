@@ -42,7 +42,7 @@ EQUALS = =
 CMAKE_SOURCE_DIR = /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build
+CMAKE_BINARY_DIR = /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -110,14 +110,14 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build && $(CMAKE_COMMAND) -E cmake_progress_start /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build/CMakeFiles /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build/3th_party/jsoncpp-1.6.5/include/CMakeFiles/progress.marks
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build && $(MAKE) -f CMakeFiles/Makefile2 3th_party/jsoncpp-1.6.5/include/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build/CMakeFiles 0
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build && $(CMAKE_COMMAND) -E cmake_progress_start /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build/CMakeFiles /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build/3th_party/jsoncpp-1.6.5/include/CMakeFiles/progress.marks
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build && $(MAKE) -f CMakeFiles/Makefile2 3th_party/jsoncpp-1.6.5/include/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
 clean:
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build && $(MAKE) -f CMakeFiles/Makefile2 3th_party/jsoncpp-1.6.5/include/clean
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build && $(MAKE) -f CMakeFiles/Makefile2 3th_party/jsoncpp-1.6.5/include/clean
 .PHONY : clean
 
 # The main clean target
@@ -126,17 +126,17 @@ clean/fast: clean
 
 # Prepare targets for installation.
 preinstall: all
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build && $(MAKE) -f CMakeFiles/Makefile2 3th_party/jsoncpp-1.6.5/include/preinstall
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build && $(MAKE) -f CMakeFiles/Makefile2 3th_party/jsoncpp-1.6.5/include/preinstall
 .PHONY : preinstall
 
 # Prepare targets for installation.
 preinstall/fast:
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build && $(MAKE) -f CMakeFiles/Makefile2 3th_party/jsoncpp-1.6.5/include/preinstall
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build && $(MAKE) -f CMakeFiles/Makefile2 3th_party/jsoncpp-1.6.5/include/preinstall
 .PHONY : preinstall/fast
 
 # clear depends
 depend:
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
 .PHONY : depend
 
 # Help Target
@@ -162,6 +162,6 @@ help:
 # No rule that depends on this can have commands that come from listfiles
 # because they might be regenerated.
 cmake_check_build_system:
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
 .PHONY : cmake_check_build_system
 

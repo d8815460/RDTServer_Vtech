@@ -14,8 +14,8 @@ FILE(REMOVE_RECURSE
   "CMakeFiles/DeviceAPI.dir/JsonRDTServerCommand.cpp.o"
   "CMakeFiles/DeviceAPI.dir/UTF.cpp.o"
   "CMakeFiles/DeviceAPI.dir/Utility.cpp.o"
-  "libDeviceAPI.pdb"
-  "libDeviceAPI.a"
+  "../../lib/libDeviceAPI.pdb"
+  "../../lib/libDeviceAPI.a"
 )
 
 # Per-language clean rules from dependency scanning.

@@ -54,6 +54,14 @@ cpptl/smallmap.h
 cpptl/forwards.h
 -
 
+/home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build/DeviceAPI/cotire/DeviceAPI_CXX_prefix.cxx
+/home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/DeviceAPI/PrefixHeader.pch
+-
+
+/home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build/DeviceAPI/cotire/DeviceAPI_CXX_prefix.hxx
+/home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build/DeviceAPI/cotire/DeviceAPI_CXX_prefix.cxx
+-
+
 /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/DeviceAPI/AccessoryTypeEnum.hpp
 stdio.h
 -
@@ -385,12 +393,4 @@ stdio.h
 -
 Device.hpp
 /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/DeviceAPI/Device.hpp
-
-/home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build/DeviceAPI/cotire/DeviceAPI_CXX_prefix.cxx
-/home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/DeviceAPI/PrefixHeader.pch
--
-
-/home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build/DeviceAPI/cotire/DeviceAPI_CXX_prefix.hxx
-/home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build/DeviceAPI/cotire/DeviceAPI_CXX_prefix.cxx
--
 

@@ -280,9 +280,9 @@ Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/main.cpp.o: ../Targate/TUTKDevice/.
 Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/main.cpp.o: ../Targate/TUTKDevice/Body.hpp
 Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/main.cpp.o: ../Targate/TUTKDevice/main.cpp
 
-Targate/TUTKDevice/cotire/TUTKDevice_CXX_prefix.hxx.gch: ../DeviceAPI/PrefixHeader.pch
 Targate/TUTKDevice/cotire/TUTKDevice_CXX_prefix.hxx.gch: DeviceAPI/cotire/DeviceAPI_CXX_prefix.cxx
 Targate/TUTKDevice/cotire/TUTKDevice_CXX_prefix.hxx.gch: DeviceAPI/cotire/DeviceAPI_CXX_prefix.hxx
 Targate/TUTKDevice/cotire/TUTKDevice_CXX_prefix.hxx.gch: Targate/TUTKDevice/cotire/TUTKDevice_CXX_prefix.cxx
 Targate/TUTKDevice/cotire/TUTKDevice_CXX_prefix.hxx.gch: Targate/TUTKDevice/cotire/TUTKDevice_CXX_prefix.hxx
+Targate/TUTKDevice/cotire/TUTKDevice_CXX_prefix.hxx.gch: ../DeviceAPI/PrefixHeader.pch
 

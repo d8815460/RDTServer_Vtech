@@ -42,7 +42,7 @@ EQUALS = =
 CMAKE_SOURCE_DIR = /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build
+CMAKE_BINARY_DIR = /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -110,14 +110,14 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build && $(CMAKE_COMMAND) -E cmake_progress_start /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build/CMakeFiles /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build/Targate/TUTKDevice/CMakeFiles/progress.marks
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build && $(MAKE) -f CMakeFiles/Makefile2 Targate/TUTKDevice/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build/CMakeFiles 0
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build && $(CMAKE_COMMAND) -E cmake_progress_start /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build/CMakeFiles /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build/Targate/TUTKDevice/CMakeFiles/progress.marks
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build && $(MAKE) -f CMakeFiles/Makefile2 Targate/TUTKDevice/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
 clean:
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build && $(MAKE) -f CMakeFiles/Makefile2 Targate/TUTKDevice/clean
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build && $(MAKE) -f CMakeFiles/Makefile2 Targate/TUTKDevice/clean
 .PHONY : clean
 
 # The main clean target
@@ -126,22 +126,22 @@ clean/fast: clean
 
 # Prepare targets for installation.
 preinstall: all
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build && $(MAKE) -f CMakeFiles/Makefile2 Targate/TUTKDevice/preinstall
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build && $(MAKE) -f CMakeFiles/Makefile2 Targate/TUTKDevice/preinstall
 .PHONY : preinstall
 
 # Prepare targets for installation.
 preinstall/fast:
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build && $(MAKE) -f CMakeFiles/Makefile2 Targate/TUTKDevice/preinstall
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build && $(MAKE) -f CMakeFiles/Makefile2 Targate/TUTKDevice/preinstall
 .PHONY : preinstall/fast
 
 # clear depends
 depend:
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
 .PHONY : depend
 
 # Convenience name for target.
 Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/rule:
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build && $(MAKE) -f CMakeFiles/Makefile2 Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/rule
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build && $(MAKE) -f CMakeFiles/Makefile2 Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/rule
 .PHONY : Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/rule
 
 # Convenience name for target.
@@ -150,12 +150,12 @@ TUTKDevice: Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/rule
 
 # fast build rule for target.
 TUTKDevice/fast:
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build && $(MAKE) -f Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/build.make Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/build
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build && $(MAKE) -f Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/build.make Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/build
 .PHONY : TUTKDevice/fast
 
 # Convenience name for target.
 Targate/TUTKDevice/CMakeFiles/TUTKDevice_pch.dir/rule:
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build && $(MAKE) -f CMakeFiles/Makefile2 Targate/TUTKDevice/CMakeFiles/TUTKDevice_pch.dir/rule
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build && $(MAKE) -f CMakeFiles/Makefile2 Targate/TUTKDevice/CMakeFiles/TUTKDevice_pch.dir/rule
 .PHONY : Targate/TUTKDevice/CMakeFiles/TUTKDevice_pch.dir/rule
 
 # Convenience name for target.
@@ -164,12 +164,12 @@ TUTKDevice_pch: Targate/TUTKDevice/CMakeFiles/TUTKDevice_pch.dir/rule
 
 # fast build rule for target.
 TUTKDevice_pch/fast:
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build && $(MAKE) -f Targate/TUTKDevice/CMakeFiles/TUTKDevice_pch.dir/build.make Targate/TUTKDevice/CMakeFiles/TUTKDevice_pch.dir/build
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build && $(MAKE) -f Targate/TUTKDevice/CMakeFiles/TUTKDevice_pch.dir/build.make Targate/TUTKDevice/CMakeFiles/TUTKDevice_pch.dir/build
 .PHONY : TUTKDevice_pch/fast
 
 # Convenience name for target.
 Targate/TUTKDevice/CMakeFiles/TUTKDevice_unity.dir/rule:
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build && $(MAKE) -f CMakeFiles/Makefile2 Targate/TUTKDevice/CMakeFiles/TUTKDevice_unity.dir/rule
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build && $(MAKE) -f CMakeFiles/Makefile2 Targate/TUTKDevice/CMakeFiles/TUTKDevice_unity.dir/rule
 .PHONY : Targate/TUTKDevice/CMakeFiles/TUTKDevice_unity.dir/rule
 
 # Convenience name for target.
@@ -178,7 +178,7 @@ TUTKDevice_unity: Targate/TUTKDevice/CMakeFiles/TUTKDevice_unity.dir/rule
 
 # fast build rule for target.
 TUTKDevice_unity/fast:
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build && $(MAKE) -f Targate/TUTKDevice/CMakeFiles/TUTKDevice_unity.dir/build.make Targate/TUTKDevice/CMakeFiles/TUTKDevice_unity.dir/build
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build && $(MAKE) -f Targate/TUTKDevice/CMakeFiles/TUTKDevice_unity.dir/build.make Targate/TUTKDevice/CMakeFiles/TUTKDevice_unity.dir/build
 .PHONY : TUTKDevice_unity/fast
 
 Body.o: Body.cpp.o
@@ -186,7 +186,7 @@ Body.o: Body.cpp.o
 
 # target to build an object file
 Body.cpp.o:
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build && $(MAKE) -f Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/build.make Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/Body.cpp.o
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build && $(MAKE) -f Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/build.make Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/Body.cpp.o
 .PHONY : Body.cpp.o
 
 Body.i: Body.cpp.i
@@ -194,7 +194,7 @@ Body.i: Body.cpp.i
 
 # target to preprocess a source file
 Body.cpp.i:
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build && $(MAKE) -f Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/build.make Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/Body.cpp.i
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build && $(MAKE) -f Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/build.make Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/Body.cpp.i
 .PHONY : Body.cpp.i
 
 Body.s: Body.cpp.s
@@ -202,7 +202,7 @@ Body.s: Body.cpp.s
 
 # target to generate assembly for a file
 Body.cpp.s:
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build && $(MAKE) -f Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/build.make Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/Body.cpp.s
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build && $(MAKE) -f Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/build.make Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/Body.cpp.s
 .PHONY : Body.cpp.s
 
 JsonRDTClientDevice.o: JsonRDTClientDevice.cpp.o
@@ -210,7 +210,7 @@ JsonRDTClientDevice.o: JsonRDTClientDevice.cpp.o
 
 # target to build an object file
 JsonRDTClientDevice.cpp.o:
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build && $(MAKE) -f Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/build.make Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/JsonRDTClientDevice.cpp.o
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build && $(MAKE) -f Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/build.make Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/JsonRDTClientDevice.cpp.o
 .PHONY : JsonRDTClientDevice.cpp.o
 
 JsonRDTClientDevice.i: JsonRDTClientDevice.cpp.i
@@ -218,7 +218,7 @@ JsonRDTClientDevice.i: JsonRDTClientDevice.cpp.i
 
 # target to preprocess a source file
 JsonRDTClientDevice.cpp.i:
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build && $(MAKE) -f Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/build.make Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/JsonRDTClientDevice.cpp.i
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build && $(MAKE) -f Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/build.make Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/JsonRDTClientDevice.cpp.i
 .PHONY : JsonRDTClientDevice.cpp.i
 
 JsonRDTClientDevice.s: JsonRDTClientDevice.cpp.s
@@ -226,7 +226,7 @@ JsonRDTClientDevice.s: JsonRDTClientDevice.cpp.s
 
 # target to generate assembly for a file
 JsonRDTClientDevice.cpp.s:
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build && $(MAKE) -f Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/build.make Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/JsonRDTClientDevice.cpp.s
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build && $(MAKE) -f Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/build.make Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/JsonRDTClientDevice.cpp.s
 .PHONY : JsonRDTClientDevice.cpp.s
 
 SampoDevice.o: SampoDevice.cpp.o
@@ -234,7 +234,7 @@ SampoDevice.o: SampoDevice.cpp.o
 
 # target to build an object file
 SampoDevice.cpp.o:
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build && $(MAKE) -f Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/build.make Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/SampoDevice.cpp.o
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build && $(MAKE) -f Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/build.make Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/SampoDevice.cpp.o
 .PHONY : SampoDevice.cpp.o
 
 SampoDevice.i: SampoDevice.cpp.i
@@ -242,7 +242,7 @@ SampoDevice.i: SampoDevice.cpp.i
 
 # target to preprocess a source file
 SampoDevice.cpp.i:
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build && $(MAKE) -f Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/build.make Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/SampoDevice.cpp.i
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build && $(MAKE) -f Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/build.make Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/SampoDevice.cpp.i
 .PHONY : SampoDevice.cpp.i
 
 SampoDevice.s: SampoDevice.cpp.s
@@ -250,7 +250,7 @@ SampoDevice.s: SampoDevice.cpp.s
 
 # target to generate assembly for a file
 SampoDevice.cpp.s:
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build && $(MAKE) -f Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/build.make Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/SampoDevice.cpp.s
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build && $(MAKE) -f Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/build.make Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/SampoDevice.cpp.s
 .PHONY : SampoDevice.cpp.s
 
 TUTKDoorDevice.o: TUTKDoorDevice.cpp.o
@@ -258,7 +258,7 @@ TUTKDoorDevice.o: TUTKDoorDevice.cpp.o
 
 # target to build an object file
 TUTKDoorDevice.cpp.o:
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build && $(MAKE) -f Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/build.make Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/TUTKDoorDevice.cpp.o
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build && $(MAKE) -f Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/build.make Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/TUTKDoorDevice.cpp.o
 .PHONY : TUTKDoorDevice.cpp.o
 
 TUTKDoorDevice.i: TUTKDoorDevice.cpp.i
@@ -266,7 +266,7 @@ TUTKDoorDevice.i: TUTKDoorDevice.cpp.i
 
 # target to preprocess a source file
 TUTKDoorDevice.cpp.i:
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build && $(MAKE) -f Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/build.make Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/TUTKDoorDevice.cpp.i
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build && $(MAKE) -f Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/build.make Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/TUTKDoorDevice.cpp.i
 .PHONY : TUTKDoorDevice.cpp.i
 
 TUTKDoorDevice.s: TUTKDoorDevice.cpp.s
@@ -274,7 +274,7 @@ TUTKDoorDevice.s: TUTKDoorDevice.cpp.s
 
 # target to generate assembly for a file
 TUTKDoorDevice.cpp.s:
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build && $(MAKE) -f Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/build.make Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/TUTKDoorDevice.cpp.s
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build && $(MAKE) -f Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/build.make Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/TUTKDoorDevice.cpp.s
 .PHONY : TUTKDoorDevice.cpp.s
 
 TUTKGasDevice.o: TUTKGasDevice.cpp.o
@@ -282,7 +282,7 @@ TUTKGasDevice.o: TUTKGasDevice.cpp.o
 
 # target to build an object file
 TUTKGasDevice.cpp.o:
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build && $(MAKE) -f Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/build.make Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/TUTKGasDevice.cpp.o
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build && $(MAKE) -f Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/build.make Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/TUTKGasDevice.cpp.o
 .PHONY : TUTKGasDevice.cpp.o
 
 TUTKGasDevice.i: TUTKGasDevice.cpp.i
@@ -290,7 +290,7 @@ TUTKGasDevice.i: TUTKGasDevice.cpp.i
 
 # target to preprocess a source file
 TUTKGasDevice.cpp.i:
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build && $(MAKE) -f Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/build.make Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/TUTKGasDevice.cpp.i
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build && $(MAKE) -f Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/build.make Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/TUTKGasDevice.cpp.i
 .PHONY : TUTKGasDevice.cpp.i
 
 TUTKGasDevice.s: TUTKGasDevice.cpp.s
@@ -298,7 +298,7 @@ TUTKGasDevice.s: TUTKGasDevice.cpp.s
 
 # target to generate assembly for a file
 TUTKGasDevice.cpp.s:
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build && $(MAKE) -f Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/build.make Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/TUTKGasDevice.cpp.s
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build && $(MAKE) -f Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/build.make Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/TUTKGasDevice.cpp.s
 .PHONY : TUTKGasDevice.cpp.s
 
 TUTKGatewayDevice.o: TUTKGatewayDevice.cpp.o
@@ -306,7 +306,7 @@ TUTKGatewayDevice.o: TUTKGatewayDevice.cpp.o
 
 # target to build an object file
 TUTKGatewayDevice.cpp.o:
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build && $(MAKE) -f Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/build.make Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/TUTKGatewayDevice.cpp.o
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build && $(MAKE) -f Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/build.make Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/TUTKGatewayDevice.cpp.o
 .PHONY : TUTKGatewayDevice.cpp.o
 
 TUTKGatewayDevice.i: TUTKGatewayDevice.cpp.i
@@ -314,7 +314,7 @@ TUTKGatewayDevice.i: TUTKGatewayDevice.cpp.i
 
 # target to preprocess a source file
 TUTKGatewayDevice.cpp.i:
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build && $(MAKE) -f Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/build.make Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/TUTKGatewayDevice.cpp.i
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build && $(MAKE) -f Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/build.make Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/TUTKGatewayDevice.cpp.i
 .PHONY : TUTKGatewayDevice.cpp.i
 
 TUTKGatewayDevice.s: TUTKGatewayDevice.cpp.s
@@ -322,7 +322,7 @@ TUTKGatewayDevice.s: TUTKGatewayDevice.cpp.s
 
 # target to generate assembly for a file
 TUTKGatewayDevice.cpp.s:
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build && $(MAKE) -f Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/build.make Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/TUTKGatewayDevice.cpp.s
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build && $(MAKE) -f Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/build.make Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/TUTKGatewayDevice.cpp.s
 .PHONY : TUTKGatewayDevice.cpp.s
 
 TUTKLightingDevice.o: TUTKLightingDevice.cpp.o
@@ -330,7 +330,7 @@ TUTKLightingDevice.o: TUTKLightingDevice.cpp.o
 
 # target to build an object file
 TUTKLightingDevice.cpp.o:
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build && $(MAKE) -f Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/build.make Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/TUTKLightingDevice.cpp.o
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build && $(MAKE) -f Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/build.make Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/TUTKLightingDevice.cpp.o
 .PHONY : TUTKLightingDevice.cpp.o
 
 TUTKLightingDevice.i: TUTKLightingDevice.cpp.i
@@ -338,7 +338,7 @@ TUTKLightingDevice.i: TUTKLightingDevice.cpp.i
 
 # target to preprocess a source file
 TUTKLightingDevice.cpp.i:
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build && $(MAKE) -f Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/build.make Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/TUTKLightingDevice.cpp.i
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build && $(MAKE) -f Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/build.make Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/TUTKLightingDevice.cpp.i
 .PHONY : TUTKLightingDevice.cpp.i
 
 TUTKLightingDevice.s: TUTKLightingDevice.cpp.s
@@ -346,7 +346,7 @@ TUTKLightingDevice.s: TUTKLightingDevice.cpp.s
 
 # target to generate assembly for a file
 TUTKLightingDevice.cpp.s:
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build && $(MAKE) -f Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/build.make Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/TUTKLightingDevice.cpp.s
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build && $(MAKE) -f Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/build.make Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/TUTKLightingDevice.cpp.s
 .PHONY : TUTKLightingDevice.cpp.s
 
 TUTKPIRDevice.o: TUTKPIRDevice.cpp.o
@@ -354,7 +354,7 @@ TUTKPIRDevice.o: TUTKPIRDevice.cpp.o
 
 # target to build an object file
 TUTKPIRDevice.cpp.o:
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build && $(MAKE) -f Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/build.make Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/TUTKPIRDevice.cpp.o
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build && $(MAKE) -f Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/build.make Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/TUTKPIRDevice.cpp.o
 .PHONY : TUTKPIRDevice.cpp.o
 
 TUTKPIRDevice.i: TUTKPIRDevice.cpp.i
@@ -362,7 +362,7 @@ TUTKPIRDevice.i: TUTKPIRDevice.cpp.i
 
 # target to preprocess a source file
 TUTKPIRDevice.cpp.i:
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build && $(MAKE) -f Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/build.make Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/TUTKPIRDevice.cpp.i
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build && $(MAKE) -f Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/build.make Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/TUTKPIRDevice.cpp.i
 .PHONY : TUTKPIRDevice.cpp.i
 
 TUTKPIRDevice.s: TUTKPIRDevice.cpp.s
@@ -370,7 +370,7 @@ TUTKPIRDevice.s: TUTKPIRDevice.cpp.s
 
 # target to generate assembly for a file
 TUTKPIRDevice.cpp.s:
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build && $(MAKE) -f Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/build.make Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/TUTKPIRDevice.cpp.s
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build && $(MAKE) -f Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/build.make Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/TUTKPIRDevice.cpp.s
 .PHONY : TUTKPIRDevice.cpp.s
 
 TUTKPlugDevice.o: TUTKPlugDevice.cpp.o
@@ -378,7 +378,7 @@ TUTKPlugDevice.o: TUTKPlugDevice.cpp.o
 
 # target to build an object file
 TUTKPlugDevice.cpp.o:
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build && $(MAKE) -f Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/build.make Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/TUTKPlugDevice.cpp.o
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build && $(MAKE) -f Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/build.make Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/TUTKPlugDevice.cpp.o
 .PHONY : TUTKPlugDevice.cpp.o
 
 TUTKPlugDevice.i: TUTKPlugDevice.cpp.i
@@ -386,7 +386,7 @@ TUTKPlugDevice.i: TUTKPlugDevice.cpp.i
 
 # target to preprocess a source file
 TUTKPlugDevice.cpp.i:
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build && $(MAKE) -f Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/build.make Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/TUTKPlugDevice.cpp.i
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build && $(MAKE) -f Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/build.make Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/TUTKPlugDevice.cpp.i
 .PHONY : TUTKPlugDevice.cpp.i
 
 TUTKPlugDevice.s: TUTKPlugDevice.cpp.s
@@ -394,7 +394,7 @@ TUTKPlugDevice.s: TUTKPlugDevice.cpp.s
 
 # target to generate assembly for a file
 TUTKPlugDevice.cpp.s:
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build && $(MAKE) -f Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/build.make Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/TUTKPlugDevice.cpp.s
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build && $(MAKE) -f Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/build.make Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/TUTKPlugDevice.cpp.s
 .PHONY : TUTKPlugDevice.cpp.s
 
 TUTKSirenDevice.o: TUTKSirenDevice.cpp.o
@@ -402,7 +402,7 @@ TUTKSirenDevice.o: TUTKSirenDevice.cpp.o
 
 # target to build an object file
 TUTKSirenDevice.cpp.o:
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build && $(MAKE) -f Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/build.make Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/TUTKSirenDevice.cpp.o
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build && $(MAKE) -f Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/build.make Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/TUTKSirenDevice.cpp.o
 .PHONY : TUTKSirenDevice.cpp.o
 
 TUTKSirenDevice.i: TUTKSirenDevice.cpp.i
@@ -410,7 +410,7 @@ TUTKSirenDevice.i: TUTKSirenDevice.cpp.i
 
 # target to preprocess a source file
 TUTKSirenDevice.cpp.i:
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build && $(MAKE) -f Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/build.make Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/TUTKSirenDevice.cpp.i
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build && $(MAKE) -f Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/build.make Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/TUTKSirenDevice.cpp.i
 .PHONY : TUTKSirenDevice.cpp.i
 
 TUTKSirenDevice.s: TUTKSirenDevice.cpp.s
@@ -418,7 +418,7 @@ TUTKSirenDevice.s: TUTKSirenDevice.cpp.s
 
 # target to generate assembly for a file
 TUTKSirenDevice.cpp.s:
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build && $(MAKE) -f Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/build.make Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/TUTKSirenDevice.cpp.s
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build && $(MAKE) -f Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/build.make Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/TUTKSirenDevice.cpp.s
 .PHONY : TUTKSirenDevice.cpp.s
 
 TUTKSmokeDevice.o: TUTKSmokeDevice.cpp.o
@@ -426,7 +426,7 @@ TUTKSmokeDevice.o: TUTKSmokeDevice.cpp.o
 
 # target to build an object file
 TUTKSmokeDevice.cpp.o:
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build && $(MAKE) -f Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/build.make Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/TUTKSmokeDevice.cpp.o
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build && $(MAKE) -f Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/build.make Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/TUTKSmokeDevice.cpp.o
 .PHONY : TUTKSmokeDevice.cpp.o
 
 TUTKSmokeDevice.i: TUTKSmokeDevice.cpp.i
@@ -434,7 +434,7 @@ TUTKSmokeDevice.i: TUTKSmokeDevice.cpp.i
 
 # target to preprocess a source file
 TUTKSmokeDevice.cpp.i:
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build && $(MAKE) -f Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/build.make Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/TUTKSmokeDevice.cpp.i
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build && $(MAKE) -f Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/build.make Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/TUTKSmokeDevice.cpp.i
 .PHONY : TUTKSmokeDevice.cpp.i
 
 TUTKSmokeDevice.s: TUTKSmokeDevice.cpp.s
@@ -442,7 +442,7 @@ TUTKSmokeDevice.s: TUTKSmokeDevice.cpp.s
 
 # target to generate assembly for a file
 TUTKSmokeDevice.cpp.s:
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build && $(MAKE) -f Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/build.make Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/TUTKSmokeDevice.cpp.s
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build && $(MAKE) -f Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/build.make Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/TUTKSmokeDevice.cpp.s
 .PHONY : TUTKSmokeDevice.cpp.s
 
 TUTKVibrateDevice.o: TUTKVibrateDevice.cpp.o
@@ -450,7 +450,7 @@ TUTKVibrateDevice.o: TUTKVibrateDevice.cpp.o
 
 # target to build an object file
 TUTKVibrateDevice.cpp.o:
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build && $(MAKE) -f Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/build.make Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/TUTKVibrateDevice.cpp.o
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build && $(MAKE) -f Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/build.make Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/TUTKVibrateDevice.cpp.o
 .PHONY : TUTKVibrateDevice.cpp.o
 
 TUTKVibrateDevice.i: TUTKVibrateDevice.cpp.i
@@ -458,7 +458,7 @@ TUTKVibrateDevice.i: TUTKVibrateDevice.cpp.i
 
 # target to preprocess a source file
 TUTKVibrateDevice.cpp.i:
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build && $(MAKE) -f Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/build.make Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/TUTKVibrateDevice.cpp.i
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build && $(MAKE) -f Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/build.make Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/TUTKVibrateDevice.cpp.i
 .PHONY : TUTKVibrateDevice.cpp.i
 
 TUTKVibrateDevice.s: TUTKVibrateDevice.cpp.s
@@ -466,7 +466,7 @@ TUTKVibrateDevice.s: TUTKVibrateDevice.cpp.s
 
 # target to generate assembly for a file
 TUTKVibrateDevice.cpp.s:
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build && $(MAKE) -f Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/build.make Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/TUTKVibrateDevice.cpp.s
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build && $(MAKE) -f Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/build.make Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/TUTKVibrateDevice.cpp.s
 .PHONY : TUTKVibrateDevice.cpp.s
 
 TUTKWaterLeakDevice.o: TUTKWaterLeakDevice.cpp.o
@@ -474,7 +474,7 @@ TUTKWaterLeakDevice.o: TUTKWaterLeakDevice.cpp.o
 
 # target to build an object file
 TUTKWaterLeakDevice.cpp.o:
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build && $(MAKE) -f Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/build.make Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/TUTKWaterLeakDevice.cpp.o
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build && $(MAKE) -f Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/build.make Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/TUTKWaterLeakDevice.cpp.o
 .PHONY : TUTKWaterLeakDevice.cpp.o
 
 TUTKWaterLeakDevice.i: TUTKWaterLeakDevice.cpp.i
@@ -482,7 +482,7 @@ TUTKWaterLeakDevice.i: TUTKWaterLeakDevice.cpp.i
 
 # target to preprocess a source file
 TUTKWaterLeakDevice.cpp.i:
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build && $(MAKE) -f Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/build.make Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/TUTKWaterLeakDevice.cpp.i
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build && $(MAKE) -f Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/build.make Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/TUTKWaterLeakDevice.cpp.i
 .PHONY : TUTKWaterLeakDevice.cpp.i
 
 TUTKWaterLeakDevice.s: TUTKWaterLeakDevice.cpp.s
@@ -490,7 +490,7 @@ TUTKWaterLeakDevice.s: TUTKWaterLeakDevice.cpp.s
 
 # target to generate assembly for a file
 TUTKWaterLeakDevice.cpp.s:
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build && $(MAKE) -f Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/build.make Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/TUTKWaterLeakDevice.cpp.s
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build && $(MAKE) -f Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/build.make Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/TUTKWaterLeakDevice.cpp.s
 .PHONY : TUTKWaterLeakDevice.cpp.s
 
 ZhongHanDevice.o: ZhongHanDevice.cpp.o
@@ -498,7 +498,7 @@ ZhongHanDevice.o: ZhongHanDevice.cpp.o
 
 # target to build an object file
 ZhongHanDevice.cpp.o:
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build && $(MAKE) -f Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/build.make Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/ZhongHanDevice.cpp.o
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build && $(MAKE) -f Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/build.make Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/ZhongHanDevice.cpp.o
 .PHONY : ZhongHanDevice.cpp.o
 
 ZhongHanDevice.i: ZhongHanDevice.cpp.i
@@ -506,7 +506,7 @@ ZhongHanDevice.i: ZhongHanDevice.cpp.i
 
 # target to preprocess a source file
 ZhongHanDevice.cpp.i:
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build && $(MAKE) -f Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/build.make Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/ZhongHanDevice.cpp.i
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build && $(MAKE) -f Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/build.make Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/ZhongHanDevice.cpp.i
 .PHONY : ZhongHanDevice.cpp.i
 
 ZhongHanDevice.s: ZhongHanDevice.cpp.s
@@ -514,7 +514,7 @@ ZhongHanDevice.s: ZhongHanDevice.cpp.s
 
 # target to generate assembly for a file
 ZhongHanDevice.cpp.s:
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build && $(MAKE) -f Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/build.make Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/ZhongHanDevice.cpp.s
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build && $(MAKE) -f Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/build.make Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/ZhongHanDevice.cpp.s
 .PHONY : ZhongHanDevice.cpp.s
 
 cotire/TUTKDevice_CXX_unity.o: cotire/TUTKDevice_CXX_unity.cxx.o
@@ -522,7 +522,7 @@ cotire/TUTKDevice_CXX_unity.o: cotire/TUTKDevice_CXX_unity.cxx.o
 
 # target to build an object file
 cotire/TUTKDevice_CXX_unity.cxx.o:
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build && $(MAKE) -f Targate/TUTKDevice/CMakeFiles/TUTKDevice_unity.dir/build.make Targate/TUTKDevice/CMakeFiles/TUTKDevice_unity.dir/cotire/TUTKDevice_CXX_unity.cxx.o
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build && $(MAKE) -f Targate/TUTKDevice/CMakeFiles/TUTKDevice_unity.dir/build.make Targate/TUTKDevice/CMakeFiles/TUTKDevice_unity.dir/cotire/TUTKDevice_CXX_unity.cxx.o
 .PHONY : cotire/TUTKDevice_CXX_unity.cxx.o
 
 cotire/TUTKDevice_CXX_unity.i: cotire/TUTKDevice_CXX_unity.cxx.i
@@ -530,7 +530,7 @@ cotire/TUTKDevice_CXX_unity.i: cotire/TUTKDevice_CXX_unity.cxx.i
 
 # target to preprocess a source file
 cotire/TUTKDevice_CXX_unity.cxx.i:
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build && $(MAKE) -f Targate/TUTKDevice/CMakeFiles/TUTKDevice_unity.dir/build.make Targate/TUTKDevice/CMakeFiles/TUTKDevice_unity.dir/cotire/TUTKDevice_CXX_unity.cxx.i
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build && $(MAKE) -f Targate/TUTKDevice/CMakeFiles/TUTKDevice_unity.dir/build.make Targate/TUTKDevice/CMakeFiles/TUTKDevice_unity.dir/cotire/TUTKDevice_CXX_unity.cxx.i
 .PHONY : cotire/TUTKDevice_CXX_unity.cxx.i
 
 cotire/TUTKDevice_CXX_unity.s: cotire/TUTKDevice_CXX_unity.cxx.s
@@ -538,7 +538,7 @@ cotire/TUTKDevice_CXX_unity.s: cotire/TUTKDevice_CXX_unity.cxx.s
 
 # target to generate assembly for a file
 cotire/TUTKDevice_CXX_unity.cxx.s:
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build && $(MAKE) -f Targate/TUTKDevice/CMakeFiles/TUTKDevice_unity.dir/build.make Targate/TUTKDevice/CMakeFiles/TUTKDevice_unity.dir/cotire/TUTKDevice_CXX_unity.cxx.s
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build && $(MAKE) -f Targate/TUTKDevice/CMakeFiles/TUTKDevice_unity.dir/build.make Targate/TUTKDevice/CMakeFiles/TUTKDevice_unity.dir/cotire/TUTKDevice_CXX_unity.cxx.s
 .PHONY : cotire/TUTKDevice_CXX_unity.cxx.s
 
 main.o: main.cpp.o
@@ -546,7 +546,7 @@ main.o: main.cpp.o
 
 # target to build an object file
 main.cpp.o:
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build && $(MAKE) -f Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/build.make Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/main.cpp.o
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build && $(MAKE) -f Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/build.make Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/main.cpp.o
 .PHONY : main.cpp.o
 
 main.i: main.cpp.i
@@ -554,7 +554,7 @@ main.i: main.cpp.i
 
 # target to preprocess a source file
 main.cpp.i:
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build && $(MAKE) -f Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/build.make Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/main.cpp.i
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build && $(MAKE) -f Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/build.make Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/main.cpp.i
 .PHONY : main.cpp.i
 
 main.s: main.cpp.s
@@ -562,7 +562,7 @@ main.s: main.cpp.s
 
 # target to generate assembly for a file
 main.cpp.s:
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build && $(MAKE) -f Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/build.make Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/main.cpp.s
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build && $(MAKE) -f Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/build.make Targate/TUTKDevice/CMakeFiles/TUTKDevice.dir/main.cpp.s
 .PHONY : main.cpp.s
 
 # Help Target
@@ -639,6 +639,6 @@ help:
 # No rule that depends on this can have commands that come from listfiles
 # because they might be regenerated.
 cmake_check_build_system:
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
 .PHONY : cmake_check_build_system
 

@@ -38,7 +38,7 @@ EQUALS = =
 CMAKE_SOURCE_DIR = /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build
+CMAKE_BINARY_DIR = /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build
 
 # Include any dependencies generated for this target.
 include 3th_party/jsoncpp-1.6.5/src/jsontestrunner/CMakeFiles/jsontestrunner_exe.dir/depend.make
@@ -51,17 +51,17 @@ include 3th_party/jsoncpp-1.6.5/src/jsontestrunner/CMakeFiles/jsontestrunner_exe
 
 3th_party/jsoncpp-1.6.5/src/jsontestrunner/CMakeFiles/jsontestrunner_exe.dir/main.cpp.o: 3th_party/jsoncpp-1.6.5/src/jsontestrunner/CMakeFiles/jsontestrunner_exe.dir/flags.make
 3th_party/jsoncpp-1.6.5/src/jsontestrunner/CMakeFiles/jsontestrunner_exe.dir/main.cpp.o: ../3th_party/jsoncpp-1.6.5/src/jsontestrunner/main.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build/CMakeFiles $(CMAKE_PROGRESS_1)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build/CMakeFiles $(CMAKE_PROGRESS_1)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object 3th_party/jsoncpp-1.6.5/src/jsontestrunner/CMakeFiles/jsontestrunner_exe.dir/main.cpp.o"
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build/3th_party/jsoncpp-1.6.5/src/jsontestrunner && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/jsontestrunner_exe.dir/main.cpp.o -c /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/3th_party/jsoncpp-1.6.5/src/jsontestrunner/main.cpp
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build/3th_party/jsoncpp-1.6.5/src/jsontestrunner && /usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/jsontestrunner_exe.dir/main.cpp.o -c /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/3th_party/jsoncpp-1.6.5/src/jsontestrunner/main.cpp
 
 3th_party/jsoncpp-1.6.5/src/jsontestrunner/CMakeFiles/jsontestrunner_exe.dir/main.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/jsontestrunner_exe.dir/main.cpp.i"
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build/3th_party/jsoncpp-1.6.5/src/jsontestrunner && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/3th_party/jsoncpp-1.6.5/src/jsontestrunner/main.cpp > CMakeFiles/jsontestrunner_exe.dir/main.cpp.i
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build/3th_party/jsoncpp-1.6.5/src/jsontestrunner && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/3th_party/jsoncpp-1.6.5/src/jsontestrunner/main.cpp > CMakeFiles/jsontestrunner_exe.dir/main.cpp.i
 
 3th_party/jsoncpp-1.6.5/src/jsontestrunner/CMakeFiles/jsontestrunner_exe.dir/main.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/jsontestrunner_exe.dir/main.cpp.s"
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build/3th_party/jsoncpp-1.6.5/src/jsontestrunner && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/3th_party/jsoncpp-1.6.5/src/jsontestrunner/main.cpp -o CMakeFiles/jsontestrunner_exe.dir/main.cpp.s
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build/3th_party/jsoncpp-1.6.5/src/jsontestrunner && /usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/3th_party/jsoncpp-1.6.5/src/jsontestrunner/main.cpp -o CMakeFiles/jsontestrunner_exe.dir/main.cpp.s
 
 3th_party/jsoncpp-1.6.5/src/jsontestrunner/CMakeFiles/jsontestrunner_exe.dir/main.cpp.o.requires:
 .PHONY : 3th_party/jsoncpp-1.6.5/src/jsontestrunner/CMakeFiles/jsontestrunner_exe.dir/main.cpp.o.requires
@@ -79,25 +79,25 @@ jsontestrunner_exe_OBJECTS = \
 # External object files for target jsontestrunner_exe
 jsontestrunner_exe_EXTERNAL_OBJECTS =
 
-3th_party/jsoncpp-1.6.5/src/jsontestrunner/jsontestrunner_exe: 3th_party/jsoncpp-1.6.5/src/jsontestrunner/CMakeFiles/jsontestrunner_exe.dir/main.cpp.o
-3th_party/jsoncpp-1.6.5/src/jsontestrunner/jsontestrunner_exe: 3th_party/jsoncpp-1.6.5/src/jsontestrunner/CMakeFiles/jsontestrunner_exe.dir/build.make
-3th_party/jsoncpp-1.6.5/src/jsontestrunner/jsontestrunner_exe: 3th_party/jsoncpp-1.6.5/src/lib_json/libjsoncpp.a
-3th_party/jsoncpp-1.6.5/src/jsontestrunner/jsontestrunner_exe: 3th_party/jsoncpp-1.6.5/src/jsontestrunner/CMakeFiles/jsontestrunner_exe.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --red --bold "Linking CXX executable jsontestrunner_exe"
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build/3th_party/jsoncpp-1.6.5/src/jsontestrunner && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/jsontestrunner_exe.dir/link.txt --verbose=$(VERBOSE)
+../bin/jsontestrunner_exe: 3th_party/jsoncpp-1.6.5/src/jsontestrunner/CMakeFiles/jsontestrunner_exe.dir/main.cpp.o
+../bin/jsontestrunner_exe: 3th_party/jsoncpp-1.6.5/src/jsontestrunner/CMakeFiles/jsontestrunner_exe.dir/build.make
+../bin/jsontestrunner_exe: ../lib/libjsoncpp.a
+../bin/jsontestrunner_exe: 3th_party/jsoncpp-1.6.5/src/jsontestrunner/CMakeFiles/jsontestrunner_exe.dir/link.txt
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --red --bold "Linking CXX executable ../../../../../bin/jsontestrunner_exe"
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build/3th_party/jsoncpp-1.6.5/src/jsontestrunner && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/jsontestrunner_exe.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
-3th_party/jsoncpp-1.6.5/src/jsontestrunner/CMakeFiles/jsontestrunner_exe.dir/build: 3th_party/jsoncpp-1.6.5/src/jsontestrunner/jsontestrunner_exe
+3th_party/jsoncpp-1.6.5/src/jsontestrunner/CMakeFiles/jsontestrunner_exe.dir/build: ../bin/jsontestrunner_exe
 .PHONY : 3th_party/jsoncpp-1.6.5/src/jsontestrunner/CMakeFiles/jsontestrunner_exe.dir/build
 
 3th_party/jsoncpp-1.6.5/src/jsontestrunner/CMakeFiles/jsontestrunner_exe.dir/requires: 3th_party/jsoncpp-1.6.5/src/jsontestrunner/CMakeFiles/jsontestrunner_exe.dir/main.cpp.o.requires
 .PHONY : 3th_party/jsoncpp-1.6.5/src/jsontestrunner/CMakeFiles/jsontestrunner_exe.dir/requires
 
 3th_party/jsoncpp-1.6.5/src/jsontestrunner/CMakeFiles/jsontestrunner_exe.dir/clean:
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build/3th_party/jsoncpp-1.6.5/src/jsontestrunner && $(CMAKE_COMMAND) -P CMakeFiles/jsontestrunner_exe.dir/cmake_clean.cmake
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build/3th_party/jsoncpp-1.6.5/src/jsontestrunner && $(CMAKE_COMMAND) -P CMakeFiles/jsontestrunner_exe.dir/cmake_clean.cmake
 .PHONY : 3th_party/jsoncpp-1.6.5/src/jsontestrunner/CMakeFiles/jsontestrunner_exe.dir/clean
 
 3th_party/jsoncpp-1.6.5/src/jsontestrunner/CMakeFiles/jsontestrunner_exe.dir/depend:
-	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/3th_party/jsoncpp-1.6.5/src/jsontestrunner /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build/3th_party/jsoncpp-1.6.5/src/jsontestrunner /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build/3th_party/jsoncpp-1.6.5/src/jsontestrunner/CMakeFiles/jsontestrunner_exe.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/3th_party/jsoncpp-1.6.5/src/jsontestrunner /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build/3th_party/jsoncpp-1.6.5/src/jsontestrunner /home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Build/3th_party/jsoncpp-1.6.5/src/jsontestrunner/CMakeFiles/jsontestrunner_exe.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : 3th_party/jsoncpp-1.6.5/src/jsontestrunner/CMakeFiles/jsontestrunner_exe.dir/depend
 

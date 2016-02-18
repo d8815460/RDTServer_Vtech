@@ -10,8 +10,8 @@ FILE(REMOVE_RECURSE
   "CMakeFiles/VtechDevice.dir/VtechOpenClosedDevice.cpp.o"
   "CMakeFiles/VtechDevice.dir/VtechVirtualGroupDevice.cpp.o"
   "CMakeFiles/VtechDevice.dir/VtechWallSwitchDevice.cpp.o"
-  "libVtechDevice.pdb"
-  "libVtechDevice.a"
+  "../../../lib/libVtechDevice.pdb"
+  "../../../lib/libVtechDevice.a"
 )
 
 # Per-language clean rules from dependency scanning.
