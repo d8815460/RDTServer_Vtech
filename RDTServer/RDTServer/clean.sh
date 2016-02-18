@@ -1,0 +1,3 @@
+cd Build
+rm -Rf *
+

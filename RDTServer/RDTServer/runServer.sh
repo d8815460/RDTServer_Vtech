@@ -2,7 +2,7 @@ cd build
 cmake ..
 make
 
-cd Targate/VtechHardwardDevice
+cd ../bin/linux/i386
 ./VtechHardwardDevice C7KUB944VZFMUH6GYHDJ
 
 
