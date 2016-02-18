@@ -1,12 +1,7 @@
 Message("CMAKE_CURRENT_SOURCE_DIR = ${CMAKE_CURRENT_SOURCE_DIR}")
 
 cmake_minimum_required(VERSION 2.8.12.2)
-
-set (CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/CMake")
-
-set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/bin)
-set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/lib)
-set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/lib)
+set(CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/CMake")
 
 ###################### cotire #############################
 include(cotire)
@@ -14,8 +9,30 @@ include(cotire)
 
 ###################### Solar #############################
 include(Solar)
-Message("CMAKE_TARGET_ARCHITECTURES = ${CMAKE_TARGET_ARCHITECTURES}")
 ###################### Solar #############################
+
+Message("CMAKE_SYSTEM_NAME = ${CMAKE_SYSTEM_NAME}")
+Message("CMAKE_TARGET_ARCHITECTURES = ${CMAKE_TARGET_ARCHITECTURES}")
+
+if (CMAKE_SYSTEM_NAME MATCHES "WIN32")
+	set(LIB lib/win32)
+	set(BIN bin/win32)
+elseif (CMAKE_SYSTEM_NAME MATCHES "Darwin")
+	set(LIB lib/mac)
+	set(BIN bin/mac)
+elseif (CMAKE_SYSTEM_NAME MATCHES "Linux")
+	if (CMAKE_TARGET_ARCHITECTURES MATCHES "i386")
+        set(LIB lib/linux/i386)
+		set(BIN bin/linux/i386)
+    else()
+        set(LIB lib/linux/x86_64)
+		set(BIN bin/linux/x86_64)
+    endif()
+endif()
+
+set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/${LIB})
+set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/${LIB})
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/${BIN})
 
 ###################### CXX11 #############################
 include(CheckCXXCompilerFlag)

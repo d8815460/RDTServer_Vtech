@@ -12,7 +12,8 @@ if (CMAKE_SYSTEM_NAME MATCHES "Linux" AND CMAKE_TARGET_ARCHITECTURES MATCHES "i3
     include_directories(${CMAKE_CURRENT_SOURCE_DIR}/../../3th_party/unix_socket)
 
     Message("CMAKE_SYSTEM_NAME = ${CMAKE_SYSTEM_NAME}")
-    link_directories(${CMAKE_CURRENT_SOURCE_DIR}/../../lib)
+    link_directories(${CMAKE_LIBRARY_OUTPUT_DIRECTORY})
+    link_directories(${CMAKE_ARCHIVE_OUTPUT_DIRECTORY})
     if (CMAKE_SYSTEM_NAME MATCHES "WIN32")
         link_directories(${CMAKE_CURRENT_SOURCE_DIR}/../../../../TUTK_Kalay_Platform_SDK_2.1.3/Lib/Windows/Win32/x64)
     elseif (CMAKE_SYSTEM_NAME MATCHES "Darwin")
