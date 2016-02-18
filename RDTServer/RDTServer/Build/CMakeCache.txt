@@ -293,8 +293,20 @@ TUTKDevice_SOURCE_DIR:STATIC=/home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/
 //Value Computed by CMake
 VtechDevice_BINARY_DIR:STATIC=/home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build/Targate/VtechDevice
 
+//Dependencies for the target
+VtechDevice_LIB_DEPENDS:STATIC=general;DeviceAPI;general;RDTAPIs;general;IOTCAPIs;general;jsoncpp;general;pthread;
+
 //Value Computed by CMake
 VtechDevice_SOURCE_DIR:STATIC=/home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Targate/VtechDevice
+
+//Dependencies for the target
+VtechDevice_unity_LIB_DEPENDS:STATIC=general;DeviceAPI_unity;general;RDTAPIs;general;IOTCAPIs;general;jsoncpp;general;pthread;
+
+//Value Computed by CMake
+VtechHardwardDevice_BINARY_DIR:STATIC=/home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build/Targate/VtechHardwardDevice
+
+//Value Computed by CMake
+VtechHardwardDevice_SOURCE_DIR:STATIC=/home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Targate/VtechHardwardDevice
 
 //Value Computed by CMake
 jsoncpp_BINARY_DIR:STATIC=/home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/build/3th_party/jsoncpp-1.6.5
@@ -400,7 +412,7 @@ CMAKE_HAVE_PTHREAD_CREATE:INTERNAL=1
 CMAKE_HAVE_PTHREAD_H:INTERNAL=1
 //Start directory with the top level CMakeLists.txt file for this
 // project
-CMAKE_HOME_DIRECTORY:INTERNAL=/home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer
+CMAKE_HOME_DIRECTORY:INTERNAL=/media/sf_RDTServer_Vtech/RDTServer/RDTServer
 //Install .so files without execute permission.
 CMAKE_INSTALL_SO_NO_EXE:INTERNAL=1
 //ADVANCED property for variable: CMAKE_LINKER
@@ -420,7 +432,7 @@ CMAKE_MODULE_LINKER_FLAGS_RELWITHDEBINFO-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_NM
 CMAKE_NM-ADVANCED:INTERNAL=1
 //number of local generators
-CMAKE_NUMBER_OF_LOCAL_GENERATORS:INTERNAL=10
+CMAKE_NUMBER_OF_LOCAL_GENERATORS:INTERNAL=11
 //ADVANCED property for variable: CMAKE_OBJCOPY
 CMAKE_OBJCOPY-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_OBJDUMP
@@ -471,6 +483,8 @@ COTIREMSG_DeviceAPI:INTERNAL=CXX target DeviceAPI cotired.
 COTIREMSG_TUTKDevice:INTERNAL=CXX target TUTKDevice cotired.
 //VtechDevice cotire message.
 COTIREMSG_VtechDevice:INTERNAL=CXX target VtechDevice cotired.
+//VtechHardwardDevice cotire message.
+COTIREMSG_VtechHardwardDevice:INTERNAL=CXX target VtechHardwardDevice cotired without precompiled header. Too few applicable sources.
 //Details about finding PythonInterp
 FIND_PACKAGE_MESSAGE_DETAILS_PythonInterp:INTERNAL=[/usr/bin/python2][v2.7.6(2.6)]
 //Details about finding Threads

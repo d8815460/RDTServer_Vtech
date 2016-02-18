@@ -360,6 +360,32 @@ VtechDevice_unity/fast:
 	$(MAKE) -f Targate/VtechDevice/CMakeFiles/VtechDevice_unity.dir/build.make Targate/VtechDevice/CMakeFiles/VtechDevice_unity.dir/build
 .PHONY : VtechDevice_unity/fast
 
+#=============================================================================
+# Target rules for targets named VtechHardwardDevice
+
+# Build rule for target.
+VtechHardwardDevice: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 VtechHardwardDevice
+.PHONY : VtechHardwardDevice
+
+# fast build rule for target.
+VtechHardwardDevice/fast:
+	$(MAKE) -f Targate/VtechHardwardDevice/CMakeFiles/VtechHardwardDevice.dir/build.make Targate/VtechHardwardDevice/CMakeFiles/VtechHardwardDevice.dir/build
+.PHONY : VtechHardwardDevice/fast
+
+#=============================================================================
+# Target rules for targets named VtechHardwardDevice_unity
+
+# Build rule for target.
+VtechHardwardDevice_unity: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 VtechHardwardDevice_unity
+.PHONY : VtechHardwardDevice_unity
+
+# fast build rule for target.
+VtechHardwardDevice_unity/fast:
+	$(MAKE) -f Targate/VtechHardwardDevice/CMakeFiles/VtechHardwardDevice_unity.dir/build.make Targate/VtechHardwardDevice/CMakeFiles/VtechHardwardDevice_unity.dir/build
+.PHONY : VtechHardwardDevice_unity/fast
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -389,6 +415,8 @@ help:
 	@echo "... VtechDevice"
 	@echo "... VtechDevice_pch"
 	@echo "... VtechDevice_unity"
+	@echo "... VtechHardwardDevice"
+	@echo "... VtechHardwardDevice_unity"
 .PHONY : help
 
 

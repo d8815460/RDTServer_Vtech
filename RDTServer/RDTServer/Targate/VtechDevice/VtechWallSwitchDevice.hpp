@@ -6,8 +6,8 @@
 //  Copyright © 2015年 jakey. All rights reserved.
 //
 
-#ifndef WallSwitchDevice_hpp
-#define WallSwitchDevice_hpp
+#ifndef VtechWallSwitchDevice_hpp
+#define VtechWallSwitchDevice_hpp
 
 #include <stdio.h>
 #include "Device.hpp"
@@ -28,4 +28,4 @@ private:
     bool m_bOnOff;
 };
 
-#endif /* WallSwitchDevice_hpp */
+#endif /* VtechWallSwitchDevice_hpp */

@@ -3,8 +3,8 @@ FILE(REMOVE_RECURSE
   "cotire/VtechDevice_CXX_unity.cxx"
   "cotire/VtechDevice_CXX_prefix.cxx"
   "CMakeFiles/VtechDevice_unity.dir/cotire/VtechDevice_CXX_unity.cxx.o"
-  "VtechDevice.pdb"
-  "VtechDevice"
+  "libVtechDevice.pdb"
+  "libVtechDevice.a"
 )
 
 # Per-language clean rules from dependency scanning.

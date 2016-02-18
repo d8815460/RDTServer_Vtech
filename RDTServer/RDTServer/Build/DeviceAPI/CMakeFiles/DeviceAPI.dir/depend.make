@@ -3,6 +3,11 @@
 
 DeviceAPI/CMakeFiles/DeviceAPI.dir/BinraryRDTClientCommand.cpp.o: ../DeviceAPI/../../../TUTK_Kalay_Platform_SDK_2.1.3/Include/IOTCAPIs.h
 DeviceAPI/CMakeFiles/DeviceAPI.dir/BinraryRDTClientCommand.cpp.o: ../DeviceAPI/../../../TUTK_Kalay_Platform_SDK_2.1.3/Include/RDTAPIs.h
+DeviceAPI/CMakeFiles/DeviceAPI.dir/BinraryRDTClientCommand.cpp.o: ../DeviceAPI/../3th_party/jsoncpp-1.6.5/include/json/config.h
+DeviceAPI/CMakeFiles/DeviceAPI.dir/BinraryRDTClientCommand.cpp.o: ../DeviceAPI/../3th_party/jsoncpp-1.6.5/include/json/features.h
+DeviceAPI/CMakeFiles/DeviceAPI.dir/BinraryRDTClientCommand.cpp.o: ../DeviceAPI/../3th_party/jsoncpp-1.6.5/include/json/forwards.h
+DeviceAPI/CMakeFiles/DeviceAPI.dir/BinraryRDTClientCommand.cpp.o: ../DeviceAPI/../3th_party/jsoncpp-1.6.5/include/json/reader.h
+DeviceAPI/CMakeFiles/DeviceAPI.dir/BinraryRDTClientCommand.cpp.o: ../DeviceAPI/../3th_party/jsoncpp-1.6.5/include/json/value.h
 DeviceAPI/CMakeFiles/DeviceAPI.dir/BinraryRDTClientCommand.cpp.o: ../DeviceAPI/AccessoryTypeEnum.hpp
 DeviceAPI/CMakeFiles/DeviceAPI.dir/BinraryRDTClientCommand.cpp.o: ../DeviceAPI/BinraryRDTClientCommand.cpp
 DeviceAPI/CMakeFiles/DeviceAPI.dir/BinraryRDTClientCommand.cpp.o: ../DeviceAPI/BinraryRDTClientCommand.hpp
@@ -19,6 +24,11 @@ DeviceAPI/CMakeFiles/DeviceAPI.dir/BinraryRDTClientCommand.cpp.o: ../DeviceAPI/U
 
 DeviceAPI/CMakeFiles/DeviceAPI.dir/BinraryRDTClientConnect.cpp.o: ../DeviceAPI/../../../TUTK_Kalay_Platform_SDK_2.1.3/Include/IOTCAPIs.h
 DeviceAPI/CMakeFiles/DeviceAPI.dir/BinraryRDTClientConnect.cpp.o: ../DeviceAPI/../../../TUTK_Kalay_Platform_SDK_2.1.3/Include/RDTAPIs.h
+DeviceAPI/CMakeFiles/DeviceAPI.dir/BinraryRDTClientConnect.cpp.o: ../DeviceAPI/../3th_party/jsoncpp-1.6.5/include/json/config.h
+DeviceAPI/CMakeFiles/DeviceAPI.dir/BinraryRDTClientConnect.cpp.o: ../DeviceAPI/../3th_party/jsoncpp-1.6.5/include/json/features.h
+DeviceAPI/CMakeFiles/DeviceAPI.dir/BinraryRDTClientConnect.cpp.o: ../DeviceAPI/../3th_party/jsoncpp-1.6.5/include/json/forwards.h
+DeviceAPI/CMakeFiles/DeviceAPI.dir/BinraryRDTClientConnect.cpp.o: ../DeviceAPI/../3th_party/jsoncpp-1.6.5/include/json/reader.h
+DeviceAPI/CMakeFiles/DeviceAPI.dir/BinraryRDTClientConnect.cpp.o: ../DeviceAPI/../3th_party/jsoncpp-1.6.5/include/json/value.h
 DeviceAPI/CMakeFiles/DeviceAPI.dir/BinraryRDTClientConnect.cpp.o: ../DeviceAPI/BinraryRDTClientConnect.cpp
 DeviceAPI/CMakeFiles/DeviceAPI.dir/BinraryRDTClientConnect.cpp.o: ../DeviceAPI/BinraryRDTClientConnect.hpp
 DeviceAPI/CMakeFiles/DeviceAPI.dir/BinraryRDTClientConnect.cpp.o: ../DeviceAPI/BinraryRDTServerCommand.hpp
@@ -32,6 +42,11 @@ DeviceAPI/CMakeFiles/DeviceAPI.dir/BinraryRDTClientConnect.cpp.o: ../DeviceAPI/E
 
 DeviceAPI/CMakeFiles/DeviceAPI.dir/BinraryRDTServerCommand.cpp.o: ../DeviceAPI/../../../TUTK_Kalay_Platform_SDK_2.1.3/Include/IOTCAPIs.h
 DeviceAPI/CMakeFiles/DeviceAPI.dir/BinraryRDTServerCommand.cpp.o: ../DeviceAPI/../../../TUTK_Kalay_Platform_SDK_2.1.3/Include/RDTAPIs.h
+DeviceAPI/CMakeFiles/DeviceAPI.dir/BinraryRDTServerCommand.cpp.o: ../DeviceAPI/../3th_party/jsoncpp-1.6.5/include/json/config.h
+DeviceAPI/CMakeFiles/DeviceAPI.dir/BinraryRDTServerCommand.cpp.o: ../DeviceAPI/../3th_party/jsoncpp-1.6.5/include/json/features.h
+DeviceAPI/CMakeFiles/DeviceAPI.dir/BinraryRDTServerCommand.cpp.o: ../DeviceAPI/../3th_party/jsoncpp-1.6.5/include/json/forwards.h
+DeviceAPI/CMakeFiles/DeviceAPI.dir/BinraryRDTServerCommand.cpp.o: ../DeviceAPI/../3th_party/jsoncpp-1.6.5/include/json/reader.h
+DeviceAPI/CMakeFiles/DeviceAPI.dir/BinraryRDTServerCommand.cpp.o: ../DeviceAPI/../3th_party/jsoncpp-1.6.5/include/json/value.h
 DeviceAPI/CMakeFiles/DeviceAPI.dir/BinraryRDTServerCommand.cpp.o: ../DeviceAPI/AccessoryTypeEnum.hpp
 DeviceAPI/CMakeFiles/DeviceAPI.dir/BinraryRDTServerCommand.cpp.o: ../DeviceAPI/BinraryRDTServerCommand.cpp
 DeviceAPI/CMakeFiles/DeviceAPI.dir/BinraryRDTServerCommand.cpp.o: ../DeviceAPI/BinraryRDTServerCommand.hpp
@@ -48,6 +63,11 @@ DeviceAPI/CMakeFiles/DeviceAPI.dir/BinraryRDTServerCommand.cpp.o: ../DeviceAPI/U
 
 DeviceAPI/CMakeFiles/DeviceAPI.dir/BinraryRDTServerConnect.cpp.o: ../DeviceAPI/../../../TUTK_Kalay_Platform_SDK_2.1.3/Include/IOTCAPIs.h
 DeviceAPI/CMakeFiles/DeviceAPI.dir/BinraryRDTServerConnect.cpp.o: ../DeviceAPI/../../../TUTK_Kalay_Platform_SDK_2.1.3/Include/RDTAPIs.h
+DeviceAPI/CMakeFiles/DeviceAPI.dir/BinraryRDTServerConnect.cpp.o: ../DeviceAPI/../3th_party/jsoncpp-1.6.5/include/json/config.h
+DeviceAPI/CMakeFiles/DeviceAPI.dir/BinraryRDTServerConnect.cpp.o: ../DeviceAPI/../3th_party/jsoncpp-1.6.5/include/json/features.h
+DeviceAPI/CMakeFiles/DeviceAPI.dir/BinraryRDTServerConnect.cpp.o: ../DeviceAPI/../3th_party/jsoncpp-1.6.5/include/json/forwards.h
+DeviceAPI/CMakeFiles/DeviceAPI.dir/BinraryRDTServerConnect.cpp.o: ../DeviceAPI/../3th_party/jsoncpp-1.6.5/include/json/reader.h
+DeviceAPI/CMakeFiles/DeviceAPI.dir/BinraryRDTServerConnect.cpp.o: ../DeviceAPI/../3th_party/jsoncpp-1.6.5/include/json/value.h
 DeviceAPI/CMakeFiles/DeviceAPI.dir/BinraryRDTServerConnect.cpp.o: ../DeviceAPI/BinraryRDTServerCommand.hpp
 DeviceAPI/CMakeFiles/DeviceAPI.dir/BinraryRDTServerConnect.cpp.o: ../DeviceAPI/BinraryRDTServerConnect.cpp
 DeviceAPI/CMakeFiles/DeviceAPI.dir/BinraryRDTServerConnect.cpp.o: ../DeviceAPI/BinraryRDTServerConnect.hpp
@@ -59,6 +79,11 @@ DeviceAPI/CMakeFiles/DeviceAPI.dir/BinraryRDTServerConnect.cpp.o: ../DeviceAPI/C
 DeviceAPI/CMakeFiles/DeviceAPI.dir/BinraryRDTServerConnect.cpp.o: ../DeviceAPI/ConnectEvent.hpp
 DeviceAPI/CMakeFiles/DeviceAPI.dir/BinraryRDTServerConnect.cpp.o: ../DeviceAPI/Event.hpp
 
+DeviceAPI/CMakeFiles/DeviceAPI.dir/Command.cpp.o: ../DeviceAPI/../3th_party/jsoncpp-1.6.5/include/json/config.h
+DeviceAPI/CMakeFiles/DeviceAPI.dir/Command.cpp.o: ../DeviceAPI/../3th_party/jsoncpp-1.6.5/include/json/features.h
+DeviceAPI/CMakeFiles/DeviceAPI.dir/Command.cpp.o: ../DeviceAPI/../3th_party/jsoncpp-1.6.5/include/json/forwards.h
+DeviceAPI/CMakeFiles/DeviceAPI.dir/Command.cpp.o: ../DeviceAPI/../3th_party/jsoncpp-1.6.5/include/json/reader.h
+DeviceAPI/CMakeFiles/DeviceAPI.dir/Command.cpp.o: ../DeviceAPI/../3th_party/jsoncpp-1.6.5/include/json/value.h
 DeviceAPI/CMakeFiles/DeviceAPI.dir/Command.cpp.o: ../DeviceAPI/Command.cpp
 DeviceAPI/CMakeFiles/DeviceAPI.dir/Command.cpp.o: ../DeviceAPI/Command.hpp
 DeviceAPI/CMakeFiles/DeviceAPI.dir/Command.cpp.o: ../DeviceAPI/CommandEvent.hpp
@@ -74,6 +99,11 @@ DeviceAPI/CMakeFiles/DeviceAPI.dir/Connect.cpp.o: ../DeviceAPI/Connect.hpp
 DeviceAPI/CMakeFiles/DeviceAPI.dir/Connect.cpp.o: ../DeviceAPI/ConnectEvent.hpp
 DeviceAPI/CMakeFiles/DeviceAPI.dir/Connect.cpp.o: ../DeviceAPI/Event.hpp
 
+DeviceAPI/CMakeFiles/DeviceAPI.dir/Device.cpp.o: ../DeviceAPI/../3th_party/jsoncpp-1.6.5/include/json/config.h
+DeviceAPI/CMakeFiles/DeviceAPI.dir/Device.cpp.o: ../DeviceAPI/../3th_party/jsoncpp-1.6.5/include/json/features.h
+DeviceAPI/CMakeFiles/DeviceAPI.dir/Device.cpp.o: ../DeviceAPI/../3th_party/jsoncpp-1.6.5/include/json/forwards.h
+DeviceAPI/CMakeFiles/DeviceAPI.dir/Device.cpp.o: ../DeviceAPI/../3th_party/jsoncpp-1.6.5/include/json/reader.h
+DeviceAPI/CMakeFiles/DeviceAPI.dir/Device.cpp.o: ../DeviceAPI/../3th_party/jsoncpp-1.6.5/include/json/value.h
 DeviceAPI/CMakeFiles/DeviceAPI.dir/Device.cpp.o: ../DeviceAPI/AccessoryTypeEnum.hpp
 DeviceAPI/CMakeFiles/DeviceAPI.dir/Device.cpp.o: ../DeviceAPI/BinraryRDTServerCommand.hpp
 DeviceAPI/CMakeFiles/DeviceAPI.dir/Device.cpp.o: ../DeviceAPI/BinraryRDTServerConnect.hpp
@@ -111,6 +141,11 @@ DeviceAPI/CMakeFiles/DeviceAPI.dir/JsonRDTClientCommand.cpp.o: ../DeviceAPI/Util
 
 DeviceAPI/CMakeFiles/DeviceAPI.dir/JsonRDTCommand.cpp.o: ../DeviceAPI/../../../TUTK_Kalay_Platform_SDK_2.1.3/Include/IOTCAPIs.h
 DeviceAPI/CMakeFiles/DeviceAPI.dir/JsonRDTCommand.cpp.o: ../DeviceAPI/../../../TUTK_Kalay_Platform_SDK_2.1.3/Include/RDTAPIs.h
+DeviceAPI/CMakeFiles/DeviceAPI.dir/JsonRDTCommand.cpp.o: ../DeviceAPI/../3th_party/jsoncpp-1.6.5/include/json/config.h
+DeviceAPI/CMakeFiles/DeviceAPI.dir/JsonRDTCommand.cpp.o: ../DeviceAPI/../3th_party/jsoncpp-1.6.5/include/json/features.h
+DeviceAPI/CMakeFiles/DeviceAPI.dir/JsonRDTCommand.cpp.o: ../DeviceAPI/../3th_party/jsoncpp-1.6.5/include/json/forwards.h
+DeviceAPI/CMakeFiles/DeviceAPI.dir/JsonRDTCommand.cpp.o: ../DeviceAPI/../3th_party/jsoncpp-1.6.5/include/json/reader.h
+DeviceAPI/CMakeFiles/DeviceAPI.dir/JsonRDTCommand.cpp.o: ../DeviceAPI/../3th_party/jsoncpp-1.6.5/include/json/value.h
 DeviceAPI/CMakeFiles/DeviceAPI.dir/JsonRDTCommand.cpp.o: ../DeviceAPI/Command.hpp
 DeviceAPI/CMakeFiles/DeviceAPI.dir/JsonRDTCommand.cpp.o: ../DeviceAPI/CommandEvent.hpp
 DeviceAPI/CMakeFiles/DeviceAPI.dir/JsonRDTCommand.cpp.o: ../DeviceAPI/CommandHardwardEvent.hpp
@@ -150,6 +185,11 @@ DeviceAPI/CMakeFiles/DeviceAPI.dir/UTF.cpp.o: ../DeviceAPI/UTF.hpp
 
 DeviceAPI/CMakeFiles/DeviceAPI.dir/Utility.cpp.o: ../DeviceAPI/../../../TUTK_Kalay_Platform_SDK_2.1.3/Include/IOTCAPIs.h
 DeviceAPI/CMakeFiles/DeviceAPI.dir/Utility.cpp.o: ../DeviceAPI/../../../TUTK_Kalay_Platform_SDK_2.1.3/Include/RDTAPIs.h
+DeviceAPI/CMakeFiles/DeviceAPI.dir/Utility.cpp.o: ../DeviceAPI/../3th_party/jsoncpp-1.6.5/include/json/config.h
+DeviceAPI/CMakeFiles/DeviceAPI.dir/Utility.cpp.o: ../DeviceAPI/../3th_party/jsoncpp-1.6.5/include/json/features.h
+DeviceAPI/CMakeFiles/DeviceAPI.dir/Utility.cpp.o: ../DeviceAPI/../3th_party/jsoncpp-1.6.5/include/json/forwards.h
+DeviceAPI/CMakeFiles/DeviceAPI.dir/Utility.cpp.o: ../DeviceAPI/../3th_party/jsoncpp-1.6.5/include/json/reader.h
+DeviceAPI/CMakeFiles/DeviceAPI.dir/Utility.cpp.o: ../DeviceAPI/../3th_party/jsoncpp-1.6.5/include/json/value.h
 DeviceAPI/CMakeFiles/DeviceAPI.dir/Utility.cpp.o: ../DeviceAPI/Command.hpp
 DeviceAPI/CMakeFiles/DeviceAPI.dir/Utility.cpp.o: ../DeviceAPI/CommandEvent.hpp
 DeviceAPI/CMakeFiles/DeviceAPI.dir/Utility.cpp.o: ../DeviceAPI/CommandHardwardEvent.hpp

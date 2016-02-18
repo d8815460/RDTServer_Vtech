@@ -91,6 +91,8 @@ stdio.h
 -
 string
 -
+json/reader.h
+-
 
 ../Targate/TUTKDevice/../../DeviceAPI/Connect.hpp
 stdio.h

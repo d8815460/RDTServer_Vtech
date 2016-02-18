@@ -114,7 +114,32 @@ void JsonRDTServerCommand::processCommandTarget(const Json::Value& inJsonObject,
     
     string target = inJsonObject["target"].asString();
     
-    if (target.find("product_name") != std::string::npos) {
+    // vertify
+    
+    if (target.find("product_code") != std::string::npos) {
+        CommandHardwardRecvProductCode commandHardwardRecvProductCode;
+        
+        // 預設ProductName
+        commandHardwardRecvProductCode.productCode = m_CommandData.productCode;
+        
+        // 通知Device
+        m_pCommandHardwardEvent->onCommandHardwardRecvProductCode(&commandHardwardRecvProductCode);
+        
+        // 修改預設ProductName
+        m_CommandData.productCode = commandHardwardRecvProductCode.productCode;
+        
+        // 上報通知
+        //        m_pCommandHardwardEvent->onCommandHardwardNotify(<#CommandHardwardNotifyData *pCommandHardwardNotifyData#>);
+        
+        // 輸出 JSON
+        Json::Value arraryItems;
+        Json::Value arrayObject;
+        arraryItems["index"] = "0";
+        arraryItems["value"] = m_CommandData.productCode;
+        arrayObject.append(arraryItems);
+        outJsonObject["response"] = arrayObject;
+    }
+    else if (target.find("product_name") != std::string::npos) {
         CommandHardwardRecvProductName commandHardwardRecvProductName;
         
         // 預設ProductName
@@ -128,7 +153,7 @@ void JsonRDTServerCommand::processCommandTarget(const Json::Value& inJsonObject,
         
         // 上報通知
 //        m_pCommandHardwardEvent->onCommandHardwardNotify(<#CommandHardwardNotifyData *pCommandHardwardNotifyData#>);
-
+        
         // 輸出 JSON
         Json::Value arraryItems;
         Json::Value arrayObject;
@@ -141,6 +166,10 @@ void JsonRDTServerCommand::processCommandTarget(const Json::Value& inJsonObject,
         LOGE("processCommandTarget Error");
         return;
     }
+    
+    CommandHardwardRecvJsonData commandHardwardRecvJsonData;
+    commandHardwardRecvJsonData.pJsonObject = &outJsonObject;
+    m_pCommandHardwardEvent->onCommandHardwardRecvJson(&commandHardwardRecvJsonData);
     
     // Common
     outJsonObject["serno"] = inJsonObject["serno"];

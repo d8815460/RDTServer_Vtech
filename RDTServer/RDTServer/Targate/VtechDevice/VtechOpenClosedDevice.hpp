@@ -6,8 +6,8 @@
 //  Copyright © 2015年 jakey. All rights reserved.
 //
 
-#ifndef OpenClosedSensor_hpp
-#define OpenClosedSensor_hpp
+#ifndef VtechOpenClosedSensor_hpp
+#define VtechOpenClosedSensor_hpp
 
 #include <stdio.h>
 #include "Device.hpp"
@@ -28,4 +28,4 @@ private:
     bool m_bOnOff;
 };
 
-#endif /* OpenClosedSensor_hpp */
+#endif /* VtechOpenClosedSensor_hpp */

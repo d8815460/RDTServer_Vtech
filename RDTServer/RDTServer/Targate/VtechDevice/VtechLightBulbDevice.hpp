@@ -6,8 +6,8 @@
 //  Copyright © 2015年 jakey. All rights reserved.
 //
 
-#ifndef LightBulbDevice_hpp
-#define LightBulbDevice_hpp
+#ifndef VtechLightBulbDevice_hpp
+#define VtechLightBulbDevice_hpp
 
 #include <stdio.h>
 #include "Device.hpp"
@@ -28,4 +28,4 @@ private:
     bool m_bOnOff;
 };
 
-#endif /* LightBulbDevice_hpp */
+#endif /* VtechLightBulbDevice_hpp */
