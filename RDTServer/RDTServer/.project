@@ -17,27 +17,27 @@
 		<link>
 			<name>[Subprojects]/DeviceAPI</name>
 			<type>2</type>
-			<location>/home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/DeviceAPI</location>
+			<location>/home/jakey/RDTServer/DeviceAPI</location>
 		</link>
 		<link>
 			<name>[Subprojects]/TUTKDevice</name>
 			<type>2</type>
-			<location>/home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Targate/TUTKDevice</location>
+			<location>/home/jakey/RDTServer/Targate/TUTKDevice</location>
 		</link>
 		<link>
 			<name>[Subprojects]/VtechDevice</name>
 			<type>2</type>
-			<location>/home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Targate/VtechDevice</location>
+			<location>/home/jakey/RDTServer/Targate/VtechDevice</location>
 		</link>
 		<link>
 			<name>[Subprojects]/VtechHardwardDevice</name>
 			<type>2</type>
-			<location>/home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/Targate/VtechHardwardDevice</location>
+			<location>/home/jakey/RDTServer/Targate/VtechHardwardDevice</location>
 		</link>
 		<link>
 			<name>[Subprojects]/jsoncpp</name>
 			<type>2</type>
-			<location>/home/jakey/sf_RDTServer_Vtech/RDTServer/RDTServer/3th_party/jsoncpp-1.6.5</location>
+			<location>/home/jakey/RDTServer/3th_party/jsoncpp-1.6.5</location>
 		</link>
 	</linkedResources>
 </projectDescription>
