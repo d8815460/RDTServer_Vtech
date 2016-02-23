@@ -10,7 +10,7 @@
 #define BinraryRDTClientCommand_hpp
 
 #include <stdio.h>
-#include "Command.hpp"
+#include "BinraryRDTCommand.hpp"
 
 using namespace std;
 
@@ -45,14 +45,11 @@ struct BinraryRDTClientCommand_ConnectCreateClient : ConnectCreateClient
     int channelID;
 };
 
-class BinraryRDTClientCommand : public Command
+class BinraryRDTClientCommand : public BinraryRDTCommand
 {
 public:
     BinraryRDTClientCommand(CommandEvent* pCommandEvent, CommandHardwardEvent* pCommandHardwardEvent, Connect* pConnect, CommandData* pCommandData = NULL);
-    
-public:
-    bool isLength2Byte(BYTE* buffer, int length);
-        
+            
 #pragma mark - ConnectEvent
 public:
     virtual void onConnectRecvData(ConnectRecvData* pConnectRecvData);
@@ -68,7 +65,6 @@ public:
 #pragma mark - Private
 private:
     void recvData(int channelID, BYTE* buffer, int totalLength);
-    bool isBasicVerificationPass(BYTE* buffer, int length);
     
 #pragma mark - member
 private:

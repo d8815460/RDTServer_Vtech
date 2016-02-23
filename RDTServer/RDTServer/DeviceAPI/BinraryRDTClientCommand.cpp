@@ -17,7 +17,7 @@
 #include "RDTAPIs.h"
 #include "BinraryRDTServerConnect.hpp"
 
-BinraryRDTClientCommand::BinraryRDTClientCommand(CommandEvent* pCommandEvent, CommandHardwardEvent* pCommandHardwardEvent, Connect* pConnect, CommandData* pCommandData) : Command(pCommandEvent, pCommandHardwardEvent, pConnect, pCommandData)
+BinraryRDTClientCommand::BinraryRDTClientCommand(CommandEvent* pCommandEvent, CommandHardwardEvent* pCommandHardwardEvent, Connect* pConnect, CommandData* pCommandData) : BinraryRDTCommand(pCommandEvent, pCommandHardwardEvent, pConnect, pCommandData)
 {
     LOGD("BinraryRDTClientCommand");
     
@@ -112,50 +112,6 @@ void* BinraryRDTClientCommand::threadInput(void *arg)
     }
     
     return NULL;
-}
-
-#pragma mark - Method
-
-bool BinraryRDTClientCommand::isLength2Byte(BYTE* buffer, int length)
-{
-    // recv command 29
-    if ((length == 10 && buffer[7 - 1] == 29) ||
-        // version 1.0.0
-        (m_CommandData.version1 == 1 && m_CommandData.version2 == 0 && m_CommandData.version3 == 0))
-    {
-        return false;
-    }
-    else {
-        return true;
-    }
-}
-
-bool BinraryRDTClientCommand::isBasicVerificationPass(BYTE *buffer, int length)
-{
-    // 基本驗證
-    if (buffer[0] == 'I' && buffer[1] == 'O' && buffer[2] == 'T' && buffer[3] == 'C' &&     // IOTC
-        buffer[length - 2] == 'G' && buffer[length - 1] == 'C')                             // GC
-        
-    {
-        if(isLength2Byte(buffer, length)) {
-            // length == 2
-            unsigned short* pLength = (unsigned short*)&buffer[4]; // 長度驗證
-            if (*pLength == length - 4 - 2 - 2) {
-                return true;
-            }
-        }
-        else {
-            // length == 1
-            if (buffer[4] == length - 4 - 2 - 1) {
-                return true;
-            }
-        }
-        
-        return false;
-    }
-    else {
-        return false;
-    }
 }
 
 #pragma mark - Command
