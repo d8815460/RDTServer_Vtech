@@ -40,11 +40,6 @@ struct BinraryRDTServerCommand_ParseRecvData : ParseRecvData
     int length;
 };
 
-struct BinraryRDTServerCommand_ConnectCreateClient : ConnectCreateClient
-{
-    int channelID;
-};
-
 class BinraryRDTServerCommand : public BinraryRDTCommand
 {
 public:
@@ -64,7 +59,6 @@ public:
 #pragma mark - ConnectEvent
 public:
     virtual void onConnectRecvData(ConnectRecvData* pConnectRecvData);
-    virtual void onConnectCreateClient(ConnectCreateClient* pConnectCreateClient);
     
 #pragma mark - Command
     virtual void parseSendData(ParseSendData* pParseSendData);
@@ -79,7 +73,6 @@ private:
     
 #pragma mark - member
 private:
-    set<int>                m_nChannelIDList;
     
 };
 

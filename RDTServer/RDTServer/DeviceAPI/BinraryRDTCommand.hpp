@@ -53,6 +53,11 @@ struct FunctionInfo
     }
 };
 
+struct BinraryRDTCommand_ConnectCreateClient : ConnectCreateClient
+{
+    int channelID;
+};
+
 class BinraryRDTCommand : public Command
 {
 public:
@@ -75,6 +80,11 @@ public:
     void addFunctionStatus(FunctionInfo* pFunctionInfo, UBYTE functionCode, unsigned short transferCode1, unsigned short transferCode2, unsigned short transferCode3, unsigned short transferCode4, unsigned short transferCode5, unsigned short transferCode6);
     
     void addFunctionStatusWithArray(FunctionInfo* pFunctionInfo, UBYTE functionCode, vector<unsigned short>* pTransferCodeArray);
+
+#pragma mark - ConnectEvent
+public:
+    virtual void onConnectRecvData(ConnectRecvData* pConnectRecvData) = 0;
+    virtual void onConnectCreateClient(ConnectCreateClient* pConnectCreateClient);
     
 #pragma mark - Method
 public:
@@ -83,6 +93,7 @@ public:
     
 #pragma mark - Member
     vector<FunctionInfo*>   m_dataInfoList;
+    set<int>                m_nChannelIDList;
 };
 
 #endif /* BinraryRDTCommand_hpp */

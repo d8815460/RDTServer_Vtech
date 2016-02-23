@@ -40,13 +40,6 @@ void BinraryRDTServerCommand::onConnectRecvData(ConnectRecvData* pConnectRecvDat
     parseRecvData(pBinraryParseRecvData);
 }
 
-void BinraryRDTServerCommand::onConnectCreateClient(ConnectCreateClient* pConnectCreateClient)
-{
-    BinraryRDTServerCommand_ConnectCreateClient* pBinraryConnectCreateClient = (BinraryRDTServerCommand_ConnectCreateClient*) pConnectCreateClient;
-    
-    m_nChannelIDList.insert(pBinraryConnectCreateClient->channelID);
-}
-
 #pragma mark - Thread
 
 void* BinraryRDTServerCommand::threadInput(void *arg)

@@ -129,7 +129,7 @@ void* BinraryRDTClientConnect::threadRun(void *arg)
             else {
                 LOGD("channelID = %d", channelID);
                 // 新增channelID
-                BinraryRDTServerCommand_ConnectCreateClient binraryConnectCreateClient;
+                BinraryRDTCommand_ConnectCreateClient binraryConnectCreateClient;
                 binraryConnectCreateClient.channelID = channelID;
                 
                 pBinraryRDTClientConnect->m_pConnectEvent->onConnectCreateClient(&binraryConnectCreateClient);

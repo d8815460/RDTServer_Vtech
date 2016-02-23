@@ -40,11 +40,6 @@ struct BinraryRDTClientCommand_ParseRecvData : ParseRecvData
     int length;
 };
 
-struct BinraryRDTClientCommand_ConnectCreateClient : ConnectCreateClient
-{
-    int channelID;
-};
-
 class BinraryRDTClientCommand : public BinraryRDTCommand
 {
 public:
@@ -68,7 +63,6 @@ private:
     
 #pragma mark - member
 private:
-    set<int>                m_nChannelIDList;
 };
 
 #endif /* BinraryRDTClientCommand_hpp */

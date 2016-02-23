@@ -88,7 +88,6 @@ protected:
     
 #pragma mark - member
     vector<AccessoryData*>   m_accessories;
-    
     set<int>                m_nChannelIDList;
 };
 

@@ -66,6 +66,15 @@ bool BinraryRDTCommand::isBasicVerificationPass(BYTE *buffer, int length)
     }
 }
 
+#pragma mark - ConnectEvent
+
+void BinraryRDTCommand::onConnectCreateClient(ConnectCreateClient* pConnectCreateClient)
+{
+    BinraryRDTCommand_ConnectCreateClient* pBinraryConnectCreateClient = (BinraryRDTCommand_ConnectCreateClient*) pConnectCreateClient;
+    
+    m_nChannelIDList.insert(pBinraryConnectCreateClient->channelID);
+}
+
 #pragma mark - Function Info
 
 FunctionInfo* BinraryRDTCommand::createFunctionInfo(unsigned int type)
