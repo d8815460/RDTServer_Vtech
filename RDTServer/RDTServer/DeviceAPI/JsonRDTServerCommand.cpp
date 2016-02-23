@@ -35,13 +35,6 @@ void JsonRDTServerCommand::onConnectRecvData(ConnectRecvData* pConnectRecvData)
     parseRecvData(pJsonParseRecvData);
 }
 
-void JsonRDTServerCommand::onConnectCreateClient(ConnectCreateClient* pConnectCreateClient)
-{
-    JsonRDTServerCommand_ConnectCreateClient* pJsonConnectCreateClient = (JsonRDTServerCommand_ConnectCreateClient*) pConnectCreateClient;
-    
-    m_nChannelIDList.insert(pJsonConnectCreateClient->channelID);
-}
-
 #pragma mark - Thread
 
 void* JsonRDTServerCommand::threadInput(void *arg)

@@ -35,13 +35,6 @@ void JsonRDTClientCommand::onConnectRecvData(ConnectRecvData* pConnectRecvData)
     parseRecvData(pBinraryParseRecvData);
 }
 
-void JsonRDTClientCommand::onConnectCreateClient(ConnectCreateClient* pConnectCreateClient)
-{
-    JsonRDTClientCommand_ConnectCreateClient* pBinraryConnectCreateClient = (JsonRDTClientCommand_ConnectCreateClient*) pConnectCreateClient;
-    
-    m_nChannelIDList.insert(pBinraryConnectCreateClient->channelID);
-}
-
 #pragma mark - Thread
 
 void* JsonRDTClientCommand::threadInput(void *arg)

@@ -26,6 +26,13 @@ JsonRDTCommand::JsonRDTCommand(CommandEvent* pCommandEvent, CommandHardwardEvent
     m_CommandData.version3 = 0;
 }
 
+void JsonRDTCommand::onConnectCreateClient(ConnectCreateClient* pConnectCreateClient)
+{
+    JsonRDTCommand_ConnectCreateClient* pJsonConnectCreateClient = (JsonRDTCommand_ConnectCreateClient*) pConnectCreateClient;
+    
+    m_nChannelIDList.insert(pJsonConnectCreateClient->channelID);
+}
+
 void JsonRDTCommand::parseSendData(ParseSendData* pParseSendData)
 {
     JsonRDTCommand_ParseSendData* pBinraryCommandRecvData = (JsonRDTCommand_ParseSendData*) pParseSendData;

@@ -30,11 +30,6 @@ struct JsonRDTClientCommand_ParseRecvData : JsonRDTCommand_ParseRecvData
 {
 };
 
-struct JsonRDTClientCommand_ConnectCreateClient : ConnectCreateClient
-{
-    int channelID;
-};
-
 class JsonRDTClientCommand : public JsonRDTCommand
 {
 public:
@@ -43,7 +38,6 @@ public:
 #pragma mark - ConnectEvent
 public:
     virtual void onConnectRecvData(ConnectRecvData* pConnectRecvData);
-    virtual void onConnectCreateClient(ConnectCreateClient* pConnectCreateClient);
     
 #pragma mark - Command
 //    virtual void parseSendData(ParseSendData* pParseSendData);
@@ -58,7 +52,6 @@ protected:
     
 #pragma mark - member
 private:
-    set<int>                m_nChannelIDList;
 };
 
 #endif /* JsonRDTClientCommand_hpp */
