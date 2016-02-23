@@ -23,12 +23,17 @@ struct CommandHardwardRecvJsonData
     Json::Value* pJsonObject;
 };
 
-struct CommandHardwardRecvProductCode
+struct CommandBase
+{
+    int errorCode;
+};
+
+struct CommandHardwardRecvProductCode : CommandBase
 {
     int productCode;
 };
 
-struct CommandHardwardRecvProductName
+struct CommandHardwardRecvProductName : CommandBase
 {
     string productName;
 };
