@@ -12,6 +12,40 @@
 #include <stdio.h>
 #include "Command.hpp"
 
+struct FunctionCodeValueData
+{
+    int value;
+};
+
+struct FunctionCodeData
+{
+    string functonCode;
+    
+    vector<FunctionCodeValueData*> functionCodeValueData;
+    
+    FunctionCodeData()
+    {
+        for (int i=0 ; i<functionCodeValueData.size() ; i++) {
+            delete functionCodeValueData[i];
+        }
+    }
+};
+
+struct AccessoryData
+{
+    int accessoryId;
+    int accessoryType;
+    
+    vector<FunctionCodeData*> functionCodeDatas;
+    
+    AccessoryData()
+    {
+        for (int i=0 ; i<functionCodeDatas.size() ; i++) {
+            delete functionCodeDatas[i];
+        }
+    }
+};
+
 struct JsonRDTCommand_ParseSendData : ParseSendData
 {
     int channelID;
@@ -42,6 +76,8 @@ protected:
     bool isBasicVerificationPass(BYTE* buffer, int length);
     virtual void recvData(int channelID, BYTE* buffer, int totalLength) = 0;
     
+#pragma mark - member
+    vector<AccessoryData*>   m_accessories;
 };
 
 #endif /* JsonRDTCommand_hpp */
