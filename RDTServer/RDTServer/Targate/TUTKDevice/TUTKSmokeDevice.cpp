@@ -9,22 +9,24 @@
 #include "TUTKSmokeDevice.hpp"
 #include "TUTKSmokeEnum.hpp"
 #include "AccessoryTypeEnum.hpp"
+#include "BinraryRDTServerCommand.hpp"
 
 #pragma mark - Normal Method
 
 void TUTKSmokeDevice::generatorDataInfoList(Command* pCommand)
 {
+    BinraryRDTServerCommand *pBinraryRDTServerCommand = (BinraryRDTServerCommand*) pCommand;
     FunctionInfo* pFunctionInfo = NULL;
     
     /* Function Status 1 */
-    pFunctionInfo = pCommand->createFunctionInfo(Accessory_Type_Smoke);
-    Command::addFunctionStatus(pFunctionInfo, TUTKSmokeFunctionCode_QuerySwitch, 1);
-    Command::addFunctionStatus(pFunctionInfo, TUTKSmokeFunctionCode_QueryConnectStatus, 1);
-    Command::addFunctionStatus(pFunctionInfo, TUTKSmokeFunctionCode_QueryTriggeredStatus, 0);
-    Command::addFunctionStatus(pFunctionInfo, TUTKSmokeFunctionCode_QueryAlarmStatus, 0);
-    Command::addFunctionStatus(pFunctionInfo, TUTKSmokeFunctionCode_QuerySOSStatus, 1);
-    Command::addFunctionStatus(pFunctionInfo, TUTKSmokeFunctionCode_QueryPowerStatus, 50);
-    Command::addFunctionStatus(pFunctionInfo, TUTKCommonFunctionCode_QueryDeviceName, u'a', u'鱻', u'鑫');
+    pFunctionInfo = pBinraryRDTServerCommand->createFunctionInfo(Accessory_Type_Smoke);
+    pBinraryRDTServerCommand->addFunctionStatus(pFunctionInfo, TUTKSmokeFunctionCode_QuerySwitch, 1);
+    pBinraryRDTServerCommand->addFunctionStatus(pFunctionInfo, TUTKSmokeFunctionCode_QueryConnectStatus, 1);
+    pBinraryRDTServerCommand->addFunctionStatus(pFunctionInfo, TUTKSmokeFunctionCode_QueryTriggeredStatus, 0);
+    pBinraryRDTServerCommand->addFunctionStatus(pFunctionInfo, TUTKSmokeFunctionCode_QueryAlarmStatus, 0);
+    pBinraryRDTServerCommand->addFunctionStatus(pFunctionInfo, TUTKSmokeFunctionCode_QuerySOSStatus, 1);
+    pBinraryRDTServerCommand->addFunctionStatus(pFunctionInfo, TUTKSmokeFunctionCode_QueryPowerStatus, 50);
+    pBinraryRDTServerCommand->addFunctionStatus(pFunctionInfo, TUTKCommonFunctionCode_QueryDeviceName, u'a', u'鱻', u'鑫');
 }
 
 #pragma mark - CommandEvent

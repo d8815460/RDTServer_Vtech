@@ -69,26 +69,26 @@ void* JsonRDTServerCommand::threadInput(void *arg)
         }
         LOGD("===================================================================================================================================");
         
-        FunctionInfo functionInfo;
-        functionInfo.isRuningStack = true;
-        functionInfo.aid = 8;
-        functionInfo.type = Accessory_Type_VtechGarageDoor;
-        
-        FunctionStatus functionStatus;
-        functionStatus.isRuningStack = true;
-        functionStatus.functionCode = 1;
-        functionInfo.functionStatusList.push_back(&functionStatus);
-        
-        static bool switchOn = true;
-        switchOn = !switchOn;
-        
-        FunctionCode functionCode;
-        functionCode.transferCode = switchOn;
-        functionStatus.functionCodeList.push_back(&functionCode);
-        
-        vector<FunctionInfo*> functionInfoList;
-        functionInfoList.push_back(&functionInfo);
-        pJsonRDTServerCommand->sendReportWithCommand30(0, &functionInfoList);
+//        FunctionInfo functionInfo;
+//        functionInfo.isRuningStack = true;
+//        functionInfo.aid = 8;
+//        functionInfo.type = Accessory_Type_VtechGarageDoor;
+//        
+//        FunctionStatus functionStatus;
+//        functionStatus.isRuningStack = true;
+//        functionStatus.functionCode = 1;
+//        functionInfo.functionStatusList.push_back(&functionStatus);
+//        
+//        static bool switchOn = true;
+//        switchOn = !switchOn;
+//        
+//        FunctionCode functionCode;
+//        functionCode.transferCode = switchOn;
+//        functionStatus.functionCodeList.push_back(&functionCode);
+//        
+//        vector<FunctionInfo*> functionInfoList;
+//        functionInfoList.push_back(&functionInfo);
+//        pJsonRDTServerCommand->sendReportWithCommand30(0, &functionInfoList);
         
         //        int count = 0;
         //        for (set<int>::iterator it = pJsonRDTServerConnect->m_nChannelIDList.begin() ; it!=pJsonRDTServerConnect->m_nChannelIDList.end() ; it++) {
@@ -1133,179 +1133,4 @@ void JsonRDTServerCommand::recvData(int channelID, BYTE* buffer, int totalLength
 //    else {
 //        LOGE("Error not match RDT command");
 //    }
-}
-
-#pragma mark - Report
-
-void JsonRDTServerCommand::sendReportAllWithCommand30(int channelID, vector<FunctionInfo*>* pFunctionInfoList)
-{
-    int count = 0;
-    for (set<int>::iterator it = m_nChannelIDList.begin() ; it != m_nChannelIDList.end() ; it++) {
-        int myChannelID = *it;
-        LOGD("m_nChannelIDList[%d]:%d", count++, myChannelID);
-        
-        if (channelID == myChannelID) {
-            continue;
-        }
-        else {
-            sendReportWithCommand30(myChannelID, pFunctionInfoList);
-        }
-    }
-}
-
-void JsonRDTServerCommand::sendReportWithCommand30(int channelID, vector<FunctionInfo*>* pFunctionInfoList)
-{
-    // 傳送的資料Buffer
-    int sendIndex = 0;
-    BYTE sendDataBuffer[MAX_BUFFER_SIZE];
-    
-    sendDataBuffer[sendIndex++] = channelID;
-    
-    UBYTE sendTotalCount = 1;
-    sendDataBuffer[sendIndex++] = sendTotalCount;
-    
-    UBYTE sendCountIndex = 0;
-    sendDataBuffer[sendIndex++] = sendCountIndex;
-    
-    UBYTE sendAmount = 0;
-    sendDataBuffer[sendIndex++] = sendAmount;
-    
-    for (int i=0 ; i<pFunctionInfoList->size() ; i++) {
-        for (int j=0 ; j<(*pFunctionInfoList)[i]->functionStatusList.size() ; j++) {
-            // amount
-            sendDataBuffer[4 - 1] = ++sendAmount;
-            
-            sendDataBuffer[sendIndex++] = (*pFunctionInfoList)[i]->aid;
-            setValue(sendDataBuffer, &sendIndex, (*pFunctionInfoList)[i]->type);
-            sendDataBuffer[sendIndex++] = (*pFunctionInfoList)[i]->functionStatusList[j]->functionCode;
-            sendDataBuffer[sendIndex++] = (*pFunctionInfoList)[i]->functionStatusList[j]->functionCodeList.size();
-            
-            LOGD("aid:%d", (*pFunctionInfoList)[i]->aid);
-            LOGD("type:%d", (*pFunctionInfoList)[i]->type);
-            LOGD("functionCode:%d", (*pFunctionInfoList)[i]->functionStatusList[j]->functionCode);
-            LOGD("functionCodeList count:%lu", (*pFunctionInfoList)[i]->functionStatusList[j]->functionCodeList.size());
-            
-            for (int k=0 ; k<(*pFunctionInfoList)[i]->functionStatusList[j]->functionCodeList.size() ; k++) {
-                LOGD("(*pFunctionInfoList)[%d]->functionStatusList[%d]->functionCodeList[%d]->transferCode:%d", i, j, k, (*pFunctionInfoList)[i]->functionStatusList[j]->functionCodeList[k]->transferCode);
-                
-                setValue(sendDataBuffer, &sendIndex, (*pFunctionInfoList)[i]->functionStatusList[j]->functionCodeList[k]->transferCode);
-            }
-        }
-    }
-    
-    JsonRDTServerCommand_ParseSendData JsonParseSendData;
-    JsonParseSendData.channelID = channelID;
-    JsonParseSendData.pData = sendDataBuffer;
-    JsonParseSendData.dataLength = sendIndex;
-    parseSendData(&JsonParseSendData);
-}
-
-void JsonRDTServerCommand::sendReportAllWithCommand32(int channelID, int operations, int aid, unsigned int type, int status)
-{
-    int count = 0;
-    for (set<int>::iterator it = m_nChannelIDList.begin() ; it != m_nChannelIDList.end() ; it++) {
-        int myChannelID = *it;
-        LOGD("m_nChannelIDList[%d]:%d", count++, myChannelID);
-        
-        if (channelID == myChannelID) {
-            continue;
-        }
-        else {
-            int aids[] = {aid};
-            unsigned int types[] = {type};
-            int statuses[] = {status};
-            sendReportWithCommand32(myChannelID, operations, 1, aids, types, statuses);
-        }
-    }
-}
-
-void JsonRDTServerCommand::sendReportAllWithCommand32(int channelID, int operations, int amount, int aids[], unsigned int types[], int statuses[])
-{
-    int count = 0;
-    for (set<int>::iterator it = m_nChannelIDList.begin() ; it != m_nChannelIDList.end() ; it++) {
-        int myChannelID = *it;
-        LOGD("m_nChannelIDList[%d]:%d", count++, myChannelID);
-        
-        if (channelID == myChannelID) {
-            continue;
-        }
-        else {
-            sendReportWithCommand32(myChannelID, operations, amount, aids, types, statuses);
-        }
-    }
-}
-
-void JsonRDTServerCommand::sendReportWithCommand32(int channelID, int operations, int amount, int aids[], unsigned int types[], int statuses[])
-{
-    // 傳送的資料Buffer
-    int sendIndex = 0;
-    BYTE sendDataBuffer[MAX_BUFFER_SIZE];
-    
-    sendDataBuffer[sendIndex++] = channelID;
-    
-    UBYTE sendTotalCount = 1;
-    sendDataBuffer[sendIndex++] = sendTotalCount;
-    
-    UBYTE sendCountIndex = 0;
-    sendDataBuffer[sendIndex++] = sendCountIndex;
-    
-    sendDataBuffer[sendIndex++] = amount;
-    
-    for (int i=0 ; i<amount ; i++) {
-        sendDataBuffer[sendIndex++] = aids[i];
-        setValue(sendDataBuffer, &sendIndex, types[i]);
-        sendDataBuffer[sendIndex++] = statuses[i];
-        sendDataBuffer[sendIndex++] = operations;
-    }
-    
-    JsonRDTServerCommand_ParseSendData JsonParseSendData;
-    JsonParseSendData.channelID = channelID;
-    JsonParseSendData.pData = sendDataBuffer;
-    JsonParseSendData.dataLength = sendIndex;
-    parseSendData(&JsonParseSendData);
-}
-
-void JsonRDTServerCommand::sendReportAllWithCommand33(int channelID, int operations, int status)
-{
-    int count = 0;
-    for (set<int>::iterator it = m_nChannelIDList.begin() ; it != m_nChannelIDList.end() ; it++) {
-        int myChannelID = *it;
-        LOGD("m_nChannelIDList[%d]:%d", count++, myChannelID);
-        
-        if (channelID == myChannelID) {
-            continue;
-        }
-        else {
-            sendReportWithCommand33(myChannelID, operations, status);
-        }
-    }
-}
-
-void JsonRDTServerCommand::sendReportWithCommand33(int channelID, int operations, int status)
-{
-    // 傳送的資料Buffer
-    int sendIndex = 0;
-    BYTE sendDataBuffer[MAX_BUFFER_SIZE];
-    
-    sendDataBuffer[sendIndex++] = channelID;
-    
-    UBYTE sendTotalCount = 1;
-    sendDataBuffer[sendIndex++] = sendTotalCount;
-    
-    UBYTE sendCountIndex = 0;
-    sendDataBuffer[sendIndex++] = sendCountIndex;
-    
-    int amount = 1;
-    sendDataBuffer[sendIndex++] = amount;
-    
-    //    for (int i=0 ; i<amount ; i++) {
-    sendDataBuffer[sendIndex++] = status;
-    sendDataBuffer[sendIndex++] = operations;
-    //    }
-    
-    JsonRDTServerCommand_ParseSendData JsonParseSendData;
-    JsonParseSendData.channelID = channelID;
-    JsonParseSendData.pData = sendDataBuffer;
-    JsonParseSendData.dataLength = sendIndex;
-    parseSendData(&JsonParseSendData);
 }

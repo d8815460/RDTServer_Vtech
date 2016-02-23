@@ -9,22 +9,24 @@
 #include "TUTKDoorDevice.hpp"
 #include "TUTKDoorEnum.hpp"
 #include "AccessoryTypeEnum.hpp"
+#include "BinraryRDTServerCommand.hpp"
 
 #pragma mark - Normal Method
 
 void TUTKDoorDevice::generatorDataInfoList(Command* pCommand)
 {
+    BinraryRDTServerCommand *pBinraryRDTServerCommand = (BinraryRDTServerCommand*) pCommand;
     FunctionInfo* pFunctionInfo = NULL;
     
     /* Function Status 1 */
-    pFunctionInfo = pCommand->createFunctionInfo(Accessory_Type_Door);
-    Command::addFunctionStatus(pFunctionInfo, TUTKDoorFunctionCode_QuerySwitch, 1);
-    Command::addFunctionStatus(pFunctionInfo, TUTKDoorFunctionCode_QueryConnectStatus, 1);
-    Command::addFunctionStatus(pFunctionInfo, TUTKDoorFunctionCode_QueryTriggeredStatus, 1);
-    Command::addFunctionStatus(pFunctionInfo, TUTKDoorFunctionCode_QueryAlarmStatus, 1);
-    Command::addFunctionStatus(pFunctionInfo, TUTKDoorFunctionCode_QuerySOSStatus, 1);
-    Command::addFunctionStatus(pFunctionInfo, TUTKDoorFunctionCode_QueryPowerStatus, 20);
-    Command::addFunctionStatus(pFunctionInfo, TUTKCommonFunctionCode_QueryDeviceName, u'門');
+    pFunctionInfo = pBinraryRDTServerCommand->createFunctionInfo(Accessory_Type_Door);
+    pBinraryRDTServerCommand->addFunctionStatus(pFunctionInfo, TUTKDoorFunctionCode_QuerySwitch, 1);
+    pBinraryRDTServerCommand->addFunctionStatus(pFunctionInfo, TUTKDoorFunctionCode_QueryConnectStatus, 1);
+    pBinraryRDTServerCommand->addFunctionStatus(pFunctionInfo, TUTKDoorFunctionCode_QueryTriggeredStatus, 1);
+    pBinraryRDTServerCommand->addFunctionStatus(pFunctionInfo, TUTKDoorFunctionCode_QueryAlarmStatus, 1);
+    pBinraryRDTServerCommand->addFunctionStatus(pFunctionInfo, TUTKDoorFunctionCode_QuerySOSStatus, 1);
+    pBinraryRDTServerCommand->addFunctionStatus(pFunctionInfo, TUTKDoorFunctionCode_QueryPowerStatus, 20);
+    pBinraryRDTServerCommand->addFunctionStatus(pFunctionInfo, TUTKCommonFunctionCode_QueryDeviceName, u'門');
 }
 
 #pragma mark - CommandEvent

@@ -201,16 +201,10 @@
 				A26FB6051C635E30007E3648 /* CommandHardwardEvent.hpp */,
 				A26FB5EB1C635E08007E3648 /* Command.hpp */,
 				A26FB5EC1C635E08007E3648 /* Command.cpp */,
-				A26FB5ED1C635E08007E3648 /* BinraryRDTClientCommand.hpp */,
-				A26FB5EE1C635E08007E3648 /* BinraryRDTClientCommand.cpp */,
-				A26FB5EF1C635E08007E3648 /* BinraryRDTServerCommand.hpp */,
-				A26FB5F01C635E08007E3648 /* BinraryRDTServerCommand.cpp */,
 				A26FB5F11C635E08007E3648 /* JsonRDTCommand.hpp */,
 				A26FB5F21C635E08007E3648 /* JsonRDTCommand.cpp */,
-				A26FB5F31C635E08007E3648 /* JsonRDTClientCommand.hpp */,
-				A26FB5F41C635E08007E3648 /* JsonRDTClientCommand.cpp */,
-				A26FB5F51C635E08007E3648 /* JsonRDTServerCommand.hpp */,
-				A26FB5F61C635E08007E3648 /* JsonRDTServerCommand.cpp */,
+				A2AF5D6D1C7C2DCF00104205 /* Client */,
+				A2AF5D6E1C7C2DE300104205 /* Server */,
 			);
 			name = Command;
 			sourceTree = "<group>";
@@ -393,6 +387,28 @@
 				A2AF26A01C73038B00F30460 /* CMakeLists.txt */,
 			);
 			name = VtechDevice;
+			sourceTree = "<group>";
+		};
+		A2AF5D6D1C7C2DCF00104205 /* Client */ = {
+			isa = PBXGroup;
+			children = (
+				A26FB5ED1C635E08007E3648 /* BinraryRDTClientCommand.hpp */,
+				A26FB5EE1C635E08007E3648 /* BinraryRDTClientCommand.cpp */,
+				A26FB5F31C635E08007E3648 /* JsonRDTClientCommand.hpp */,
+				A26FB5F41C635E08007E3648 /* JsonRDTClientCommand.cpp */,
+			);
+			name = Client;
+			sourceTree = "<group>";
+		};
+		A2AF5D6E1C7C2DE300104205 /* Server */ = {
+			isa = PBXGroup;
+			children = (
+				A26FB5EF1C635E08007E3648 /* BinraryRDTServerCommand.hpp */,
+				A26FB5F01C635E08007E3648 /* BinraryRDTServerCommand.cpp */,
+				A26FB5F51C635E08007E3648 /* JsonRDTServerCommand.hpp */,
+				A26FB5F61C635E08007E3648 /* JsonRDTServerCommand.cpp */,
+			);
+			name = Server;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

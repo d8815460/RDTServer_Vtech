@@ -16,22 +16,22 @@
 
 void VtechGarageDoorDevice::generatorDataInfoList(Command* pCommand)
 {
-    static int locationIndex = 0;
-    static vector<unsigned short> locations[3] = { {u'客', u'廳'}, {u'廚', u'房'}, {u'浴', u'室'} };
-//    static unsigned short locations[3][2] = { {u'客', u'廳'}, {u'廚', u'房'}, {u'浴', u'室'} };
-    
-    FunctionInfo* pFunctionInfo = NULL;
-    
-    /* Function Status */
-    pFunctionInfo = pCommand->createFunctionInfo(Accessory_Type_VtechGarageDoor);
-    Command::addFunctionStatus(pFunctionInfo, VtechGarageDoorFunctionCode_QuerySwitch, 1);
-    Command::addFunctionStatus(pFunctionInfo, VtechGarageDoorFunctionCode_QueryConnectStatus, 1);
-    Command::addFunctionStatus(pFunctionInfo, VtechGarageDoorFunctionCode_QueryTriggeredStatus, 1);
-    Command::addFunctionStatus(pFunctionInfo, VtechGarageDoorFunctionCode_QueryAlarmStatus, 1);
-    Command::addFunctionStatus(pFunctionInfo, VtechGarageDoorFunctionCode_QuerySOSStatus, 1);
-    Command::addFunctionStatus(pFunctionInfo, VtechGarageDoorFunctionCode_QueryPowerStatus, 1);
-    Command::addFunctionStatusWithArray(pFunctionInfo, VtechGarageDoorFunctionCode_QueryLocationName, &locations[locationIndex]);
-    Command::addFunctionStatus(pFunctionInfo, TUTKCommonFunctionCode_QueryDeviceName, u'門', u'馳');
+//    static int locationIndex = 0;
+//    static vector<unsigned short> locations[3] = { {u'客', u'廳'}, {u'廚', u'房'}, {u'浴', u'室'} };
+////    static unsigned short locations[3][2] = { {u'客', u'廳'}, {u'廚', u'房'}, {u'浴', u'室'} };
+//    
+//    FunctionInfo* pFunctionInfo = NULL;
+//    
+//    /* Function Status */
+//    pFunctionInfo = pCommand->createFunctionInfo(Accessory_Type_VtechGarageDoor);
+//    Command::addFunctionStatus(pFunctionInfo, VtechGarageDoorFunctionCode_QuerySwitch, 1);
+//    Command::addFunctionStatus(pFunctionInfo, VtechGarageDoorFunctionCode_QueryConnectStatus, 1);
+//    Command::addFunctionStatus(pFunctionInfo, VtechGarageDoorFunctionCode_QueryTriggeredStatus, 1);
+//    Command::addFunctionStatus(pFunctionInfo, VtechGarageDoorFunctionCode_QueryAlarmStatus, 1);
+//    Command::addFunctionStatus(pFunctionInfo, VtechGarageDoorFunctionCode_QuerySOSStatus, 1);
+//    Command::addFunctionStatus(pFunctionInfo, VtechGarageDoorFunctionCode_QueryPowerStatus, 1);
+//    Command::addFunctionStatusWithArray(pFunctionInfo, VtechGarageDoorFunctionCode_QueryLocationName, &locations[locationIndex]);
+//    Command::addFunctionStatus(pFunctionInfo, TUTKCommonFunctionCode_QueryDeviceName, u'門', u'馳');
     
 //    locationIndex++;
 }

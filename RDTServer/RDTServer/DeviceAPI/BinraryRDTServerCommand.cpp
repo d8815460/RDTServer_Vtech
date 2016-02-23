@@ -25,6 +25,15 @@ BinraryRDTServerCommand::BinraryRDTServerCommand(CommandEvent* pCommandEvent, Co
     pthread_create(&pThreadInput, NULL, &BinraryRDTServerCommand::threadInput, (void*)this);
 }
 
+BinraryRDTServerCommand::~BinraryRDTServerCommand()
+{
+    LOGD("~BinraryRDTServerCommand");
+    
+    for (vector<FunctionInfo*>::iterator it = m_dataInfoList.end() ; it != m_dataInfoList.begin() ; it--) {
+        removeFunctionInfo(it);
+    }
+}
+
 #pragma mark - ConnectEvent
 
 void BinraryRDTServerCommand::onConnectRecvData(ConnectRecvData* pConnectRecvData)
@@ -547,28 +556,28 @@ void BinraryRDTServerCommand::recvData(int channelID, BYTE* buffer, int totalLen
                         UBYTE countIndex = 0;
                         data[sendIndex++] = countIndex;
                         
-                        UBYTE amount = 0; // m_CommandData.DataInfoList.size();
+                        UBYTE amount = 0; // m_dataInfoList.size();
                         data[3 - 1] = amount;
                         
                         sendIndex++;
                         
-                        for (int i=0 ; i<m_CommandData.DataInfoList.size() ; i++) {
-                            if (type == m_CommandData.DataInfoList[i]->type) {
-                                setValue(data, &sendIndex, m_CommandData.DataInfoList[i]->aid);
-                                setValue(data, &sendIndex, m_CommandData.DataInfoList[i]->type);
-                                UBYTE functionAmount = m_CommandData.DataInfoList[i]->functionStatusList.size();
+                        for (int i=0 ; i<m_dataInfoList.size() ; i++) {
+                            if (type == m_dataInfoList[i]->type) {
+                                setValue(data, &sendIndex, m_dataInfoList[i]->aid);
+                                setValue(data, &sendIndex, m_dataInfoList[i]->type);
+                                UBYTE functionAmount = m_dataInfoList[i]->functionStatusList.size();
                                 setValue(data, &sendIndex, functionAmount);
                                 
-                                for (int j=0 ; j<m_CommandData.DataInfoList[i]->functionStatusList.size() ; j++) {
-                                    LOGD("m_pDataInfo[%d].pFunctionStatus[%d].functionCode:%d", i, j, m_CommandData.DataInfoList[i]->functionStatusList[j]->functionCode);
-                                    LOGD("m_pDataInfo[%d].pFunctionStatus[%d].functionCodeAmount:%lu", i, j, m_CommandData.DataInfoList[i]->functionStatusList[j]->functionCodeList.size());
-                                    setValue(data, &sendIndex, m_CommandData.DataInfoList[i]->functionStatusList[j]->functionCode);
-                                    UBYTE functionCodeAmount = m_CommandData.DataInfoList[i]->functionStatusList[j]->functionCodeList.size();
+                                for (int j=0 ; j<m_dataInfoList[i]->functionStatusList.size() ; j++) {
+                                    LOGD("m_pDataInfo[%d].pFunctionStatus[%d].functionCode:%d", i, j, m_dataInfoList[i]->functionStatusList[j]->functionCode);
+                                    LOGD("m_pDataInfo[%d].pFunctionStatus[%d].functionCodeAmount:%lu", i, j, m_dataInfoList[i]->functionStatusList[j]->functionCodeList.size());
+                                    setValue(data, &sendIndex, m_dataInfoList[i]->functionStatusList[j]->functionCode);
+                                    UBYTE functionCodeAmount = m_dataInfoList[i]->functionStatusList[j]->functionCodeList.size();
                                     setValue(data, &sendIndex, functionCodeAmount);
                                     
-                                    for (int k=0 ; k<m_CommandData.DataInfoList[i]->functionStatusList[j]->functionCodeList.size() ; k++) {
-                                        LOGD("m_pDataInfo[%d].pFunctionStatus[%d].pFunctionCode[%d]:%d", i, j, k, m_CommandData.DataInfoList[i]->functionStatusList[j]->functionCodeList[k]->transferCode);
-                                        setValue(data, &sendIndex, m_CommandData.DataInfoList[i]->functionStatusList[j]->functionCodeList[k]->transferCode);
+                                    for (int k=0 ; k<m_dataInfoList[i]->functionStatusList[j]->functionCodeList.size() ; k++) {
+                                        LOGD("m_pDataInfo[%d].pFunctionStatus[%d].pFunctionCode[%d]:%d", i, j, k, m_dataInfoList[i]->functionStatusList[j]->functionCodeList[k]->transferCode);
+                                        setValue(data, &sendIndex, m_dataInfoList[i]->functionStatusList[j]->functionCodeList[k]->transferCode);
                                     }
                                 }
                                 
@@ -628,37 +637,37 @@ void BinraryRDTServerCommand::recvData(int channelID, BYTE* buffer, int totalLen
                             LOGD("type:%d", type);
                             LOGD("functionCode:%d", functionCode);
                             
-                            LOGD("m_CommandData.DataInfoList.size():%lu", m_CommandData.DataInfoList.size());
-                            for (int i=0 ; i<m_CommandData.DataInfoList.size() ; i++) {
-                                LOGD("m_pDataInfo[%d].functionStatusAmount:%lu", i, m_CommandData.DataInfoList[i]->functionStatusList.size());
+                            LOGD("m_dataInfoList.size():%lu", m_dataInfoList.size());
+                            for (int i=0 ; i<m_dataInfoList.size() ; i++) {
+                                LOGD("m_pDataInfo[%d].functionStatusAmount:%lu", i, m_dataInfoList[i]->functionStatusList.size());
                                 
-                                for (int j=0 ; j<m_CommandData.DataInfoList[i]->functionStatusList.size() ; j++) {
-                                    LOGD("m_pDataInfo[%d].pFunctionStatus[%d].functionCode:%d", i, j, m_CommandData.DataInfoList[i]->functionStatusList[j]->functionCode);
-                                    LOGD("m_CommandData.DataInfoList[i]->aid:%d", m_CommandData.DataInfoList[i]->aid);
+                                for (int j=0 ; j<m_dataInfoList[i]->functionStatusList.size() ; j++) {
+                                    LOGD("m_pDataInfo[%d].pFunctionStatus[%d].functionCode:%d", i, j, m_dataInfoList[i]->functionStatusList[j]->functionCode);
+                                    LOGD("m_dataInfoList[i]->aid:%d", m_dataInfoList[i]->aid);
                                     
-                                    if (aid == m_CommandData.DataInfoList[i]->aid)
+                                    if (aid == m_dataInfoList[i]->aid)
                                     {
                                         // 查詢所有的 Function Code
                                         if (functionCode == 0 ||
-                                            functionCode == m_CommandData.DataInfoList[i]->functionStatusList[j]->functionCode)
+                                            functionCode == m_dataInfoList[i]->functionStatusList[j]->functionCode)
                                         {
                                             // amount
                                             sendDataBuffer[3 - 1] = ++sendAmount;
                                             
-                                            sendDataBuffer[sendIndex++] = m_CommandData.DataInfoList[i]->aid;
-                                            setValue(sendDataBuffer, &sendIndex, m_CommandData.DataInfoList[i]->type);
-                                            sendDataBuffer[sendIndex++] = m_CommandData.DataInfoList[i]->functionStatusList[j]->functionCode;
-                                            sendDataBuffer[sendIndex++] = m_CommandData.DataInfoList[i]->functionStatusList[j]->functionCodeList.size();
+                                            sendDataBuffer[sendIndex++] = m_dataInfoList[i]->aid;
+                                            setValue(sendDataBuffer, &sendIndex, m_dataInfoList[i]->type);
+                                            sendDataBuffer[sendIndex++] = m_dataInfoList[i]->functionStatusList[j]->functionCode;
+                                            sendDataBuffer[sendIndex++] = m_dataInfoList[i]->functionStatusList[j]->functionCodeList.size();
                                             
-                                            LOGD("aid:%d", m_CommandData.DataInfoList[i]->aid);
-                                            LOGD("type:%d", m_CommandData.DataInfoList[i]->type);
-                                            LOGD("functionCode:%d", m_CommandData.DataInfoList[i]->functionStatusList[j]->functionCode);
-                                            LOGD("functionAmount:%lu", m_CommandData.DataInfoList[i]->functionStatusList[j]->functionCodeList.size());
+                                            LOGD("aid:%d", m_dataInfoList[i]->aid);
+                                            LOGD("type:%d", m_dataInfoList[i]->type);
+                                            LOGD("functionCode:%d", m_dataInfoList[i]->functionStatusList[j]->functionCode);
+                                            LOGD("functionAmount:%lu", m_dataInfoList[i]->functionStatusList[j]->functionCodeList.size());
                                             
-                                            for (int k=0 ; k<m_CommandData.DataInfoList[i]->functionStatusList[j]->functionCodeList.size() ; k++) {
-                                                LOGD("m_pDataInfo[%d].pFunctionStatus[%d].pFunctionCode[%d].transferCode:%d", i, j, k, m_CommandData.DataInfoList[i]->functionStatusList[j]->functionCodeList[k]->transferCode);
+                                            for (int k=0 ; k<m_dataInfoList[i]->functionStatusList[j]->functionCodeList.size() ; k++) {
+                                                LOGD("m_pDataInfo[%d].pFunctionStatus[%d].pFunctionCode[%d].transferCode:%d", i, j, k, m_dataInfoList[i]->functionStatusList[j]->functionCodeList[k]->transferCode);
                                                 
-                                                setValue(sendDataBuffer, &sendIndex, m_CommandData.DataInfoList[i]->functionStatusList[j]->functionCodeList[k]->transferCode);
+                                                setValue(sendDataBuffer, &sendIndex, m_dataInfoList[i]->functionStatusList[j]->functionCodeList[k]->transferCode);
                                             }
                                         }
                                     }
@@ -727,37 +736,37 @@ void BinraryRDTServerCommand::recvData(int channelID, BYTE* buffer, int totalLen
                             //                                break;
                             //                            }
                             
-                            LOGD("m_CommandData.DataInfoList.size():%lu", m_CommandData.DataInfoList.size());
-                            for (int i=0 ; i<m_CommandData.DataInfoList.size() ; i++) {
-                                LOGD("m_pDataInfo[%d].functionStatusAmount:%lu", i, m_CommandData.DataInfoList[i]->functionStatusList.size());
+                            LOGD("m_dataInfoList.size():%lu", m_dataInfoList.size());
+                            for (int i=0 ; i<m_dataInfoList.size() ; i++) {
+                                LOGD("m_pDataInfo[%d].functionStatusAmount:%lu", i, m_dataInfoList[i]->functionStatusList.size());
                                 
-                                for (int j=0 ; j<m_CommandData.DataInfoList[i]->functionStatusList.size() ; j++) {
-                                    LOGD("aid:%d", m_CommandData.DataInfoList[i]->aid);
-                                    LOGD("type:%d", m_CommandData.DataInfoList[i]->type);
-                                    LOGD("m_pDataInfo[%d].pFunctionStatus[%d].functionCode:%d", i, j, m_CommandData.DataInfoList[i]->functionStatusList[j]->functionCode);
+                                for (int j=0 ; j<m_dataInfoList[i]->functionStatusList.size() ; j++) {
+                                    LOGD("aid:%d", m_dataInfoList[i]->aid);
+                                    LOGD("type:%d", m_dataInfoList[i]->type);
+                                    LOGD("m_pDataInfo[%d].pFunctionStatus[%d].functionCode:%d", i, j, m_dataInfoList[i]->functionStatusList[j]->functionCode);
                                     LOGD("aid:%d", aid);
                                     LOGD("type:%d", type);
                                     LOGD("functionCode:%d", functionCode);
                                     
-                                    if (aid == m_CommandData.DataInfoList[i]->aid &&
+                                    if (aid == m_dataInfoList[i]->aid &&
                                         // functionCode 詢問狀態 = 修改狀態 - 1
                                         //              修改狀態 = 詢問狀態 + 1
-                                        functionCode - 1 == m_CommandData.DataInfoList[i]->functionStatusList[j]->functionCode)
+                                        functionCode - 1 == m_dataInfoList[i]->functionStatusList[j]->functionCode)
                                     {
                                         LOGD("functionCodeAmount:%d", functionCodeAmount);
-                                        LOGD("m_CommandData.DataInfoList[i]->functionStatusList[j]->functionCodeList.size() = %lu", m_CommandData.DataInfoList[i]->functionStatusList[j]->functionCodeList.size());
+                                        LOGD("m_dataInfoList[i]->functionStatusList[j]->functionCodeList.size() = %lu", m_dataInfoList[i]->functionStatusList[j]->functionCodeList.size());
                                         
                                         FunctionInfo* pFunctionInfo = new FunctionInfo();
-                                        pFunctionInfo->aid = m_CommandData.DataInfoList[i]->aid;
-                                        pFunctionInfo->type = m_CommandData.DataInfoList[i]->type;
+                                        pFunctionInfo->aid = m_dataInfoList[i]->aid;
+                                        pFunctionInfo->type = m_dataInfoList[i]->type;
                                         FunctionStatus* pFunctionStatus = new FunctionStatus();
                                         
                                         // 設定數量較少
-                                        if (functionCodeAmount < m_CommandData.DataInfoList[i]->functionStatusList[j]->functionCodeList.size())
+                                        if (functionCodeAmount < m_dataInfoList[i]->functionStatusList[j]->functionCodeList.size())
                                         {
-                                            for (int y=0 ; y<m_CommandData.DataInfoList[i]->functionStatusList[j]->functionCodeList.size() ; y++) {
+                                            for (int y=0 ; y<m_dataInfoList[i]->functionStatusList[j]->functionCodeList.size() ; y++) {
                                                 // 清空
-                                                m_CommandData.DataInfoList[i]->functionStatusList[j]->functionCodeList[y]->transferCode = NULL;
+                                                m_dataInfoList[i]->functionStatusList[j]->functionCodeList[y]->transferCode = NULL;
                                             }
                                             
                                             // 設定
@@ -765,32 +774,32 @@ void BinraryRDTServerCommand::recvData(int channelID, BYTE* buffer, int totalLen
                                                 unsigned short transferCode = Utility::bytes2UnsignedLongWithBeginData(buffer, &recvIndex, 2);
                                                 LOGD("y:%d transferCode:%d", y, transferCode);
                                                 
-                                                m_CommandData.DataInfoList[i]->functionStatusList[j]->functionCodeList[y]->transferCode = transferCode;
+                                                m_dataInfoList[i]->functionStatusList[j]->functionCodeList[y]->transferCode = transferCode;
                                             }
                                         }
                                         // 設定數量較多
-                                        else if (functionCodeAmount > m_CommandData.DataInfoList[i]->functionStatusList[j]->functionCodeList.size()) {
+                                        else if (functionCodeAmount > m_dataInfoList[i]->functionStatusList[j]->functionCodeList.size()) {
                                             // 設定
                                             for (int y=0 ; y<functionCodeAmount ; y++) {
                                                 unsigned short transferCode = Utility::bytes2UnsignedLongWithBeginData(buffer, &recvIndex, 2);
                                                 LOGD("y:%d transferCode:%d", y, transferCode);
                                                 
-                                                if (y + 1 > m_CommandData.DataInfoList[i]->functionStatusList[j]->functionCodeList.size()) {
-                                                    addFunctionCode(m_CommandData.DataInfoList[i]->functionStatusList[j], transferCode);
+                                                if (y + 1 > m_dataInfoList[i]->functionStatusList[j]->functionCodeList.size()) {
+                                                    addFunctionCode(m_dataInfoList[i]->functionStatusList[j], transferCode);
                                                 }
                                                 else {
-                                                    m_CommandData.DataInfoList[i]->functionStatusList[j]->functionCodeList[y]->transferCode = transferCode;
+                                                    m_dataInfoList[i]->functionStatusList[j]->functionCodeList[y]->transferCode = transferCode;
                                                 }
                                             }
                                         }
                                         // 設定值數量一樣
-                                        else if (functionCodeAmount == m_CommandData.DataInfoList[i]->functionStatusList[j]->functionCodeList.size()) {
+                                        else if (functionCodeAmount == m_dataInfoList[i]->functionStatusList[j]->functionCodeList.size()) {
                                             // 設定
                                             for (int y=0 ; y<functionCodeAmount ; y++) {
                                                 unsigned short transferCode = Utility::bytes2UnsignedLongWithBeginData(buffer, &recvIndex, 2);
                                                 LOGD("y:%d transferCode:%d", y, transferCode);
                                                 
-                                                m_CommandData.DataInfoList[i]->functionStatusList[j]->functionCodeList[y]->transferCode = transferCode;
+                                                m_dataInfoList[i]->functionStatusList[j]->functionCodeList[y]->transferCode = transferCode;
                                             }
                                         }
                                         else {
@@ -800,28 +809,28 @@ void BinraryRDTServerCommand::recvData(int channelID, BYTE* buffer, int totalLen
                                         // amount
                                         sendDataBuffer[3 - 1] = ++sendAmount;
                                         
-                                        sendDataBuffer[sendIndex++] = m_CommandData.DataInfoList[i]->aid;
-                                        setValue(sendDataBuffer, &sendIndex, m_CommandData.DataInfoList[i]->type);
+                                        sendDataBuffer[sendIndex++] = m_dataInfoList[i]->aid;
+                                        setValue(sendDataBuffer, &sendIndex, m_dataInfoList[i]->type);
                                         sendDataBuffer[sendIndex++] = functionCode;
-                                        sendDataBuffer[sendIndex++] = m_CommandData.DataInfoList[i]->functionStatusList[j]->functionCodeList.size();
+                                        sendDataBuffer[sendIndex++] = m_dataInfoList[i]->functionStatusList[j]->functionCodeList.size();
                                         
-                                        pFunctionStatus->functionCode = m_CommandData.DataInfoList[i]->functionStatusList[j]->functionCode;
+                                        pFunctionStatus->functionCode = m_dataInfoList[i]->functionStatusList[j]->functionCode;
                                         
-                                        for (int k=0 ; k<m_CommandData.DataInfoList[i]->functionStatusList[j]->functionCodeList.size() ; k++) {
-                                            LOGD("m_pDataInfo[%d].pFunctionStatus[%d].pFunctionCode[%d].transferCode:%d", i, j, k, m_CommandData.DataInfoList[i]->functionStatusList[j]->functionCodeList[k]->transferCode);
+                                        for (int k=0 ; k<m_dataInfoList[i]->functionStatusList[j]->functionCodeList.size() ; k++) {
+                                            LOGD("m_pDataInfo[%d].pFunctionStatus[%d].pFunctionCode[%d].transferCode:%d", i, j, k, m_dataInfoList[i]->functionStatusList[j]->functionCodeList[k]->transferCode);
                                             
-                                            setValue(sendDataBuffer, &sendIndex, m_CommandData.DataInfoList[i]->functionStatusList[j]->functionCodeList[k]->transferCode);
+                                            setValue(sendDataBuffer, &sendIndex, m_dataInfoList[i]->functionStatusList[j]->functionCodeList[k]->transferCode);
                                             
                                             FunctionCode *pFunctionCode = new FunctionCode();
-                                            pFunctionCode->transferCode = m_CommandData.DataInfoList[i]->functionStatusList[j]->functionCodeList[k]->transferCode;
+                                            pFunctionCode->transferCode = m_dataInfoList[i]->functionStatusList[j]->functionCodeList[k]->transferCode;
                                             pFunctionStatus->functionCodeList.push_back(pFunctionCode);
                                         }
                                         
-                                        m_pCommandEvent->onCommandRecvCommand28(m_CommandData.DataInfoList[i]->functionStatusList[j]);
+                                        m_pCommandEvent->onCommandRecvCommand28(m_dataInfoList[i]->functionStatusList[j]);
                                         
                                         pFunctionInfo->functionStatusList.push_back(pFunctionStatus);
                                         dataInfoList.push_back(pFunctionInfo); // 回應對應的一組
-                                        //                                        dataInfoList.push_back(m_CommandData.DataInfoList[i]);/ / 回應所有
+                                        //                                        dataInfoList.push_back(m_dataInfoList[i]);/ / 回應所有
                                     }
                                 }
                             }
@@ -907,32 +916,32 @@ void BinraryRDTServerCommand::recvData(int channelID, BYTE* buffer, int totalLen
                             LOGD("functionCode:%d", functionCode);
                             LOGD("functionCodeAmount:%d", functionCodeAmount);
                             
-                            LOGD("m_CommandData.DataInfoList.size():%lu", m_CommandData.DataInfoList.size());
-                            for (int i=0 ; i<m_CommandData.DataInfoList.size() ; i++) {
-                                LOGD("m_pDataInfo[%d].functionStatusAmount:%lu", i, m_CommandData.DataInfoList[i]->functionStatusList.size());
+                            LOGD("m_dataInfoList.size():%lu", m_dataInfoList.size());
+                            for (int i=0 ; i<m_dataInfoList.size() ; i++) {
+                                LOGD("m_pDataInfo[%d].functionStatusAmount:%lu", i, m_dataInfoList[i]->functionStatusList.size());
                                 
-                                for (int j=0 ; j<m_CommandData.DataInfoList[i]->functionStatusList.size() ; j++) {
-                                    LOGD("m_pDataInfo[%d].pFunctionStatus[%d].functionCode:%d", i, j, m_CommandData.DataInfoList[i]->functionStatusList[j]->functionCode);
+                                for (int j=0 ; j<m_dataInfoList[i]->functionStatusList.size() ; j++) {
+                                    LOGD("m_pDataInfo[%d].pFunctionStatus[%d].functionCode:%d", i, j, m_dataInfoList[i]->functionStatusList[j]->functionCode);
                                     LOGD("type:%d", type);
                                     LOGD("aid:%d", aid);
                                     LOGD("functionCode:%d", functionCode);
                                     
                                     //                                    if (// TODO type == Accessory_Type_Air_Conditioner &&
-                                    //                                        aid == m_CommandData.DataInfoList[i]->aid &&
+                                    //                                        aid == m_dataInfoList[i]->aid &&
                                     //                                        // functionCode 詢問狀態 = 修改狀態 - 1
                                     //                                        //              修改狀態 = 詢問狀態 + 1
-                                    //                                        functionCode - 1 == m_CommandData.DataInfoList[i]->functionStatusList[j]->functionCode)
+                                    //                                        functionCode - 1 == m_dataInfoList[i]->functionStatusList[j]->functionCode)
                                     //                                    {
                                     //
                                     //                                        LOGD("functionCodeAmount:%d", functionCodeAmount);
-                                    //                                        LOGD("m_CommandData.DataInfoList[i]->functionStatusList[j]->functionCodeList.size() = %lu", m_CommandData.DataInfoList[i]->functionStatusList[j]->functionCodeList.size());
+                                    //                                        LOGD("m_dataInfoList[i]->functionStatusList[j]->functionCodeList.size() = %lu", m_dataInfoList[i]->functionStatusList[j]->functionCodeList.size());
                                     //
                                     //                                        // 設定數量較少
-                                    //                                        if (functionCodeAmount < m_CommandData.DataInfoList[i]->functionStatusList[j]->functionCodeList.size())
+                                    //                                        if (functionCodeAmount < m_dataInfoList[i]->functionStatusList[j]->functionCodeList.size())
                                     //                                        {
-                                    //                                            for (int y=0 ; y<m_CommandData.DataInfoList[i]->functionStatusList[j]->functionCodeList.size() ; y++) {
+                                    //                                            for (int y=0 ; y<m_dataInfoList[i]->functionStatusList[j]->functionCodeList.size() ; y++) {
                                     //                                                // 清空
-                                    //                                                m_CommandData.DataInfoList[i]->functionStatusList[j]->functionCodeList[y]->transferCode = NULL;
+                                    //                                                m_dataInfoList[i]->functionStatusList[j]->functionCodeList[y]->transferCode = NULL;
                                     //                                            }
                                     //
                                     //                                            // 設定
@@ -940,32 +949,32 @@ void BinraryRDTServerCommand::recvData(int channelID, BYTE* buffer, int totalLen
                                     //                                                unsigned short transferCode = Utility::bytes2UnsignedLongWithBeginData(buffer, &recvIndex, 2);
                                     //                                                LOGD("y:%d transferCode:%d", y, transferCode);
                                     //
-                                    //                                                m_CommandData.DataInfoList[i]->functionStatusList[j]->functionCodeList[y]->transferCode = transferCode;
+                                    //                                                m_dataInfoList[i]->functionStatusList[j]->functionCodeList[y]->transferCode = transferCode;
                                     //                                            }
                                     //                                        }
                                     //                                        // 設定數量較多
-                                    //                                        else if (functionCodeAmount > m_CommandData.DataInfoList[i]->functionStatusList[j]->functionCodeList.size()) {
+                                    //                                        else if (functionCodeAmount > m_dataInfoList[i]->functionStatusList[j]->functionCodeList.size()) {
                                     //                                            // 設定
                                     //                                            for (int y=0 ; y<functionCodeAmount ; y++) {
                                     //                                                unsigned short transferCode = Utility::bytes2UnsignedLongWithBeginData(buffer, &recvIndex, 2);
                                     //                                                LOGD("y:%d transferCode:%d", y, transferCode);
                                     //
-                                    //                                                if (y + 1 > m_CommandData.DataInfoList[i]->functionStatusList[j]->functionCodeList.size()) {
-                                    //                                                    addFunctionCode(m_CommandData.DataInfoList[i]->functionStatusList[j], transferCode);
+                                    //                                                if (y + 1 > m_dataInfoList[i]->functionStatusList[j]->functionCodeList.size()) {
+                                    //                                                    addFunctionCode(m_dataInfoList[i]->functionStatusList[j], transferCode);
                                     //                                                }
                                     //                                                else {
-                                    //                                                    m_CommandData.DataInfoList[i]->functionStatusList[j]->functionCodeList[y]->transferCode = transferCode;
+                                    //                                                    m_dataInfoList[i]->functionStatusList[j]->functionCodeList[y]->transferCode = transferCode;
                                     //                                                }
                                     //                                            }
                                     //                                        }
                                     //                                        // 設定值數量一樣
-                                    //                                        else if (functionCodeAmount == m_CommandData.DataInfoList[i]->functionStatusList[j]->functionCodeList.size()) {
+                                    //                                        else if (functionCodeAmount == m_dataInfoList[i]->functionStatusList[j]->functionCodeList.size()) {
                                     //                                            // 設定
                                     //                                            for (int y=0 ; y<functionCodeAmount ; y++) {
                                     //                                                unsigned short transferCode = Utility::bytes2UnsignedLongWithBeginData(buffer, &recvIndex, 2);
                                     //                                                LOGD("y:%d transferCode:%d", y, transferCode);
                                     //
-                                    //                                                m_CommandData.DataInfoList[i]->functionStatusList[j]->functionCodeList[y]->transferCode = transferCode;
+                                    //                                                m_dataInfoList[i]->functionStatusList[j]->functionCodeList[y]->transferCode = transferCode;
                                     //                                            }
                                     //                                        }
                                     //                                        else {
@@ -975,18 +984,18 @@ void BinraryRDTServerCommand::recvData(int channelID, BYTE* buffer, int totalLen
                                     //                                        // amount
                                     //                                        sendDataBuffer[3 - 1] = ++sendAmount;
                                     //
-                                    //                                        sendDataBuffer[sendIndex++] = m_CommandData.DataInfoList[i]->aid;
-                                    //                                        setValue(sendDataBuffer, &sendIndex, m_CommandData.DataInfoList[i]->type);
+                                    //                                        sendDataBuffer[sendIndex++] = m_dataInfoList[i]->aid;
+                                    //                                        setValue(sendDataBuffer, &sendIndex, m_dataInfoList[i]->type);
                                     //                                        sendDataBuffer[sendIndex++] = functionCode;
-                                    //                                        sendDataBuffer[sendIndex++] = m_CommandData.DataInfoList[i]->functionStatusList[j]->functionCodeList.size();
+                                    //                                        sendDataBuffer[sendIndex++] = m_dataInfoList[i]->functionStatusList[j]->functionCodeList.size();
                                     //
-                                    //                                        for (int k=0 ; k<m_CommandData.DataInfoList[i]->functionStatusList[j]->functionCodeList.size() ; k++) {
-                                    //                                            LOGD("m_pDataInfo[%d].pFunctionStatus[%d].pFunctionCode[%d].transferCode:%d", i, j, k, m_CommandData.DataInfoList[i]->functionStatusList[j]->functionCodeList[k]->transferCode);
+                                    //                                        for (int k=0 ; k<m_dataInfoList[i]->functionStatusList[j]->functionCodeList.size() ; k++) {
+                                    //                                            LOGD("m_pDataInfo[%d].pFunctionStatus[%d].pFunctionCode[%d].transferCode:%d", i, j, k, m_dataInfoList[i]->functionStatusList[j]->functionCodeList[k]->transferCode);
                                     //
-                                    //                                            setValue(sendDataBuffer, &sendIndex, m_CommandData.DataInfoList[i]->functionStatusList[j]->functionCodeList[k]->transferCode);
+                                    //                                            setValue(sendDataBuffer, &sendIndex, m_dataInfoList[i]->functionStatusList[j]->functionCodeList[k]->transferCode);
                                     //                                        }
                                     //
-                                    //                                        onCommandRecvCommand28(m_CommandData.DataInfoList[i]->functionStatusList[j]);
+                                    //                                        onCommandRecvCommand28(m_dataInfoList[i]->functionStatusList[j]);
                                     //                                    }
                                 }
                             }
@@ -1014,34 +1023,34 @@ void BinraryRDTServerCommand::recvData(int channelID, BYTE* buffer, int totalLen
                         data[sendIndex++] = ++amount;
                         
                         // 加入Sensor
-                        //                    TUTKPIRDevice::generatorDataInfoList(m_nMaxAID++, &m_CommandData.DataInfoList, &m_TypeSet);
-                        //                    TUTKSmokeDevice::generatorDataInfoList(m_nMaxAID++, &m_CommandData.DataInfoList, &m_TypeSet);
+                        //                    TUTKPIRDevice::generatorDataInfoList(m_nMaxAID++, &m_dataInfoList, &m_TypeSet);
+                        //                    TUTKSmokeDevice::generatorDataInfoList(m_nMaxAID++, &m_dataInfoList, &m_TypeSet);
 //                        VtechVirtualGroupDevice::generatorDataInfoList(this);
                         
                         // 取最後一個
                         //                    data[4 - 1] = ++amount;
                         
-                        int i = (int) m_CommandData.DataInfoList.size() - 1;
-                        setValue(data, &sendIndex, m_CommandData.DataInfoList[i]->aid);
-                        setValue(data, &sendIndex, m_CommandData.DataInfoList[i]->type);
+                        int i = (int) m_dataInfoList.size() - 1;
+                        setValue(data, &sendIndex, m_dataInfoList[i]->aid);
+                        setValue(data, &sendIndex, m_dataInfoList[i]->type);
                         
-                        UBYTE functionAmount = m_CommandData.DataInfoList[i]->functionStatusList.size();
+                        UBYTE functionAmount = m_dataInfoList[i]->functionStatusList.size();
                         setValue(data, &sendIndex, functionAmount);
                         
-                        for (int j=0 ; j<m_CommandData.DataInfoList[i]->functionStatusList.size() ; j++) {
-                            LOGD("m_pDataInfo[%d].pFunctionStatus[%d].functionCode:%d", i, j, m_CommandData.DataInfoList[i]->functionStatusList[j]->functionCode);
-                            LOGD("m_pDataInfo[%d].pFunctionStatus[%d].functionCodeAmount:%lu", i, j, m_CommandData.DataInfoList[i]->functionStatusList[j]->functionCodeList.size());
-                            setValue(data, &sendIndex, m_CommandData.DataInfoList[i]->functionStatusList[j]->functionCode);
-                            UBYTE functionCodeAmount = m_CommandData.DataInfoList[i]->functionStatusList[j]->functionCodeList.size();
+                        for (int j=0 ; j<m_dataInfoList[i]->functionStatusList.size() ; j++) {
+                            LOGD("m_pDataInfo[%d].pFunctionStatus[%d].functionCode:%d", i, j, m_dataInfoList[i]->functionStatusList[j]->functionCode);
+                            LOGD("m_pDataInfo[%d].pFunctionStatus[%d].functionCodeAmount:%lu", i, j, m_dataInfoList[i]->functionStatusList[j]->functionCodeList.size());
+                            setValue(data, &sendIndex, m_dataInfoList[i]->functionStatusList[j]->functionCode);
+                            UBYTE functionCodeAmount = m_dataInfoList[i]->functionStatusList[j]->functionCodeList.size();
                             setValue(data, &sendIndex, functionCodeAmount);
                             
-                            for (int k=0 ; k<m_CommandData.DataInfoList[i]->functionStatusList[j]->functionCodeList.size() ; k++) {
-                                LOGD("m_pDataInfo[%d].pFunctionStatus[%d].pFunctionCode[%d]:%d", i, j, k, m_CommandData.DataInfoList[i]->functionStatusList[j]->functionCodeList[k]->transferCode);
-                                setValue(data, &sendIndex, m_CommandData.DataInfoList[i]->functionStatusList[j]->functionCodeList[k]->transferCode);
+                            for (int k=0 ; k<m_dataInfoList[i]->functionStatusList[j]->functionCodeList.size() ; k++) {
+                                LOGD("m_pDataInfo[%d].pFunctionStatus[%d].pFunctionCode[%d]:%d", i, j, k, m_dataInfoList[i]->functionStatusList[j]->functionCodeList[k]->transferCode);
+                                setValue(data, &sendIndex, m_dataInfoList[i]->functionStatusList[j]->functionCodeList[k]->transferCode);
                             }
                         }
                         
-                        sendReportAllWithCommand32(channelID, operators, m_CommandData.DataInfoList[i]->aid, m_CommandData.DataInfoList[i]->type, 1);
+                        sendReportAllWithCommand32(channelID, operators, m_dataInfoList[i]->aid, m_dataInfoList[i]->type, 1);
                         
                         BinraryRDTServerCommand_ParseSendData binraryParseSendData;
                         binraryParseSendData.channelID = channelID;
@@ -1085,19 +1094,19 @@ void BinraryRDTServerCommand::recvData(int channelID, BYTE* buffer, int totalLen
                         map<int, bool> resultTypeMap;
                         
                         for (set<UBYTE>::iterator it = aidSet.begin() ; it != aidSet.end() ; it++) {
-                            for (int i=(int)m_CommandData.DataInfoList.size()-1 ; i>=0 ; i--) {
+                            for (int i=(int)m_dataInfoList.size()-1 ; i>=0 ; i--) {
                                 LOGD("(*it):%d", (*it));
-                                LOGD("m_CommandData.DataInfoList[%d]->aid:%d", i, m_CommandData.DataInfoList[i]->aid);
+                                LOGD("m_dataInfoList[%d]->aid:%d", i, m_dataInfoList[i]->aid);
                                 
-                                if (m_CommandData.DataInfoList[i]->aid == (*it)) {
-                                    LOGD("m_CommandData.DataInfoList[i]->type:%d", m_CommandData.DataInfoList[i]->type);
-                                    resultTypeMap.insert( std::pair<int, bool>(m_CommandData.DataInfoList[i]->type, true) );
+                                if (m_dataInfoList[i]->aid == (*it)) {
+                                    LOGD("m_dataInfoList[i]->type:%d", m_dataInfoList[i]->type);
+                                    resultTypeMap.insert( std::pair<int, bool>(m_dataInfoList[i]->type, true) );
                                     
                                     resultAidList.push_back((*it));
-                                    resultTypeList.push_back(m_CommandData.DataInfoList[i]->type);
+                                    resultTypeList.push_back(m_dataInfoList[i]->type);
                                     resultResponseList.push_back(1);
                                     
-                                    m_CommandData.DataInfoList.erase(m_CommandData.DataInfoList.begin() + i);
+                                    m_dataInfoList.erase(m_dataInfoList.begin() + i);
                                     break;
                                 }
                             }
@@ -1107,11 +1116,11 @@ void BinraryRDTServerCommand::recvData(int channelID, BYTE* buffer, int totalLen
                         for (map<int, bool>::iterator it = resultTypeMap.begin() ; it != resultTypeMap.end() ; it++) {
                             LOGD("it->first:%d", it->first);
                             
-                            for (int i=(int)m_CommandData.DataInfoList.size()-1 ; i>=0 ; i--) {
-                                LOGD("type:%d", m_CommandData.DataInfoList[i]->type);
+                            for (int i=(int)m_dataInfoList.size()-1 ; i>=0 ; i--) {
+                                LOGD("type:%d", m_dataInfoList[i]->type);
                                 
                                 // 已存在
-                                if (m_CommandData.DataInfoList[i]->type == it->first) {
+                                if (m_dataInfoList[i]->type == it->first) {
                                     LOGD("it->first:%d", it->first);
                                     
                                     it->second = false;
@@ -1165,28 +1174,28 @@ void BinraryRDTServerCommand::recvData(int channelID, BYTE* buffer, int totalLen
                         UBYTE countIndex = 0;
                         data[sendIndex++] = countIndex;
                         
-                        UBYTE amount = 0; // m_CommandData.DataInfoList.size();
+                        UBYTE amount = 0; // m_dataInfoList.size();
                         data[3 - 1] = amount;
                         sendIndex++;
                         
                         int type = Accessory_Type_Gateway;
-                        for (int i=0 ; i<m_CommandData.DataInfoList.size() ; i++) {
-                            if (type != m_CommandData.DataInfoList[i]->type) {
-                                setValue(data, &sendIndex, m_CommandData.DataInfoList[i]->aid);
-                                setValue(data, &sendIndex, m_CommandData.DataInfoList[i]->type);
-                                UBYTE functionAmount = m_CommandData.DataInfoList[i]->functionStatusList.size();
+                        for (int i=0 ; i<m_dataInfoList.size() ; i++) {
+                            if (type != m_dataInfoList[i]->type) {
+                                setValue(data, &sendIndex, m_dataInfoList[i]->aid);
+                                setValue(data, &sendIndex, m_dataInfoList[i]->type);
+                                UBYTE functionAmount = m_dataInfoList[i]->functionStatusList.size();
                                 setValue(data, &sendIndex, functionAmount);
                                 
-                                for (int j=0 ; j<m_CommandData.DataInfoList[i]->functionStatusList.size() ; j++) {
-                                    LOGD("m_pDataInfo[%d].pFunctionStatus[%d].functionCode:%d", i, j, m_CommandData.DataInfoList[i]->functionStatusList[j]->functionCode);
-                                    LOGD("m_pDataInfo[%d].pFunctionStatus[%d].functionCodeAmount:%lu", i, j, m_CommandData.DataInfoList[i]->functionStatusList[j]->functionCodeList.size());
-                                    setValue(data, &sendIndex, m_CommandData.DataInfoList[i]->functionStatusList[j]->functionCode);
-                                    UBYTE functionCodeAmount = m_CommandData.DataInfoList[i]->functionStatusList[j]->functionCodeList.size();
+                                for (int j=0 ; j<m_dataInfoList[i]->functionStatusList.size() ; j++) {
+                                    LOGD("m_pDataInfo[%d].pFunctionStatus[%d].functionCode:%d", i, j, m_dataInfoList[i]->functionStatusList[j]->functionCode);
+                                    LOGD("m_pDataInfo[%d].pFunctionStatus[%d].functionCodeAmount:%lu", i, j, m_dataInfoList[i]->functionStatusList[j]->functionCodeList.size());
+                                    setValue(data, &sendIndex, m_dataInfoList[i]->functionStatusList[j]->functionCode);
+                                    UBYTE functionCodeAmount = m_dataInfoList[i]->functionStatusList[j]->functionCodeList.size();
                                     setValue(data, &sendIndex, functionCodeAmount);
                                     
-                                    for (int k=0 ; k<m_CommandData.DataInfoList[i]->functionStatusList[j]->functionCodeList.size() ; k++) {
-                                        LOGD("m_pDataInfo[%d].pFunctionStatus[%d].pFunctionCode[%d]:%d", i, j, k, m_CommandData.DataInfoList[i]->functionStatusList[j]->functionCodeList[k]->transferCode);
-                                        setValue(data, &sendIndex, m_CommandData.DataInfoList[i]->functionStatusList[j]->functionCodeList[k]->transferCode);
+                                    for (int k=0 ; k<m_dataInfoList[i]->functionStatusList[j]->functionCodeList.size() ; k++) {
+                                        LOGD("m_pDataInfo[%d].pFunctionStatus[%d].pFunctionCode[%d]:%d", i, j, k, m_dataInfoList[i]->functionStatusList[j]->functionCodeList[k]->transferCode);
+                                        setValue(data, &sendIndex, m_dataInfoList[i]->functionStatusList[j]->functionCodeList[k]->transferCode);
                                     }
                                 }
                                 
@@ -1263,6 +1272,108 @@ void BinraryRDTServerCommand::parseRecvData(ParseRecvData* pParseRecvData)
         } while (length - offset > 0);
         
     }
+}
+
+#pragma mark - Function Info
+
+FunctionInfo* BinraryRDTServerCommand::createFunctionInfo(unsigned int type)
+{
+    m_CommandData.TypeSet.insert(type);
+    
+    FunctionInfo* pFunctionInfo = new FunctionInfo();
+    pFunctionInfo->aid = m_CommandData.nMaxAID++;
+    pFunctionInfo->type = type;
+    m_dataInfoList.push_back(pFunctionInfo);
+    
+    return pFunctionInfo;
+}
+
+void BinraryRDTServerCommand::addFunctionStatus(FunctionInfo* pFunctionInfo, UBYTE functionCode, unsigned short transferCode)
+{
+    FunctionStatus* pFunctionStatus = new FunctionStatus();
+    pFunctionStatus->functionCode = functionCode;
+    addFunctionCode(pFunctionStatus, transferCode);
+    pFunctionInfo->functionStatusList.push_back(pFunctionStatus);
+}
+
+void BinraryRDTServerCommand::addFunctionStatus(FunctionInfo* pFunctionInfo, UBYTE functionCode, unsigned short transferCode1, unsigned short transferCode2)
+{
+    FunctionStatus* pFunctionStatus = new FunctionStatus();
+    pFunctionStatus->functionCode = functionCode;
+    addFunctionCode(pFunctionStatus, transferCode1);
+    addFunctionCode(pFunctionStatus, transferCode2);
+    pFunctionInfo->functionStatusList.push_back(pFunctionStatus);
+}
+
+void BinraryRDTServerCommand::addFunctionStatus(FunctionInfo* pFunctionInfo, UBYTE functionCode, unsigned short transferCode1, unsigned short transferCode2, unsigned short transferCode3)
+{
+    FunctionStatus* pFunctionStatus = new FunctionStatus();
+    pFunctionStatus->functionCode = functionCode;
+    addFunctionCode(pFunctionStatus, transferCode1);
+    addFunctionCode(pFunctionStatus, transferCode2);
+    addFunctionCode(pFunctionStatus, transferCode3);
+    pFunctionInfo->functionStatusList.push_back(pFunctionStatus);
+}
+
+void BinraryRDTServerCommand::addFunctionStatus(FunctionInfo* pFunctionInfo, UBYTE functionCode, unsigned short transferCode1, unsigned short transferCode2, unsigned short transferCode3, unsigned short transferCode4)
+{
+    FunctionStatus* pFunctionStatus = new FunctionStatus();
+    pFunctionStatus->functionCode = functionCode;
+    addFunctionCode(pFunctionStatus, transferCode1);
+    addFunctionCode(pFunctionStatus, transferCode2);
+    addFunctionCode(pFunctionStatus, transferCode3);
+    addFunctionCode(pFunctionStatus, transferCode4);
+    pFunctionInfo->functionStatusList.push_back(pFunctionStatus);
+}
+
+void BinraryRDTServerCommand::addFunctionStatus(FunctionInfo* pFunctionInfo, UBYTE functionCode, unsigned short transferCode1, unsigned short transferCode2, unsigned short transferCode3, unsigned short transferCode4, unsigned short transferCode5)
+{
+    FunctionStatus* pFunctionStatus = new FunctionStatus();
+    pFunctionStatus->functionCode = functionCode;
+    addFunctionCode(pFunctionStatus, transferCode1);
+    addFunctionCode(pFunctionStatus, transferCode2);
+    addFunctionCode(pFunctionStatus, transferCode3);
+    addFunctionCode(pFunctionStatus, transferCode4);
+    addFunctionCode(pFunctionStatus, transferCode5);
+    pFunctionInfo->functionStatusList.push_back(pFunctionStatus);
+}
+
+void BinraryRDTServerCommand::addFunctionStatus(FunctionInfo* pFunctionInfo, UBYTE functionCode, unsigned short transferCode1, unsigned short transferCode2, unsigned short transferCode3, unsigned short transferCode4, unsigned short transferCode5, unsigned short transferCode6)
+{
+    FunctionStatus* pFunctionStatus = new FunctionStatus();
+    pFunctionStatus->functionCode = functionCode;
+    addFunctionCode(pFunctionStatus, transferCode1);
+    addFunctionCode(pFunctionStatus, transferCode2);
+    addFunctionCode(pFunctionStatus, transferCode3);
+    addFunctionCode(pFunctionStatus, transferCode4);
+    addFunctionCode(pFunctionStatus, transferCode5);
+    addFunctionCode(pFunctionStatus, transferCode6);
+    pFunctionInfo->functionStatusList.push_back(pFunctionStatus);
+}
+
+void BinraryRDTServerCommand::addFunctionStatusWithArray(FunctionInfo* pFunctionInfo, UBYTE functionCode, vector<unsigned short>* pTransferCodeArray)
+{
+    FunctionStatus* pFunctionStatus = new FunctionStatus();
+    pFunctionStatus->functionCode = functionCode;
+    
+    for (int i=0 ; i<pTransferCodeArray->size(); i++) {
+        addFunctionCode(pFunctionStatus, (*pTransferCodeArray)[i]);
+    }
+    
+    pFunctionInfo->functionStatusList.push_back(pFunctionStatus);
+}
+
+void BinraryRDTServerCommand::addFunctionCode(FunctionStatus* pFunctionStatus, unsigned short transferCode)
+{
+    FunctionCode* pFunctionCode = new FunctionCode();
+    pFunctionCode->transferCode = transferCode;
+    pFunctionStatus->functionCodeList.push_back(pFunctionCode);
+}
+
+void BinraryRDTServerCommand::removeFunctionInfo(vector<FunctionInfo*>::iterator it)
+{
+    delete (*it);
+    m_dataInfoList.erase(it);
 }
 
 #pragma mark - Report

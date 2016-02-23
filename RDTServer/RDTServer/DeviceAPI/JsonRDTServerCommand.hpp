@@ -39,18 +39,7 @@ class JsonRDTServerCommand : public JsonRDTCommand
 {
 public:
     JsonRDTServerCommand(CommandEvent* pCommandEvent, CommandHardwardEvent* pCommandHardwardEvent, Connect* pConnect, CommandData* pCommandData = NULL);
-    
-public:
-#pragma mark - Report
-    void sendReportWithCommand30(int channelID, vector<FunctionInfo*>* pFunctionInfoList);
-    void sendReportWithCommand32(int channelID, int operations, int amount, int aids[], unsigned int types[], int statuses[]);
-    void sendReportWithCommand33(int channelID, int operations, int status);
-    
-    void sendReportAllWithCommand30(int channelID, vector<FunctionInfo*>* pFunctionInfoList);
-    void sendReportAllWithCommand32(int channelID, int operations, int aid, unsigned int type, int status);
-    void sendReportAllWithCommand32(int channelID, int operations, int amount, int aids[], unsigned int types[], int statuses[]);
-    void sendReportAllWithCommand33(int channelID, int operations, int status);
-    
+        
 #pragma mark - ConnectEvent
 public:
     virtual void onConnectRecvData(ConnectRecvData* pConnectRecvData);

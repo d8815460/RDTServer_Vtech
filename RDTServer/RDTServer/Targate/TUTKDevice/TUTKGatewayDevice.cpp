@@ -7,6 +7,7 @@
 //
 
 #include "TUTKGatewayDevice.hpp"
+#include <map>
 #include "Utility.hpp"
 #include "TUTKPlugEnum.hpp"
 #include "TUTKLightingEnum.hpp"
@@ -21,7 +22,7 @@
 #include "TUTKGasDevice.hpp"
 #include "TUTKVibrateDevice.hpp"
 #include "AccessoryTypeEnum.hpp"
-#include <map>
+#include "BinraryRDTServerCommand.hpp"
 
 //size_t TUTKGatewayDevice::UTF16ToUTF8(char *mbBuffer, const char16_t *utf16String)
 //{
@@ -65,20 +66,20 @@ void TUTKGatewayDevice::constructorFinish()
 ////    UTF::utf16ToUtf8(dest, len, src, 3);
 //    LOGD("dest:%s", dest);
     
-    
+    BinraryRDTServerCommand *pBinraryRDTServerCommand = (BinraryRDTServerCommand*) m_pCommand;
     FunctionInfo* pFunctionInfo = NULL;
     
     /* Function Status 1 */
-    pFunctionInfo = pFunctionInfo = m_pCommand->createFunctionInfo(Accessory_Type_Gateway);
+    pFunctionInfo = pFunctionInfo = pBinraryRDTServerCommand->createFunctionInfo(Accessory_Type_Gateway);
     
     // 裝置名稱詢問 (N)
-    Command::addFunctionStatus(pFunctionInfo, TUTKCommonFunctionCode_QueryDeviceName, u'閘', u'道');
+    pBinraryRDTServerCommand->addFunctionStatus(pFunctionInfo, TUTKCommonFunctionCode_QueryDeviceName, u'閘', u'道');
     
     // 佈防模式詢問
-    Command::addFunctionStatus(pFunctionInfo, TUTKGatewayFunctionCode_QueryAlarm, 1, 1);
+    pBinraryRDTServerCommand->addFunctionStatus(pFunctionInfo, TUTKGatewayFunctionCode_QueryAlarm, 1, 1);
     
     // 閘道即時報警詢問
-    Command::addFunctionStatus(pFunctionInfo, TUTKGatewayFunctionCode_QueryAlert, 1, 1);
+    pBinraryRDTServerCommand->addFunctionStatus(pFunctionInfo, TUTKGatewayFunctionCode_QueryAlert, 1, 1);
     
 //    // 長度測試
 //    for (int i=0 ; i<150 ; i++) {

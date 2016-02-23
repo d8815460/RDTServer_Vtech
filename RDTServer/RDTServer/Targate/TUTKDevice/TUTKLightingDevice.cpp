@@ -9,34 +9,37 @@
 #include "TUTKLightingDevice.hpp"
 #include "TUTKLightingEnum.hpp"
 #include "AccessoryTypeEnum.hpp"
+#include "BinraryRDTServerCommand.hpp"
 
 #pragma mark - Normal Method
 
 void TUTKLightingDevice::generatorDataInfoList(Command* pCommand)
 {
+    BinraryRDTServerCommand *pBinraryRDTServerCommand = (BinraryRDTServerCommand*) pCommand;
     FunctionInfo* pFunctionInfo = NULL;
-    pFunctionInfo = pCommand->createFunctionInfo(Accessory_Type_Light);
+    
+    pFunctionInfo = pBinraryRDTServerCommand->createFunctionInfo(Accessory_Type_Light);
     
     // 查詢電燈開關 (on, off)
-    Command::addFunctionStatus(pFunctionInfo, TUTKLightingFunctionCode_QuerySwitch, 1);
+    pBinraryRDTServerCommand->addFunctionStatus(pFunctionInfo, TUTKLightingFunctionCode_QuerySwitch, 1);
     
     // 智能電燈亮度詢問 (0 - 100)
-    Command::addFunctionStatus(pFunctionInfo, TUTKLightingFunctionCode_QueryBrightness, 100);
+    pBinraryRDTServerCommand->addFunctionStatus(pFunctionInfo, TUTKLightingFunctionCode_QueryBrightness, 100);
     
     // 智能電燈最終顯示顏色詢問 (0 - 255)
-    Command::addFunctionStatus(pFunctionInfo, TUTKLightingFunctionCode_QueryColor, 255, 255, 255);
+    pBinraryRDTServerCommand->addFunctionStatus(pFunctionInfo, TUTKLightingFunctionCode_QueryColor, 255, 255, 255);
     
     // 智能電燈設備名稱詢問 (N)
-    Command::addFunctionStatus(pFunctionInfo, TUTKCommonFunctionCode_QueryDeviceName, u'雲', u'端');
+    pBinraryRDTServerCommand->addFunctionStatus(pFunctionInfo, TUTKCommonFunctionCode_QueryDeviceName, u'雲', u'端');
     
     // 智能電燈調色盤HUE (0 - 100)
-    Command::addFunctionStatus(pFunctionInfo, TUTKLightingFunctionCode_QueryColorPalette, 100);
+    pBinraryRDTServerCommand->addFunctionStatus(pFunctionInfo, TUTKLightingFunctionCode_QueryColorPalette, 100);
     
     // 智能電燈飽和度 (0 - 100)
-    Command::addFunctionStatus(pFunctionInfo, TUTKLightingFunctionCode_QuerySaturation, 100);
+    pBinraryRDTServerCommand->addFunctionStatus(pFunctionInfo, TUTKLightingFunctionCode_QuerySaturation, 100);
     
     // 智能電燈色溫 (0 - 100)
-    Command::addFunctionStatus(pFunctionInfo, TUTKLightingFunctionCode_QueryColorTemperature, 100);
+    pBinraryRDTServerCommand->addFunctionStatus(pFunctionInfo, TUTKLightingFunctionCode_QueryColorTemperature, 100);
 }
 
 #pragma mark - CommandEvent

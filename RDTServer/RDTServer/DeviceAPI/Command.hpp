@@ -25,48 +25,6 @@ struct WifiInfo
     UBYTE signal;
 };
 
-
-struct FunctionCode
-{
-    unsigned short transferCode;
-};
-
-struct FunctionStatus
-{
-    bool isRuningStack;
-    
-    UBYTE functionCode;
-    vector<FunctionCode*> functionCodeList;
-    
-    ~FunctionStatus()
-    {
-        if (isRuningStack == false) {
-            for (int k=0 ; k<functionCodeList.size() ; k++) {
-                delete functionCodeList[k];
-            }
-        }
-    }
-};
-
-struct FunctionInfo
-{
-    bool isRuningStack;
-    
-    UBYTE aid;
-    unsigned int type;
-    
-    vector<FunctionStatus*> functionStatusList;
-    
-    ~FunctionInfo()
-    {
-        if (isRuningStack == false) {
-            for (int j=0 ; j<functionStatusList.size() ; j++) {
-                delete functionStatusList[j];
-            }
-        }
-    }
-};
-
 struct CommandData
 {
     std::string             productName;
@@ -85,7 +43,6 @@ struct CommandData
     
     int                     nMaxAID;
     set<unsigned int>       TypeSet;
-    vector<FunctionInfo*>   DataInfoList;
 };
 
 struct ParseSendData { };
@@ -119,23 +76,6 @@ public:
     virtual void reset();
     virtual void parseSendData(ParseSendData* pParseSendData) = 0;
     virtual void parseRecvData(ParseRecvData* pParseRecvData) = 0;
-    
-#pragma mark - Function Info
-protected:
-    void removeFunctionInfo(vector<FunctionInfo*>::iterator it);
-
-public:
-    FunctionInfo* createFunctionInfo(unsigned int type);
-    
-    static void addFunctionCode(FunctionStatus* pFunctionStatus, unsigned short transferCode);
-    static void addFunctionStatus(FunctionInfo* pFunctionInfo, UBYTE functionCode, unsigned short transferCode);
-    static void addFunctionStatus(FunctionInfo* pFunctionInfo, UBYTE functionCode, unsigned short transferCode1, unsigned short transferCode2);
-    static void addFunctionStatus(FunctionInfo* pFunctionInfo, UBYTE functionCode, unsigned short transferCode1, unsigned short transferCode2, unsigned short transferCode3);
-    static void addFunctionStatus(FunctionInfo* pFunctionInfo, UBYTE functionCode, unsigned short transferCode1, unsigned short transferCode2, unsigned short transferCode3, unsigned short transferCode4);
-    static void addFunctionStatus(FunctionInfo* pFunctionInfo, UBYTE functionCode, unsigned short transferCode1, unsigned short transferCode2, unsigned short transferCode3, unsigned short transferCode4, unsigned short transferCode5);
-    static void addFunctionStatus(FunctionInfo* pFunctionInfo, UBYTE functionCode, unsigned short transferCode1, unsigned short transferCode2, unsigned short transferCode3, unsigned short transferCode4, unsigned short transferCode5, unsigned short transferCode6);
-    
-    static void addFunctionStatusWithArray(FunctionInfo* pFunctionInfo, UBYTE functionCode, vector<unsigned short>* pTransferCodeArray);
     
 // 變數
 protected:
