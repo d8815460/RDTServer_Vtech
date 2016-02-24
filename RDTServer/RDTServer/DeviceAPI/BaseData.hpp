@@ -72,12 +72,6 @@ struct AccessoryData : BaseData
 {
     int accessoryId;
     int accessoryType;
-    
-    AccessoryData(int accessoryId, int accessoryType)
-    {
-        this->accessoryId = accessoryId;
-        this->accessoryType = accessoryType;
-    }
 };
 
 #endif /* BaseData_hpp */

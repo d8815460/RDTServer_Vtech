@@ -12,14 +12,24 @@
 #include <stdio.h>
 #include "JsonRDTServerCommand.hpp"
 
+struct GroupData : BaseData
+{
+    int groupId;
+};
+
 class VtechJsonRDTServerCommand : public JsonRDTServerCommand
 {
 public:
     VtechJsonRDTServerCommand(CommandEvent* pCommandEvent, CommandHardwardEvent* pCommandHardwardEvent, Connect* pConnect, CommandData* pCommandData = NULL);
     
+    vector<GroupData*>* getGeoupList()
+    {
+        return &m_groupList;
+    }
+    
 #pragma mark - Member
 protected:
-    vector<AccessoryData*>  m_groupList;
+    vector<GroupData*>  m_groupList;
 };
 
 #endif /* VtechJsonRDTServerCommand_hpp */

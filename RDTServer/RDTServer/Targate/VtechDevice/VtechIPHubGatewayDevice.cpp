@@ -17,7 +17,7 @@
 #include "VtechIPHubGatewayEnum.hpp"
 
 #include "BinraryRDTServerCommand.hpp"
-#include "JsonRDTServerCommand.hpp"
+#include "VtechJsonRDTServerCommand.hpp"
 
 // Devices
 #include "VtechGarageDoorDevice.hpp"
@@ -44,14 +44,20 @@ void VtechIPHubGatewayDevice::reset()
     m_pCommand->reset();
     
     /* Function Status 1 */
-    JsonRDTServerCommand* pRDTServerCommand = (JsonRDTServerCommand*) m_pCommand;
+    VtechJsonRDTServerCommand* pRDTServerCommand = (VtechJsonRDTServerCommand*) m_pCommand;
     
     vector<AccessoryData*>* pAccessoryList = pRDTServerCommand->getAccessoryList();
-    
-    AccessoryData* pAccessory = new AccessoryData(1, 1);
+    AccessoryData* pAccessory = new AccessoryData();
+    pAccessory->accessoryId = 1;
+    pAccessory->accessoryType = 1;
     pAccessory->addFunctionCodeData(1, 1);
     pAccessory->addFunctionCodeData(2, 2);
     pAccessoryList->push_back(pAccessory);
+    
+    vector<GroupData*>* pGroupList = pRDTServerCommand->getGeoupList();
+    GroupData* pGroupData = new GroupData();
+    pGroupData->groupId = 1;
+    pGroupList->push_back(pGroupData);
     
 //    pAccessories->addFunctionStatus(pFunctionInfo, VtechIPHubGatewayFunctionCode_QueryConnectStatus, 1, 1);
 //    pAccessories->addFunctionStatus(pFunctionInfo, VtechIPHubGatewayFunctionCode_QueryPowerStatus, 1, 1);
@@ -81,7 +87,7 @@ void VtechIPHubGatewayDevice::reset()
 Command* VtechIPHubGatewayDevice::createCommand(Connect* pConnect)
 {
 //    return new BinraryRDTServerCommand(this, pConnect);
-    return new JsonRDTServerCommand(this, this, pConnect);
+    return new VtechJsonRDTServerCommand(this, this, pConnect);
 }
 
 #pragma mark - CommandHardwardEvent
