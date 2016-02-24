@@ -41,35 +41,35 @@ VtechIPHubGatewayDevice::~VtechIPHubGatewayDevice()
 
 void VtechIPHubGatewayDevice::reset()
 {
-//    m_pCommand->reset();
-//    
-//    FunctionInfo* pFunctionInfo = NULL;
-//    
-//    /* Function Status 1 */
-//    pFunctionInfo = m_pCommand->createFunctionInfo(Accessory_Type_VtechIPHubGateway);
-//    
-//    Command::addFunctionStatus(pFunctionInfo, VtechIPHubGatewayFunctionCode_QuerySwitch, 1, 1);
-//    Command::addFunctionStatus(pFunctionInfo, VtechIPHubGatewayFunctionCode_QueryConnectStatus, 1, 1);
-//    Command::addFunctionStatus(pFunctionInfo, VtechIPHubGatewayFunctionCode_QueryPowerStatus, 1, 1);
-//    Command::addFunctionStatus(pFunctionInfo, VtechIPHubGatewayFunctionCode_QueryPairStatus, 1, 1);
-//    Command::addFunctionStatus(pFunctionInfo, VtechIPHubGatewayFunctionCode_QueryLocationName, u'客', u'廳');
-//    //    addFunctionStatus(pFunctionInfo, VtechIPHubGatewayFunctionCode_QueryGroupID, 0);
-//    //    addFunctionStatus(pFunctionInfo, VtechIPHubGatewayFunctionCode_QueryAddGroupID, 0);
-//    //    addFunctionStatus(pFunctionInfo, VtechIPHubGatewayFunctionCode_QueryLeaveGroupID, 0);
-//    Command::addFunctionStatus(pFunctionInfo, TUTKCommonFunctionCode_QueryDeviceName, u'I', u'P', u'H', u'u', u'b');
-//    
-//    // Sensors
-//    VtechLightBulbDevice::generatorDataInfoList(m_pCommand);
-//    VtechLightBulbDevice::generatorDataInfoList(m_pCommand);
-//    VtechLightBulbDevice::generatorDataInfoList(m_pCommand);
-//    VtechLightBulbDevice::generatorDataInfoList(m_pCommand);
-//    
-//    VtechMotionSensorDevice::generatorDataInfoList(m_pCommand);
-//    VtechOpenClosedDevice::generatorDataInfoList(m_pCommand);
-//    VtechWallSwitchDevice::generatorDataInfoList(m_pCommand);
-//    VtechGarageDoorDevice::generatorDataInfoList(m_pCommand);
-//    
-//    //    VtechVirtualGroupDevice::generatorDataInfoList(m_nMaxAID++, &m_DataInfoList, &m_TypeSet);
+    m_pCommand->reset();
+    
+    FunctionInfo* pFunctionInfo = NULL;
+    
+    /* Function Status 1 */
+    pFunctionInfo = m_pCommand->createFunctionInfo(Accessory_Type_VtechIPHubGateway);
+    
+    Command::addFunctionStatus(pFunctionInfo, VtechIPHubGatewayFunctionCode_QuerySwitch, 1, 1);
+    Command::addFunctionStatus(pFunctionInfo, VtechIPHubGatewayFunctionCode_QueryConnectStatus, 1, 1);
+    Command::addFunctionStatus(pFunctionInfo, VtechIPHubGatewayFunctionCode_QueryPowerStatus, 1, 1);
+    Command::addFunctionStatus(pFunctionInfo, VtechIPHubGatewayFunctionCode_QueryPairStatus, 1, 1);
+    Command::addFunctionStatus(pFunctionInfo, VtechIPHubGatewayFunctionCode_QueryLocationName, u'客', u'廳');
+    //    addFunctionStatus(pFunctionInfo, VtechIPHubGatewayFunctionCode_QueryGroupID, 0);
+    //    addFunctionStatus(pFunctionInfo, VtechIPHubGatewayFunctionCode_QueryAddGroupID, 0);
+    //    addFunctionStatus(pFunctionInfo, VtechIPHubGatewayFunctionCode_QueryLeaveGroupID, 0);
+    Command::addFunctionStatus(pFunctionInfo, TUTKCommonFunctionCode_QueryDeviceName, u'I', u'P', u'H', u'u', u'b');
+    
+    // Sensors
+    VtechLightBulbDevice::generatorDataInfoList(m_pCommand);
+    VtechLightBulbDevice::generatorDataInfoList(m_pCommand);
+    VtechLightBulbDevice::generatorDataInfoList(m_pCommand);
+    VtechLightBulbDevice::generatorDataInfoList(m_pCommand);
+    
+    VtechMotionSensorDevice::generatorDataInfoList(m_pCommand);
+    VtechOpenClosedDevice::generatorDataInfoList(m_pCommand);
+    VtechWallSwitchDevice::generatorDataInfoList(m_pCommand);
+    VtechGarageDoorDevice::generatorDataInfoList(m_pCommand);
+    
+    //    VtechVirtualGroupDevice::generatorDataInfoList(m_nMaxAID++, &m_DataInfoList, &m_TypeSet);
 }
 
 #pragma mark - Device
