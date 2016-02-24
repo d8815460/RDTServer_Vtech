@@ -82,6 +82,8 @@
 		A26FB6F11C63600B007E3648 /* json_writer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A26FB6E31C63600A007E3648 /* json_writer.cpp */; };
 		A2A17A271C7D568A008AEFD4 /* BaseData.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A2A17A251C7D568A008AEFD4 /* BaseData.cpp */; };
 		A2A17A281C7D568A008AEFD4 /* BaseData.hpp in Headers */ = {isa = PBXBuildFile; fileRef = A2A17A261C7D568A008AEFD4 /* BaseData.hpp */; };
+		A2A17A2B1C7D8C24008AEFD4 /* VtechJsonRDTServerCommand.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A2A17A291C7D8C24008AEFD4 /* VtechJsonRDTServerCommand.cpp */; };
+		A2A17A2C1C7D8C24008AEFD4 /* VtechJsonRDTServerCommand.hpp in Headers */ = {isa = PBXBuildFile; fileRef = A2A17A2A1C7D8C24008AEFD4 /* VtechJsonRDTServerCommand.hpp */; };
 		A2AF5D751C7C395300104205 /* BinraryRDTCommand.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A2AF5D731C7C395300104205 /* BinraryRDTCommand.cpp */; };
 		A2AF5D761C7C395300104205 /* BinraryRDTCommand.hpp in Headers */ = {isa = PBXBuildFile; fileRef = A2AF5D741C7C395300104205 /* BinraryRDTCommand.hpp */; };
 		A2B03D211C6444F8002CFA38 /* AccessoryTypeEnum.hpp in Headers */ = {isa = PBXBuildFile; fileRef = A2B03D201C6444F8002CFA38 /* AccessoryTypeEnum.hpp */; };
@@ -168,6 +170,8 @@
 		A2913D911C635CFF00AF81AF /* libDeviceAPI.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libDeviceAPI.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		A2A17A251C7D568A008AEFD4 /* BaseData.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = BaseData.cpp; path = RDTServer/DeviceAPI/BaseData.cpp; sourceTree = SOURCE_ROOT; };
 		A2A17A261C7D568A008AEFD4 /* BaseData.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = BaseData.hpp; path = RDTServer/DeviceAPI/BaseData.hpp; sourceTree = SOURCE_ROOT; };
+		A2A17A291C7D8C24008AEFD4 /* VtechJsonRDTServerCommand.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = VtechJsonRDTServerCommand.cpp; path = RDTServer/DeviceAPI/VtechJsonRDTServerCommand.cpp; sourceTree = SOURCE_ROOT; };
+		A2A17A2A1C7D8C24008AEFD4 /* VtechJsonRDTServerCommand.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = VtechJsonRDTServerCommand.hpp; path = RDTServer/DeviceAPI/VtechJsonRDTServerCommand.hpp; sourceTree = SOURCE_ROOT; };
 		A2AF26A01C73038B00F30460 /* CMakeLists.txt */ = {isa = PBXFileReference; lastKnownFileType = text; name = CMakeLists.txt; path = RDTServer/Targate/VtechDevice/CMakeLists.txt; sourceTree = "<group>"; };
 		A2AF5D731C7C395300104205 /* BinraryRDTCommand.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = BinraryRDTCommand.cpp; path = RDTServer/DeviceAPI/BinraryRDTCommand.cpp; sourceTree = SOURCE_ROOT; };
 		A2AF5D741C7C395300104205 /* BinraryRDTCommand.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = BinraryRDTCommand.hpp; path = RDTServer/DeviceAPI/BinraryRDTCommand.hpp; sourceTree = SOURCE_ROOT; };
@@ -419,6 +423,8 @@
 				A26FB5F01C635E08007E3648 /* BinraryRDTServerCommand.cpp */,
 				A26FB5F51C635E08007E3648 /* JsonRDTServerCommand.hpp */,
 				A26FB5F61C635E08007E3648 /* JsonRDTServerCommand.cpp */,
+				A2A17A2A1C7D8C24008AEFD4 /* VtechJsonRDTServerCommand.hpp */,
+				A2A17A291C7D8C24008AEFD4 /* VtechJsonRDTServerCommand.cpp */,
 			);
 			name = Server;
 			sourceTree = "<group>";
@@ -459,6 +465,7 @@
 				A26FB6EE1C63600B007E3648 /* json_tool.h in Headers */,
 				A26FB6C01C635F8B007E3648 /* IPStack.h in Headers */,
 				A26FB5D61C635DD1007E3648 /* Common.hpp in Headers */,
+				A2A17A2C1C7D8C24008AEFD4 /* VtechJsonRDTServerCommand.hpp in Headers */,
 				A26FB6C11C635F8C007E3648 /* WifiIPStack.h in Headers */,
 				A26FB5FC1C635E08007E3648 /* BinraryRDTServerCommand.hpp in Headers */,
 				A26FB6E71C63600A007E3648 /* features.h in Headers */,
@@ -548,6 +555,7 @@
 				A26FB6031C635E08007E3648 /* JsonRDTServerCommand.cpp in Sources */,
 				A26FB6B41C635F67007E3648 /* MQTTSubscribeClient.c in Sources */,
 				A26FB6AF1C635F67007E3648 /* MQTTPacket.c in Sources */,
+				A2A17A2B1C7D8C24008AEFD4 /* VtechJsonRDTServerCommand.cpp in Sources */,
 				A26FB5FB1C635E08007E3648 /* BinraryRDTClientCommand.cpp in Sources */,
 				A2AF5D751C7C395300104205 /* BinraryRDTCommand.cpp in Sources */,
 				A26FB6AA1C635F67007E3648 /* MQTTConnectClient.c in Sources */,

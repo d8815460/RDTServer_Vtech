@@ -43,20 +43,24 @@ void VtechIPHubGatewayDevice::reset()
 {
     m_pCommand->reset();
     
-    FunctionInfo* pFunctionInfo = NULL;
-    
     /* Function Status 1 */
-    pFunctionInfo = m_pCommand->createFunctionInfo(Accessory_Type_VtechIPHubGateway);
+    JsonRDTServerCommand* pRDTServerCommand = (JsonRDTServerCommand*) m_pCommand;
     
-    Command::addFunctionStatus(pFunctionInfo, VtechIPHubGatewayFunctionCode_QuerySwitch, 1, 1);
-    Command::addFunctionStatus(pFunctionInfo, VtechIPHubGatewayFunctionCode_QueryConnectStatus, 1, 1);
-    Command::addFunctionStatus(pFunctionInfo, VtechIPHubGatewayFunctionCode_QueryPowerStatus, 1, 1);
-    Command::addFunctionStatus(pFunctionInfo, VtechIPHubGatewayFunctionCode_QueryPairStatus, 1, 1);
-    Command::addFunctionStatus(pFunctionInfo, VtechIPHubGatewayFunctionCode_QueryLocationName, u'客', u'廳');
+    vector<AccessoryData*>* pAccessoryList = pRDTServerCommand->getAccessoryList();
+    
+    AccessoryData* pAccessory = new AccessoryData(1, 1);
+    pAccessory->addFunctionCodeData(1, 1);
+    pAccessory->addFunctionCodeData(2, 2);
+    pAccessoryList->push_back(pAccessory);
+    
+//    pAccessories->addFunctionStatus(pFunctionInfo, VtechIPHubGatewayFunctionCode_QueryConnectStatus, 1, 1);
+//    pAccessories->addFunctionStatus(pFunctionInfo, VtechIPHubGatewayFunctionCode_QueryPowerStatus, 1, 1);
+//    pAccessories->addFunctionStatus(pFunctionInfo, VtechIPHubGatewayFunctionCode_QueryPairStatus, 1, 1);
+//    pAccessories->addFunctionStatus(pFunctionInfo, VtechIPHubGatewayFunctionCode_QueryLocationName, u'客', u'廳');
     //    addFunctionStatus(pFunctionInfo, VtechIPHubGatewayFunctionCode_QueryGroupID, 0);
     //    addFunctionStatus(pFunctionInfo, VtechIPHubGatewayFunctionCode_QueryAddGroupID, 0);
     //    addFunctionStatus(pFunctionInfo, VtechIPHubGatewayFunctionCode_QueryLeaveGroupID, 0);
-    Command::addFunctionStatus(pFunctionInfo, TUTKCommonFunctionCode_QueryDeviceName, u'I', u'P', u'H', u'u', u'b');
+//    pAccessories->addFunctionStatus(pFunctionInfo, TUTKCommonFunctionCode_QueryDeviceName, u'I', u'P', u'H', u'u', u'b');
     
     // Sensors
     VtechLightBulbDevice::generatorDataInfoList(m_pCommand);

@@ -25,11 +25,11 @@ public:
 #pragma mark - Device
     virtual Command* createCommand(Connect* pConnect);
     virtual void constructorFinish() { reset(); }
-
+    
 #pragma mark - CommandHardwardEvent
     virtual void onCommandHardwardNotify(CommandHardwardNotifyData* pCommandHardwardNotifyData);
     virtual void onCommandHardwardRecvJson(CommandHardwardRecvJsonData* pCommandHardwardRecvJsonData);
-
+    
     virtual void onCommandHardwardRecvProductCode(CommandHardwardRecvProductCode* pCommandHardwardRecvProductCode);
     virtual void onCommandHardwardRecvProductName(CommandHardwardRecvProductName* pCommandHardwardRecvProductName);
     
@@ -41,7 +41,7 @@ protected:
     
     virtual void onCommandRecvCommand28(FunctionStatus* pFunctionStatus);
     virtual void onCommandRecvFullCommand28(int channelID, vector<FunctionInfo*>* pDataInfoList);
-        
+    
 private:
 };
 

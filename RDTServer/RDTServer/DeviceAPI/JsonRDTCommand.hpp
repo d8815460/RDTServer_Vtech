@@ -40,6 +40,11 @@ class JsonRDTCommand : public Command
 public:
     JsonRDTCommand(CommandEvent* pCommandEvent, CommandHardwardEvent* pCommandHardwardEvent, Connect* pConnect, CommandData* pCommandData = NULL);
     
+    vector<AccessoryData*>* getAccessoryList()
+    {
+        return &m_accessoryList;
+    }
+    
 #pragma mark - ConnectEvent
 public:
     virtual void onConnectRecvData(ConnectRecvData* pConnectRecvData) = 0;
@@ -57,7 +62,7 @@ protected:
 protected:
     set<int>                m_nChannelIDList;
     
-    vector<AccessoryData*>  m_accessories;
+    vector<AccessoryData*>  m_accessoryList;
 };
 
 #endif /* JsonRDTCommand_hpp */
