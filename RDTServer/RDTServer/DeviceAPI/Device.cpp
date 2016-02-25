@@ -94,16 +94,26 @@ void Device::onCommandHardwardRecvJson(CommandHardwardRecvJsonData* pCommandHard
 void Device::onCommandHardwardRecv_ProductCode(CommandHardwardRecv_ProductCode* pCommandHardwardRecv_ProductCode)
 {
     LOGD("onCommandHardwardRecv_ProductCode");
+    
+    pCommandHardwardRecv_ProductCode->productCode = -1;
 }
 
 void Device::onCommandHardwardRecv_ProductName(CommandHardwardRecv_ProductName* pCommandHardwardRecv_ProductName)
 {
     LOGD("onCommandHardwardRecv_ProductName");
+    
+    pCommandHardwardRecv_ProductName->productName = "Device";
 }
 
 void Device::onCommandHardwardRecv_CreateAccessoryItems(CommandHardwardRecv_CreateAccessoryItems* pCommandHardwardRecv_CreateAccessoryItems)
 {
     LOGD("onCommandHardwardRecv_CreateAccessoryItems");
+    
+    AccessoryData* pAccessoryData = pCommandHardwardRecv_CreateAccessoryItems->pAccessoryData;
+    pAccessoryData->accessoryId = 1;
+    pAccessoryData->accessoryType = 1;
+    pAccessoryData->addFunctionCodeData("a", 1);
+    pAccessoryData->addFunctionCodeData("b", 1, 2);
 }
 
 void Device::onCommandHardwardRecv_DeleteAccessoryItems(CommandHardwardRecv_DeleteAccessoryItems* pCommandHardwardRecv_DeleteAccessoryItems)

@@ -114,15 +114,7 @@ void JsonRDTServerCommand::processCommandTarget(const Json::Value& inJsonObject,
     
     if (target.find("product_code") != std::string::npos) {
         CommandHardwardRecv_ProductCode commandHardwardRecv_ProductCode;
-        
-        // 預設ProductName
-        commandHardwardRecv_ProductCode.productCode = m_CommandData.productCode;
-        
-        // 通知Device
         m_pCommandHardwardEvent->onCommandHardwardRecv_ProductCode(&commandHardwardRecv_ProductCode);
-        
-        // 修改預設ProductName
-        m_CommandData.productCode = commandHardwardRecv_ProductCode.productCode;
         
         // 上報通知
         //        m_pCommandHardwardEvent->onCommandHardwardNotify(<#CommandHardwardNotifyData *pCommandHardwardNotifyData#>);
@@ -131,21 +123,13 @@ void JsonRDTServerCommand::processCommandTarget(const Json::Value& inJsonObject,
         Json::Value arraryItems;
         Json::Value arrayObject;
         arraryItems["index"] = "0";
-        arraryItems["value"] = m_CommandData.productCode;
+        arraryItems["value"] = commandHardwardRecv_ProductCode.productCode;
         arrayObject.append(arraryItems);
         outJsonObject["response"] = arrayObject;
     }
     else if (target.find("product_name") != std::string::npos) {
         CommandHardwardRecv_ProductName commandHardwardRecv_ProductName;
-        
-        // 預設ProductName
-        commandHardwardRecv_ProductName.productName = m_CommandData.productName;
-    
-        // 通知Device
         m_pCommandHardwardEvent->onCommandHardwardRecv_ProductName(&commandHardwardRecv_ProductName);
-        
-        // 修改預設ProductName
-        m_CommandData.productName = commandHardwardRecv_ProductName.productName;
         
         // 上報通知
 //        m_pCommandHardwardEvent->onCommandHardwardNotify(<#CommandHardwardNotifyData *pCommandHardwardNotifyData#>);
@@ -154,31 +138,24 @@ void JsonRDTServerCommand::processCommandTarget(const Json::Value& inJsonObject,
         Json::Value arraryItems;
         Json::Value arrayObject;
         arraryItems["index"] = "0";
-        arraryItems["value"] = m_CommandData.productName;
+        arraryItems["value"] = commandHardwardRecv_ProductName.productName;
         arrayObject.append(arraryItems);
         outJsonObject["response"] = arrayObject;
     }
-    else if (target.find("accessory")) {
-        if (operation.find("create")) {
+    else if (target.find("accessory") != std::string::npos) {
+        // 新增
+        if (operation.find("create") != std::string::npos) {
             AccessoryData* pAccessoryData = new AccessoryData();
 //            pAccessoryData->print();
             CommandHardwardRecv_CreateAccessoryItems commandHardwardRecv_CreateAccessoryItems;
             commandHardwardRecv_CreateAccessoryItems.pAccessoryData = pAccessoryData;
             m_pCommandHardwardEvent->onCommandHardwardRecv_CreateAccessoryItems(&commandHardwardRecv_CreateAccessoryItems);
-//            pAccessoryData->print();
-            
-            // 如果是模擬器，填入模擬器假設資料
-            if (m_isSimulator == true) {
-                pAccessoryData->accessoryId = 1;
-                pAccessoryData->accessoryType = 1;
-                pAccessoryData->addFunctionCodeData(1, 1);
-                pAccessoryData->addFunctionCodeData(2, 2);
-            }
-//            pAccessoryData->print();
+            pAccessoryData->print();
             
             m_accessoryList.push_back(pAccessoryData);
         }
-        else if (operation.find("delete")) {
+        // 刪除
+        else if (operation.find("delete") != std::string::npos) {
             size_t pos1 = target.find("/accessory/");
             size_t pos2 = target.rfind("/");
             string number = target.substr(pos1, pos2);
@@ -188,13 +165,15 @@ void JsonRDTServerCommand::processCommandTarget(const Json::Value& inJsonObject,
             m_pCommandHardwardEvent->onCommandHardwardRecv_DeleteAccessoryItems(&commandHardwardRecv_DeleteAccessoryItems);
 //            m_accessoryList.erase();
         }
-        else if (operation.find("read")) {
+        // 查詢
+        else if (operation.find("read") != std::string::npos) {
             CommandHardwardRecv_ReadAccessoryByType commandHardwardRecv_ReadAccessoryByType;
             commandHardwardRecv_ReadAccessoryByType.typeSet.insert(1);
             commandHardwardRecv_ReadAccessoryByType.typeSet.insert(2);
-            m_pCommandHardwardEvent->onCommandHardwardRecv_ReadAccessoryByType(&commandHardwardRecv_ReadAccessoryByType);
+//            m_pCommandHardwardEvent->onCommandHardwardRecv_ReadAccessoryByType(&commandHardwardRecv_ReadAccessoryByType);
         }
-        else if (operation.find("update")) {
+        // 修改
+        else if (operation.find("update") != std::string::npos) {
             
         }
     }

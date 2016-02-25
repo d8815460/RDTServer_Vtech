@@ -18,10 +18,7 @@ Command::Command(CommandEvent* pCommandEvent, CommandHardwardEvent* pCommandHard
     if (pCommandData != NULL) {
         memcpy(&m_CommandData, pCommandData, sizeof(CommandData));
     }
-    else {
-        m_CommandData.productCode = -1;
-        m_CommandData.productName = "Device";
-        
+    else {        
         // 必須設定ConnectEvent
         m_pConnect->setConnectEvent(this);
         

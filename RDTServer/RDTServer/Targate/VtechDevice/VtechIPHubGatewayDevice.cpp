@@ -52,8 +52,8 @@ void VtechIPHubGatewayDevice::reset()
     AccessoryData* pAccessory = new AccessoryData();
     pAccessory->accessoryId = 1;
     pAccessory->accessoryType = 1;
-    pAccessory->addFunctionCodeData(1, 1);
-    pAccessory->addFunctionCodeData(2, 2);
+    pAccessory->addFunctionCodeData("a", 1);
+    pAccessory->addFunctionCodeData("b", 2);
     pAccessoryList->push_back(pAccessory);
     
     vector<GroupData*>* pGroupList = pRDTServerCommand->getGeoupList();

@@ -27,8 +27,8 @@ struct WifiInfo
 
 struct CommandData
 {
-    std::string             productName;
-    int                     productCode;
+//    std::string             productName;
+//    int                     productCode;
     
     unsigned short          version1;
     unsigned short          version2;

@@ -26,7 +26,7 @@ struct FunctionCodeValueData
     
     void print()
     {
-        LOGD("print");
+        LOGD("value:%d", value);
     }
 };
 
@@ -42,9 +42,21 @@ struct FunctionCodeData
         }
     }
     
+    void addFunctionCodeValueData(int value)
+    {
+        FunctionCodeValueData* pFunctionCodeValueData = new FunctionCodeValueData();
+        pFunctionCodeValueData->value = value;
+        
+        functionCodeValueDataList.push_back(pFunctionCodeValueData);
+    }
+    
     void print()
     {
-        LOGD("print");
+        LOGD("functonCode:%s", functonCode.c_str());
+        
+        for (int i=0 ; i<functionCodeValueDataList.size() ; i++) {
+            functionCodeValueDataList[i]->print();
+        }
     }
 };
 
@@ -63,7 +75,7 @@ struct BaseData
         }
     }
     
-    void addFunctionCodeData(int functonCode, int value)
+    void addFunctionCodeData(string functonCode, int value)
     {
         FunctionCodeValueData *functionCodeValueData = new FunctionCodeValueData();
         functionCodeValueData->value = value;
@@ -74,11 +86,20 @@ struct BaseData
         functionCodeDataList.push_back(functionCodeData);
     }
     
-    //    void addFunctionCodeData(int functonCode, int value1, int value2);
+    void addFunctionCodeData(string functonCode, int value1, int value2)
+    {
+        FunctionCodeData* functionCodeData = new FunctionCodeData();
+        functionCodeData->functonCode = functonCode;
+        functionCodeData->addFunctionCodeValueData(value1);
+        functionCodeData->addFunctionCodeValueData(value2);
+        functionCodeDataList.push_back(functionCodeData);
+    }
     
     void print()
     {
-        LOGD("print");
+        for (int i=0 ; i<functionCodeDataList.size() ; i++) {
+            functionCodeDataList[i]->print();
+        }
     }
 };
 
@@ -89,9 +110,10 @@ struct AccessoryData : BaseData
     
     void print()
     {
-        BaseData::print();
+        LOGD("accessoryId:%d", accessoryId);
+        LOGD("accessoryType:%d", accessoryType);
         
-        LOGD("print");
+        BaseData::print();
     }
 };
 

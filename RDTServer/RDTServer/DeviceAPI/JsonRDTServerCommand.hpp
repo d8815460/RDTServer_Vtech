@@ -56,7 +56,6 @@ private:
     
 #pragma mark - member
 protected:
-    bool m_isSimulator;
 };
 
 #endif /* JsonRDTServerCommand_hpp */

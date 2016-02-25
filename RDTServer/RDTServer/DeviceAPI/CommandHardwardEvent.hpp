@@ -68,6 +68,19 @@ public:
     virtual void onCommandHardwardRecv_ProductCode(CommandHardwardRecv_ProductCode* pCommandHardwardRecv_ProductCode) = 0;
     virtual void onCommandHardwardRecv_ProductName(CommandHardwardRecv_ProductName* pCommandHardwardRecv_ProductCode) = 0;
     
+    /**
+     * \brief 硬體收到新增Accessory項目
+     *
+     * \details 當收到新增Accessory項目時，系統將會建立Accessory，並發送一個struct，包含資料項目AccessoryData,必須填入相關資料
+     *
+     * \param CommandHardwardRecv_CreateAccessoryItems.pAccessoryData 包含新增Accessory相關的資料
+     * \param psRDT_Status [out] The status of specified RDT channel
+     *
+     * \return #RDT_ER_NoERROR if getting the RDT status successfully
+     * \return Error code if return value < 0
+     *			- #RDT_ER_NOT_INITIALIZED RDT module is not initialized yet
+     *			- #RDT_ER_INVALID_RDT_ID The specified RDT channel ID is not valid
+     */
     virtual void onCommandHardwardRecv_CreateAccessoryItems(CommandHardwardRecv_CreateAccessoryItems* pCommandHardwardRecv_CreateAccessoryItems) = 0;
     virtual void onCommandHardwardRecv_DeleteAccessoryItems(CommandHardwardRecv_DeleteAccessoryItems* pCommandHardwardRecv_DeleteAccessoryItems) = 0;
     virtual void onCommandHardwardRecv_ReadAccessoryByType(CommandHardwardRecv_ReadAccessoryByType* pCommandHardwardRecv_ReadAccessoryByType) = 0;
