@@ -44,16 +44,21 @@ public:
     virtual unsigned short onCommandGetProductCode() = 0;
     virtual const char* onCommandGetProductName() = 0;
     virtual void onCommandRecvData(CommandRecvData* pCommandRecvData);
-        
+    
     virtual void onCommandRecvCommand28(FunctionStatus* pFunctionStatus);
     virtual void onCommandRecvFullCommand28(int channelID, vector<FunctionInfo*>* pDataInfoList);
-
+    
 #pragma mark - CommandHardwardEvent
     virtual void onCommandHardwardNotify(CommandHardwardNotifyData* pCommandHardwardNotifyData);
     virtual void onCommandHardwardRecvJson(CommandHardwardRecvJsonData* pCommandHardwardRecvJsonData);
     
-    virtual void onCommandHardwardRecvProductCode(CommandHardwardRecvProductCode* pCommandHardwardRecvProductCode);
-    virtual void onCommandHardwardRecvProductName(CommandHardwardRecvProductName* pCommandHardwardRecvProductName);
+    virtual void onCommandHardwardRecv_ProductCode(CommandHardwardRecv_ProductCode* pCommandHardwardRecv_ProductCode);
+    virtual void onCommandHardwardRecv_ProductName(CommandHardwardRecv_ProductName* pCommandHardwardRecv_ProductName);
+    
+    virtual void onCommandHardwardRecv_CreateAccessoryItems(CommandHardwardRecv_CreateAccessoryItems* pCommandHardwardRecv_CreateAccessoryItems);
+    virtual void onCommandHardwardRecv_DeleteAccessoryItems(CommandHardwardRecv_DeleteAccessoryItems* pCommandHardwardRecv_DeleteAccessoryItems);
+    virtual void onCommandHardwardRecv_ReadAccessoryByType(CommandHardwardRecv_ReadAccessoryByType* pCommandHardwardRecv_ReadAccessoryByType);
+    virtual void onCommandHardwardRecv_UpdateAccessoryFunctionCode(CommandHardwardRecv_UpdateAccessoryFunctionCode* pCommandHardwardRecv_UpdateAccessoryFunctionCode);
     
 // 成員變數
 protected:

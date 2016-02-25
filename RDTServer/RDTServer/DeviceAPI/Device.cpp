@@ -91,14 +91,34 @@ void Device::onCommandHardwardRecvJson(CommandHardwardRecvJsonData* pCommandHard
     LOGD("onCommandHardwardRecvJson");
 }
 
-void Device::onCommandHardwardRecvProductCode(CommandHardwardRecvProductCode* pCommandHardwardRecvProductCode)
+void Device::onCommandHardwardRecv_ProductCode(CommandHardwardRecv_ProductCode* pCommandHardwardRecv_ProductCode)
 {
-    LOGD("onCommandHardwardRecvProductCode");
+    LOGD("onCommandHardwardRecv_ProductCode");
 }
 
-void Device::onCommandHardwardRecvProductName(CommandHardwardRecvProductName* pCommandHardwardRecvProductName)
+void Device::onCommandHardwardRecv_ProductName(CommandHardwardRecv_ProductName* pCommandHardwardRecv_ProductName)
 {
-    LOGD("onCommandHardwardRecvProductName");
+    LOGD("onCommandHardwardRecv_ProductName");
+}
+
+void Device::onCommandHardwardRecv_CreateAccessoryItems(CommandHardwardRecv_CreateAccessoryItems* pCommandHardwardRecv_CreateAccessoryItems)
+{
+    LOGD("onCommandHardwardRecv_CreateAccessoryItems");
+}
+
+void Device::onCommandHardwardRecv_DeleteAccessoryItems(CommandHardwardRecv_DeleteAccessoryItems* pCommandHardwardRecv_DeleteAccessoryItems)
+{
+    LOGD("onCommandHardwardRecv_DeleteAccessoryItems");
+}
+
+void Device::onCommandHardwardRecv_ReadAccessoryByType(CommandHardwardRecv_ReadAccessoryByType* pCommandHardwardRecv_ReadAccessoryByType)
+{
+    LOGD("onCommandHardwardRecv_ReadAccessoryByType");
+}
+
+void Device::onCommandHardwardRecv_UpdateAccessoryFunctionCode(CommandHardwardRecv_UpdateAccessoryFunctionCode* pCommandHardwardRecv_UpdateAccessoryFunctionCode)
+{
+    LOGD("onCommandHardwardRecv_UpdateAccessoryFunctionCode");
 }
 
 #pragma mark - Normal Method

@@ -23,6 +23,11 @@ using namespace std;
 struct FunctionCodeValueData
 {
     int value;
+    
+    void print()
+    {
+        LOGD("print");
+    }
 };
 
 struct FunctionCodeData
@@ -35,6 +40,11 @@ struct FunctionCodeData
         for (int i=0 ; i<functionCodeValueDataList.size() ; i++) {
             delete functionCodeValueDataList[i];
         }
+    }
+    
+    void print()
+    {
+        LOGD("print");
     }
 };
 
@@ -66,12 +76,23 @@ struct BaseData
     
     //    void addFunctionCodeData(int functonCode, int value1, int value2);
     
+    void print()
+    {
+        LOGD("print");
+    }
 };
 
 struct AccessoryData : BaseData
 {
     int accessoryId;
     int accessoryType;
+    
+    void print()
+    {
+        BaseData::print();
+        
+        LOGD("print");
+    }
 };
 
 #endif /* BaseData_hpp */

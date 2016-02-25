@@ -30,6 +30,8 @@
 VtechIPHubGatewayDevice::VtechIPHubGatewayDevice()
 {
     LOGD("VtechIPHubGatewayDevice");
+    
+//    m_isSimulator = false;
 }
 
 VtechIPHubGatewayDevice::~VtechIPHubGatewayDevice()
@@ -56,7 +58,6 @@ void VtechIPHubGatewayDevice::reset()
     
     vector<GroupData*>* pGroupList = pRDTServerCommand->getGeoupList();
     GroupData* pGroupData = new GroupData();
-    pGroupData->groupId = 1;
     pGroupList->push_back(pGroupData);
     
 //    pAccessories->addFunctionStatus(pFunctionInfo, VtechIPHubGatewayFunctionCode_QueryConnectStatus, 1, 1);
@@ -109,18 +110,18 @@ void VtechIPHubGatewayDevice::onCommandHardwardRecvJson(CommandHardwardRecvJsonD
 	 LOGD("jsonString:%s", jsonString.c_str());
 }
 
-void VtechIPHubGatewayDevice::onCommandHardwardRecvProductCode(CommandHardwardRecvProductCode* pCommandHardwardRecvProductCode)
+void VtechIPHubGatewayDevice::onCommandHardwardRecv_ProductCode(CommandHardwardRecv_ProductCode* pCommandHardwardRecv_ProductCode)
 {
-    LOGD("onCommandHardwardRecvProductCode: productCode:%d", pCommandHardwardRecvProductCode->productCode);
-    pCommandHardwardRecvProductCode->productCode = 0xE1;
-    LOGD("onCommandHardwardRecvProductCode->productCode:%d", pCommandHardwardRecvProductCode->productCode);
+    LOGD("onCommandHardwardRecv_ProductCode:%d", pCommandHardwardRecv_ProductCode->productCode);
+    pCommandHardwardRecv_ProductCode->productCode = 0xE1;
+    LOGD("onCommandHardwardRecv_ProductCode:%d", pCommandHardwardRecv_ProductCode->productCode);
 }
 
-void VtechIPHubGatewayDevice::onCommandHardwardRecvProductName(CommandHardwardRecvProductName* pCommandHardwardRecvProductName)
+void VtechIPHubGatewayDevice::onCommandHardwardRecv_ProductName(CommandHardwardRecv_ProductName* pCommandHardwardRecv_ProductName)
 {
-    LOGD("onCommandHardwardRecvProductName: productName:%s", pCommandHardwardRecvProductName->productName.c_str());
-    pCommandHardwardRecvProductName->productName = "VtechIPHubGatewayDevice";
-    LOGD("pCommandHardwardRecvProductName->productName:%s", pCommandHardwardRecvProductName->productName.c_str());
+    LOGD("pCommandHardwardRecv_ProductName:%s", pCommandHardwardRecv_ProductName->productName.c_str());
+    pCommandHardwardRecv_ProductName->productName = "VtechIPHubGatewayDevice";
+    LOGD("pCommandHardwardRecv_ProductName:%s", pCommandHardwardRecv_ProductName->productName.c_str());
 }
 
 #pragma mark - CommandEvent

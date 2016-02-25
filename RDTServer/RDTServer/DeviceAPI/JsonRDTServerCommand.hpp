@@ -55,7 +55,8 @@ private:
     void processCommandTarget(const Json::Value& jsonObject, Json::Value& outJsonObject);
     
 #pragma mark - member
-private:
+protected:
+    bool m_isSimulator;
 };
 
 #endif /* JsonRDTServerCommand_hpp */
