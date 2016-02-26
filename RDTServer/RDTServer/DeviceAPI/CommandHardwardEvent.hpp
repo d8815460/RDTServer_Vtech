@@ -14,9 +14,10 @@
 #include <json/reader.h>
 #include "BaseData.hpp"
 
-struct CommandHardwardNotifyData
+struct CommandBase
 {
-    Json::Value* pJsonObject;
+    DataType dataType;
+    int errorCode;
 };
 
 struct CommandHardwardRecvJsonData
@@ -24,10 +25,9 @@ struct CommandHardwardRecvJsonData
     Json::Value* pJsonObject;
 };
 
-struct CommandBase
+struct CommandHardwardNotifyData : CommandBase
 {
-    DataType dataType;
-    int errorCode;
+    vector<BaseData*> baseDataList;
 };
 
 struct CommandHardwardRecv_ProductCode : CommandBase
@@ -72,7 +72,7 @@ public:
     /**
      * \brief 硬體收到新增項目
      *
-     * \details 當收到新增項目時，系統將會建立新項目，並發送一個struct，包含資料項目BaseData,必須根據實際DataType填入相關資料
+     * \details 當收到新增項目時，系統將會建立新項目，存放在struct，包含資料項目BaseData,必須根據實際DataType填入相關資料
      *
      * \param dataType  實際資料型態
      * \param errorCode 發生錯誤時的錯誤碼
@@ -81,8 +81,40 @@ public:
      */
     virtual void onCommandHardwardRecv_CreateItem(CommandHardwardRecv_CreateItems* pCommandHardwardRecv_CreateItems) = 0;
     
+    /**
+     * \brief 硬體收到刪除項目
+     *
+     * \details 當收到刪除項目時，系統將會發送id，存放在struct,必須根據實際DataType刪除相關資料
+     *
+     * \param dataType  實際資料型態
+     * \param errorCode 發生錯誤時的錯誤碼
+     * \param id        包含刪除項目的識別碼
+     *
+     */
     virtual void onCommandHardwardRecv_DeleteItems(CommandHardwardRecv_DeleteItems* pCommandHardwardRecv_DeleteItems) = 0;
+    
+    /**
+     * \brief 硬體收到讀取資料項目清單
+     *
+     * \details 當收到讀取資料項目時，系統將會發送BaseData清單，存放在struct，必須根據實際DataType查詢相關資料
+     *
+     * \param dataType      實際資料型態
+     * \param errorCode     發生錯誤時的錯誤碼
+     * \param baseDataList  包含查詢項目清單
+     *
+     */
     virtual void onCommandHardwardRecv_ReadItems(CommandHardwardRecv_ReadItems* pCommandHardwardRecv_ReadItems) = 0;
+    
+    /**
+     * \brief 硬體收到更新資料項目清單
+     *
+     * \details 當收到讀取資料項目時，系統將會發送BaseData清單，存放在struct，必須根據實際DataType更新相關資料
+     *
+     * \param dataType      實際資料型態
+     * \param errorCode     發生錯誤時的錯誤碼
+     * \param baseDataList  包含更新項目清單
+     *
+     */
     virtual void onCommandHardwardRecv_UpdateItems(CommandHardwardRecv_UpdateItems* pCommandHardwardRecv_UpdateItems) = 0;
 };
 

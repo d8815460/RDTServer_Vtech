@@ -157,7 +157,7 @@ void JsonRDTServerCommand::processCommandTarget(const Json::Value& inJsonObject,
         // 刪除
         else if (operation.find("delete") != std::string::npos) {
             size_t pos2 = target.rfind("/") - 1;
-            size_t pos1 = target.rfind("/", pos2);
+            size_t pos1 = target.rfind("/", pos2);                                                                 
             string number = target.substr(pos1 + 1, pos2 - pos1);
             int accessoryId = atoi(number.c_str());
             CommandHardwardRecv_DeleteItems commandHardwardRecv_DeleteItems;
