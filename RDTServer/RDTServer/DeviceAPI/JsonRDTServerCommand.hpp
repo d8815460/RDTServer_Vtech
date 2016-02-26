@@ -39,20 +39,22 @@ public:
 public:
     virtual void onConnectRecvData(ConnectRecvData* pConnectRecvData);
     
+#pragma mark - Thread
+public:
+    static void* threadInput(void *arg);
+    
 #pragma mark - Command
+public:
 //    virtual void parseSendData(ParseSendData* pParseSendData);
 //    virtual void parseRecvData(ParseRecvData* pParseRecvData);
     
-#pragma mark - Thread
-    static void* threadInput(void *arg);
-    
-#pragma mark - Protected
+#pragma mark - JsonRDTCommand
 protected:
     virtual void recvData(int channelID, BYTE* buffer, int totalLength);
     
-#pragma mark - Private Method
-private:
-    void processCommandTarget(const Json::Value& jsonObject, Json::Value& outJsonObject);
+#pragma mark - JsonRDTServerCommand
+protected:
+    virtual bool processCommandTarget(const Json::Value& jsonObject, Json::Value& outJsonObject);
     
 #pragma mark - member
 protected:

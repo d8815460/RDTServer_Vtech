@@ -54,7 +54,8 @@ public:
 #pragma mark - Command
     virtual void parseSendData(ParseSendData* pParseSendData);
     virtual void parseRecvData(ParseRecvData* pParseRecvData);
-    
+
+#pragma mark - JsonRDTCommand
 protected:
     bool isBasicVerificationPass(BYTE* buffer, int length);
     virtual void recvData(int channelID, BYTE* buffer, int totalLength) = 0;

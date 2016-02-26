@@ -15,6 +15,13 @@
 struct GroupData : BaseData
 {
     int groupId;
+    
+    void print()
+    {
+        LOGD("groupId:%d", groupId);
+        
+        BaseData::print();
+    }
 };
 
 class VtechJsonRDTServerCommand : public JsonRDTServerCommand
@@ -26,6 +33,10 @@ public:
     {
         return &m_groupList;
     }
+    
+#pragma mark - JsonRDTCommand
+protected:
+    virtual bool processCommandTarget(const Json::Value& jsonObject, Json::Value& outJsonObject);
     
 #pragma mark - Member
 protected:

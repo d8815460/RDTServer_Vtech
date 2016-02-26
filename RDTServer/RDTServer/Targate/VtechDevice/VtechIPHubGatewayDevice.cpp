@@ -106,8 +106,8 @@ void VtechIPHubGatewayDevice::onCommandHardwardRecvJson(CommandHardwardRecvJsonD
 {
 	LOGD("onCommandHardwardRecvJson");
 
-	 std::string jsonString = pCommandHardwardRecvJsonData->pJsonObject->toStyledString();
-	 LOGD("jsonString:%s", jsonString.c_str());
+//	 std::string jsonString = pCommandHardwardRecvJsonData->pJsonObject->toStyledString();
+//	 LOGD("jsonString:%s", jsonString.c_str());
 }
 
 void VtechIPHubGatewayDevice::onCommandHardwardRecv_ProductCode(CommandHardwardRecv_ProductCode* pCommandHardwardRecv_ProductCode)

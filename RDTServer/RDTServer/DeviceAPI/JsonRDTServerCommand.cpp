@@ -101,9 +101,9 @@ void* JsonRDTServerCommand::threadInput(void *arg)
     return NULL;
 }
 
-#pragma mark - Private Method
+#pragma mark - Protected Method
 
-void JsonRDTServerCommand::processCommandTarget(const Json::Value& inJsonObject, Json::Value& outJsonObject)
+bool JsonRDTServerCommand::processCommandTarget(const Json::Value& inJsonObject, Json::Value& outJsonObject)
 {
 //    m_pCommandHardwardEvent->onCommandHardwardRecvJson(inJsonObject, outJsonObject);
     
@@ -148,6 +148,7 @@ void JsonRDTServerCommand::processCommandTarget(const Json::Value& inJsonObject,
             AccessoryData* pAccessoryData = new AccessoryData();
 //            pAccessoryData->print();
             CommandHardwardRecv_CreateItems commandHardwardRecv_CreateItems;
+            commandHardwardRecv_CreateItems.dataType = DataType_Accessory;
             commandHardwardRecv_CreateItems.pBaseData = pAccessoryData;
             m_pCommandHardwardEvent->onCommandHardwardRecv_CreateItem(&commandHardwardRecv_CreateItems);
             pAccessoryData->print();
@@ -161,6 +162,7 @@ void JsonRDTServerCommand::processCommandTarget(const Json::Value& inJsonObject,
             string number = target.substr(pos1 + 1, pos2 - pos1);
             int accessoryId = atoi(number.c_str());
             CommandHardwardRecv_DeleteItems commandHardwardRecv_DeleteItems;
+            commandHardwardRecv_DeleteItems.dataType = DataType_Accessory;
             commandHardwardRecv_DeleteItems.id = accessoryId;
             m_pCommandHardwardEvent->onCommandHardwardRecv_DeleteItems(&commandHardwardRecv_DeleteItems);
 //            m_accessoryList.erase();
@@ -168,6 +170,7 @@ void JsonRDTServerCommand::processCommandTarget(const Json::Value& inJsonObject,
         // 查詢
         else if (operation.find("read") != std::string::npos) {
             CommandHardwardRecv_ReadItems commandHardwardRecv_ReadItems;
+            commandHardwardRecv_ReadItems.dataType = DataType_Accessory;
 //            commandHardwardRecv_ReadItems.m_accessoryList
             m_pCommandHardwardEvent->onCommandHardwardRecv_ReadItems(&commandHardwardRecv_ReadItems);
         }
@@ -176,31 +179,12 @@ void JsonRDTServerCommand::processCommandTarget(const Json::Value& inJsonObject,
             
         }
     }
-    else if (target.find("group") != std::string::npos) {
-        
-    }
     else {
         LOGE("processCommandTarget Error");
-        return;
+        return false;
     }
     
-    CommandHardwardRecvJsonData commandHardwardRecvJsonData;
-    commandHardwardRecvJsonData.pJsonObject = &outJsonObject;
-    m_pCommandHardwardEvent->onCommandHardwardRecvJson(&commandHardwardRecvJsonData);
-    
-    // Common
-    outJsonObject["serno"] = inJsonObject["serno"];
-    outJsonObject["operation"] = "read";
-    outJsonObject["target"] = target;
-    
-    // Version
-    char version[20];
-    sprintf(version, "%d.%d.%d", m_CommandData.version1, m_CommandData.version2, m_CommandData.version3);
-//    LOGD("version:%s", version);
-    outJsonObject["version"] = version;
-    
-    // Error Code
-    outJsonObject["error_code"] = 0;
+    return true;
 }
 
 #pragma mark - Command
@@ -231,7 +215,31 @@ void JsonRDTServerCommand::recvData(int channelID, BYTE* buffer, int totalLength
     Json::Value outJsonObject;
     if (reader.parse(json, inJsonObject))
     {
-        processCommandTarget(inJsonObject, outJsonObject);
+        bool result = processCommandTarget(inJsonObject, outJsonObject);
+        
+        if (result) {
+            // Common
+            outJsonObject["serno"] = inJsonObject["serno"];
+            outJsonObject["operation"] = "read";
+            outJsonObject["target"] = inJsonObject["target"];
+            
+            // Version
+            char version[20];
+            sprintf(version, "%d.%d.%d", m_CommandData.version1, m_CommandData.version2, m_CommandData.version3);
+            //    LOGD("version:%s", version);
+            outJsonObject["version"] = version;
+            
+            // Error Code
+            outJsonObject["error_code"] = 0;
+            
+            CommandHardwardRecvJsonData commandHardwardRecvJsonData;
+            commandHardwardRecvJsonData.pJsonObject = &outJsonObject;
+            m_pCommandHardwardEvent->onCommandHardwardRecvJson(&commandHardwardRecvJsonData);
+        }
+        else {
+            LOGE("processCommandTarget 失敗不傳送");
+            return;
+        }
     }
     
     set<int>::iterator it = m_nChannelIDList.end();
