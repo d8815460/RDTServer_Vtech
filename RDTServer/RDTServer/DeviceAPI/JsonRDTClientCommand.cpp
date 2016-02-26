@@ -65,14 +65,17 @@ void* JsonRDTClientCommand::threadInput(void *arg)
             unsigned int serno = 87654321;
             root["serno"] = serno;
             
-//            root["operation"] = "read";
-//            root["target"] = "/accessory/0/product_code/";
+            root["operation"] = "read";
+            root["target"] = "/accessory/0/product_code/";
             
 //            root["operation"] = "read";
 //            root["target"] = "/accessory/0/product_name/";
 
-            root["operation"] = "create";
-            root["target"] = "/accessory/";
+//            root["operation"] = "create";
+//            root["target"] = "/accessory/";
+            
+//            root["operation"] = "delete";
+//            root["target"] = "/accessory/1/";
             
 //            arraryItems["cpp"] = "jsoncpp";
 //            arraryItems["java"] = "jsoninjava";

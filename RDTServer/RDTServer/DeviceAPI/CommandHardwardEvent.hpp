@@ -26,6 +26,7 @@ struct CommandHardwardRecvJsonData
 
 struct CommandBase
 {
+    DataType dataType;
     int errorCode;
 };
 
@@ -39,24 +40,24 @@ struct CommandHardwardRecv_ProductName : CommandBase
     string productName;
 };
 
-struct CommandHardwardRecv_CreateAccessoryItems : CommandBase
+struct CommandHardwardRecv_CreateItems : CommandBase
 {
-    AccessoryData* pAccessoryData;
+    BaseData* pBaseData;
 };
 
-struct CommandHardwardRecv_DeleteAccessoryItems : CommandBase
+struct CommandHardwardRecv_DeleteItems : CommandBase
 {
-    int accessoryId;
+    int id;
 };
 
-struct CommandHardwardRecv_ReadAccessoryByType : CommandBase
+struct CommandHardwardRecv_ReadItems : CommandBase
 {
-    set<int> typeSet;
+    vector<BaseData*> baseDataList;
 };
 
-struct CommandHardwardRecv_UpdateAccessoryFunctionCode : CommandBase
+struct CommandHardwardRecv_UpdateItems : CommandBase
 {
-    vector<AccessoryData*>  m_accessoryList;
+    vector<BaseData*> baseDataList;
 };
 
 class CommandHardwardEvent
@@ -69,24 +70,20 @@ public:
     virtual void onCommandHardwardRecv_ProductName(CommandHardwardRecv_ProductName* pCommandHardwardRecv_ProductCode) = 0;
     
     /**
-     * \brief 硬體收到新增Accessory項目
+     * \brief 硬體收到新增項目
      *
-     * \details 當收到新增Accessory項目時，系統將會建立Accessory，並發送一個struct，包含資料項目AccessoryData,必須填入相關資料
+     * \details 當收到新增項目時，系統將會建立新項目，並發送一個struct，包含資料項目BaseData,必須根據實際DataType填入相關資料
      *
-     * \param CommandHardwardRecv_CreateAccessoryItems.pAccessoryData 包含新增Accessory相關的資料
-     * \param psRDT_Status [out] The status of specified RDT channel
+     * \param dataType  實際資料型態
+     * \param errorCode 發生錯誤時的錯誤碼
+     * \param pBaseData 包含新增項目相關的資料
      *
-     * \return #RDT_ER_NoERROR if getting the RDT status successfully
-     * \return Error code if return value < 0
-     *			- #RDT_ER_NOT_INITIALIZED RDT module is not initialized yet
-     *			- #RDT_ER_INVALID_RDT_ID The specified RDT channel ID is not valid
      */
-    virtual void onCommandHardwardRecv_CreateAccessoryItems(CommandHardwardRecv_CreateAccessoryItems* pCommandHardwardRecv_CreateAccessoryItems) = 0;
-    virtual void onCommandHardwardRecv_DeleteAccessoryItems(CommandHardwardRecv_DeleteAccessoryItems* pCommandHardwardRecv_DeleteAccessoryItems) = 0;
-    virtual void onCommandHardwardRecv_ReadAccessoryByType(CommandHardwardRecv_ReadAccessoryByType* pCommandHardwardRecv_ReadAccessoryByType) = 0;
-    virtual void onCommandHardwardRecv_UpdateAccessoryFunctionCode(CommandHardwardRecv_UpdateAccessoryFunctionCode* pCommandHardwardRecv_UpdateAccessoryFunctionCode) = 0;
+    virtual void onCommandHardwardRecv_CreateItem(CommandHardwardRecv_CreateItems* pCommandHardwardRecv_CreateItems) = 0;
     
-//    virtual void onCommandHardwardRecv_GetAccessoryByType(CommandHardwardRecv_GetAccessoryByType* pCommandHardwardRecv_GetAccessoryByType) = 0;
+    virtual void onCommandHardwardRecv_DeleteItems(CommandHardwardRecv_DeleteItems* pCommandHardwardRecv_DeleteItems) = 0;
+    virtual void onCommandHardwardRecv_ReadItems(CommandHardwardRecv_ReadItems* pCommandHardwardRecv_ReadItems) = 0;
+    virtual void onCommandHardwardRecv_UpdateItems(CommandHardwardRecv_UpdateItems* pCommandHardwardRecv_UpdateItems) = 0;
 };
 
 #endif /* CommandHardwardEvent_hpp */

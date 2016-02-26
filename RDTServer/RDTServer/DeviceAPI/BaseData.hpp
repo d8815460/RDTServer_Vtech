@@ -15,10 +15,12 @@
 
 using namespace std;
 
-//enum DataType
-//{
-//    DataType_AccessoryData,
-//};
+enum DataType
+{
+    DataType_None,
+    DataType_Accessory,
+    DataType_Group,
+};
 
 struct FunctionCodeValueData
 {
@@ -35,7 +37,7 @@ struct FunctionCodeData
     string functonCode;
     vector<FunctionCodeValueData*> functionCodeValueDataList;
     
-    FunctionCodeData()
+    ~FunctionCodeData()
     {
         for (int i=0 ; i<functionCodeValueDataList.size() ; i++) {
             delete functionCodeValueDataList[i];
@@ -63,10 +65,6 @@ struct FunctionCodeData
 struct BaseData
 {
     vector<FunctionCodeData*> functionCodeDataList;
-    
-    BaseData()
-    {
-    }
     
     ~BaseData()
     {

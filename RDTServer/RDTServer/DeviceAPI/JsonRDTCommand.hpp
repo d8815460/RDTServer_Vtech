@@ -39,6 +39,7 @@ class JsonRDTCommand : public Command
 {
 public:
     JsonRDTCommand(CommandEvent* pCommandEvent, CommandHardwardEvent* pCommandHardwardEvent, Connect* pConnect, CommandData* pCommandData = NULL);
+    ~JsonRDTCommand();
     
     vector<AccessoryData*>* getAccessoryList()
     {

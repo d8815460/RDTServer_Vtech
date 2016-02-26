@@ -26,6 +26,13 @@ JsonRDTCommand::JsonRDTCommand(CommandEvent* pCommandEvent, CommandHardwardEvent
     m_CommandData.version3 = 0;
 }
 
+JsonRDTCommand::~JsonRDTCommand()
+{
+    for (int i=0 ; i<m_accessoryList.size() ; i++) {
+        delete m_accessoryList[i];
+    }
+}
+
 void JsonRDTCommand::onConnectCreateClient(ConnectCreateClient* pConnectCreateClient)
 {
     JsonRDTCommand_ConnectCreateClient* pJsonConnectCreateClient = (JsonRDTCommand_ConnectCreateClient*) pConnectCreateClient;

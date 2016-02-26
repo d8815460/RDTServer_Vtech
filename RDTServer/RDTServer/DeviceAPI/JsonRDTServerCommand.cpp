@@ -147,35 +147,37 @@ void JsonRDTServerCommand::processCommandTarget(const Json::Value& inJsonObject,
         if (operation.find("create") != std::string::npos) {
             AccessoryData* pAccessoryData = new AccessoryData();
 //            pAccessoryData->print();
-            CommandHardwardRecv_CreateAccessoryItems commandHardwardRecv_CreateAccessoryItems;
-            commandHardwardRecv_CreateAccessoryItems.pAccessoryData = pAccessoryData;
-            m_pCommandHardwardEvent->onCommandHardwardRecv_CreateAccessoryItems(&commandHardwardRecv_CreateAccessoryItems);
+            CommandHardwardRecv_CreateItems commandHardwardRecv_CreateItems;
+            commandHardwardRecv_CreateItems.pBaseData = pAccessoryData;
+            m_pCommandHardwardEvent->onCommandHardwardRecv_CreateItem(&commandHardwardRecv_CreateItems);
             pAccessoryData->print();
             
             m_accessoryList.push_back(pAccessoryData);
         }
         // 刪除
         else if (operation.find("delete") != std::string::npos) {
-            size_t pos1 = target.find("/accessory/");
-            size_t pos2 = target.rfind("/");
-            string number = target.substr(pos1, pos2);
+            size_t pos2 = target.rfind("/") - 1;
+            size_t pos1 = target.rfind("/", pos2);
+            string number = target.substr(pos1 + 1, pos2 - pos1);
             int accessoryId = atoi(number.c_str());
-            CommandHardwardRecv_DeleteAccessoryItems commandHardwardRecv_DeleteAccessoryItems;
-            commandHardwardRecv_DeleteAccessoryItems.accessoryId = accessoryId;
-            m_pCommandHardwardEvent->onCommandHardwardRecv_DeleteAccessoryItems(&commandHardwardRecv_DeleteAccessoryItems);
+            CommandHardwardRecv_DeleteItems commandHardwardRecv_DeleteItems;
+            commandHardwardRecv_DeleteItems.id = accessoryId;
+            m_pCommandHardwardEvent->onCommandHardwardRecv_DeleteItems(&commandHardwardRecv_DeleteItems);
 //            m_accessoryList.erase();
         }
         // 查詢
         else if (operation.find("read") != std::string::npos) {
-            CommandHardwardRecv_ReadAccessoryByType commandHardwardRecv_ReadAccessoryByType;
-            commandHardwardRecv_ReadAccessoryByType.typeSet.insert(1);
-            commandHardwardRecv_ReadAccessoryByType.typeSet.insert(2);
-//            m_pCommandHardwardEvent->onCommandHardwardRecv_ReadAccessoryByType(&commandHardwardRecv_ReadAccessoryByType);
+            CommandHardwardRecv_ReadItems commandHardwardRecv_ReadItems;
+//            commandHardwardRecv_ReadItems.m_accessoryList
+            m_pCommandHardwardEvent->onCommandHardwardRecv_ReadItems(&commandHardwardRecv_ReadItems);
         }
         // 修改
         else if (operation.find("update") != std::string::npos) {
             
         }
+    }
+    else if (target.find("group") != std::string::npos) {
+        
     }
     else {
         LOGE("processCommandTarget Error");
