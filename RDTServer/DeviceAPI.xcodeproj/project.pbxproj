@@ -87,9 +87,7 @@
 		A2AF5D751C7C395300104205 /* BinraryRDTCommand.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A2AF5D731C7C395300104205 /* BinraryRDTCommand.cpp */; };
 		A2AF5D761C7C395300104205 /* BinraryRDTCommand.hpp in Headers */ = {isa = PBXBuildFile; fileRef = A2AF5D741C7C395300104205 /* BinraryRDTCommand.hpp */; };
 		A2B03D211C6444F8002CFA38 /* AccessoryTypeEnum.hpp in Headers */ = {isa = PBXBuildFile; fileRef = A2B03D201C6444F8002CFA38 /* AccessoryTypeEnum.hpp */; };
-		A2B44AE61C8564FC00DD49F6 /* Exception.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A2B44AE41C8564FC00DD49F6 /* Exception.cpp */; };
 		A2B44AE71C8564FC00DD49F6 /* Exception.hpp in Headers */ = {isa = PBXBuildFile; fileRef = A2B44AE51C8564FC00DD49F6 /* Exception.hpp */; };
-		A2B44AEA1C85651100DD49F6 /* RDTException.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A2B44AE81C85651100DD49F6 /* RDTException.cpp */; };
 		A2B44AEB1C85651100DD49F6 /* RDTException.hpp in Headers */ = {isa = PBXBuildFile; fileRef = A2B44AE91C85651100DD49F6 /* RDTException.hpp */; };
 /* End PBXBuildFile section */
 
@@ -180,9 +178,7 @@
 		A2AF5D731C7C395300104205 /* BinraryRDTCommand.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = BinraryRDTCommand.cpp; path = RDTServer/DeviceAPI/BinraryRDTCommand.cpp; sourceTree = SOURCE_ROOT; };
 		A2AF5D741C7C395300104205 /* BinraryRDTCommand.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = BinraryRDTCommand.hpp; path = RDTServer/DeviceAPI/BinraryRDTCommand.hpp; sourceTree = SOURCE_ROOT; };
 		A2B03D201C6444F8002CFA38 /* AccessoryTypeEnum.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = AccessoryTypeEnum.hpp; path = RDTServer/DeviceAPI/AccessoryTypeEnum.hpp; sourceTree = SOURCE_ROOT; };
-		A2B44AE41C8564FC00DD49F6 /* Exception.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Exception.cpp; path = RDTServer/DeviceAPI/Exception.cpp; sourceTree = SOURCE_ROOT; };
 		A2B44AE51C8564FC00DD49F6 /* Exception.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = Exception.hpp; path = RDTServer/DeviceAPI/Exception.hpp; sourceTree = SOURCE_ROOT; };
-		A2B44AE81C85651100DD49F6 /* RDTException.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = RDTException.cpp; path = RDTServer/DeviceAPI/RDTException.cpp; sourceTree = SOURCE_ROOT; };
 		A2B44AE91C85651100DD49F6 /* RDTException.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = RDTException.hpp; path = RDTServer/DeviceAPI/RDTException.hpp; sourceTree = SOURCE_ROOT; };
 		A2BED36F1C719B5000AF9D4E /* CMakeLists.txt */ = {isa = PBXFileReference; lastKnownFileType = text; name = CMakeLists.txt; path = RDTServer/CMakeLists.txt; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -442,9 +438,7 @@
 			isa = PBXGroup;
 			children = (
 				A2B44AE51C8564FC00DD49F6 /* Exception.hpp */,
-				A2B44AE41C8564FC00DD49F6 /* Exception.cpp */,
 				A2B44AE91C85651100DD49F6 /* RDTException.hpp */,
-				A2B44AE81C85651100DD49F6 /* RDTException.cpp */,
 			);
 			name = Exception;
 			sourceTree = "<group>";
@@ -569,7 +563,6 @@
 			files = (
 				A26FB5E81C635DEB007E3648 /* BinraryRDTServerConnect.cpp in Sources */,
 				A26FB5F91C635E08007E3648 /* Command.cpp in Sources */,
-				A2B44AEA1C85651100DD49F6 /* RDTException.cpp in Sources */,
 				A26FB6B81C635F67007E3648 /* MQTTUnsubscribeServer.c in Sources */,
 				A26FB6AD1C635F67007E3648 /* MQTTFormat.c in Sources */,
 				A2A17A271C7D568A008AEFD4 /* BaseData.cpp in Sources */,
@@ -580,7 +573,6 @@
 				A26FB6AF1C635F67007E3648 /* MQTTPacket.c in Sources */,
 				A2A17A2B1C7D8C24008AEFD4 /* VtechJsonRDTServerCommand.cpp in Sources */,
 				A26FB5FB1C635E08007E3648 /* BinraryRDTClientCommand.cpp in Sources */,
-				A2B44AE61C8564FC00DD49F6 /* Exception.cpp in Sources */,
 				A2AF5D751C7C395300104205 /* BinraryRDTCommand.cpp in Sources */,
 				A26FB6AA1C635F67007E3648 /* MQTTConnectClient.c in Sources */,
 				A26FB5D51C635DD1007E3648 /* Utility.cpp in Sources */,

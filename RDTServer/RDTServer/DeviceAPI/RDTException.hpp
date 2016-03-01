@@ -15,13 +15,11 @@
 #include "Exception.hpp"
 #include "RDTAPIs.h"
 
-using namespace std;
-
 struct RDTException : public Exception
 {
-    static map<int, const char*> createMap()
+    static std::map<int, const char*> createMap()
     {
-        map<int, const char*> map;
+        std::map<int, const char*> map;
             map[RDT_ER_NOT_INITIALIZED]					= "RDT module is not initialized yet. Please use RDT_Initialize() for initialization.";
             map[RDT_ER_ALREADY_INITIALIZED]				= "RDT module is already initialized. It is not necessary to re-initialize.";
             map[RDT_ER_EXCEED_MAX_CHANNEL]				=     "The number of RDT channels has reached maximum.\nPlease use RDT_Set_Max_Channel_Number() to set up the max number of RDT channels.\nBy default, the maximum channel number is #MAX_DEFAULT_RDT_CHANNEL_NUMBER.";
@@ -45,7 +43,7 @@ struct RDTException : public Exception
         return map;
     }
     
-    static map<int, const char*> errorMessageMap;
+    static std::map<int, const char*> errorMessageMap;
     
     RDTException(const char* function, int line, int errorCode) : Exception(function, line, errorCode, errorMessageMap[errorCode])
     {
