@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A2340FDE1C85A9000001D776 /* IOTCException.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A2340FDC1C85A9000001D776 /* IOTCException.cpp */; };
+		A2340FDF1C85A9000001D776 /* IOTCException.hpp in Headers */ = {isa = PBXBuildFile; fileRef = A2340FDD1C85A9000001D776 /* IOTCException.hpp */; };
 		A26FB5D01C635DD1007E3648 /* platform_Config.h in Headers */ = {isa = PBXBuildFile; fileRef = A26FB5C01C635DD1007E3648 /* platform_Config.h */; };
 		A26FB5D11C635DD1007E3648 /* PrefixHeader.pch in Headers */ = {isa = PBXBuildFile; fileRef = A26FB5C11C635DD1007E3648 /* PrefixHeader.pch */; };
 		A26FB5D21C635DD1007E3648 /* UTF.hpp in Headers */ = {isa = PBXBuildFile; fileRef = A26FB5C21C635DD1007E3648 /* UTF.hpp */; };
@@ -90,11 +92,11 @@
 		A2B44AE71C8564FC00DD49F6 /* Exception.hpp in Headers */ = {isa = PBXBuildFile; fileRef = A2B44AE51C8564FC00DD49F6 /* Exception.hpp */; };
 		A2B44AEB1C85651100DD49F6 /* RDTException.hpp in Headers */ = {isa = PBXBuildFile; fileRef = A2B44AE91C85651100DD49F6 /* RDTException.hpp */; };
 		A2B44AF11C85948900DD49F6 /* RDTException.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A2B44AF01C85948900DD49F6 /* RDTException.cpp */; };
-		A2B44AF41C859A2600DD49F6 /* IOTCException.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A2B44AF21C859A2600DD49F6 /* IOTCException.cpp */; };
-		A2B44AF51C859A2600DD49F6 /* IOTCException.hpp in Headers */ = {isa = PBXBuildFile; fileRef = A2B44AF31C859A2600DD49F6 /* IOTCException.hpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		A2340FDC1C85A9000001D776 /* IOTCException.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = IOTCException.cpp; path = RDTServer/DeviceAPI/IOTCException.cpp; sourceTree = SOURCE_ROOT; };
+		A2340FDD1C85A9000001D776 /* IOTCException.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = IOTCException.hpp; path = RDTServer/DeviceAPI/IOTCException.hpp; sourceTree = SOURCE_ROOT; };
 		A26FB5C01C635DD1007E3648 /* platform_Config.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = platform_Config.h; path = RDTServer/DeviceAPI/platform_Config.h; sourceTree = SOURCE_ROOT; };
 		A26FB5C11C635DD1007E3648 /* PrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PrefixHeader.pch; path = RDTServer/DeviceAPI/PrefixHeader.pch; sourceTree = SOURCE_ROOT; };
 		A26FB5C21C635DD1007E3648 /* UTF.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = UTF.hpp; path = RDTServer/DeviceAPI/UTF.hpp; sourceTree = SOURCE_ROOT; };
@@ -184,8 +186,6 @@
 		A2B44AE51C8564FC00DD49F6 /* Exception.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = Exception.hpp; path = RDTServer/DeviceAPI/Exception.hpp; sourceTree = SOURCE_ROOT; };
 		A2B44AE91C85651100DD49F6 /* RDTException.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = RDTException.hpp; path = RDTServer/DeviceAPI/RDTException.hpp; sourceTree = SOURCE_ROOT; };
 		A2B44AF01C85948900DD49F6 /* RDTException.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = RDTException.cpp; path = RDTServer/DeviceAPI/RDTException.cpp; sourceTree = SOURCE_ROOT; };
-		A2B44AF21C859A2600DD49F6 /* IOTCException.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = IOTCException.cpp; sourceTree = SOURCE_ROOT; };
-		A2B44AF31C859A2600DD49F6 /* IOTCException.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = IOTCException.hpp; sourceTree = SOURCE_ROOT; };
 		A2BED36F1C719B5000AF9D4E /* CMakeLists.txt */ = {isa = PBXFileReference; lastKnownFileType = text; name = CMakeLists.txt; path = RDTServer/CMakeLists.txt; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -446,8 +446,8 @@
 				A2B44AE51C8564FC00DD49F6 /* Exception.hpp */,
 				A2B44AE91C85651100DD49F6 /* RDTException.hpp */,
 				A2B44AF01C85948900DD49F6 /* RDTException.cpp */,
-				A2B44AF31C859A2600DD49F6 /* IOTCException.hpp */,
-				A2B44AF21C859A2600DD49F6 /* IOTCException.cpp */,
+				A2340FDD1C85A9000001D776 /* IOTCException.hpp */,
+				A2340FDC1C85A9000001D776 /* IOTCException.cpp */,
 			);
 			name = Exception;
 			sourceTree = "<group>";
@@ -465,7 +465,6 @@
 				A26FB5D21C635DD1007E3648 /* UTF.hpp in Headers */,
 				A26FB6CE1C635FB7007E3648 /* MQTTClient.h in Headers */,
 				A2B03D211C6444F8002CFA38 /* AccessoryTypeEnum.hpp in Headers */,
-				A2B44AF51C859A2600DD49F6 /* IOTCException.hpp in Headers */,
 				A26FB6AE1C635F67007E3648 /* MQTTFormat.h in Headers */,
 				A26FB5F71C635E08007E3648 /* CommandEvent.hpp in Headers */,
 				A26FB5E31C635DEB007E3648 /* Connect.hpp in Headers */,
@@ -510,6 +509,7 @@
 				A26FB6EA1C63600A007E3648 /* reader.h in Headers */,
 				A26FB5D91C635DD1007E3648 /* Event.hpp in Headers */,
 				A26FB6BF1C635F8B007E3648 /* Countdown.h in Headers */,
+				A2340FDF1C85A9000001D776 /* IOTCException.hpp in Headers */,
 				A26FB5E21C635DEB007E3648 /* ConnectEvent.hpp in Headers */,
 				A2B44AE71C8564FC00DD49F6 /* Exception.hpp in Headers */,
 			);
@@ -571,6 +571,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A2340FDE1C85A9000001D776 /* IOTCException.cpp in Sources */,
 				A26FB5E81C635DEB007E3648 /* BinraryRDTServerConnect.cpp in Sources */,
 				A26FB5F91C635E08007E3648 /* Command.cpp in Sources */,
 				A26FB6B81C635F67007E3648 /* MQTTUnsubscribeServer.c in Sources */,
@@ -589,7 +590,6 @@
 				A26FB5D51C635DD1007E3648 /* Utility.cpp in Sources */,
 				A26FB6F01C63600B007E3648 /* json_value.cpp in Sources */,
 				A26FB6AB1C635F67007E3648 /* MQTTConnectServer.c in Sources */,
-				A2B44AF41C859A2600DD49F6 /* IOTCException.cpp in Sources */,
 				A26FB6F11C63600B007E3648 /* json_writer.cpp in Sources */,
 				A26FB6011C635E08007E3648 /* JsonRDTClientCommand.cpp in Sources */,
 				A26FB5D81C635DD1007E3648 /* Device.cpp in Sources */,
