@@ -106,7 +106,7 @@ void* BinraryRDTServerCommand::threadInput(void *arg)
 
 #pragma mark - Command
 
-void BinraryRDTServerCommand::parseSendData(ParseSendData* pParseSendData)
+void BinraryRDTServerCommand::parseSendData(ParseSendData* pParseSendData) throw (RDTException)
 {
     BinraryRDTServerCommand_ParseSendData* pBinraryCommandRecvData = (BinraryRDTServerCommand_ParseSendData*) pParseSendData;
     
@@ -171,7 +171,7 @@ void BinraryRDTServerCommand::parseSendData(ParseSendData* pParseSendData)
     Utility::printData(__PRETTY_FUNCTION__, __LINE__, buffer, index);
     int ret = RDT_Write(channelID, (const char*)buffer, index);
     if (ret < 0) {
-        LOGE("RDT_Write failed");
+        throw RDTException(__PRETTY_FUNCTION__, __LINE__, ret);
     }
 }
 

@@ -80,7 +80,7 @@ void Command::init()
 
 #pragma maek - Command
 
-void Command::reset()
+void Command::reset() throw (range_error)
 {
     m_CommandData.nMaxAID = 0;
     m_CommandData.TypeSet.clear();

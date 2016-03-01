@@ -22,7 +22,7 @@ struct RDTException : public Exception
         std::map<int, const char*> map;
             map[RDT_ER_NOT_INITIALIZED]					= "RDT module is not initialized yet. Please use RDT_Initialize() for initialization.";
             map[RDT_ER_ALREADY_INITIALIZED]				= "RDT module is already initialized. It is not necessary to re-initialize.";
-            map[RDT_ER_EXCEED_MAX_CHANNEL]				=     "The number of RDT channels has reached maximum.\nPlease use RDT_Set_Max_Channel_Number() to set up the max number of RDT channels.\nBy default, the maximum channel number is #MAX_DEFAULT_RDT_CHANNEL_NUMBER.";
+            map[RDT_ER_EXCEED_MAX_CHANNEL]				= "The number of RDT channels has reached maximum.\nPlease use RDT_Set_Max_Channel_Number() to set up the max number of RDT channels.\nBy default, the maximum channel number is #MAX_DEFAULT_RDT_CHANNEL_NUMBER.";
             map[RDT_ER_MEM_INSUFF]						= "Insufficient memory for allocation";
             map[RDT_ER_FAIL_CREATE_THREAD]              = "RDT module fails to create threads. Please check if OS has ability to\ncreate threads for RDT module.";
             map[RDT_ER_FAIL_CREATE_MUTEX]               = "RDT module fails to create Mutexs when doing initialization. Please check\nif OS has sufficient Mutexs for RDT module.";
@@ -45,11 +45,8 @@ struct RDTException : public Exception
     
     static std::map<int, const char*> errorMessageMap;
     
-    RDTException(const char* function, int line, int errorCode) : Exception(function, line, errorCode, errorMessageMap[errorCode])
-    {
-    }
+    RDTException(const char* function, int line, int errorCode) : Exception(function, line, errorCode, errorMessageMap[errorCode]) {}
+    RDTException(const char* function, int line, int errorCode, const char* errorMessage) : Exception(function, line, errorCode, errorMessage) {}
 };
-
-map<int, const char*> RDTException::errorMessageMap = RDTException::createMap();
     
 #endif /* RDTException_hpp" */

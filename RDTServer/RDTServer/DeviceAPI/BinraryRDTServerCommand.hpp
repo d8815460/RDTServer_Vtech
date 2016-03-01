@@ -61,7 +61,7 @@ public:
     virtual void onConnectRecvData(ConnectRecvData* pConnectRecvData);
     
 #pragma mark - Command
-    virtual void parseSendData(ParseSendData* pParseSendData);
+    virtual void parseSendData(ParseSendData* pParseSendData) throw (RDTException);
     virtual void parseRecvData(ParseRecvData* pParseRecvData);
     
 #pragma mark - Thread

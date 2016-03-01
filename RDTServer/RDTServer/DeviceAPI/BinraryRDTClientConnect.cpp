@@ -144,7 +144,7 @@ void* BinraryRDTClientConnect::threadRun(void *arg)
                     nRet = RDT_Status_Check(channelID, &statusStatus);
                     
                     if (nRet < 0) {
-                        LOGE("RDT_Status_Check nRet:%d", nRet);
+                        throw RDTException(__PRETTY_FUNCTION__, __LINE__, nRet);
                         break;
                     }
                     
