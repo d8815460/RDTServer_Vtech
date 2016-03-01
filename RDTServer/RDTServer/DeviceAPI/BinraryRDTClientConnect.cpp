@@ -38,18 +38,19 @@ BinraryRDTClientConnect::~BinraryRDTClientConnect()
 
 #pragma mark - Connect
 
-void BinraryRDTClientConnect::initialize()
+void BinraryRDTClientConnect::initialize() throw (IOTCException, RDTException)
 {
     int ret = IOTC_Initialize2(0);
     if (ret != IOTC_ER_NoERROR)
     {
         LOGE("IOTC_Initialize error!!");
-        //        return 0;
+        throw IOTCException(__PRETTY_FUNCTION__, __LINE__, ret);
     }
     
-    int rdtCh = RDT_Initialize();
-    if(rdtCh <= 0) {
+    ret = RDT_Initialize();
+    if(ret <= 0) {
         LOGE("RDT_Initialize error!!");
+        throw RDTException(__PRETTY_FUNCTION__, __LINE__, ret);
     }
     
     printIOTCVersion();
@@ -86,7 +87,7 @@ void BinraryRDTClientConnect::disconnect()
 
 #pragma mark - Threads
 
-void* BinraryRDTClientConnect::threadRun(void *arg)
+void* BinraryRDTClientConnect::threadRun(void *arg) throw (IOTCException, RDTException)
 {
     BinraryRDTClientConnect* pBinraryRDTClientConnect = (BinraryRDTClientConnect*) arg;
     
@@ -98,11 +99,13 @@ void* BinraryRDTClientConnect::threadRun(void *arg)
         if(pBinraryRDTClientConnect->m_nSid == IOTC_ER_NOT_INITIALIZED)
         {
             LOGE("Not Initialize!!!\n");
+            throw IOTCException(__PRETTY_FUNCTION__, __LINE__, pBinraryRDTClientConnect->m_nSid);
             return 0;
         }
         else if (pBinraryRDTClientConnect->m_nSid == IOTC_ER_EXCEED_MAX_SESSION)
         {
             LOGE("EXCEED MAX SESSION!!!\n");
+            throw IOTCException(__PRETTY_FUNCTION__, __LINE__, pBinraryRDTClientConnect->m_nSid);
             return 0;
         }
         
@@ -112,7 +115,8 @@ void* BinraryRDTClientConnect::threadRun(void *arg)
             if(pBinraryRDTClientConnect->m_nSid < 0)
             {
                 LOGE("p2pAPIs_Client connect failed...!!\n");
-                continue;
+                throw IOTCException(__PRETTY_FUNCTION__, __LINE__, pBinraryRDTClientConnect->m_nSid);
+//                continue;
             }
             
             IOTC_Session_Check(pBinraryRDTClientConnect->m_nSid, &sInfo);
@@ -125,6 +129,7 @@ void* BinraryRDTClientConnect::threadRun(void *arg)
             {
                 LOGE("RDT_Create failed[%d]!!", channelID);
                 IOTC_Session_Close(pBinraryRDTClientConnect->m_nSid);
+                throw IOTCException(__PRETTY_FUNCTION__, __LINE__, channelID);
             }
             else {
                 LOGD("channelID = %d", channelID);

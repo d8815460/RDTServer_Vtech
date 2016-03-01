@@ -14,6 +14,8 @@
 #include <pthread.h>
 #include "Connect.hpp"
 #include "Command.hpp"
+#include "IOTCException.hpp"
+#include "RDTException.hpp"
 
 using namespace std;
 
@@ -40,7 +42,7 @@ public:
     ~BinraryRDTServerConnect();
         
 #pragma mark - Connect
-    virtual void initialize();
+    virtual void initialize() throw (IOTCException, RDTException);
     virtual void deInitialize();
     virtual void run();
     virtual void connect();
@@ -50,7 +52,7 @@ public:
 protected:
     static void* threadLogin(void *arg);
     static void* threadRun(void *arg);
-    static void* threadRecv(void *arg);
+    static void* threadRecv(void *arg) throw (RDTException);
     
     static void printIOTCVersion();
     static void printRDTVersion();

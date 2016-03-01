@@ -42,18 +42,19 @@ BinraryRDTServerConnect::~BinraryRDTServerConnect()
 
 #pragma mark - Connect
 
-void BinraryRDTServerConnect::initialize()
+void BinraryRDTServerConnect::initialize() throw (IOTCException, RDTException)
 {
     int ret = IOTC_Initialize2(0);
     if (ret != IOTC_ER_NoERROR)
     {
         LOGE("IOTC_Initialize error!!");
-        //        return 0;
+        throw IOTCException(__PRETTY_FUNCTION__, __LINE__, ret);
     }
     
     int rdtCh = RDT_Initialize();
     if(rdtCh <= 0) {
         LOGE("RDT_Initialize error!!");
+        throw RDTException(__PRETTY_FUNCTION__, __LINE__, ret);
     }
     
     printIOTCVersion();
@@ -136,7 +137,7 @@ void* BinraryRDTServerConnect::threadRun(void *arg)
     return NULL;
 }
 
-void* BinraryRDTServerConnect::threadRecv(void *arg)
+void* BinraryRDTServerConnect::threadRecv(void *arg) throw (RDTException)
 {
     BinraryRDTServerConnect* pBinraryRDTServerConnect = (BinraryRDTServerConnect*) arg;
     
@@ -147,6 +148,7 @@ void* BinraryRDTServerConnect::threadRecv(void *arg)
     {
         LOGE("RDT_Create failed[%d]!!", channelID);
         IOTC_Session_Close(pBinraryRDTServerConnect->m_nSid);
+        throw RDTException(__PRETTY_FUNCTION__, __LINE__, channelID);
     }
     else {
         LOGD("channelID = %d", channelID);

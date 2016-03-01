@@ -75,7 +75,7 @@ public:
     
 #pragma mark - Command
 public:
-    virtual void reset() throw (range_error);
+    virtual void reset();
     virtual void parseSendData(ParseSendData* pParseSendData) throw (RDTException) = 0;
     virtual void parseRecvData(ParseRecvData* pParseRecvData) = 0;
     
