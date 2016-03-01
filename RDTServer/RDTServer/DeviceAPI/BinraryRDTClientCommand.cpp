@@ -16,6 +16,7 @@
 #include "IOTCAPIs.h"
 #include "RDTAPIs.h"
 #include "BinraryRDTServerConnect.hpp"
+#include "RDTException.hpp"
 
 BinraryRDTClientCommand::BinraryRDTClientCommand(CommandEvent* pCommandEvent, CommandHardwardEvent* pCommandHardwardEvent, Connect* pConnect, CommandData* pCommandData) : BinraryRDTCommand(pCommandEvent, pCommandHardwardEvent, pConnect, pCommandData)
 {
@@ -175,6 +176,7 @@ void BinraryRDTClientCommand::parseSendData(ParseSendData* pParseSendData)
     int ret = RDT_Write(channelID, (const char*)buffer, index);
     if (ret < 0) {
         LOGE("RDT_Write failed");
+        throw RDTException(__PRETTY_FUNCTION__, __LINE__, ret);
     }
 }
 

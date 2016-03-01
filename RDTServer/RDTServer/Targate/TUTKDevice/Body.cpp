@@ -93,24 +93,27 @@ void Body::runBody(Device **ppOutDevice, char deviceName[20])
         *ppOutDevice = new JsonRDTClientDevice();
     }
     else {
-        LOGE("Device Not Found!");
+        string error = "Device Not Found!";
+        const char* newLine = "\n";
         
-        LOGE("請使用RDTServer Device ");
-        LOGE("如:Command TUTKGatewayDevice 00000000000000000000");
-        LOGE("可以使用的Devices:");
-        LOGE("AbocomDevice");
-        LOGE("ZhongHanDevice");
-        LOGE("PhilipsDevice");
-        LOGE("TUTKGatewayDevice");
-        LOGE("TUTKPlugDevice");
-        LOGE("SampoDevice");
-        LOGE("TUTKLightingDevice");
-        LOGE("TUTKDoorDevice");
-        LOGE("TUTKWaterLeakDevice");
-        LOGE("TUTKSirenDevice");
-        LOGE("TUTKGasDevice");
-        LOGE("TUTKVibrateDevice");
-        LOGE("TUTKSmokeDevice");
-        LOGE("JsonRDTClientDevice");
+        error.append("請使用RDTServer Device").append(newLine);
+        error.append("如:Command TUTKGatewayDevice 00000000000000000000").append(newLine);
+        error.append("可以使用的Devices:").append(newLine);
+        error.append("AbocomDevice").append(newLine);
+        error.append("ZhongHanDevice").append(newLine);
+        error.append("PhilipsDevice").append(newLine);
+        error.append("TUTKGatewayDevice").append(newLine);
+        error.append("TUTKPlugDevice").append(newLine);
+        error.append("SampoDevice").append(newLine);
+        error.append("TUTKLightingDevice").append(newLine);
+        error.append("TUTKDoorDevice").append(newLine);
+        error.append("TUTKWaterLeakDevice").append(newLine);
+        error.append("TUTKSirenDevice").append(newLine);
+        error.append("TUTKGasDevice").append(newLine);
+        error.append("TUTKVibrateDevice").append(newLine);
+        error.append("TUTKSmokeDevice").append(newLine);
+        error.append("JsonRDTClientDevice").append(newLine);
+        
+        throw error;
     }
 }

@@ -286,24 +286,29 @@ int main(int argc, char *argv[])
         LOGD("argc:%d", argc);
         LOGD("argv[0]:%s", argv[0]);
         
-        if (argc >= 3) {
-            char uid[21];
-            memset(uid, 0, 21);
-            strcpy(uid, argv[2]);
-            LOGD("uid:%s", uid);
-            
-            Device *pDevice = NULL;
-            Body::runBody(&pDevice, argv[1]);
-            pDevice->run(uid);
-            
-            delete pDevice;
+        try {
+            if (argc == 3) {
+                char uid[21];
+                memset(uid, 0, 21);
+                strcpy(uid, argv[2]);
+                LOGD("uid:%s", uid);
+                
+                Device *pDevice = NULL;
+                Body::runBody(&pDevice, argv[1]);
+                pDevice->run(uid);
+                
+                delete pDevice;
+            }
+            else {
+                throw invalid_argument("參數數量不正確，必須數入兩個參數，如：./RDTServer PowerStripDevice 00000000000000000000");
+            }
+        } catch (string& message) {
+            LOGE("%s", message.c_str());
+        } catch (exception& e) {
+            LOGE("%s", e.what());
         }
-        else {
-            LOGE("參數數量不正確，必須數入兩個參數，如：./RDTServer PowerStripDevice 00000000000000000000");
-        }
-        
-        LOGD("Server exit!");
     }
     
+    LOGD("Server exit!");
 	return 0;
 }
