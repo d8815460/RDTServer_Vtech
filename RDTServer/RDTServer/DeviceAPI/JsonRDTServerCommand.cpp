@@ -220,7 +220,7 @@ void JsonRDTServerCommand::recvData(int channelID, BYTE* buffer, int totalLength
         if (result) {
             // Common
             outJsonObject["serno"] = inJsonObject["serno"];
-            outJsonObject["operation"] = "read";
+            outJsonObject["operation"] = inJsonObject["operation"];
             outJsonObject["target"] = inJsonObject["target"];
             
             // Version
