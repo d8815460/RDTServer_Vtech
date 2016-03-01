@@ -68,7 +68,7 @@ void VtechIPHubGatewayHardwardDevice::sendToGateway(char* payload, int length)
    
    try
    {
-       sock.snd(payload,length-2);
+       sock.snd(payload,length-1);
    }
    catch (const libsocket::socket_exception& exc)
    {
