@@ -182,10 +182,10 @@ void JsonRDTServerCommand::processCommandTarget(const Json::Value& inJsonObject,
             throw CommandException(__PRETTY_FUNCTION__, __LINE__, CommandException_ErrorCode_No_Match_Command_Operation);
         }
     }
-    else {
-        LOGE("processCommandTarget Error");
-        throw CommandException(__PRETTY_FUNCTION__, __LINE__, CommandException_ErrorCode_No_Match_Command_Target);
-    }
+//    else {
+//        LOGE("processCommandTarget Error");
+//        throw CommandException(__PRETTY_FUNCTION__, __LINE__, CommandException_ErrorCode_No_Match_Command_Target);
+//    }
 }
 
 #pragma mark - Command

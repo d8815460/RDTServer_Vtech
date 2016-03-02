@@ -14,6 +14,7 @@
 #include "Device.hpp"
 #include "Body.hpp"
 #include "IOTCException.hpp"
+#include "Utility.hpp"
 
 //// curlpp
 //#include <curlpp/cURLpp.hpp>
@@ -303,11 +304,14 @@ int main(int argc, char *argv[])
             else {
                 throw invalid_argument("參數數量不正確，必須數入兩個參數，如：./RDTServer PowerStripDevice 00000000000000000000");
             }
-        } catch (string& message) {
+        }
+        catch (Exception& e) {
+            Utility::showException(e);
+        }
+        catch (string& message) {
             LOGE("%s", message.c_str());
-        } catch (Exception& e) {
-            LOGE("Function:%s Line:%d ErrorCode:%d ErrorMessage:%s", e.function, e.line, e.errorCode, e.errorMessage.c_str());
-        } catch (exception& e) {
+        }
+        catch (exception& e) {
             LOGE("%s", e.what());
         }
     }

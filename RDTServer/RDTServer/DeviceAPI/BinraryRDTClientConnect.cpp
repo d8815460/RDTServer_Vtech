@@ -13,6 +13,7 @@
 #include "IOTCAPIs.h"
 #include "RDTAPIs.h"
 #include "BinraryRDTServerCommand.hpp"
+#include "Utility.hpp"
 
 BinraryRDTClientConnect::BinraryRDTClientConnect(ConnectData* pConnectData) : Connect(pConnectData), m_nMaxClientNumber(MAX_CLIENT_NUM)
 {
@@ -165,7 +166,7 @@ void* BinraryRDTClientConnect::threadRun(void *arg) throw (IOTCException, RDTExc
             
         } while(pBinraryRDTClientConnect->m_isConnect);
     } catch (Exception& e) {
-        LOGE("Function:%s Line:%d ErrorCode:%d ErrorMessage:%s", e.function, e.line, e.errorCode, e.errorMessage.c_str());
+        Utility::showException(e);
     }
 
     //    pthread_exit(0);
