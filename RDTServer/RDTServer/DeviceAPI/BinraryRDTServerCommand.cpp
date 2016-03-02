@@ -175,7 +175,7 @@ void BinraryRDTServerCommand::parseSendData(ParseSendData* pParseSendData) throw
     }
 }
 
-void BinraryRDTServerCommand::recvData(int channelID, BYTE* buffer, int totalLength)
+void BinraryRDTServerCommand::recvData(int channelID, BYTE* buffer, int totalLength) throw (CommandException)
 {
     LOGD("recvData");
     
@@ -1100,7 +1100,8 @@ void BinraryRDTServerCommand::recvData(int channelID, BYTE* buffer, int totalLen
         m_pCommandEvent->onCommandRecvData(&BinraryCommandRecvData);
     }
     else {
-        LOGE("Error not match RDT command");
+        LOGE("Error not match RDT Command");
+        throw CommandException(__PRETTY_FUNCTION__, __LINE__, CommandException_ErrorCode_No_Match_RDT_Command);
     }
 }
 
@@ -1139,6 +1140,7 @@ void BinraryRDTServerCommand::parseRecvData(ParseRecvData* pParseRecvData)
             }
             else {
                 LOGE("封包未符合!");
+                throw CommandException(__PRETTY_FUNCTION__, __LINE__, CommandException_ErrorCode_Packet_Not_Match);
             }
             
             offset += fragmentLength;

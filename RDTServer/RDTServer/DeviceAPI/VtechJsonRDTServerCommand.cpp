@@ -15,12 +15,9 @@ VtechJsonRDTServerCommand::VtechJsonRDTServerCommand(CommandEvent* pCommandEvent
 
 #pragma mark - JsonRDTCommand
 
-bool VtechJsonRDTServerCommand::processCommandTarget(const Json::Value& inJsonObject, Json::Value& outJsonObject)
+void VtechJsonRDTServerCommand::processCommandTarget(const Json::Value& inJsonObject, Json::Value& outJsonObject) throw (CommandException)
 {
-    bool result = JsonRDTServerCommand::processCommandTarget(inJsonObject, outJsonObject);
-    if (result == true) {
-        return true;
-    }
+    JsonRDTServerCommand::processCommandTarget(inJsonObject, outJsonObject);
     
     string target = inJsonObject["target"].asString();
     string operation = inJsonObject["operation"].asString();
@@ -59,9 +56,13 @@ bool VtechJsonRDTServerCommand::processCommandTarget(const Json::Value& inJsonOb
         }
         // 修改
         else if (operation.find("update") != std::string::npos) {
-            
+            throw CommandException(__PRETTY_FUNCTION__, __LINE__, CommandException_ErrorCode_No_Match_Command_Operation);
+        }
+        else {
+            throw CommandException(__PRETTY_FUNCTION__, __LINE__, CommandException_ErrorCode_No_Match_Command_Operation);
         }
     }
-    
-    return true;
+    else {
+        throw CommandException(__PRETTY_FUNCTION__, __LINE__, CommandException_ErrorCode_No_Match_Command_Target);
+    }
 }

@@ -12,6 +12,7 @@
 #include <stdio.h>
 #include "Command.hpp"
 #include "BaseData.hpp"
+#include "CommandException.hpp"
 
 struct JsonRDTCommand_ParseSendData : ParseSendData
 {
@@ -53,7 +54,7 @@ public:
     
 #pragma mark - Command
     virtual void parseSendData(ParseSendData* pParseSendData) throw (RDTException);
-    virtual void parseRecvData(ParseRecvData* pParseRecvData);
+    virtual void parseRecvData(ParseRecvData* pParseRecvData) throw (CommandException);
 
 #pragma mark - JsonRDTCommand
 protected:

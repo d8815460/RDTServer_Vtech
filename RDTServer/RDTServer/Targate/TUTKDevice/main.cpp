@@ -13,6 +13,7 @@
 
 #include "Device.hpp"
 #include "Body.hpp"
+#include "IOTCException.hpp"
 
 //// curlpp
 //#include <curlpp/cURLpp.hpp>
@@ -304,6 +305,8 @@ int main(int argc, char *argv[])
             }
         } catch (string& message) {
             LOGE("%s", message.c_str());
+        } catch (Exception& e) {
+            LOGE("Function:%s Line:%d ErrorCode:%d ErrorMessage:%s", e.function, e.line, e.errorCode, e.errorMessage.c_str());
         } catch (exception& e) {
             LOGE("%s", e.what());
         }

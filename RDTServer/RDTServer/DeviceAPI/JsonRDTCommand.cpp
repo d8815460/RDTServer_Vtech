@@ -87,7 +87,7 @@ void JsonRDTCommand::parseSendData(ParseSendData* pParseSendData) throw(RDTExcep
     }
 }
 
-void JsonRDTCommand::parseRecvData(ParseRecvData* pParseRecvData)
+void JsonRDTCommand::parseRecvData(ParseRecvData* pParseRecvData) throw (CommandException)
 {
     JsonRDTCommand_ParseRecvData* pJsonParseRecvData = (JsonRDTCommand_ParseRecvData*) pParseRecvData;
     int channelID = pJsonParseRecvData->channelID;
@@ -118,6 +118,7 @@ void JsonRDTCommand::parseRecvData(ParseRecvData* pParseRecvData)
             }
             else {
                 LOGE("封包未符合!");
+                throw CommandException(__PRETTY_FUNCTION__, __LINE__, CommandException_ErrorCode_Packet_Not_Match);
             }
             
             offset += fragmentLength;

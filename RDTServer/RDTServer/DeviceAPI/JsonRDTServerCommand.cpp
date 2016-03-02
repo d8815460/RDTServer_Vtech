@@ -103,7 +103,7 @@ void* JsonRDTServerCommand::threadInput(void *arg)
 
 #pragma mark - Protected Method
 
-bool JsonRDTServerCommand::processCommandTarget(const Json::Value& inJsonObject, Json::Value& outJsonObject)
+void JsonRDTServerCommand::processCommandTarget(const Json::Value& inJsonObject, Json::Value& outJsonObject) throw (CommandException)
 {
 //    m_pCommandHardwardEvent->onCommandHardwardRecvJson(inJsonObject, outJsonObject);
     
@@ -117,7 +117,7 @@ bool JsonRDTServerCommand::processCommandTarget(const Json::Value& inJsonObject,
         m_pCommandHardwardEvent->onCommandHardwardRecv_ProductCode(&commandHardwardRecv_ProductCode);
         
         // 上報通知
-        //        m_pCommandHardwardEvent->onCommandHardwardNotify(<#CommandHardwardNotifyData *pCommandHardwardNotifyData#>);
+//        m_pCommandHardwardEvent->onCommandHardwardNotify(<#CommandHardwardNotifyData *pCommandHardwardNotifyData#>);
         
         // 輸出 JSON
         Json::Value arraryItems;
@@ -176,15 +176,16 @@ bool JsonRDTServerCommand::processCommandTarget(const Json::Value& inJsonObject,
         }
         // 修改
         else if (operation.find("update") != std::string::npos) {
-            
+            throw CommandException(__PRETTY_FUNCTION__, __LINE__, CommandException_ErrorCode_No_Match_Command_Operation);
+        }
+        else {
+            throw CommandException(__PRETTY_FUNCTION__, __LINE__, CommandException_ErrorCode_No_Match_Command_Operation);
         }
     }
     else {
         LOGE("processCommandTarget Error");
-        return false;
+        throw CommandException(__PRETTY_FUNCTION__, __LINE__, CommandException_ErrorCode_No_Match_Command_Target);
     }
-    
-    return true;
 }
 
 #pragma mark - Command
@@ -215,31 +216,25 @@ void JsonRDTServerCommand::recvData(int channelID, BYTE* buffer, int totalLength
     Json::Value outJsonObject;
     if (reader.parse(json, inJsonObject))
     {
-        bool result = processCommandTarget(inJsonObject, outJsonObject);
+        processCommandTarget(inJsonObject, outJsonObject);
         
-        if (result) {
-            // Common
-            outJsonObject["serno"] = inJsonObject["serno"];
-            outJsonObject["operation"] = "read";
-            outJsonObject["target"] = inJsonObject["target"];
-            
-            // Version
-            char version[20];
-            sprintf(version, "%d.%d.%d", m_CommandData.version1, m_CommandData.version2, m_CommandData.version3);
-            //    LOGD("version:%s", version);
-            outJsonObject["version"] = version;
-            
-            // Error Code
-            outJsonObject["error_code"] = 0;
-            
-            CommandHardwardRecvJsonData commandHardwardRecvJsonData;
-            commandHardwardRecvJsonData.pJsonObject = &outJsonObject;
-            m_pCommandHardwardEvent->onCommandHardwardRecvJson(&commandHardwardRecvJsonData);
-        }
-        else {
-            LOGE("processCommandTarget 失敗不傳送");
-            return;
-        }
+        // Common
+        outJsonObject["serno"] = inJsonObject["serno"];
+        outJsonObject["operation"] = "read";
+        outJsonObject["target"] = inJsonObject["target"];
+        
+        // Version
+        char version[20];
+        sprintf(version, "%d.%d.%d", m_CommandData.version1, m_CommandData.version2, m_CommandData.version3);
+        //    LOGD("version:%s", version);
+        outJsonObject["version"] = version;
+        
+        // Error Code
+        outJsonObject["error_code"] = 0;
+        
+        CommandHardwardRecvJsonData commandHardwardRecvJsonData;
+        commandHardwardRecvJsonData.pJsonObject = &outJsonObject;
+        m_pCommandHardwardEvent->onCommandHardwardRecvJson(&commandHardwardRecvJsonData);
     }
     
     set<int>::iterator it = m_nChannelIDList.end();

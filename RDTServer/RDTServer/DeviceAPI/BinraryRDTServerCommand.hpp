@@ -11,6 +11,7 @@
 
 #include <stdio.h>
 #include "BinraryRDTCommand.hpp"
+#include "CommandException.hpp"
 
 using namespace std;
 
@@ -69,7 +70,7 @@ public:
     
 #pragma mark - Private
 private:
-    void recvData(int channelID, BYTE* buffer, int totalLength);
+    void recvData(int channelID, BYTE* buffer, int totalLength) throw (CommandException);
     
 #pragma mark - member
 private:

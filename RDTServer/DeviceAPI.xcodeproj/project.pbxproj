@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A21E95B61C8691AE00D4FFCF /* CommandException.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A21E95B41C8691AE00D4FFCF /* CommandException.cpp */; };
+		A21E95B71C8691AE00D4FFCF /* CommandException.hpp in Headers */ = {isa = PBXBuildFile; fileRef = A21E95B51C8691AE00D4FFCF /* CommandException.hpp */; };
 		A2340FDE1C85A9000001D776 /* IOTCException.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A2340FDC1C85A9000001D776 /* IOTCException.cpp */; };
 		A2340FDF1C85A9000001D776 /* IOTCException.hpp in Headers */ = {isa = PBXBuildFile; fileRef = A2340FDD1C85A9000001D776 /* IOTCException.hpp */; };
 		A26FB5D01C635DD1007E3648 /* platform_Config.h in Headers */ = {isa = PBXBuildFile; fileRef = A26FB5C01C635DD1007E3648 /* platform_Config.h */; };
@@ -95,6 +97,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		A21E95B41C8691AE00D4FFCF /* CommandException.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CommandException.cpp; path = RDTServer/DeviceAPI/CommandException.cpp; sourceTree = SOURCE_ROOT; };
+		A21E95B51C8691AE00D4FFCF /* CommandException.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = CommandException.hpp; path = RDTServer/DeviceAPI/CommandException.hpp; sourceTree = SOURCE_ROOT; };
 		A2340FDC1C85A9000001D776 /* IOTCException.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = IOTCException.cpp; path = RDTServer/DeviceAPI/IOTCException.cpp; sourceTree = SOURCE_ROOT; };
 		A2340FDD1C85A9000001D776 /* IOTCException.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = IOTCException.hpp; path = RDTServer/DeviceAPI/IOTCException.hpp; sourceTree = SOURCE_ROOT; };
 		A26FB5C01C635DD1007E3648 /* platform_Config.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = platform_Config.h; path = RDTServer/DeviceAPI/platform_Config.h; sourceTree = SOURCE_ROOT; };
@@ -444,10 +448,12 @@
 			isa = PBXGroup;
 			children = (
 				A2B44AE51C8564FC00DD49F6 /* Exception.hpp */,
-				A2B44AE91C85651100DD49F6 /* RDTException.hpp */,
-				A2B44AF01C85948900DD49F6 /* RDTException.cpp */,
 				A2340FDD1C85A9000001D776 /* IOTCException.hpp */,
 				A2340FDC1C85A9000001D776 /* IOTCException.cpp */,
+				A2B44AE91C85651100DD49F6 /* RDTException.hpp */,
+				A2B44AF01C85948900DD49F6 /* RDTException.cpp */,
+				A21E95B51C8691AE00D4FFCF /* CommandException.hpp */,
+				A21E95B41C8691AE00D4FFCF /* CommandException.cpp */,
 			);
 			name = Exception;
 			sourceTree = "<group>";
@@ -477,6 +483,7 @@
 				A26FB5FE1C635E08007E3648 /* JsonRDTCommand.hpp in Headers */,
 				A26FB6E91C63600A007E3648 /* json.h in Headers */,
 				A26FB6CD1C635FB7007E3648 /* FP.h in Headers */,
+				A21E95B71C8691AE00D4FFCF /* CommandException.hpp in Headers */,
 				A26FB5F81C635E08007E3648 /* Command.hpp in Headers */,
 				A26FB6B61C635F67007E3648 /* MQTTUnsubscribe.h in Headers */,
 				A26FB5D01C635DD1007E3648 /* platform_Config.h in Headers */,
@@ -586,6 +593,7 @@
 				A2A17A2B1C7D8C24008AEFD4 /* VtechJsonRDTServerCommand.cpp in Sources */,
 				A26FB5FB1C635E08007E3648 /* BinraryRDTClientCommand.cpp in Sources */,
 				A2AF5D751C7C395300104205 /* BinraryRDTCommand.cpp in Sources */,
+				A21E95B61C8691AE00D4FFCF /* CommandException.cpp in Sources */,
 				A26FB6AA1C635F67007E3648 /* MQTTConnectClient.c in Sources */,
 				A26FB5D51C635DD1007E3648 /* Utility.cpp in Sources */,
 				A26FB6F01C63600B007E3648 /* json_value.cpp in Sources */,

@@ -185,7 +185,7 @@ void BinraryRDTClientCommand::recvData(int channelID, BYTE* buffer, int totalLen
     Utility::printData(__PRETTY_FUNCTION__, __LINE__, buffer, totalLength);
 }
 
-void BinraryRDTClientCommand::parseRecvData(ParseRecvData* pParseRecvData)
+void BinraryRDTClientCommand::parseRecvData(ParseRecvData* pParseRecvData) throw (CommandException)
 {
     BinraryRDTClientCommand_ParseRecvData* pBinraryParseRecvData = (BinraryRDTClientCommand_ParseRecvData*) pParseRecvData;
     int channelID = pBinraryParseRecvData->channelID;
@@ -220,6 +220,7 @@ void BinraryRDTClientCommand::parseRecvData(ParseRecvData* pParseRecvData)
             }
             else {
                 LOGE("封包未符合!");
+                throw CommandException(__PRETTY_FUNCTION__, __LINE__, CommandException_ErrorCode_Packet_Not_Match);
             }
             
             offset += fragmentLength;

@@ -11,6 +11,7 @@
 
 #include <stdio.h>
 #include "BinraryRDTCommand.hpp"
+#include "CommandException.hpp"
 
 using namespace std;
 
@@ -52,7 +53,7 @@ public:
     
 #pragma mark - Command
     virtual void parseSendData(ParseSendData* pParseSendData) throw (RDTException);
-    virtual void parseRecvData(ParseRecvData* pParseRecvData);
+    virtual void parseRecvData(ParseRecvData* pParseRecvData) throw (CommandException);
 
 #pragma mark - Thread
     static void* threadInput(void *arg);
