@@ -106,7 +106,7 @@ void* BinraryRDTServerCommand::threadInput(void *arg)
 
 #pragma mark - Command
 
-void BinraryRDTServerCommand::parseSendData(ParseSendData* pParseSendData)
+void BinraryRDTServerCommand::parseSendData(ParseSendData* pParseSendData) throw (RDTException)
 {
     BinraryRDTServerCommand_ParseSendData* pBinraryCommandRecvData = (BinraryRDTServerCommand_ParseSendData*) pParseSendData;
     
@@ -171,11 +171,11 @@ void BinraryRDTServerCommand::parseSendData(ParseSendData* pParseSendData)
     Utility::printData(__PRETTY_FUNCTION__, __LINE__, buffer, index);
     int ret = RDT_Write(channelID, (const char*)buffer, index);
     if (ret < 0) {
-        LOGE("RDT_Write failed");
+        throw RDTException(__PRETTY_FUNCTION__, __LINE__, ret);
     }
 }
 
-void BinraryRDTServerCommand::recvData(int channelID, BYTE* buffer, int totalLength)
+void BinraryRDTServerCommand::recvData(int channelID, BYTE* buffer, int totalLength) throw (CommandException)
 {
     LOGD("recvData");
     
@@ -870,78 +870,6 @@ void BinraryRDTServerCommand::recvData(int channelID, BYTE* buffer, int totalLen
                                     LOGD("type:%d", type);
                                     LOGD("aid:%d", aid);
                                     LOGD("functionCode:%d", functionCode);
-                                    
-                                    //                                    if (// TODO type == Accessory_Type_Air_Conditioner &&
-                                    //                                        aid == m_dataInfoList[i]->aid &&
-                                    //                                        // functionCode 詢問狀態 = 修改狀態 - 1
-                                    //                                        //              修改狀態 = 詢問狀態 + 1
-                                    //                                        functionCode - 1 == m_dataInfoList[i]->functionStatusList[j]->functionCode)
-                                    //                                    {
-                                    //
-                                    //                                        LOGD("functionCodeAmount:%d", functionCodeAmount);
-                                    //                                        LOGD("m_dataInfoList[i]->functionStatusList[j]->functionCodeList.size() = %lu", m_dataInfoList[i]->functionStatusList[j]->functionCodeList.size());
-                                    //
-                                    //                                        // 設定數量較少
-                                    //                                        if (functionCodeAmount < m_dataInfoList[i]->functionStatusList[j]->functionCodeList.size())
-                                    //                                        {
-                                    //                                            for (int y=0 ; y<m_dataInfoList[i]->functionStatusList[j]->functionCodeList.size() ; y++) {
-                                    //                                                // 清空
-                                    //                                                m_dataInfoList[i]->functionStatusList[j]->functionCodeList[y]->transferCode = NULL;
-                                    //                                            }
-                                    //
-                                    //                                            // 設定
-                                    //                                            for (int y=0 ; y<functionCodeAmount ; y++) {
-                                    //                                                unsigned short transferCode = Utility::bytes2UnsignedLongWithBeginData(buffer, &recvIndex, 2);
-                                    //                                                LOGD("y:%d transferCode:%d", y, transferCode);
-                                    //
-                                    //                                                m_dataInfoList[i]->functionStatusList[j]->functionCodeList[y]->transferCode = transferCode;
-                                    //                                            }
-                                    //                                        }
-                                    //                                        // 設定數量較多
-                                    //                                        else if (functionCodeAmount > m_dataInfoList[i]->functionStatusList[j]->functionCodeList.size()) {
-                                    //                                            // 設定
-                                    //                                            for (int y=0 ; y<functionCodeAmount ; y++) {
-                                    //                                                unsigned short transferCode = Utility::bytes2UnsignedLongWithBeginData(buffer, &recvIndex, 2);
-                                    //                                                LOGD("y:%d transferCode:%d", y, transferCode);
-                                    //
-                                    //                                                if (y + 1 > m_dataInfoList[i]->functionStatusList[j]->functionCodeList.size()) {
-                                    //                                                    addFunctionCode(m_dataInfoList[i]->functionStatusList[j], transferCode);
-                                    //                                                }
-                                    //                                                else {
-                                    //                                                    m_dataInfoList[i]->functionStatusList[j]->functionCodeList[y]->transferCode = transferCode;
-                                    //                                                }
-                                    //                                            }
-                                    //                                        }
-                                    //                                        // 設定值數量一樣
-                                    //                                        else if (functionCodeAmount == m_dataInfoList[i]->functionStatusList[j]->functionCodeList.size()) {
-                                    //                                            // 設定
-                                    //                                            for (int y=0 ; y<functionCodeAmount ; y++) {
-                                    //                                                unsigned short transferCode = Utility::bytes2UnsignedLongWithBeginData(buffer, &recvIndex, 2);
-                                    //                                                LOGD("y:%d transferCode:%d", y, transferCode);
-                                    //
-                                    //                                                m_dataInfoList[i]->functionStatusList[j]->functionCodeList[y]->transferCode = transferCode;
-                                    //                                            }
-                                    //                                        }
-                                    //                                        else {
-                                    //                                            LOGE("對應不到");
-                                    //                                        }
-                                    //
-                                    //                                        // amount
-                                    //                                        sendDataBuffer[3 - 1] = ++sendAmount;
-                                    //
-                                    //                                        sendDataBuffer[sendIndex++] = m_dataInfoList[i]->aid;
-                                    //                                        setValue(sendDataBuffer, &sendIndex, m_dataInfoList[i]->type);
-                                    //                                        sendDataBuffer[sendIndex++] = functionCode;
-                                    //                                        sendDataBuffer[sendIndex++] = m_dataInfoList[i]->functionStatusList[j]->functionCodeList.size();
-                                    //
-                                    //                                        for (int k=0 ; k<m_dataInfoList[i]->functionStatusList[j]->functionCodeList.size() ; k++) {
-                                    //                                            LOGD("m_pDataInfo[%d].pFunctionStatus[%d].pFunctionCode[%d].transferCode:%d", i, j, k, m_dataInfoList[i]->functionStatusList[j]->functionCodeList[k]->transferCode);
-                                    //
-                                    //                                            setValue(sendDataBuffer, &sendIndex, m_dataInfoList[i]->functionStatusList[j]->functionCodeList[k]->transferCode);
-                                    //                                        }
-                                    //
-                                    //                                        onCommandRecvCommand28(m_dataInfoList[i]->functionStatusList[j]);
-                                    //                                    }
                                 }
                             }
                         }
@@ -1172,7 +1100,8 @@ void BinraryRDTServerCommand::recvData(int channelID, BYTE* buffer, int totalLen
         m_pCommandEvent->onCommandRecvData(&BinraryCommandRecvData);
     }
     else {
-        LOGE("Error not match RDT command");
+        LOGE("Error not match RDT Command");
+        throw CommandException(__PRETTY_FUNCTION__, __LINE__, CommandException_ErrorCode_No_Match_RDT_Command);
     }
 }
 
@@ -1211,6 +1140,7 @@ void BinraryRDTServerCommand::parseRecvData(ParseRecvData* pParseRecvData)
             }
             else {
                 LOGE("封包未符合!");
+                throw CommandException(__PRETTY_FUNCTION__, __LINE__, CommandException_ErrorCode_Packet_Not_Match);
             }
             
             offset += fragmentLength;

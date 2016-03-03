@@ -22,6 +22,7 @@ public:
     static unsigned long bytes2UnsignedLongWithBeginData(BYTE* data, int* pIndex, const int length);
     
     static void printData(const char* function, int line, const BYTE* data, const int length);
+    static void showException(Exception& e);
     
 //    template <typename T>
 //    static T setValue(BYTE* pBuffer, int* pIndex, T value);

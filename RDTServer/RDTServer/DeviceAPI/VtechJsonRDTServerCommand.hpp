@@ -36,7 +36,7 @@ public:
     
 #pragma mark - JsonRDTCommand
 protected:
-    virtual bool processCommandTarget(const Json::Value& jsonObject, Json::Value& outJsonObject);
+    virtual void processCommandTarget(const Json::Value& jsonObject, Json::Value& outJsonObject) throw (CommandException);
     
 #pragma mark - Member
 protected:

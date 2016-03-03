@@ -12,9 +12,11 @@
 #include <stdio.h>
 #include <set>
 #include <vector>
+#include <exception>
 #include "CommandEvent.hpp"
 #include "CommandHardwardEvent.hpp"
 #include "Connect.hpp"
+#include "RDTException.hpp"
 
 using namespace std;
 
@@ -74,7 +76,7 @@ public:
 #pragma mark - Command
 public:
     virtual void reset();
-    virtual void parseSendData(ParseSendData* pParseSendData) = 0;
+    virtual void parseSendData(ParseSendData* pParseSendData) throw (RDTException) = 0;
     virtual void parseRecvData(ParseRecvData* pParseRecvData) = 0;
     
 // 變數

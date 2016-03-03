@@ -40,7 +40,7 @@ void JsonRDTCommand::onConnectCreateClient(ConnectCreateClient* pConnectCreateCl
     m_nChannelIDList.insert(pJsonConnectCreateClient->channelID);
 }
 
-void JsonRDTCommand::parseSendData(ParseSendData* pParseSendData)
+void JsonRDTCommand::parseSendData(ParseSendData* pParseSendData) throw(RDTException)
 {
     JsonRDTCommand_ParseSendData* pBinraryCommandRecvData = (JsonRDTCommand_ParseSendData*) pParseSendData;
     
@@ -83,11 +83,11 @@ void JsonRDTCommand::parseSendData(ParseSendData* pParseSendData)
     Utility::printData(__PRETTY_FUNCTION__, __LINE__, buffer, index);
     int ret = RDT_Write(pBinraryCommandRecvData->channelID, (const char*)buffer, index);
     if (ret < 0) {
-        LOGE("RDT_Write failed");
+        throw RDTException(__PRETTY_FUNCTION__, __LINE__, ret);
     }
 }
 
-void JsonRDTCommand::parseRecvData(ParseRecvData* pParseRecvData)
+void JsonRDTCommand::parseRecvData(ParseRecvData* pParseRecvData) throw (CommandException)
 {
     JsonRDTCommand_ParseRecvData* pJsonParseRecvData = (JsonRDTCommand_ParseRecvData*) pParseRecvData;
     int channelID = pJsonParseRecvData->channelID;
@@ -118,6 +118,7 @@ void JsonRDTCommand::parseRecvData(ParseRecvData* pParseRecvData)
             }
             else {
                 LOGE("封包未符合!");
+                throw CommandException(__PRETTY_FUNCTION__, __LINE__, CommandException_ErrorCode_Packet_Not_Match);
             }
             
             offset += fragmentLength;

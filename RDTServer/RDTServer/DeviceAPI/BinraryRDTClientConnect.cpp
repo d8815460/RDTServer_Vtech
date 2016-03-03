@@ -13,6 +13,7 @@
 #include "IOTCAPIs.h"
 #include "RDTAPIs.h"
 #include "BinraryRDTServerCommand.hpp"
+#include "Utility.hpp"
 
 BinraryRDTClientConnect::BinraryRDTClientConnect(ConnectData* pConnectData) : Connect(pConnectData), m_nMaxClientNumber(MAX_CLIENT_NUM)
 {
@@ -38,18 +39,19 @@ BinraryRDTClientConnect::~BinraryRDTClientConnect()
 
 #pragma mark - Connect
 
-void BinraryRDTClientConnect::initialize()
+void BinraryRDTClientConnect::initialize() throw (IOTCException, RDTException)
 {
     int ret = IOTC_Initialize2(0);
     if (ret != IOTC_ER_NoERROR)
     {
         LOGE("IOTC_Initialize error!!");
-        //        return 0;
+        throw IOTCException(__PRETTY_FUNCTION__, __LINE__, ret);
     }
     
-    int rdtCh = RDT_Initialize();
-    if(rdtCh <= 0) {
+    ret = RDT_Initialize();
+    if(ret <= 0) {
         LOGE("RDT_Initialize error!!");
+        throw RDTException(__PRETTY_FUNCTION__, __LINE__, ret);
     }
     
     printIOTCVersion();
@@ -76,6 +78,7 @@ void BinraryRDTClientConnect::run()
 void BinraryRDTClientConnect::connect()
 {
     pthread_create(m_ppThreadRun, NULL, &BinraryRDTClientConnect::threadRun, (void*)this);
+    
     m_isConnect = true;
 }
 
@@ -86,78 +89,86 @@ void BinraryRDTClientConnect::disconnect()
 
 #pragma mark - Threads
 
-void* BinraryRDTClientConnect::threadRun(void *arg)
+void* BinraryRDTClientConnect::threadRun(void *arg) throw (IOTCException, RDTException)
 {
     BinraryRDTClientConnect* pBinraryRDTClientConnect = (BinraryRDTClientConnect*) arg;
     
-    do {
-        struct st_SInfo sInfo;
-        //        LOGD("start IOTC_Listen...");
-        pBinraryRDTClientConnect->m_nSid = IOTC_Get_SessionID();
-        LOGD("IOTC_Get_SessionID:%d", pBinraryRDTClientConnect->m_nSid);
-        if(pBinraryRDTClientConnect->m_nSid == IOTC_ER_NOT_INITIALIZED)
-        {
-            LOGE("Not Initialize!!!\n");
-            return 0;
-        }
-        else if (pBinraryRDTClientConnect->m_nSid == IOTC_ER_EXCEED_MAX_SESSION)
-        {
-            LOGE("EXCEED MAX SESSION!!!\n");
-            return 0;
-        }
-        
-        if(pBinraryRDTClientConnect->m_nSid >= 0) {
-            pBinraryRDTClientConnect->m_nSid = IOTC_Connect_ByUID_Parallel(pBinraryRDTClientConnect->m_sUid, pBinraryRDTClientConnect->m_nSid);
-            LOGD("Step 2: call IOTC_Connect_ByUID_Parallel(%s) ret = %d\n", pBinraryRDTClientConnect->m_sUid, pBinraryRDTClientConnect->m_nSid);
-            if(pBinraryRDTClientConnect->m_nSid < 0)
+    try {
+        do {
+            struct st_SInfo sInfo;
+            //        LOGD("start IOTC_Listen...");
+            pBinraryRDTClientConnect->m_nSid = IOTC_Get_SessionID();
+            LOGD("IOTC_Get_SessionID:%d", pBinraryRDTClientConnect->m_nSid);
+            if(pBinraryRDTClientConnect->m_nSid == IOTC_ER_NOT_INITIALIZED)
             {
-                LOGE("p2pAPIs_Client connect failed...!!\n");
-                continue;
+                LOGE("Not Initialize!!!\n");
+                throw IOTCException(__PRETTY_FUNCTION__, __LINE__, pBinraryRDTClientConnect->m_nSid);
+                return 0;
             }
-            
-            IOTC_Session_Check(pBinraryRDTClientConnect->m_nSid, &sInfo);
-            const char* mode[3] = {"P2P", "RLY", "LAN"};
-            LOGD("Client from %s:%d Mode=%s", sInfo.RemoteIP, sInfo.RemotePort, mode[sInfo.Mode]);
-            
-            int channelID = RDT_Create(pBinraryRDTClientConnect->m_nSid, RDT_WAIT_TIMEMS, 0);
-            
-            if(channelID < 0)
+            else if (pBinraryRDTClientConnect->m_nSid == IOTC_ER_EXCEED_MAX_SESSION)
             {
-                LOGE("RDT_Create failed[%d]!!", channelID);
-                IOTC_Session_Close(pBinraryRDTClientConnect->m_nSid);
+                LOGE("EXCEED MAX SESSION!!!\n");
+                throw IOTCException(__PRETTY_FUNCTION__, __LINE__, pBinraryRDTClientConnect->m_nSid);
+                return 0;
             }
-            else {
-                LOGD("channelID = %d", channelID);
-                // 新增channelID
-                BinraryRDTCommand_ConnectCreateClient binraryConnectCreateClient;
-                binraryConnectCreateClient.channelID = channelID;
+            
+            if(pBinraryRDTClientConnect->m_nSid >= 0) {
+                pBinraryRDTClientConnect->m_nSid = IOTC_Connect_ByUID_Parallel(pBinraryRDTClientConnect->m_sUid, pBinraryRDTClientConnect->m_nSid);
+                LOGD("Step 2: call IOTC_Connect_ByUID_Parallel(%s) ret = %d\n", pBinraryRDTClientConnect->m_sUid, pBinraryRDTClientConnect->m_nSid);
+                if(pBinraryRDTClientConnect->m_nSid < 0)
+                {
+                    LOGE("p2pAPIs_Client connect failed...!!\n");
+                    throw IOTCException(__PRETTY_FUNCTION__, __LINE__, pBinraryRDTClientConnect->m_nSid);
+                    //                continue;
+                }
                 
-                pBinraryRDTClientConnect->m_pConnectEvent->onConnectCreateClient(&binraryConnectCreateClient);
-                pBinraryRDTClientConnect->m_nClientCount++;
-                pBinraryRDTClientConnect->m_channelID = channelID;
+                IOTC_Session_Check(pBinraryRDTClientConnect->m_nSid, &sInfo);
+                const char* mode[3] = {"P2P", "RLY", "LAN"};
+                LOGD("Client from %s:%d Mode=%s", sInfo.RemoteIP, sInfo.RemotePort, mode[sInfo.Mode]);
                 
-                pthread_create(&pBinraryRDTClientConnect->m_ppThreadID[pBinraryRDTClientConnect->m_nClientCount], NULL, &BinraryRDTClientConnect::threadRecv, (void*)pBinraryRDTClientConnect);
+                int channelID = RDT_Create(pBinraryRDTClientConnect->m_nSid, RDT_WAIT_TIMEMS, 0);
                 
-                int nRet;
-                st_RDT_Status statusStatus;
-                while (true) {
-                    nRet = RDT_Status_Check(channelID, &statusStatus);
+                if(channelID < 0)
+                {
+                    LOGE("RDT_Create failed[%d]!!", channelID);
+                    IOTC_Session_Close(pBinraryRDTClientConnect->m_nSid);
+                    throw IOTCException(__PRETTY_FUNCTION__, __LINE__, channelID);
+                }
+                else {
+                    LOGD("channelID = %d", channelID);
+                    // 新增channelID
+                    BinraryRDTCommand_ConnectCreateClient binraryConnectCreateClient;
+                    binraryConnectCreateClient.channelID = channelID;
                     
-                    if (nRet < 0) {
-                        LOGE("RDT_Status_Check nRet:%d", nRet);
-                        break;
-                    }
+                    pBinraryRDTClientConnect->m_pConnectEvent->onConnectCreateClient(&binraryConnectCreateClient);
+                    pBinraryRDTClientConnect->m_nClientCount++;
+                    pBinraryRDTClientConnect->m_channelID = channelID;
                     
-                    sleep(RUN_WATTING_TIMES);
-                };
-                
-                RDT_Destroy(channelID);
-                IOTC_Session_Close(pBinraryRDTClientConnect->m_nSid);
+                    pthread_create(&pBinraryRDTClientConnect->m_ppThreadID[pBinraryRDTClientConnect->m_nClientCount], NULL, &BinraryRDTClientConnect::threadRecv, (void*)pBinraryRDTClientConnect);
+                    
+                    int nRet;
+                    st_RDT_Status statusStatus;
+                    while (true) {
+                        nRet = RDT_Status_Check(channelID, &statusStatus);
+                        
+                        if (nRet < 0) {
+                            throw RDTException(__PRETTY_FUNCTION__, __LINE__, nRet);
+                            break;
+                        }
+                        
+                        sleep(RUN_WATTING_TIMES);
+                    };
+                    
+                    RDT_Destroy(channelID);
+                    IOTC_Session_Close(pBinraryRDTClientConnect->m_nSid);
+                }
             }
-        }
-        
-    } while(pBinraryRDTClientConnect->m_isConnect);
-    
+            
+        } while(pBinraryRDTClientConnect->m_isConnect);
+    } catch (Exception& e) {
+        Utility::showException(e);
+    }
+
     //    pthread_exit(0);
     return NULL;
 }

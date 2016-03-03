@@ -13,6 +13,7 @@
 #include "IOTCAPIs.h"
 #include "RDTAPIs.h"
 #include "BinraryRDTServerCommand.hpp"
+#include "Utility.hpp"
 
 BinraryRDTServerConnect::BinraryRDTServerConnect(ConnectData* pConnectData) : Connect(pConnectData), m_nMaxClientNumber(MAX_CLIENT_NUM)
 {
@@ -42,18 +43,19 @@ BinraryRDTServerConnect::~BinraryRDTServerConnect()
 
 #pragma mark - Connect
 
-void BinraryRDTServerConnect::initialize()
+void BinraryRDTServerConnect::initialize() throw (IOTCException, RDTException)
 {
     int ret = IOTC_Initialize2(0);
     if (ret != IOTC_ER_NoERROR)
     {
         LOGE("IOTC_Initialize error!!");
-        //        return 0;
+        throw IOTCException(__PRETTY_FUNCTION__, __LINE__, ret);
     }
     
     int rdtCh = RDT_Initialize();
     if(rdtCh <= 0) {
         LOGE("RDT_Initialize error!!");
+        throw RDTException(__PRETTY_FUNCTION__, __LINE__, ret);
     }
     
     printIOTCVersion();
@@ -136,45 +138,50 @@ void* BinraryRDTServerConnect::threadRun(void *arg)
     return NULL;
 }
 
-void* BinraryRDTServerConnect::threadRecv(void *arg)
+void* BinraryRDTServerConnect::threadRecv(void *arg) throw (RDTException)
 {
-    BinraryRDTServerConnect* pBinraryRDTServerConnect = (BinraryRDTServerConnect*) arg;
-    
-    BYTE buffer[MAX_BUFFER_SIZE];
-    int channelID = RDT_Create(pBinraryRDTServerConnect->m_nSid, RDT_WAIT_TIMEMS, 0);
-    
-    if(channelID < 0)
-    {
-        LOGE("RDT_Create failed[%d]!!", channelID);
-        IOTC_Session_Close(pBinraryRDTServerConnect->m_nSid);
-    }
-    else {
-        LOGD("channelID = %d", channelID);
-        // 新增channelID
-        BinraryRDTCommand_ConnectCreateClient binraryConnectCreateClient;
-        binraryConnectCreateClient.channelID = channelID;
-        pBinraryRDTServerConnect->m_pConnectEvent->onConnectCreateClient(&binraryConnectCreateClient);
-        pBinraryRDTServerConnect->m_nClientCount++;
+    try {
+        BinraryRDTServerConnect* pBinraryRDTServerConnect = (BinraryRDTServerConnect*) arg;
         
-        while (true)
-        {
-            int ret = RDT_Read(channelID, (char*) buffer, MAX_BUFFER_SIZE, RDT_WAIT_TIMEMS);
-            if(ret >= 0) {
-                BinraryRDTServerConnect_ConnectRecvData binraryConnectRecvData;
-                binraryConnectRecvData.channelID = channelID;
-                binraryConnectRecvData.pBuffer = buffer;
-                binraryConnectRecvData.length = ret;
-                pBinraryRDTServerConnect->m_pConnectEvent->onConnectRecvData(&binraryConnectRecvData);
-            }
-            else if (ret != RDT_ER_TIMEOUT) {
-                LOGD("RDT_Read failed:%d", ret);
-                
-                break;
-            }
+        BYTE buffer[MAX_BUFFER_SIZE];
+        int channelID = RDT_Create(pBinraryRDTServerConnect->m_nSid, RDT_WAIT_TIMEMS, 0);
+        
+        if(channelID < 0) {
+            LOGE("RDT_Create failed[%d]!!", channelID);
+            IOTC_Session_Close(pBinraryRDTServerConnect->m_nSid);
+            throw RDTException(__PRETTY_FUNCTION__, __LINE__, channelID);
         }
-        
-        RDT_Destroy(channelID);
-        IOTC_Session_Close(pBinraryRDTServerConnect->m_nSid);
+        else {
+            LOGD("channelID = %d", channelID);
+            // 新增channelID
+            BinraryRDTCommand_ConnectCreateClient binraryConnectCreateClient;
+            binraryConnectCreateClient.channelID = channelID;
+            pBinraryRDTServerConnect->m_pConnectEvent->onConnectCreateClient(&binraryConnectCreateClient);
+            pBinraryRDTServerConnect->m_nClientCount++;
+            
+            while (true)
+            {
+                int ret = RDT_Read(channelID, (char*) buffer, MAX_BUFFER_SIZE, RDT_WAIT_TIMEMS);
+                if(ret >= 0) {
+                    BinraryRDTServerConnect_ConnectRecvData binraryConnectRecvData;
+                    binraryConnectRecvData.channelID = channelID;
+                    binraryConnectRecvData.pBuffer = buffer;
+                    binraryConnectRecvData.length = ret;
+                    pBinraryRDTServerConnect->m_pConnectEvent->onConnectRecvData(&binraryConnectRecvData);
+                }
+                else if (ret != RDT_ER_TIMEOUT) {
+                    LOGD("RDT_Read failed:%d", ret);
+                    
+                    break;
+                }
+            }
+            
+            RDT_Destroy(channelID);
+            IOTC_Session_Close(pBinraryRDTServerConnect->m_nSid);
+        }
+    }
+    catch (Exception& e) {
+        Utility::showException(e);
     }
     
     return NULL;
