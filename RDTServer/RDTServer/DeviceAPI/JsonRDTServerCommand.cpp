@@ -105,8 +105,6 @@ void* JsonRDTServerCommand::threadInput(void *arg)
 
 void JsonRDTServerCommand::processCommandTarget(const Json::Value& inJsonObject, Json::Value& outJsonObject) throw (CommandException)
 {
-//    m_pCommandHardwardEvent->onCommandHardwardRecvJson(inJsonObject, outJsonObject);
-    
     string target = inJsonObject["target"].asString();
     string operation = inJsonObject["operation"].asString();
     
