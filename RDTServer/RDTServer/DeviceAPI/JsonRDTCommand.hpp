@@ -36,6 +36,26 @@ struct JsonRDTCommand_ConnectCreateClient : ConnectCreateClient
     int channelID;
 };
 
+struct CommandHardwardSend_CreateItems : CommandHardwardRecv_CreateItems
+{
+    
+};
+
+struct CommandHardwardSend_DeleteItems : CommandHardwardRecv_DeleteItems
+{
+    
+};
+
+struct CommandHardwardSend_ReadItems : CommandHardwardRecv_ReadItems
+{
+    
+};
+
+struct CommandHardwardSend_UpdateItems : CommandHardwardRecv_UpdateItems
+{
+    
+};
+
 class JsonRDTCommand : public Command
 {
 public:
@@ -55,18 +75,54 @@ public:
 #pragma mark - Command
     virtual void parseSendData(ParseSendData* pParseSendData) throw (RDTException);
     virtual void parseRecvData(ParseRecvData* pParseRecvData) throw (CommandException);
-
+    
     /**
-     * \brief 硬體主動更新資料項目清單
+     * \brief 硬體傳送新增項目
      *
-     * \details 當硬體主動更新項目，如將燈打開或是PIR觸發，硬體針對實際狀況發送BaseData清單，存放在struct，必須根據實際DataType更新相關資料
+     * \details 當收到新增項目時，系統將會建立新項目，存放在struct，包含資料項目BaseData,必須根據實際DataType填入相關資料
+     *
+     * \param dataType  實際資料型態
+     * \param errorCode 發生錯誤時的錯誤碼
+     * \param pBaseData 包含新增項目相關的資料
+     *
+     */
+    virtual void commandHardwardSend_CreateItem(CommandHardwardSend_CreateItems* pCommandHardwardRecv_CreateItems);
+    
+    /**
+     * \brief 硬體傳送刪除項目
+     *
+     * \details 硬體傳送刪除項目時，系統將會發送id，存放在struct,必須根據實際DataType刪除相關資料
+     *
+     * \param dataType  實際資料型態
+     * \param errorCode 發生錯誤時的錯誤碼
+     * \param id        包含刪除項目的識別碼
+     *
+     */
+    virtual void commandHardwardSend_DeleteItems(CommandHardwardSend_DeleteItems* pCommandHardwardRecv_DeleteItems);
+    
+    /**
+     * \brief 硬體傳送讀取資料項目清單
+     *
+     * \details 硬體傳送讀取資料項目時，系統將會發送BaseData清單，存放在struct，必須根據實際DataType查詢相關資料
+     *
+     * \param dataType      實際資料型態
+     * \param errorCode     發生錯誤時的錯誤碼
+     * \param baseDataList  包含查詢項目清單
+     *
+     */
+    virtual void commandHardwardSend_ReadItems(CommandHardwardSend_ReadItems* pCommandHardwardRecv_ReadItems);
+    
+    /**
+     * \brief 硬體傳送更新資料項目清單
+     *
+     * \details 硬體傳送更新項目，如將燈打開或是PIR觸發，硬體針對實際狀況發送BaseData清單，存放在struct，必須根據實際DataType更新相關資料
      *
      * \param dataType      實際資料型態
      * \param errorCode     發生錯誤時的錯誤碼
      * \param baseDataList  包含更新項目清單
      *
      */
-    virtual void hardwardUpdateItems(CommandHardwardRecv_UpdateItems* pCommandHardwardRecv_UpdateItems) throw (CommandException);
+    virtual void commandHardwardSend_UpdateItems(CommandHardwardSend_UpdateItems* pCommandHardwardSend_UpdateItems) throw (CommandException);
     
 #pragma mark - JsonRDTCommand
 protected:

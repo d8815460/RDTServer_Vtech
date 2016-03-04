@@ -11,7 +11,7 @@
 #include <limits.h>
 #include <iostream>
 
-#include "VtechIPHubGatewayHardwardDevice.hpp"
+#include "VtechIPHubGatewayHardwardDeviceImpl.hpp"
 
 using namespace std;
 
@@ -19,7 +19,7 @@ int main(int argc, char *argv[])
 {
     LOGD("uid = %s", argv[1]);
     
-    VtechIPHubGatewayHardwardDevice device;
+    VtechIPHubGatewayHardwardDeviceImpl device;
     device.run(argv[1]);
     
 	return 0;

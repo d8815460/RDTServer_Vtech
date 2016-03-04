@@ -15,10 +15,10 @@
 
 using namespace std;
 
-class VtechIPHubGatewayHardwardDevice : public VtechIPHubGatewayDevice
+class VtechIPHubGatewayHardwardDeviceImpl : public VtechIPHubGatewayDevice
 {
 public:
-    VtechIPHubGatewayHardwardDevice();
+    VtechIPHubGatewayHardwardDeviceImpl();
     
 #pragma mark - Device
     virtual Hardward* createHardward();
@@ -26,9 +26,11 @@ public:
 private:
 };
 
-class VtechIPHubGatewayHardward : public Hardward
+class VtechIPHubGatewayHardwardImpl : public VtechIPHubGatewayHardward
 {
-public:	
+public:
+	VtechIPHubGatewayHardwardImpl(JsonRDTCommand* pJsonRDTCommand);
+	
 #pragma mark - Thread
    static void* socketInput(void *arg);
    

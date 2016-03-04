@@ -85,6 +85,11 @@ void VtechIPHubGatewayDevice::reset()
 
 #pragma mark - Device
 
+Hardward* VtechIPHubGatewayDevice::createHardward()
+{
+    return new VtechIPHubGatewayHardward((JsonRDTCommand*) m_pCommand);
+}
+
 Command* VtechIPHubGatewayDevice::createCommand(Connect* pConnect, CommandHardwardEvent* pCommandHardwardEvent)
 {
     return new VtechJsonRDTServerCommand(this, pCommandHardwardEvent, pConnect);
@@ -115,4 +120,11 @@ void VtechIPHubGatewayDevice::onCommandRecvFullCommand28(int channelID, vector<F
 void VtechIPHubGatewayDevice::onCommandRecvData(CommandRecvData* pCommandRecvData)
 {
     LOGD("onCommandRecvData");
+}
+
+#pragma mark - VtechIPHubGatewayHardward::VtechIPHubGatewayHardward
+
+VtechIPHubGatewayHardward::VtechIPHubGatewayHardward(JsonRDTCommand* pJsonRDTCommand)
+{
+    m_pJsonRDTCommand = pJsonRDTCommand;
 }

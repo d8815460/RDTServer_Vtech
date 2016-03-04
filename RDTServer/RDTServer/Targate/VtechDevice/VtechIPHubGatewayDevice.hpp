@@ -11,6 +11,7 @@
 
 #include <stdio.h>
 #include "Device.hpp"
+#include "JsonRDTCommand.hpp"
 
 using namespace std;
 
@@ -23,6 +24,7 @@ public:
     void reset();
     
 #pragma mark - Device
+    virtual Hardward* createHardward();
     virtual Command* createCommand(Connect* pConnect, CommandHardwardEvent* pCommandHardwardEvent);
     virtual void constructorFinish() { reset(); }
     
@@ -36,6 +38,15 @@ protected:
     virtual void onCommandRecvFullCommand28(int channelID, vector<FunctionInfo*>* pDataInfoList);
     
 private:
+};
+
+class VtechIPHubGatewayHardward : public Hardward
+{
+public:
+    VtechIPHubGatewayHardward(JsonRDTCommand* pJsonRDTCommand);
+    
+protected:
+    JsonRDTCommand* m_pJsonRDTCommand;
 };
 
 #endif /* VtechIPHubGatewayDevice_hpp */

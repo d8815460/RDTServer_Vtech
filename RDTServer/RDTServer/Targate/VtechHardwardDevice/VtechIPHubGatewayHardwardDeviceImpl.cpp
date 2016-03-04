@@ -6,7 +6,7 @@
 //  Copyright © 2015年 jakey. All rights reserved.
 //
 
-#include "VtechIPHubGatewayHardwardDevice.hpp"
+#include "VtechIPHubGatewayHardwardDeviceImpl.hpp"
 #include <iostream>
 #include <cstring>
 #include "Common.hpp"
@@ -21,21 +21,21 @@ unix_stream_client sock(socket_path); // need libsocket++
 
 #pragma mark - Normal Method
 
-VtechIPHubGatewayHardwardDevice::VtechIPHubGatewayHardwardDevice()
+VtechIPHubGatewayHardwardDeviceImpl::VtechIPHubGatewayHardwardDeviceImpl()
 {
-  LOGD("VtechIPHubGatewayHardwardDevice");
+  LOGD("VtechIPHubGatewayHardwardDeviceImpl");
 }
 
 #pragma mark - Device
 
-Hardward* VtechIPHubGatewayHardwardDevice::createHardward()
+Hardward* VtechIPHubGatewayHardwardDeviceImpl::createHardward()
 {
-  return new VtechIPHubGatewayHardward();
+  return new VtechIPHubGatewayHardwardImpl((JsonRDTCommand*) m_pCommand);
 }
 
-#pragma mark - VtechIPHubGatewayHardward::Thread
+#pragma mark - Thread
 
-void* VtechIPHubGatewayHardward::socketInput(void *arg)
+void* VtechIPHubGatewayHardwardImpl::socketInput(void *arg)
 {
    while(true)
    {
@@ -55,9 +55,9 @@ void* VtechIPHubGatewayHardward::socketInput(void *arg)
    return NULL;
 }
 
-#pragma mark - VtechIPHubGatewayHardward::Method
+#pragma mark - Method
 
-void VtechIPHubGatewayHardward::sendToGateway(char* payload, int length)
+void VtechIPHubGatewayHardwardImpl::sendToGateway(char* payload, int length)
 {
    LOGD("Vtech call to send to gateway");
    
@@ -71,9 +71,16 @@ void VtechIPHubGatewayHardward::sendToGateway(char* payload, int length)
    }
 }
 
-#pragma mark - VtechIPHubGatewayHardward::CommandHardwardEvent
+#pragma mark - VtechIPHubGatewayHardwardImpl::VtechIPHubGatewayHardwardImpl
 
-void VtechIPHubGatewayHardward::onCommandHardwardRecvJson(CommandHardwardRecvJsonData* pCommandHardwardRecvJsonData)
+VtechIPHubGatewayHardwardImpl::VtechIPHubGatewayHardwardImpl(JsonRDTCommand* pJsonRDTCommand) : VtechIPHubGatewayHardward(pJsonRDTCommand)
+{
+
+}
+
+#pragma mark - VtechIPHubGatewayHardwardImpl::CommandHardwardEvent
+
+void VtechIPHubGatewayHardwardImpl::onCommandHardwardRecvJson(CommandHardwardRecvJsonData* pCommandHardwardRecvJsonData)
 {
 	LOGD("onCommandHardwardRecvJson");
 
@@ -83,7 +90,7 @@ void VtechIPHubGatewayHardward::onCommandHardwardRecvJson(CommandHardwardRecvJso
 	sendToGateway((char*)jsonString.c_str(), jsonString.length());
 }
 
-void VtechIPHubGatewayHardward::onCommandHardwardRecv_CreateItem(CommandHardwardRecv_CreateItems* pCommandHardwardRecv_CreateItems)
+void VtechIPHubGatewayHardwardImpl::onCommandHardwardRecv_CreateItem(CommandHardwardRecv_CreateItems* pCommandHardwardRecv_CreateItems)
 {
     LOGD("onCommandHardwardRecv_CreateItems");
     
@@ -105,7 +112,7 @@ void VtechIPHubGatewayHardward::onCommandHardwardRecv_CreateItem(CommandHardward
     
 }
 
-void VtechIPHubGatewayHardward::onCommandHardwardRecv_DeleteItems(CommandHardwardRecv_DeleteItems* pCommandHardwardRecv_DeleteItems)
+void VtechIPHubGatewayHardwardImpl::onCommandHardwardRecv_DeleteItems(CommandHardwardRecv_DeleteItems* pCommandHardwardRecv_DeleteItems)
 {
     LOGD("onCommandHardwardRecv_DeleteItems");
     
@@ -123,7 +130,7 @@ void VtechIPHubGatewayHardward::onCommandHardwardRecv_DeleteItems(CommandHardwar
     
 }
 
-void VtechIPHubGatewayHardward::onCommandHardwardRecv_ReadItems(CommandHardwardRecv_ReadItems* pCommandHardwardRecv_ReadItems)
+void VtechIPHubGatewayHardwardImpl::onCommandHardwardRecv_ReadItems(CommandHardwardRecv_ReadItems* pCommandHardwardRecv_ReadItems)
 {
     LOGD("onCommandHardwardRecv_ReadItems");
     
@@ -144,7 +151,7 @@ void VtechIPHubGatewayHardward::onCommandHardwardRecv_ReadItems(CommandHardwardR
     }
 }
 
-void VtechIPHubGatewayHardward::onCommandHardwardRecv_UpdateItems(CommandHardwardRecv_UpdateItems* pCommandHardwardRecv_UpdateItems)
+void VtechIPHubGatewayHardwardImpl::onCommandHardwardRecv_UpdateItems(CommandHardwardRecv_UpdateItems* pCommandHardwardRecv_UpdateItems)
 {
     LOGD("onCommandHardwardRecv_UpdateItems");
     
