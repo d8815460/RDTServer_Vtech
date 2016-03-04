@@ -9,16 +9,26 @@
 #ifndef VtechIPHubGatewayHardwardDevice_hpp
 #define VtechIPHubGatewayHardwardDevice_hpp
 
-#include "VtechIPHubGatewayDevice.hpp"
 #include <stdio.h>
+#include "Hardward.hpp"
+#include "VtechIPHubGatewayDevice.hpp"
 
 using namespace std;
 
 class VtechIPHubGatewayHardwardDevice : public VtechIPHubGatewayDevice
 {
 public:
-	VtechIPHubGatewayHardwardDevice();
-	
+    VtechIPHubGatewayHardwardDevice();
+    
+#pragma mark - Device
+    virtual Hardward* createHardward();
+    
+private:
+};
+
+class VtechIPHubGatewayHardward : public Hardward
+{
+public:	
 #pragma mark - Thread
    static void* socketInput(void *arg);
    
@@ -26,9 +36,8 @@ public:
    void sendToGateway(char* payload, int length);
     
 #pragma mark - CommandHardwardEvent
-   virtual void onCommandHardwardRecvJson(CommandHardwardRecvJsonData* pCommandHardwardRecvJsonData);
+	virtual void onCommandHardwardRecvJson(CommandHardwardRecvJsonData* pCommandHardwardRecvJsonData);
 
-#pragma mark - CommandHardwardEvent
     virtual void onCommandHardwardRecv_CreateItem(CommandHardwardRecv_CreateItems* pCommandHardwardRecv_CreateItems);
     virtual void onCommandHardwardRecv_DeleteItems(CommandHardwardRecv_DeleteItems* pCommandHardwardRecv_DeleteItems);
     virtual void onCommandHardwardRecv_ReadItems(CommandHardwardRecv_ReadItems* pCommandHardwardRecv_ReadItems);

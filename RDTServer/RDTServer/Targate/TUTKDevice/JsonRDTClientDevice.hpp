@@ -19,7 +19,7 @@ public:
     
 #pragma mark - Device
     virtual Connect* createConnect(ConnectData* pConnectData);
-    virtual Command* createCommand(Connect* pConnect);
+    virtual Command* createCommand(Connect* pConnect, CommandHardwardEvent* pCommandHardwardEvent);
     virtual void constructorFinish() { generatorDataInfoList(m_pCommand); }
     
 protected:

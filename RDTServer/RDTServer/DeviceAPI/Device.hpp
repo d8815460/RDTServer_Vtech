@@ -12,6 +12,7 @@
 #include <set>
 #include <map>
 #include <pthread.h>
+#include "Hardward.hpp"
 #include "Command.hpp"
 #include "CommandEvent.hpp"
 #include "CommandHardwardEvent.hpp"
@@ -22,7 +23,7 @@ using namespace std;
 
 //static map<int, int> g_sidChannelIDMap;
 
-class Device : public CommandEvent, public CommandHardwardEvent
+class Device : public CommandEvent
 {
 // 建構式
 public:
@@ -35,8 +36,9 @@ public:
     //    void registerListener(Callback callback);
         
 #pragma mark - Device
+    virtual Hardward* createHardward();
     virtual Connect* createConnect(ConnectData* pConnectData);
-    virtual Command* createCommand(Connect* pConnect);
+    virtual Command* createCommand(Connect* pConnect, CommandHardwardEvent* pCommandHardwardEvent);
     virtual void constructorFinish() = 0;
     
 #pragma mark - CommandEvent
@@ -48,22 +50,10 @@ public:
     virtual void onCommandRecvCommand28(FunctionStatus* pFunctionStatus);
     virtual void onCommandRecvFullCommand28(int channelID, vector<FunctionInfo*>* pDataInfoList);
     
-#pragma mark - CommandHardwardEvent
-    virtual void onCommandHardwardNotify(CommandHardwardNotifyData* pCommandHardwardNotifyData);
-    virtual void onCommandHardwardRecvJson(CommandHardwardRecvJsonData* pCommandHardwardRecvJsonData);
-    
-    virtual void onCommandHardwardRecv_ProductCode(CommandHardwardRecv_ProductCode* pCommandHardwardRecv_ProductCode);
-    virtual void onCommandHardwardRecv_ProductName(CommandHardwardRecv_ProductName* pCommandHardwardRecv_ProductName);
-    
-    virtual void onCommandHardwardRecv_CreateItem(CommandHardwardRecv_CreateItems* pCommandHardwardRecv_CreateItems);
-    virtual void onCommandHardwardRecv_DeleteItems(CommandHardwardRecv_DeleteItems* pCommandHardwardRecv_DeleteItems);
-    virtual void onCommandHardwardRecv_ReadItems(CommandHardwardRecv_ReadItems* pCommandHardwardRecv_ReadItems);
-    virtual void onCommandHardwardRecv_UpdateItems(CommandHardwardRecv_UpdateItems* pCommandHardwardRecv_UpdateItems);
-    
 // 成員變數
 protected:
     Command* m_pCommand;
-//    Hardward* m_pHardward;
+    Hardward* m_pHardward;
     
 //    Callback m_callback;
 };

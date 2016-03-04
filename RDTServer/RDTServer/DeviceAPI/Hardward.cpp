@@ -1,89 +1,40 @@
 //
-//  VtechIPHubDevice.cpp
-//  RDTServer
+//  Hardward.cpp
+//  HardwardAPI
 //
-//  Created by jakey on 2015/11/18.
-//  Copyright © 2015年 jakey. All rights reserved.
+//  Created by jakey on 2016/3/4.
+//  Copyright © 2016年 jakey. All rights reserved.
 //
 
-#include "VtechIPHubGatewayHardwardDevice.hpp"
-#include <iostream>
-#include <cstring>
-#include "Common.hpp"
+#include "Hardward.hpp"
 
-#include "unixclientstream.hpp"
-#include "exception.hpp"
+#pragma mark - CommandHardwardEvent
 
-using libsocket::unix_stream_client; // need libsocket++
-
-string socket_path = "/tmp/unixsocket";
-unix_stream_client sock(socket_path); // need libsocket++
-
-#pragma mark - Normal Method
-
-VtechIPHubGatewayHardwardDevice::VtechIPHubGatewayHardwardDevice()
+void Hardward::onCommandHardwardNotify(CommandHardwardNotifyData* pCommandHardwardNotifyData)
 {
-  LOGD("VtechIPHubGatewayHardwardDevice");
+    LOGD("onCommandHardwardNotify");
 }
 
-#pragma mark - Device
-
-Hardward* VtechIPHubGatewayHardwardDevice::createHardward()
+void Hardward::onCommandHardwardRecvJson(CommandHardwardRecvJsonData* pCommandHardwardRecvJsonData)
 {
-  return new VtechIPHubGatewayHardward();
+    LOGD("onCommandHardwardRecvJson");
 }
 
-#pragma mark - VtechIPHubGatewayHardward::Thread
-
-void* VtechIPHubGatewayHardward::socketInput(void *arg)
+void Hardward::onCommandHardwardRecv_ProductCode(CommandHardwardRecv_ProductCode* pCommandHardwardRecv_ProductCode)
 {
-   while(true)
-   {
-       unsigned char buffer[BUFFER_SIZE];
-       memset(buffer, 0, BUFFER_SIZE);
-       
-       try {
-           sock.rcv(buffer,BUFFER_SIZE-1);
-           LOGD("we found the received payload = %s \n",buffer);
-       }
-       catch (const libsocket::socket_exception& exc)
-       {
-           std::cerr << exc.mesg;
-       }
-   }
-   
-   return NULL;
+    LOGD("onCommandHardwardRecv_ProductCode");
+    
+    pCommandHardwardRecv_ProductCode->productCode = -1;
 }
 
-#pragma mark - VtechIPHubGatewayHardward::Method
-
-void VtechIPHubGatewayHardward::sendToGateway(char* payload, int length)
+void Hardward::onCommandHardwardRecv_ProductName(CommandHardwardRecv_ProductName* pCommandHardwardRecv_ProductName)
 {
-   LOGD("Vtech call to send to gateway");
-   
-   try
-   {
-       sock.snd(payload,length-1);
-   }
-   catch (const libsocket::socket_exception& exc)
-   {
-       std::cerr << exc.mesg;
-   }
+    LOGD("onCommandHardwardRecv_ProductName");
+    
+    pCommandHardwardRecv_ProductName->productName = "Hardward";
 }
 
-#pragma mark - VtechIPHubGatewayHardward::CommandHardwardEvent
-
-void VtechIPHubGatewayHardward::onCommandHardwardRecvJson(CommandHardwardRecvJsonData* pCommandHardwardRecvJsonData)
-{
-	LOGD("onCommandHardwardRecvJson");
-
-	std::string jsonString = pCommandHardwardRecvJsonData->pJsonObject->toStyledString();
-	LOGD("jsonString:%s", jsonString.c_str());
-
-	sendToGateway((char*)jsonString.c_str(), jsonString.length());
-}
-
-void VtechIPHubGatewayHardward::onCommandHardwardRecv_CreateItem(CommandHardwardRecv_CreateItems* pCommandHardwardRecv_CreateItems)
+void Hardward::onCommandHardwardRecv_CreateItem(CommandHardwardRecv_CreateItems* pCommandHardwardRecv_CreateItems)
 {
     LOGD("onCommandHardwardRecv_CreateItems");
     
@@ -105,7 +56,7 @@ void VtechIPHubGatewayHardward::onCommandHardwardRecv_CreateItem(CommandHardward
     
 }
 
-void VtechIPHubGatewayHardward::onCommandHardwardRecv_DeleteItems(CommandHardwardRecv_DeleteItems* pCommandHardwardRecv_DeleteItems)
+void Hardward::onCommandHardwardRecv_DeleteItems(CommandHardwardRecv_DeleteItems* pCommandHardwardRecv_DeleteItems)
 {
     LOGD("onCommandHardwardRecv_DeleteItems");
     
@@ -123,7 +74,7 @@ void VtechIPHubGatewayHardward::onCommandHardwardRecv_DeleteItems(CommandHardwar
     
 }
 
-void VtechIPHubGatewayHardward::onCommandHardwardRecv_ReadItems(CommandHardwardRecv_ReadItems* pCommandHardwardRecv_ReadItems)
+void Hardward::onCommandHardwardRecv_ReadItems(CommandHardwardRecv_ReadItems* pCommandHardwardRecv_ReadItems)
 {
     LOGD("onCommandHardwardRecv_ReadItems");
     
@@ -144,7 +95,7 @@ void VtechIPHubGatewayHardward::onCommandHardwardRecv_ReadItems(CommandHardwardR
     }
 }
 
-void VtechIPHubGatewayHardward::onCommandHardwardRecv_UpdateItems(CommandHardwardRecv_UpdateItems* pCommandHardwardRecv_UpdateItems)
+void Hardward::onCommandHardwardRecv_UpdateItems(CommandHardwardRecv_UpdateItems* pCommandHardwardRecv_UpdateItems)
 {
     LOGD("onCommandHardwardRecv_UpdateItems");
     

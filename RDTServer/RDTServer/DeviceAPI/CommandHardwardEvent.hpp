@@ -13,7 +13,6 @@
 #include <string>
 #include <json/reader.h>
 #include "BaseData.hpp"
-#include "CommandHardwardNormalEvent.hpp"
 #include "CommandHardwardCURDEvent.hpp"
 
 struct CommandHardwardRecvJsonData

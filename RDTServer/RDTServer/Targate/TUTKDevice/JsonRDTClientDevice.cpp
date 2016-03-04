@@ -35,9 +35,9 @@ Connect* JsonRDTClientDevice::createConnect(ConnectData* pConnectData)
     return new BinraryRDTClientConnect(pConnectData);
 }
 
-Command* JsonRDTClientDevice::createCommand(Connect* pConnect)
+Command* JsonRDTClientDevice::createCommand(Connect* pConnect, CommandHardwardEvent* pCommandHardwardEvent)
 {
-    return new JsonRDTClientCommand(this, this, pConnect);
+    return new JsonRDTClientCommand(this, pCommandHardwardEvent, pConnect);
 }
 
 #pragma mark - CommandEvent
