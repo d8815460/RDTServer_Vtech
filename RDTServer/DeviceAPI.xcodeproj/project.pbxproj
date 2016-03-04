@@ -94,6 +94,7 @@
 		A2B44AE71C8564FC00DD49F6 /* Exception.hpp in Headers */ = {isa = PBXBuildFile; fileRef = A2B44AE51C8564FC00DD49F6 /* Exception.hpp */; };
 		A2B44AEB1C85651100DD49F6 /* RDTException.hpp in Headers */ = {isa = PBXBuildFile; fileRef = A2B44AE91C85651100DD49F6 /* RDTException.hpp */; };
 		A2B44AF11C85948900DD49F6 /* RDTException.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A2B44AF01C85948900DD49F6 /* RDTException.cpp */; };
+		A2BBADC41C896CAD00B41503 /* CommandHardwardCURDEvent.hpp in Headers */ = {isa = PBXBuildFile; fileRef = A2BBADC21C896CAD00B41503 /* CommandHardwardCURDEvent.hpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -190,6 +191,7 @@
 		A2B44AE51C8564FC00DD49F6 /* Exception.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = Exception.hpp; path = RDTServer/DeviceAPI/Exception.hpp; sourceTree = SOURCE_ROOT; };
 		A2B44AE91C85651100DD49F6 /* RDTException.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = RDTException.hpp; path = RDTServer/DeviceAPI/RDTException.hpp; sourceTree = SOURCE_ROOT; };
 		A2B44AF01C85948900DD49F6 /* RDTException.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = RDTException.cpp; path = RDTServer/DeviceAPI/RDTException.cpp; sourceTree = SOURCE_ROOT; };
+		A2BBADC21C896CAD00B41503 /* CommandHardwardCURDEvent.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = CommandHardwardCURDEvent.hpp; path = RDTServer/DeviceAPI/CommandHardwardCURDEvent.hpp; sourceTree = SOURCE_ROOT; };
 		A2BED36F1C719B5000AF9D4E /* CMakeLists.txt */ = {isa = PBXFileReference; lastKnownFileType = text; name = CMakeLists.txt; path = RDTServer/CMakeLists.txt; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -227,6 +229,7 @@
 				A2A17A251C7D568A008AEFD4 /* BaseData.cpp */,
 				A26FB5EA1C635E08007E3648 /* CommandEvent.hpp */,
 				A26FB6051C635E30007E3648 /* CommandHardwardEvent.hpp */,
+				A2BBADC21C896CAD00B41503 /* CommandHardwardCURDEvent.hpp */,
 				A26FB5EB1C635E08007E3648 /* Command.hpp */,
 				A26FB5EC1C635E08007E3648 /* Command.cpp */,
 				A2AF5D741C7C395300104205 /* BinraryRDTCommand.hpp */,
@@ -511,6 +514,7 @@
 				A26FB5D41C635DD1007E3648 /* Utility.hpp in Headers */,
 				A26FB5E51C635DEB007E3648 /* BinraryRDTClientConnect.hpp in Headers */,
 				A26FB6B31C635F67007E3648 /* MQTTSubscribe.h in Headers */,
+				A2BBADC41C896CAD00B41503 /* CommandHardwardCURDEvent.hpp in Headers */,
 				A26FB6001C635E08007E3648 /* JsonRDTClientCommand.hpp in Headers */,
 				A2AF5D761C7C395300104205 /* BinraryRDTCommand.hpp in Headers */,
 				A26FB6EA1C63600A007E3648 /* reader.h in Headers */,

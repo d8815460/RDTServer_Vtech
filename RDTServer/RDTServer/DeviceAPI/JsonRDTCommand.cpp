@@ -9,13 +9,12 @@
 #include "JsonRDTCommand.hpp"
 #include <cstring>
 #include <unistd.h>
+#include <stdio.h>
+#include <string.h>
 #include "Common.hpp"
 #include "Utility.hpp"
 #include "IOTCAPIs.h"
 #include "RDTAPIs.h"
-
-#include <stdio.h>
-#include <string.h>
 
 JsonRDTCommand::JsonRDTCommand(CommandEvent* pCommandEvent, CommandHardwardEvent* pCommandHardwardEvent, Connect* pConnect, CommandData* pCommandData) : Command(pCommandEvent, pCommandHardwardEvent, pConnect, pCommandData)
 {
@@ -126,6 +125,24 @@ void JsonRDTCommand::parseRecvData(ParseRecvData* pParseRecvData) throw (Command
         
     }
 }
+
+void JsonRDTCommand::hardwardUpdateItems(CommandHardwardRecv_UpdateItems* pCommandHardwardRecv_UpdateItems) throw (CommandException)
+{
+    switch (pCommandHardwardRecv_UpdateItems->dataType) {
+        case DataType_Accessory:
+            // 發送推播
+            break;
+            
+        case DataType_Group:
+            break;
+            
+        default:
+            throw CommandException(__PRETTY_FUNCTION__, __LINE__, CommandException_ErrorCode_DataType_Not_Found);
+            break;
+    }
+}
+
+#pragma mark - JsonRDTCommand
 
 bool JsonRDTCommand::isBasicVerificationPass(BYTE *buffer, int length)
 {

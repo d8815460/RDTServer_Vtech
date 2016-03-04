@@ -22,6 +22,12 @@ enum DataType
     DataType_Group,
 };
 
+struct CommandBase
+{
+    DataType dataType;
+    int errorCode;
+};
+
 struct FunctionCodeValueData
 {
     int value;
