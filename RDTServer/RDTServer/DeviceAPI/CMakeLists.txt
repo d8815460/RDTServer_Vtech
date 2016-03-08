@@ -42,6 +42,7 @@ endif()
 include_directories(${CMAKE_CURRENT_SOURCE_DIR})
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/../../../TUTK_Kalay_Platform_SDK_2.1.3/Include)
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/../3th_party/jsoncpp-1.6.5/include)
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/../../3th_party/sqlite-amalgamation-3110100)
 
 Message("CMAKE_SYSTEM_NAME = ${CMAKE_SYSTEM_NAME}")
 link_directories(${CMAKE_CURRENT_SOURCE_DIR}/../build/3th_party/jsoncpp-1.6.5/src/lib_json)
@@ -68,11 +69,11 @@ add_library(DeviceAPI ${LIB_SOURCES} ${LIB_HEADERS})
 #add_executable(DeviceAPI ${SRC_FILES})
 
 if (CMAKE_SYSTEM_NAME MATCHES "WIN32")
-    target_link_libraries(DeviceAPI RDTAPIs jsoncpp)
+    target_link_libraries(DeviceAPI RDTAPIs jsoncpp sqlite3 dl)
 elseif (CMAKE_SYSTEM_NAME MATCHES "Darwin")
-    target_link_libraries(DeviceAPI IOTCAPIs_ALL jsoncpp)
+    target_link_libraries(DeviceAPI IOTCAPIs_ALL jsoncpp sqlite3 dl)
 elseif (CMAKE_SYSTEM_NAME MATCHES "Linux")
-    target_link_libraries(DeviceAPI RDTAPIs IOTCAPIs pthread jsoncpp)
+    target_link_libraries(DeviceAPI RDTAPIs IOTCAPIs pthread jsoncpp sqlite3 dl)
 endif()
 ###################### Base #############################
 
