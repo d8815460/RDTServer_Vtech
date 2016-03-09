@@ -73,5 +73,5 @@ void Utility::printData(const char* function, int line, const BYTE* data, const 
 
 void Utility::showException(Exception& e)
 {
-    LOGE("Function:%s\nLine:%d\nErrorCode:%d\nErrorMessage:%s\n", e.function, e.line, e.errorCode, e.errorMessage.c_str());
+    LOGE("\nFunction:%s\nLine:%d\nErrorCode:%d\nErrorMessage:%s\n", e.function, e.line, e.errorCode, e.errorMessage.c_str());
 }

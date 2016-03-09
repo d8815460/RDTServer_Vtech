@@ -79,13 +79,26 @@ void* JsonRDTClientCommand::threadInput(void *arg)
 //            root["operation"] = "delete";
 //            root["target"] = "/accessory/1/";
             
+            // 更新accessory
+            root["operation"] = "update";
+            root["target"] = "/accessory/1/function_code/switch/value/1";
+//            root["target"] = "[/accessory/1/function_code/switch/value/1, /accessory/2/function_code/switch/value/1]";
+//            root["target"] = "function_code/switch/value/1";
+//            root["target"] = "/accessory/1/";
+            
+//            root["target"] = "UPDATE FunctionCode SET value = 1 where accessory_id = 1";
+            
+//            root["target"] = "[/accessory/1/function_code/switch/1, /accessory/2/function_code/switch/1]";
+//            root["target"] = "AID:1/FNC:switch:1";
+//            root["target"] = "AID:1&FNC:switch:1;AID:2&FNC:switch:1";
+            
             // 新增group
 //            root["operation"] = "create";
 //            root["target"] = "/group/";
             
             // 刪除group
-            root["operation"] = "delete";
-            root["target"] = "/group/1/";
+//            root["operation"] = "delete";
+//            root["target"] = "/group/1/";
             
 //            arraryItems["cpp"] = "jsoncpp";
 //            arraryItems["java"] = "jsoninjava";
