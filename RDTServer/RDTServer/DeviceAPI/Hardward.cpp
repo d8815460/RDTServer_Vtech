@@ -49,9 +49,9 @@ void Hardward::onCommandHardwardRecv_CreateItem(CommandHardwardRecv_CreateItems*
             pAccessoryData->addFunctionCodeData("color", 1, 2);
         }   break;
             
-        default:
+        default: {
             LOGE("對應不到dataType");
-            break;
+        }   break;
     }
     
 }
@@ -65,11 +65,11 @@ void Hardward::onCommandHardwardRecv_DeleteItems(CommandHardwardRecv_DeleteItems
     switch (pCommandHardwardRecv_DeleteItems->dataType) {
         case DataType_Accessory: {
             // remove pCommandHardwardRecv_DeleteItems->id;
-        }
+        }   break;
             
-        default:
+        default: {
             LOGE("對應不到dataType");
-            break;
+        }   break;
     }
     
 }
@@ -87,11 +87,11 @@ void Hardward::onCommandHardwardRecv_ReadItems(CommandHardwardRecv_ReadItems* pC
                 LOGD("accessoryId:%d", (*pAccessoryList)[i]->accessoryId);
                 LOGD("accessoryType:%d", (*pAccessoryList)[i]->accessoryType);
             }
-        }
+        }   break;
             
-        default:
+        default: {
             LOGE("對應不到dataType");
-            break;
+        }   break;
     }
 }
 
@@ -103,15 +103,23 @@ void Hardward::onCommandHardwardRecv_UpdateItems(CommandHardwardRecv_UpdateItems
     switch (pCommandHardwardRecv_UpdateItems->dataType) {
         case DataType_Accessory: {
             // 針對收到的資料做為更新硬體參考
-            vector<AccessoryData*>* pAccessoryList = (vector<AccessoryData*>*) &pCommandHardwardRecv_UpdateItems->baseDataList;
-            for (int i=0 ; i<pAccessoryList->size() ; i++) {
-                LOGD("accessoryId:%d", (*pAccessoryList)[i]->accessoryId);
-                LOGD("accessoryType:%d", (*pAccessoryList)[i]->accessoryType);
-            }
-        }
+            vector<AccessoryData*> accessoryList = (vector<AccessoryData*>&) pCommandHardwardRecv_UpdateItems->baseDataList;
             
-        default:
+            for (int i=0 ; i<accessoryList.size() ; i++) {
+                LOGD("accessoryId:%d", accessoryList[i]->accessoryId);
+                
+                for (int j=0 ; j<accessoryList[i]->functionCodeDataList.size() ; j++) {
+                    LOGD("functionCode:%s", accessoryList[i]->functionCodeDataList[j]->functonCode.c_str());
+                    
+                    for (int k=0 ; k<accessoryList[i]->functionCodeDataList[j]->functionCodeValueDataList.size() ; k++) {
+                        LOGD("value:%d", accessoryList[i]->functionCodeDataList[j]->functionCodeValueDataList[k]->value);
+                    }
+                }
+            }
+        }   break;
+            
+        default: {
             LOGE("對應不到dataType");
-            break;
+        }   break;
     }
 }

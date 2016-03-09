@@ -8,7 +8,6 @@
 
 #include "JsonRDTServerCommand.hpp"
 #include <iostream>
-#include <cstring>
 #include <unistd.h>
 #include "Common.hpp"
 #include "Utility.hpp"
@@ -101,7 +100,19 @@ void* JsonRDTServerCommand::threadInput(void *arg)
     return NULL;
 }
 
-#pragma mark - Protected Method
+#pragma mark - Method
+std::string JsonRDTServerCommand::findWord(std::string& string, const std::string& word)
+{
+    size_t startPos = string.find(word) + word.size() + 1;
+    if (startPos != std::string::npos) {
+        size_t endPos = string.find("/", startPos);
+        return string.substr(startPos, endPos - startPos);
+    }
+    
+    return "";
+}
+
+#pragma mark - JsonRDTServerCommand
 
 void JsonRDTServerCommand::processCommandTarget(const Json::Value& inJsonObject, Json::Value& outJsonObject) throw (CommandException)
 {
@@ -109,7 +120,7 @@ void JsonRDTServerCommand::processCommandTarget(const Json::Value& inJsonObject,
     string operation = inJsonObject["operation"].asString();
     
     // vertify
-    
+    // 辨識最上面一層
     if (target.find("product_code") != std::string::npos) {
         CommandHardwardRecv_ProductCode commandHardwardRecv_ProductCode;
         m_pCommandHardwardEvent->onCommandHardwardRecv_ProductCode(&commandHardwardRecv_ProductCode);
@@ -142,7 +153,7 @@ void JsonRDTServerCommand::processCommandTarget(const Json::Value& inJsonObject,
     }
     else if (target.find("accessory") != std::string::npos) {
         // 新增
-        if (operation.find("create") != std::string::npos) {
+        if (operation == "create") {
             AccessoryData* pAccessoryData = new AccessoryData();
 //            pAccessoryData->print();
             CommandHardwardRecv_CreateItems commandHardwardRecv_CreateItems;
@@ -154,7 +165,7 @@ void JsonRDTServerCommand::processCommandTarget(const Json::Value& inJsonObject,
             m_accessoryList.push_back(pAccessoryData);
         }
         // 刪除
-        else if (operation.find("delete") != std::string::npos) {
+        else if (operation == "delete") {
             size_t pos2 = target.rfind("/") - 1;
             size_t pos1 = target.rfind("/", pos2);                                                                 
             string number = target.substr(pos1 + 1, pos2 - pos1);
@@ -166,15 +177,48 @@ void JsonRDTServerCommand::processCommandTarget(const Json::Value& inJsonObject,
 //            m_accessoryList.erase();
         }
         // 查詢
-        else if (operation.find("read") != std::string::npos) {
+        else if (operation == "read") {
             CommandHardwardRecv_ReadItems commandHardwardRecv_ReadItems;
             commandHardwardRecv_ReadItems.dataType = DataType_Accessory;
 //            commandHardwardRecv_ReadItems.m_accessoryList
             m_pCommandHardwardEvent->onCommandHardwardRecv_ReadItems(&commandHardwardRecv_ReadItems);
         }
         // 修改
-        else if (operation.find("update") != std::string::npos) {
-            throw CommandException(__PRETTY_FUNCTION__, __LINE__, CommandException_ErrorCode_No_Match_Command_Operation);
+        else if (operation == "update") {
+            std::string accessory = findWord(target, std::string("accessory"));
+            int accessoryId = atoi(accessory.c_str());
+            for (int i=0 ; i<m_accessoryList.size() ; i++) {
+                if (m_accessoryList[i]->accessoryId == accessoryId) {
+                    std::string functionCode = findWord(target, std::string("function_code"));
+                    for (int j=0 ; j<m_accessoryList[i]->functionCodeDataList.size() ; j++) {
+                        if (m_accessoryList[i]->functionCodeDataList[j]->functonCode == "switch") {
+                            std::string valueString = findWord(target, std::string("value"));
+//                            LOGD("value:%s", value.c_str());
+                            int value = atoi(valueString.c_str());
+                            
+                            m_accessoryList[i]->functionCodeDataList[j]->functionCodeValueDataList[0]->value = value;
+                            
+                            FunctionCodeValueData* pFunctionCodeValueData = new FunctionCodeValueData();
+                            pFunctionCodeValueData->value = value;
+                            
+                            FunctionCodeData* pFunctionCodeData = new FunctionCodeData();
+                            pFunctionCodeData->functonCode = functionCode;
+                            pFunctionCodeData->functionCodeValueDataList.push_back(pFunctionCodeValueData);
+                            
+                            AccessoryData* pAccessoryData = new AccessoryData();
+                            pAccessoryData->accessoryId = accessoryId;
+                            pAccessoryData->functionCodeDataList.push_back(pFunctionCodeData);
+                            
+                            CommandHardwardRecv_UpdateItems updateItems;
+                            updateItems.dataType = DataType_Accessory;
+                            updateItems.baseDataList.push_back(pAccessoryData);
+                            
+                            m_pCommandHardwardEvent->onCommandHardwardRecv_UpdateItems(&updateItems);
+                            break;
+                        }
+                    }
+                }
+            }
         }
         else {
             throw CommandException(__PRETTY_FUNCTION__, __LINE__, CommandException_ErrorCode_No_Match_Command_Operation);

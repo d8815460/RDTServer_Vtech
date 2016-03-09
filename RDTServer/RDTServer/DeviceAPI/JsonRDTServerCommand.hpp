@@ -10,6 +10,7 @@
 #define JsonRDTServerCommand_hpp
 
 #include <stdio.h>
+#include <cstring>
 #include "JsonRDTCommand.hpp"
 #include <json/reader.h>
 
@@ -51,6 +52,10 @@ public:
 #pragma mark - JsonRDTCommand
 protected:
     virtual void recvData(int channelID, BYTE* buffer, int totalLength);
+    
+#pragma mark - Method
+private:
+    std::string findWord(std::string& string, const std::string& word);
     
 #pragma mark - JsonRDTServerCommand
 protected:
