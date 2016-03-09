@@ -97,6 +97,8 @@
 		A2BBADC41C896CAD00B41503 /* CommandHardwardCURDEvent.hpp in Headers */ = {isa = PBXBuildFile; fileRef = A2BBADC21C896CAD00B41503 /* CommandHardwardCURDEvent.hpp */; };
 		A2BBADCB1C8973A900B41503 /* Hardward.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A2BBADC91C8973A900B41503 /* Hardward.cpp */; };
 		A2BBADCC1C8973A900B41503 /* Hardward.hpp in Headers */ = {isa = PBXBuildFile; fileRef = A2BBADCA1C8973A900B41503 /* Hardward.hpp */; };
+		A2C6E1181C8ED55E0024D998 /* DatabaseManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A2C6E1161C8ED55E0024D998 /* DatabaseManager.cpp */; };
+		A2C6E1191C8ED55E0024D998 /* DatabaseManager.hpp in Headers */ = {isa = PBXBuildFile; fileRef = A2C6E1171C8ED55E0024D998 /* DatabaseManager.hpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -197,6 +199,8 @@
 		A2BBADC91C8973A900B41503 /* Hardward.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Hardward.cpp; path = RDTServer/DeviceAPI/Hardward.cpp; sourceTree = SOURCE_ROOT; };
 		A2BBADCA1C8973A900B41503 /* Hardward.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = Hardward.hpp; path = RDTServer/DeviceAPI/Hardward.hpp; sourceTree = SOURCE_ROOT; };
 		A2BED36F1C719B5000AF9D4E /* CMakeLists.txt */ = {isa = PBXFileReference; lastKnownFileType = text; name = CMakeLists.txt; path = RDTServer/CMakeLists.txt; sourceTree = "<group>"; };
+		A2C6E1161C8ED55E0024D998 /* DatabaseManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = DatabaseManager.cpp; path = RDTServer/lib/mac/DatabaseManager.cpp; sourceTree = SOURCE_ROOT; };
+		A2C6E1171C8ED55E0024D998 /* DatabaseManager.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = DatabaseManager.hpp; path = RDTServer/lib/mac/DatabaseManager.hpp; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -405,9 +409,11 @@
 				A26FB5C11C635DD1007E3648 /* PrefixHeader.pch */,
 				A26FB5C21C635DD1007E3648 /* UTF.hpp */,
 				A26FB5C31C635DD1007E3648 /* UTF.cpp */,
+				A26FB5C61C635DD1007E3648 /* Common.hpp */,
 				A26FB5C41C635DD1007E3648 /* Utility.hpp */,
 				A26FB5C51C635DD1007E3648 /* Utility.cpp */,
-				A26FB5C61C635DD1007E3648 /* Common.hpp */,
+				A2C6E1171C8ED55E0024D998 /* DatabaseManager.hpp */,
+				A2C6E1161C8ED55E0024D998 /* DatabaseManager.cpp */,
 				A2BBADCA1C8973A900B41503 /* Hardward.hpp */,
 				A2BBADC91C8973A900B41503 /* Hardward.cpp */,
 				A26FB5C71C635DD1007E3648 /* Device.hpp */,
@@ -478,6 +484,7 @@
 				A26FB6B01C635F67007E3648 /* MQTTPacket.h in Headers */,
 				A26FB6ED1C63600A007E3648 /* writer.h in Headers */,
 				A26FB5D21C635DD1007E3648 /* UTF.hpp in Headers */,
+				A2C6E1191C8ED55E0024D998 /* DatabaseManager.hpp in Headers */,
 				A26FB6CE1C635FB7007E3648 /* MQTTClient.h in Headers */,
 				A2B03D211C6444F8002CFA38 /* AccessoryTypeEnum.hpp in Headers */,
 				A26FB6AE1C635F67007E3648 /* MQTTFormat.h in Headers */,
@@ -599,6 +606,7 @@
 				A26FB5E61C635DEB007E3648 /* BinraryRDTClientConnect.cpp in Sources */,
 				A26FB6031C635E08007E3648 /* JsonRDTServerCommand.cpp in Sources */,
 				A2B44AF11C85948900DD49F6 /* RDTException.cpp in Sources */,
+				A2C6E1181C8ED55E0024D998 /* DatabaseManager.cpp in Sources */,
 				A26FB6B41C635F67007E3648 /* MQTTSubscribeClient.c in Sources */,
 				A26FB6AF1C635F67007E3648 /* MQTTPacket.c in Sources */,
 				A2A17A2B1C7D8C24008AEFD4 /* VtechJsonRDTServerCommand.cpp in Sources */,
