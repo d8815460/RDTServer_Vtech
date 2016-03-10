@@ -6,8 +6,8 @@
 //  Copyright © 2016年 jakey. All rights reserved.
 //
 
-#ifndef DaoManager_hpp
-#define DaoManager_hpp
+#ifndef PojoManager_hpp
+#define PojoManager_hpp
 
 #include <stdio.h>
 #include "Pojo.hpp"
@@ -28,6 +28,11 @@ public:
     {
         pojoList.push_back(pPojo);
     }
+    
+    void clear()
+    {
+        pojoList.clear();
+    }
 };
 
-#endif /* DaoManager_hpp */
+#endif /* PojoManager_hpp */

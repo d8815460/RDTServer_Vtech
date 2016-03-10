@@ -35,6 +35,6 @@ void AccessoryDao::readCallback(PojoManager& outPojoManager, int row, vector<cha
 void AccessoryDao::read(std::string& sql, PojoManager& outPojoManager)
 {
     DatabaseManager& databaseManager = DatabaseManager::getInstance();
-    databaseManager.read(sql, outPojoManager, readCallback);
+    databaseManager.read(sql, outPojoManager, AccessoryDao::readCallback);
     
 }
