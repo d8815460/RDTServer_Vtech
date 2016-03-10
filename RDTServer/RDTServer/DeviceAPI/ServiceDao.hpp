@@ -20,12 +20,21 @@ struct ServicePojo : public Pojo
     int fkAccessorySerial;
     std::string name;
     std::string value;
+    
+    void print()
+    {
+        LOGD("serviceSerial:%d", serviceSerial);
+        LOGD("fkAccessorySerial:%d", fkAccessorySerial);
+        LOGD("name:%s", name.c_str());
+        LOGD("value:%s", value.c_str());
+        LOGD();
+    }
 };
 
 class ServiceDao
 {
 public:
-    static void read(std::string& sql, PojoManager& outPojoManager);
+    static void read(char* sql, PojoManager& outPojoManager);
     
 private:
     static void readCallback(PojoManager& outPojoManager, int row, vector<char*>& colList);

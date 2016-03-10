@@ -38,25 +38,15 @@ DatabaseManager::DatabaseManager()
     AccessoryDao::read(queryAccessorySql, pojoManager);
     for (Pojo* pPojo : pojoManager.pojoList) {
         AccessoryPojo* pAccessoryPojo = (AccessoryPojo*) pPojo;
-        
-        LOGD("accessorySerial:%d", pAccessoryPojo->accessorySerial);
-        LOGD("accessoryId:%d", pAccessoryPojo->accessoryId);
-        LOGD("accessoryType:%d", pAccessoryPojo->accessoryType);
-        LOGD();
+        pAccessoryPojo->print();
     }
     
-    /* 取得 database 裡所有的資料 */
-    pojoManager.clear();
-    ServiceDao::read(queryServiceSql, pojoManager);
-    for (Pojo* pPojo : pojoManager.pojoList) {
-        ServicePojo* pServicePojo = (ServicePojo*) pPojo;
-        
-        LOGD("serviceSerial:%d", pServicePojo->serviceSerial);
-        LOGD("fkAccessorySerial:%d", pServicePojo->fkAccessorySerial);
-        LOGD("name:%s", pServicePojo->name.c_str());
-        LOGD("value:%s", pServicePojo->value.c_str());
-        LOGD();
-    }
+//    /* 取得 database 裡所有的資料 */
+//    pojoManager.clear();
+//    ServiceDao::read(queryServiceSql, pojoManager);
+//    for (Pojo* pPojo : pojoManager.pojoList) {
+//        ServicePojo* pServicePojo = (ServicePojo*) pPojo;
+//    }
     
     close();
 }
@@ -75,14 +65,14 @@ void DatabaseManager::close()
     sqlite3_close(m_pDatabase);
 }
 
-int DatabaseManager::exec(std::string& sql)
+int DatabaseManager::exec(const char* sql)
 {
 //    LOGD("execSQL:%s", sql.c_str());
     
     char *errMsg = NULL;
     
     /* 新增一筆資料 */
-    int count = sqlite3_exec(m_pDatabase, sql.c_str(), 0, 0, &errMsg);
+    int count = sqlite3_exec(m_pDatabase, sql, 0, 0, &errMsg);
 //    LOGD("count:%d", count);
     
     if (errMsg != NULL) {
@@ -100,14 +90,14 @@ int DatabaseManager::exec(std::string& sql)
     return count;
 }
 
-void DatabaseManager::read(std::string& sql, PojoManager& outPojoManager, DatabaseManager_ReadCallback callback)
+void DatabaseManager::read(const char* sql, PojoManager& outPojoManager, DatabaseManager_ReadCallback callback)
 {
     char* errMsg = NULL;
     int rows;
     int cols;
     char** result;
     
-    sqlite3_get_table(m_pDatabase, sql.c_str(), &result, &rows, &cols, &errMsg);
+    sqlite3_get_table(m_pDatabase, sql, &result, &rows, &cols, &errMsg);
     if (errMsg != NULL) {
         throw DatabaseException(__PRETTY_FUNCTION__, __LINE__, errMsg);
     }

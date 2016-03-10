@@ -15,7 +15,7 @@ void ServiceDao::readCallback(PojoManager& outPojoManager, int row, vector<char*
     
     for (size_t i=0 ; i<colList.size() ; i++) {
         char* data = colList[i];
-        LOGD("data:%s", data);
+//        LOGD("data:%s", data);
         
         if (i == 0) {
             pServicePojo->serviceSerial = stoi(data);
@@ -37,9 +37,8 @@ void ServiceDao::readCallback(PojoManager& outPojoManager, int row, vector<char*
     outPojoManager.push_back(pServicePojo);
 }
 
-void ServiceDao::read(std::string& sql, PojoManager& outPojoManager)
+void ServiceDao::read(char* sql, PojoManager& outPojoManager)
 {
     DatabaseManager& databaseManager = DatabaseManager::getInstance();
     databaseManager.read(sql, outPojoManager, ServiceDao::readCallback);
-    
 }

@@ -10,7 +10,6 @@
 #define DatabaseManager_hpp
 
 #include <stdio.h>
-#include <string>
 #include <vector>
 #include "sqlite3.h"
 #include "DatabaseException.hpp"
@@ -19,26 +18,26 @@
 
 using namespace std;
 
-static std::string createAccessory = "CREATE TABLE Accessory ("
+static const char* createAccessory = "CREATE TABLE Accessory ("
                                      "accessorySerial INTEGER PRIMARY KEY,"
                                      "accessoryId     INTEGER,"
                                      "accessoryType   INTEGER);";
 
-static std::string createService =  "CREATE TABLE Service ("
+static const char* createService =  "CREATE TABLE Service ("
                                     "serviceSerial INTEGER PRIMARY KEY,"
                                     "fkAccessorySerial INTEGER,"
                                     "name      TEXT,"
                                     "value     TEXT,"
                                     "FOREIGN KEY(fkAccessorySerial) REFERENCES Accessory(accessorySerial));";
 
-static std::string insertAccessory1 = "INSERT INTO Accessory VALUES(NULL, 888, 999);";
-static std::string insertAccessory2 = "INSERT INTO Accessory VALUES(NULL, 111, 222);";
+static const char* insertAccessory1 = "INSERT INTO Accessory VALUES(NULL, 888, 999);";
+static const char* insertAccessory2 = "INSERT INTO Accessory VALUES(NULL, 111, 222);";
 
-static std::string insertService1 = "INSERT INTO Service VALUES(NULL, 1, 'ColorService', 'RGB');";
-static std::string insertService2 = "INSERT INTO Service VALUES(NULL, 1, 'SwitchService', 'ON_OFF');";
+static const char* insertService1 = "INSERT INTO Service VALUES(NULL, 1, 'ColorService', 'RGB');";
+static const char* insertService2 = "INSERT INTO Service VALUES(NULL, 2, 'SwitchService', 'ON_OFF');";
 
-static std::string queryAccessorySql = "SELECT * FROM Accessory;";
-static std::string queryServiceSql   = "SELECT * FROM Service;";
+static const char* queryAccessorySql = "SELECT * FROM Accessory;";
+static const char* queryServiceSql   = "SELECT * FROM Service;";
 
 typedef void (*DatabaseManager_ReadCallback) (PojoManager& outPojoManager, int row, vector<char*>& rowList);
 
@@ -49,8 +48,8 @@ public:
     
     void open();
     void close();
-    int exec(std::string& sql);
-    void read(std::string& sql, PojoManager& outPojoManager, DatabaseManager_ReadCallback callback);
+    int exec(const char* sql);
+    void read(const char* sql, PojoManager& outPojoManager, DatabaseManager_ReadCallback callback);
     
 #pragma mark - Private Method
     

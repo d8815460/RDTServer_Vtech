@@ -17,6 +17,7 @@ using namespace std;
 
 struct Pojo
 {
+    
 };
 
 #endif /* Dao_hpp */

@@ -16,11 +16,18 @@ struct PojoManager
 {
 public:
     vector<Pojo*> pojoList;
+    PojoManager* pPojoManager;
     
     ~PojoManager()
     {
+        if (pPojoManager != NULL) {
+            delete pPojoManager;
+            pPojoManager = NULL;
+        }
+        
         for (Pojo* pPojo : pojoList) {
             delete pPojo;
+            pPojo = NULL;
         }
     }
     
