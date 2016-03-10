@@ -10,13 +10,25 @@
 #define AccessoryDao_hpp
 
 #include <stdio.h>
-#include "Dao.hpp"
+#include <string>
+#include "DatabaseManager.hpp"
 
-struct AccessoryDao : public Dao
+using namespace std;
+
+struct AccessoryPojo : public Pojo
 {
-    int accessoryNumber;
+    int accessorySerial;
     int accessoryId;
     int accessoryType;
+};
+
+class AccessoryDao
+{
+public:
+    static void read(std::string& sql, PojoManager& outPojoManager);
+
+private:
+    static void readCallback(PojoManager& outPojoManager, int row, vector<char*>& colList);
 };
 
 #endif /* AccessoryDao_hpp */

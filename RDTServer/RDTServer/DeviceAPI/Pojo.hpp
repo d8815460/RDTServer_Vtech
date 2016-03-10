@@ -15,7 +15,7 @@
 
 using namespace std;
 
-class Dao
+struct Pojo
 {
     
 };

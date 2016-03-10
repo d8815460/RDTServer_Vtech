@@ -15,8 +15,8 @@
 #include "Body.hpp"
 #include "IOTCException.hpp"
 #include "Utility.hpp"
-//#include "sqlite3.h"
 
+//#include "sqlite3.h"
 
 //// curlpp
 //#include <curlpp/cURLpp.hpp>
@@ -317,7 +317,7 @@ int main(int argc, char *argv[])
 //        sqlite3_get_table(db , querysql, &result, &rows, &cols, &errMsg);
 //        
 //        /* 列出所有資料 */
-//        for (int i=0 ; i<rows ; i++) {
+//        for (int i=0 ; i<rows+1 ; i++) {
 //            for (int j=0 ; j<cols ; j++) {
 //                printf("%s\t", result[i * cols + j]);
 //            }

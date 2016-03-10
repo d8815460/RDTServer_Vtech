@@ -16,6 +16,7 @@
 enum DatabaseException_ErrorCode
 {
     DatabaseException_ErrorCode_Open_Database_Failed,
+    DatabaseException_ErrorCode_Column_Over_The_Range,
 };
 
 struct DatabaseException : public Exception
@@ -24,6 +25,7 @@ struct DatabaseException : public Exception
     {
         std::map<int, const char*> map;
         map[DatabaseException_ErrorCode_Open_Database_Failed]   = "Open Database Failed";
+        map[DatabaseException_ErrorCode_Column_Over_The_Range]  = "Column Over The Range";
         
         return map;
     }

@@ -14,20 +14,32 @@
 #include <vector>
 #include "sqlite3.h"
 #include "DatabaseException.hpp"
+#include "PojoManager.hpp"
 #include "AccessoryDao.hpp"
-#include "DaoManager.hpp"
 
 using namespace std;
 
 static std::string createAccessory = "CREATE TABLE Accessory ("
-                                     "accessoryNumber INTEGER PRIMARY KEY,"
+                                     "accessorySerial INTEGER PRIMARY KEY,"
                                      "accessoryId     INTEGER,"
                                      "accessoryType   INTEGER);";
 
-static std::string insertAccessory =  "INSERT INTO Accessory VALUES(NULL, 1, 1);";
-static std::string insertAccessory2 = "INSERT INTO Accessory VALUES(NULL, 2, 2);";
+static std::string createService =  "CREATE TABLE Service ("
+                                    "serviceSerial INTEGER PRIMARY KEY,"
+                                    "fkAccessorySerial INTEGER,"
+                                    "name      TEXT,"
+                                    "value     TEXT,"
+                                    "FOREIGN KEY(fkAccessorySerial) REFERENCES Accessory(accessorySerial));";
+
+static std::string insertAccessory1 = "INSERT INTO Accessory VALUES(NULL, 888, 999);";
+static std::string insertAccessory2 = "INSERT INTO Accessory VALUES(NULL, 111, 222);";
+
+static std::string insertService1 =  "INSERT INTO Service VALUES(NULL, 1, 'ColorService', 'RGB');";
+static std::string insertService2 =  "INSERT INTO Service VALUES(NULL, 1, 'SwitchService', 'ON_OFF');";
 
 static std::string queryAccessorySql = "SELECT * FROM Accessory;";
+
+typedef void (*DatabaseManager_ReadCallback) (PojoManager& outPojoManager, int row, vector<char*>& rowList);
 
 class DatabaseManager
 {
@@ -53,10 +65,14 @@ public:
     
     int exec(std::string& sql)
     {
+        LOGD("execSQL:%s", sql.c_str());
+        
         char *errMsg = NULL;
         
         /* 新增一筆資料 */
         int count = sqlite3_exec(m_pDatabase, sql.c_str(), 0, 0, &errMsg);
+        LOGD("count:%d", count);
+        
         if (errMsg != NULL) {
             LOGD("errMsg:%s", errMsg);
             
@@ -72,25 +88,32 @@ public:
         return count;
     }
     
-    void query(std::string& sql)
+    void read(std::string& sql, PojoManager& outPojoManager, DatabaseManager_ReadCallback callback)
     {
-//        map<std::string, std::string> resultMap;
-        
-        char *errMsg = NULL;
-        int rows, cols;
-        char **result;
+        char* errMsg = NULL;
+        int rows;
+        int cols;
+        char** result;
         
         sqlite3_get_table(m_pDatabase, sql.c_str(), &result, &rows, &cols, &errMsg);
         if (errMsg != NULL) {
             throw DatabaseException(__PRETTY_FUNCTION__, __LINE__, errMsg);
         }
         
-//        vector<std::string> headerList;
-        for (int i=1 ; i<rows ; i++) {
+        vector<char*> colList;
+        for (int i=0 ; i<rows+1 ; i++) {
             for (int j=0 ; j<cols ; j++) {
                 LOG("%s\t", result[i * cols + j]);
                 
-//                resultMap.insert(pair<std::string, std::string>("a", "b"));
+                if (i > 0) {
+                    colList.push_back(result[i * cols + j]);
+                }
+                
+            }
+            
+            if (i > 0) {
+                callback(outPojoManager, i, colList);
+                colList.clear();
             }
             
             LOG("\n");
@@ -100,75 +123,10 @@ public:
         sqlite3_free_table(result);
     }
     
-    void queryAccessory(std::string& sql, DaoManager& outDaoManager)
-    {
-        char *errMsg = NULL;
-        int rows, cols;
-        char **result;
-        
-        sqlite3_get_table(m_pDatabase, sql.c_str(), &result, &rows, &cols, &errMsg);
-        if (errMsg != NULL) {
-            throw DatabaseException(__PRETTY_FUNCTION__, __LINE__, errMsg);
-        }
-        
-        for (int i=1 ; i<rows ; i++) {
-            AccessoryDao* pAccessoryDao = new AccessoryDao();
-            
-            for (int j=0 ; j<cols ; j++) {
-//                LOG("%s\t", result[i * cols + j]);
-                
-                if (j == 0) {
-                    pAccessoryDao->accessoryNumber = stoi(result[i * cols + j]);
-                }
-                else if (j == 1) {
-                    pAccessoryDao->accessoryId = stoi(result[i * cols + j]);
-                }
-                else if (j == 2) {
-                    pAccessoryDao->accessoryType = stoi(result[i * cols + j]);
-                }
-            }
-            
-//            LOG("\n");
-            outDaoManager.push_back(pAccessoryDao);
-        }
-        
-        /* 釋放 */
-        sqlite3_free_table(result);
-    }
+#pragma mark - Private Method
     
 private:
-    DatabaseManager()
-    {
-        LOGD("DatabaseManager");
-        
-//        int rows, cols;
-//        char **result;
-        
-        open();
-        
-        /* 建立 Table */
-        exec(createAccessory);
-        
-        /* 新增一筆資料 */
-        exec(insertAccessory);
-        exec(insertAccessory2);
-        
-        /* 取得該筆資料的 ID */
-        LOGD("ID:%lld\n", sqlite3_last_insert_rowid(m_pDatabase));
-        
-        /* 取得 database 裡所有的資料 */
-        DaoManager accessoryDaoManager;
-        queryAccessory(queryAccessorySql, accessoryDaoManager);
-        for (Dao* pDao : accessoryDaoManager.daoList) {
-            AccessoryDao* pAccessoryDao = (AccessoryDao*) pDao;
-            
-            LOGD("id:%d", pAccessoryDao->accessoryNumber);
-            LOGD("accessoryId:%d", pAccessoryDao->accessoryId);
-            LOGD("accessoryType:%d", pAccessoryDao->accessoryType);
-        }
-        
-        close();
-    }
+    DatabaseManager();
     
     static DatabaseManager m_Instance;
     sqlite3* m_pDatabase;

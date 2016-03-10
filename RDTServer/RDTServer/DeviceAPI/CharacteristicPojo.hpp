@@ -11,11 +11,11 @@
 
 #include <stdio.h>
 #include <string>
-#include "Dao.hpp"
+#include "Pojo.hpp"
 
-struct CharacteristicDao : public Dao
+struct CharacteristicPojo : public Pojo
 {
-    int characteristicNumber;
+    int characteristicSerial;
     std::string name;
     std::string value;
 };

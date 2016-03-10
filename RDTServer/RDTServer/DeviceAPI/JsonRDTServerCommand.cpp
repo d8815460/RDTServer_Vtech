@@ -101,6 +101,7 @@ void* JsonRDTServerCommand::threadInput(void *arg)
 }
 
 #pragma mark - Method
+
 std::string JsonRDTServerCommand::findWord(std::string& string, const std::string& word)
 {
     size_t startPos = string.find(word) + word.size() + 1;
@@ -171,7 +172,7 @@ void JsonRDTServerCommand::processCommandTarget(const Json::Value& inJsonObject,
             size_t pos2 = target.rfind("/") - 1;
             size_t pos1 = target.rfind("/", pos2);                                                                 
             string number = target.substr(pos1 + 1, pos2 - pos1);
-            int accessoryId = atoi(number.c_str());
+            int accessoryId = stoi(number.c_str());
             CommandHardwardRecv_DeleteItems commandHardwardRecv_DeleteItems;
             commandHardwardRecv_DeleteItems.dataType = DataType_Accessory;
             commandHardwardRecv_DeleteItems.id = accessoryId;

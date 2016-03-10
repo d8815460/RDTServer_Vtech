@@ -10,23 +10,23 @@
 #define DaoManager_hpp
 
 #include <stdio.h>
-#include "Dao.hpp"
+#include "Pojo.hpp"
 
-struct DaoManager
+struct PojoManager
 {
 public:
-    vector<Dao*> daoList;
+    vector<Pojo*> pojoList;
     
-    ~DaoManager()
+    ~PojoManager()
     {
-        for (Dao* pDao : daoList) {
-            delete pDao;
+        for (Pojo* pPojo : pojoList) {
+            delete pPojo;
         }
     }
     
-    void push_back(Dao* pDao)
+    void push_back(Pojo* pPojo)
     {
-        daoList.push_back(pDao);
+        pojoList.push_back(pPojo);
     }
 };
 

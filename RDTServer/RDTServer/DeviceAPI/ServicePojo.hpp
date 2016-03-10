@@ -11,11 +11,11 @@
 
 #include <stdio.h>
 #include <string>
-#include "Dao.hpp"
+#include "Pojo.hpp"
 
-struct ServiceDao : public Dao
+struct ServicePojo : public Pojo
 {
-    int ServiceNumber;
+    int serviceSerial;
     std::string name;
     std::string value;
 };
