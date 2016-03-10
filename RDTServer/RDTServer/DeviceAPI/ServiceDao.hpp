@@ -21,7 +21,7 @@ struct ServicePojo : public Pojo
     std::string name;
     std::string value;
     
-    void print()
+    virtual void print()
     {
         LOGD("serviceSerial:%d", serviceSerial);
         LOGD("fkAccessorySerial:%d", fkAccessorySerial);

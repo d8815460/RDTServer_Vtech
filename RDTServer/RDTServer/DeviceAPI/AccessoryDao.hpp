@@ -24,7 +24,7 @@ struct AccessoryPojo : public Pojo
     
     vector<ServicePojo*> serviceList;
     
-    void print()
+    virtual void print()
     {
         LOGD("accessorySerial:%d", accessorySerial);
         LOGD("accessoryId:%d", accessoryId);
