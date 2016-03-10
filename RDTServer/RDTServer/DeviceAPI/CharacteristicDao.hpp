@@ -11,8 +11,9 @@
 
 #include <stdio.h>
 #include <string>
+#include "Dao.hpp"
 
-struct CharacteristicDao
+struct CharacteristicDao : public Dao
 {
     int characteristicNumber;
     std::string name;

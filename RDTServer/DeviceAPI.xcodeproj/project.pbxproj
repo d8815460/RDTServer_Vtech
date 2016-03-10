@@ -97,6 +97,7 @@
 		A2A3C2561C91176800ABED16 /* Dao.hpp in Headers */ = {isa = PBXBuildFile; fileRef = A2A3C2541C91176800ABED16 /* Dao.hpp */; };
 		A2A3C25A1C9117CA00ABED16 /* ServiceDao.hpp in Headers */ = {isa = PBXBuildFile; fileRef = A2A3C2581C9117CA00ABED16 /* ServiceDao.hpp */; };
 		A2A3C25E1C9119E400ABED16 /* CharacteristicDao.hpp in Headers */ = {isa = PBXBuildFile; fileRef = A2A3C25C1C9119E400ABED16 /* CharacteristicDao.hpp */; };
+		A2A3C2621C913E3700ABED16 /* DaoManager.hpp in Headers */ = {isa = PBXBuildFile; fileRef = A2A3C2601C913E3700ABED16 /* DaoManager.hpp */; };
 		A2AF5D751C7C395300104205 /* BinraryRDTCommand.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A2AF5D731C7C395300104205 /* BinraryRDTCommand.cpp */; };
 		A2AF5D761C7C395300104205 /* BinraryRDTCommand.hpp in Headers */ = {isa = PBXBuildFile; fileRef = A2AF5D741C7C395300104205 /* BinraryRDTCommand.hpp */; };
 		A2B03D211C6444F8002CFA38 /* AccessoryTypeEnum.hpp in Headers */ = {isa = PBXBuildFile; fileRef = A2B03D201C6444F8002CFA38 /* AccessoryTypeEnum.hpp */; };
@@ -204,6 +205,7 @@
 		A2A3C2541C91176800ABED16 /* Dao.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = Dao.hpp; path = RDTServer/DeviceAPI/Dao.hpp; sourceTree = SOURCE_ROOT; };
 		A2A3C2581C9117CA00ABED16 /* ServiceDao.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = ServiceDao.hpp; path = RDTServer/DeviceAPI/ServiceDao.hpp; sourceTree = SOURCE_ROOT; };
 		A2A3C25C1C9119E400ABED16 /* CharacteristicDao.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = CharacteristicDao.hpp; path = RDTServer/DeviceAPI/CharacteristicDao.hpp; sourceTree = SOURCE_ROOT; };
+		A2A3C2601C913E3700ABED16 /* DaoManager.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = DaoManager.hpp; path = RDTServer/DeviceAPI/DaoManager.hpp; sourceTree = SOURCE_ROOT; };
 		A2AF26A01C73038B00F30460 /* CMakeLists.txt */ = {isa = PBXFileReference; lastKnownFileType = text; name = CMakeLists.txt; path = RDTServer/Targate/VtechDevice/CMakeLists.txt; sourceTree = "<group>"; };
 		A2AF5D731C7C395300104205 /* BinraryRDTCommand.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = BinraryRDTCommand.cpp; path = RDTServer/DeviceAPI/BinraryRDTCommand.cpp; sourceTree = SOURCE_ROOT; };
 		A2AF5D741C7C395300104205 /* BinraryRDTCommand.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = BinraryRDTCommand.hpp; path = RDTServer/DeviceAPI/BinraryRDTCommand.hpp; sourceTree = SOURCE_ROOT; };
@@ -455,6 +457,7 @@
 			children = (
 				A2A3C2541C91176800ABED16 /* Dao.hpp */,
 				A2A3C2531C91176800ABED16 /* Dao.cpp */,
+				A2A3C2601C913E3700ABED16 /* DaoManager.hpp */,
 				A2A3C2501C91163700ABED16 /* AccessoryDao.hpp */,
 				A2A3C2581C9117CA00ABED16 /* ServiceDao.hpp */,
 				A2A3C25C1C9119E400ABED16 /* CharacteristicDao.hpp */,
@@ -574,6 +577,7 @@
 				A26FB6001C635E08007E3648 /* JsonRDTClientCommand.hpp in Headers */,
 				A2AF5D761C7C395300104205 /* BinraryRDTCommand.hpp in Headers */,
 				A26FB6EA1C63600A007E3648 /* reader.h in Headers */,
+				A2A3C2621C913E3700ABED16 /* DaoManager.hpp in Headers */,
 				A26FB5D91C635DD1007E3648 /* Event.hpp in Headers */,
 				A26FB6BF1C635F8B007E3648 /* Countdown.h in Headers */,
 				A2340FDF1C85A9000001D776 /* IOTCException.hpp in Headers */,

@@ -11,8 +11,9 @@
 
 #include <stdio.h>
 #include <string>
+#include "Dao.hpp"
 
-struct ServiceDao
+struct ServiceDao : public Dao
 {
     int ServiceNumber;
     std::string name;

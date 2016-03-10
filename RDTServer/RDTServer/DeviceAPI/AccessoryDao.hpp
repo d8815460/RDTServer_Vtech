@@ -10,8 +10,9 @@
 #define AccessoryDao_hpp
 
 #include <stdio.h>
+#include "Dao.hpp"
 
-struct AccessoryDao
+struct AccessoryDao : public Dao
 {
     int accessoryNumber;
     int accessoryId;

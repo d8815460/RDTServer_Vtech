@@ -15,24 +15,18 @@
 #include "sqlite3.h"
 #include "DatabaseException.hpp"
 #include "AccessoryDao.hpp"
+#include "DaoManager.hpp"
 
 using namespace std;
-
-static std::string createsql = "CREATE TABLE Contact ("
-                            "ID INTEGER PRIMARY KEY,"
-                            "Name VARCHAR(10),"
-                            "PhoneNumber VARCHAR(10));";
 
 static std::string createAccessory = "CREATE TABLE Accessory ("
                                      "accessoryNumber INTEGER PRIMARY KEY,"
                                      "accessoryId     INTEGER,"
                                      "accessoryType   INTEGER);";
 
-static std::string insertsql = "INSERT INTO Contact VALUES(NULL, 'Fred', '09990123456');";
 static std::string insertAccessory =  "INSERT INTO Accessory VALUES(NULL, 1, 1);";
 static std::string insertAccessory2 = "INSERT INTO Accessory VALUES(NULL, 2, 2);";
 
-static std::string querysql = "SELECT * FROM Contact;";
 static std::string queryAccessorySql = "SELECT * FROM Accessory;";
 
 class DatabaseManager
@@ -106,7 +100,7 @@ public:
         sqlite3_free_table(result);
     }
     
-    void queryAccessory(std::string& sql, vector<AccessoryDao*>& outAccessoryDaoList)
+    void queryAccessory(std::string& sql, DaoManager& outDaoManager)
     {
         char *errMsg = NULL;
         int rows, cols;
@@ -135,7 +129,7 @@ public:
             }
             
 //            LOG("\n");
-            outAccessoryDaoList.push_back(pAccessoryDao);
+            outDaoManager.push_back(pAccessoryDao);
         }
         
         /* 釋放 */
@@ -163,13 +157,14 @@ private:
         LOGD("ID:%lld\n", sqlite3_last_insert_rowid(m_pDatabase));
         
         /* 取得 database 裡所有的資料 */
-        vector<AccessoryDao*> accessoryDaoList;
-        queryAccessory(queryAccessorySql, accessoryDaoList);
-        
-        for (AccessoryDao* dao : accessoryDaoList) {
-            LOGD("id:%d", dao->accessoryNumber);
-            LOGD("accessoryId:%d", dao->accessoryId);
-            LOGD("accessoryType:%d", dao->accessoryType);
+        DaoManager accessoryDaoManager;
+        queryAccessory(queryAccessorySql, accessoryDaoManager);
+        for (Dao* pDao : accessoryDaoManager.daoList) {
+            AccessoryDao* pAccessoryDao = (AccessoryDao*) pDao;
+            
+            LOGD("id:%d", pAccessoryDao->accessoryNumber);
+            LOGD("accessoryId:%d", pAccessoryDao->accessoryId);
+            LOGD("accessoryType:%d", pAccessoryDao->accessoryType);
         }
         
         close();
