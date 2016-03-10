@@ -15,7 +15,7 @@
 #include "Body.hpp"
 #include "IOTCException.hpp"
 #include "Utility.hpp"
-#include "sqlite3.h"
+//#include "sqlite3.h"
 
 
 //// curlpp
@@ -161,13 +161,13 @@ using namespace std;
 //    printf("Payload %.*s\n", (int)message.payloadlen, (char*)message.payload);
 //}
 
-static char createsql[] = "CREATE TABLE Contact("
-                        "ID INTEGER PRIMARY KEY,"
-                        "Name VARCHAR(10),"
-                        "PhoneNumber VARCHAR(10));";
-
-static char insertsql[] = "INSERT INTO Contact VALUES(NULL, 'Fred', '09990123456');";
-static char querysql[] = "SELECT * FROM Contact;";
+//static char createsql[] = "CREATE TABLE Contact("
+//                        "ID INTEGER PRIMARY KEY,"
+//                        "Name VARCHAR(10),"
+//                        "PhoneNumber VARCHAR(10));";
+//
+//static char insertsql[] = "INSERT INTO Contact VALUES(NULL, 'Fred', '09990123456');";
+//static char querysql[] = "SELECT * FROM Contact;";
 
 int main(int argc, char *argv[])
 {
@@ -309,6 +309,7 @@ int main(int argc, char *argv[])
 //        
 //        /* 新增一筆資料 */
 //        sqlite3_exec(db, insertsql, 0, 0, &errMsg);
+//        
 //        /* 取得該筆資料的 ID */
 //        printf("%lld\n", sqlite3_last_insert_rowid(db));
 //        

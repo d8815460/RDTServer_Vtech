@@ -152,6 +152,8 @@ void JsonRDTServerCommand::processCommandTarget(const Json::Value& inJsonObject,
         outJsonObject["response"] = arrayObject;
     }
     else if (target.find("accessory") != std::string::npos) {
+        std::string accessory = findWord(target, std::string("accessory"));
+        
         // 新增
         if (operation == "create") {
             AccessoryData* pAccessoryData = new AccessoryData();
@@ -185,7 +187,6 @@ void JsonRDTServerCommand::processCommandTarget(const Json::Value& inJsonObject,
         }
         // 修改
         else if (operation == "update") {
-            std::string accessory = findWord(target, std::string("accessory"));
             int accessoryId = atoi(accessory.c_str());
             for (int i=0 ; i<m_accessoryList.size() ; i++) {
                 if (m_accessoryList[i]->accessoryId == accessoryId) {
