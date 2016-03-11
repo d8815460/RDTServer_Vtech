@@ -37,29 +37,32 @@ DatabaseManager::DatabaseManager()
     exec(createService);
     
     /* 新增一筆資料 */
-    ServicePojo servicePojo1;
-    servicePojo1.fkAccessorySerial = 1;
-    servicePojo1.name = "ColorService";
-    servicePojo1.value = "RGB";
-    ServicePojo servicePojo2;
-    servicePojo2.fkAccessorySerial = 1;
-    servicePojo2.name = "SwitchService";
-    servicePojo2.value = "ON_OFF";
+    shared_ptr<ServicePojo> pServicePojo1(new ServicePojo);
+    pServicePojo1->fkAccessorySerial = 1;
+    pServicePojo1->name = "ColorService";
+    pServicePojo1->value = "RGB";
+    shared_ptr<ServicePojo> pServicePojo2(new ServicePojo);
+    pServicePojo2->fkAccessorySerial = 1;
+    pServicePojo2->name = "SwitchService";
+    pServicePojo2->value = "ON_OFF";
     AccessoryPojo accessoryPojo;
     accessoryPojo.accessoryId = 1;
     accessoryPojo.accessoryType = 1;
-    accessoryPojo.servicePojoList.push_back(&servicePojo1);
-    accessoryPojo.servicePojoList.push_back(&servicePojo2);
+    
+    shared_ptr<vector<shared_ptr<Pojo>>> pp(new vector<shared_ptr<Pojo>>);
+    accessoryPojo.pServicePojoList = pp;
+    accessoryPojo.pServicePojoList->push_back(pServicePojo1);
+    accessoryPojo.pServicePojoList->push_back(pServicePojo2);
     AccessoryDao::create(accessoryPojo);
     
     /* 取得該筆資料的 ID */
 //    LOGD("ID:%lld\n", sqlite3_last_insert_rowid(m_pDatabase));
     
     /* 取得 database 裡所有的資料 */
-    vector<shared_ptr<Pojo>> pojoList;
-    AccessoryDao::read(pojoList);
-    for (shared_ptr<Pojo> pPojo : pojoList) {
-        LOGD("use_count:%ld", pPojo.use_count());
+    shared_ptr<vector<shared_ptr<Pojo>>> pojoList;
+    pojoList = AccessoryDao::read();
+    for (shared_ptr<Pojo> pPojo : *pojoList) {
+//        LOGD("use_count:%ld", pPojo.use_count());
         pPojo->print();
     }
     
@@ -105,8 +108,10 @@ int DatabaseManager::exec(const char* sql)
     return count;
 }
 
-void DatabaseManager::read(const char* sql, vector<shared_ptr<Pojo>>& outPojoList, DatabaseManager_ReadCallback callback)
+shared_ptr<vector<shared_ptr<Pojo>>> DatabaseManager::read(const char* sql, DatabaseManager_ReadCallback callback)
 {
+    shared_ptr<vector<shared_ptr<Pojo>>> pPojoList(new vector<shared_ptr<Pojo>>);
+    
     char* errMsg = NULL;
     int rows;
     int cols;
@@ -129,7 +134,7 @@ void DatabaseManager::read(const char* sql, vector<shared_ptr<Pojo>>& outPojoLis
         }
         
         if (i > 0) {
-            callback(outPojoList, i, colList);
+            callback(pPojoList, i, colList);
             colList.clear();
         }
         
@@ -138,4 +143,6 @@ void DatabaseManager::read(const char* sql, vector<shared_ptr<Pojo>>& outPojoLis
     
     /* 釋放 */
     sqlite3_free_table(result);
+    
+    return pPojoList;
 }

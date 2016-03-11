@@ -23,7 +23,7 @@ struct AccessoryPojo : public Pojo
     int accessoryId;
     int accessoryType;
     
-    vector<ServicePojo*> servicePojoList;
+    shared_ptr<vector<shared_ptr<Pojo>>> pServicePojoList;
     
     virtual ~AccessoryPojo()
     {
@@ -40,8 +40,8 @@ struct AccessoryPojo : public Pojo
         LOGD("accessoryId:%d", accessoryId);
         LOGD("accessoryType:%d", accessoryType);
         
-        for (ServicePojo* pServicePojo : servicePojoList) {
-            pServicePojo->print();
+        for (shared_ptr<Pojo> pPojo : *pServicePojoList) {
+            pPojo->print();
         }
         
         LOGD();
@@ -51,11 +51,11 @@ struct AccessoryPojo : public Pojo
 class AccessoryDao
 {
 public:
-    static void read(vector<shared_ptr<Pojo>>& outPojoList);
+    static shared_ptr<vector<shared_ptr<Pojo>>> read();
     static void create(AccessoryPojo& accessoryPojo);
     
 private:
-    static void readCallback(vector<shared_ptr<Pojo>>& outPojoList, int row, vector<char*>& colList);
+    static void readCallback(shared_ptr<vector<shared_ptr<Pojo>>> outPtrPojoList, int row, vector<char*>& colList);
 };
 
 #endif /* AccessoryDao_hpp */

@@ -21,7 +21,7 @@
 
 using namespace std;
 
-typedef void (*DatabaseManager_ReadCallback) (vector<shared_ptr<Pojo>>& outPojoList, int row, vector<char*>& rowList);
+typedef void (*DatabaseManager_ReadCallback) (shared_ptr<vector<shared_ptr<Pojo>>> outPtrPojoList, int row, vector<char*>& rowList);
 
 class DatabaseManager
 {
@@ -31,7 +31,7 @@ public:
     void open();
     void close();
     int exec(const char* sql);
-    void read(const char* sql, vector<shared_ptr<Pojo>>& outPojoList, DatabaseManager_ReadCallback callback);
+    shared_ptr<vector<shared_ptr<Pojo>>> read(const char* sql, DatabaseManager_ReadCallback callback);
     
 #pragma mark - Private Method
     

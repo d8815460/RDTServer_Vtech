@@ -9,7 +9,7 @@
 #include "AccessoryDao.hpp"
 #include <string>
 
-void AccessoryDao::readCallback(vector<shared_ptr<Pojo>>& outPojoList, int row, vector<char*>& colList)
+void AccessoryDao::readCallback(shared_ptr<vector<shared_ptr<Pojo>>> outPtrPojoList, int row, vector<char*>& colList)
 {
     shared_ptr<AccessoryPojo> pAccessoryPojo(new AccessoryPojo());
 //    LOGD("use_count:%ld", pAccessoryPojo.use_count());
@@ -21,15 +21,10 @@ void AccessoryDao::readCallback(vector<shared_ptr<Pojo>>& outPojoList, int row, 
         if (i == 0) {
             pAccessoryPojo->accessorySerial = stoi(data);
             
-//            /* 取得 database 裡所有的資料 */
-//            outPojoArray.pPojoArray = new PojoArray();
-//            PojoArray& pojoArray = *outPojoArray.pPojoArray;
-//            
-//            ServiceDao::read(pojoArray, pAccessoryPojo->accessorySerial);
-//            for (Pojo* pPojo : pojoArray.subPojoList) {
-//                ServicePojo* pServicePojo = (ServicePojo*) pPojo;
-////                pServicePojo->print();
-//                pAccessoryPojo->servicePojoList.push_back(pServicePojo);
+            /* 取得 database 裡所有的資料 */
+            pAccessoryPojo->pServicePojoList = ServiceDao::read(pAccessoryPojo->accessorySerial);
+//            for (shared_ptr<Pojo> pPojo : pAccessoryPojo->servicePojoList) {
+//                pPojo->print();
 //            }
         }
         else if (i == 1) {
@@ -43,13 +38,13 @@ void AccessoryDao::readCallback(vector<shared_ptr<Pojo>>& outPojoList, int row, 
         }
     }
     
-    outPojoList.push_back(pAccessoryPojo);
+    outPtrPojoList->push_back(pAccessoryPojo);
 }
 
-void AccessoryDao::read(vector<shared_ptr<Pojo>>& outPojoList)
+shared_ptr<vector<shared_ptr<Pojo>>> AccessoryDao::read()
 {
     DatabaseManager& databaseManager = DatabaseManager::getInstance();
-    databaseManager.read("SELECT * FROM Accessory;", outPojoList, AccessoryDao::readCallback);
+    return databaseManager.read("SELECT * FROM Accessory;", AccessoryDao::readCallback);
 }
 
 void AccessoryDao::create(AccessoryPojo& accessoryPojo)
@@ -60,7 +55,7 @@ void AccessoryDao::create(AccessoryPojo& accessoryPojo)
     sprintf(buffer, "INSERT INTO Accessory VALUES(NULL, %d, %d);", accessoryPojo.accessoryId, accessoryPojo.accessoryType);
     databaseManager.exec(buffer);
     
-    for (ServicePojo* pServicePojo : accessoryPojo.servicePojoList) {
-        ServiceDao::create(*pServicePojo);
+    for (shared_ptr<Pojo> pPojo : *accessoryPojo.pServicePojoList) {
+        ServiceDao::create(pPojo);
     }
 }

@@ -40,11 +40,11 @@ struct ServicePojo : public Pojo
 class ServiceDao
 {
 public:
-    static void read(vector<shared_ptr<Pojo>>& outPojoList, int fkAccessorySerial);
-    static void create(ServicePojo& servicePojo);
+    static shared_ptr<vector<shared_ptr<Pojo>>> read(int fkAccessorySerial);
+    static void create(shared_ptr<Pojo> pPojo);
     
 private:
-    static void readCallback(vector<shared_ptr<Pojo>>& outPojoList, int row, vector<char*>& colList);
+    static void readCallback(shared_ptr<vector<shared_ptr<Pojo>>> outPtrPojoList, int row, vector<char*>& colList);
 };
 
 #endif /* ServiceDao_hpp */

@@ -9,7 +9,7 @@
 #include "ServiceDao.hpp"
 #include "DatabaseManager.hpp"
 
-void ServiceDao::readCallback(vector<shared_ptr<Pojo>>& outPojoList, int row, vector<char*>& colList)
+void ServiceDao::readCallback(shared_ptr<vector<shared_ptr<Pojo>>> outPtrPojoList, int row, vector<char*>& colList)
 {
     shared_ptr<ServicePojo> pServicePojo(new ServicePojo());
     
@@ -34,24 +34,24 @@ void ServiceDao::readCallback(vector<shared_ptr<Pojo>>& outPojoList, int row, ve
         }
     }
     
-    outPojoList.push_back(pServicePojo);
-    pServicePojo.reset();
+    outPtrPojoList->push_back(pServicePojo);
 }
 
-void ServiceDao::read(vector<shared_ptr<Pojo>>& outPojoList, int fkAccessorySerial)
+shared_ptr<vector<shared_ptr<Pojo>>> ServiceDao::read(int fkAccessorySerial)
 {
     char buffer[Pojo_Buffer_Size];
     sprintf(buffer, "SELECT * FROM Service WHERE fkAccessorySerial = %d;", fkAccessorySerial);
     
     DatabaseManager& databaseManager = DatabaseManager::getInstance();
-    databaseManager.read(buffer, outPojoList, ServiceDao::readCallback);
+    return databaseManager.read(buffer, ServiceDao::readCallback);
 }
 
-void ServiceDao::create(ServicePojo& servicePojo)
+void ServiceDao::create(shared_ptr<Pojo> pPojo)
 {
     DatabaseManager& databaseManager = DatabaseManager::getInstance();
+    shared_ptr<ServicePojo>& pServicePojo = (shared_ptr<ServicePojo>&) pPojo;
     
     char buffer[Pojo_Buffer_Size];
-    sprintf(buffer, "INSERT INTO Service VALUES(NULL, %d, '%s', '%s');", servicePojo.fkAccessorySerial, servicePojo.name.c_str(), servicePojo.value.c_str());
+    sprintf(buffer, "INSERT INTO Service VALUES(NULL, %d, '%s', '%s');", pServicePojo->fkAccessorySerial, pServicePojo->name.c_str(), pServicePojo->value.c_str());
     databaseManager.exec(buffer);
 }
