@@ -15,7 +15,7 @@
 struct PojoManager
 {
 public:
-    vector<Pojo*> pojoList;
+    vector<Pojo*> subPojoList;
     PojoManager* pPojoManager;
     
     ~PojoManager()
@@ -25,7 +25,7 @@ public:
             pPojoManager = NULL;
         }
         
-        for (Pojo* pPojo : pojoList) {
+        for (Pojo* pPojo : subPojoList) {
             delete pPojo;
             pPojo = NULL;
         }
@@ -33,12 +33,12 @@ public:
     
     void push_back(Pojo* pPojo)
     {
-        pojoList.push_back(pPojo);
+        subPojoList.push_back(pPojo);
     }
     
     void clear()
     {
-        pojoList.clear();
+        subPojoList.clear();
     }
 };
 

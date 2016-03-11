@@ -12,6 +12,20 @@
 
 DatabaseManager DatabaseManager::m_Instance = DatabaseManager();
 
+static const char* createAccessory =    "CREATE TABLE Accessory ("
+                                        "accessorySerial INTEGER PRIMARY KEY,"
+                                        "accessoryId     INTEGER,"
+                                        "accessoryType   INTEGER);";
+
+static const char* createService =  "CREATE TABLE Service ("
+                                    "serviceSerial INTEGER PRIMARY KEY,"
+                                    "fkAccessorySerial INTEGER,"
+                                    "name      TEXT,"
+                                    "value     TEXT,"
+                                    "FOREIGN KEY(fkAccessorySerial) REFERENCES Accessory(accessorySerial));";
+
+static const char* queryAccessorySql = "SELECT * FROM Accessory;";
+
 #pragma mark - Private Method
 
 DatabaseManager::DatabaseManager()
@@ -25,10 +39,20 @@ DatabaseManager::DatabaseManager()
     exec(createService);
     
     /* 新增一筆資料 */
-    exec(insertAccessory1);
-    exec(insertAccessory2);
-    exec(insertService1);
-    exec(insertService2);
+    ServicePojo servicePojo1;
+    servicePojo1.fkAccessorySerial = 1;
+    servicePojo1.name = "ColorService";
+    servicePojo1.value = "RGB";
+    ServicePojo servicePojo2;
+    servicePojo2.fkAccessorySerial = 1;
+    servicePojo2.name = "SwitchService";
+    servicePojo2.value = "ON_OFF";
+    AccessoryPojo accessoryPojo;
+    accessoryPojo.accessoryId = 1;
+    accessoryPojo.accessoryType = 1;
+    accessoryPojo.servicePojoList.push_back(&servicePojo1);
+    accessoryPojo.servicePojoList.push_back(&servicePojo2);
+    AccessoryDao::create(accessoryPojo);
     
     /* 取得該筆資料的 ID */
 //    LOGD("ID:%lld\n", sqlite3_last_insert_rowid(m_pDatabase));
@@ -36,7 +60,7 @@ DatabaseManager::DatabaseManager()
     /* 取得 database 裡所有的資料 */
     PojoManager pojoManager;
     AccessoryDao::read(queryAccessorySql, pojoManager);
-    for (Pojo* pPojo : pojoManager.pojoList) {
+    for (Pojo* pPojo : pojoManager.subPojoList) {
         AccessoryPojo* pAccessoryPojo = (AccessoryPojo*) pPojo;
         pAccessoryPojo->print();
     }

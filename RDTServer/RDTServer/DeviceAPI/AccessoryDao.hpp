@@ -22,7 +22,7 @@ struct AccessoryPojo : public Pojo
     int accessoryId;
     int accessoryType;
     
-    vector<ServicePojo*> serviceList;
+    vector<ServicePojo*> servicePojoList;
     
     virtual void print()
     {
@@ -30,7 +30,7 @@ struct AccessoryPojo : public Pojo
         LOGD("accessoryId:%d", accessoryId);
         LOGD("accessoryType:%d", accessoryType);
         
-        for (ServicePojo* pServicePojo : serviceList) {
+        for (ServicePojo* pServicePojo : servicePojoList) {
             pServicePojo->print();
         }
         
@@ -42,7 +42,8 @@ class AccessoryDao
 {
 public:
     static void read(const char* sql, PojoManager& outPojoManager);
-
+    static void create(AccessoryPojo& accessoryPojo);
+    
 private:
     static void readCallback(PojoManager& outPojoManager, int row, vector<char*>& colList);
 };

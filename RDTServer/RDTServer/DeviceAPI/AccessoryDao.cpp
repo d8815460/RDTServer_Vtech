@@ -20,7 +20,7 @@ void AccessoryDao::readCallback(PojoManager& outPojoManager, int row, vector<cha
         if (i == 0) {
             pAccessoryPojo->accessorySerial = stoi(data);
             
-            char buffer[100];
+            char buffer[Pojo_Buffer_Size];
             sprintf(buffer, "SELECT * FROM Service WHERE fkAccessorySerial = %d;", pAccessoryPojo->accessorySerial);
             
             /* 取得 database 裡所有的資料 */
@@ -28,10 +28,10 @@ void AccessoryDao::readCallback(PojoManager& outPojoManager, int row, vector<cha
             PojoManager& pojoManager = *outPojoManager.pPojoManager;
             
             ServiceDao::read(buffer, pojoManager);
-            for (Pojo* pPojo : pojoManager.pojoList) {
+            for (Pojo* pPojo : pojoManager.subPojoList) {
                 ServicePojo* pServicePojo = (ServicePojo*) pPojo;
 //                pServicePojo->print();
-                pAccessoryPojo->serviceList.push_back(pServicePojo);
+                pAccessoryPojo->servicePojoList.push_back(pServicePojo);
             }
         }
         else if (i == 1) {
@@ -52,4 +52,17 @@ void AccessoryDao::read(const char* sql, PojoManager& outPojoManager)
 {
     DatabaseManager& databaseManager = DatabaseManager::getInstance();
     databaseManager.read(sql, outPojoManager, AccessoryDao::readCallback);
+}
+
+void AccessoryDao::create(AccessoryPojo& accessoryPojo)
+{
+    DatabaseManager& databaseManager = DatabaseManager::getInstance();
+    
+    char buffer[Pojo_Buffer_Size];
+    sprintf(buffer, "INSERT INTO Accessory VALUES(NULL, %d, %d);", accessoryPojo.accessoryId, accessoryPojo.accessoryType);
+    databaseManager.exec(buffer);
+    
+    for (ServicePojo* pServicePojo : accessoryPojo.servicePojoList) {
+        ServiceDao::create(*pServicePojo);
+    }
 }

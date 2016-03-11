@@ -42,3 +42,12 @@ void ServiceDao::read(char* sql, PojoManager& outPojoManager)
     DatabaseManager& databaseManager = DatabaseManager::getInstance();
     databaseManager.read(sql, outPojoManager, ServiceDao::readCallback);
 }
+
+void ServiceDao::create(ServicePojo& servicePojo)
+{
+    DatabaseManager& databaseManager = DatabaseManager::getInstance();
+    
+    char buffer[Pojo_Buffer_Size];
+    sprintf(buffer, "INSERT INTO Service VALUES(NULL, %d, '%s', '%s');", servicePojo.fkAccessorySerial, servicePojo.name.c_str(), servicePojo.value.c_str());
+    databaseManager.exec(buffer);
+}

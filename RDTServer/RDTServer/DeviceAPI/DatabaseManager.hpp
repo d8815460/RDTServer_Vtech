@@ -18,27 +18,6 @@
 
 using namespace std;
 
-static const char* createAccessory = "CREATE TABLE Accessory ("
-                                     "accessorySerial INTEGER PRIMARY KEY,"
-                                     "accessoryId     INTEGER,"
-                                     "accessoryType   INTEGER);";
-
-static const char* createService =  "CREATE TABLE Service ("
-                                    "serviceSerial INTEGER PRIMARY KEY,"
-                                    "fkAccessorySerial INTEGER,"
-                                    "name      TEXT,"
-                                    "value     TEXT,"
-                                    "FOREIGN KEY(fkAccessorySerial) REFERENCES Accessory(accessorySerial));";
-
-static const char* insertAccessory1 = "INSERT INTO Accessory VALUES(NULL, 888, 999);";
-static const char* insertAccessory2 = "INSERT INTO Accessory VALUES(NULL, 111, 222);";
-
-static const char* insertService1 = "INSERT INTO Service VALUES(NULL, 1, 'ColorService', 'RGB');";
-static const char* insertService2 = "INSERT INTO Service VALUES(NULL, 2, 'SwitchService', 'ON_OFF');";
-
-static const char* queryAccessorySql = "SELECT * FROM Accessory;";
-static const char* queryServiceSql   = "SELECT * FROM Service;";
-
 typedef void (*DatabaseManager_ReadCallback) (PojoManager& outPojoManager, int row, vector<char*>& rowList);
 
 class DatabaseManager

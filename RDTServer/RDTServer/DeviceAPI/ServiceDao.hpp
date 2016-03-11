@@ -35,6 +35,7 @@ class ServiceDao
 {
 public:
     static void read(char* sql, PojoManager& outPojoManager);
+    static void create(ServicePojo& servicePojo);
     
 private:
     static void readCallback(PojoManager& outPojoManager, int row, vector<char*>& colList);

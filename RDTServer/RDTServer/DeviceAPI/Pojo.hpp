@@ -13,10 +13,14 @@
 #include <vector>
 #include <string>
 
+#define Pojo_Buffer_Size 100
+
 using namespace std;
 
 struct Pojo
 {
+    virtual ~Pojo() {}
+    
     virtual void print() = 0;
 };
 
