@@ -9,9 +9,10 @@
 #include "AccessoryDao.hpp"
 #include <string>
 
-void AccessoryDao::readCallback(PojoArray& outPojoArray, int row, vector<char*>& colList)
+void AccessoryDao::readCallback(vector<shared_ptr<Pojo>>& outPojoList, int row, vector<char*>& colList)
 {
-    AccessoryPojo* pAccessoryPojo = new AccessoryPojo();
+    shared_ptr<AccessoryPojo> pAccessoryPojo(new AccessoryPojo());
+//    LOGD("use_count:%ld", pAccessoryPojo.use_count());
     
     for (size_t i=0 ; i<colList.size() ; i++) {
         char* data = colList[i];
@@ -20,19 +21,16 @@ void AccessoryDao::readCallback(PojoArray& outPojoArray, int row, vector<char*>&
         if (i == 0) {
             pAccessoryPojo->accessorySerial = stoi(data);
             
-            char buffer[Pojo_Buffer_Size];
-            sprintf(buffer, "SELECT * FROM Service WHERE fkAccessorySerial = %d;", pAccessoryPojo->accessorySerial);
-            
-            /* 取得 database 裡所有的資料 */
-            outPojoArray.pPojoArray = new PojoArray();
-            PojoArray& PojoArray = *outPojoArray.pPojoArray;
-            
-            ServiceDao::read(buffer, PojoArray);
-            for (Pojo* pPojo : PojoArray.subPojoList) {
-                ServicePojo* pServicePojo = (ServicePojo*) pPojo;
-//                pServicePojo->print();
-                pAccessoryPojo->servicePojoList.push_back(pServicePojo);
-            }
+//            /* 取得 database 裡所有的資料 */
+//            outPojoArray.pPojoArray = new PojoArray();
+//            PojoArray& pojoArray = *outPojoArray.pPojoArray;
+//            
+//            ServiceDao::read(pojoArray, pAccessoryPojo->accessorySerial);
+//            for (Pojo* pPojo : pojoArray.subPojoList) {
+//                ServicePojo* pServicePojo = (ServicePojo*) pPojo;
+////                pServicePojo->print();
+//                pAccessoryPojo->servicePojoList.push_back(pServicePojo);
+//            }
         }
         else if (i == 1) {
             pAccessoryPojo->accessoryId = stoi(data);
@@ -45,13 +43,13 @@ void AccessoryDao::readCallback(PojoArray& outPojoArray, int row, vector<char*>&
         }
     }
     
-    outPojoArray.push_back(pAccessoryPojo);
+    outPojoList.push_back(pAccessoryPojo);
 }
 
-void AccessoryDao::read(PojoArray& outPojoArray)
+void AccessoryDao::read(vector<shared_ptr<Pojo>>& outPojoList)
 {
     DatabaseManager& databaseManager = DatabaseManager::getInstance();
-    databaseManager.read("SELECT * FROM Accessory;", outPojoArray, AccessoryDao::readCallback);
+    databaseManager.read("SELECT * FROM Accessory;", outPojoList, AccessoryDao::readCallback);
 }
 
 void AccessoryDao::create(AccessoryPojo& accessoryPojo)

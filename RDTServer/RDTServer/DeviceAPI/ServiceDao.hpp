@@ -11,6 +11,7 @@
 
 #include <stdio.h>
 #include <string>
+#include <memory>
 #include "Pojo.hpp"
 #include "PojoArray.hpp"
 
@@ -20,6 +21,11 @@ struct ServicePojo : public Pojo
     int fkAccessorySerial;
     std::string name;
     std::string value;
+    
+    virtual ~ServicePojo()
+    {
+        
+    }
     
     virtual void print()
     {
@@ -34,11 +40,11 @@ struct ServicePojo : public Pojo
 class ServiceDao
 {
 public:
-    static void read(char* sql, PojoArray& outPojoArray);
+    static void read(vector<shared_ptr<Pojo>>& outPojoList, int fkAccessorySerial);
     static void create(ServicePojo& servicePojo);
     
 private:
-    static void readCallback(PojoArray& outPojoArray, int row, vector<char*>& colList);
+    static void readCallback(vector<shared_ptr<Pojo>>& outPojoList, int row, vector<char*>& colList);
 };
 
 #endif /* ServiceDao_hpp */

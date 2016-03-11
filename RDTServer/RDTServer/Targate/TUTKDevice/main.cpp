@@ -171,6 +171,24 @@ using namespace std;
 
 int main(int argc, char *argv[])
 {
+//    {
+//        shared_ptr<int> a;  // a is empty
+//        {
+//            shared_ptr<int> b( new int( 10 ) );  // allocate resource
+//            
+//            a = b;  // reference counter: 2
+//            LOGD("use_count%ld", a.use_count());
+//            {
+//                shared_ptr<int> c = a;  // reference counter: 3
+//                LOGD("use_count%ld", a.use_count());
+//                *c = 100;
+//            }  // c dead, reference counter: 2
+//            LOGD("use_count%ld", a.use_count());
+//        } // b dead, reference counter: 1
+//        cout << *a << endl;
+//        LOGD("use_count%ld", a.use_count());
+//    }  // release resource
+    
     // MQTT
     {
 //        IPStack ipstack = IPStack();

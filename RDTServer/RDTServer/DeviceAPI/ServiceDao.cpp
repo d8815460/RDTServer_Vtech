@@ -9,9 +9,9 @@
 #include "ServiceDao.hpp"
 #include "DatabaseManager.hpp"
 
-void ServiceDao::readCallback(PojoArray& outPojoArray, int row, vector<char*>& colList)
+void ServiceDao::readCallback(vector<shared_ptr<Pojo>>& outPojoList, int row, vector<char*>& colList)
 {
-    ServicePojo* pServicePojo = new ServicePojo();
+    shared_ptr<ServicePojo> pServicePojo(new ServicePojo());
     
     for (size_t i=0 ; i<colList.size() ; i++) {
         char* data = colList[i];
@@ -34,13 +34,17 @@ void ServiceDao::readCallback(PojoArray& outPojoArray, int row, vector<char*>& c
         }
     }
     
-    outPojoArray.push_back(pServicePojo);
+    outPojoList.push_back(pServicePojo);
+    pServicePojo.reset();
 }
 
-void ServiceDao::read(char* sql, PojoArray& outPojoArray)
+void ServiceDao::read(vector<shared_ptr<Pojo>>& outPojoList, int fkAccessorySerial)
 {
+    char buffer[Pojo_Buffer_Size];
+    sprintf(buffer, "SELECT * FROM Service WHERE fkAccessorySerial = %d;", fkAccessorySerial);
+    
     DatabaseManager& databaseManager = DatabaseManager::getInstance();
-    databaseManager.read(sql, outPojoArray, ServiceDao::readCallback);
+    databaseManager.read(buffer, outPojoList, ServiceDao::readCallback);
 }
 
 void ServiceDao::create(ServicePojo& servicePojo)

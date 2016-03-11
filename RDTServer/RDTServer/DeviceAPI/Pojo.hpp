@@ -20,8 +20,8 @@ using namespace std;
 struct Pojo
 {
     virtual ~Pojo() {}
-    
     virtual void print() = 0;
+    
 };
 
 #endif /* Dao_hpp */

@@ -11,6 +11,7 @@
 
 #include <stdio.h>
 #include <string>
+#include <memory>
 #include "DatabaseManager.hpp"
 #include "ServiceDao.hpp"
 
@@ -23,6 +24,15 @@ struct AccessoryPojo : public Pojo
     int accessoryType;
     
     vector<ServicePojo*> servicePojoList;
+    
+    virtual ~AccessoryPojo()
+    {
+//        if (servicePojoList.size() > 0) {
+//            for (ServicePojo* pServicePojo : servicePojoList) {
+//                delete pServicePojo;
+//            }
+//        }
+    }
     
     virtual void print()
     {
@@ -41,11 +51,11 @@ struct AccessoryPojo : public Pojo
 class AccessoryDao
 {
 public:
-    static void read(PojoArray& outPojoArray);
+    static void read(vector<shared_ptr<Pojo>>& outPojoList);
     static void create(AccessoryPojo& accessoryPojo);
     
 private:
-    static void readCallback(PojoArray& outPojoArray, int row, vector<char*>& colList);
+    static void readCallback(vector<shared_ptr<Pojo>>& outPojoList, int row, vector<char*>& colList);
 };
 
 #endif /* AccessoryDao_hpp */

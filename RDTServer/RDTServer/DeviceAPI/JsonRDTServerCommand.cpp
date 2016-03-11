@@ -9,6 +9,7 @@
 #include "JsonRDTServerCommand.hpp"
 #include <iostream>
 #include <unistd.h>
+#include <string.h>
 #include "Common.hpp"
 #include "Utility.hpp"
 #include "IOTCAPIs.h"

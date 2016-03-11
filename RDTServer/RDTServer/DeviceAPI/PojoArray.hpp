@@ -16,14 +16,14 @@ struct PojoArray
 {
 public:
     vector<Pojo*> subPojoList;
-    PojoArray* pPojoArray;
+//    PojoArray* pPojoArray;
     
     ~PojoArray()
     {
-        if (pPojoArray != NULL) {
-            delete pPojoArray;
-            pPojoArray = NULL;
-        }
+//        if (pPojoArray != NULL) {
+//            delete pPojoArray;
+//            pPojoArray = NULL;
+//        }
         
         for (Pojo* pPojo : subPojoList) {
             delete pPojo;

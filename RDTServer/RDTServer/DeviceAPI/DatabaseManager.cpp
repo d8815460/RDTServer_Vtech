@@ -56,11 +56,11 @@ DatabaseManager::DatabaseManager()
 //    LOGD("ID:%lld\n", sqlite3_last_insert_rowid(m_pDatabase));
     
     /* 取得 database 裡所有的資料 */
-    PojoArray PojoArray;
-    AccessoryDao::read(PojoArray);
-    for (Pojo* pPojo : PojoArray.subPojoList) {
-        AccessoryPojo* pAccessoryPojo = (AccessoryPojo*) pPojo;
-        pAccessoryPojo->print();
+    vector<shared_ptr<Pojo>> pojoList;
+    AccessoryDao::read(pojoList);
+    for (shared_ptr<Pojo> pPojo : pojoList) {
+        LOGD("use_count:%ld", pPojo.use_count());
+        pPojo->print();
     }
     
     close();
@@ -105,7 +105,7 @@ int DatabaseManager::exec(const char* sql)
     return count;
 }
 
-void DatabaseManager::read(const char* sql, PojoArray& outPojoArray, DatabaseManager_ReadCallback callback)
+void DatabaseManager::read(const char* sql, vector<shared_ptr<Pojo>>& outPojoList, DatabaseManager_ReadCallback callback)
 {
     char* errMsg = NULL;
     int rows;
@@ -129,7 +129,7 @@ void DatabaseManager::read(const char* sql, PojoArray& outPojoArray, DatabaseMan
         }
         
         if (i > 0) {
-            callback(outPojoArray, i, colList);
+            callback(outPojoList, i, colList);
             colList.clear();
         }
         
