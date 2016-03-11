@@ -9,7 +9,7 @@
 #include "AccessoryDao.hpp"
 #include <string>
 
-void AccessoryDao::readCallback(PojoManager& outPojoManager, int row, vector<char*>& colList)
+void AccessoryDao::readCallback(PojoArray& outPojoArray, int row, vector<char*>& colList)
 {
     AccessoryPojo* pAccessoryPojo = new AccessoryPojo();
     
@@ -24,11 +24,11 @@ void AccessoryDao::readCallback(PojoManager& outPojoManager, int row, vector<cha
             sprintf(buffer, "SELECT * FROM Service WHERE fkAccessorySerial = %d;", pAccessoryPojo->accessorySerial);
             
             /* 取得 database 裡所有的資料 */
-            outPojoManager.pPojoManager = new PojoManager();
-            PojoManager& pojoManager = *outPojoManager.pPojoManager;
+            outPojoArray.pPojoArray = new PojoArray();
+            PojoArray& PojoArray = *outPojoArray.pPojoArray;
             
-            ServiceDao::read(buffer, pojoManager);
-            for (Pojo* pPojo : pojoManager.subPojoList) {
+            ServiceDao::read(buffer, PojoArray);
+            for (Pojo* pPojo : PojoArray.subPojoList) {
                 ServicePojo* pServicePojo = (ServicePojo*) pPojo;
 //                pServicePojo->print();
                 pAccessoryPojo->servicePojoList.push_back(pServicePojo);
@@ -45,13 +45,13 @@ void AccessoryDao::readCallback(PojoManager& outPojoManager, int row, vector<cha
         }
     }
     
-    outPojoManager.push_back(pAccessoryPojo);
+    outPojoArray.push_back(pAccessoryPojo);
 }
 
-void AccessoryDao::read(const char* sql, PojoManager& outPojoManager)
+void AccessoryDao::read(PojoArray& outPojoArray)
 {
     DatabaseManager& databaseManager = DatabaseManager::getInstance();
-    databaseManager.read(sql, outPojoManager, AccessoryDao::readCallback);
+    databaseManager.read("SELECT * FROM Accessory;", outPojoArray, AccessoryDao::readCallback);
 }
 
 void AccessoryDao::create(AccessoryPojo& accessoryPojo)

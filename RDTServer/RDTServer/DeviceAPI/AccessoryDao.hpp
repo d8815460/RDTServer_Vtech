@@ -41,11 +41,11 @@ struct AccessoryPojo : public Pojo
 class AccessoryDao
 {
 public:
-    static void read(const char* sql, PojoManager& outPojoManager);
+    static void read(PojoArray& outPojoArray);
     static void create(AccessoryPojo& accessoryPojo);
     
 private:
-    static void readCallback(PojoManager& outPojoManager, int row, vector<char*>& colList);
+    static void readCallback(PojoArray& outPojoArray, int row, vector<char*>& colList);
 };
 
 #endif /* AccessoryDao_hpp */

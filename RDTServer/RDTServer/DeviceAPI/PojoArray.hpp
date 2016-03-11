@@ -6,23 +6,23 @@
 //  Copyright © 2016年 jakey. All rights reserved.
 //
 
-#ifndef PojoManager_hpp
-#define PojoManager_hpp
+#ifndef PojoArray_hpp
+#define PojoArray_hpp
 
 #include <stdio.h>
 #include "Pojo.hpp"
 
-struct PojoManager
+struct PojoArray
 {
 public:
     vector<Pojo*> subPojoList;
-    PojoManager* pPojoManager;
+    PojoArray* pPojoArray;
     
-    ~PojoManager()
+    ~PojoArray()
     {
-        if (pPojoManager != NULL) {
-            delete pPojoManager;
-            pPojoManager = NULL;
+        if (pPojoArray != NULL) {
+            delete pPojoArray;
+            pPojoArray = NULL;
         }
         
         for (Pojo* pPojo : subPojoList) {
@@ -42,4 +42,4 @@ public:
     }
 };
 
-#endif /* PojoManager_hpp */
+#endif /* PojoArray_hpp */

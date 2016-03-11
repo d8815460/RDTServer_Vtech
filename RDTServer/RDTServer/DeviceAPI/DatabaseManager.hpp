@@ -13,12 +13,14 @@
 #include <vector>
 #include "sqlite3.h"
 #include "DatabaseException.hpp"
-#include "PojoManager.hpp"
+#include "PojoArray.hpp"
 #include "AccessoryDao.hpp"
+
+#define Database_File_Name "database.db3"
 
 using namespace std;
 
-typedef void (*DatabaseManager_ReadCallback) (PojoManager& outPojoManager, int row, vector<char*>& rowList);
+typedef void (*DatabaseManager_ReadCallback) (PojoArray& outPojoArray, int row, vector<char*>& rowList);
 
 class DatabaseManager
 {
@@ -28,7 +30,7 @@ public:
     void open();
     void close();
     int exec(const char* sql);
-    void read(const char* sql, PojoManager& outPojoManager, DatabaseManager_ReadCallback callback);
+    void read(const char* sql, PojoArray& outPojoArray, DatabaseManager_ReadCallback callback);
     
 #pragma mark - Private Method
     

@@ -12,7 +12,7 @@
 #include <stdio.h>
 #include <string>
 #include "Pojo.hpp"
-#include "PojoManager.hpp"
+#include "PojoArray.hpp"
 
 struct ServicePojo : public Pojo
 {
@@ -34,11 +34,11 @@ struct ServicePojo : public Pojo
 class ServiceDao
 {
 public:
-    static void read(char* sql, PojoManager& outPojoManager);
+    static void read(char* sql, PojoArray& outPojoArray);
     static void create(ServicePojo& servicePojo);
     
 private:
-    static void readCallback(PojoManager& outPojoManager, int row, vector<char*>& colList);
+    static void readCallback(PojoArray& outPojoArray, int row, vector<char*>& colList);
 };
 
 #endif /* ServiceDao_hpp */

@@ -9,7 +9,7 @@
 #include "ServiceDao.hpp"
 #include "DatabaseManager.hpp"
 
-void ServiceDao::readCallback(PojoManager& outPojoManager, int row, vector<char*>& colList)
+void ServiceDao::readCallback(PojoArray& outPojoArray, int row, vector<char*>& colList)
 {
     ServicePojo* pServicePojo = new ServicePojo();
     
@@ -34,13 +34,13 @@ void ServiceDao::readCallback(PojoManager& outPojoManager, int row, vector<char*
         }
     }
     
-    outPojoManager.push_back(pServicePojo);
+    outPojoArray.push_back(pServicePojo);
 }
 
-void ServiceDao::read(char* sql, PojoManager& outPojoManager)
+void ServiceDao::read(char* sql, PojoArray& outPojoArray)
 {
     DatabaseManager& databaseManager = DatabaseManager::getInstance();
-    databaseManager.read(sql, outPojoManager, ServiceDao::readCallback);
+    databaseManager.read(sql, outPojoArray, ServiceDao::readCallback);
 }
 
 void ServiceDao::create(ServicePojo& servicePojo)

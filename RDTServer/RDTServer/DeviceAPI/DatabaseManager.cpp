@@ -24,8 +24,6 @@ static const char* createService =  "CREATE TABLE Service ("
                                     "value     TEXT,"
                                     "FOREIGN KEY(fkAccessorySerial) REFERENCES Accessory(accessorySerial));";
 
-static const char* queryAccessorySql = "SELECT * FROM Accessory;";
-
 #pragma mark - Private Method
 
 DatabaseManager::DatabaseManager()
@@ -58,19 +56,12 @@ DatabaseManager::DatabaseManager()
 //    LOGD("ID:%lld\n", sqlite3_last_insert_rowid(m_pDatabase));
     
     /* 取得 database 裡所有的資料 */
-    PojoManager pojoManager;
-    AccessoryDao::read(queryAccessorySql, pojoManager);
-    for (Pojo* pPojo : pojoManager.subPojoList) {
+    PojoArray PojoArray;
+    AccessoryDao::read(PojoArray);
+    for (Pojo* pPojo : PojoArray.subPojoList) {
         AccessoryPojo* pAccessoryPojo = (AccessoryPojo*) pPojo;
         pAccessoryPojo->print();
     }
-    
-//    /* 取得 database 裡所有的資料 */
-//    pojoManager.clear();
-//    ServiceDao::read(queryServiceSql, pojoManager);
-//    for (Pojo* pPojo : pojoManager.pojoList) {
-//        ServicePojo* pServicePojo = (ServicePojo*) pPojo;
-//    }
     
     close();
 }
@@ -78,7 +69,7 @@ DatabaseManager::DatabaseManager()
 void DatabaseManager::open()
 {
     /* 開啟 database 檔 */
-    if (sqlite3_open_v2("database.db3", &m_pDatabase, SQLITE_OPEN_READWRITE | SQLITE_OPEN_CREATE, NULL)) {
+    if (sqlite3_open_v2(Database_File_Name, &m_pDatabase, SQLITE_OPEN_READWRITE | SQLITE_OPEN_CREATE, NULL)) {
         throw DatabaseException(__PRETTY_FUNCTION__, __LINE__, DatabaseException_ErrorCode_Open_Database_Failed);
     }
 }
@@ -114,7 +105,7 @@ int DatabaseManager::exec(const char* sql)
     return count;
 }
 
-void DatabaseManager::read(const char* sql, PojoManager& outPojoManager, DatabaseManager_ReadCallback callback)
+void DatabaseManager::read(const char* sql, PojoArray& outPojoArray, DatabaseManager_ReadCallback callback)
 {
     char* errMsg = NULL;
     int rows;
@@ -138,7 +129,7 @@ void DatabaseManager::read(const char* sql, PojoManager& outPojoManager, Databas
         }
         
         if (i > 0) {
-            callback(outPojoManager, i, colList);
+            callback(outPojoArray, i, colList);
             colList.clear();
         }
         
