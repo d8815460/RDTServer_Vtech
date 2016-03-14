@@ -84,10 +84,10 @@ void VtechIPHubGatewayHardwardImpl::onCommandHardwardRecvJson(CommandHardwardRec
 {
 	LOGD("onCommandHardwardRecvJson");
 
-	std::string jsonString = pCommandHardwardRecvJsonData->pJsonObject->toStyledString();
-	LOGD("jsonString:%s", jsonString.c_str());
+// 	std::string jsonString = pCommandHardwardRecvJsonData->pJsonObject->toStyledString();
+// 	LOGD("jsonString:%s", jsonString.c_str());
 
-	sendToGateway((char*)jsonString.c_str(), jsonString.length());
+// 	sendToGateway((char*)jsonString.c_str(), jsonString.length());
 }
 
 void VtechIPHubGatewayHardwardImpl::onCommandHardwardRecv_CreateItem(CommandHardwardRecv_CreateItems* pCommandHardwardRecv_CreateItems)
@@ -154,6 +154,12 @@ void VtechIPHubGatewayHardwardImpl::onCommandHardwardRecv_ReadItems(CommandHardw
 void VtechIPHubGatewayHardwardImpl::onCommandHardwardRecv_UpdateItems(CommandHardwardRecv_UpdateItems* pCommandHardwardRecv_UpdateItems)
 {
     LOGD("onCommandHardwardRecv_UpdateItems");
+
+/*
+Vtech added on 14/3/2016
+*/
+	Json::Value root;
+	root["operation"] = "update";
     
     // 根據不同的DataType取得資料
     switch (pCommandHardwardRecv_UpdateItems->dataType) {
@@ -163,15 +169,26 @@ void VtechIPHubGatewayHardwardImpl::onCommandHardwardRecv_UpdateItems(CommandHar
             
             for (int i=0 ; i<accessoryList.size() ; i++) {
                 LOGD("accessoryId:%d", accessoryList[i]->accessoryId);
+
+				root["accessoryId"] = accessoryList[i]->accessoryId;
                 
                 for (int j=0 ; j<accessoryList[i]->functionCodeDataList.size() ; j++) {
                     LOGD("functionCode:%s", accessoryList[i]->functionCodeDataList[j]->functonCode.c_str());
+
+					root["functionCode"] = accessoryList[i]->functionCodeDataList[j]->functonCode.c_str();
                     
                     for (int k=0 ; k<accessoryList[i]->functionCodeDataList[j]->functionCodeValueDataList.size() ; k++) {
                         LOGD("value:%d", accessoryList[i]->functionCodeDataList[j]->functionCodeValueDataList[k]->value);
+
+					root["value"] = accessoryList[i]->functionCodeDataList[j]->functionCodeValueDataList[k]->value;
+
                     }
                 }
             }
+		std::string json = root.toStyledString();
+		LOGD("Received JSON string in UpdateItems - jsonString:%s", json.c_str());
+		pCommandHardwardRecv_UpdateItems->errorCode = -1; // Vtech - 我們這樣放errorCode嗎?
+		sendToGateway((char*)json.c_str(), json.length());
         }   break;
             
         default: {
