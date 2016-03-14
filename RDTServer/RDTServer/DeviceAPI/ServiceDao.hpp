@@ -37,6 +37,10 @@ public:
     static void create(shared_ptr<ServicePojo> pPojo);
     static void update(shared_ptr<ServicePojo> pPojo);
     
+    static int deleteAll();
+    static int deleteWithSerial(int accessorySerial);
+    static int deleteWithFKAccessorySerial(int fkAccessorySerial);
+    
     static shared_ptr<vector<shared_ptr<Pojo>>> read(int fkAccessorySerial);
     
 private:

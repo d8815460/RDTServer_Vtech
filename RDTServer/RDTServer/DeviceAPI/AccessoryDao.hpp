@@ -50,6 +50,9 @@ public:
     static void create(AccessoryPojo& pojo);
     static void update(AccessoryPojo& pojo);
     
+    static int deleteAll();
+    static int deleteWithSerial(int accessorySerial);
+    
     static shared_ptr<vector<shared_ptr<Pojo>>> read();
     
 private:

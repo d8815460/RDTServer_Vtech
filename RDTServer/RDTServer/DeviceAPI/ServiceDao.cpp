@@ -55,6 +55,7 @@ void ServiceDao::create(shared_ptr<ServicePojo> pServicePojo)
     char buffer[Pojo_Buffer_Size];
     sprintf(buffer, "INSERT INTO Service VALUES(NULL, %d, '%s', '%s');", pServicePojo->fkAccessorySerial, pServicePojo->name.c_str(), pServicePojo->value.c_str());
     LOGD("buffer:%s", buffer);
+    
     databaseManager.exec(buffer);
 }
 
@@ -66,4 +67,33 @@ void ServiceDao::update(shared_ptr<ServicePojo> pServicePojo)
     sprintf(buffer, "UPDATE Service SET name = '%s', value = '%s';", pServicePojo->name.c_str(), pServicePojo->value.c_str());
     LOGD("buffer:%s", buffer);
     databaseManager.exec(buffer);
+}
+
+int ServiceDao::deleteAll()
+{
+    DatabaseManager& databaseManager = DatabaseManager::getInstance();
+    
+    return databaseManager.exec("DELETE FROM Service;");
+}
+
+int ServiceDao::deleteWithSerial(int serviceSerial)
+{
+    DatabaseManager& databaseManager = DatabaseManager::getInstance();
+    
+    char buffer[Pojo_Buffer_Size];
+    sprintf(buffer, "DELETE FROM Service WHERE serviceSerial = %d;", serviceSerial);
+    LOGD("buffer:%s", buffer);
+    
+    return databaseManager.exec(buffer);
+}
+
+int ServiceDao::deleteWithFKAccessorySerial(int fkAccessorySerial)
+{
+    DatabaseManager& databaseManager = DatabaseManager::getInstance();
+    
+    char buffer[Pojo_Buffer_Size];
+    sprintf(buffer, "DELETE FROM Service WHERE fkAccessorySerial = %d;", fkAccessorySerial);
+    LOGD("buffer:%s", buffer);
+    
+    return databaseManager.exec(buffer);
 }

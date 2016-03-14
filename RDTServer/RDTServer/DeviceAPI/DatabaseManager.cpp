@@ -19,10 +19,9 @@ static const char* createAccessory =    "CREATE TABLE Accessory ("
 
 static const char* createService =  "CREATE TABLE Service ("
                                     "serviceSerial INTEGER PRIMARY KEY,"
-                                    "fkAccessorySerial INTEGER,"
+                                    "fkAccessorySerial INTEGER REFERENCES Accessory(accessorySerial),"
                                     "name      TEXT,"
-                                    "value     TEXT,"
-                                    "FOREIGN KEY(fkAccessorySerial) REFERENCES Accessory(accessorySerial));";
+                                    "value     TEXT);";
 
 #pragma mark - Private Method
 
@@ -36,44 +35,65 @@ DatabaseManager::DatabaseManager()
     exec(createAccessory);
     exec(createService);
     
-    /* 新增一筆資料 */
-    shared_ptr<ServicePojo> pServicePojo1(new ServicePojo);
-    pServicePojo1->fkAccessorySerial = 1;
-    pServicePojo1->name = "ColorService";
-    pServicePojo1->value = "RGB";
-    shared_ptr<ServicePojo> pServicePojo2(new ServicePojo);
-    pServicePojo2->fkAccessorySerial = 1;
-    pServicePojo2->name = "SwitchService";
-    pServicePojo2->value = "ON_OFF";
+    AccessoryDao::deleteAll();
     
-    AccessoryPojo accessoryPojo;
-    accessoryPojo.accessoryId = 1;
-    accessoryPojo.accessoryType = 1;
-    accessoryPojo.pServicePojoList->push_back(pServicePojo1);
-    accessoryPojo.pServicePojoList->push_back(pServicePojo2);
-    LOGD("accessoryPojo.pServicePojoList:%lu", accessoryPojo.pServicePojoList->size());
-    AccessoryDao::create(accessoryPojo);
+    {
+        /* 新增一筆資料 */
+        shared_ptr<ServicePojo> pServicePojo1(new ServicePojo);
+        pServicePojo1->fkAccessorySerial = 1;
+        pServicePojo1->name = "ColorService";
+        pServicePojo1->value = "RGB";
+        shared_ptr<ServicePojo> pServicePojo2(new ServicePojo);
+        pServicePojo2->fkAccessorySerial = 1;
+        pServicePojo2->name = "SwitchService";
+        pServicePojo2->value = "ON_OFF";
+        AccessoryPojo accessoryPojo;
+        accessoryPojo.accessoryId = 1;
+        accessoryPojo.accessoryType = 1;
+        accessoryPojo.pServicePojoList->push_back(pServicePojo1);
+        accessoryPojo.pServicePojoList->push_back(pServicePojo2);
+        AccessoryDao::create(accessoryPojo);
+    }
     
-//    LOGD("accessoryPojo.pServicePojoList:%lu", accessoryPojo.pServicePojoList->size());
+    {
+        /* 新增一筆資料 */
+        shared_ptr<ServicePojo> pServicePojo1(new ServicePojo);
+        pServicePojo1->fkAccessorySerial = 2;
+        pServicePojo1->name = "AAA";
+        pServicePojo1->value = "BBB";
+        shared_ptr<ServicePojo> pServicePojo2(new ServicePojo);
+        pServicePojo2->fkAccessorySerial = 2;
+        pServicePojo2->name = "CCC";
+        pServicePojo2->value = "DDD";
+        AccessoryPojo accessoryPojo;
+        accessoryPojo.accessoryId = 2;
+        accessoryPojo.accessoryType = 2;
+        accessoryPojo.pServicePojoList->push_back(pServicePojo1);
+        accessoryPojo.pServicePojoList->push_back(pServicePojo2);
+        AccessoryDao::create(accessoryPojo);
+    }
     
     /* 取得該筆資料的 ID */
 //    LOGD("ID:%lld\n", sqlite3_last_insert_rowid(m_pDatabase));
     
-    // 更新資料
     shared_ptr<vector<shared_ptr<Pojo>>> pojoList = AccessoryDao::read();
-    for (shared_ptr<Pojo> pPojo : *pojoList) {
-        
-        shared_ptr<AccessoryPojo>& pAccessoryPojo = (shared_ptr<AccessoryPojo>&) pPojo;
-        pAccessoryPojo->accessoryId = 111;
-        
-        for (shared_ptr<Pojo> pPojo : *pAccessoryPojo->pServicePojoList) {
-            shared_ptr<ServicePojo>& pServicePojo = (shared_ptr<ServicePojo>&) pPojo;
-            pServicePojo->name = "GGYY";
-            LOGD("pServicePojo->name:%s", pServicePojo->name.c_str());
-        }
-        
-        AccessoryDao::update(*pAccessoryPojo);
-    }
+    
+//    // 更新資料
+//    for (shared_ptr<Pojo> pPojo : *pojoList) {
+//        shared_ptr<AccessoryPojo>& pAccessoryPojo = (shared_ptr<AccessoryPojo>&) pPojo;
+//        pAccessoryPojo->accessoryId = 111;
+//        
+//        for (shared_ptr<Pojo> pPojo : *pAccessoryPojo->pServicePojoList) {
+//            shared_ptr<ServicePojo>& pServicePojo = (shared_ptr<ServicePojo>&) pPojo;
+//            pServicePojo->name = "GGYY";
+//            LOGD("pServicePojo->name:%s", pServicePojo->name.c_str());
+//        }
+//        
+//        AccessoryDao::update(*pAccessoryPojo);
+//    }
+    
+    // 刪除資料
+    AccessoryDao::deleteWithSerial(1);
     
     // 查詢資料
     pojoList = AccessoryDao::read();
@@ -114,8 +134,10 @@ int DatabaseManager::exec(const char* sql)
         std::string errorMessage = std::string(errMsg);
         if (errorMessage.rfind("already exists") != std::string::npos) {
             // 不處理
+//            LOGD("errMsg:%s", errMsg);
         }
         else {
+            LOGE("errMsg:%s", errMsg);
             throw DatabaseException(__PRETTY_FUNCTION__, __LINE__, errMsg);
         }
     }

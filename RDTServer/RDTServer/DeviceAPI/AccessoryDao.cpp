@@ -75,6 +75,27 @@ void AccessoryDao::update(AccessoryPojo& accessoryPojo)
     }
 }
 
+int AccessoryDao::deleteAll()
+{
+    DatabaseManager& databaseManager = DatabaseManager::getInstance();
+    
+    ServiceDao::deleteAll();
+    
+    return databaseManager.exec("DELETE FROM Accessory;");
+}
+
+int AccessoryDao::deleteWithSerial(int accessorySerial)
+{
+    DatabaseManager& databaseManager = DatabaseManager::getInstance();
+    
+    char buffer[Pojo_Buffer_Size];
+    sprintf(buffer, "DELETE FROM Accessory WHERE accessorySerial = %d;", accessorySerial);
+    
+    ServiceDao::deleteWithFKAccessorySerial(accessorySerial);
+    
+    return databaseManager.exec(buffer);
+}
+
 shared_ptr<vector<shared_ptr<Pojo>>> AccessoryDao::read()
 {
     DatabaseManager& databaseManager = DatabaseManager::getInstance();
