@@ -24,6 +24,12 @@ unix_stream_client sock(socket_path); // need libsocket++
 VtechIPHubGatewayHardwardDeviceImpl::VtechIPHubGatewayHardwardDeviceImpl()
 {
   LOGD("VtechIPHubGatewayHardwardDeviceImpl");
+
+
+	LOGD("Vtech check to create socket input thread here");
+    pthread_t pThreadsocketInput;
+    pthread_create(&pThreadsocketInput, NULL, &VtechIPHubGatewayHardwardImpl::socketInput, (void*)this);
+
 }
 
 #pragma mark - Device
@@ -43,8 +49,41 @@ void* VtechIPHubGatewayHardwardImpl::socketInput(void *arg)
        memset(buffer, 0, BUFFER_SIZE);
        
        try {
-           sock.rcv(buffer,BUFFER_SIZE-1);
-           LOGD("we found the received payload = %s \n",buffer);
+			sock.rcv(buffer,BUFFER_SIZE-1);
+// 			LOGD("we found received payload from unix socket = %s \n",buffer);
+			char* json = (char*) (buffer);
+    		LOGD("received json data:%s", json);
+			Json::Reader reader;
+			Json::Value inJsonObject;
+			if (reader.parse(json, inJsonObject))
+			{
+				LOGD("JSON object can be parsed");		
+				std::string operation= inJsonObject["operation"].asString();
+				LOGD("received json operation = %s", operation.c_str());
+
+				unsigned int accessoryId= inJsonObject["accessoryId"].asUInt();
+				LOGD("received json accessoryId = %d", accessoryId);
+
+				std::string functionCode= inJsonObject["functionCode"].asString();
+				LOGD("received json functionCode = %s", functionCode.c_str());
+
+				unsigned int value= inJsonObject["value"].asUInt();
+				LOGD("received json value = %d", value);
+
+				if (operation.compare("update") == 0)
+				{
+					LOGD("Vtech check we need to call the update below \n");
+/*
+					we should now call the update api below
+*/
+				}
+				else
+					LOGD("Vtech check it's not a valid operation \n");
+
+				
+			}
+
+
        }
        catch (const libsocket::socket_exception& exc)
        {

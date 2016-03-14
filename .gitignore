@@ -2,4 +2,4 @@ RDTServer/workspace/.metadata/
 *.o
 RDTServer/RDTServer/lib
 RDTServer/RDTServer/bin
-RDTServer/RDTServer/Build
+RDTServer/RDTServer/build
