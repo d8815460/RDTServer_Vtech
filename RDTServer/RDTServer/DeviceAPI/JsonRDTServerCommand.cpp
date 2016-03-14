@@ -101,6 +101,7 @@ void* JsonRDTServerCommand::threadInput(void *arg)
 }
 
 #pragma mark - Method
+
 std::string JsonRDTServerCommand::findWord(std::string& string, const std::string& word)
 {
     size_t startPos = string.find(word) + word.size() + 1;
@@ -152,14 +153,17 @@ void JsonRDTServerCommand::processCommandTarget(const Json::Value& inJsonObject,
         outJsonObject["response"] = arrayObject;
     }
     else if (target.find("accessory") != std::string::npos) {
+        CommandBase* pCommand = NULL;
+        
         // 新增
         if (operation == "create") {
             AccessoryData* pAccessoryData = new AccessoryData();
 //            pAccessoryData->print();
-            CommandHardwardRecv_CreateItems commandHardwardRecv_CreateItems;
-            commandHardwardRecv_CreateItems.dataType = DataType_Accessory;
-            commandHardwardRecv_CreateItems.pBaseData = pAccessoryData;
-            m_pCommandHardwardEvent->onCommandHardwardRecv_CreateItem(&commandHardwardRecv_CreateItems);
+            pCommand = new CommandHardwardRecv_CreateItems();
+            CommandHardwardRecv_CreateItems* pCommandHardwardRecv_CreateItems = (CommandHardwardRecv_CreateItems*) pCommand;
+            pCommandHardwardRecv_CreateItems->dataType = DataType_Accessory;
+            pCommandHardwardRecv_CreateItems->pBaseData = pAccessoryData;
+            m_pCommandHardwardEvent->onCommandHardwardRecv_CreateItem(pCommandHardwardRecv_CreateItems);
             pAccessoryData->print();
             
             m_accessoryList.push_back(pAccessoryData);
@@ -170,18 +174,21 @@ void JsonRDTServerCommand::processCommandTarget(const Json::Value& inJsonObject,
             size_t pos1 = target.rfind("/", pos2);                                                                 
             string number = target.substr(pos1 + 1, pos2 - pos1);
             int accessoryId = atoi(number.c_str());
-            CommandHardwardRecv_DeleteItems commandHardwardRecv_DeleteItems;
-            commandHardwardRecv_DeleteItems.dataType = DataType_Accessory;
-            commandHardwardRecv_DeleteItems.id = accessoryId;
-            m_pCommandHardwardEvent->onCommandHardwardRecv_DeleteItems(&commandHardwardRecv_DeleteItems);
+            
+            pCommand = new CommandHardwardRecv_DeleteItems();
+            CommandHardwardRecv_DeleteItems* pDeleteItems = (CommandHardwardRecv_DeleteItems*) pCommand;
+            pDeleteItems->dataType = DataType_Accessory;
+            pDeleteItems->id = accessoryId;
+            m_pCommandHardwardEvent->onCommandHardwardRecv_DeleteItems(pDeleteItems);
 //            m_accessoryList.erase();
         }
         // 查詢
         else if (operation == "read") {
-            CommandHardwardRecv_ReadItems commandHardwardRecv_ReadItems;
-            commandHardwardRecv_ReadItems.dataType = DataType_Accessory;
+            CommandHardwardRecv_ReadItems readItems;
+            pCommand = &readItems;
+            readItems.dataType = DataType_Accessory;
 //            commandHardwardRecv_ReadItems.m_accessoryList
-            m_pCommandHardwardEvent->onCommandHardwardRecv_ReadItems(&commandHardwardRecv_ReadItems);
+            m_pCommandHardwardEvent->onCommandHardwardRecv_ReadItems(&readItems);
         }
         // 修改
         else if (operation == "update") {
@@ -209,11 +216,13 @@ void JsonRDTServerCommand::processCommandTarget(const Json::Value& inJsonObject,
                             pAccessoryData->accessoryId = accessoryId;
                             pAccessoryData->functionCodeDataList.push_back(pFunctionCodeData);
                             
-                            CommandHardwardRecv_UpdateItems updateItems;
-                            updateItems.dataType = DataType_Accessory;
-                            updateItems.baseDataList.push_back(pAccessoryData);
+                            pCommand = new CommandHardwardRecv_UpdateItems();
+                            CommandHardwardRecv_UpdateItems* pUpdateItems = (CommandHardwardRecv_UpdateItems*) pCommand;
+                            pUpdateItems->dataType = DataType_Accessory;
+                            pUpdateItems->baseDataList.push_back(pAccessoryData);
                             
-                            m_pCommandHardwardEvent->onCommandHardwardRecv_UpdateItems(&updateItems);
+                            m_pCommandHardwardEvent->onCommandHardwardRecv_UpdateItems(pUpdateItems);
+                            
                             break;
                         }
                     }
@@ -223,6 +232,16 @@ void JsonRDTServerCommand::processCommandTarget(const Json::Value& inJsonObject,
         else {
             throw CommandException(__PRETTY_FUNCTION__, __LINE__, CommandException_ErrorCode_No_Match_Command_Operation);
         }
+        
+        // 發生錯誤
+        if (pCommand->errorCode != 0) {
+            // Error Code
+            outJsonObject["error_code"] = pCommand->errorCode;
+        }
+        else {
+            outJsonObject["error_code"] = 0;
+        }
+        delete pCommand;
     }
 //    else {
 //        LOGE("processCommandTarget Error");
@@ -270,9 +289,6 @@ void JsonRDTServerCommand::recvData(int channelID, BYTE* buffer, int totalLength
         sprintf(version, "%d.%d.%d", m_CommandData.version1, m_CommandData.version2, m_CommandData.version3);
         //    LOGD("version:%s", version);
         outJsonObject["version"] = version;
-        
-        // Error Code
-        outJsonObject["error_code"] = 0;
         
         CommandHardwardRecvJsonData commandHardwardRecvJsonData;
         commandHardwardRecvJsonData.pJsonObject = &outJsonObject;

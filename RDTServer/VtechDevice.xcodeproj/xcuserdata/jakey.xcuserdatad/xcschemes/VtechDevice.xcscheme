@@ -64,11 +64,11 @@
       <CommandLineArguments>
          <CommandLineArgument
             argument = "C7KUB944VZFMUH6GYHDJ"
-            isEnabled = "YES">
+            isEnabled = "NO">
          </CommandLineArgument>
          <CommandLineArgument
             argument = "E7YAB554YTZCAH6GY1E1"
-            isEnabled = "NO">
+            isEnabled = "YES">
          </CommandLineArgument>
       </CommandLineArguments>
       <AdditionalOptions>
