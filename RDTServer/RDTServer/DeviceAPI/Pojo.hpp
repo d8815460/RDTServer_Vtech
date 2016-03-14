@@ -6,14 +6,14 @@
 //  Copyright © 2016年 jakey. All rights reserved.
 //
 
-#ifndef Dao_hpp
-#define Dao_hpp
+#ifndef Pojo_hpp
+#define Pojo_hpp
 
 #include <stdio.h>
 #include <vector>
 #include <string>
 
-#define Pojo_Buffer_Size 100
+#define Pojo_Buffer_Size 128
 
 using namespace std;
 
@@ -21,7 +21,6 @@ struct Pojo
 {
     virtual ~Pojo() {}
     virtual void print() = 0;
-    
 };
 
-#endif /* Dao_hpp */
+#endif /* Pojo_hpp */

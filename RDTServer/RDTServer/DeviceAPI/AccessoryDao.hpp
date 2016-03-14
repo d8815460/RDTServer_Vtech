@@ -13,7 +13,6 @@
 #include <string>
 #include <memory>
 #include "DatabaseManager.hpp"
-#include "ServiceDao.hpp"
 
 using namespace std;
 
@@ -22,16 +21,11 @@ struct AccessoryPojo : public Pojo
     int accessorySerial;
     int accessoryId;
     int accessoryType;
-    
     shared_ptr<vector<shared_ptr<Pojo>>> pServicePojoList;
     
-    virtual ~AccessoryPojo()
+    AccessoryPojo()
     {
-//        if (servicePojoList.size() > 0) {
-//            for (ServicePojo* pServicePojo : servicePojoList) {
-//                delete pServicePojo;
-//            }
-//        }
+        pServicePojoList = shared_ptr<vector<shared_ptr<Pojo>>>(new vector<shared_ptr<Pojo>>());
     }
     
     virtual void print()
@@ -40,8 +34,10 @@ struct AccessoryPojo : public Pojo
         LOGD("accessoryId:%d", accessoryId);
         LOGD("accessoryType:%d", accessoryType);
         
-        for (shared_ptr<Pojo> pPojo : *pServicePojoList) {
-            pPojo->print();
+        if (pServicePojoList != NULL) {
+            for (shared_ptr<Pojo> pPojo : *pServicePojoList) {
+                pPojo->print();
+            }
         }
         
         LOGD();
@@ -51,10 +47,13 @@ struct AccessoryPojo : public Pojo
 class AccessoryDao
 {
 public:
+    static void create(AccessoryPojo& pojo);
+    static void update(AccessoryPojo& pojo);
+    
     static shared_ptr<vector<shared_ptr<Pojo>>> read();
-    static void create(AccessoryPojo& accessoryPojo);
     
 private:
+    AccessoryDao() {};
     static void readCallback(shared_ptr<vector<shared_ptr<Pojo>>> outPtrPojoList, int row, vector<char*>& colList);
 };
 

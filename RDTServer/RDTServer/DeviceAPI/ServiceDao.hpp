@@ -13,7 +13,6 @@
 #include <string>
 #include <memory>
 #include "Pojo.hpp"
-#include "PojoArray.hpp"
 
 struct ServicePojo : public Pojo
 {
@@ -21,12 +20,7 @@ struct ServicePojo : public Pojo
     int fkAccessorySerial;
     std::string name;
     std::string value;
-    
-    virtual ~ServicePojo()
-    {
-        
-    }
-    
+            
     virtual void print()
     {
         LOGD("serviceSerial:%d", serviceSerial);
@@ -40,8 +34,10 @@ struct ServicePojo : public Pojo
 class ServiceDao
 {
 public:
+    static void create(shared_ptr<ServicePojo> pPojo);
+    static void update(shared_ptr<ServicePojo> pPojo);
+    
     static shared_ptr<vector<shared_ptr<Pojo>>> read(int fkAccessorySerial);
-    static void create(shared_ptr<Pojo> pPojo);
     
 private:
     static void readCallback(shared_ptr<vector<shared_ptr<Pojo>>> outPtrPojoList, int row, vector<char*>& colList);

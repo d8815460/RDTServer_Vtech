@@ -14,7 +14,6 @@
 #include <memory>
 #include "sqlite3.h"
 #include "DatabaseException.hpp"
-#include "PojoArray.hpp"
 #include "Pojo.hpp"
 
 #define Database_File_Name "database.db3"

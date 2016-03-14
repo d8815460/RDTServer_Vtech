@@ -8,6 +8,7 @@
 
 #include "AccessoryDao.hpp"
 #include <string>
+#include "ServiceDao.hpp"
 
 void AccessoryDao::readCallback(shared_ptr<vector<shared_ptr<Pojo>>> outPtrPojoList, int row, vector<char*>& colList)
 {
@@ -23,7 +24,7 @@ void AccessoryDao::readCallback(shared_ptr<vector<shared_ptr<Pojo>>> outPtrPojoL
             
             /* 取得 database 裡所有的資料 */
             pAccessoryPojo->pServicePojoList = ServiceDao::read(pAccessoryPojo->accessorySerial);
-//            for (shared_ptr<Pojo> pPojo : pAccessoryPojo->servicePojoList) {
+//            for (shared_ptr<Pojo> pPojo : *pAccessoryPojo->pServicePojoList) {
 //                pPojo->print();
 //            }
         }
@@ -41,21 +42,41 @@ void AccessoryDao::readCallback(shared_ptr<vector<shared_ptr<Pojo>>> outPtrPojoL
     outPtrPojoList->push_back(pAccessoryPojo);
 }
 
-shared_ptr<vector<shared_ptr<Pojo>>> AccessoryDao::read()
-{
-    DatabaseManager& databaseManager = DatabaseManager::getInstance();
-    return databaseManager.read("SELECT * FROM Accessory;", AccessoryDao::readCallback);
-}
-
 void AccessoryDao::create(AccessoryPojo& accessoryPojo)
 {
     DatabaseManager& databaseManager = DatabaseManager::getInstance();
     
     char buffer[Pojo_Buffer_Size];
     sprintf(buffer, "INSERT INTO Accessory VALUES(NULL, %d, %d);", accessoryPojo.accessoryId, accessoryPojo.accessoryType);
+    LOGD("buffer:%s", buffer);
     databaseManager.exec(buffer);
     
     for (shared_ptr<Pojo> pPojo : *accessoryPojo.pServicePojoList) {
-        ServiceDao::create(pPojo);
+        shared_ptr<ServicePojo>& pServicePojo = (shared_ptr<ServicePojo>&) pPojo;
+//        LOGD("pServicePojo->name:%s", pServicePojo->name.c_str());
+        
+        ServiceDao::create(pServicePojo);
     }
+}
+
+void AccessoryDao::update(AccessoryPojo& accessoryPojo)
+{
+    DatabaseManager& databaseManager = DatabaseManager::getInstance();
+    
+    char buffer[Pojo_Buffer_Size];
+    sprintf(buffer, "UPDATE Accessory SET accessoryId = %d, accessoryType = %d;", accessoryPojo.accessoryId, accessoryPojo.accessoryType);
+    databaseManager.exec(buffer);
+    
+    if (accessoryPojo.pServicePojoList != NULL) {
+        for (shared_ptr<Pojo> pPojo : *accessoryPojo.pServicePojoList) {
+            shared_ptr<ServicePojo>& pServicePojo = (shared_ptr<ServicePojo>&) pPojo;
+            ServiceDao::update(pServicePojo);
+        }
+    }
+}
+
+shared_ptr<vector<shared_ptr<Pojo>>> AccessoryDao::read()
+{
+    DatabaseManager& databaseManager = DatabaseManager::getInstance();
+    return databaseManager.read("SELECT * FROM Accessory;", AccessoryDao::readCallback);
 }

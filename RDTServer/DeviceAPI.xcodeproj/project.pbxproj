@@ -95,7 +95,6 @@
 		A2A3C2551C91176800ABED16 /* Pojo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A2A3C2531C91176800ABED16 /* Pojo.cpp */; };
 		A2A3C2561C91176800ABED16 /* Pojo.hpp in Headers */ = {isa = PBXBuildFile; fileRef = A2A3C2541C91176800ABED16 /* Pojo.hpp */; };
 		A2A3C25E1C9119E400ABED16 /* CharacteristicPojo.hpp in Headers */ = {isa = PBXBuildFile; fileRef = A2A3C25C1C9119E400ABED16 /* CharacteristicPojo.hpp */; };
-		A2A3C2621C913E3700ABED16 /* PojoArray.hpp in Headers */ = {isa = PBXBuildFile; fileRef = A2A3C2601C913E3700ABED16 /* PojoArray.hpp */; };
 		A2A3C2651C9152F200ABED16 /* AccessoryDao.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A2A3C2631C9152F200ABED16 /* AccessoryDao.cpp */; };
 		A2A3C2661C9152F200ABED16 /* AccessoryDao.hpp in Headers */ = {isa = PBXBuildFile; fileRef = A2A3C2641C9152F200ABED16 /* AccessoryDao.hpp */; };
 		A2A3C26C1C91721300ABED16 /* ServiceDao.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A2A3C26A1C91721300ABED16 /* ServiceDao.cpp */; };
@@ -205,7 +204,6 @@
 		A2A3C2531C91176800ABED16 /* Pojo.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Pojo.cpp; path = RDTServer/DeviceAPI/Pojo.cpp; sourceTree = SOURCE_ROOT; };
 		A2A3C2541C91176800ABED16 /* Pojo.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = Pojo.hpp; path = RDTServer/DeviceAPI/Pojo.hpp; sourceTree = SOURCE_ROOT; };
 		A2A3C25C1C9119E400ABED16 /* CharacteristicPojo.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = CharacteristicPojo.hpp; path = RDTServer/DeviceAPI/CharacteristicPojo.hpp; sourceTree = SOURCE_ROOT; };
-		A2A3C2601C913E3700ABED16 /* PojoArray.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = PojoArray.hpp; path = RDTServer/DeviceAPI/PojoArray.hpp; sourceTree = SOURCE_ROOT; };
 		A2A3C2631C9152F200ABED16 /* AccessoryDao.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AccessoryDao.cpp; path = RDTServer/DeviceAPI/AccessoryDao.cpp; sourceTree = SOURCE_ROOT; };
 		A2A3C2641C9152F200ABED16 /* AccessoryDao.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = AccessoryDao.hpp; path = RDTServer/DeviceAPI/AccessoryDao.hpp; sourceTree = SOURCE_ROOT; };
 		A2A3C26A1C91721300ABED16 /* ServiceDao.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ServiceDao.cpp; path = RDTServer/DeviceAPI/ServiceDao.cpp; sourceTree = SOURCE_ROOT; };
@@ -461,7 +459,6 @@
 			children = (
 				A2A3C2541C91176800ABED16 /* Pojo.hpp */,
 				A2A3C2531C91176800ABED16 /* Pojo.cpp */,
-				A2A3C2601C913E3700ABED16 /* PojoArray.hpp */,
 				A2A3C2641C9152F200ABED16 /* AccessoryDao.hpp */,
 				A2A3C2631C9152F200ABED16 /* AccessoryDao.cpp */,
 				A2A3C26B1C91721300ABED16 /* ServiceDao.hpp */,
@@ -583,7 +580,6 @@
 				A26FB6001C635E08007E3648 /* JsonRDTClientCommand.hpp in Headers */,
 				A2AF5D761C7C395300104205 /* BinraryRDTCommand.hpp in Headers */,
 				A26FB6EA1C63600A007E3648 /* reader.h in Headers */,
-				A2A3C2621C913E3700ABED16 /* PojoArray.hpp in Headers */,
 				A26FB5D91C635DD1007E3648 /* Event.hpp in Headers */,
 				A26FB6BF1C635F8B007E3648 /* Countdown.h in Headers */,
 				A2340FDF1C85A9000001D776 /* IOTCException.hpp in Headers */,

@@ -25,6 +25,8 @@ void ServiceDao::readCallback(shared_ptr<vector<shared_ptr<Pojo>>> outPtrPojoLis
         }
         else if (i == 2) {
             pServicePojo->name = data;
+//            LOGD("data:%s", data);
+//            LOGD("pServicePojo->name:%s", pServicePojo->name);
         }
         else if (i == 3) {
             pServicePojo->value = data;
@@ -46,12 +48,22 @@ shared_ptr<vector<shared_ptr<Pojo>>> ServiceDao::read(int fkAccessorySerial)
     return databaseManager.read(buffer, ServiceDao::readCallback);
 }
 
-void ServiceDao::create(shared_ptr<Pojo> pPojo)
+void ServiceDao::create(shared_ptr<ServicePojo> pServicePojo)
 {
     DatabaseManager& databaseManager = DatabaseManager::getInstance();
-    shared_ptr<ServicePojo>& pServicePojo = (shared_ptr<ServicePojo>&) pPojo;
     
     char buffer[Pojo_Buffer_Size];
     sprintf(buffer, "INSERT INTO Service VALUES(NULL, %d, '%s', '%s');", pServicePojo->fkAccessorySerial, pServicePojo->name.c_str(), pServicePojo->value.c_str());
+    LOGD("buffer:%s", buffer);
+    databaseManager.exec(buffer);
+}
+
+void ServiceDao::update(shared_ptr<ServicePojo> pServicePojo)
+{
+    DatabaseManager& databaseManager = DatabaseManager::getInstance();
+    
+    char buffer[Pojo_Buffer_Size];
+    sprintf(buffer, "UPDATE Service SET name = '%s', value = '%s';", pServicePojo->name.c_str(), pServicePojo->value.c_str());
+    LOGD("buffer:%s", buffer);
     databaseManager.exec(buffer);
 }
