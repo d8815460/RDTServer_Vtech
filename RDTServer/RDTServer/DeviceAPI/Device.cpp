@@ -21,9 +21,18 @@
 
 using namespace std;
 
+Device* Device::m_pInstance = NULL;
+
 Device::Device()
 {
     LOGD("Device");
+    
+    if (m_pInstance != NULL) {
+        throw Exception(__PRETTY_FUNCTION__, __LINE__, -1, "Device two constrator error");
+    }
+    else {
+        m_pInstance = this;
+    }
     
     // Device 註冊推播
 //    http://push.iotcplatform.com/tpns?cmd=device&uid=C3KAB97WKTF4AG6GUHC1

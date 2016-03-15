@@ -43,7 +43,7 @@ private:
 class VtechIPHubGatewayHardward : public Hardward
 {
 public:
-    VtechIPHubGatewayHardward(JsonRDTCommand* pJsonRDTCommand);
+    VtechIPHubGatewayHardward();
     
 #pragma mark - CommandHardwardEvent
     virtual void onCommandHardwardRecv_CreateItem(CommandHardwardRecv_CreateItems* pCommandHardwardRecv_CreateItems);
@@ -52,7 +52,6 @@ public:
     virtual void onCommandHardwardRecv_UpdateItems(CommandHardwardRecv_UpdateItems* pCommandHardwardRecv_UpdateItems);
     
 protected:
-    JsonRDTCommand* m_pJsonRDTCommand;
 };
 
 #endif /* VtechIPHubGatewayDevice_hpp */

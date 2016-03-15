@@ -114,7 +114,7 @@ void JsonRDTCommand::parseRecvData(ParseRecvData* pParseRecvData) throw (Command
         
         do {
             int fragmentLength = 0;
-            fragmentLength = pBuffer[offset + 4] + 4 + 2 + 2;
+            fragmentLength = pBuffer[offset + 2] + 2 + 2 + 2; // header first 2 bytes, header end 2 bytes, Length size 2 bytes
             
             if (isBasicVerificationPass(pBuffer + offset, fragmentLength) == true) {
                 recvData(channelID, pBuffer + offset, fragmentLength);
@@ -193,11 +193,37 @@ void JsonRDTCommand::commandHardwardSend_UpdateItems(CommandHardwardSend_UpdateI
 {
     switch (pCommandHardwardSend_UpdateItems->dataType) {
         case DataType_Accessory:
-            // 發送上報
+            // 準備json
             if (pCommandHardwardSend_UpdateItems->baseDataList.size() > 0) {
+                std::string json = pCommandHardwardSend_UpdateItems->baseDataList[0]->toJson();
+                LOGD("json = \n%s", json.c_str());
+                
+                Json::Reader reader;
                 Json::Value jsonObject;
-                pCommandHardwardSend_UpdateItems->baseDataList[0]->toJson(jsonObject);
-                LOGD("json = %s", jsonObject.toStyledString().c_str());
+                if (reader.parse(json, jsonObject))
+                {
+                    Json::Value root;
+                    
+                    // Common
+                    root["serno"] = 12345678;
+                    root["operation"] = "update";
+                    root["target"] = "/accessory/";
+                    root["request"] = jsonObject;
+                    
+                    json = root.toStyledString();
+                    LOGD("json = \n%s", json.c_str());
+                    
+                    // 發送上報
+//                    set<int>::iterator it = m_nChannelIDList.end();
+//                    it--;
+//                    int channelID = (*it);
+//                    sendJsonData(channelID, root);
+                    
+//                    for (set<int>::iterator it=m_nChannelIDList.begin() ; it!=m_nChannelIDList.end() ; it++) {
+//                        int channelID = (*it);
+//                        sendJsonData(channelID, root);
+//                    }
+                }
             }
             
             break;
@@ -229,4 +255,21 @@ bool JsonRDTCommand::isBasicVerificationPass(BYTE *buffer, int length)
     else {
         return false;
     }
+}
+
+#pragma mark - Method
+
+void JsonRDTCommand::sendJsonData(int channelID, Json::Value& jsonObject)
+{
+    std::string jsonString = jsonObject.toStyledString();
+    LOGD("JSON傳送資料:%s", jsonString.c_str());
+    
+    JsonRDTCommand_ParseSendData jsonParseSendData;
+    jsonParseSendData.channelID = channelID;
+    jsonParseSendData.serno = jsonObject["serno"].asUInt();
+    jsonParseSendData.totalCount = 1;
+    jsonParseSendData.count = 1;
+    jsonParseSendData.pData = (BYTE*) jsonString.c_str();
+    jsonParseSendData.dataLength = (int) jsonString.length();
+    parseSendData(&jsonParseSendData);
 }

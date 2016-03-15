@@ -34,9 +34,12 @@ struct FunctionCodeValueData
 {
     int value;
     
-    void toJson(Json::Value& outJsonObject)
+    std::string toJson()
     {
-        outJsonObject["value"] = value;
+        std::string json;
+        json.append(QUOTES).append("value").append(QUOTES_COLON).append(to_string(value)).append(NEW_LINE);
+        
+        return json;
     }
     
     void print()
@@ -65,27 +68,17 @@ struct FunctionCodeData
         functionCodeValueDataList.push_back(pFunctionCodeValueData);
     }
     
-    void toJson(Json::Value& outJsonObject)
+    std::string toJson()
     {
-        Json::Value array;
-        Json::Value item;
-        array.append(item);
+        std::string json;
         
-        outJsonObject["functon_codes"] = array;
-        item["functon_code"] = functonCode;
+        json.append(QUOTES).append("functon_code").append(QUOTES_COLON).append(QUOTES).append(functonCode).append(QUOTES).append(COMMA).append(NEW_LINE);
+        for (int i=0 ; i<functionCodeValueDataList.size() ; i++) {
+            json.append(QUOTES).append("index").append(QUOTES_COLON).append(to_string(i)).append(COMMA).append(NEW_LINE);
+            json.append(functionCodeValueDataList[i]->toJson());
+        }
         
-//        {
-//            Json::Value array;
-//            Json::Value item;
-//            array.append(item);
-//            
-//            outJsonObject["indexes"] = ;
-//            
-//            for (int i=0 ; i<functionCodeValueDataList.size() ; i++) {
-//                str.append("\"index\":").append(to_string(i)).append(NEW_LINE);
-//                str.append(functionCodeValueDataList[i]->toJson());
-//            }
-//        }
+        return json;
     }
     
     void print()
@@ -129,19 +122,22 @@ struct BaseData
         functionCodeDataList.push_back(functionCodeData);
     }
     
-    void toJson(Json::Value& outJsonObject)
+    virtual std::string toJson()
     {
-        Json::Value array;
-        Json::Value item;
-        array.append(item);
+        std::string json;
         
-        outJsonObject["function_codes"] = array;
+        json.append(QUOTES).append("function_codes").append(QUOTES_COLON_BRACKETS).append(NEW_LINE);
+        json.append("{").append(NEW_LINE);
         for (int i=0 ; i<functionCodeDataList.size() ; i++) {
-            functionCodeDataList[i]->toJson(item);
+            json.append(functionCodeDataList[i]->toJson());
         }
+        json.append("}").append(NEW_LINE);
+        json.append("]").append(NEW_LINE);
+        
+        return json;
     }
     
-    void print()
+    virtual void print()
     {
         for (int i=0 ; i<functionCodeDataList.size() ; i++) {
             functionCodeDataList[i]->print();
@@ -154,20 +150,26 @@ struct AccessoryData : BaseData
     int accessoryId;
     int accessoryType;
     
-    void toJson(Json::Value& outJsonObject)
+    virtual std::string toJson()
     {
-        Json::Value arrayObject;
-        Json::Value arraryItems;
-        arrayObject.append(arraryItems);
+        std::string json;
         
-        outJsonObject["accessories"] = arrayObject;
-        arraryItems["accessory_id"] = accessoryId;
-        arraryItems["accessory_type"] = accessoryType;
+        json.append("{").append(NEW_LINE);
         
-        BaseData::toJson(arraryItems);
+        json.append(QUOTES).append("accessories").append(QUOTES_COLON_BRACKETS).append(NEW_LINE);
+        json.append("{").append(NEW_LINE);
+        json.append(QUOTES).append("accessory_id").append(QUOTES_COLON).append(to_string(accessoryId)).append(COMMA).append(NEW_LINE);
+        json.append(QUOTES).append("accessory_type").append(QUOTES_COLON).append(to_string(accessoryType)).append(COMMA).append(NEW_LINE);
+        json.append(BaseData::toJson());
+        json.append("}").append(NEW_LINE);
+        json.append("]").append(NEW_LINE);
+        
+        json.append("}");
+        
+        return json;
     }
     
-    void print()
+    virtual void print()
     {
         LOGD("accessoryId:%d", accessoryId);
         LOGD("accessoryType:%d", accessoryType);

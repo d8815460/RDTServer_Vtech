@@ -295,18 +295,5 @@ void JsonRDTServerCommand::recvData(int channelID, BYTE* buffer, int totalLength
         m_pCommandHardwardEvent->onCommandHardwardRecvJson(&commandHardwardRecvJsonData);
     }
     
-    set<int>::iterator it = m_nChannelIDList.end();
-    it--;
-    
-    std::string jsonString = outJsonObject.toStyledString();
-    LOGD("JSON傳送資料:%s", jsonString.c_str());
-    
-    JsonRDTServerCommand_ParseSendData jsonParseSendData;
-    jsonParseSendData.channelID = *it;
-    jsonParseSendData.serno = outJsonObject["serno"].asUInt();
-    jsonParseSendData.totalCount = 1;
-    jsonParseSendData.count = 1;
-    jsonParseSendData.pData = (BYTE*) jsonString.c_str();
-    jsonParseSendData.dataLength = (int) jsonString.length();
-    parseSendData(&jsonParseSendData);
+    sendJsonData(channelID, outJsonObject);
 }

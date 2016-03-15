@@ -56,7 +56,7 @@ protected:
 #pragma mark - Method
 private:
     std::string findWord(std::string& string, const std::string& word);
-    
+        
 #pragma mark - JsonRDTServerCommand
 protected:
     virtual void processCommandTarget(const Json::Value& jsonObject, Json::Value& outJsonObject) throw (CommandException);

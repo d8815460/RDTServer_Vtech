@@ -32,6 +32,9 @@ public:
     
     void run(const char* parameter);
     
+    static Device* getInstance() { return m_pInstance; }
+    Command* getCommand() { return m_pCommand; }
+    
     // 註冊Callback
     //    void registerListener(Callback callback);
         
@@ -52,6 +55,8 @@ public:
     
 // 成員變數
 protected:
+    static Device* m_pInstance;
+    
     Command* m_pCommand;
     Hardward* m_pHardward;
     

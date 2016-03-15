@@ -129,6 +129,10 @@ protected:
     bool isBasicVerificationPass(BYTE* buffer, int length);
     virtual void recvData(int channelID, BYTE* buffer, int totalLength) = 0;
     
+#pragma mark - Method
+protected:
+    void sendJsonData(int channelID, Json::Value& jsonObject);
+    
 #pragma mark - Member
 protected:
     set<int>                m_nChannelIDList;

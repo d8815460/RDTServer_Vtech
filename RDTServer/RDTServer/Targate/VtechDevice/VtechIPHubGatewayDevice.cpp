@@ -87,7 +87,7 @@ void VtechIPHubGatewayDevice::reset()
 
 Hardward* VtechIPHubGatewayDevice::createHardward()
 {
-    return new VtechIPHubGatewayHardward((JsonRDTCommand*) m_pCommand);
+    return new VtechIPHubGatewayHardward();
 }
 
 Command* VtechIPHubGatewayDevice::createCommand(Connect* pConnect, CommandHardwardEvent* pCommandHardwardEvent)
@@ -124,9 +124,9 @@ void VtechIPHubGatewayDevice::onCommandRecvData(CommandRecvData* pCommandRecvDat
 
 #pragma mark - VtechIPHubGatewayHardward::VtechIPHubGatewayHardward
 
-VtechIPHubGatewayHardward::VtechIPHubGatewayHardward(JsonRDTCommand* pJsonRDTCommand)
+VtechIPHubGatewayHardward::VtechIPHubGatewayHardward()
 {
-    m_pJsonRDTCommand = pJsonRDTCommand;
+    LOGD("VtechIPHubGatewayHardward");
 }
 
 void VtechIPHubGatewayHardward::onCommandHardwardRecv_CreateItem(CommandHardwardRecv_CreateItems* pCommandHardwardRecv_CreateItems)
@@ -219,10 +219,13 @@ void VtechIPHubGatewayHardward::onCommandHardwardRecv_UpdateItems(CommandHardwar
         }   break;
     }
     
-//    // 通知update
-//    CommandHardwardSend_UpdateItems sendUpdateItems;
-//    sendUpdateItems.baseDataList = pCommandHardwardRecv_UpdateItems->baseDataList;
-//    sendUpdateItems.dataType = pCommandHardwardRecv_UpdateItems->dataType;
-//    sendUpdateItems.errorCode = pCommandHardwardRecv_UpdateItems->errorCode;
-//    m_pJsonRDTCommand->commandHardwardSend_UpdateItems(&sendUpdateItems);
+    // 通知update
+    CommandHardwardSend_UpdateItems sendUpdateItems;
+    sendUpdateItems.baseDataList = pCommandHardwardRecv_UpdateItems->baseDataList;
+    sendUpdateItems.dataType = pCommandHardwardRecv_UpdateItems->dataType;
+    sendUpdateItems.errorCode = pCommandHardwardRecv_UpdateItems->errorCode;
+    
+    Device* pDevice = Device::getInstance();
+    JsonRDTCommand* jsonRDTCommand = (JsonRDTCommand*) pDevice->getCommand();
+    jsonRDTCommand->commandHardwardSend_UpdateItems(&sendUpdateItems);
 }
