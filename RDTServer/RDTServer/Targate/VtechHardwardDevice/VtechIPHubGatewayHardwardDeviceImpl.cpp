@@ -114,7 +114,7 @@ void VtechIPHubGatewayHardwardImpl::sendToGateway(char* payload, int length)
 
 VtechIPHubGatewayHardwardImpl::VtechIPHubGatewayHardwardImpl(JsonRDTCommand* pJsonRDTCommand) : VtechIPHubGatewayHardward(pJsonRDTCommand)
 {
-
+  LOGD("VtechIPHubGatewayHardwardImpl");
 }
 
 #pragma mark - VtechIPHubGatewayHardwardImpl::CommandHardwardEvent
@@ -234,4 +234,6 @@ Vtech added on 14/3/2016
             LOGE("對應不到dataType");
         }   break;
     }
+
+    // 通知update
 }

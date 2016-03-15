@@ -14,6 +14,7 @@
 
 class Hardward : public CommandHardwardEvent
 {
+public:
 #pragma mark - CommandHardwardEvent
     virtual void onCommandHardwardNotify(CommandHardwardNotifyData* pCommandHardwardNotifyData);
     virtual void onCommandHardwardRecvJson(CommandHardwardRecvJsonData* pCommandHardwardRecvJsonData);

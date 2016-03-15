@@ -193,7 +193,13 @@ void JsonRDTCommand::commandHardwardSend_UpdateItems(CommandHardwardSend_UpdateI
 {
     switch (pCommandHardwardSend_UpdateItems->dataType) {
         case DataType_Accessory:
-            // 發送推播
+            // 發送上報
+            if (pCommandHardwardSend_UpdateItems->baseDataList.size() > 0) {
+                Json::Value jsonObject;
+                pCommandHardwardSend_UpdateItems->baseDataList[0]->toJson(jsonObject);
+                LOGD("json = %s", jsonObject.toStyledString().c_str());
+            }
+            
             break;
             
         case DataType_Group:

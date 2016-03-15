@@ -12,6 +12,8 @@
 #include <stdio.h>
 #include <string>
 #include <vector>
+#include "Common.hpp"
+#include <json/reader.h>
 
 using namespace std;
 
@@ -31,6 +33,11 @@ struct CommandBase
 struct FunctionCodeValueData
 {
     int value;
+    
+    void toJson(Json::Value& outJsonObject)
+    {
+        outJsonObject["value"] = value;
+    }
     
     void print()
     {
@@ -56,6 +63,29 @@ struct FunctionCodeData
         pFunctionCodeValueData->value = value;
         
         functionCodeValueDataList.push_back(pFunctionCodeValueData);
+    }
+    
+    void toJson(Json::Value& outJsonObject)
+    {
+        Json::Value array;
+        Json::Value item;
+        array.append(item);
+        
+        outJsonObject["functon_codes"] = array;
+        item["functon_code"] = functonCode;
+        
+//        {
+//            Json::Value array;
+//            Json::Value item;
+//            array.append(item);
+//            
+//            outJsonObject["indexes"] = ;
+//            
+//            for (int i=0 ; i<functionCodeValueDataList.size() ; i++) {
+//                str.append("\"index\":").append(to_string(i)).append(NEW_LINE);
+//                str.append(functionCodeValueDataList[i]->toJson());
+//            }
+//        }
     }
     
     void print()
@@ -99,6 +129,18 @@ struct BaseData
         functionCodeDataList.push_back(functionCodeData);
     }
     
+    void toJson(Json::Value& outJsonObject)
+    {
+        Json::Value array;
+        Json::Value item;
+        array.append(item);
+        
+        outJsonObject["function_codes"] = array;
+        for (int i=0 ; i<functionCodeDataList.size() ; i++) {
+            functionCodeDataList[i]->toJson(item);
+        }
+    }
+    
     void print()
     {
         for (int i=0 ; i<functionCodeDataList.size() ; i++) {
@@ -111,6 +153,19 @@ struct AccessoryData : BaseData
 {
     int accessoryId;
     int accessoryType;
+    
+    void toJson(Json::Value& outJsonObject)
+    {
+        Json::Value arrayObject;
+        Json::Value arraryItems;
+        arrayObject.append(arraryItems);
+        
+        outJsonObject["accessories"] = arrayObject;
+        arraryItems["accessory_id"] = accessoryId;
+        arraryItems["accessory_type"] = accessoryType;
+        
+        BaseData::toJson(arraryItems);
+    }
     
     void print()
     {
