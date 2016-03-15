@@ -1,0 +1,34 @@
+device link error (note that device means sensor in this document, e.g. motion, door....)
+device command handle error
+device not found (accessoryId not found)
+device type error (e.g. device exists but it's supposed to be a light bulb instead of a motion sensor)
+device registration error
+device registration timeout
+device delete failed
+device record is corrupted (when this happened the user may need to re-register all the devices again)
+function code not supported (applied to both device and ip-hub itself)
+function code value is out of range
+function code value type error
+cannot contact OTA server
+OTA file download error
+device OTA update failed
+IP-hub OTA update failed
+cannot register to TUTK push notification server
+No internet connection (e.g. software OTA, push notification would not work)
+No LAN connection
+user authentication error (reserved for account management)
+group create failed
+delete group failed
+add device to group failed
+remove device to group failed
+backup failed
+restore failed
+activity log access error
+activity log file is full
+ULE system error (i.e. sensor RF system)
+ULE system busy
+system storage is full
+general system error (would require a soft reboot or power cycle)
+
+
+
