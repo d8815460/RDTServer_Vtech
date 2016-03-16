@@ -21,11 +21,11 @@ struct AccessoryPojo : public Pojo
     int accessorySerial;
     int accessoryId;
     int accessoryType;
-    shared_ptr<vector<shared_ptr<Pojo>>> pServicePojoList;
+    shared_ptr<vector<shared_ptr<Pojo>>> pElementPojoList;
     
     AccessoryPojo()
     {
-        pServicePojoList = shared_ptr<vector<shared_ptr<Pojo>>>(new vector<shared_ptr<Pojo>>());
+        pElementPojoList = shared_ptr<vector<shared_ptr<Pojo>>>(new vector<shared_ptr<Pojo>>());
     }
     
     virtual void print()
@@ -34,8 +34,8 @@ struct AccessoryPojo : public Pojo
         LOGD("accessoryId:%d", accessoryId);
         LOGD("accessoryType:%d", accessoryType);
         
-        if (pServicePojoList != NULL) {
-            for (shared_ptr<Pojo> pPojo : *pServicePojoList) {
+        if (pElementPojoList != NULL) {
+            for (shared_ptr<Pojo> pPojo : *pElementPojoList) {
                 pPojo->print();
             }
         }

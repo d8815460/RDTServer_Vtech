@@ -8,7 +8,7 @@
 
 #include "DatabaseManager.hpp"
 #include "AccessoryDao.hpp"
-#include "ServiceDao.hpp"
+#include "ElementDao.hpp"
 
 DatabaseManager DatabaseManager::m_Instance = DatabaseManager();
 
@@ -17,8 +17,8 @@ static const char* createAccessory =    "CREATE TABLE Accessory ("
                                         "accessoryId     INTEGER,"
                                         "accessoryType   INTEGER);";
 
-static const char* createService =  "CREATE TABLE Service ("
-                                    "serviceSerial INTEGER PRIMARY KEY,"
+static const char* createService =  "CREATE TABLE Element ("
+                                    "elementSerial INTEGER PRIMARY KEY,"
                                     "fkAccessorySerial INTEGER REFERENCES Accessory(accessorySerial),"
                                     "name      TEXT,"
                                     "value     TEXT);";
@@ -39,37 +39,37 @@ DatabaseManager::DatabaseManager()
     
     {
         /* 新增一筆資料 */
-        shared_ptr<ServicePojo> pServicePojo1(new ServicePojo);
-        pServicePojo1->fkAccessorySerial = 1;
-        pServicePojo1->name = "ColorService";
-        pServicePojo1->value = "RGB";
-        shared_ptr<ServicePojo> pServicePojo2(new ServicePojo);
-        pServicePojo2->fkAccessorySerial = 1;
-        pServicePojo2->name = "SwitchService";
-        pServicePojo2->value = "ON_OFF";
+        shared_ptr<ElementPojo> pElementPojo1(new ElementPojo);
+        pElementPojo1->fkAccessorySerial = 1;
+        pElementPojo1->name = "ColorElement";
+        pElementPojo1->value = "RGB";
+        shared_ptr<ElementPojo> pElementPojo2(new ElementPojo);
+        pElementPojo2->fkAccessorySerial = 1;
+        pElementPojo2->name = "SwitchElement";
+        pElementPojo2->value = "ON_OFF";
         AccessoryPojo accessoryPojo;
         accessoryPojo.accessoryId = 1;
         accessoryPojo.accessoryType = 1;
-        accessoryPojo.pServicePojoList->push_back(pServicePojo1);
-        accessoryPojo.pServicePojoList->push_back(pServicePojo2);
+        accessoryPojo.pElementPojoList->push_back(pElementPojo1);
+        accessoryPojo.pElementPojoList->push_back(pElementPojo2);
         AccessoryDao::create(accessoryPojo);
     }
     
     {
         /* 新增一筆資料 */
-        shared_ptr<ServicePojo> pServicePojo1(new ServicePojo);
-        pServicePojo1->fkAccessorySerial = 2;
-        pServicePojo1->name = "AAA";
-        pServicePojo1->value = "BBB";
-        shared_ptr<ServicePojo> pServicePojo2(new ServicePojo);
-        pServicePojo2->fkAccessorySerial = 2;
-        pServicePojo2->name = "CCC";
-        pServicePojo2->value = "DDD";
+        shared_ptr<ElementPojo> pElementPojo1(new ElementPojo);
+        pElementPojo1->fkAccessorySerial = 2;
+        pElementPojo1->name = "AAA";
+        pElementPojo1->value = "BBB";
+        shared_ptr<ElementPojo> pElementPojo2(new ElementPojo);
+        pElementPojo2->fkAccessorySerial = 2;
+        pElementPojo2->name = "CCC";
+        pElementPojo2->value = "DDD";
         AccessoryPojo accessoryPojo;
         accessoryPojo.accessoryId = 2;
         accessoryPojo.accessoryType = 2;
-        accessoryPojo.pServicePojoList->push_back(pServicePojo1);
-        accessoryPojo.pServicePojoList->push_back(pServicePojo2);
+        accessoryPojo.pElementPojoList->push_back(pElementPojo1);
+        accessoryPojo.pElementPojoList->push_back(pElementPojo2);
         AccessoryDao::create(accessoryPojo);
     }
     
@@ -83,10 +83,10 @@ DatabaseManager::DatabaseManager()
 //        shared_ptr<AccessoryPojo>& pAccessoryPojo = (shared_ptr<AccessoryPojo>&) pPojo;
 //        pAccessoryPojo->accessoryId = 111;
 //        
-//        for (shared_ptr<Pojo> pPojo : *pAccessoryPojo->pServicePojoList) {
-//            shared_ptr<ServicePojo>& pServicePojo = (shared_ptr<ServicePojo>&) pPojo;
-//            pServicePojo->name = "GGYY";
-//            LOGD("pServicePojo->name:%s", pServicePojo->name.c_str());
+//        for (shared_ptr<Pojo> pPojo : *pAccessoryPojo->pElementPojoList) {
+//            shared_ptr<ElementPojo>& pElementPojo = (shared_ptr<ElementPojo>&) pPojo;
+//            pElementPojo->name = "GGYY";
+//            LOGD("pElementPojo->name:%s", pElementPojo->name.c_str());
 //        }
 //        
 //        AccessoryDao::update(*pAccessoryPojo);

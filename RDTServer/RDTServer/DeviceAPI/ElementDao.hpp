@@ -1,29 +1,29 @@
 //
-//  ServiceDao.hpp
+//  ElementDao.hpp
 //  DeviceAPI
 //
 //  Created by jakey on 2016/3/10.
 //  Copyright © 2016年 jakey. All rights reserved.
 //
 
-#ifndef ServiceDao_hpp
-#define ServiceDao_hpp
+#ifndef ElementDao_hpp
+#define ElementDao_hpp
 
 #include <stdio.h>
 #include <string>
 #include <memory>
 #include "Pojo.hpp"
 
-struct ServicePojo : public Pojo
+struct ElementPojo : public Pojo
 {
-    int serviceSerial;
+    int elementSerial;
     int fkAccessorySerial;
     std::string name;
     std::string value;
             
     virtual void print()
     {
-        LOGD("serviceSerial:%d", serviceSerial);
+        LOGD("ElementSerial:%d", elementSerial);
         LOGD("fkAccessorySerial:%d", fkAccessorySerial);
         LOGD("name:%s", name.c_str());
         LOGD("value:%s", value.c_str());
@@ -31,11 +31,11 @@ struct ServicePojo : public Pojo
     }
 };
 
-class ServiceDao
+class ElementDao
 {
 public:
-    static void create(shared_ptr<ServicePojo> pPojo);
-    static void update(shared_ptr<ServicePojo> pPojo);
+    static void create(shared_ptr<ElementPojo> pElementPojo);
+    static void update(shared_ptr<ElementPojo> pElementPojo);
     
     static int deleteAll();
     static int deleteWithSerial(int accessorySerial);
@@ -47,4 +47,4 @@ private:
     static void readCallback(shared_ptr<vector<shared_ptr<Pojo>>> outPtrPojoList, int row, vector<char*>& colList);
 };
 
-#endif /* ServiceDao_hpp */
+#endif /* ElementDao_hpp */

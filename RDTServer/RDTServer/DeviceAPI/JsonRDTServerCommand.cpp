@@ -194,7 +194,7 @@ void JsonRDTServerCommand::processCommandTarget(const Json::Value& inJsonObject,
         }
         // 修改
         else if (operation == "update") {
-            int accessoryId = atoi(accessory.c_str());
+            int accessoryId = stoi(accessory.c_str());
             for (int i=0 ; i<m_accessoryList.size() ; i++) {
                 if (m_accessoryList[i]->accessoryId == accessoryId) {
                     std::string functionCode = findWord(target, std::string("function_code"));

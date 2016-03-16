@@ -8,7 +8,7 @@
 
 #include "AccessoryDao.hpp"
 #include <string>
-#include "ServiceDao.hpp"
+#include "ElementDao.hpp"
 
 void AccessoryDao::readCallback(shared_ptr<vector<shared_ptr<Pojo>>> outPtrPojoList, int row, vector<char*>& colList)
 {
@@ -23,8 +23,8 @@ void AccessoryDao::readCallback(shared_ptr<vector<shared_ptr<Pojo>>> outPtrPojoL
             pAccessoryPojo->accessorySerial = stoi(data);
             
             /* 取得 database 裡所有的資料 */
-            pAccessoryPojo->pServicePojoList = ServiceDao::read(pAccessoryPojo->accessorySerial);
-//            for (shared_ptr<Pojo> pPojo : *pAccessoryPojo->pServicePojoList) {
+            pAccessoryPojo->pElementPojoList = ElementDao::read(pAccessoryPojo->accessorySerial);
+//            for (shared_ptr<Pojo> pPojo : *pAccessoryPojo->pElementPojoList) {
 //                pPojo->print();
 //            }
         }
@@ -51,11 +51,11 @@ void AccessoryDao::create(AccessoryPojo& accessoryPojo)
     LOGD("buffer:%s", buffer);
     databaseManager.exec(buffer);
     
-    for (shared_ptr<Pojo> pPojo : *accessoryPojo.pServicePojoList) {
-        shared_ptr<ServicePojo>& pServicePojo = (shared_ptr<ServicePojo>&) pPojo;
-//        LOGD("pServicePojo->name:%s", pServicePojo->name.c_str());
+    for (shared_ptr<Pojo> pPojo : *accessoryPojo.pElementPojoList) {
+        shared_ptr<ElementPojo>& pElementPojo = (shared_ptr<ElementPojo>&) pPojo;
+//        LOGD("pElementPojo->name:%s", pElementPojo->name.c_str());
         
-        ServiceDao::create(pServicePojo);
+        ElementDao::create(pElementPojo);
     }
 }
 
@@ -67,10 +67,10 @@ void AccessoryDao::update(AccessoryPojo& accessoryPojo)
     sprintf(buffer, "UPDATE Accessory SET accessoryId = %d, accessoryType = %d;", accessoryPojo.accessoryId, accessoryPojo.accessoryType);
     databaseManager.exec(buffer);
     
-    if (accessoryPojo.pServicePojoList != NULL) {
-        for (shared_ptr<Pojo> pPojo : *accessoryPojo.pServicePojoList) {
-            shared_ptr<ServicePojo>& pServicePojo = (shared_ptr<ServicePojo>&) pPojo;
-            ServiceDao::update(pServicePojo);
+    if (accessoryPojo.pElementPojoList != NULL) {
+        for (shared_ptr<Pojo> pPojo : *accessoryPojo.pElementPojoList) {
+            shared_ptr<ElementPojo>& pElementPojo = (shared_ptr<ElementPojo>&) pPojo;
+            ElementDao::update(pElementPojo);
         }
     }
 }
@@ -79,7 +79,7 @@ int AccessoryDao::deleteAll()
 {
     DatabaseManager& databaseManager = DatabaseManager::getInstance();
     
-    ServiceDao::deleteAll();
+    ElementDao::deleteAll();
     
     return databaseManager.exec("DELETE FROM Accessory;");
 }
@@ -91,7 +91,7 @@ int AccessoryDao::deleteWithSerial(int accessorySerial)
     char buffer[Pojo_Buffer_Size];
     sprintf(buffer, "DELETE FROM Accessory WHERE accessorySerial = %d;", accessorySerial);
     
-    ServiceDao::deleteWithFKAccessorySerial(accessorySerial);
+    ElementDao::deleteWithFKAccessorySerial(accessorySerial);
     
     return databaseManager.exec(buffer);
 }

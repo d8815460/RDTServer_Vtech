@@ -1,98 +1,98 @@
 //
-//  ServiceDao.cpp
+//  ElementDao.cpp
 //  DeviceAPI
 //
 //  Created by jakey on 2016/3/10.
 //  Copyright © 2016年 jakey. All rights reserved.
 //
 
-#include "ServiceDao.hpp"
+#include "ElementDao.hpp"
 #include "DatabaseManager.hpp"
 
-void ServiceDao::readCallback(shared_ptr<vector<shared_ptr<Pojo>>> outPtrPojoList, int row, vector<char*>& colList)
+void ElementDao::readCallback(shared_ptr<vector<shared_ptr<Pojo>>> outPtrPojoList, int row, vector<char*>& colList)
 {
-    shared_ptr<ServicePojo> pServicePojo(new ServicePojo());
+    shared_ptr<ElementPojo> pElementPojo(new ElementPojo());
     
     for (size_t i=0 ; i<colList.size() ; i++) {
         char* data = colList[i];
 //        LOGD("data:%s", data);
         
         if (i == 0) {
-            pServicePojo->serviceSerial = stoi(data);
+            pElementPojo->elementSerial = stoi(data);
         }
         else if (i == 1) {
-            pServicePojo->fkAccessorySerial = stoi(data);
+            pElementPojo->fkAccessorySerial = stoi(data);
         }
         else if (i == 2) {
-            pServicePojo->name = data;
+            pElementPojo->name = data;
 //            LOGD("data:%s", data);
-//            LOGD("pServicePojo->name:%s", pServicePojo->name);
+//            LOGD("pElementPojo->name:%s", pElementPojo->name);
         }
         else if (i == 3) {
-            pServicePojo->value = data;
+            pElementPojo->value = data;
         }
         else {
             throw DatabaseException(__PRETTY_FUNCTION__, __LINE__, DatabaseException_ErrorCode_Column_Over_The_Range);
         }
     }
     
-    outPtrPojoList->push_back(pServicePojo);
+    outPtrPojoList->push_back(pElementPojo);
 }
 
-shared_ptr<vector<shared_ptr<Pojo>>> ServiceDao::read(int fkAccessorySerial)
+shared_ptr<vector<shared_ptr<Pojo>>> ElementDao::read(int fkAccessorySerial)
 {
     char buffer[Pojo_Buffer_Size];
-    sprintf(buffer, "SELECT * FROM Service WHERE fkAccessorySerial = %d;", fkAccessorySerial);
+    sprintf(buffer, "SELECT * FROM Element WHERE fkAccessorySerial = %d;", fkAccessorySerial);
     
     DatabaseManager& databaseManager = DatabaseManager::getInstance();
-    return databaseManager.read(buffer, ServiceDao::readCallback);
+    return databaseManager.read(buffer, ElementDao::readCallback);
 }
 
-void ServiceDao::create(shared_ptr<ServicePojo> pServicePojo)
+void ElementDao::create(shared_ptr<ElementPojo> pElementPojo)
 {
     DatabaseManager& databaseManager = DatabaseManager::getInstance();
     
     char buffer[Pojo_Buffer_Size];
-    sprintf(buffer, "INSERT INTO Service VALUES(NULL, %d, '%s', '%s');", pServicePojo->fkAccessorySerial, pServicePojo->name.c_str(), pServicePojo->value.c_str());
+    sprintf(buffer, "INSERT INTO Element VALUES(NULL, %d, '%s', '%s');", pElementPojo->fkAccessorySerial, pElementPojo->name.c_str(), pElementPojo->value.c_str());
     LOGD("buffer:%s", buffer);
     
     databaseManager.exec(buffer);
 }
 
-void ServiceDao::update(shared_ptr<ServicePojo> pServicePojo)
+void ElementDao::update(shared_ptr<ElementPojo> pElementPojo)
 {
     DatabaseManager& databaseManager = DatabaseManager::getInstance();
     
     char buffer[Pojo_Buffer_Size];
-    sprintf(buffer, "UPDATE Service SET name = '%s', value = '%s';", pServicePojo->name.c_str(), pServicePojo->value.c_str());
+    sprintf(buffer, "UPDATE Element SET name = '%s', value = '%s';", pElementPojo->name.c_str(), pElementPojo->value.c_str());
     LOGD("buffer:%s", buffer);
     databaseManager.exec(buffer);
 }
 
-int ServiceDao::deleteAll()
+int ElementDao::deleteAll()
 {
     DatabaseManager& databaseManager = DatabaseManager::getInstance();
     
-    return databaseManager.exec("DELETE FROM Service;");
+    return databaseManager.exec("DELETE FROM Element;");
 }
 
-int ServiceDao::deleteWithSerial(int serviceSerial)
+int ElementDao::deleteWithSerial(int ElementSerial)
 {
     DatabaseManager& databaseManager = DatabaseManager::getInstance();
     
     char buffer[Pojo_Buffer_Size];
-    sprintf(buffer, "DELETE FROM Service WHERE serviceSerial = %d;", serviceSerial);
+    sprintf(buffer, "DELETE FROM Element WHERE ElementSerial = %d;", ElementSerial);
     LOGD("buffer:%s", buffer);
     
     return databaseManager.exec(buffer);
 }
 
-int ServiceDao::deleteWithFKAccessorySerial(int fkAccessorySerial)
+int ElementDao::deleteWithFKAccessorySerial(int fkAccessorySerial)
 {
     DatabaseManager& databaseManager = DatabaseManager::getInstance();
     
     char buffer[Pojo_Buffer_Size];
-    sprintf(buffer, "DELETE FROM Service WHERE fkAccessorySerial = %d;", fkAccessorySerial);
+    sprintf(buffer, "DELETE FROM Element WHERE fkAccessorySerial = %d;", fkAccessorySerial);
     LOGD("buffer:%s", buffer);
     
     return databaseManager.exec(buffer);
