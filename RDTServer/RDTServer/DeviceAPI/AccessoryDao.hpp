@@ -19,8 +19,8 @@ using namespace std;
 struct AccessoryPojo : public Pojo
 {
     int accessorySerial;
-    int accessoryId;
-    int accessoryType;
+    int AID;
+    int AType;
     shared_ptr<vector<shared_ptr<Pojo>>> pElementPojoList;
     
     AccessoryPojo()
@@ -31,8 +31,8 @@ struct AccessoryPojo : public Pojo
     virtual void print()
     {
         LOGD("accessorySerial:%d", accessorySerial);
-        LOGD("accessoryId:%d", accessoryId);
-        LOGD("accessoryType:%d", accessoryType);
+        LOGD("AID:%d", AID);
+        LOGD("AType:%d", AType);
         
         if (pElementPojoList != NULL) {
             for (shared_ptr<Pojo> pPojo : *pElementPojoList) {

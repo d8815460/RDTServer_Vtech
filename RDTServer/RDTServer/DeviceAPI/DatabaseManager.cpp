@@ -14,10 +14,10 @@ DatabaseManager DatabaseManager::m_Instance = DatabaseManager();
 
 static const char* createAccessory =    "CREATE TABLE Accessory ("
                                         "accessorySerial INTEGER PRIMARY KEY,"
-                                        "accessoryId     INTEGER,"
-                                        "accessoryType   INTEGER);";
+                                        "AID     INTEGER,"
+                                        "AType   INTEGER);";
 
-static const char* createService =  "CREATE TABLE Element ("
+static const char* createElement =  "CREATE TABLE Element ("
                                     "elementSerial INTEGER PRIMARY KEY,"
                                     "fkAccessorySerial INTEGER REFERENCES Accessory(accessorySerial),"
                                     "name      TEXT,"
@@ -29,11 +29,19 @@ DatabaseManager::DatabaseManager()
 {
     LOGD("DatabaseManager");
     
+    if(remove(Database_File_Name) != 0 ) {
+        LOGE("Error deleting file");
+        throw DatabaseException(__PRETTY_FUNCTION__, __LINE__, DatabaseException_ErrorCode_Error_Deleting_Database);
+    }
+    else {
+        LOGD("File successfully deleted");
+    }
+    
     open();
     
     /* 建立 Table */
     exec(createAccessory);
-    exec(createService);
+    exec(createElement);
     
     AccessoryDao::deleteAll();
     
@@ -48,8 +56,8 @@ DatabaseManager::DatabaseManager()
         pElementPojo2->name = "SwitchElement";
         pElementPojo2->value = "ON_OFF";
         AccessoryPojo accessoryPojo;
-        accessoryPojo.accessoryId = 1;
-        accessoryPojo.accessoryType = 1;
+        accessoryPojo.AID = 1;
+        accessoryPojo.AType = 1;
         accessoryPojo.pElementPojoList->push_back(pElementPojo1);
         accessoryPojo.pElementPojoList->push_back(pElementPojo2);
         AccessoryDao::create(accessoryPojo);
@@ -66,8 +74,8 @@ DatabaseManager::DatabaseManager()
         pElementPojo2->name = "CCC";
         pElementPojo2->value = "DDD";
         AccessoryPojo accessoryPojo;
-        accessoryPojo.accessoryId = 2;
-        accessoryPojo.accessoryType = 2;
+        accessoryPojo.AID = 2;
+        accessoryPojo.AType = 2;
         accessoryPojo.pElementPojoList->push_back(pElementPojo1);
         accessoryPojo.pElementPojoList->push_back(pElementPojo2);
         AccessoryDao::create(accessoryPojo);

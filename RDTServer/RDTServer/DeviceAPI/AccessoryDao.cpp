@@ -29,10 +29,10 @@ void AccessoryDao::readCallback(shared_ptr<vector<shared_ptr<Pojo>>> outPtrPojoL
 //            }
         }
         else if (i == 1) {
-            pAccessoryPojo->accessoryId = stoi(data);
+            pAccessoryPojo->AID = stoi(data);
         }
         else if (i == 2) {
-            pAccessoryPojo->accessoryType = stoi(data);
+            pAccessoryPojo->AType = stoi(data);
         }
         else {
             throw DatabaseException(__PRETTY_FUNCTION__, __LINE__, DatabaseException_ErrorCode_Column_Over_The_Range);
@@ -47,7 +47,7 @@ void AccessoryDao::create(AccessoryPojo& accessoryPojo)
     DatabaseManager& databaseManager = DatabaseManager::getInstance();
     
     char buffer[Pojo_Buffer_Size];
-    sprintf(buffer, "INSERT INTO Accessory VALUES(NULL, %d, %d);", accessoryPojo.accessoryId, accessoryPojo.accessoryType);
+    sprintf(buffer, "INSERT INTO Accessory VALUES(NULL, %d, %d);", accessoryPojo.AID, accessoryPojo.AType);
     LOGD("buffer:%s", buffer);
     databaseManager.exec(buffer);
     
@@ -64,7 +64,7 @@ void AccessoryDao::update(AccessoryPojo& accessoryPojo)
     DatabaseManager& databaseManager = DatabaseManager::getInstance();
     
     char buffer[Pojo_Buffer_Size];
-    sprintf(buffer, "UPDATE Accessory SET accessoryId = %d, accessoryType = %d;", accessoryPojo.accessoryId, accessoryPojo.accessoryType);
+    sprintf(buffer, "UPDATE Accessory SET AID = %d, AType = %d;", accessoryPojo.AID, accessoryPojo.AType);
     databaseManager.exec(buffer);
     
     if (accessoryPojo.pElementPojoList != NULL) {
@@ -101,3 +101,4 @@ shared_ptr<vector<shared_ptr<Pojo>>> AccessoryDao::read()
     DatabaseManager& databaseManager = DatabaseManager::getInstance();
     return databaseManager.read("SELECT * FROM Accessory;", AccessoryDao::readCallback);
 }
+

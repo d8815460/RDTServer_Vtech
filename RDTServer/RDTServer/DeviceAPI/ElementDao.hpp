@@ -38,7 +38,7 @@ public:
     static void update(shared_ptr<ElementPojo> pElementPojo);
     
     static int deleteAll();
-    static int deleteWithSerial(int accessorySerial);
+    static int deleteWithSerial(int elementSerial);
     static int deleteWithFKAccessorySerial(int fkAccessorySerial);
     
     static shared_ptr<vector<shared_ptr<Pojo>>> read(int fkAccessorySerial);

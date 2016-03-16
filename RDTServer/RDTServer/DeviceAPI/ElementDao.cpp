@@ -76,12 +76,12 @@ int ElementDao::deleteAll()
     return databaseManager.exec("DELETE FROM Element;");
 }
 
-int ElementDao::deleteWithSerial(int ElementSerial)
+int ElementDao::deleteWithSerial(int elementSerial)
 {
     DatabaseManager& databaseManager = DatabaseManager::getInstance();
     
     char buffer[Pojo_Buffer_Size];
-    sprintf(buffer, "DELETE FROM Element WHERE ElementSerial = %d;", ElementSerial);
+    sprintf(buffer, "DELETE FROM Element WHERE elementSerial = %d;", elementSerial);
     LOGD("buffer:%s", buffer);
     
     return databaseManager.exec(buffer);
