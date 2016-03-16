@@ -36,7 +36,7 @@ VtechIPHubGatewayHardwardDeviceImpl::VtechIPHubGatewayHardwardDeviceImpl()
 
 Hardward* VtechIPHubGatewayHardwardDeviceImpl::createHardward()
 {
-  return new VtechIPHubGatewayHardwardImpl((JsonRDTCommand*) m_pCommand);
+  return new VtechIPHubGatewayHardwardImpl();
 }
 
 #pragma mark - Thread
@@ -112,7 +112,7 @@ void VtechIPHubGatewayHardwardImpl::sendToGateway(char* payload, int length)
 
 #pragma mark - VtechIPHubGatewayHardwardImpl::VtechIPHubGatewayHardwardImpl
 
-VtechIPHubGatewayHardwardImpl::VtechIPHubGatewayHardwardImpl(JsonRDTCommand* pJsonRDTCommand) : VtechIPHubGatewayHardward(pJsonRDTCommand)
+VtechIPHubGatewayHardwardImpl::VtechIPHubGatewayHardwardImpl()
 {
   LOGD("VtechIPHubGatewayHardwardImpl");
 }
@@ -236,4 +236,13 @@ Vtech added on 14/3/2016
     }
 
     // 通知update
+    LOGD("通知update");
+    CommandHardwardSend_UpdateItems sendUpdateItems;
+    sendUpdateItems.baseDataList = pCommandHardwardRecv_UpdateItems->baseDataList;
+    sendUpdateItems.dataType = pCommandHardwardRecv_UpdateItems->dataType;
+    sendUpdateItems.errorCode = pCommandHardwardRecv_UpdateItems->errorCode;
+    
+    Device* pDevice = Device::getInstance();
+    JsonRDTCommand* jsonRDTCommand = (JsonRDTCommand*) pDevice->getCommand();
+    jsonRDTCommand->commandHardwardSend_UpdateItems(&sendUpdateItems);
 }

@@ -191,6 +191,8 @@ void JsonRDTCommand::commandHardwardSend_ReadItems(CommandHardwardSend_ReadItems
 
 void JsonRDTCommand::commandHardwardSend_UpdateItems(CommandHardwardSend_UpdateItems* pCommandHardwardSend_UpdateItems) throw (CommandException)
 {
+    LOGD("commandHardwardSend_UpdateItems");
+    
     switch (pCommandHardwardSend_UpdateItems->dataType) {
         case DataType_Accessory:
             // 準備json
@@ -211,7 +213,7 @@ void JsonRDTCommand::commandHardwardSend_UpdateItems(CommandHardwardSend_UpdateI
                     root["request"] = jsonObject;
                     
                     json = root.toStyledString();
-                    LOGD("json = \n%s", json.c_str());
+                    LOGD("收到 hardward json = \n%s", json.c_str());
                     
                     // 發送上報
 //                    set<int>::iterator it = m_nChannelIDList.end();

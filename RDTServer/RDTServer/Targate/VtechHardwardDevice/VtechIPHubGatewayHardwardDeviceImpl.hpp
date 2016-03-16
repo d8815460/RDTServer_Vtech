@@ -29,7 +29,7 @@ private:
 class VtechIPHubGatewayHardwardImpl : public VtechIPHubGatewayHardward
 {
 public:
-	VtechIPHubGatewayHardwardImpl(JsonRDTCommand* pJsonRDTCommand);
+	VtechIPHubGatewayHardwardImpl();
 	
 #pragma mark - Thread
    static void* socketInput(void *arg);

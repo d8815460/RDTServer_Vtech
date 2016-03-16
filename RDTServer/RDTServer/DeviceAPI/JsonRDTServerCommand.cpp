@@ -255,21 +255,20 @@ void JsonRDTServerCommand::recvData(int channelID, BYTE* buffer, int totalLength
 {
 //    LOGD("recvData");
     
-//    LOGD("Binrary 資料");
-//    Utility::printData(__PRETTY_FUNCTION__, __LINE__, buffer, totalLength);
+    LOGD("Binrary 資料");
+    Utility::printData(__PRETTY_FUNCTION__, __LINE__, buffer, totalLength);
     
     // 取得json的位置
     char* json = (char*) (buffer + 11 - 1);
-    int jsonLen = (int) strlen(json);
     
     // 清除最後header end 0x03 0x04
-    json[jsonLen-1] = NULL;
-    json[jsonLen-2] = NULL;
+    json[totalLength-1] = NULL;
+    json[totalLength-2] = NULL;
     
-//    LOGD("JSON 接收 Binrary 資料");
-//    Utility::printData(__PRETTY_FUNCTION__, __LINE__, (BYTE*)json, jsonLen-2);
-//    
-//    LOGD("JSON接收長度:%d", jsonLen);
+    LOGD("JSON 接收 Binrary 資料");
+    Utility::printData(__PRETTY_FUNCTION__, __LINE__, (BYTE*)json, totalLength-2);
+    
+    LOGD("JSON接收長度:%d", totalLength);
     LOGD("JSON接收資料:%s", json);
     
     Json::Reader reader;
@@ -296,4 +295,5 @@ void JsonRDTServerCommand::recvData(int channelID, BYTE* buffer, int totalLength
     }
     
     sendJsonData(channelID, outJsonObject);
+//    sendJsonData(channelID, outJsonObject);
 }

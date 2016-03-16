@@ -165,16 +165,22 @@ void JsonRDTClientCommand::recvData(int channelID, BYTE* buffer, int totalLength
 {
 //    LOGD("recvData");
 
+    LOGD("Binrary 資料");
+    Utility::printData(__PRETTY_FUNCTION__, __LINE__, buffer, totalLength);
+    
+    // json抓取位置
     char* json = (char*) (buffer + 11 - 1);
-    int jsonLen = (int) strlen(json);
     
     // 清除最後header end 0x03 0x04
-    json[jsonLen-1] = NULL;
-    json[jsonLen-2] = NULL;
+    json[totalLength-1] = NULL;
+    json[totalLength-2] = NULL;
     
     //    LOGD("json binrary 資料");
     //    Utility::printData(__PRETTY_FUNCTION__, __LINE__, (BYTE*)json, jsonLen-2);
     
-    LOGD("JSON長度:%d", jsonLen);
+    LOGD("JSON長度:%d", totalLength);
     LOGD("JSON資料:%s", json);
+    
+    LOGD("Binrary 資料");
+    Utility::printData(__PRETTY_FUNCTION__, __LINE__, buffer, totalLength);
 }
