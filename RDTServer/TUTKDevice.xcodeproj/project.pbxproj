@@ -39,6 +39,7 @@
 		A2BED3211C71769300AF9D4E /* TUTKWaterLeakDevice.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A2BED30F1C71769300AF9D4E /* TUTKWaterLeakDevice.cpp */; };
 		A2BED3221C71769300AF9D4E /* ZhongHanDevice.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A2BED3121C71769300AF9D4E /* ZhongHanDevice.cpp */; };
 		A2BED3911C71B01A00AF9D4E /* libDeviceAPI.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A2BED38E1C71AFF100AF9D4E /* libDeviceAPI.a */; };
+		A2C6E1151C8EC9E30024D998 /* libsqlite3.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A2C6E1141C8EC9E30024D998 /* libsqlite3.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -161,6 +162,9 @@
 		A2BED3231C71770000AF9D4E /* CMakeLists.txt */ = {isa = PBXFileReference; lastKnownFileType = text; name = CMakeLists.txt; path = Targate/TUTKDevice/CMakeLists.txt; sourceTree = "<group>"; };
 		A2BED3891C71AFF100AF9D4E /* DeviceAPI.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = DeviceAPI.xcodeproj; sourceTree = "<group>"; };
 		A2BF717A1AC95A4600379199 /* TUTKDevice */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = TUTKDevice; sourceTree = BUILT_PRODUCTS_DIR; };
+		A2C6E1101C8EBA840024D998 /* sqlite3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = sqlite3.h; path = "RDTServer/3th_party/sqlite-amalgamation-3110100/sqlite3.h"; sourceTree = "<group>"; };
+		A2C6E1111C8EBA840024D998 /* sqlite3ext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = sqlite3ext.h; path = "RDTServer/3th_party/sqlite-amalgamation-3110100/sqlite3ext.h"; sourceTree = "<group>"; };
+		A2C6E1141C8EC9E30024D998 /* libsqlite3.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libsqlite3.a; path = RDTServer/lib/mac/libsqlite3.a; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -168,9 +172,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A2BED3911C71B01A00AF9D4E /* libDeviceAPI.a in Frameworks */,
+				A2C6E1151C8EC9E30024D998 /* libsqlite3.a in Frameworks */,
 				A24FBA491C07144400EF516E /* libutilspp.a in Frameworks */,
 				A24FBA471C07143100EF516E /* libcurlpp.a in Frameworks */,
+				A2BED3911C71B01A00AF9D4E /* libDeviceAPI.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -193,6 +198,7 @@
 		A24D7FF81BFD6DB600143462 /* 3th Party */ = {
 			isa = PBXGroup;
 			children = (
+				A2C6E10D1C8EBA770024D998 /* sqlite */,
 				A27836201C3B765500283F81 /* Paho_MQTT */,
 				A24FBA4A1C07145000EF516E /* Librarys */,
 				A24D80061BFD790900143462 /* jsoncpp */,
@@ -262,6 +268,7 @@
 		A24FBA4A1C07145000EF516E /* Librarys */ = {
 			isa = PBXGroup;
 			children = (
+				A2C6E1141C8EC9E30024D998 /* libsqlite3.a */,
 				A26FB6F21C636627007E3648 /* libDeviceAPI.a */,
 				A24FBA481C07144400EF516E /* libutilspp.a */,
 				A24FBA461C07143100EF516E /* libcurlpp.a */,
@@ -397,6 +404,15 @@
 			);
 			name = TUTKDevice;
 			path = RDTServer;
+			sourceTree = "<group>";
+		};
+		A2C6E10D1C8EBA770024D998 /* sqlite */ = {
+			isa = PBXGroup;
+			children = (
+				A2C6E1101C8EBA840024D998 /* sqlite3.h */,
+				A2C6E1111C8EBA840024D998 /* sqlite3ext.h */,
+			);
+			name = sqlite;
 			sourceTree = "<group>";
 		};
 		A2EB62921B3293D800D7553C /* Devices */ = {
@@ -616,6 +632,7 @@
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 					../TUTK_Kalay_Platform_SDK_2.1.3/Include,
 					"RDTServer/3th_party/jsoncpp-1.6.5/include",
+					"RDTServer/3th_party/sqlite-amalgamation-3110100",
 					"RDTServer/3th_party/curlpp-0.7.3/include",
 					RDTServer/DeviceAPI,
 				);
@@ -648,6 +665,7 @@
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 					../TUTK_Kalay_Platform_SDK_2.1.3/Include,
 					"RDTServer/3th_party/jsoncpp-1.6.5/include",
+					"RDTServer/3th_party/sqlite-amalgamation-3110100",
 					"RDTServer/3th_party/curlpp-0.7.3/include",
 					RDTServer/DeviceAPI,
 				);

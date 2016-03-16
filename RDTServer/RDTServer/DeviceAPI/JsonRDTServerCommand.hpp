@@ -10,7 +10,7 @@
 #define JsonRDTServerCommand_hpp
 
 #include <stdio.h>
-#include <cstring>
+#include <string>
 #include "JsonRDTCommand.hpp"
 #include <json/reader.h>
 

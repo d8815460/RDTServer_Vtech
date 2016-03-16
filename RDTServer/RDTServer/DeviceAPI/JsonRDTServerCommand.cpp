@@ -9,6 +9,7 @@
 #include "JsonRDTServerCommand.hpp"
 #include <iostream>
 #include <unistd.h>
+#include <string.h>
 #include "Common.hpp"
 #include "Utility.hpp"
 #include "IOTCAPIs.h"
@@ -153,6 +154,7 @@ void JsonRDTServerCommand::processCommandTarget(const Json::Value& inJsonObject,
         outJsonObject["response"] = arrayObject;
     }
     else if (target.find("accessory") != std::string::npos) {
+        std::string accessory = findWord(target, std::string("accessory"));
         CommandBase* pCommand = NULL;
         
         // 新增
@@ -173,7 +175,7 @@ void JsonRDTServerCommand::processCommandTarget(const Json::Value& inJsonObject,
             size_t pos2 = target.rfind("/") - 1;
             size_t pos1 = target.rfind("/", pos2);                                                                 
             string number = target.substr(pos1 + 1, pos2 - pos1);
-            int accessoryId = atoi(number.c_str());
+            int accessoryId = stoi(number.c_str());
             
             pCommand = new CommandHardwardRecv_DeleteItems();
             CommandHardwardRecv_DeleteItems* pDeleteItems = (CommandHardwardRecv_DeleteItems*) pCommand;
@@ -192,7 +194,6 @@ void JsonRDTServerCommand::processCommandTarget(const Json::Value& inJsonObject,
         }
         // 修改
         else if (operation == "update") {
-            std::string accessory = findWord(target, std::string("accessory"));
             int accessoryId = atoi(accessory.c_str());
             for (int i=0 ; i<m_accessoryList.size() ; i++) {
                 if (m_accessoryList[i]->accessoryId == accessoryId) {

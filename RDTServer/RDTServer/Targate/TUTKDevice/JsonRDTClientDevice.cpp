@@ -9,6 +9,7 @@
 #include "JsonRDTClientDevice.hpp"
 #include "BinraryRDTClientConnect.hpp"
 #include "JsonRDTClientCommand.hpp"
+#include "DatabaseManager.hpp"
 
 void JsonRDTClientDevice::generatorDataInfoList(Command* pCommand)
 {
@@ -26,6 +27,9 @@ void JsonRDTClientDevice::generatorDataInfoList(Command* pCommand)
 //    Command::addFunctionStatus(pFunctionInfo, VtechOpenClosedFunctionCode_QueryPowerStatus, 1);
 //    Command::addFunctionStatusWithArray(pFunctionInfo, VtechOpenClosedFunctionCode_QueryLocationName, &locations[locationIndex]);
 //    Command::addFunctionStatus(pFunctionInfo, TUTKCommonFunctionCode_QueryDeviceName, u'開', u'關', u'門');
+    
+    DatabaseManager& databaseManager = DatabaseManager::getInstance();
+    
 }
 
 #pragma mark - Device
