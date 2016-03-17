@@ -76,6 +76,37 @@ void* VtechIPHubGatewayHardwardImpl::socketInput(void *arg)
 /*
 					we should now call the update api below
 */
+
+				FunctionCodeValueData* pFunctionCodeValueData = new FunctionCodeValueData();
+				pFunctionCodeValueData->value = value;
+				
+				FunctionCodeData* pFunctionCodeData = new FunctionCodeData();
+				pFunctionCodeData->functonCode = functionCode;
+				pFunctionCodeData->functionCodeValueDataList.push_back(pFunctionCodeValueData);
+
+				AccessoryData* pAccessoryData = new AccessoryData();
+				pAccessoryData->accessoryId = accessoryId;
+				pAccessoryData->functionCodeDataList.push_back(pFunctionCodeData);
+
+				CommandBase* pCommand = NULL;
+				pCommand = new CommandHardwardRecv_UpdateItems();
+				CommandHardwardRecv_UpdateItems* pUpdateItems = (CommandHardwardRecv_UpdateItems*) pCommand;
+				pUpdateItems->dataType = DataType_Accessory;
+				pUpdateItems->baseDataList.push_back(pAccessoryData);
+
+				// 通知update
+				LOGD("通知update");
+				CommandHardwardSend_UpdateItems sendUpdateItems;
+				sendUpdateItems.baseDataList = pUpdateItems->baseDataList;
+				sendUpdateItems.dataType = pUpdateItems->dataType;
+				sendUpdateItems.errorCode = pUpdateItems->errorCode;
+				
+				Device* pDevice = Device::getInstance();
+				JsonRDTCommand* jsonRDTCommand = (JsonRDTCommand*) pDevice->getCommand();
+				jsonRDTCommand->commandHardwardSend_UpdateItems(&sendUpdateItems);
+
+
+
 				}
 				else
 					LOGD("Vtech check it's not a valid operation \n");
@@ -208,7 +239,6 @@ Vtech added on 14/3/2016
             
             for (int i=0 ; i<accessoryList.size() ; i++) {
                 LOGD("accessoryId:%d", accessoryList[i]->accessoryId);
-
 				root["accessoryId"] = accessoryList[i]->accessoryId;
                 
                 for (int j=0 ; j<accessoryList[i]->functionCodeDataList.size() ; j++) {
@@ -226,7 +256,7 @@ Vtech added on 14/3/2016
             }
 		std::string json = root.toStyledString();
 		LOGD("Received JSON string in UpdateItems - jsonString:%s", json.c_str());
-		pCommandHardwardRecv_UpdateItems->errorCode = -1; // Vtech - 我們這樣放errorCode嗎?
+		pCommandHardwardRecv_UpdateItems->errorCode = -99; // Vtech - 我們這樣放errorCode嗎?
 		sendToGateway((char*)json.c_str(), json.length());
         }   break;
             
@@ -235,6 +265,8 @@ Vtech added on 14/3/2016
         }   break;
     }
 
+
+#if 0
     // 通知update
     LOGD("通知update");
     CommandHardwardSend_UpdateItems sendUpdateItems;
@@ -245,4 +277,5 @@ Vtech added on 14/3/2016
     Device* pDevice = Device::getInstance();
     JsonRDTCommand* jsonRDTCommand = (JsonRDTCommand*) pDevice->getCommand();
     jsonRDTCommand->commandHardwardSend_UpdateItems(&sendUpdateItems);
+#endif
 }
