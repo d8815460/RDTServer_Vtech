@@ -48,6 +48,8 @@ void AccessoryDao::create(AccessoryPojo& accessoryPojo)
 {
     DatabaseManager& databaseManager = DatabaseManager::getInstance();
     
+    LOGD("ID:%lld\n", sqlite3_last_insert_rowid(databaseManager.getSqliteDatabase()));
+    
     char buffer[Pojo_Buffer_Size];
     sprintf(buffer, "INSERT INTO Accessory VALUES(NULL, %d, %d);", accessoryPojo.AID, accessoryPojo.AType);
     LOGD("buffer:%s", buffer);
@@ -55,7 +57,9 @@ void AccessoryDao::create(AccessoryPojo& accessoryPojo)
     
     for (shared_ptr<Pojo> pPojo : *accessoryPojo.pElementPojoList) {
         shared_ptr<ElementPojo>& pElementPojo = (shared_ptr<ElementPojo>&) pPojo;
-//        pElementPojo->fkAccessorySerial = accessoryPojo.accessorySerial;
+        
+        accessoryPojo.accessorySerial = (int) sqlite3_last_insert_rowid(databaseManager.getSqliteDatabase());
+        pElementPojo->fkAccessorySerial = accessoryPojo.accessorySerial;
         
 //        LOGD("accessoryPojo.accessorySerial:%d", accessoryPojo.accessorySerial);
 //        LOGD("pElementPojo->name:%s", pElementPojo->name.c_str());

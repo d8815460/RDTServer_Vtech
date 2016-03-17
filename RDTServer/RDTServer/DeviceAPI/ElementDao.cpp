@@ -63,7 +63,9 @@ void ElementDao::create(shared_ptr<ElementPojo> pElementPojo)
     
     for (shared_ptr<Pojo> pPojo : *pElementPojo->pElementNOPojoList) {
         shared_ptr<ElementNOPojo>& pElementNOPojo = (shared_ptr<ElementNOPojo>&) pPojo;
-//        pElementNOPojo->fkElementSerial = pElementPojo->elementSerial;
+        
+        pElementPojo->elementSerial = (int) sqlite3_last_insert_rowid(databaseManager.getSqliteDatabase());
+        pElementNOPojo->fkElementSerial = pElementPojo->elementSerial;
 //        LOGD("pElementPojo->name:%s", pElementPojo->name.c_str());
         
         ElementNODao::create(pElementNOPojo);

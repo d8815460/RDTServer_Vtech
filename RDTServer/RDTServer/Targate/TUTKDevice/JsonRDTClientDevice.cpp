@@ -29,7 +29,6 @@ void JsonRDTClientDevice::generatorDataInfoList(Command* pCommand)
 //    Command::addFunctionStatus(pFunctionInfo, TUTKCommonFunctionCode_QueryDeviceName, u'開', u'關', u'門');
     
     DatabaseManager& databaseManager = DatabaseManager::getInstance();
-    
 }
 
 #pragma mark - Device

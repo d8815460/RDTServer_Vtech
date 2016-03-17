@@ -58,17 +58,14 @@ DatabaseManager::DatabaseManager()
         pElementNOPojo1->value = "1";
         
         shared_ptr<ElementPojo> pElementPojo1(new ElementPojo);
-        pElementPojo1->fkAccessorySerial = 1;
         pElementPojo1->element = "switch";
         pElementPojo1->pElementNOPojoList->push_back(pElementNOPojo1);
         
         shared_ptr<ElementNOPojo> pElementNOPojo2(new ElementNOPojo);
         pElementNOPojo2->elementNO = 0;
-        pElementNOPojo2->fkElementSerial = 1;
         pElementNOPojo2->value = "100";
         
         shared_ptr<ElementPojo> pElementPojo2(new ElementPojo);
-        pElementPojo2->fkAccessorySerial = 1;
         pElementPojo2->element = "brightness";
         pElementPojo1->pElementNOPojoList->push_back(pElementNOPojo2);
         
@@ -83,21 +80,17 @@ DatabaseManager::DatabaseManager()
         /* 新增一筆資料 */
         shared_ptr<ElementNOPojo> pElementNOPojo1(new ElementNOPojo);
         pElementNOPojo1->elementNO = 0;
-        pElementNOPojo1->fkElementSerial = 2;
         pElementNOPojo1->value = "0";
         
         shared_ptr<ElementPojo> pElementPojo1(new ElementPojo);
-        pElementPojo1->fkAccessorySerial = 2;
         pElementPojo1->element = "switch";
         pElementPojo1->pElementNOPojoList->push_back(pElementNOPojo1);
         
         shared_ptr<ElementNOPojo> pElementNOPojo2(new ElementNOPojo);
         pElementNOPojo2->elementNO = 0;
-        pElementNOPojo2->fkElementSerial = 2;
         pElementNOPojo2->value = "10.1";
         
         shared_ptr<ElementPojo> pElementPojo2(new ElementPojo);
-        pElementPojo2->fkAccessorySerial = 2;
         pElementPojo2->element = "volt";
         pElementPojo1->pElementNOPojoList->push_back(pElementNOPojo2);
         
