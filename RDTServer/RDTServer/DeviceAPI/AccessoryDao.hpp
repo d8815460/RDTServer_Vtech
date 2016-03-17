@@ -30,6 +30,7 @@ struct AccessoryPojo : public Pojo
     
     virtual void print()
     {
+        LOGD("================================================================================");
         LOGD("accessorySerial:%d", accessorySerial);
         LOGD("AID:%d", AID);
         LOGD("AType:%d", AType);
@@ -39,7 +40,7 @@ struct AccessoryPojo : public Pojo
                 pPojo->print();
             }
         }
-        
+        LOGD("================================================================================");
         LOGD();
     }
 };

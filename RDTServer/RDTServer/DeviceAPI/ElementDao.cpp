@@ -8,6 +8,7 @@
 
 #include "ElementDao.hpp"
 #include "DatabaseManager.hpp"
+#include "ElementNODao.hpp"
 
 void ElementDao::readCallback(shared_ptr<vector<shared_ptr<Pojo>>> outPtrPojoList, int row, vector<char*>& colList)
 {
@@ -19,17 +20,18 @@ void ElementDao::readCallback(shared_ptr<vector<shared_ptr<Pojo>>> outPtrPojoLis
         
         if (i == 0) {
             pElementPojo->elementSerial = stoi(data);
+//            LOGD("pElementPojo->elementSerial:%d", pElementPojo->elementSerial);
+            
+            /* 取得 pElementPojoList 裡所有的資料 */
+            pElementPojo->pElementNOPojoList = ElementNODao::read(pElementPojo->elementSerial);
         }
         else if (i == 1) {
             pElementPojo->fkAccessorySerial = stoi(data);
         }
         else if (i == 2) {
-            pElementPojo->name = data;
+            pElementPojo->element = data;
 //            LOGD("data:%s", data);
 //            LOGD("pElementPojo->name:%s", pElementPojo->name);
-        }
-        else if (i == 3) {
-            pElementPojo->value = data;
         }
         else {
             throw DatabaseException(__PRETTY_FUNCTION__, __LINE__, DatabaseException_ErrorCode_Column_Over_The_Range);
@@ -41,10 +43,11 @@ void ElementDao::readCallback(shared_ptr<vector<shared_ptr<Pojo>>> outPtrPojoLis
 
 shared_ptr<vector<shared_ptr<Pojo>>> ElementDao::read(int fkAccessorySerial)
 {
+    DatabaseManager& databaseManager = DatabaseManager::getInstance();
+    
     char buffer[Pojo_Buffer_Size];
     sprintf(buffer, "SELECT * FROM Element WHERE fkAccessorySerial = %d;", fkAccessorySerial);
     
-    DatabaseManager& databaseManager = DatabaseManager::getInstance();
     return databaseManager.read(buffer, ElementDao::readCallback);
 }
 
@@ -53,10 +56,18 @@ void ElementDao::create(shared_ptr<ElementPojo> pElementPojo)
     DatabaseManager& databaseManager = DatabaseManager::getInstance();
     
     char buffer[Pojo_Buffer_Size];
-    sprintf(buffer, "INSERT INTO Element VALUES(NULL, %d, '%s', '%s');", pElementPojo->fkAccessorySerial, pElementPojo->name.c_str(), pElementPojo->value.c_str());
+    sprintf(buffer, "INSERT INTO Element VALUES(NULL, %d, '%s');", pElementPojo->fkAccessorySerial, pElementPojo->element.c_str());
     LOGD("buffer:%s", buffer);
     
     databaseManager.exec(buffer);
+    
+    for (shared_ptr<Pojo> pPojo : *pElementPojo->pElementNOPojoList) {
+        shared_ptr<ElementNOPojo>& pElementNOPojo = (shared_ptr<ElementNOPojo>&) pPojo;
+//        pElementNOPojo->fkElementSerial = pElementPojo->elementSerial;
+//        LOGD("pElementPojo->name:%s", pElementPojo->name.c_str());
+        
+        ElementNODao::create(pElementNOPojo);
+    }
 }
 
 void ElementDao::update(shared_ptr<ElementPojo> pElementPojo)
@@ -64,14 +75,24 @@ void ElementDao::update(shared_ptr<ElementPojo> pElementPojo)
     DatabaseManager& databaseManager = DatabaseManager::getInstance();
     
     char buffer[Pojo_Buffer_Size];
-    sprintf(buffer, "UPDATE Element SET name = '%s', value = '%s';", pElementPojo->name.c_str(), pElementPojo->value.c_str());
+    sprintf(buffer, "UPDATE Element SET fkAccessorySerial = %d, element = '%s';", pElementPojo->fkAccessorySerial, pElementPojo->element.c_str());
     LOGD("buffer:%s", buffer);
+    
     databaseManager.exec(buffer);
+    
+    for (shared_ptr<Pojo> pPojo : *pElementPojo->pElementNOPojoList) {
+        shared_ptr<ElementNOPojo>& pElementNOPojo = (shared_ptr<ElementNOPojo>&) pPojo;
+//        LOGD("pElementPojo->name:%s", pElementPojo->name.c_str());
+        
+        ElementNODao::update(pElementNOPojo);
+    }
 }
 
 int ElementDao::deleteAll()
 {
     DatabaseManager& databaseManager = DatabaseManager::getInstance();
+    
+    ElementNODao::deleteAll();
     
     return databaseManager.exec("DELETE FROM Element;");
 }

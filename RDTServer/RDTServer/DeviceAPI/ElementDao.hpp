@@ -18,16 +18,25 @@ struct ElementPojo : public Pojo
 {
     int elementSerial;
     int fkAccessorySerial;
-    std::string name;
-    std::string value;
-            
+    std::string element;
+    shared_ptr<vector<shared_ptr<Pojo>>> pElementNOPojoList;
+    
+    ElementPojo()
+    {
+        pElementNOPojoList = shared_ptr<vector<shared_ptr<Pojo>>>(new vector<shared_ptr<Pojo>>());
+    }
+    
     virtual void print()
     {
-        LOGD("ElementSerial:%d", elementSerial);
+        LOGD("elementSerial:%d", elementSerial);
         LOGD("fkAccessorySerial:%d", fkAccessorySerial);
-        LOGD("name:%s", name.c_str());
-        LOGD("value:%s", value.c_str());
-        LOGD();
+        LOGD("element:%s", element.c_str());
+        
+        if (pElementNOPojoList != NULL) {
+            for (shared_ptr<Pojo> pPojo : *pElementNOPojoList) {
+                pPojo->print();
+            }
+        }
     }
 };
 

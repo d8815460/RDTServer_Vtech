@@ -9,6 +9,7 @@
 #include "DatabaseManager.hpp"
 #include "AccessoryDao.hpp"
 #include "ElementDao.hpp"
+#include "ElementNODao.hpp"
 
 DatabaseManager DatabaseManager::m_Instance = DatabaseManager();
 
@@ -20,8 +21,13 @@ static const char* createAccessory =    "CREATE TABLE Accessory ("
 static const char* createElement =  "CREATE TABLE Element ("
                                     "elementSerial INTEGER PRIMARY KEY,"
                                     "fkAccessorySerial INTEGER REFERENCES Accessory(accessorySerial),"
-                                    "name      TEXT,"
-                                    "value     TEXT);";
+                                    "element    TEXT);";
+
+static const char* createElementNO =    "CREATE TABLE ElementNO ("
+                                        "elementNOSerial INTEGER PRIMARY KEY,"
+                                        "fkElementSerial INTEGER REFERENCES Element(elementSerial),"
+                                        "elementNO INTEGER,"
+                                        "value  TEXT);";
 
 #pragma mark - Private Method
 
@@ -29,6 +35,7 @@ DatabaseManager::DatabaseManager()
 {
     LOGD("DatabaseManager");
     
+    // 移除Database file
     if(remove(Database_File_Name) != 0 ) {
         LOGE("Error deleting file");
         throw DatabaseException(__PRETTY_FUNCTION__, __LINE__, DatabaseException_ErrorCode_Error_Deleting_Database);
@@ -42,49 +49,70 @@ DatabaseManager::DatabaseManager()
     /* 建立 Table */
     exec(createAccessory);
     exec(createElement);
-    
-    AccessoryDao::deleteAll();
+    exec(createElementNO);
     
     {
         /* 新增一筆資料 */
+        shared_ptr<ElementNOPojo> pElementNOPojo1(new ElementNOPojo);
+        pElementNOPojo1->elementNO = 0;
+        pElementNOPojo1->value = "1";
+        
         shared_ptr<ElementPojo> pElementPojo1(new ElementPojo);
         pElementPojo1->fkAccessorySerial = 1;
-        pElementPojo1->name = "ColorElement";
-        pElementPojo1->value = "RGB";
+        pElementPojo1->element = "switch";
+        pElementPojo1->pElementNOPojoList->push_back(pElementNOPojo1);
+        
+        shared_ptr<ElementNOPojo> pElementNOPojo2(new ElementNOPojo);
+        pElementNOPojo2->elementNO = 0;
+        pElementNOPojo2->fkElementSerial = 1;
+        pElementNOPojo2->value = "100";
+        
         shared_ptr<ElementPojo> pElementPojo2(new ElementPojo);
         pElementPojo2->fkAccessorySerial = 1;
-        pElementPojo2->name = "SwitchElement";
-        pElementPojo2->value = "ON_OFF";
+        pElementPojo2->element = "brightness";
+        pElementPojo1->pElementNOPojoList->push_back(pElementNOPojo2);
+        
         AccessoryPojo accessoryPojo;
-        accessoryPojo.AID = 1;
-        accessoryPojo.AType = 1;
+        accessoryPojo.AID = 0;
+        accessoryPojo.AType = 12;
         accessoryPojo.pElementPojoList->push_back(pElementPojo1);
-        accessoryPojo.pElementPojoList->push_back(pElementPojo2);
         AccessoryDao::create(accessoryPojo);
     }
     
     {
         /* 新增一筆資料 */
+        shared_ptr<ElementNOPojo> pElementNOPojo1(new ElementNOPojo);
+        pElementNOPojo1->elementNO = 0;
+        pElementNOPojo1->fkElementSerial = 2;
+        pElementNOPojo1->value = "0";
+        
         shared_ptr<ElementPojo> pElementPojo1(new ElementPojo);
         pElementPojo1->fkAccessorySerial = 2;
-        pElementPojo1->name = "AAA";
-        pElementPojo1->value = "BBB";
+        pElementPojo1->element = "switch";
+        pElementPojo1->pElementNOPojoList->push_back(pElementNOPojo1);
+        
+        shared_ptr<ElementNOPojo> pElementNOPojo2(new ElementNOPojo);
+        pElementNOPojo2->elementNO = 0;
+        pElementNOPojo2->fkElementSerial = 2;
+        pElementNOPojo2->value = "10.1";
+        
         shared_ptr<ElementPojo> pElementPojo2(new ElementPojo);
         pElementPojo2->fkAccessorySerial = 2;
-        pElementPojo2->name = "CCC";
-        pElementPojo2->value = "DDD";
+        pElementPojo2->element = "volt";
+        pElementPojo1->pElementNOPojoList->push_back(pElementNOPojo2);
+        
         AccessoryPojo accessoryPojo;
-        accessoryPojo.AID = 2;
-        accessoryPojo.AType = 2;
+        accessoryPojo.AID = 5;
+        accessoryPojo.AType = 13;
         accessoryPojo.pElementPojoList->push_back(pElementPojo1);
-        accessoryPojo.pElementPojoList->push_back(pElementPojo2);
         AccessoryDao::create(accessoryPojo);
     }
     
     /* 取得該筆資料的 ID */
 //    LOGD("ID:%lld\n", sqlite3_last_insert_rowid(m_pDatabase));
     
-    shared_ptr<vector<shared_ptr<Pojo>>> pojoList = AccessoryDao::read();
+    shared_ptr<vector<shared_ptr<Pojo>>> pojoList = NULL;
+//    pojoList = AccessoryDao::read();
     
 //    // 更新資料
 //    for (shared_ptr<Pojo> pPojo : *pojoList) {
@@ -101,7 +129,7 @@ DatabaseManager::DatabaseManager()
 //    }
     
     // 刪除資料
-    AccessoryDao::deleteWithSerial(1);
+//    AccessoryDao::deleteWithSerial(1);
     
     // 查詢資料
     pojoList = AccessoryDao::read();

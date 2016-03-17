@@ -21,12 +21,14 @@ void AccessoryDao::readCallback(shared_ptr<vector<shared_ptr<Pojo>>> outPtrPojoL
         
         if (i == 0) {
             pAccessoryPojo->accessorySerial = stoi(data);
+//            LOGD("pAccessoryPojo->accessorySerial:%d", pAccessoryPojo->accessorySerial);
             
-            /* 取得 database 裡所有的資料 */
+            /* 取得 pElementPojoList 裡所有的資料 */
             pAccessoryPojo->pElementPojoList = ElementDao::read(pAccessoryPojo->accessorySerial);
 //            for (shared_ptr<Pojo> pPojo : *pAccessoryPojo->pElementPojoList) {
 //                pPojo->print();
 //            }
+
         }
         else if (i == 1) {
             pAccessoryPojo->AID = stoi(data);
@@ -53,6 +55,9 @@ void AccessoryDao::create(AccessoryPojo& accessoryPojo)
     
     for (shared_ptr<Pojo> pPojo : *accessoryPojo.pElementPojoList) {
         shared_ptr<ElementPojo>& pElementPojo = (shared_ptr<ElementPojo>&) pPojo;
+//        pElementPojo->fkAccessorySerial = accessoryPojo.accessorySerial;
+        
+//        LOGD("accessoryPojo.accessorySerial:%d", accessoryPojo.accessorySerial);
 //        LOGD("pElementPojo->name:%s", pElementPojo->name.c_str());
         
         ElementDao::create(pElementPojo);
@@ -101,4 +106,3 @@ shared_ptr<vector<shared_ptr<Pojo>>> AccessoryDao::read()
     DatabaseManager& databaseManager = DatabaseManager::getInstance();
     return databaseManager.read("SELECT * FROM Accessory;", AccessoryDao::readCallback);
 }
-
