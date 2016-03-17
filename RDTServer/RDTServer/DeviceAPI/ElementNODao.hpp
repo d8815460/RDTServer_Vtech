@@ -12,6 +12,7 @@
 #include <stdio.h>
 #include <string>
 #include "Pojo.hpp"
+#include "Common.hpp"
 
 struct ElementNOPojo : public Pojo
 {
@@ -19,6 +20,22 @@ struct ElementNOPojo : public Pojo
     int fkElementSerial;
     int elementNO;
     std::string value;
+    
+    virtual void toJson(Json::Value& json)
+    {
+        json["ElementNO"] = elementNO;
+        json["value"] = value;
+    }
+    
+//    virtual std::string toJson()
+//    {
+//        std::string json;
+//        
+//        json.append(QUOTES).append("ElementNO").append(QUOTES_COLON).append(to_string(elementNO)).append(COMMA).append(NEW_LINE);
+//        json.append(QUOTES).append("value").append(QUOTES_COLON).append(QUOTES).append(value).append(QUOTES).append(NEW_LINE);
+//        
+//        return json;
+//    }
     
     virtual void print()
     {

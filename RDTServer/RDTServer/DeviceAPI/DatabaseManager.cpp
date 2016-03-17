@@ -10,6 +10,8 @@
 #include "AccessoryDao.hpp"
 #include "ElementDao.hpp"
 #include "ElementNODao.hpp"
+#include <json/reader.h>
+#include "Utility.hpp"
 
 DatabaseManager DatabaseManager::m_Instance = DatabaseManager();
 
@@ -126,9 +128,9 @@ DatabaseManager::DatabaseManager()
     
     // 查詢資料
     pojoList = AccessoryDao::read();
-    for (shared_ptr<Pojo> pPojo : *pojoList) {
-        pPojo->print();
-    }
+    Json::Value root;
+    Utility::pojoListToJson(root, pojoList);
+    LOGD("產生json = \n%s", root.toStyledString().c_str());
     
     close();
 }

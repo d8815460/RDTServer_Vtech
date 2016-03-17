@@ -5,8 +5,8 @@
 #define MAX_BUFFER_SIZE 1024
 #define BUFFER_SIZE 300
 
-//#define NEW_LINE "\n"
-#define NEW_LINE ""
+#define NEW_LINE "\n"
+//#define NEW_LINE ""
 #define COMMA ","
 #define QUOTES "\""
 #define QUOTES_COLON "\":"

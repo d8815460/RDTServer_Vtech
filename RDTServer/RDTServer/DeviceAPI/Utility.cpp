@@ -75,3 +75,23 @@ void Utility::showException(Exception& e)
 {
     LOGE("\nFunction:%s\nLine:%d\nErrorCode:%d\nErrorMessage:%s\n", e.function, e.line, e.errorCode, e.errorMessage.c_str());
 }
+
+void Utility::pojoListToJson(Json::Value& root, shared_ptr<vector<shared_ptr<Pojo>>>& pojoList)
+{
+    Json::Value listAccessory;
+    
+    // Common
+    root["serno"] = 12345678;
+    root["function"] = "AddAccessories";
+    root["error_code"] = 0;
+    
+    for (shared_ptr<Pojo> pPojo : *pojoList) {
+        Json::Value accessoryJson;
+        pPojo->toJson(accessoryJson);
+        //        LOGD("產生json = \n%s", accessoryJson.toStyledString().c_str());
+        listAccessory.append(accessoryJson);
+    }
+    
+    root["ListAccessory"] = listAccessory;
+//    LOGD("產生json = \n%s", root.toStyledString().c_str());
+}
