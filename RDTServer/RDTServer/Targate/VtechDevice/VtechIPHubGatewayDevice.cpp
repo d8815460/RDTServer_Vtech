@@ -220,12 +220,34 @@ void VtechIPHubGatewayHardward::onCommandHardwardRecv_UpdateItems(CommandHardwar
     }
     
     // 通知update
+    FunctionCodeValueData* pFunctionCodeValueData = new FunctionCodeValueData();
+    pFunctionCodeValueData->value = 1;
+    
+    FunctionCodeData* pFunctionCodeData = new FunctionCodeData();
+    pFunctionCodeData->functonCode = 1;
+    pFunctionCodeData->functionCodeValueDataList.push_back(pFunctionCodeValueData);
+
+    AccessoryData* pAccessoryData = new AccessoryData();
+    pAccessoryData->accessoryId = 1;
+    pAccessoryData->functionCodeDataList.push_back(pFunctionCodeData);
+    
     CommandHardwardSend_UpdateItems sendUpdateItems;
-    sendUpdateItems.baseDataList = pCommandHardwardRecv_UpdateItems->baseDataList;
-    sendUpdateItems.dataType = pCommandHardwardRecv_UpdateItems->dataType;
-    sendUpdateItems.errorCode = pCommandHardwardRecv_UpdateItems->errorCode;
+    sendUpdateItems.baseDataList.push_back(pAccessoryData);
+    sendUpdateItems.dataType = DataType_Accessory;
+    sendUpdateItems.errorCode = 0;
     
     Device* pDevice = Device::getInstance();
     JsonRDTCommand* jsonRDTCommand = (JsonRDTCommand*) pDevice->getCommand();
     jsonRDTCommand->commandHardwardSend_UpdateItems(&sendUpdateItems);
+    
+    // 通知update
+//    LOGD("通知update");
+//    CommandHardwardSend_UpdateItems sendUpdateItems;
+//    sendUpdateItems.baseDataList = pUpdateItems->baseDataList;
+//    sendUpdateItems.dataType = pUpdateItems->dataType;
+//    sendUpdateItems.errorCode = pUpdateItems->errorCode;
+//    
+//    Device* pDevice = Device::getInstance();
+//    JsonRDTCommand* jsonRDTCommand = (JsonRDTCommand*) pDevice->getCommand();
+//    jsonRDTCommand->commandHardwardSend_UpdateItems(&sendUpdateItems);
 }

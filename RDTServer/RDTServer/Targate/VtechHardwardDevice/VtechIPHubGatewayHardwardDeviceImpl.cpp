@@ -77,33 +77,78 @@ void* VtechIPHubGatewayHardwardImpl::socketInput(void *arg)
 					we should now call the update api below
 */
 
-				FunctionCodeValueData* pFunctionCodeValueData = new FunctionCodeValueData();
-				pFunctionCodeValueData->value = value;
+        // 通知update
+        FunctionCodeValueData* pFunctionCodeValueData = new FunctionCodeValueData();
+        pFunctionCodeValueData->value = value;
+        
+        FunctionCodeData* pFunctionCodeData = new FunctionCodeData();
+        pFunctionCodeData->functonCode = functionCode.c_str();
+        pFunctionCodeData->functionCodeValueDataList.push_back(pFunctionCodeValueData);
+
+        AccessoryData* pAccessoryData = new AccessoryData();
+        pAccessoryData->accessoryId = accessoryId;
+        pAccessoryData->functionCodeDataList.push_back(pFunctionCodeData);
+        
+        CommandHardwardSend_UpdateItems sendUpdateItems;
+        sendUpdateItems.baseDataList.push_back(pAccessoryData);
+        sendUpdateItems.dataType = DataType_Accessory;
+        sendUpdateItems.errorCode = 0;
+        
+        Device* pDevice = Device::getInstance();
+        JsonRDTCommand* jsonRDTCommand = (JsonRDTCommand*) pDevice->getCommand();
+        jsonRDTCommand->commandHardwardSend_UpdateItems(&sendUpdateItems);
+        /*
+        執行後在Server上看到
+        收到 hardward json = 
+        {
+           "operation" : "update",
+           "request" : {
+              "accessories" : [
+                 {
+                    "accessory_id" : 1,
+                    "accessory_type" : 0,
+                    "function_codes" : [
+                       {
+                          "functon_code" : "motion",
+                          "index" : 0,
+                          "value" : 1
+                       }
+                    ]
+                 }
+              ]
+           },
+           "serno" : 12345678,
+           "target" : "/accessory/"
+        }
+        */
+
+				// FunctionCodeValueData* pFunctionCodeValueData = new FunctionCodeValueData();
+				// pFunctionCodeValueData->value = value;
 				
-				FunctionCodeData* pFunctionCodeData = new FunctionCodeData();
-				pFunctionCodeData->functonCode = functionCode;
-				pFunctionCodeData->functionCodeValueDataList.push_back(pFunctionCodeValueData);
+				// FunctionCodeData* pFunctionCodeData = new FunctionCodeData();
+				// pFunctionCodeData->functonCode = functionCode;
+				// pFunctionCodeData->functionCodeValueDataList.push_back(pFunctionCodeValueData);
 
-				AccessoryData* pAccessoryData = new AccessoryData();
-				pAccessoryData->accessoryId = accessoryId;
-				pAccessoryData->functionCodeDataList.push_back(pFunctionCodeData);
+				// AccessoryData* pAccessoryData = new AccessoryData();
+				// pAccessoryData->accessoryId = accessoryId;
+				// pAccessoryData->functionCodeDataList.push_back(pFunctionCodeData);
 
-				CommandBase* pCommand = NULL;
-				pCommand = new CommandHardwardRecv_UpdateItems();
-				CommandHardwardRecv_UpdateItems* pUpdateItems = (CommandHardwardRecv_UpdateItems*) pCommand;
-				pUpdateItems->dataType = DataType_Accessory;
-				pUpdateItems->baseDataList.push_back(pAccessoryData);
+				// CommandBase* pCommand = NULL;
+				// pCommand = new CommandHardwardRecv_UpdateItems();
+				// CommandHardwardRecv_UpdateItems* pUpdateItems = (CommandHardwardRecv_UpdateItems*) pCommand;
+				// pUpdateItems->dataType = DataType_Accessory;
+				// pUpdateItems->baseDataList.push_back(pAccessoryData);
 
-				// 通知update
-				LOGD("通知update");
-				CommandHardwardSend_UpdateItems sendUpdateItems;
-				sendUpdateItems.baseDataList = pUpdateItems->baseDataList;
-				sendUpdateItems.dataType = pUpdateItems->dataType;
-				sendUpdateItems.errorCode = pUpdateItems->errorCode;
+				// // 通知update
+				// LOGD("通知update");
+				// CommandHardwardSend_UpdateItems sendUpdateItems;
+				// sendUpdateItems.baseDataList = pUpdateItems->baseDataList;
+				// sendUpdateItems.dataType = pUpdateItems->dataType;
+				// sendUpdateItems.errorCode = pUpdateItems->errorCode;
 				
-				Device* pDevice = Device::getInstance();
-				JsonRDTCommand* jsonRDTCommand = (JsonRDTCommand*) pDevice->getCommand();
-				jsonRDTCommand->commandHardwardSend_UpdateItems(&sendUpdateItems);
+				// Device* pDevice = Device::getInstance();
+				// JsonRDTCommand* jsonRDTCommand = (JsonRDTCommand*) pDevice->getCommand();
+				// jsonRDTCommand->commandHardwardSend_UpdateItems(&sendUpdateItems);
 
 
 
