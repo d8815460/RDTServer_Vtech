@@ -20,10 +20,10 @@ static const char* createAccessory =    "CREATE TABLE Accessory ("
                                         "AID     INTEGER,"
                                         "AType   INTEGER);";
 
-static const char* createElement =  "CREATE TABLE Element ("
-                                    "elementSerial INTEGER PRIMARY KEY,"
-                                    "fkAccessorySerial INTEGER REFERENCES Accessory(accessorySerial),"
-                                    "element    TEXT);";
+static const char* createElement =      "CREATE TABLE Element ("
+                                        "elementSerial INTEGER PRIMARY KEY,"
+                                        "fkAccessorySerial INTEGER REFERENCES Accessory(accessorySerial),"
+                                        "element    TEXT);";
 
 static const char* createElementNO =    "CREATE TABLE ElementNO ("
                                         "elementNOSerial INTEGER PRIMARY KEY,"

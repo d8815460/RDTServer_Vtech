@@ -21,6 +21,7 @@ enum CommandException_ErrorCode
     CommandException_ErrorCode_No_Match_Command_Target,
     CommandException_ErrorCode_No_Match_Command_Operation,
     CommandException_ErrorCode_DataType_Not_Found,
+    CommandException_ErrorCode_Json_Formate_Error,
 };
 
 struct CommandException : public Exception
@@ -33,6 +34,7 @@ struct CommandException : public Exception
         map[CommandException_ErrorCode_No_Match_Command_Target]     = "No Match Command Target";
         map[CommandException_ErrorCode_No_Match_Command_Operation]  = "No Match Command Operation";
         map[CommandException_ErrorCode_DataType_Not_Found]          = "DataType Not Found";
+        map[CommandException_ErrorCode_Json_Formate_Error]          = "Json Formate Error";
         
         return map;
     }

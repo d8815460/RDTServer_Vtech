@@ -295,6 +295,9 @@ void JsonRDTServerCommand::recvData(int channelID, BYTE* buffer, int totalLength
         commandHardwardRecvJsonData.pJsonObject = &outJsonObject;
         m_pCommandHardwardEvent->onCommandHardwardRecvJson(&commandHardwardRecvJsonData);
     }
+    else {
+        throw CommandException(__PRETTY_FUNCTION__, __LINE__, CommandException_ErrorCode_Json_Formate_Error);
+    }
     
     sendJsonData(channelID, outJsonObject);
 }
