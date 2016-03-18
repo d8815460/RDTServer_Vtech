@@ -14,10 +14,14 @@
 #include "unixclientstream.hpp"
 #include "exception.hpp"
 
+#include <unistd.h>
+
 using libsocket::unix_stream_client; // need libsocket++
 
 string socket_path = "/tmp/unixsocket";
 unix_stream_client sock(socket_path); // need libsocket++
+
+unsigned int ULEErrorCode = -999;
 
 #pragma mark - Normal Method
 
@@ -153,6 +157,15 @@ void* VtechIPHubGatewayHardwardImpl::socketInput(void *arg)
 
 
 				}
+
+				else if (operation.compare("reply") == 0)
+				{
+					LOGD("Vtech check we check for error code below \n");
+					ULEErrorCode = inJsonObject["errorCode"].asUInt();
+					LOGD("received json errorCode= %d", ULEErrorCode);
+
+				}
+
 				else
 					LOGD("Vtech check it's not a valid operation \n");
 
@@ -185,6 +198,7 @@ void VtechIPHubGatewayHardwardImpl::sendToGateway(char* payload, int length)
        std::cerr << exc.mesg;
    }
 }
+
 
 #pragma mark - VtechIPHubGatewayHardwardImpl::VtechIPHubGatewayHardwardImpl
 
@@ -301,8 +315,11 @@ Vtech added on 14/3/2016
             }
 		std::string json = root.toStyledString();
 		LOGD("Received JSON string in UpdateItems - jsonString:%s", json.c_str());
-		pCommandHardwardRecv_UpdateItems->errorCode = -99; // Vtech - 我們這樣放errorCode嗎?
 		sendToGateway((char*)json.c_str(), json.length());
+		while (ULEErrorCode == -999)
+			usleep(1);
+		pCommandHardwardRecv_UpdateItems->errorCode = ULEErrorCode;
+		ULEErrorCode = -999;
         }   break;
             
         default: {
