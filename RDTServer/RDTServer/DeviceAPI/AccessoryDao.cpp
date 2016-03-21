@@ -21,18 +21,20 @@ void AccessoryDao::readCallback(shared_ptr<vector<shared_ptr<Pojo>>> outPtrPojoL
         
         if (i == 0) {
             pAccessoryPojo->accessorySerial = stoi(data);
+//            LOGD("pAccessoryPojo->accessorySerial:%d", pAccessoryPojo->accessorySerial);
             
-            /* 取得 database 裡所有的資料 */
+            /* 取得 pElementPojoList 裡所有的資料 */
             pAccessoryPojo->pElementPojoList = ElementDao::read(pAccessoryPojo->accessorySerial);
 //            for (shared_ptr<Pojo> pPojo : *pAccessoryPojo->pElementPojoList) {
 //                pPojo->print();
 //            }
+
         }
         else if (i == 1) {
-            pAccessoryPojo->accessoryId = stoi(data);
+            pAccessoryPojo->AID = stoi(data);
         }
         else if (i == 2) {
-            pAccessoryPojo->accessoryType = stoi(data);
+            pAccessoryPojo->AType = stoi(data);
         }
         else {
             throw DatabaseException(__PRETTY_FUNCTION__, __LINE__, DatabaseException_ErrorCode_Column_Over_The_Range);
@@ -46,13 +48,20 @@ void AccessoryDao::create(AccessoryPojo& accessoryPojo)
 {
     DatabaseManager& databaseManager = DatabaseManager::getInstance();
     
+    LOGD("ID:%lld\n", sqlite3_last_insert_rowid(databaseManager.getSqliteDatabase()));
+    
     char buffer[Pojo_Buffer_Size];
-    sprintf(buffer, "INSERT INTO Accessory VALUES(NULL, %d, %d);", accessoryPojo.accessoryId, accessoryPojo.accessoryType);
+    sprintf(buffer, "INSERT INTO Accessory VALUES(NULL, %d, %d);", accessoryPojo.AID, accessoryPojo.AType);
     LOGD("buffer:%s", buffer);
     databaseManager.exec(buffer);
     
     for (shared_ptr<Pojo> pPojo : *accessoryPojo.pElementPojoList) {
         shared_ptr<ElementPojo>& pElementPojo = (shared_ptr<ElementPojo>&) pPojo;
+        
+        accessoryPojo.accessorySerial = (int) sqlite3_last_insert_rowid(databaseManager.getSqliteDatabase());
+        pElementPojo->fkAccessorySerial = accessoryPojo.accessorySerial;
+        
+//        LOGD("accessoryPojo.accessorySerial:%d", accessoryPojo.accessorySerial);
 //        LOGD("pElementPojo->name:%s", pElementPojo->name.c_str());
         
         ElementDao::create(pElementPojo);
@@ -64,7 +73,7 @@ void AccessoryDao::update(AccessoryPojo& accessoryPojo)
     DatabaseManager& databaseManager = DatabaseManager::getInstance();
     
     char buffer[Pojo_Buffer_Size];
-    sprintf(buffer, "UPDATE Accessory SET accessoryId = %d, accessoryType = %d;", accessoryPojo.accessoryId, accessoryPojo.accessoryType);
+    sprintf(buffer, "UPDATE Accessory SET AID = %d, AType = %d;", accessoryPojo.AID, accessoryPojo.AType);
     databaseManager.exec(buffer);
     
     if (accessoryPojo.pElementPojoList != NULL) {

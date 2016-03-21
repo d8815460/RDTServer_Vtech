@@ -10,8 +10,7 @@
 		A24D80151BFD796E00143462 /* json_reader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A24D80121BFD796E00143462 /* json_reader.cpp */; };
 		A24D80161BFD796E00143462 /* json_value.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A24D80131BFD796E00143462 /* json_value.cpp */; };
 		A24D80171BFD796E00143462 /* json_writer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A24D80141BFD796E00143462 /* json_writer.cpp */; };
-		A24FBA471C07143100EF516E /* libcurlpp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A24FBA461C07143100EF516E /* libcurlpp.a */; };
-		A24FBA491C07144400EF516E /* libutilspp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A24FBA481C07144400EF516E /* libutilspp.a */; };
+		A25D242C1C9FE45D00967572 /* libcurlpp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A25D242B1C9FE45D00967572 /* libcurlpp.a */; };
 		A278363D1C3B8A9700283F81 /* MQTTConnectClient.c in Sources */ = {isa = PBXBuildFile; fileRef = A278362D1C3B8A9700283F81 /* MQTTConnectClient.c */; };
 		A278363E1C3B8A9700283F81 /* MQTTConnectServer.c in Sources */ = {isa = PBXBuildFile; fileRef = A278362E1C3B8A9700283F81 /* MQTTConnectServer.c */; };
 		A278363F1C3B8A9700283F81 /* MQTTDeserializePublish.c in Sources */ = {isa = PBXBuildFile; fileRef = A278362F1C3B8A9700283F81 /* MQTTDeserializePublish.c */; };
@@ -89,13 +88,12 @@
 		A24D80131BFD796E00143462 /* json_value.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = json_value.cpp; path = "3th_party/jsoncpp-1.6.5/src/lib_json/json_value.cpp"; sourceTree = "<group>"; };
 		A24D80141BFD796E00143462 /* json_writer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = json_writer.cpp; path = "3th_party/jsoncpp-1.6.5/src/lib_json/json_writer.cpp"; sourceTree = "<group>"; };
 		A24D80181BFD799400143462 /* json_tool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = json_tool.h; path = "3th_party/jsoncpp-1.6.5/src/lib_json/json_tool.h"; sourceTree = "<group>"; };
-		A24FBA461C07143100EF516E /* libcurlpp.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libcurlpp.a; path = "RDTServer/3th_party/curlpp-0.7.3/Librarys/libcurlpp.a"; sourceTree = "<group>"; };
-		A24FBA481C07144400EF516E /* libutilspp.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libutilspp.a; path = "RDTServer/3th_party/curlpp-0.7.3/Librarys/libutilspp.a"; sourceTree = "<group>"; };
 		A256252B1C3CFB250036692B /* MQTTEthernet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MQTTEthernet.h; sourceTree = "<group>"; };
 		A256252C1C3CFB250036692B /* MQTTSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MQTTSocket.h; sourceTree = "<group>"; };
 		A256252E1C3CFB310036692B /* Countdown.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Countdown.h; sourceTree = "<group>"; };
 		A256252F1C3CFB310036692B /* IPStack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPStack.h; sourceTree = "<group>"; };
 		A25625301C3CFB310036692B /* WifiIPStack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WifiIPStack.h; sourceTree = "<group>"; };
+		A25D242B1C9FE45D00967572 /* libcurlpp.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libcurlpp.a; path = RDTServer/lib/mac/libcurlpp.a; sourceTree = "<group>"; };
 		A26FB6F21C636627007E3648 /* libDeviceAPI.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libDeviceAPI.a; path = RDTServer/lib/mac/libDeviceAPI.a; sourceTree = "<group>"; };
 		A27836281C3B8A6500283F81 /* FP.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FP.h; path = RDTServer/3th_party/Paho_MQTT/MQTTClient/FP.h; sourceTree = "<group>"; };
 		A27836291C3B8A6500283F81 /* MQTTClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MQTTClient.h; path = RDTServer/3th_party/Paho_MQTT/MQTTClient/MQTTClient.h; sourceTree = "<group>"; };
@@ -172,9 +170,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A25D242C1C9FE45D00967572 /* libcurlpp.a in Frameworks */,
 				A2C6E1151C8EC9E30024D998 /* libsqlite3.a in Frameworks */,
-				A24FBA491C07144400EF516E /* libutilspp.a in Frameworks */,
-				A24FBA471C07143100EF516E /* libcurlpp.a in Frameworks */,
 				A2BED3911C71B01A00AF9D4E /* libDeviceAPI.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -268,10 +265,9 @@
 		A24FBA4A1C07145000EF516E /* Librarys */ = {
 			isa = PBXGroup;
 			children = (
+				A25D242B1C9FE45D00967572 /* libcurlpp.a */,
 				A2C6E1141C8EC9E30024D998 /* libsqlite3.a */,
 				A26FB6F21C636627007E3648 /* libDeviceAPI.a */,
-				A24FBA481C07144400EF516E /* libutilspp.a */,
-				A24FBA461C07143100EF516E /* libcurlpp.a */,
 			);
 			name = Librarys;
 			sourceTree = "<group>";
@@ -633,7 +629,7 @@
 					../TUTK_Kalay_Platform_SDK_2.1.3/Include,
 					"RDTServer/3th_party/jsoncpp-1.6.5/include",
 					"RDTServer/3th_party/sqlite-amalgamation-3110100",
-					"RDTServer/3th_party/curlpp-0.7.3/include",
+					RDTServer/3th_party/curlpp/include,
 					RDTServer/DeviceAPI,
 				);
 				LIBRARY_SEARCH_PATHS = (
@@ -666,7 +662,7 @@
 					../TUTK_Kalay_Platform_SDK_2.1.3/Include,
 					"RDTServer/3th_party/jsoncpp-1.6.5/include",
 					"RDTServer/3th_party/sqlite-amalgamation-3110100",
-					"RDTServer/3th_party/curlpp-0.7.3/include",
+					RDTServer/3th_party/curlpp/include,
 					RDTServer/DeviceAPI,
 				);
 				LIBRARY_SEARCH_PATHS = (

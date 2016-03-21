@@ -55,6 +55,7 @@ else()
 endif()
 ###################### CXX11 #############################
 
+add_subdirectory(3th_party/curlpp)
 add_subdirectory(3th_party/jsoncpp-1.6.5)
 add_subdirectory(3th_party/sqlite-amalgamation-3110100)
 add_subdirectory(DeviceAPI)

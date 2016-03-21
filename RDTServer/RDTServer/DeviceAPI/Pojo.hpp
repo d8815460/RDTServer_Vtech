@@ -12,6 +12,7 @@
 #include <stdio.h>
 #include <vector>
 #include <string>
+#include <json/reader.h>
 
 #define Pojo_Buffer_Size 128
 
@@ -20,6 +21,10 @@ using namespace std;
 struct Pojo
 {
     virtual ~Pojo() {}
+    
+    virtual void toJson(Json::Value& json) {};
+//    virtual std::string toJson() = 0;
+    
     virtual void print() = 0;
 };
 

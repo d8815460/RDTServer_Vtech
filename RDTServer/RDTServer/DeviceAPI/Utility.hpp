@@ -10,7 +10,9 @@
 #define __RDTServer__Utility__
 
 #include <stdio.h>
+#include <memory>
 #include "Device.hpp"
+#include "Pojo.hpp"
 
 typedef void (*JsonRecvDataCallback)(int channelID, BYTE* buffer, int totalLength);
 
@@ -23,6 +25,8 @@ public:
     
     static void printData(const char* function, int line, const BYTE* data, const int length);
     static void showException(Exception& e);
+    
+    static void pojoListToJson(Json::Value& root, shared_ptr<vector<shared_ptr<Pojo>>>& pojoList);
     
 //    template <typename T>
 //    static T setValue(BYTE* pBuffer, int* pIndex, T value);

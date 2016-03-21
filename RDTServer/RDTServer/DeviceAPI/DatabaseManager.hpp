@@ -27,6 +27,8 @@ class DatabaseManager
 public:
     static DatabaseManager& getInstance() { return m_Instance; }
     
+    sqlite3* getSqliteDatabase() { return m_pDatabase; }
+    
     void open();
     void close();
     int exec(const char* sql);
