@@ -12,6 +12,14 @@
 #include "RDTAPIs.h"
 #include "Common.hpp"
 
+// curl
+#include <cstdlib>
+#include <cerrno>
+#include <curlpp/cURLpp.hpp>
+#include <curlpp/Easy.hpp>
+#include <curlpp/Options.hpp>
+#include <curlpp/Exception.hpp>
+
 void Utility::reverse(BYTE* data, const int length)
 {
     int SIZE = length;
@@ -94,4 +102,45 @@ void Utility::pojoListToJson(Json::Value& root, shared_ptr<vector<shared_ptr<Poj
     
     root["ListAccessory"] = listAccessory;
 //    LOGD("產生json = \n%s", root.toStyledString().c_str());
+}
+
+void Utility::sendParseRest(const char *url, const char* appID, const char* masterKey, const char* restKey, const char* json)
+{
+    try {
+        curlpp::Cleanup cleaner;
+        curlpp::Easy request;
+        
+        request.setOpt(new curlpp::options::Url(url));
+        request.setOpt(new curlpp::options::Verbose(true));
+        
+        std::list<std::string> header;
+        std::string str = "";
+        str.append("X-Parse-Application-Id: ");
+        str.append(appID);
+        header.push_back(str);
+        
+        str = "";
+        str.append("X-Parse-Master-Key: ");
+        str.append(masterKey);
+        header.push_back(str);
+        
+        str = "";
+        str.append("X-Parse-REST-API-Key: ");
+        str.append(restKey);
+        header.push_back(str);
+        
+        header.push_back("Content-Type: application/json");
+        request.setOpt(new curlpp::options::HttpHeader(header));
+        
+        request.setOpt(new curlpp::options::PostFields(json));
+        request.setOpt(new curlpp::options::PostFieldSize(strlen(json)));
+        
+        request.perform();
+    }
+    catch ( curlpp::LogicError & e ) {
+        std::cout << e.what() << std::endl;
+    }
+    catch ( curlpp::RuntimeError & e ) {
+        std::cout << e.what() << std::endl;
+    }
 }

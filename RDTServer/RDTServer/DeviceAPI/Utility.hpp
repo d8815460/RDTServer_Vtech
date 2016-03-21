@@ -25,8 +25,8 @@ public:
     
     static void printData(const char* function, int line, const BYTE* data, const int length);
     static void showException(Exception& e);
-    
     static void pojoListToJson(Json::Value& root, shared_ptr<vector<shared_ptr<Pojo>>>& pojoList);
+    static void sendParseRest(const char *url, const char* appID, const char* masterKey, const char* restKey, const char* json);
     
 //    template <typename T>
 //    static T setValue(BYTE* pBuffer, int* pIndex, T value);

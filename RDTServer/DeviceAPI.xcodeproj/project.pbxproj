@@ -98,6 +98,7 @@
 		A2A3C2661C9152F200ABED16 /* AccessoryDao.hpp in Headers */ = {isa = PBXBuildFile; fileRef = A2A3C2641C9152F200ABED16 /* AccessoryDao.hpp */; };
 		A2A3C26C1C91721300ABED16 /* ElementDao.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A2A3C26A1C91721300ABED16 /* ElementDao.cpp */; };
 		A2A3C26D1C91721300ABED16 /* ElementDao.hpp in Headers */ = {isa = PBXBuildFile; fileRef = A2A3C26B1C91721300ABED16 /* ElementDao.hpp */; };
+		A2AD00461CA006A80092E7EF /* libcurlpp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A2AD00451CA006A80092E7EF /* libcurlpp.a */; };
 		A2AF5D751C7C395300104205 /* BinraryRDTCommand.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A2AF5D731C7C395300104205 /* BinraryRDTCommand.cpp */; };
 		A2AF5D761C7C395300104205 /* BinraryRDTCommand.hpp in Headers */ = {isa = PBXBuildFile; fileRef = A2AF5D741C7C395300104205 /* BinraryRDTCommand.hpp */; };
 		A2B03D211C6444F8002CFA38 /* AccessoryTypeEnum.hpp in Headers */ = {isa = PBXBuildFile; fileRef = A2B03D201C6444F8002CFA38 /* AccessoryTypeEnum.hpp */; };
@@ -208,6 +209,7 @@
 		A2A3C2641C9152F200ABED16 /* AccessoryDao.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = AccessoryDao.hpp; path = RDTServer/DeviceAPI/AccessoryDao.hpp; sourceTree = SOURCE_ROOT; };
 		A2A3C26A1C91721300ABED16 /* ElementDao.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ElementDao.cpp; path = RDTServer/DeviceAPI/ElementDao.cpp; sourceTree = SOURCE_ROOT; };
 		A2A3C26B1C91721300ABED16 /* ElementDao.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = ElementDao.hpp; path = RDTServer/DeviceAPI/ElementDao.hpp; sourceTree = SOURCE_ROOT; };
+		A2AD00451CA006A80092E7EF /* libcurlpp.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libcurlpp.a; path = RDTServer/lib/mac/libcurlpp.a; sourceTree = "<group>"; };
 		A2AF26A01C73038B00F30460 /* CMakeLists.txt */ = {isa = PBXFileReference; lastKnownFileType = text; name = CMakeLists.txt; path = RDTServer/Targate/VtechDevice/CMakeLists.txt; sourceTree = "<group>"; };
 		A2AF5D731C7C395300104205 /* BinraryRDTCommand.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = BinraryRDTCommand.cpp; path = RDTServer/DeviceAPI/BinraryRDTCommand.cpp; sourceTree = SOURCE_ROOT; };
 		A2AF5D741C7C395300104205 /* BinraryRDTCommand.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = BinraryRDTCommand.hpp; path = RDTServer/DeviceAPI/BinraryRDTCommand.hpp; sourceTree = SOURCE_ROOT; };
@@ -226,6 +228,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A2AD00461CA006A80092E7EF /* libcurlpp.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -403,6 +406,7 @@
 		A2913D881C635CFF00AF81AF = {
 			isa = PBXGroup;
 			children = (
+				A2AD00451CA006A80092E7EF /* libcurlpp.a */,
 				A2913D931C635CFF00AF81AF /* DeviceAPI */,
 				A26FB68C1C635EB0007E3648 /* Other */,
 				A26FB6951C635F3B007E3648 /* 3th_Party */,
@@ -775,13 +779,13 @@
 				HEADER_SEARCH_PATHS = (
 					../TUTK_Kalay_Platform_SDK_2.1.3/Include,
 					"RDTServer/3th_party/jsoncpp-1.6.5/include",
-					"RDTServer/3th_party/curlpp-0.7.3/include",
+					RDTServer/3th_party/curlpp/include,
 				);
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					../TUTK_Kalay_Platform_SDK_2.1.3/Lib/MAC,
-					"RDTServer/3th_party/curlpp-0.7.3/Librarys",
 					RDTServer/lib/mac,
+					"$(PROJECT_DIR)/RDTServer/lib/mac",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -796,13 +800,13 @@
 				HEADER_SEARCH_PATHS = (
 					../TUTK_Kalay_Platform_SDK_2.1.3/Include,
 					"RDTServer/3th_party/jsoncpp-1.6.5/include",
-					"RDTServer/3th_party/curlpp-0.7.3/include",
+					RDTServer/3th_party/curlpp/include,
 				);
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					../TUTK_Kalay_Platform_SDK_2.1.3/Lib/MAC,
-					"RDTServer/3th_party/curlpp-0.7.3/Librarys",
 					RDTServer/lib/mac,
+					"$(PROJECT_DIR)/RDTServer/lib/mac",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};

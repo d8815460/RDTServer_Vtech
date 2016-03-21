@@ -16,14 +16,6 @@
 #include "IOTCException.hpp"
 #include "Utility.hpp"
 
-// curl
-#include <cstdlib>
-#include <cerrno>
-#include <curlpp/cURLpp.hpp>
-#include <curlpp/Easy.hpp>
-#include <curlpp/Options.hpp>
-#include <curlpp/Exception.hpp>
-
 //#include "sqlite3.h"
 
 //// curlpp
@@ -176,47 +168,6 @@ using namespace std;
 //
 //static char insertsql[] = "INSERT INTO Contact VALUES(NULL, 'Fred', '09990123456');";
 //static char querysql[] = "SELECT * FROM Contact;";
-
-void sendParseRest(const char *url, const char* appID, const char* masterKey, const char* restKey, const char* json)
-{
-    try {
-        curlpp::Cleanup cleaner;
-        curlpp::Easy request;
-
-        request.setOpt(new curlpp::options::Url(url));
-        request.setOpt(new curlpp::options::Verbose(true));
-        
-        std::list<std::string> header;
-        std::string str = "";
-        str.append("X-Parse-Application-Id: ");
-        str.append(appID);
-        header.push_back(str);
-        
-        str = "";
-        str.append("X-Parse-Master-Key: ");
-        str.append(masterKey);
-        header.push_back(str);
-        
-        str = "";
-        str.append("X-Parse-REST-API-Key: ");
-        str.append(restKey);
-        header.push_back(str);
-        
-        header.push_back("Content-Type: application/json");
-        request.setOpt(new curlpp::options::HttpHeader(header));
-        
-        request.setOpt(new curlpp::options::PostFields(json));
-        request.setOpt(new curlpp::options::PostFieldSize(strlen(json)));
-
-        request.perform();
-    }
-    catch ( curlpp::LogicError & e ) {
-        std::cout << e.what() << std::endl;
-    }
-    catch ( curlpp::RuntimeError & e ) {
-        std::cout << e.what() << std::endl;
-    }
-}
 
 int main(int argc, char *argv[])
 {
@@ -429,11 +380,11 @@ int main(int argc, char *argv[])
 //            std::cout << e.what() << std::endl;
 //        }
         
-        sendParseRest("http://203.77.34.135:1337/parse/push",
-                      "EoAplzLMJaf7ZGSvpJEWvbKz0rEBlR3nKUG9pLww",
-                      "FssnnvdCbFCjgwS7i8FziDkngfRG4nT8SOQ6z40n",
-                      "HFLJofa47H1A3XaEHY5IPDRWksI6P2Y1oR7sY10w",
-                      "{\"where\": {\"deviceType\": {\"$in\": [\"ios\"]}},\"data\": {\"title\": \"The Shining\",\"alert\": \"All work and no play makes Jacka dull boy.\"}}");
+        Utility::sendParseRest("http://203.77.34.135:1337/parse/push",
+                               "EoAplzLMJaf7ZGSvpJEWvbKz0rEBlR3nKUG9pLww",
+                               "FssnnvdCbFCjgwS7i8FziDkngfRG4nT8SOQ6z40n",
+                               "HFLJofa47H1A3XaEHY5IPDRWksI6P2Y1oR7sY10w",
+                               "{\"where\": {\"deviceType\": {\"$in\": [\"ios\"]}},\"data\": {\"title\": \"The Shining\",\"alert\": \"All work and no play makes Jacka dull boy.\"}}");
     }
     
     // RDT
