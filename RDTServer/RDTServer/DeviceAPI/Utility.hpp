@@ -10,6 +10,7 @@
 #define __RDTServer__Utility__
 
 #include <stdio.h>
+#include <memory>
 #include "Device.hpp"
 #include "Pojo.hpp"
 

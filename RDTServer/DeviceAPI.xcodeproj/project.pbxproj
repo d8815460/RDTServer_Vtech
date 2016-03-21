@@ -73,8 +73,6 @@
 		A26FB6CD1C635FB7007E3648 /* FP.h in Headers */ = {isa = PBXBuildFile; fileRef = A26FB6CA1C635FB7007E3648 /* FP.h */; };
 		A26FB6CE1C635FB7007E3648 /* MQTTClient.h in Headers */ = {isa = PBXBuildFile; fileRef = A26FB6CB1C635FB7007E3648 /* MQTTClient.h */; };
 		A26FB6CF1C635FB7007E3648 /* MQTTLogging.h in Headers */ = {isa = PBXBuildFile; fileRef = A26FB6CC1C635FB7007E3648 /* MQTTLogging.h */; };
-		A26FB6D31C635FF4007E3648 /* libutilspp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A26FB6D11C635FF4007E3648 /* libutilspp.a */; };
-		A26FB6D41C635FF4007E3648 /* libcurlpp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A26FB6D21C635FF4007E3648 /* libcurlpp.a */; };
 		A26FB6E41C63600A007E3648 /* assertions.h in Headers */ = {isa = PBXBuildFile; fileRef = A26FB6D61C63600A007E3648 /* assertions.h */; };
 		A26FB6E51C63600A007E3648 /* autolink.h in Headers */ = {isa = PBXBuildFile; fileRef = A26FB6D71C63600A007E3648 /* autolink.h */; };
 		A26FB6E61C63600A007E3648 /* config.h in Headers */ = {isa = PBXBuildFile; fileRef = A26FB6D81C63600A007E3648 /* config.h */; };
@@ -228,8 +226,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A26FB6D31C635FF4007E3648 /* libutilspp.a in Frameworks */,
-				A26FB6D41C635FF4007E3648 /* libcurlpp.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

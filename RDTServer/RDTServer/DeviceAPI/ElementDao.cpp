@@ -7,6 +7,7 @@
 //
 
 #include "ElementDao.hpp"
+#include <memory>
 #include "DatabaseManager.hpp"
 #include "ElementNODao.hpp"
 

@@ -6,6 +6,7 @@ project(TUTKDevice)
 include_directories(${CMAKE_CURRENT_SOURCE_DIR})
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/../../DeviceAPI)
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/../../../../TUTK_Kalay_Platform_SDK_2.1.3/Include)
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/../../3th_party/curlpp/include)
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/../../3th_party/jsoncpp-1.6.5/include)
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/../../3th_party/sqlite-amalgamation-3110100)
 
@@ -31,11 +32,11 @@ file(GLOB_RECURSE SRC_FILES *.cpp)
 add_executable(TUTKDevice ${SRC_FILES})
 
 if (CMAKE_SYSTEM_NAME MATCHES "WIN32")
-    target_link_libraries(TUTKDevice DeviceAPI RDTAPIs jsoncpp sqlite3 dl)
+    target_link_libraries(TUTKDevice DeviceAPI RDTAPIs curlpp jsoncpp sqlite3 dl)
 elseif (CMAKE_SYSTEM_NAME MATCHES "Darwin")
-    target_link_libraries(TUTKDevice DeviceAPI IOTCAPIs_ALL jsoncpp sqlite3 dl)
+    target_link_libraries(TUTKDevice DeviceAPI IOTCAPIs_ALL curlpp jsoncpp sqlite3 dl)
 elseif (CMAKE_SYSTEM_NAME MATCHES "Linux")
-    target_link_libraries(TUTKDevice DeviceAPI RDTAPIs IOTCAPIs pthread jsoncpp sqlite3 dl)
+    target_link_libraries(TUTKDevice DeviceAPI RDTAPIs IOTCAPIs pthread curlpp jsoncpp sqlite3 dl)
 endif()
 
 ###################### Base #############################
