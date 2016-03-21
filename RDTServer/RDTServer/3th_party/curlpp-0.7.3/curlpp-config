@@ -70,11 +70,11 @@ while test $# -gt 0; do
 	;;
 
     --cflags)
-       	echo -I${prefix}/include   -I/usr/local/include
+       	echo -I${prefix}/include  -I/Users/jakey/anaconda/include -I/usr/local/include
        	;;
 
     --libs)
-       	echo -L${exec_prefix}/lib -lcurlpp   -lstdc++ -lcurl 
+       	echo -L${exec_prefix}/lib -lcurlpp   -lstdc++ -L/Users/jakey/anaconda/lib -lcurl -lssl -lcrypto -lz 
        	;;
 
     *)

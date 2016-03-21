@@ -32,7 +32,7 @@ example05.o: example05.cpp \
   /usr/include/sys/_pthread/_pthread_attr_t.h \
   /usr/include/sys/_types/_sigaltstack.h \
   /usr/include/sys/_types/_ucontext.h /usr/include/sys/resource.h \
-  /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../lib/clang/7.0.0/include/stdint.h \
+  /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../lib/clang/7.0.2/include/stdint.h \
   /usr/include/stdint.h /usr/include/sys/_types/_int8_t.h \
   /usr/include/sys/_types/_int16_t.h /usr/include/sys/_types/_int32_t.h \
   /usr/include/sys/_types/_int64_t.h /usr/include/_types/_uint8_t.h \
@@ -49,9 +49,10 @@ example05.o: example05.cpp \
   /usr/include/string.h /usr/include/sys/_types/_rsize_t.h \
   /usr/include/sys/_types/_errno_t.h /usr/include/strings.h \
   ../include/curlpp/cURLpp.hpp ../include/curlpp/internal/buildconfig.h \
-  /usr/include/curl/curl.h /usr/include/curl/curlver.h \
-  /usr/include/curl/curlbuild.h /usr/include/sys/types.h \
-  /usr/include/sys/_types/_blkcnt_t.h \
+  /Users/jakey/anaconda/include/curl/curl.h \
+  /Users/jakey/anaconda/include/curl/curlver.h \
+  /Users/jakey/anaconda/include/curl/curlbuild.h \
+  /usr/include/sys/types.h /usr/include/sys/_types/_blkcnt_t.h \
   /usr/include/sys/_types/_blksize_t.h \
   /usr/include/sys/_types/_in_addr_t.h \
   /usr/include/sys/_types/_in_port_t.h /usr/include/sys/_types/_ino_t.h \
@@ -67,23 +68,24 @@ example05.o: example05.cpp \
   /usr/include/sys/_pthread/_pthread_t.h \
   /usr/include/sys/_pthread/_pthread_key_t.h \
   /usr/include/sys/_types/_fsblkcnt_t.h \
-  /usr/include/sys/_types/_fsfilcnt_t.h /usr/include/inttypes.h \
-  /usr/include/sys/socket.h /usr/include/machine/_param.h \
-  /usr/include/i386/_param.h /usr/include/sys/_types/_sa_family_t.h \
+  /usr/include/sys/_types/_fsfilcnt_t.h /usr/include/sys/socket.h \
+  /usr/include/machine/_param.h /usr/include/i386/_param.h \
+  /usr/include/sys/_types/_sa_family_t.h \
   /usr/include/sys/_types/_socklen_t.h \
-  /usr/include/sys/_types/_iovec_t.h /usr/include/curl/curlrules.h \
-  /usr/include/stdio.h /usr/include/sys/_types/_va_list.h \
-  /usr/include/sys/stdio.h \
-  /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../lib/clang/7.0.0/include/limits.h \
+  /usr/include/sys/_types/_iovec_t.h \
+  /Users/jakey/anaconda/include/curl/curlrules.h /usr/include/stdio.h \
+  /usr/include/sys/_types/_va_list.h /usr/include/sys/stdio.h \
+  /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../lib/clang/7.0.2/include/limits.h \
   /usr/include/limits.h /usr/include/machine/limits.h \
   /usr/include/i386/limits.h /usr/include/i386/_limits.h \
   /usr/include/sys/syslimits.h /usr/include/time.h \
   /usr/include/sys/time.h /usr/include/sys/_types/_timeval64.h \
-  /usr/include/curl/easy.h /usr/include/curl/multi.h \
+  /Users/jakey/anaconda/include/curl/easy.h \
+  /Users/jakey/anaconda/include/curl/multi.h \
   /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/string \
   /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/iosfwd \
   /usr/include/wchar.h /usr/include/sys/_types/_mbstate_t.h \
-  /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../lib/clang/7.0.0/include/stdarg.h \
+  /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../lib/clang/7.0.2/include/stdarg.h \
   /usr/include/_wctype.h /usr/include/sys/_types/_wint_t.h \
   /usr/include/_types/_wctype_t.h /usr/include/ctype.h \
   /usr/include/runetype.h \
@@ -95,7 +97,7 @@ example05.o: example05.cpp \
   /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/algorithm \
   /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/initializer_list \
   /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/cstddef \
-  /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../lib/clang/7.0.0/include/stddef.h \
+  /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../lib/clang/7.0.2/include/stddef.h \
   /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/type_traits \
   /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/utility \
   /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/__tuple \
@@ -358,10 +360,9 @@ example05.o: example05.cpp \
   /usr/include/sys/_types/_mach_port_t.h /usr/include/locale.h \
   /usr/include/_locale.h /usr/include/xlocale.h /usr/include/_xlocale.h \
   /usr/include/xlocale/_ctype.h /usr/include/xlocale/__wctype.h \
-  /usr/include/xlocale/_inttypes.h /usr/include/xlocale/_stdio.h \
-  /usr/include/xlocale/_stdlib.h /usr/include/xlocale/_string.h \
-  /usr/include/xlocale/_time.h /usr/include/xlocale/_wchar.h \
-  /usr/include/xlocale/_wctype.h \
+  /usr/include/xlocale/_stdio.h /usr/include/xlocale/_stdlib.h \
+  /usr/include/xlocale/_string.h /usr/include/xlocale/_time.h \
+  /usr/include/xlocale/_wchar.h /usr/include/xlocale/_wctype.h \
   /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/streambuf \
   /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/istream \
   /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/ostream \
@@ -487,7 +488,7 @@ example05.o: example05.cpp \
 
 /usr/include/sys/resource.h:
 
-/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../lib/clang/7.0.0/include/stdint.h:
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../lib/clang/7.0.2/include/stdint.h:
 
 /usr/include/stdint.h:
 
@@ -547,11 +548,11 @@ example05.o: example05.cpp \
 
 ../include/curlpp/internal/buildconfig.h:
 
-/usr/include/curl/curl.h:
+/Users/jakey/anaconda/include/curl/curl.h:
 
-/usr/include/curl/curlver.h:
+/Users/jakey/anaconda/include/curl/curlver.h:
 
-/usr/include/curl/curlbuild.h:
+/Users/jakey/anaconda/include/curl/curlbuild.h:
 
 /usr/include/sys/types.h:
 
@@ -595,8 +596,6 @@ example05.o: example05.cpp \
 
 /usr/include/sys/_types/_fsfilcnt_t.h:
 
-/usr/include/inttypes.h:
-
 /usr/include/sys/socket.h:
 
 /usr/include/machine/_param.h:
@@ -609,7 +608,7 @@ example05.o: example05.cpp \
 
 /usr/include/sys/_types/_iovec_t.h:
 
-/usr/include/curl/curlrules.h:
+/Users/jakey/anaconda/include/curl/curlrules.h:
 
 /usr/include/stdio.h:
 
@@ -617,7 +616,7 @@ example05.o: example05.cpp \
 
 /usr/include/sys/stdio.h:
 
-/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../lib/clang/7.0.0/include/limits.h:
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../lib/clang/7.0.2/include/limits.h:
 
 /usr/include/limits.h:
 
@@ -635,9 +634,9 @@ example05.o: example05.cpp \
 
 /usr/include/sys/_types/_timeval64.h:
 
-/usr/include/curl/easy.h:
+/Users/jakey/anaconda/include/curl/easy.h:
 
-/usr/include/curl/multi.h:
+/Users/jakey/anaconda/include/curl/multi.h:
 
 /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/string:
 
@@ -647,7 +646,7 @@ example05.o: example05.cpp \
 
 /usr/include/sys/_types/_mbstate_t.h:
 
-/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../lib/clang/7.0.0/include/stdarg.h:
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../lib/clang/7.0.2/include/stdarg.h:
 
 /usr/include/_wctype.h:
 
@@ -677,7 +676,7 @@ example05.o: example05.cpp \
 
 /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/cstddef:
 
-/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../lib/clang/7.0.0/include/stddef.h:
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../lib/clang/7.0.2/include/stddef.h:
 
 /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/type_traits:
 
@@ -1228,8 +1227,6 @@ example05.o: example05.cpp \
 /usr/include/xlocale/_ctype.h:
 
 /usr/include/xlocale/__wctype.h:
-
-/usr/include/xlocale/_inttypes.h:
 
 /usr/include/xlocale/_stdio.h:
 
