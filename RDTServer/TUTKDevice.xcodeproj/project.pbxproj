@@ -195,9 +195,9 @@
 		A24D7FF81BFD6DB600143462 /* 3th Party */ = {
 			isa = PBXGroup;
 			children = (
+				A24FBA4A1C07145000EF516E /* Librarys */,
 				A2C6E10D1C8EBA770024D998 /* sqlite */,
 				A27836201C3B765500283F81 /* Paho_MQTT */,
-				A24FBA4A1C07145000EF516E /* Librarys */,
 				A24D80061BFD790900143462 /* jsoncpp */,
 			);
 			name = "3th Party";

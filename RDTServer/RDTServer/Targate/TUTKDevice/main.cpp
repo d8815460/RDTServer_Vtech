@@ -380,11 +380,11 @@ int main(int argc, char *argv[])
 //            std::cout << e.what() << std::endl;
 //        }
         
-        Utility::sendParseRest("http://203.77.34.135:1337/parse/push",
-                               "EoAplzLMJaf7ZGSvpJEWvbKz0rEBlR3nKUG9pLww",
-                               "FssnnvdCbFCjgwS7i8FziDkngfRG4nT8SOQ6z40n",
-                               "HFLJofa47H1A3XaEHY5IPDRWksI6P2Y1oR7sY10w",
-                               "{\"where\": {\"deviceType\": {\"$in\": [\"ios\"]}},\"data\": {\"title\": \"The Shining\",\"alert\": \"All work and no play makes Jacka dull boy.\"}}");
+//        Utility::sendParseRest("http://203.77.34.135:1337/parse/push",
+//                               "EoAplzLMJaf7ZGSvpJEWvbKz0rEBlR3nKUG9pLww",
+//                               "FssnnvdCbFCjgwS7i8FziDkngfRG4nT8SOQ6z40n",
+//                               "HFLJofa47H1A3XaEHY5IPDRWksI6P2Y1oR7sY10w",
+//                               "{\"where\": {\"deviceType\": {\"$in\": [\"ios\"]}},\"data\": {\"title\": \"The Shining\",\"alert\": \"All work and no play makes Jacka dull boy.\"}}");
     }
     
     // RDT

@@ -181,8 +181,6 @@
 		A26FB6CA1C635FB7007E3648 /* FP.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FP.h; path = RDTServer/3th_party/Paho_MQTT/MQTTClient/FP.h; sourceTree = "<group>"; };
 		A26FB6CB1C635FB7007E3648 /* MQTTClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MQTTClient.h; path = RDTServer/3th_party/Paho_MQTT/MQTTClient/MQTTClient.h; sourceTree = "<group>"; };
 		A26FB6CC1C635FB7007E3648 /* MQTTLogging.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MQTTLogging.h; path = RDTServer/3th_party/Paho_MQTT/MQTTClient/MQTTLogging.h; sourceTree = "<group>"; };
-		A26FB6D11C635FF4007E3648 /* libutilspp.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libutilspp.a; path = "RDTServer/3th_party/curlpp-0.7.3/Librarys/libutilspp.a"; sourceTree = "<group>"; };
-		A26FB6D21C635FF4007E3648 /* libcurlpp.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libcurlpp.a; path = "RDTServer/3th_party/curlpp-0.7.3/Librarys/libcurlpp.a"; sourceTree = "<group>"; };
 		A26FB6D61C63600A007E3648 /* assertions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = assertions.h; path = "RDTServer/3th_party/jsoncpp-1.6.5/include/json/assertions.h"; sourceTree = "<group>"; };
 		A26FB6D71C63600A007E3648 /* autolink.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = autolink.h; path = "RDTServer/3th_party/jsoncpp-1.6.5/include/json/autolink.h"; sourceTree = "<group>"; };
 		A26FB6D81C63600A007E3648 /* config.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = config.h; path = "RDTServer/3th_party/jsoncpp-1.6.5/include/json/config.h"; sourceTree = "<group>"; };
@@ -293,8 +291,8 @@
 		A26FB6951C635F3B007E3648 /* 3th_Party */ = {
 			isa = PBXGroup;
 			children = (
-				A26FB6D51C636001007E3648 /* jsoncpp */,
 				A26FB6D01C635FE3007E3648 /* Librarys */,
+				A26FB6D51C636001007E3648 /* jsoncpp */,
 				A26FB6BA1C635F72007E3648 /* MQTTClient */,
 				A26FB6961C635F4D007E3648 /* Paho_MQTT */,
 			);
@@ -376,8 +374,7 @@
 		A26FB6D01C635FE3007E3648 /* Librarys */ = {
 			isa = PBXGroup;
 			children = (
-				A26FB6D11C635FF4007E3648 /* libutilspp.a */,
-				A26FB6D21C635FF4007E3648 /* libcurlpp.a */,
+				A2AD00451CA006A80092E7EF /* libcurlpp.a */,
 			);
 			name = Librarys;
 			sourceTree = "<group>";
@@ -406,7 +403,6 @@
 		A2913D881C635CFF00AF81AF = {
 			isa = PBXGroup;
 			children = (
-				A2AD00451CA006A80092E7EF /* libcurlpp.a */,
 				A2913D931C635CFF00AF81AF /* DeviceAPI */,
 				A26FB68C1C635EB0007E3648 /* Other */,
 				A26FB6951C635F3B007E3648 /* 3th_Party */,
