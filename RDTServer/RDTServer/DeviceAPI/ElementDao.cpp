@@ -59,15 +59,18 @@ void ElementDao::create(shared_ptr<ElementPojo> pElementPojo)
     char buffer[Pojo_Buffer_Size];
     sprintf(buffer, "INSERT INTO Element VALUES(NULL, %d, '%s');", pElementPojo->fkAccessorySerial, pElementPojo->element.c_str());
     LOGD("buffer:%s", buffer);
-    
     databaseManager.exec(buffer);
     
+    int rowid = (int) sqlite3_last_insert_rowid(databaseManager.getSqliteDatabase());
+                                    
     for (shared_ptr<Pojo> pPojo : *pElementPojo->pElementNOPojoList) {
         shared_ptr<ElementNOPojo>& pElementNOPojo = (shared_ptr<ElementNOPojo>&) pPojo;
         
-        pElementPojo->elementSerial = (int) sqlite3_last_insert_rowid(databaseManager.getSqliteDatabase());
+        pElementPojo->elementSerial = rowid;
         pElementNOPojo->fkElementSerial = pElementPojo->elementSerial;
+        
 //        LOGD("pElementPojo->name:%s", pElementPojo->name.c_str());
+//        LOGD("pElementPojo->elementSerial:%d", pElementPojo->elementSerial);
         
         ElementNODao::create(pElementNOPojo);
     }

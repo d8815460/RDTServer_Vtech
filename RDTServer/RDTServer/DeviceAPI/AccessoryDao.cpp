@@ -55,10 +55,12 @@ void AccessoryDao::create(AccessoryPojo& accessoryPojo)
     LOGD("buffer:%s", buffer);
     databaseManager.exec(buffer);
     
+    int rowid = (int) sqlite3_last_insert_rowid(databaseManager.getSqliteDatabase());
+    
     for (shared_ptr<Pojo> pPojo : *accessoryPojo.pElementPojoList) {
         shared_ptr<ElementPojo>& pElementPojo = (shared_ptr<ElementPojo>&) pPojo;
         
-        accessoryPojo.accessorySerial = (int) sqlite3_last_insert_rowid(databaseManager.getSqliteDatabase());
+        accessoryPojo.accessorySerial =rowid ;
         pElementPojo->fkAccessorySerial = accessoryPojo.accessorySerial;
         
 //        LOGD("accessoryPojo.accessorySerial:%d", accessoryPojo.accessorySerial);

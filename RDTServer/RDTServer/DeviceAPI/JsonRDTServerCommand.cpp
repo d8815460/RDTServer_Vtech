@@ -118,132 +118,158 @@ std::string JsonRDTServerCommand::findWord(std::string& string, const std::strin
 
 void JsonRDTServerCommand::processCommandTarget(const Json::Value& inJsonObject, Json::Value& outJsonObject) throw (CommandException)
 {
-    string target = inJsonObject["target"].asString();
-    string operation = inJsonObject["operation"].asString();
+    string function = inJsonObject["function"].asString();
+    Json::Value IfList = inJsonObject["If"];
     
-    // vertify
-    // 辨識最上面一層
-    if (target.find("product_code") != std::string::npos) {
-        CommandHardwardRecv_ProductCode commandHardwardRecv_ProductCode;
-        m_pCommandHardwardEvent->onCommandHardwardRecv_ProductCode(&commandHardwardRecv_ProductCode);
+    LOGD("function:%s", function.c_str());
+    
+    for (int i=0 ; i<IfList.size() ; i++) {
+        Json::Value IfKey = IfList[i];
         
-        // 上報通知
-//        m_pCommandHardwardEvent->onCommandHardwardNotify(<#CommandHardwardNotifyData *pCommandHardwardNotifyData#>);
+        // 找出key
+//        Json::Value::Members members = IfKey.getMemberNames();
+//        for (int j=0 ; j<members.size() ; j++) {
+//            LOGD("key:%s", members[j].c_str());
+//        }
         
-        // 輸出 JSON
-        Json::Value arraryItems;
-        Json::Value arrayObject;
-        arraryItems["index"] = "0";
-        arraryItems["value"] = commandHardwardRecv_ProductCode.productCode;
-        arrayObject.append(arraryItems);
-        outJsonObject["response"] = arrayObject;
+        if (IfKey.isMember("List")) {
+//            LOGD("IfKey:%s", IfKey["List"].asCString());
+            
+            
+        }
+        
     }
-    else if (target.find("product_name") != std::string::npos) {
-        CommandHardwardRecv_ProductName commandHardwardRecv_ProductName;
-        m_pCommandHardwardEvent->onCommandHardwardRecv_ProductName(&commandHardwardRecv_ProductName);
+    
+    // 查詢
+    if (function.find("read")) {
         
-        // 上報通知
-//        m_pCommandHardwardEvent->onCommandHardwardNotify(<#CommandHardwardNotifyData *pCommandHardwardNotifyData#>);
-        
-        // 輸出 JSON
-        Json::Value arraryItems;
-        Json::Value arrayObject;
-        arraryItems["index"] = "0";
-        arraryItems["value"] = commandHardwardRecv_ProductName.productName;
-        arrayObject.append(arraryItems);
-        outJsonObject["response"] = arrayObject;
     }
-    else if (target.find("accessory") != std::string::npos) {
-        std::string accessory = findWord(target, std::string("accessory"));
-        CommandBase* pCommand = NULL;
-        
-        // 新增
-        if (operation == "create") {
-            AccessoryData* pAccessoryData = new AccessoryData();
+    
+    
+//    // vertify
+//    // 辨識最上面一層
+//    if (target.find("product_code") != std::string::npos) {
+//        CommandHardwardRecv_ProductCode commandHardwardRecv_ProductCode;
+//        m_pCommandHardwardEvent->onCommandHardwardRecv_ProductCode(&commandHardwardRecv_ProductCode);
+//        
+//        // 上報通知
+////        m_pCommandHardwardEvent->onCommandHardwardNotify(<#CommandHardwardNotifyData *pCommandHardwardNotifyData#>);
+//        
+//        // 輸出 JSON
+//        Json::Value arraryItems;
+//        Json::Value arrayObject;
+//        arraryItems["index"] = "0";
+//        arraryItems["value"] = commandHardwardRecv_ProductCode.productCode;
+//        arrayObject.append(arraryItems);
+//        outJsonObject["response"] = arrayObject;
+//    }
+//    else if (target.find("product_name") != std::string::npos) {
+//        CommandHardwardRecv_ProductName commandHardwardRecv_ProductName;
+//        m_pCommandHardwardEvent->onCommandHardwardRecv_ProductName(&commandHardwardRecv_ProductName);
+//        
+//        // 上報通知
+////        m_pCommandHardwardEvent->onCommandHardwardNotify(<#CommandHardwardNotifyData *pCommandHardwardNotifyData#>);
+//        
+//        // 輸出 JSON
+//        Json::Value arraryItems;
+//        Json::Value arrayObject;
+//        arraryItems["index"] = "0";
+//        arraryItems["value"] = commandHardwardRecv_ProductName.productName;
+//        arrayObject.append(arraryItems);
+//        outJsonObject["response"] = arrayObject;
+//    }
+//    else if (target.find("accessory") != std::string::npos) {
+//        std::string accessory = findWord(target, std::string("accessory"));
+//        CommandBase* pCommand = NULL;
+//        
+//        // 新增
+//        if (operation == "create") {
+//            AccessoryData* pAccessoryData = new AccessoryData();
+////            pAccessoryData->print();
+//            pCommand = new CommandHardwardRecv_CreateItems();
+//            CommandHardwardRecv_CreateItems* pCommandHardwardRecv_CreateItems = (CommandHardwardRecv_CreateItems*) pCommand;
+//            pCommandHardwardRecv_CreateItems->dataType = DataType_Accessory;
+//            pCommandHardwardRecv_CreateItems->pBaseData = pAccessoryData;
+//            m_pCommandHardwardEvent->onCommandHardwardRecv_CreateItem(pCommandHardwardRecv_CreateItems);
 //            pAccessoryData->print();
-            pCommand = new CommandHardwardRecv_CreateItems();
-            CommandHardwardRecv_CreateItems* pCommandHardwardRecv_CreateItems = (CommandHardwardRecv_CreateItems*) pCommand;
-            pCommandHardwardRecv_CreateItems->dataType = DataType_Accessory;
-            pCommandHardwardRecv_CreateItems->pBaseData = pAccessoryData;
-            m_pCommandHardwardEvent->onCommandHardwardRecv_CreateItem(pCommandHardwardRecv_CreateItems);
-            pAccessoryData->print();
-            
-            m_accessoryList.push_back(pAccessoryData);
-        }
-        // 刪除
-        else if (operation == "delete") {
-            size_t pos2 = target.rfind("/") - 1;
-            size_t pos1 = target.rfind("/", pos2);                                                                 
-            string number = target.substr(pos1 + 1, pos2 - pos1);
-            int accessoryId = stoi(number.c_str());
-            
-            pCommand = new CommandHardwardRecv_DeleteItems();
-            CommandHardwardRecv_DeleteItems* pDeleteItems = (CommandHardwardRecv_DeleteItems*) pCommand;
-            pDeleteItems->dataType = DataType_Accessory;
-            pDeleteItems->id = accessoryId;
-            m_pCommandHardwardEvent->onCommandHardwardRecv_DeleteItems(pDeleteItems);
-//            m_accessoryList.erase();
-        }
-        // 查詢
-        else if (operation == "read") {
-            CommandHardwardRecv_ReadItems readItems;
-            pCommand = &readItems;
-            readItems.dataType = DataType_Accessory;
-//            commandHardwardRecv_ReadItems.m_accessoryList
-            m_pCommandHardwardEvent->onCommandHardwardRecv_ReadItems(&readItems);
-        }
-        // 修改
-        else if (operation == "update") {
-            int accessoryId = stoi(accessory.c_str());
-            for (int i=0 ; i<m_accessoryList.size() ; i++) {
-                if (m_accessoryList[i]->accessoryId == accessoryId) {
-                    std::string functionCode = findWord(target, std::string("function_code"));
-                    for (int j=0 ; j<m_accessoryList[i]->functionCodeDataList.size() ; j++) {
-                        if (m_accessoryList[i]->functionCodeDataList[j]->functonCode == "switch") {
-                            std::string valueString = findWord(target, std::string("value"));
-//                            LOGD("value:%s", value.c_str());
-                            int value = atoi(valueString.c_str());
-                            
-                            m_accessoryList[i]->functionCodeDataList[j]->functionCodeValueDataList[0]->value = value;
-                            
-                            FunctionCodeValueData* pFunctionCodeValueData = new FunctionCodeValueData();
-                            pFunctionCodeValueData->value = value;
-                            
-                            FunctionCodeData* pFunctionCodeData = new FunctionCodeData();
-                            pFunctionCodeData->functonCode = functionCode;
-                            pFunctionCodeData->functionCodeValueDataList.push_back(pFunctionCodeValueData);
-                            
-                            AccessoryData* pAccessoryData = new AccessoryData();
-                            pAccessoryData->accessoryId = accessoryId;
-                            pAccessoryData->functionCodeDataList.push_back(pFunctionCodeData);
-                            
-                            pCommand = new CommandHardwardRecv_UpdateItems();
-                            CommandHardwardRecv_UpdateItems* pUpdateItems = (CommandHardwardRecv_UpdateItems*) pCommand;
-                            pUpdateItems->dataType = DataType_Accessory;
-                            pUpdateItems->baseDataList.push_back(pAccessoryData);
-                            
-                            m_pCommandHardwardEvent->onCommandHardwardRecv_UpdateItems(pUpdateItems);
-                            
-                            break;
-                        }
-                    }
-                }
-            }
-        }
-        else {
-            throw CommandException(__PRETTY_FUNCTION__, __LINE__, CommandException_ErrorCode_No_Match_Command_Operation);
-        }
-        
-        // 發生錯誤
-        if (pCommand->errorCode != 0) {
-            // Error Code
-            outJsonObject["error_code"] = pCommand->errorCode;
-        }
-        else {
-            outJsonObject["error_code"] = 0;
-        }
-        delete pCommand;
-    }
+//            
+//            m_accessoryList.push_back(pAccessoryData);
+//        }
+//        // 刪除
+//        else if (operation == "delete") {
+//            size_t pos2 = target.rfind("/") - 1;
+//            size_t pos1 = target.rfind("/", pos2);                                                                 
+//            string number = target.substr(pos1 + 1, pos2 - pos1);
+//            int accessoryId = stoi(number.c_str());
+//            
+//            pCommand = new CommandHardwardRecv_DeleteItems();
+//            CommandHardwardRecv_DeleteItems* pDeleteItems = (CommandHardwardRecv_DeleteItems*) pCommand;
+//            pDeleteItems->dataType = DataType_Accessory;
+//            pDeleteItems->id = accessoryId;
+//            m_pCommandHardwardEvent->onCommandHardwardRecv_DeleteItems(pDeleteItems);
+////            m_accessoryList.erase();
+//        }
+//        // 查詢
+//        else if (operation == "read") {
+//            CommandHardwardRecv_ReadItems readItems;
+//            pCommand = &readItems;
+//            readItems.dataType = DataType_Accessory;
+////            commandHardwardRecv_ReadItems.m_accessoryList
+//            m_pCommandHardwardEvent->onCommandHardwardRecv_ReadItems(&readItems);
+//        }
+//        // 修改
+//        else if (operation == "update") {
+//            int accessoryId = stoi(accessory.c_str());
+//            for (int i=0 ; i<m_accessoryList.size() ; i++) {
+//                if (m_accessoryList[i]->accessoryId == accessoryId) {
+//                    std::string functionCode = findWord(target, std::string("function_code"));
+//                    for (int j=0 ; j<m_accessoryList[i]->functionCodeDataList.size() ; j++) {
+//                        if (m_accessoryList[i]->functionCodeDataList[j]->functonCode == "switch") {
+//                            std::string valueString = findWord(target, std::string("value"));
+////                            LOGD("value:%s", value.c_str());
+//                            int value = atoi(valueString.c_str());
+//                            
+//                            m_accessoryList[i]->functionCodeDataList[j]->functionCodeValueDataList[0]->value = value;
+//                            
+//                            FunctionCodeValueData* pFunctionCodeValueData = new FunctionCodeValueData();
+//                            pFunctionCodeValueData->value = value;
+//                            
+//                            FunctionCodeData* pFunctionCodeData = new FunctionCodeData();
+//                            pFunctionCodeData->functonCode = functionCode;
+//                            pFunctionCodeData->functionCodeValueDataList.push_back(pFunctionCodeValueData);
+//                            
+//                            AccessoryData* pAccessoryData = new AccessoryData();
+//                            pAccessoryData->accessoryId = accessoryId;
+//                            pAccessoryData->functionCodeDataList.push_back(pFunctionCodeData);
+//                            
+//                            pCommand = new CommandHardwardRecv_UpdateItems();
+//                            CommandHardwardRecv_UpdateItems* pUpdateItems = (CommandHardwardRecv_UpdateItems*) pCommand;
+//                            pUpdateItems->dataType = DataType_Accessory;
+//                            pUpdateItems->baseDataList.push_back(pAccessoryData);
+//                            
+//                            m_pCommandHardwardEvent->onCommandHardwardRecv_UpdateItems(pUpdateItems);
+//                            
+//                            break;
+//                        }
+//                    }
+//                }
+//            }
+//        }
+//        else {
+//            throw CommandException(__PRETTY_FUNCTION__, __LINE__, CommandException_ErrorCode_No_Match_Command_Operation);
+//        }
+//        
+//        // 發生錯誤
+//        if (pCommand->errorCode != 0) {
+//            // Error Code
+//            outJsonObject["error_code"] = pCommand->errorCode;
+//        }
+//        else {
+//            outJsonObject["error_code"] = 0;
+//        }
+//        delete pCommand;
+//    }
+    
 //    else {
 //        LOGE("processCommandTarget Error");
 //        throw CommandException(__PRETTY_FUNCTION__, __LINE__, CommandException_ErrorCode_No_Match_Command_Target);
@@ -282,14 +308,13 @@ void JsonRDTServerCommand::recvData(int channelID, BYTE* buffer, int totalLength
         
         // Common
         outJsonObject["serno"] = inJsonObject["serno"];
-        outJsonObject["operation"] = inJsonObject["operation"];
-        outJsonObject["target"] = inJsonObject["target"];
+        outJsonObject["function"] = inJsonObject["function"];
         
-        // Version
-        char version[20];
-        sprintf(version, "%d.%d.%d", m_CommandData.version1, m_CommandData.version2, m_CommandData.version3);
-        //    LOGD("version:%s", version);
-        outJsonObject["version"] = version;
+//        // Version
+//        char version[20];
+//        sprintf(version, "%d.%d.%d", m_CommandData.version1, m_CommandData.version2, m_CommandData.version3);
+//        //    LOGD("version:%s", version);
+//        outJsonObject["version"] = version;
         
         CommandHardwardRecvJsonData commandHardwardRecvJsonData;
         commandHardwardRecvJsonData.pJsonObject = &outJsonObject;

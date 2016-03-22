@@ -55,51 +55,49 @@ DatabaseManager::DatabaseManager()
     
     {
         /* 新增一筆資料 */
-        shared_ptr<ElementNOPojo> pElementNOPojo1(new ElementNOPojo);
-        pElementNOPojo1->elementNO = 0;
-        pElementNOPojo1->value = "1";
-        
-        shared_ptr<ElementPojo> pElementPojo1(new ElementPojo);
-        pElementPojo1->element = "switch";
-        pElementPojo1->pElementNOPojoList->push_back(pElementNOPojo1);
-        
-        shared_ptr<ElementNOPojo> pElementNOPojo2(new ElementNOPojo);
-        pElementNOPojo2->elementNO = 0;
-        pElementNOPojo2->value = "100";
-        
-        shared_ptr<ElementPojo> pElementPojo2(new ElementPojo);
-        pElementPojo2->element = "brightness";
-        pElementPojo1->pElementNOPojoList->push_back(pElementNOPojo2);
-        
         AccessoryPojo accessoryPojo;
         accessoryPojo.AID = 0;
         accessoryPojo.AType = 12;
-        accessoryPojo.pElementPojoList->push_back(pElementPojo1);
+        
+        shared_ptr<ElementPojo> pElement1(new ElementPojo);
+        pElement1->element = "switch";
+        
+        shared_ptr<ElementNOPojo> pNO1(new ElementNOPojo);
+        pNO1->elementNO = 0;
+        pNO1->value = "1";
+        
+        shared_ptr<ElementNOPojo> pNO2(new ElementNOPojo);
+        pNO2->elementNO = 1;
+        pNO2->value = "100";
+        
+        accessoryPojo.pElementPojoList->push_back(pElement1);
+        pElement1->pElementNOPojoList->push_back(pNO1);
+        pElement1->pElementNOPojoList->push_back(pNO2);
+        
         AccessoryDao::create(accessoryPojo);
     }
     
     {
         /* 新增一筆資料 */
-        shared_ptr<ElementNOPojo> pElementNOPojo1(new ElementNOPojo);
-        pElementNOPojo1->elementNO = 0;
-        pElementNOPojo1->value = "0";
-        
-        shared_ptr<ElementPojo> pElementPojo1(new ElementPojo);
-        pElementPojo1->element = "switch";
-        pElementPojo1->pElementNOPojoList->push_back(pElementNOPojo1);
-        
-        shared_ptr<ElementNOPojo> pElementNOPojo2(new ElementNOPojo);
-        pElementNOPojo2->elementNO = 0;
-        pElementNOPojo2->value = "10.1";
-        
-        shared_ptr<ElementPojo> pElementPojo2(new ElementPojo);
-        pElementPojo2->element = "volt";
-        pElementPojo1->pElementNOPojoList->push_back(pElementNOPojo2);
-        
         AccessoryPojo accessoryPojo;
-        accessoryPojo.AID = 5;
-        accessoryPojo.AType = 13;
-        accessoryPojo.pElementPojoList->push_back(pElementPojo1);
+        accessoryPojo.AID = 1;
+        accessoryPojo.AType = 1;
+        
+        shared_ptr<ElementPojo> pElement1(new ElementPojo);
+        pElement1->element = "switch";
+        
+        shared_ptr<ElementNOPojo> pNO1(new ElementNOPojo);
+        pNO1->elementNO = 0;
+        pNO1->value = "1";
+        
+        shared_ptr<ElementNOPojo> pNO2(new ElementNOPojo);
+        pNO2->elementNO = 1;
+        pNO2->value = "100";
+        
+        accessoryPojo.pElementPojoList->push_back(pElement1);
+        pElement1->pElementNOPojoList->push_back(pNO1);
+        pElement1->pElementNOPojoList->push_back(pNO2);
+        
         AccessoryDao::create(accessoryPojo);
     }
     
