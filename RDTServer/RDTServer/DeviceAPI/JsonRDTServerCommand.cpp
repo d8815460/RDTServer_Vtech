@@ -16,6 +16,7 @@
 #include "RDTAPIs.h"
 #include "BinraryRDTServerConnect.hpp"
 #include "AccessoryTypeEnum.hpp"
+#include "AccessoryDao.hpp"
 
 JsonRDTServerCommand::JsonRDTServerCommand(CommandEvent* pCommandEvent, CommandHardwardEvent* pCommandHardwardEvent, Connect* pConnect, CommandData* pCommandData) : JsonRDTCommand(pCommandEvent, pCommandHardwardEvent, pConnect, pCommandData)
 {
@@ -116,35 +117,33 @@ std::string JsonRDTServerCommand::findWord(std::string& string, const std::strin
 
 #pragma mark - JsonRDTServerCommand
 
-void JsonRDTServerCommand::processCommandTarget(const Json::Value& inJsonObject, Json::Value& outJsonObject) throw (CommandException)
+void JsonRDTServerCommand::processCommandTarget(Json::Value& inJsonObject, Json::Value& outJsonObject) throw (CommandException)
 {
     string function = inJsonObject["function"].asString();
-    Json::Value IfList = inJsonObject["If"];
+    Json::Value IfObject = inJsonObject["If"];
     
     LOGD("function:%s", function.c_str());
     
-    for (int i=0 ; i<IfList.size() ; i++) {
-        Json::Value IfKey = IfList[i];
-        
-        // 找出key
-//        Json::Value::Members members = IfKey.getMemberNames();
-//        for (int j=0 ; j<members.size() ; j++) {
-//            LOGD("key:%s", members[j].c_str());
-//        }
-        
-        if (IfKey.isMember("List")) {
-//            LOGD("IfKey:%s", IfKey["List"].asCString());
-            
-            
-        }
-        
-    }
+    // 找出key
+    //        Json::Value::Members members = IfKey.getMemberNames();
+    //        for (int j=0 ; j<members.size() ; j++) {
+    //            LOGD("key:%s", members[j].c_str());
+    //        }
     
     // 查詢
-    if (function.find("read")) {
-        
+    if (function.find("read") != std::string::npos) {
+        if (IfObject.isMember("List")) {
+            std::string value = IfObject["List"].asString();
+            if (value.find("ListAccessory") != std::string::npos) {
+                shared_ptr<vector<shared_ptr<Pojo>>> pojoList = AccessoryDao::read();
+                
+                Utility::pojoListToJson(inJsonObject, outJsonObject, pojoList);
+                LOGD("產生json = \n%s", outJsonObject.toStyledString().c_str());
+            }
+        }
     }
     
+    int a = 100;
     
 //    // vertify
 //    // 辨識最上面一層

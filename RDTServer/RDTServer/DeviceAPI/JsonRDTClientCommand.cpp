@@ -59,7 +59,7 @@ void* JsonRDTClientCommand::threadInput(void *arg)
             it--;
             
             Json::Value root;
-            Json::Value array;
+//            Json::Value array;
             Json::Value item;
             
             unsigned int serno = 87654321;
@@ -97,8 +97,7 @@ void* JsonRDTClientCommand::threadInput(void *arg)
             root["respID"] = 1;
             root["function"] = "read";
             item["List"] = "ListAccessory";
-            array.append(item);
-            root["If"] = array;
+            root["If"] = item;
             
             // 新增group
 //            root["operation"] = "create";

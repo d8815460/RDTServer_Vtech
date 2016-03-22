@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A231688F1CA127B900B8CEFF /* libsqlite3.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A231688E1CA127B900B8CEFF /* libsqlite3.a */; };
 		A2B023A41CA0E73C00BB5DDD /* libcurlpp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A2B023A31CA0E73C00BB5DDD /* libcurlpp.a */; };
 		A2BED34D1C717AE100AF9D4E /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A2BED3371C717AE100AF9D4E /* main.cpp */; };
 		A2BED34E1C717AE100AF9D4E /* VtechGarageDoorDevice.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A2BED3381C717AE100AF9D4E /* VtechGarageDoorDevice.cpp */; };
@@ -51,6 +52,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		A231688E1CA127B900B8CEFF /* libsqlite3.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libsqlite3.a; path = ../RDTServer/lib/mac/libsqlite3.a; sourceTree = "<group>"; };
 		A2B023A31CA0E73C00BB5DDD /* libcurlpp.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libcurlpp.a; path = ../RDTServer/lib/mac/libcurlpp.a; sourceTree = "<group>"; };
 		A2BED32D1C717AAD00AF9D4E /* VtechDevice */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = VtechDevice; sourceTree = BUILT_PRODUCTS_DIR; };
 		A2BED3371C717AE100AF9D4E /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = RDTServer/Targate/VtechDevice/main.cpp; sourceTree = SOURCE_ROOT; };
@@ -92,6 +94,7 @@
 				A2BED36D1C7199E400AF9D4E /* libIOTCAPIs_ALL.a in Frameworks */,
 				A2B023A41CA0E73C00BB5DDD /* libcurlpp.a in Frameworks */,
 				A2BED36B1C7199C800AF9D4E /* libjsoncpp.a in Frameworks */,
+				A231688F1CA127B900B8CEFF /* libsqlite3.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -151,6 +154,7 @@
 			children = (
 				A2BED36C1C7199E400AF9D4E /* libIOTCAPIs_ALL.a */,
 				A2B023A31CA0E73C00BB5DDD /* libcurlpp.a */,
+				A231688E1CA127B900B8CEFF /* libsqlite3.a */,
 				A2BED3681C7199C800AF9D4E /* libDeviceAPI.a */,
 				A2BED3691C7199C800AF9D4E /* libjsoncpp.a */,
 			);
@@ -363,9 +367,10 @@
 				GCC_PREFIX_HEADER = "$(SRCROOT)/RDTServer/DeviceAPI/PrefixHeader.pch";
 				HEADER_SEARCH_PATHS = (
 					../TUTK_Kalay_Platform_SDK_2.1.3/Include,
+					RDTServer/DeviceAPI,
 					RDTServer/3th_party/curlpp/include,
 					"RDTServer/3th_party/jsoncpp-1.6.5/include",
-					RDTServer/DeviceAPI,
+					"RDTServer/3th_party/sqlite-amalgamation-3110100",
 				);
 				LIBRARY_SEARCH_PATHS = (
 					../TUTK_Kalay_Platform_SDK_2.1.3/Lib/MAC,
@@ -385,9 +390,10 @@
 				GCC_PREFIX_HEADER = "$(SRCROOT)/RDTServer/DeviceAPI/PrefixHeader.pch";
 				HEADER_SEARCH_PATHS = (
 					../TUTK_Kalay_Platform_SDK_2.1.3/Include,
+					RDTServer/DeviceAPI,
 					RDTServer/3th_party/curlpp/include,
 					"RDTServer/3th_party/jsoncpp-1.6.5/include",
-					RDTServer/DeviceAPI,
+					"RDTServer/3th_party/sqlite-amalgamation-3110100",
 				);
 				LIBRARY_SEARCH_PATHS = (
 					../TUTK_Kalay_Platform_SDK_2.1.3/Lib/MAC,

@@ -24,8 +24,7 @@ struct ElementNOPojo : public Pojo
     
     virtual void toJson(Json::Value& json)
     {
-        json["ElementNO"] = elementNO;
-        json["value"] = value;
+        json[to_string(elementNO)] = value;
     }
     
 //    virtual std::string toJson()

@@ -40,7 +40,7 @@ DatabaseManager::DatabaseManager()
     // 移除Database file
     if(remove(Database_File_Name) != 0 ) {
         LOGE("Error deleting file");
-        throw DatabaseException(__PRETTY_FUNCTION__, __LINE__, DatabaseException_ErrorCode_Error_Deleting_Database);
+//        throw DatabaseException(__PRETTY_FUNCTION__, __LINE__, DatabaseException_ErrorCode_Error_Deleting_Database);
     }
     else {
         LOGD("File successfully deleted");
@@ -57,7 +57,7 @@ DatabaseManager::DatabaseManager()
         /* 新增一筆資料 */
         AccessoryPojo accessoryPojo;
         accessoryPojo.AID = 0;
-        accessoryPojo.AType = 12;
+        accessoryPojo.AType = 0;
         
         shared_ptr<ElementPojo> pElement1(new ElementPojo);
         pElement1->element = "switch";
@@ -123,14 +123,6 @@ DatabaseManager::DatabaseManager()
     
     // 刪除資料
 //    AccessoryDao::deleteWithSerial(1);
-    
-    // 查詢資料
-    pojoList = AccessoryDao::read();
-    Json::Value root;
-    Utility::pojoListToJson(root, pojoList);
-    LOGD("產生json = \n%s", root.toStyledString().c_str());
-    
-    close();
 }
 
 void DatabaseManager::open()

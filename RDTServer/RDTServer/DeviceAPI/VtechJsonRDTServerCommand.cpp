@@ -15,7 +15,7 @@ VtechJsonRDTServerCommand::VtechJsonRDTServerCommand(CommandEvent* pCommandEvent
 
 #pragma mark - JsonRDTCommand
 
-void VtechJsonRDTServerCommand::processCommandTarget(const Json::Value& inJsonObject, Json::Value& outJsonObject) throw (CommandException)
+void VtechJsonRDTServerCommand::processCommandTarget(Json::Value& inJsonObject, Json::Value& outJsonObject) throw (CommandException)
 {
     JsonRDTServerCommand::processCommandTarget(inJsonObject, outJsonObject);
     

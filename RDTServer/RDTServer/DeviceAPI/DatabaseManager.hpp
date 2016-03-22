@@ -26,6 +26,7 @@ class DatabaseManager
 {
 public:
     static DatabaseManager& getInstance() { return m_Instance; }
+    ~DatabaseManager() { close(); }
     
     sqlite3* getSqliteDatabase() { return m_pDatabase; }
     
