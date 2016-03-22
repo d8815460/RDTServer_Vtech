@@ -93,12 +93,15 @@ void Utility::pojoListToJson(Json::Value& inJsonObject, Json::Value& outJsonObje
     outJsonObject["function"] = inJsonObject["function"];
     outJsonObject["error_code"] = 0;
     
+    Json::Value subObject;
     for (shared_ptr<Pojo> pPojo : *pojoList) {
-        pPojo->toJson(listAccessory);
+        pPojo->toJson(subObject);
         //        LOGD("產生json = \n%s", accessoryJson.toStyledString().c_str());
     }
     
-    outJsonObject["ListAccessory"] = listAccessory;
+    listAccessory["ListAccessory"] = subObject;
+    outJsonObject["response"] = listAccessory;
+    
 //    LOGD("產生json = \n%s", root.toStyledString().c_str());
 }
 

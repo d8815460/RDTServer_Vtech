@@ -29,6 +29,8 @@ struct ElementPojo : public Pojo
     
     virtual void toJson(Json::Value& json)
     {
+        Json::Value jsonList;
+        
         Json::Value subJsonList;
         for (vector<shared_ptr<Pojo>>::iterator it=pElementNOPojoList->begin() ; it!=pElementNOPojoList->end() ; it++) {
             shared_ptr<Pojo> pPojo = *it;
@@ -36,7 +38,9 @@ struct ElementPojo : public Pojo
             pPojo->toJson(subJsonList);
 //            LOGD("產生json = \n%s", subJson.toStyledString().c_str());
         }
-        json[element] = subJsonList;
+        
+        jsonList[element] = subJsonList;
+        json["ListElement"] = jsonList;
         
 //        LOGD("產生json = \n%s", json.toStyledString().c_str());
     }
