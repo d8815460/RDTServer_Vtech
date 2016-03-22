@@ -140,10 +140,10 @@ void JsonRDTServerCommand::processCommandTarget(Json::Value& inJsonObject, Json:
                 Utility::pojoListToJson(inJsonObject, outJsonObject, pojoList);
 //                LOGD("產生json = \n%s", outJsonObject.toStyledString().c_str());
                 
-//                CommandHardwardRecv_ReadItems readItems;
-//                pCommand = &readItems;
-//                readItems.dataType = DataType_Accessory;
-//                m_pCommandHardwardEvent->onCommandHardwardRecv_ReadItems(&readItems);
+                CommandHardwardRecv_ReadItems readItems;
+                readItems.dataType = DataType_Accessory;
+                readItems.pojoList = pojoList;
+                m_pCommandHardwardEvent->onCommandHardwardRecv_ReadItems(&readItems);
             }
         }
     }

@@ -7,6 +7,7 @@
 //
 
 #include "Hardward.hpp"
+#include "AccessoryDao.hpp"
 
 #pragma mark - CommandHardwardEvent
 
@@ -82,10 +83,12 @@ void Hardward::onCommandHardwardRecv_ReadItems(CommandHardwardRecv_ReadItems* pC
     switch (pCommandHardwardRecv_ReadItems->dataType) {
         case DataType_Accessory: {
             // 針對收到的資料做為參考
-            vector<AccessoryData*>* pAccessoryList = (vector<AccessoryData*>*) &pCommandHardwardRecv_ReadItems->baseDataList;
-            for (int i=0 ; i<pAccessoryList->size() ; i++) {
-                LOGD("accessoryId:%d", (*pAccessoryList)[i]->accessoryId);
-                LOGD("accessoryType:%d", (*pAccessoryList)[i]->accessoryType);
+            shared_ptr<vector<shared_ptr<Pojo>>> pAccessoryList = (shared_ptr<vector<shared_ptr<Pojo>>>) pCommandHardwardRecv_ReadItems->pojoList;
+            for (shared_ptr<Pojo> pPojo : *pAccessoryList) {
+                shared_ptr<AccessoryPojo>& accessoryPojo = (shared_ptr<AccessoryPojo>&) pPojo;
+                
+                LOGD("AID:%d", accessoryPojo->AID);
+                LOGD("iconType:%d", accessoryPojo->iconType);
             }
         }   break;
             

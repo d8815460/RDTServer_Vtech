@@ -114,6 +114,8 @@ void* JsonRDTClientCommand::threadInput(void *arg)
 //            root["request"] = arrayObject;
             
             std::string json = root.toStyledString();
+            LOGD("json傳送資料:%s", json.c_str());
+            
             JsonRDTClientCommand_ParseSendData parseSendData;
             parseSendData.channelID = *it;
             parseSendData.serno = serno;
