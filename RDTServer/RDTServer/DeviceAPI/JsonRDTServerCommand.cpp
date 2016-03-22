@@ -138,12 +138,15 @@ void JsonRDTServerCommand::processCommandTarget(Json::Value& inJsonObject, Json:
                 shared_ptr<vector<shared_ptr<Pojo>>> pojoList = AccessoryDao::read();
                 
                 Utility::pojoListToJson(inJsonObject, outJsonObject, pojoList);
-                LOGD("產生json = \n%s", outJsonObject.toStyledString().c_str());
+//                LOGD("產生json = \n%s", outJsonObject.toStyledString().c_str());
+                
+//                CommandHardwardRecv_ReadItems readItems;
+//                pCommand = &readItems;
+//                readItems.dataType = DataType_Accessory;
+//                m_pCommandHardwardEvent->onCommandHardwardRecv_ReadItems(&readItems);
             }
         }
     }
-    
-    int a = 100;
     
 //    // vertify
 //    // 辨識最上面一層
