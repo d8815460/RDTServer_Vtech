@@ -41,12 +41,11 @@ endif()
 
 include_directories(${CMAKE_CURRENT_SOURCE_DIR})
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/../../../TUTK_Kalay_Platform_SDK_2.1.3/Include)
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/../3th_party/sqlite-amalgamation-3110100)
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/../3th_party/curlpp/include)
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/../3th_party/jsoncpp-1.6.5/include)
-include_directories(${CMAKE_CURRENT_SOURCE_DIR}/../3th_party/sqlite-amalgamation-3110100)
 
 Message("CMAKE_SYSTEM_NAME = ${CMAKE_SYSTEM_NAME}")
-link_directories(${CMAKE_CURRENT_SOURCE_DIR}/../build/3th_party/jsoncpp-1.6.5/src/lib_json)
 if (CMAKE_SYSTEM_NAME MATCHES "WIN32")
     link_directories(${CMAKE_CURRENT_SOURCE_DIR}/../../../TUTK_Kalay_Platform_SDK_2.1.3/Lib/Windows/Win32/x64)
 elseif (CMAKE_SYSTEM_NAME MATCHES "Darwin")

@@ -10,6 +10,7 @@
 #define CommandHardwardCURDEvent_hpp
 
 #include <stdio.h>
+#include <memory>
 #include <json/reader.h>
 #include "Pojo.hpp"
 #include "BaseData.hpp"

@@ -6,6 +6,7 @@ project(VtechDevice)
 include_directories(${CMAKE_CURRENT_SOURCE_DIR})
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/../../DeviceAPI)
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/../../../../TUTK_Kalay_Platform_SDK_2.1.3/Include)
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/../../3th_party/sqlite-amalgamation-3110100)
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/../../3th_party/jsoncpp-1.6.5/include)
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/../../3th_party/unix_socket)
 
@@ -41,11 +42,11 @@ else()
 endif()
 
 if (CMAKE_SYSTEM_NAME MATCHES "WIN32")
-    target_link_libraries(VtechDevice DeviceAPI RDTAPIs jsoncpp)
+    target_link_libraries(VtechDevice DeviceAPI RDTAPIs sqlite3 jsoncpp)
 elseif (CMAKE_SYSTEM_NAME MATCHES "Darwin")
-    target_link_libraries(VtechDevice DeviceAPI IOTCAPIs_ALL jsoncpp)
+    target_link_libraries(VtechDevice DeviceAPI IOTCAPIs_ALL sqlite3 jsoncpp)
 elseif (CMAKE_SYSTEM_NAME MATCHES "Linux")
-    target_link_libraries(VtechDevice DeviceAPI RDTAPIs IOTCAPIs jsoncpp pthread)
+    target_link_libraries(VtechDevice DeviceAPI RDTAPIs IOTCAPIs sqlite3 jsoncpp pthread)
 endif()
 ###################### Base #############################
 
