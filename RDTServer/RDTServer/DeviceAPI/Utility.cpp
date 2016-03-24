@@ -95,9 +95,10 @@ void Utility::pojoListToJson(Json::Value& inJsonObject, Json::Value& outJsonObje
     Json::Value listAccessory;
     
     // Common
-    outJsonObject["serno"] = inJsonObject["serno"];
-    outJsonObject["function"] = inJsonObject["function"];
-    outJsonObject["error_code"] = 0;
+//    outJsonObject["Serno"] = inJsonObject["Serno"];
+//    outJsonObject["Function"] = inJsonObject["Function"];
+//    outJsonObject["ErrorCode"] = 0;
+    outJsonObject["SenderInfo"] = inJsonObject;
     
     Json::Value subObject;
     for (shared_ptr<Pojo> pPojo : *pojoList) {
@@ -106,7 +107,7 @@ void Utility::pojoListToJson(Json::Value& inJsonObject, Json::Value& outJsonObje
     }
     
     listAccessory["ListAccessory"] = subObject;
-    outJsonObject["response"] = listAccessory;
+    outJsonObject["Response"] = listAccessory;
     
 //    LOGD("產生json = \n%s", root.toStyledString().c_str());
 }

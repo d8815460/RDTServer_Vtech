@@ -119,10 +119,10 @@ std::string JsonRDTServerCommand::findWord(std::string& string, const std::strin
 
 void JsonRDTServerCommand::processCommandTarget(Json::Value& inJsonObject, Json::Value& outJsonObject) throw (CommandException)
 {
-    string function = inJsonObject["function"].asString();
+    string function = inJsonObject["Function"].asString();
     Json::Value IfObject = inJsonObject["If"];
     
-    LOGD("function:%s", function.c_str());
+    LOGD("Function:%s", function.c_str());
     
     // 找出key
     //        Json::Value::Members members = IfKey.getMemberNames();
@@ -309,8 +309,8 @@ void JsonRDTServerCommand::recvData(int channelID, BYTE* buffer, int totalLength
         processCommandTarget(inJsonObject, outJsonObject);
         
         // Common
-        outJsonObject["serno"] = inJsonObject["serno"];
-        outJsonObject["function"] = inJsonObject["function"];
+//        outJsonObject["serno"] = inJsonObject["serno"];
+//        outJsonObject["function"] = inJsonObject["function"];
         
 //        // Version
 //        char version[20];

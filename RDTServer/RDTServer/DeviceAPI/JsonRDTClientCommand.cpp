@@ -63,7 +63,7 @@ void* JsonRDTClientCommand::threadInput(void *arg)
             Json::Value item;
             
             unsigned int serno = 87654321;
-            root["serno"] = serno;
+            root["Serno"] = serno;
             
 //            root["operation"] = "read";
 //            root["target"] = "/accessory/0/product_code/";
@@ -94,8 +94,8 @@ void* JsonRDTClientCommand::threadInput(void *arg)
 //            root["target"] = "AID:1&FNC:switch:1;AID:2&FNC:switch:1";
             
             // version 2.1
-            root["respID"] = 1;
-            root["function"] = "read";
+//            root["RespID"] = 1;
+            root["Function"] = "read";
             item["List"] = "ListAccessory";
             root["If"] = item;
             
