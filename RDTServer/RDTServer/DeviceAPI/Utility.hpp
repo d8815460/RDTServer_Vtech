@@ -19,6 +19,8 @@ typedef void (*JsonRecvDataCallback)(int channelID, BYTE* buffer, int totalLengt
 class Utility
 {
 public:
+    static void displayVersion();
+    
     static void reverse(BYTE* data, const int length);
     static unsigned long bytes2UnsignedLong(BYTE* data, const int length);
     static unsigned long bytes2UnsignedLongWithBeginData(BYTE* data, int* pIndex, const int length);

@@ -11,6 +11,7 @@
 #include "IOTCAPIs.h"
 #include "RDTAPIs.h"
 #include "Common.hpp"
+#include "config.h"
 
 // curl
 #include <cstdlib>
@@ -19,6 +20,11 @@
 #include <curlpp/Easy.hpp>
 #include <curlpp/Options.hpp>
 #include <curlpp/Exception.hpp>
+
+void Utility::displayVersion()
+{
+    LOGD("Device API Version: %d.%d.%d", DEVICE_API_VERSION_MAJOR, DEVICE_API_VERSION_MINOR, DEVICE_API_VERSION_PATCH);
+}
 
 void Utility::reverse(BYTE* data, const int length)
 {

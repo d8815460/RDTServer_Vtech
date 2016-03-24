@@ -25,6 +25,7 @@ Device* Device::m_pInstance = NULL;
 
 Device::Device()
 {
+    Utility::displayVersion();
     LOGD("Device");
     
     if (m_pInstance != NULL) {

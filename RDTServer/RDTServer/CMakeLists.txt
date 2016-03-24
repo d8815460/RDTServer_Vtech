@@ -3,6 +3,29 @@ Message("CMAKE_CURRENT_SOURCE_DIR = ${CMAKE_CURRENT_SOURCE_DIR}")
 cmake_minimum_required(VERSION 2.8.12.2)
 set(CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/CMake")
 
+###################### 版本號 #############################
+set (DEVICE_API_VERSION_MAJOR 0)
+set (DEVICE_API_VERSION_MINOR 1)
+set (DEVICE_API_VERSION_PATCH 1)
+###################### 版本號 #############################
+
+###################### 配置文件 #############################
+# 加入一個配置頭文件，用於處理CMake的對源碼的設置
+configure_file (
+  "${CMAKE_CURRENT_SOURCE_DIR}/DeviceAPI/config.h.in"
+  "${CMAKE_CURRENT_SOURCE_DIR}/DeviceAPI/config.h"
+  )
+###################### 配置文件 #############################
+
+###################### CPack 安装包 #############################
+include (InstallRequiredSystemLibraries)
+#set (CPACK_RESOURCE_FILE_LICENSE "${CMAKE_CURRENT_SOURCE_DIR}/License.txt")
+set (CPACK_PACKAGE_VERSION_MAJOR "${DEVICE_API_VERSION_MAJOR}")
+set (CPACK_PACKAGE_VERSION_MINOR "${DEVICE_API_VERSION_MINOR}")
+set (CPACK_PACKAGE_VERSION_PATCH "${DEVICE_API_VERSION_PATCH}")
+include (CPack)
+###################### CPack 安装包 #############################
+
 ###################### Disable warnings #############################
 macro(add_lldb_definitions)
   # We don't want no semicolons on LLDB_DEFINITIONS:
