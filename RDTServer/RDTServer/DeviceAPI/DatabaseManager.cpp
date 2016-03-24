@@ -68,7 +68,7 @@ DatabaseManager::DatabaseManager()
         
         shared_ptr<ElementNOPojo> pNO2(new ElementNOPojo);
         pNO2->elementNO = 1;
-        pNO2->value = "100";
+        pNO2->value = "大鑫";
         
         accessoryPojo.pElementPojoList->push_back(pElement1);
         pElement1->pElementNOPojoList->push_back(pNO1);
