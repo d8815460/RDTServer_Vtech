@@ -88,7 +88,7 @@ void Hardward::onCommandHardwardRecv_ReadItems(CommandHardwardRecv_ReadItems* pC
                 shared_ptr<AccessoryPojo>& accessoryPojo = (shared_ptr<AccessoryPojo>&) pPojo;
                 
                 LOGD("AID:%d", accessoryPojo->AID);
-                LOGD("iconType:%d", accessoryPojo->iconType);
+                LOGD("iconType:%d", accessoryPojo->IconType);
             }
         }   break;
             

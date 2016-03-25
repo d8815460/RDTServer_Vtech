@@ -41,6 +41,18 @@ endif()
 
 ###################### Base #############################
 
+# 指定安装路徑
+#install (TARGETS TUTKDevice DESTINATION bin)
+#install (FILES "${PROJECT_BINARY_DIR}/config.h"
+#         DESTINATION include)
+
+install(TARGETS TUTKDevice
+        RUNTIME DESTINATION bin
+        LIBRARY DESTINATION lib
+        ARCHIVE DESTINATION lib
+        PUBLIC_HEADER DESTINATION include
+        )
+
 ######################## cotire ###########################
 # cotire sets the following properties
 get_target_property(_unitySource DeviceAPI COTIRE_CXX_UNITY_SOURCE)

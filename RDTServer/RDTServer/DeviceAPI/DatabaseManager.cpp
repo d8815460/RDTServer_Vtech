@@ -17,8 +17,8 @@ DatabaseManager DatabaseManager::m_Instance = DatabaseManager();
 
 static const char* createAccessory =    "CREATE TABLE Accessory ("
                                         "accessorySerial INTEGER PRIMARY KEY,"
-                                        "AID     INTEGER,"
-                                        "IconType   INTEGER);";
+                                        "AID            INTEGER,"
+                                        "iconType       INTEGER);";
 
 static const char* createElement =      "CREATE TABLE Element ("
                                         "elementSerial INTEGER PRIMARY KEY,"
@@ -57,7 +57,7 @@ DatabaseManager::DatabaseManager()
         /* 新增一筆資料 */
         AccessoryPojo accessoryPojo;
         accessoryPojo.AID = 0;
-        accessoryPojo.iconType = 0;
+        accessoryPojo.IconType = 0;
         
         shared_ptr<ElementPojo> pElement1(new ElementPojo);
         pElement1->element = "switch";
@@ -81,7 +81,7 @@ DatabaseManager::DatabaseManager()
         /* 新增一筆資料 */
         AccessoryPojo accessoryPojo;
         accessoryPojo.AID = 1;
-        accessoryPojo.iconType = 1;
+        accessoryPojo.IconType = 1;
         
         shared_ptr<ElementPojo> pElement1(new ElementPojo);
         pElement1->element = "switch";

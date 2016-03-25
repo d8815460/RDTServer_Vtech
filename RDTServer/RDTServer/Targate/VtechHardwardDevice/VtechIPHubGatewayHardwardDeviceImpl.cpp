@@ -183,7 +183,7 @@ void VtechIPHubGatewayHardwardImpl::onCommandHardwardRecv_ReadItems(CommandHardw
                 shared_ptr<AccessoryPojo>& accessoryPojo = (shared_ptr<AccessoryPojo>&) pPojo;
                 
                 LOGD("AID:%d", accessoryPojo->AID);
-                LOGD("iconType:%d", accessoryPojo->iconType);
+                LOGD("IconType:%d", accessoryPojo->IconType);
             }
         }   break;
             

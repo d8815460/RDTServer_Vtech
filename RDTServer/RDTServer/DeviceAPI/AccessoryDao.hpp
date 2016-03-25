@@ -20,9 +20,12 @@ using namespace std;
 
 struct AccessoryPojo : public Pojo
 {
-    int accessorySerial;
-    int AID;
-    int iconType;
+    int         accessorySerial;
+    int         AID;
+    int         IconType;
+//    std::string name;
+    bool        isConnection;
+    
     shared_ptr<vector<shared_ptr<Pojo>>> pElementPojoList;
     
     AccessoryPojo()
@@ -33,7 +36,8 @@ struct AccessoryPojo : public Pojo
     virtual void toJson(Json::Value& json)
     {
         Json::Value subJsonList;
-        subJsonList["IconType"] = iconType;
+        subJsonList["IconType"] = IconType;
+//        subJsonList["IsConnection"]
         
         for (vector<shared_ptr<Pojo>>::iterator it=pElementPojoList->begin() ; it!=pElementPojoList->end() ; it++) {
             shared_ptr<Pojo> pPojo = *it;
@@ -80,7 +84,7 @@ struct AccessoryPojo : public Pojo
         LOGD("================================================================================");
         LOGD("accessorySerial:%d", accessorySerial);
         LOGD("AID:%d", AID);
-        LOGD("IconType:%d", iconType);
+        LOGD("IconType:%d", IconType);
         
         if (pElementPojoList != NULL) {
             for (shared_ptr<Pojo> pPojo : *pElementPojoList) {

@@ -182,7 +182,7 @@ void JsonRDTCommand::commandHardwardSend_ReadItems(CommandHardwardSend_ReadItems
                 shared_ptr<AccessoryPojo>& accessoryPojo = (shared_ptr<AccessoryPojo>&) pPojo;
                 
                 LOGD("AID:%d", accessoryPojo->AID);
-                LOGD("iconType:%d", accessoryPojo->iconType);
+                LOGD("iconType:%d", accessoryPojo->IconType);
             }
         }
             
