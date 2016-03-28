@@ -20,7 +20,9 @@ static const char* createElementNO =    "CREATE TABLE ElementNO ("
                                         "elementNOSerial    INTEGER PRIMARY KEY,"
                                         "fkElementSerial    INTEGER REFERENCES Element(elementSerial),"
                                         "elementNO          INTEGER,"
-                                        "value              TEXT);";
+                                        "value              TEXT,"
+                                        "NtfyEnable         BOOLEAN"
+                                        ");";
 /******************************************* 修改處 *****************************************************/
 
 struct ElementNOPojo : public Pojo
@@ -29,9 +31,10 @@ struct ElementNOPojo : public Pojo
     
     int elementNOSerial;
     
-    int fkElementSerial;
-    int ElementNO;
+    int         fkElementSerial;
+    int         ElementNO;
     std::string Value;
+    bool        NtfyEnable;
     
     ElementNOPojo() {}
     
@@ -43,6 +46,7 @@ struct ElementNOPojo : public Pojo
             createValueObject(DatabaseType_INTEGER, fkElementSerial)
             createValueObject(DatabaseType_INTEGER, ElementNO)
             createValueObject(DatabaseType_TEXT,    Value)
+            createValueObject(DatabaseType_INTEGER, NtfyEnable)
         };
         /******************************************* 修改處 *****************************************************/
         //        }
@@ -50,6 +54,10 @@ struct ElementNOPojo : public Pojo
     
     virtual void toJson(Json::Value& json)
     {
+        /******************************************* 修改處 *****************************************************/
+        addJson(json, NtfyEnable);
+        /******************************************* 修改處 *****************************************************/
+        
         json[to_string(ElementNO)] = Value;
     }
     

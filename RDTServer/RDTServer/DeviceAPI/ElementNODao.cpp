@@ -22,8 +22,9 @@ void ElementNODao::readCallback(shared_ptr<vector<shared_ptr<Pojo>>> outPtrPojoL
         }
         /******************************************* 修改處 *****************************************************/
         if_index_int_va(1, pElementNOPojo->fkElementSerial, data)
-        if_index_int_va(2, pElementNOPojo->ElementNO, data)
-        if_index_str_va(3, pElementNOPojo->Value, data)
+        if_index_int_va(2, pElementNOPojo->ElementNO,       data)
+        if_index_str_va(3, pElementNOPojo->Value,           data)
+        if_index_str_va(4, pElementNOPojo->NtfyEnable,      data)
         /******************************************* 修改處 *****************************************************/
         else {
             throw DatabaseException(__PRETTY_FUNCTION__, __LINE__, DatabaseException_ErrorCode_Column_Over_The_Range);

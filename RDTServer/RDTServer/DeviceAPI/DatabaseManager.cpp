@@ -80,10 +80,12 @@ DatabaseManager::DatabaseManager()
         shared_ptr<ElementNOPojo> pNO1(new ElementNOPojo);
         pNO1->ElementNO = 0;
         pNO1->Value = "1";
+        pNO1->NtfyEnable = true;
         
         shared_ptr<ElementNOPojo> pNO2(new ElementNOPojo);
         pNO2->ElementNO = 1;
         pNO2->Value = "100";
+        pNO2->NtfyEnable = true;
         
         accessoryPojo.pElementPojoList->push_back(pElement1);
         pElement1->pElementNOPojoList->push_back(pNO1);
