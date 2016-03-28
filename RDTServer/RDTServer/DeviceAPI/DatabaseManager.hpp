@@ -12,6 +12,7 @@
 #include <stdio.h>
 #include <vector>
 #include <memory>
+#include <map>
 #include "sqlite3.h"
 #include "DatabaseException.hpp"
 #include "Pojo.hpp"

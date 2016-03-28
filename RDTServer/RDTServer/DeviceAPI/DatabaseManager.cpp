@@ -15,11 +15,6 @@
 
 DatabaseManager DatabaseManager::m_Instance = DatabaseManager();
 
-static const char* createAccessory =    "CREATE TABLE Accessory ("
-                                        "accessorySerial INTEGER PRIMARY KEY,"
-                                        "AID            INTEGER,"
-                                        "iconType       INTEGER);";
-
 static const char* createElement =      "CREATE TABLE Element ("
                                         "elementSerial INTEGER PRIMARY KEY,"
                                         "fkAccessorySerial INTEGER REFERENCES Accessory(accessorySerial),"
@@ -36,7 +31,7 @@ static const char* createElementNO =    "CREATE TABLE ElementNO ("
 DatabaseManager::DatabaseManager()
 {
     LOGD("DatabaseManager");
-    
+        
     // 移除Database file
     if(remove(Database_File_Name) != 0 ) {
         LOGE("Error deleting file");
@@ -57,7 +52,9 @@ DatabaseManager::DatabaseManager()
         /* 新增一筆資料 */
         AccessoryPojo accessoryPojo;
         accessoryPojo.AID = 0;
+        accessoryPojo.Name = "b";
         accessoryPojo.IconType = 0;
+        accessoryPojo.Connection = 1;
         
         shared_ptr<ElementPojo> pElement1(new ElementPojo);
         pElement1->element = "switch";
@@ -81,7 +78,9 @@ DatabaseManager::DatabaseManager()
         /* 新增一筆資料 */
         AccessoryPojo accessoryPojo;
         accessoryPojo.AID = 1;
+        accessoryPojo.Name = "a";
         accessoryPojo.IconType = 1;
+        accessoryPojo.Connection = 1;
         
         shared_ptr<ElementPojo> pElement1(new ElementPojo);
         pElement1->element = "switch";

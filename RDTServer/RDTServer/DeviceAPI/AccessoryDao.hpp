@@ -18,13 +18,27 @@
 
 using namespace std;
 
+static const char* createAccessory =    "CREATE TABLE Accessory ("
+                                        "accessorySerial    INTEGER PRIMARY KEY,"
+                                        "AID                INTEGER,"
+                                        "Name               TEXT,"
+                                        "IconType           INTEGER,"
+                                        "Connection         INTEGER"
+                                        ");";
+
+#define addJson(json, Field) \
+    json[#Field] = Field
+
 struct AccessoryPojo : public Pojo
 {
+    vector<ValueObject> valueObjectList;
+    
     int         accessorySerial;
     int         AID;
+    
+    std::string Name;
     int         IconType;
-//    std::string name;
-    bool        isConnection;
+    int         Connection;
     
     shared_ptr<vector<shared_ptr<Pojo>>> pElementPojoList;
     
@@ -33,11 +47,33 @@ struct AccessoryPojo : public Pojo
         pElementPojoList = shared_ptr<vector<shared_ptr<Pojo>>>(new vector<shared_ptr<Pojo>>());
     }
     
+    void genValueObject()
+    {
+        valueObjectList = {
+            ValueObject(DatabaseType_INTEGER,   "AID",          AID),
+            ValueObject(DatabaseType_TEXT,      "Name",         Name),
+            ValueObject(DatabaseType_INTEGER,   "IconType",     IconType),
+            ValueObject(DatabaseType_INTEGER,   "Connection",   Connection),
+        };
+    }
+    
     virtual void toJson(Json::Value& json)
     {
         Json::Value subJsonList;
-        subJsonList["IconType"] = IconType;
-//        subJsonList["IsConnection"]
+        
+        addJson(subJsonList, Name);
+        addJson(subJsonList, IconType);
+        addJson(subJsonList, Connection);
+        
+//        for (map<std::string, enum DatabaseType>::iterator it=mapping.begin() ; it!=mapping.end() ; it++) {
+////            LOGD("first:%s", it->first.c_str());
+//            addJson(subJsonList, it->first.c_str());
+//        }
+        
+//        addJson(subJsonList, IconType);
+//        addJson(subJsonList, Connection);
+        
+//        subJsonList["Connection"]
         
         for (vector<shared_ptr<Pojo>>::iterator it=pElementPojoList->begin() ; it!=pElementPojoList->end() ; it++) {
             shared_ptr<Pojo> pPojo = *it;

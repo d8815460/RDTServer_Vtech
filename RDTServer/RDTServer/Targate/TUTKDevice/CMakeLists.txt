@@ -7,6 +7,7 @@ include_directories(${CMAKE_CURRENT_SOURCE_DIR})
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/../../DeviceAPI)
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/../../../../TUTK_Kalay_Platform_SDK_2.1.3/Include)
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/../../3th_party/sqlite-amalgamation-3110100)
+#include_directories(${CMAKE_CURRENT_SOURCE_DIR}/../../3th_party/litesql-src-0.3.17/include)
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/../../3th_party/jsoncpp-1.6.5/include)
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/../../3th_party/curlpp/include)
 

@@ -16,7 +16,40 @@
 
 #define Pojo_Buffer_Size 128
 
+enum DatabaseType
+{
+    DatabaseType_INTEGER,
+    DatabaseType_TEXT,
+};
+
 using namespace std;
+
+struct ValueObject
+{
+    ValueObject() {}
+    
+    ValueObject(DatabaseType type, std::string key, int nValue)
+    {
+        this->type = type;
+        this->key = key;
+        this->nValue = nValue;
+    }
+    
+    ValueObject(DatabaseType type, std::string key, std::string strValue)
+    {
+        this->type = type;
+        this->key = key;
+        this->strValue = strValue;
+    }
+    
+    DatabaseType type;
+    std::string key;
+    
+//    union {
+        int         nValue;
+        std::string strValue;
+//    };
+};
 
 struct Pojo
 {
@@ -26,6 +59,72 @@ struct Pojo
 //    virtual std::string toJson() = 0;
     
     virtual void print() = 0;
+    
+    std::string createSQL(std::string prefixSQL, vector<ValueObject>& objList)
+    {
+        std::string sql = prefixSQL;
+        std::string sql1 = "";
+        std::string sql2 = "";
+        
+        for (ValueObject obj : objList) {
+            sql1.append(obj.key).append(", ");
+            
+            if (obj.type == DatabaseType_INTEGER) {
+                sql2.append(to_string(obj.nValue)).append(", ");
+            }
+            else {
+                sql2.append("'").append(obj.strValue).append("'").append(", ");
+            }
+        }
+        
+//        LOGD("sql1:%s", sql1.c_str());
+//        LOGD("sql2:%s", sql2.c_str());
+        sql1.erase(sql1.size() - 2);
+        sql2.erase(sql2.size() - 2);
+        LOGD("sql1:%s", sql1.c_str());
+        LOGD("sql2:%s", sql2.c_str());
+        
+        sql.append(sql1);
+        sql.append(") VALUES (NULL, ");
+        sql.append(sql2);
+        sql.append(")");
+        
+        LOGD("sql:%s", sql.c_str());
+        return sql;
+    }
+    
+    std::string updateSQL(std::string prefixSQL, vector<ValueObject>& objList)
+    {
+        std::string sql = prefixSQL;
+        std::string sql1 = "";
+        std::string sql2 = "";
+        
+        for (ValueObject obj : objList) {
+            sql1.append(obj.key).append(" = ");
+            
+            if (obj.type == DatabaseType_INTEGER) {
+                sql2.append(to_string(obj.nValue)).append(", ");
+            }
+            else {
+                sql2.append("'").append(obj.strValue).append("'").append(", ");
+            }
+        }
+        
+        //        LOGD("sql1:%s", sql1.c_str());
+        //        LOGD("sql2:%s", sql2.c_str());
+        sql1.erase(sql1.size() - 2);
+        sql2.erase(sql2.size() - 2);
+        LOGD("sql1:%s", sql1.c_str());
+        LOGD("sql2:%s", sql2.c_str());
+        
+        sql.append(sql1);
+        sql.append(") VALUES (NULL, ");
+        sql.append(sql2);
+        sql.append(")");
+        
+        LOGD("sql:%s", sql.c_str());
+        return sql;
+    }
 };
 
 #endif /* Pojo_hpp */

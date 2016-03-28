@@ -6,7 +6,7 @@ set(CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/CMake")
 ###################### 版本號 #############################
 set (DEVICE_API_VERSION_MAJOR 0)
 set (DEVICE_API_VERSION_MINOR 1)
-set (DEVICE_API_VERSION_PATCH 1)
+set (DEVICE_API_VERSION_PATCH 2)
 ###################### 版本號 #############################
 
 ###################### 配置文件 #############################
@@ -112,7 +112,7 @@ endif()
 ###################### CXX11 #############################
 
 add_subdirectory(3th_party/sqlite-amalgamation-3110100)
-add_subdirectory(3th_party/litesql-src-0.3.17)
+#add_subdirectory(3th_party/litesql-src-0.3.17)
 add_subdirectory(3th_party/curlpp)
 add_subdirectory(3th_party/jsoncpp-1.6.5)
 add_subdirectory(DeviceAPI)

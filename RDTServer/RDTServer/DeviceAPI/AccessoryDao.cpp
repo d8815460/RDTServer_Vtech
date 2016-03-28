@@ -34,7 +34,13 @@ void AccessoryDao::readCallback(shared_ptr<vector<shared_ptr<Pojo>>> outPtrPojoL
             pAccessoryPojo->AID = stoi(data);
         }
         else if (i == 2) {
+            pAccessoryPojo->Name = data;
+        }
+        else if (i == 3) {
             pAccessoryPojo->IconType = stoi(data);
+        }
+        else if (i == 4) {
+            pAccessoryPojo->Connection = stoi(data);
         }
         else {
             throw DatabaseException(__PRETTY_FUNCTION__, __LINE__, DatabaseException_ErrorCode_Column_Over_The_Range);
@@ -50,10 +56,9 @@ void AccessoryDao::create(AccessoryPojo& accessoryPojo)
     
     LOGD("ID:%lld\n", sqlite3_last_insert_rowid(databaseManager.getSqliteDatabase()));
     
-    char buffer[Pojo_Buffer_Size];
-    sprintf(buffer, "INSERT INTO Accessory VALUES(NULL, %d, %d);", accessoryPojo.AID, accessoryPojo.IconType);
-    LOGD("buffer:%s", buffer);
-    databaseManager.exec(buffer);
+    accessoryPojo.genValueObject();
+    std::string sql = accessoryPojo.createSQL("INSERT INTO Accessory (accessorySerial, ", accessoryPojo.valueObjectList);
+    databaseManager.exec(sql.c_str());
     
     int rowid = (int) sqlite3_last_insert_rowid(databaseManager.getSqliteDatabase());
     
@@ -74,9 +79,9 @@ void AccessoryDao::update(AccessoryPojo& accessoryPojo)
 {
     DatabaseManager& databaseManager = DatabaseManager::getInstance();
     
-    char buffer[Pojo_Buffer_Size];
-    sprintf(buffer, "UPDATE Accessory SET AID = %d, AType = %d;", accessoryPojo.AID, accessoryPojo.IconType);
-    databaseManager.exec(buffer);
+    accessoryPojo.genValueObject();
+    std::string sql = accessoryPojo.updateSQL("UPDATE Accessory SET ", accessoryPojo.valueObjectList);
+    databaseManager.exec(sql.c_str());
     
     if (accessoryPojo.pElementPojoList != NULL) {
         for (shared_ptr<Pojo> pPojo : *accessoryPojo.pElementPojoList) {

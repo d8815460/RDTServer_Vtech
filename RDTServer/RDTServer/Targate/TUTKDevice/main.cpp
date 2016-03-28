@@ -17,6 +17,7 @@
 #include "Utility.hpp"
 
 //#include "sqlite3.h"
+//#include "litesql.hpp"
 
 //// curlpp
 //#include <curlpp/cURLpp.hpp>
@@ -169,8 +170,51 @@ using namespace std;
 //static char insertsql[] = "INSERT INTO Contact VALUES(NULL, 'Fred', '09990123456');";
 //static char querysql[] = "SELECT * FROM Contact;";
 
+#define aaa(...) LOGD(__VA_ARGS__)
+
+//#define forLoop(count, json, Field) \
+//    for (int _i=0 ; _i<count ; _i++) { \
+//        addJson(json, Field) \
+//    }
+//
+//void loopVA_Args(Json::Value& json, int count, const char* value, ...)
+//{
+//    va_list vl;
+//    va_start(vl, value);
+//    LOGD("value:%s", value);
+//    
+//    addJson(json, value);
+//    
+////    ch = va_arg(vl, char*);
+//    for (int i=1 ; i<count ; i++)
+//    {
+//        value = va_arg(vl, char*);
+//        LOGD("value:%s", value);
+//        
+//        addJson(json, value);
+//    }
+//    
+//    va_end(vl);
+//}
+//
+//#define va_args(...) \
+//    for (int i=1 ; i<__VA_ARGS__[0]+1 ; i++) { \
+//        __VA_ARGS__[i] \
+//    }
+
+//#define createBuffer(buffer, param, ...) \
+//    sprintf(buffer, param, ##__VA_ARGS__)
+
 int main(int argc, char *argv[])
 {
+//    Json::Value json;
+//    loopVA_Args(json, 2, "AAA", "BBB");
+//    LOGD("json:%s", json.toStyledString().c_str());
+    
+//    const char* k = "abc";
+//    const char* j = "xyz";
+//    int x = 100;
+//    LOGD("%c, %c, %c", va_args((int)strlen(k), k));
     
 //    {
 //        shared_ptr<int> a;  // a is empty
