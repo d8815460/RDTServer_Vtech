@@ -10,10 +10,47 @@
 #include <string>
 #include "ElementDao.hpp"
 
+#define str_va(key, data) \
+    key = data
+
+#define int_va(key, data) \
+    key = stoi(data)
+
+#define if_index_int_va(index, key, data) \
+    else if (i == index) { \
+        int_va(key, data); \
+    }
+
+#define if_index_str_va(index, key, data) \
+    else if (i == index) { \
+        str_va(key, data); \
+    }
+
+//void loopVA_Args(Json::Value& json, int count, const char* value, ...)
+//{
+//    va_list vl;
+//    va_start(vl, value);
+//    LOGD("value:%s", value);
+//
+//    addJson(json, value);
+//
+////    ch = va_arg(vl, char*);
+//    for (int i=1 ; i<count ; i++)
+//    {
+//        value = va_arg(vl, char*);
+//        LOGD("value:%s", value);
+//
+//        addJson(json, value);
+//    }
+//
+//    va_end(vl);
+//}
+
 void AccessoryDao::readCallback(shared_ptr<vector<shared_ptr<Pojo>>> outPtrPojoList, int row, vector<char*>& colList)
 {
     shared_ptr<AccessoryPojo> pAccessoryPojo(new AccessoryPojo());
 //    LOGD("use_count:%ld", pAccessoryPojo.use_count());
+//    pAccessoryPojo->genValueObject();   // 值會不正確
     
     for (size_t i=0 ; i<colList.size() ; i++) {
         char* data = colList[i];
@@ -30,23 +67,30 @@ void AccessoryDao::readCallback(shared_ptr<vector<shared_ptr<Pojo>>> outPtrPojoL
 //            }
 
         }
-        else if (i == 1) {
-            pAccessoryPojo->AID = stoi(data);
-        }
-        else if (i == 2) {
-            pAccessoryPojo->Name = data;
-        }
-        else if (i == 3) {
-            pAccessoryPojo->IconType = stoi(data);
-        }
-        else if (i == 4) {
-            pAccessoryPojo->Connection = stoi(data);
-        }
+        /******************************************* 修改處 *****************************************************/
+        if_index_int_va(1, pAccessoryPojo->AID, data)
+        if_index_str_va(2, pAccessoryPojo->Name, data)
+        if_index_int_va(3, pAccessoryPojo->IconType, data)
+        if_index_int_va(4, pAccessoryPojo->Connection, data)
+        if_index_int_va(5, pAccessoryPojo->IsGateway, data)
+        /******************************************* 修改處 *****************************************************/
         else {
+//            ValueObject& valObj = pAccessoryPojo->valueObjectList[i-1];
+//            if (valObj.type == DatabaseType_INTEGER) {
+////                pAccessoryPojo->AID = stoi(data);
+//                int iData = stoi(data);
+//                addPojo(pAccessoryPojo, valObj.key, iData);
+//            }
+//            else {
+////                pAccessoryPojo->Name = data;
+//                addPojo(pAccessoryPojo, valObj.key, data);
+//            }
+            
             throw DatabaseException(__PRETTY_FUNCTION__, __LINE__, DatabaseException_ErrorCode_Column_Over_The_Range);
         }
     }
     
+//    pAccessoryPojo->genValueObject(); // 值會正確
     outPtrPojoList->push_back(pAccessoryPojo);
 }
 

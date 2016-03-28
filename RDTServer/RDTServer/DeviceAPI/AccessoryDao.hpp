@@ -18,27 +18,34 @@
 
 using namespace std;
 
+/******************************************* 修改處 *****************************************************/
 static const char* createAccessory =    "CREATE TABLE Accessory ("
                                         "accessorySerial    INTEGER PRIMARY KEY,"
                                         "AID                INTEGER,"
                                         "Name               TEXT,"
                                         "IconType           INTEGER,"
-                                        "Connection         INTEGER"
+                                        "Connection         INTEGER,"
+                                        "IsGateway          BOOLEAN"
                                         ");";
+/******************************************* 修改處 *****************************************************/
 
-#define addJson(json, Field) \
-    json[#Field] = Field
+#define addJson(json, field) \
+    json[#field] = field
+
+#define addPojo(pojo, field, data) \
+    pojo->##field = data
 
 struct AccessoryPojo : public Pojo
 {
     vector<ValueObject> valueObjectList;
     
     int         accessorySerial;
-    int         AID;
     
+    int         AID;
     std::string Name;
     int         IconType;
     int         Connection;
+    bool        IsGateway;
     
     shared_ptr<vector<shared_ptr<Pojo>>> pElementPojoList;
     
@@ -49,21 +56,29 @@ struct AccessoryPojo : public Pojo
     
     void genValueObject()
     {
-        valueObjectList = {
-            ValueObject(DatabaseType_INTEGER,   "AID",          AID),
-            ValueObject(DatabaseType_TEXT,      "Name",         Name),
-            ValueObject(DatabaseType_INTEGER,   "IconType",     IconType),
-            ValueObject(DatabaseType_INTEGER,   "Connection",   Connection),
-        };
+//        if (valueObjectList.size() == 0) {
+            /******************************************* 修改處 *****************************************************/
+            valueObjectList = {
+                ValueObject(DatabaseType_INTEGER,   "AID",          AID),
+                ValueObject(DatabaseType_TEXT,      "Name",         Name),
+                ValueObject(DatabaseType_INTEGER,   "IconType",     IconType),
+                ValueObject(DatabaseType_INTEGER,   "Connection",   Connection),
+                ValueObject(DatabaseType_INTEGER,   "IsGateway",    IsGateway),
+            };
+            /******************************************* 修改處 *****************************************************/
+//        }
     }
     
     virtual void toJson(Json::Value& json)
     {
         Json::Value subJsonList;
         
+        /******************************************* 修改處 *****************************************************/
         addJson(subJsonList, Name);
         addJson(subJsonList, IconType);
         addJson(subJsonList, Connection);
+        addJson(subJsonList, IsGateway);
+        /******************************************* 修改處 *****************************************************/
         
 //        for (map<std::string, enum DatabaseType>::iterator it=mapping.begin() ; it!=mapping.end() ; it++) {
 ////            LOGD("first:%s", it->first.c_str());

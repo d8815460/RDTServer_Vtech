@@ -48,6 +48,7 @@ DatabaseManager::DatabaseManager()
     exec(createElement);
     exec(createElementNO);
     
+    /******************************************* 修改處 *****************************************************/
     {
         /* 新增一筆資料 */
         AccessoryPojo accessoryPojo;
@@ -55,6 +56,7 @@ DatabaseManager::DatabaseManager()
         accessoryPojo.Name = "b";
         accessoryPojo.IconType = 0;
         accessoryPojo.Connection = 1;
+        accessoryPojo.IsGateway = false;
         
         shared_ptr<ElementPojo> pElement1(new ElementPojo);
         pElement1->element = "switch";
@@ -81,6 +83,7 @@ DatabaseManager::DatabaseManager()
         accessoryPojo.Name = "a";
         accessoryPojo.IconType = 1;
         accessoryPojo.Connection = 1;
+        accessoryPojo.IsGateway = true;
         
         shared_ptr<ElementPojo> pElement1(new ElementPojo);
         pElement1->element = "switch";
@@ -99,6 +102,7 @@ DatabaseManager::DatabaseManager()
         
         AccessoryDao::create(accessoryPojo);
     }
+    /******************************************* 修改處 *****************************************************/
     
     /* 取得該筆資料的 ID */
 //    LOGD("ID:%lld\n", sqlite3_last_insert_rowid(m_pDatabase));
