@@ -53,11 +53,11 @@ struct AccessoryPojo : public Pojo
 //        if (valueObjectList.size() == 0) {
             /******************************************* 修改處 *****************************************************/
             valueObjectList = {
-                ValueObject(DatabaseType_INTEGER,   "AID",          AID),
-                ValueObject(DatabaseType_TEXT,      "Name",         Name),
-                ValueObject(DatabaseType_INTEGER,   "IconType",     IconType),
-                ValueObject(DatabaseType_INTEGER,   "Connection",   Connection),
-                ValueObject(DatabaseType_INTEGER,   "IsGateway",    IsGateway),
+                createValueObject(DatabaseType_INTEGER, AID)
+                createValueObject(DatabaseType_TEXT,    Name)
+                createValueObject(DatabaseType_INTEGER, IconType)
+                createValueObject(DatabaseType_INTEGER, Connection)
+                createValueObject(DatabaseType_INTEGER, IsGateway)
             };
             /******************************************* 修改處 *****************************************************/
 //        }
@@ -68,6 +68,7 @@ struct AccessoryPojo : public Pojo
         Json::Value subJsonList;
         
         /******************************************* 修改處 *****************************************************/
+        // AID在下面加
         addJson(subJsonList, Name);
         addJson(subJsonList, IconType);
         addJson(subJsonList, Connection);

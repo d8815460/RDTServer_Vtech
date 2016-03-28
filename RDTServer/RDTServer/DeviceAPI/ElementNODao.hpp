@@ -40,9 +40,9 @@ struct ElementNOPojo : public Pojo
         //        if (valueObjectList.size() == 0) {
         /******************************************* 修改處 *****************************************************/
         valueObjectList = {
-            ValueObject(DatabaseType_INTEGER,   "fkElementSerial",  fkElementSerial),
-            ValueObject(DatabaseType_INTEGER,   "elementNO",        elementNO),
-            ValueObject(DatabaseType_TEXT,      "value",            value),
+            createValueObject(DatabaseType_INTEGER, fkElementSerial)
+            createValueObject(DatabaseType_INTEGER, elementNO)
+            createValueObject(DatabaseType_TEXT,    value)
         };
         /******************************************* 修改處 *****************************************************/
         //        }

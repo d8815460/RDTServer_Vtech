@@ -38,6 +38,9 @@
         str_va(key, data); \
     }
 
+#define createValueObject(type, vo) \
+    ValueObject(type, #vo, vo),
+
 enum DatabaseType
 {
     DatabaseType_INTEGER,
