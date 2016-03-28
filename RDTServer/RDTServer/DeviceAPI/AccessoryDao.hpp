@@ -29,12 +29,6 @@ static const char* createAccessory =    "CREATE TABLE Accessory ("
                                         ");";
 /******************************************* 修改處 *****************************************************/
 
-#define addJson(json, field) \
-    json[#field] = field
-
-#define addPojo(pojo, field, data) \
-    pojo->##field = data
-
 struct AccessoryPojo : public Pojo
 {
     vector<ValueObject> valueObjectList;

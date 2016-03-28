@@ -26,14 +26,10 @@ void ElementDao::readCallback(shared_ptr<vector<shared_ptr<Pojo>>> outPtrPojoLis
             /* 取得 pElementPojoList 裡所有的資料 */
             pElementPojo->pElementNOPojoList = ElementNODao::read(pElementPojo->elementSerial);
         }
-        else if (i == 1) {
-            pElementPojo->fkAccessorySerial = stoi(data);
-        }
-        else if (i == 2) {
-            pElementPojo->element = data;
-//            LOGD("data:%s", data);
-//            LOGD("pElementPojo->name:%s", pElementPojo->name);
-        }
+        /******************************************* 修改處 *****************************************************/
+        if_index_int_va(1, pElementPojo->fkAccessorySerial, data)
+        if_index_str_va(2, pElementPojo->element, data)
+        /******************************************* 修改處 *****************************************************/
         else {
             throw DatabaseException(__PRETTY_FUNCTION__, __LINE__, DatabaseException_ErrorCode_Column_Over_The_Range);
         }
@@ -56,10 +52,9 @@ void ElementDao::create(shared_ptr<ElementPojo> pElementPojo)
 {
     DatabaseManager& databaseManager = DatabaseManager::getInstance();
     
-    char buffer[Pojo_Buffer_Size];
-    sprintf(buffer, "INSERT INTO Element VALUES(NULL, %d, '%s');", pElementPojo->fkAccessorySerial, pElementPojo->element.c_str());
-    LOGD("buffer:%s", buffer);
-    databaseManager.exec(buffer);
+    pElementPojo->genValueObject();
+    std::string sql = pElementPojo->createSQL("INSERT INTO Element (elementSerial, ", pElementPojo->valueObjectList);
+    databaseManager.exec(sql.c_str());
     
     int rowid = (int) sqlite3_last_insert_rowid(databaseManager.getSqliteDatabase());
                                     
@@ -80,11 +75,9 @@ void ElementDao::update(shared_ptr<ElementPojo> pElementPojo)
 {
     DatabaseManager& databaseManager = DatabaseManager::getInstance();
     
-    char buffer[Pojo_Buffer_Size];
-    sprintf(buffer, "UPDATE Element SET fkAccessorySerial = %d, element = '%s';", pElementPojo->fkAccessorySerial, pElementPojo->element.c_str());
-    LOGD("buffer:%s", buffer);
-    
-    databaseManager.exec(buffer);
+    pElementPojo->genValueObject();
+    std::string sql = pElementPojo->updateSQL("UPDATE Element SET ", pElementPojo->valueObjectList);
+    databaseManager.exec(sql.c_str());
     
     for (shared_ptr<Pojo> pPojo : *pElementPojo->pElementNOPojoList) {
         shared_ptr<ElementNOPojo>& pElementNOPojo = (shared_ptr<ElementNOPojo>&) pPojo;

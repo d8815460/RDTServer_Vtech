@@ -15,12 +15,38 @@
 #include "Pojo.hpp"
 #include "Common.hpp"
 
+/******************************************* 修改處 *****************************************************/
+static const char* createElementNO =    "CREATE TABLE ElementNO ("
+                                        "elementNOSerial    INTEGER PRIMARY KEY,"
+                                        "fkElementSerial    INTEGER REFERENCES Element(elementSerial),"
+                                        "elementNO          INTEGER,"
+                                        "value              TEXT);";
+/******************************************* 修改處 *****************************************************/
+
 struct ElementNOPojo : public Pojo
 {
+    vector<ValueObject> valueObjectList;
+    
     int elementNOSerial;
+    
     int fkElementSerial;
     int elementNO;
     std::string value;
+    
+    ElementNOPojo() {}
+    
+    void genValueObject()
+    {
+        //        if (valueObjectList.size() == 0) {
+        /******************************************* 修改處 *****************************************************/
+        valueObjectList = {
+            ValueObject(DatabaseType_INTEGER,   "fkElementSerial",  fkElementSerial),
+            ValueObject(DatabaseType_INTEGER,   "elementNO",        elementNO),
+            ValueObject(DatabaseType_TEXT,      "value",            value),
+        };
+        /******************************************* 修改處 *****************************************************/
+        //        }
+    }
     
     virtual void toJson(Json::Value& json)
     {

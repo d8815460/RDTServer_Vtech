@@ -16,6 +16,28 @@
 
 #define Pojo_Buffer_Size 128
 
+#define addJson(json, field) \
+    json[#field] = field
+
+#define addPojo(pojo, field, data) \
+    pojo->##field = data
+
+#define str_va(key, data) \
+    key = data
+
+#define int_va(key, data) \
+    key = stoi(data)
+
+#define if_index_int_va(index, key, data) \
+    else if (i == index) { \
+        int_va(key, data); \
+    }
+
+#define if_index_str_va(index, key, data) \
+    else if (i == index) { \
+        str_va(key, data); \
+    }
+
 enum DatabaseType
 {
     DatabaseType_INTEGER,

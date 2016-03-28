@@ -15,9 +15,19 @@
 #include "Pojo.hpp"
 #include "Common.hpp"
 
+/******************************************* 修改處 *****************************************************/
+static const char* createElement =      "CREATE TABLE Element ("
+                                        "elementSerial      INTEGER PRIMARY KEY,"
+                                        "fkAccessorySerial  INTEGER REFERENCES Accessory(accessorySerial),"
+                                        "element            TEXT);";
+/******************************************* 修改處 *****************************************************/
+
 struct ElementPojo : public Pojo
 {
+    vector<ValueObject> valueObjectList;
+    
     int elementSerial;
+    
     int fkAccessorySerial;
     std::string element;
     shared_ptr<vector<shared_ptr<Pojo>>> pElementNOPojoList;
@@ -27,11 +37,23 @@ struct ElementPojo : public Pojo
         pElementNOPojoList = shared_ptr<vector<shared_ptr<Pojo>>>(new vector<shared_ptr<Pojo>>());
     }
     
+    void genValueObject()
+    {
+        //        if (valueObjectList.size() == 0) {
+        /******************************************* 修改處 *****************************************************/
+        valueObjectList = {
+            ValueObject(DatabaseType_INTEGER,   "fkAccessorySerial",    fkAccessorySerial),
+            ValueObject(DatabaseType_TEXT,      "element",              element),
+        };
+        /******************************************* 修改處 *****************************************************/
+        //        }
+    }
+    
     virtual void toJson(Json::Value& json)
     {
         Json::Value jsonList;
-        
         Json::Value subJsonList;
+        
         for (vector<shared_ptr<Pojo>>::iterator it=pElementNOPojoList->begin() ; it!=pElementNOPojoList->end() ; it++) {
             shared_ptr<Pojo> pPojo = *it;
             

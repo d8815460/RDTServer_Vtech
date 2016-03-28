@@ -15,17 +15,6 @@
 
 DatabaseManager DatabaseManager::m_Instance = DatabaseManager();
 
-static const char* createElement =      "CREATE TABLE Element ("
-                                        "elementSerial INTEGER PRIMARY KEY,"
-                                        "fkAccessorySerial INTEGER REFERENCES Accessory(accessorySerial),"
-                                        "element    TEXT);";
-
-static const char* createElementNO =    "CREATE TABLE ElementNO ("
-                                        "elementNOSerial INTEGER PRIMARY KEY,"
-                                        "fkElementSerial INTEGER REFERENCES Element(elementSerial),"
-                                        "elementNO INTEGER,"
-                                        "value  TEXT);";
-
 #pragma mark - Private Method
 
 DatabaseManager::DatabaseManager()

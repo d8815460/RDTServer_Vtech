@@ -20,15 +20,11 @@ void ElementNODao::readCallback(shared_ptr<vector<shared_ptr<Pojo>>> outPtrPojoL
         if (i == 0) {
             pElementNOPojo->elementNOSerial = stoi(data);
         }
-        else if (i == 1) {
-            pElementNOPojo->fkElementSerial = stoi(data);
-        }
-        else if (i == 2) {
-            pElementNOPojo->elementNO = stoi(data);
-        }
-        else if (i == 3) {
-            pElementNOPojo->value = data;
-        }
+        /******************************************* 修改處 *****************************************************/
+        if_index_int_va(1, pElementNOPojo->fkElementSerial, data)
+        if_index_int_va(2, pElementNOPojo->elementNO, data)
+        if_index_str_va(3, pElementNOPojo->value, data)
+        /******************************************* 修改處 *****************************************************/
         else {
             throw DatabaseException(__PRETTY_FUNCTION__, __LINE__, DatabaseException_ErrorCode_Column_Over_The_Range);
         }
@@ -51,22 +47,18 @@ void ElementNODao::create(shared_ptr<ElementNOPojo> pElementNOPojo)
 {
     DatabaseManager& databaseManager = DatabaseManager::getInstance();
     
-    char buffer[Pojo_Buffer_Size];
-    sprintf(buffer, "INSERT INTO ElementNO VALUES(NULL, %d, '%d', '%s');", pElementNOPojo->fkElementSerial, pElementNOPojo->elementNO, pElementNOPojo->value.c_str());
-    LOGD("buffer:%s", buffer);
-    
-    databaseManager.exec(buffer);
+    pElementNOPojo->genValueObject();
+    std::string sql = pElementNOPojo->createSQL("INSERT INTO ElementNO (elementNOSerial, ", pElementNOPojo->valueObjectList);
+    databaseManager.exec(sql.c_str());
 }
 
 void ElementNODao::update(shared_ptr<ElementNOPojo> pElementNOPojo)
 {
     DatabaseManager& databaseManager = DatabaseManager::getInstance();
     
-    char buffer[Pojo_Buffer_Size];
-    sprintf(buffer, "UPDATE ElementNO SET name = '%d', value = '%s';", pElementNOPojo->elementNO, pElementNOPojo->value.c_str());
-    LOGD("buffer:%s", buffer);
-    
-    databaseManager.exec(buffer);
+    pElementNOPojo->genValueObject();
+    std::string sql = pElementNOPojo->updateSQL("UPDATE ElementNO SET ", pElementNOPojo->valueObjectList);
+    databaseManager.exec(sql.c_str());
 }
 
 int ElementNODao::deleteAll()

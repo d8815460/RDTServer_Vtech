@@ -10,22 +10,6 @@
 #include <string>
 #include "ElementDao.hpp"
 
-#define str_va(key, data) \
-    key = data
-
-#define int_va(key, data) \
-    key = stoi(data)
-
-#define if_index_int_va(index, key, data) \
-    else if (i == index) { \
-        int_va(key, data); \
-    }
-
-#define if_index_str_va(index, key, data) \
-    else if (i == index) { \
-        str_va(key, data); \
-    }
-
 //void loopVA_Args(Json::Value& json, int count, const char* value, ...)
 //{
 //    va_list vl;
