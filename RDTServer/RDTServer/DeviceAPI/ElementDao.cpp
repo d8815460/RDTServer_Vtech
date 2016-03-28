@@ -28,7 +28,7 @@ void ElementDao::readCallback(shared_ptr<vector<shared_ptr<Pojo>>> outPtrPojoLis
         }
         /******************************************* 修改處 *****************************************************/
         if_index_int_va(1, pElementPojo->fkAccessorySerial, data)
-        if_index_str_va(2, pElementPojo->element, data)
+        if_index_str_va(2, pElementPojo->Element, data)
         /******************************************* 修改處 *****************************************************/
         else {
             throw DatabaseException(__PRETTY_FUNCTION__, __LINE__, DatabaseException_ErrorCode_Column_Over_The_Range);

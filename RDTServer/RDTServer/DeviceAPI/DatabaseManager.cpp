@@ -48,15 +48,15 @@ DatabaseManager::DatabaseManager()
         accessoryPojo.IsGateway = false;
         
         shared_ptr<ElementPojo> pElement1(new ElementPojo);
-        pElement1->element = "switch";
+        pElement1->Element = "switch";
         
         shared_ptr<ElementNOPojo> pNO1(new ElementNOPojo);
-        pNO1->elementNO = 0;
-        pNO1->value = "1";
+        pNO1->ElementNO = 0;
+        pNO1->Value = "1";
         
         shared_ptr<ElementNOPojo> pNO2(new ElementNOPojo);
-        pNO2->elementNO = 1;
-        pNO2->value = "大鑫";
+        pNO2->ElementNO = 1;
+        pNO2->Value = "大鑫";
         
         accessoryPojo.pElementPojoList->push_back(pElement1);
         pElement1->pElementNOPojoList->push_back(pNO1);
@@ -75,15 +75,15 @@ DatabaseManager::DatabaseManager()
         accessoryPojo.IsGateway = true;
         
         shared_ptr<ElementPojo> pElement1(new ElementPojo);
-        pElement1->element = "switch";
+        pElement1->Element = "switch";
         
         shared_ptr<ElementNOPojo> pNO1(new ElementNOPojo);
-        pNO1->elementNO = 0;
-        pNO1->value = "1";
+        pNO1->ElementNO = 0;
+        pNO1->Value = "1";
         
         shared_ptr<ElementNOPojo> pNO2(new ElementNOPojo);
-        pNO2->elementNO = 1;
-        pNO2->value = "100";
+        pNO2->ElementNO = 1;
+        pNO2->Value = "100";
         
         accessoryPojo.pElementPojoList->push_back(pElement1);
         pElement1->pElementNOPojoList->push_back(pNO1);

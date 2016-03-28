@@ -19,7 +19,7 @@
 static const char* createElement =      "CREATE TABLE Element ("
                                         "elementSerial      INTEGER PRIMARY KEY,"
                                         "fkAccessorySerial  INTEGER REFERENCES Accessory(accessorySerial),"
-                                        "element            TEXT);";
+                                        "Element            TEXT);";
 /******************************************* 修改處 *****************************************************/
 
 struct ElementPojo : public Pojo
@@ -28,8 +28,10 @@ struct ElementPojo : public Pojo
     
     int elementSerial;
     
-    int fkAccessorySerial;
-    std::string element;
+    int         fkAccessorySerial;
+    std::string Element;
+//    bool        NtfyEnable;
+    
     shared_ptr<vector<shared_ptr<Pojo>>> pElementNOPojoList;
     
     ElementPojo()
@@ -43,7 +45,7 @@ struct ElementPojo : public Pojo
         /******************************************* 修改處 *****************************************************/
         valueObjectList = {
             createValueObject(DatabaseType_INTEGER, fkAccessorySerial)
-            createValueObject(DatabaseType_TEXT,    element)
+            createValueObject(DatabaseType_TEXT,    Element)
         };
         /******************************************* 修改處 *****************************************************/
         //        }
@@ -61,7 +63,7 @@ struct ElementPojo : public Pojo
 //            LOGD("產生json = \n%s", subJson.toStyledString().c_str());
         }
         
-        jsonList[element] = subJsonList;
+        jsonList[Element] = subJsonList;
         json["ListElement"] = jsonList;
         
 //        LOGD("產生json = \n%s", json.toStyledString().c_str());
@@ -101,7 +103,7 @@ struct ElementPojo : public Pojo
     {
         LOGD("elementSerial:%d", elementSerial);
         LOGD("fkAccessorySerial:%d", fkAccessorySerial);
-        LOGD("element:%s", element.c_str());
+        LOGD("Element:%s", Element.c_str());
         
         if (pElementNOPojoList != NULL) {
             for (shared_ptr<Pojo> pPojo : *pElementNOPojoList) {

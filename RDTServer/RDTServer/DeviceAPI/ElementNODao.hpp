@@ -30,8 +30,8 @@ struct ElementNOPojo : public Pojo
     int elementNOSerial;
     
     int fkElementSerial;
-    int elementNO;
-    std::string value;
+    int ElementNO;
+    std::string Value;
     
     ElementNOPojo() {}
     
@@ -41,8 +41,8 @@ struct ElementNOPojo : public Pojo
         /******************************************* 修改處 *****************************************************/
         valueObjectList = {
             createValueObject(DatabaseType_INTEGER, fkElementSerial)
-            createValueObject(DatabaseType_INTEGER, elementNO)
-            createValueObject(DatabaseType_TEXT,    value)
+            createValueObject(DatabaseType_INTEGER, ElementNO)
+            createValueObject(DatabaseType_TEXT,    Value)
         };
         /******************************************* 修改處 *****************************************************/
         //        }
@@ -50,7 +50,7 @@ struct ElementNOPojo : public Pojo
     
     virtual void toJson(Json::Value& json)
     {
-        json[to_string(elementNO)] = value;
+        json[to_string(ElementNO)] = Value;
     }
     
 //    virtual std::string toJson()
@@ -67,8 +67,8 @@ struct ElementNOPojo : public Pojo
     {
         LOGD("elementNOSerial:%d", elementNOSerial);
         LOGD("fkElementSerial:%d", fkElementSerial);
-        LOGD("elementNO:%d", elementNO);
-        LOGD("value:%s", value.c_str());
+        LOGD("ElementNO:%d", ElementNO);
+        LOGD("Value:%s", Value.c_str());
     }
 };
 
