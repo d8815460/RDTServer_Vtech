@@ -28,6 +28,12 @@
 #include "VtechWallSwitchDevice.hpp"
 #include "VtechVirtualGroupDevice.hpp"
 
+// Database
+#include "AccessoryTypeEnum.hpp"
+#include "AccessoryDao.hpp"
+#include "ElementDao.hpp"
+#include "ElementNoDao.hpp"
+
 VtechIPHubGatewayDevice::VtechIPHubGatewayDevice()
 {
     LOGD("VtechIPHubGatewayDevice");
@@ -137,12 +143,39 @@ void VtechIPHubGatewayHardward::onCommandHardwardRecv_CreateItem(CommandHardward
     // 根據不同的DataType取得資料
     switch (pCommandHardwardRecv_CreateItems->dataType) {
         case DataType_Accessory: {
-            // 將新增資料填入
-            AccessoryData* pAccessoryData = (AccessoryData*) pCommandHardwardRecv_CreateItems->pBaseData;
-            pAccessoryData->accessoryId = 1;
-            pAccessoryData->accessoryType = 1;
-            pAccessoryData->addFunctionCodeData("switch", 1);
-            pAccessoryData->addFunctionCodeData("color", 1, 2);
+            /* 新增一筆資料 */
+            
+            // 建立accessoryPojo
+            shared_ptr<AccessoryPojo> pAccessoryPojo(new AccessoryPojo);
+            pAccessoryPojo->AID = 1;
+            pAccessoryPojo->Name = "PIR Sensor";
+            pAccessoryPojo->IconType = 1;
+            pAccessoryPojo->Connection = 1;
+            pAccessoryPojo->IsGateway = true;
+            
+            // 建立ElementPojo
+            shared_ptr<ElementPojo> pElement1(new ElementPojo);
+            pElement1->Element = "switch";
+            
+            // 建立ElementNOPojo
+            shared_ptr<ElementNOPojo> pNO1(new ElementNOPojo);
+            pNO1->ElementNO = 0;
+            pNO1->Value = "1";
+            pNO1->NtfyEnable = true;
+            
+            // 建立ElementNOPojo
+            shared_ptr<ElementNOPojo> pNO2(new ElementNOPojo);
+            pNO2->ElementNO = 1;
+            pNO2->Value = "100";
+            pNO2->NtfyEnable = true;
+            
+            // 放入相關階層
+            pAccessoryPojo->pElementPojoList->push_back(pElement1);
+            pElement1->pElementNOPojoList->push_back(pNO1);
+            pElement1->pElementNOPojoList->push_back(pNO2);
+            
+            // 將accessoryPojo放入pojoList
+            pCommandHardwardRecv_CreateItems->pojoList->push_back(pAccessoryPojo);
         }   break;
             
         default: {

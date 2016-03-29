@@ -90,7 +90,7 @@ void Utility::showException(Exception& e)
     LOGE("\nFunction:%s\nLine:%d\nErrorCode:%d\nErrorMessage:%s\n", e.function, e.line, e.errorCode, e.errorMessage.c_str());
 }
 
-void Utility::pojoToJson(Json::Value& inJsonObject, Json::Value& outJsonObject, shared_ptr<AccessoryPojo>& pPojo)
+void Utility::pojoToJson(Json::Value& inJsonObject, Json::Value& outJsonObject, shared_ptr<Pojo>& pPojo)
 {
     Json::Value listAccessory;
     

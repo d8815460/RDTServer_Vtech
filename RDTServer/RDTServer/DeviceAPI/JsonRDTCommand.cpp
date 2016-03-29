@@ -139,11 +139,6 @@ void JsonRDTCommand::commandHardwardSend_CreateItem(CommandHardwardSend_CreateIt
     switch (pCommandHardwardRecv_CreateItems->dataType) {
         case DataType_Accessory: {
             // 將新增資料填入
-            AccessoryData* pAccessoryData = (AccessoryData*) pCommandHardwardRecv_CreateItems->pBaseData;
-            pAccessoryData->accessoryId = 1;
-            pAccessoryData->accessoryType = 1;
-            pAccessoryData->addFunctionCodeData("switch", 1);
-            pAccessoryData->addFunctionCodeData("color", 1, 2);
         }   break;
             
         default:

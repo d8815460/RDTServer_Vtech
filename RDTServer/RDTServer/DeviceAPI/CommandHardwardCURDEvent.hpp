@@ -17,7 +17,13 @@
 
 struct CommandHardwardRecv_CreateItems : CommandBase
 {
-    BaseData* pBaseData;
+    shared_ptr<vector<shared_ptr<Pojo>>> pojoList;
+    
+    CommandHardwardRecv_CreateItems()
+    {
+        shared_ptr<vector<shared_ptr<Pojo>>> pp(new vector<shared_ptr<Pojo>>);
+        pojoList = pp;
+    }
 };
 
 struct CommandHardwardRecv_DeleteItems : CommandBase
