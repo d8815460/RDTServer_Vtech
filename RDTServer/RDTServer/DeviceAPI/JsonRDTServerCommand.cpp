@@ -161,12 +161,12 @@ void JsonRDTServerCommand::processCommandTarget(Json::Value& inJsonObject, Json:
                 }
                 
                 /* 新增一筆資料 */
-                AccessoryPojo accessoryPojo;
-                accessoryPojo.AID = 1;
-                accessoryPojo.Name = "PIR Sensor";
-                accessoryPojo.IconType = 1;
-                accessoryPojo.Connection = 1;
-                accessoryPojo.IsGateway = true;
+                shared_ptr<AccessoryPojo> pAccessoryPojo(new AccessoryPojo);
+                pAccessoryPojo->AID = 1;
+                pAccessoryPojo->Name = "PIR Sensor";
+                pAccessoryPojo->IconType = 1;
+                pAccessoryPojo->Connection = 1;
+                pAccessoryPojo->IsGateway = true;
                 
                 shared_ptr<ElementPojo> pElement1(new ElementPojo);
                 pElement1->Element = "switch";
@@ -181,10 +181,12 @@ void JsonRDTServerCommand::processCommandTarget(Json::Value& inJsonObject, Json:
                 pNO2->Value = "100";
                 pNO2->NtfyEnable = true;
                 
-                accessoryPojo.pElementPojoList->push_back(pElement1);
+                pAccessoryPojo->pElementPojoList->push_back(pElement1);
                 pElement1->pElementNOPojoList->push_back(pNO1);
                 pElement1->pElementNOPojoList->push_back(pNO2);
-                AccessoryDao::create(accessoryPojo);
+                AccessoryDao::create(*pAccessoryPojo);
+                
+                Utility::pojoToJson(inJsonObject, outJsonObject, pAccessoryPojo);
                 
 //                CommandHardwardRecv_CreateItems createItems;
 //                createItems.dataType = DataType_Accessory;

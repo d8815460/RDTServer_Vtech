@@ -90,14 +90,28 @@ void Utility::showException(Exception& e)
     LOGE("\nFunction:%s\nLine:%d\nErrorCode:%d\nErrorMessage:%s\n", e.function, e.line, e.errorCode, e.errorMessage.c_str());
 }
 
+void Utility::pojoToJson(Json::Value& inJsonObject, Json::Value& outJsonObject, shared_ptr<AccessoryPojo>& pPojo)
+{
+    Json::Value listAccessory;
+    
+    // Common
+    outJsonObject["SenderInfo"] = inJsonObject;
+    
+    Json::Value object;
+    pPojo->toJson(object);
+//        LOGD("產生json = \n%s", accessoryJson.toStyledString().c_str());
+    
+    listAccessory["ListAccessory"] = object;
+    outJsonObject["Response"] = listAccessory;
+    
+    //    LOGD("產生json = \n%s", root.toStyledString().c_str());
+}
+
 void Utility::pojoListToJson(Json::Value& inJsonObject, Json::Value& outJsonObject, shared_ptr<vector<shared_ptr<Pojo>>>& pojoList)
 {
     Json::Value listAccessory;
     
     // Common
-//    outJsonObject["Serno"] = inJsonObject["Serno"];
-//    outJsonObject["Function"] = inJsonObject["Function"];
-//    outJsonObject["ErrorCode"] = 0;
     outJsonObject["SenderInfo"] = inJsonObject;
     
     Json::Value subObject;
