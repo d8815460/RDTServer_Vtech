@@ -46,6 +46,8 @@ struct ElementNOPojo : public Pojo
             createValueObject(DatabaseType_INTEGER, fkElementSerial)
             createValueObject(DatabaseType_INTEGER, ElementNO)
             createValueObject(DatabaseType_TEXT,    Value)
+            
+            // 需要addJson
             createValueObject(DatabaseType_INTEGER, NtfyEnable)
         };
         /******************************************* 修改處 *****************************************************/

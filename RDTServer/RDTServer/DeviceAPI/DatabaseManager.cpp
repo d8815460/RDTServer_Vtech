@@ -42,7 +42,7 @@ DatabaseManager::DatabaseManager()
         /* 新增一筆資料 */
         AccessoryPojo accessoryPojo;
         accessoryPojo.AID = 0;
-        accessoryPojo.Name = "b";
+        accessoryPojo.Name = "IPHub";
         accessoryPojo.IconType = 0;
         accessoryPojo.Connection = 1;
         accessoryPojo.IsGateway = false;
@@ -57,35 +57,6 @@ DatabaseManager::DatabaseManager()
         shared_ptr<ElementNOPojo> pNO2(new ElementNOPojo);
         pNO2->ElementNO = 1;
         pNO2->Value = "大鑫";
-        
-        accessoryPojo.pElementPojoList->push_back(pElement1);
-        pElement1->pElementNOPojoList->push_back(pNO1);
-        pElement1->pElementNOPojoList->push_back(pNO2);
-        
-        AccessoryDao::create(accessoryPojo);
-    }
-    
-    {
-        /* 新增一筆資料 */
-        AccessoryPojo accessoryPojo;
-        accessoryPojo.AID = 1;
-        accessoryPojo.Name = "a";
-        accessoryPojo.IconType = 1;
-        accessoryPojo.Connection = 1;
-        accessoryPojo.IsGateway = true;
-        
-        shared_ptr<ElementPojo> pElement1(new ElementPojo);
-        pElement1->Element = "switch";
-        
-        shared_ptr<ElementNOPojo> pNO1(new ElementNOPojo);
-        pNO1->ElementNO = 0;
-        pNO1->Value = "1";
-        pNO1->NtfyEnable = true;
-        
-        shared_ptr<ElementNOPojo> pNO2(new ElementNOPojo);
-        pNO2->ElementNO = 1;
-        pNO2->Value = "100";
-        pNO2->NtfyEnable = true;
         
         accessoryPojo.pElementPojoList->push_back(pElement1);
         pElement1->pElementNOPojoList->push_back(pNO1);

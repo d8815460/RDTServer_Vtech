@@ -59,7 +59,6 @@ void* JsonRDTClientCommand::threadInput(void *arg)
             it--;
             
             Json::Value root;
-//            Json::Value array;
             Json::Value item;
             
             unsigned int serno = 87654321;
@@ -94,9 +93,16 @@ void* JsonRDTClientCommand::threadInput(void *arg)
 //            root["target"] = "AID:1&FNC:switch:1;AID:2&FNC:switch:1";
             
             // version 2.1
-//            root["RespID"] = 1;
-            root["Function"] = "read";
-            item["List"] = "ListAccessory";
+            /* Get All Accessories */
+//            root["Function"] = "read";
+//            item["List"] = "ListAccessory";
+//            root["If"] = item;
+            
+            /* Add Accessories */
+            root["Function"] = "write";
+            Json::Value array;
+            array.append(-1);
+            item["AID"] = array;
             root["If"] = item;
             
             // 新增group

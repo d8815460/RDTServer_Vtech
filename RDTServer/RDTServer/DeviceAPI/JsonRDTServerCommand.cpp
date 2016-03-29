@@ -15,8 +15,11 @@
 #include "IOTCAPIs.h"
 #include "RDTAPIs.h"
 #include "BinraryRDTServerConnect.hpp"
+
 #include "AccessoryTypeEnum.hpp"
 #include "AccessoryDao.hpp"
+#include "ElementDao.hpp"
+#include "ElementNoDao.hpp"
 
 JsonRDTServerCommand::JsonRDTServerCommand(CommandEvent* pCommandEvent, CommandHardwardEvent* pCommandHardwardEvent, Connect* pConnect, CommandData* pCommandData) : JsonRDTCommand(pCommandEvent, pCommandHardwardEvent, pConnect, pCommandData)
 {
@@ -144,6 +147,49 @@ void JsonRDTServerCommand::processCommandTarget(Json::Value& inJsonObject, Json:
                 readItems.dataType = DataType_Accessory;
                 readItems.pojoList = pojoList;
                 m_pCommandHardwardEvent->onCommandHardwardRecv_ReadItems(&readItems);
+            }
+        }
+    }
+    else if (function.find("write") != std::string::npos) {
+        if (IfObject.isMember("AID")) {
+            Json::Value value = IfObject["AID"];
+            
+            if (value.size() == 1) {
+                // 新增 accessory, AID = [-1]
+                if (value[0] == -1) {
+                    
+                }
+                
+                /* 新增一筆資料 */
+                AccessoryPojo accessoryPojo;
+                accessoryPojo.AID = 1;
+                accessoryPojo.Name = "PIR Sensor";
+                accessoryPojo.IconType = 1;
+                accessoryPojo.Connection = 1;
+                accessoryPojo.IsGateway = true;
+                
+                shared_ptr<ElementPojo> pElement1(new ElementPojo);
+                pElement1->Element = "switch";
+                
+                shared_ptr<ElementNOPojo> pNO1(new ElementNOPojo);
+                pNO1->ElementNO = 0;
+                pNO1->Value = "1";
+                pNO1->NtfyEnable = true;
+                
+                shared_ptr<ElementNOPojo> pNO2(new ElementNOPojo);
+                pNO2->ElementNO = 1;
+                pNO2->Value = "100";
+                pNO2->NtfyEnable = true;
+                
+                accessoryPojo.pElementPojoList->push_back(pElement1);
+                pElement1->pElementNOPojoList->push_back(pNO1);
+                pElement1->pElementNOPojoList->push_back(pNO2);
+                AccessoryDao::create(accessoryPojo);
+                
+//                CommandHardwardRecv_CreateItems createItems;
+//                createItems.dataType = DataType_Accessory;
+//                createItems.pojoList = pojoList;
+//                m_pCommandHardwardEvent->onCommandHardwardRecv_CreateItem(&readItems);
             }
         }
     }
