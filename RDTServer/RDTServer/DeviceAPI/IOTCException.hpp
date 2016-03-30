@@ -83,7 +83,7 @@ struct IOTCException : public Exception
     
     static std::map<int, const char*> errorMessageMap;
     
-    IOTCException(const char* function, int line, int errorCode) : Exception(function, line, errorCode, errorMessageMap[errorCode]) {}
+    IOTCException(const char* function, int line, int errorCode) : Exception(function, line, "IOTCException", errorCode, errorMessageMap[errorCode]) {}
 };
 
 #endif /* IOTCException_hpp */

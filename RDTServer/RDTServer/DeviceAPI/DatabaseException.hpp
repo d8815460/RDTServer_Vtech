@@ -15,7 +15,7 @@
 
 enum DatabaseException_ErrorCode
 {
-    DatabaseException_ErrorCode_Open_Database_Failed,
+    DatabaseException_ErrorCode_Open_Database_Failed = 1,
     DatabaseException_ErrorCode_Column_Over_The_Range,
     DatabaseException_ErrorCode_Error_Deleting_Database,
 };
@@ -34,8 +34,8 @@ struct DatabaseException : public Exception
     
     static std::map<int, const char*> errorMessageMap;
     
-    DatabaseException(const char* function, int line, int errorCode) : Exception(function, line, errorCode, errorMessageMap[errorCode]) {}
-    DatabaseException(const char* function, int line, char* errorMessage) : Exception(function, line, -1, errorMessage) {}
+    DatabaseException(const char* function, int line, int errorCode) : Exception(function, line, "DatabaseException", errorCode, errorMessageMap[errorCode]) {}
+    DatabaseException(const char* function, int line, char* errorMessage) : Exception(function, line, "DatabaseException", -1, errorMessage) {}
 };
 
 #endif /* DatabaseException_hpp */

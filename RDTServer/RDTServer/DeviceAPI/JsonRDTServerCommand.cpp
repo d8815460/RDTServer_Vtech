@@ -20,6 +20,7 @@
 #include "AccessoryDao.hpp"
 #include "ElementDao.hpp"
 #include "ElementNoDao.hpp"
+#include "VtechHardwareException.hpp"
 
 JsonRDTServerCommand::JsonRDTServerCommand(CommandEvent* pCommandEvent, CommandHardwardEvent* pCommandHardwardEvent, Connect* pConnect, CommandData* pCommandData) : JsonRDTCommand(pCommandEvent, pCommandHardwardEvent, pConnect, pCommandData)
 {
@@ -133,6 +134,8 @@ void JsonRDTServerCommand::processCommandTarget(Json::Value& inJsonObject, Json:
     //            LOGD("key:%s", members[j].c_str());
     //        }
     
+    CommandBase* pCommandBase = NULL;
+    
     // 查詢
     if (function.find("read") != std::string::npos) {
         if (IfObject.isMember("List")) {
@@ -143,10 +146,11 @@ void JsonRDTServerCommand::processCommandTarget(Json::Value& inJsonObject, Json:
                 Utility::pojoListToJson(inJsonObject, outJsonObject, pojoList);
 //                LOGD("產生json = \n%s", outJsonObject.toStyledString().c_str());
                 
-                CommandHardwardRecv_ReadItems readItems;
-                readItems.dataType = DataType_Accessory;
-                readItems.pojoList = pojoList;
-                m_pCommandHardwardEvent->onCommandHardwardRecv_ReadItems(&readItems);
+                pCommandBase = new CommandHardwardRecv_ReadItems();
+                CommandHardwardRecv_ReadItems* preadItems = (CommandHardwardRecv_ReadItems*) pCommandBase;
+                preadItems->dataType = DataType_Accessory;
+                preadItems->pojoList = pojoList;
+                m_pCommandHardwardEvent->onCommandHardwardRecv_ReadItems(preadItems);
             }
         }
     }
@@ -157,12 +161,13 @@ void JsonRDTServerCommand::processCommandTarget(Json::Value& inJsonObject, Json:
             if (value.size() == 1) {
                 // 新增 accessory, AID = [-1]
                 if (value[0] == -1) {
-                    CommandHardwardRecv_CreateItems createItems;
-                    createItems.dataType = DataType_Accessory;
-                    m_pCommandHardwardEvent->onCommandHardwardRecv_CreateItem(&createItems);
+                    pCommandBase = new CommandHardwardRecv_CreateItems();
+                    CommandHardwardRecv_CreateItems* pCreateItems = (CommandHardwardRecv_CreateItems*) pCommandBase;
+                    pCreateItems->dataType = DataType_Accessory;
+                    m_pCommandHardwardEvent->onCommandHardwardRecv_CreateItem(pCreateItems);
                     
-                    if (createItems.dataType == DataType_Accessory) {
-                        for (shared_ptr<Pojo> pPojo : *createItems.pojoList) {
+                    if (pCreateItems->dataType == DataType_Accessory) {
+                        for (shared_ptr<Pojo> pPojo : *pCreateItems->pojoList) {
                             shared_ptr<AccessoryPojo>& pAccessoryPojo = (shared_ptr<AccessoryPojo>&) pPojo;
                             
                             AccessoryDao::create(*pAccessoryPojo);
@@ -173,6 +178,10 @@ void JsonRDTServerCommand::processCommandTarget(Json::Value& inJsonObject, Json:
             }
         }
     }
+    
+    outJsonObject["ErrorCode"] = pCommandBase->errorCode;
+    
+    delete pCommandBase;
     
 //    // vertify
 //    // 辨識最上面一層

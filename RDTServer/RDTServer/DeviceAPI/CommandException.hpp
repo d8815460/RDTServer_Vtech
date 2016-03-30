@@ -16,7 +16,7 @@
 
 enum CommandException_ErrorCode
 {
-    CommandException_ErrorCode_Packet_Not_Match,
+    CommandException_ErrorCode_Packet_Not_Match = 1,
     CommandException_ErrorCode_No_Match_RDT_Command,
     CommandException_ErrorCode_No_Match_Command_Target,
     CommandException_ErrorCode_No_Match_Command_Operation,
@@ -41,7 +41,7 @@ struct CommandException : public Exception
     
     static std::map<int, const char*> errorMessageMap;
     
-    CommandException(const char* function, int line, int errorCode) : Exception(function, line, errorCode, errorMessageMap[errorCode]) {}
+    CommandException(const char* function, int line, int errorCode) : Exception(function, line, "CommandException", errorCode, errorMessageMap[errorCode]) {}
 };
 
 #endif /* CommandException_hpp */

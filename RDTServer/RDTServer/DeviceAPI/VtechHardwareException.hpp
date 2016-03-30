@@ -17,7 +17,7 @@
 
 enum VtechHardwareException_ErrorCode
 {
-    VtechHardwareException_ErrorCode_device_link_error,
+    VtechHardwareException_ErrorCode_device_link_error = 1,
     VtechHardwareException_ErrorCode_device_command_handle_error,
     VtechHardwareException_ErrorCode_device_not_found,
     VtechHardwareException_ErrorCode_device_type_error,
@@ -92,7 +92,7 @@ struct VtechHardwareException : public Exception
     
     static std::map<int, const char*> errorMessageMap;
     
-    VtechHardwareException(const char* function, int line, int errorCode) : Exception(function, line, errorCode, errorMessageMap[errorCode]) {}
+    VtechHardwareException(const char* function, int line, int errorCode) : Exception(function, line, "VtechHardwareException", errorCode, errorMessageMap[errorCode]) {}
 };
 
 #endif /* VtechHardwareException_hpp */
