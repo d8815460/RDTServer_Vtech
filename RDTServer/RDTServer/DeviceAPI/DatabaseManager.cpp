@@ -40,12 +40,13 @@ DatabaseManager::DatabaseManager()
     /******************************************* 修改處 *****************************************************/
     {
         /* 新增一筆資料 */
-        AccessoryPojo accessoryPojo;
-        accessoryPojo.AID = 0;
-        accessoryPojo.Name = "IPHub";
-        accessoryPojo.IconType = 0;
-        accessoryPojo.Connection = 1;
-        accessoryPojo.IsGateway = false;
+        AccessoryPojo accessoryPojo(0, "IPHub", 0, 1, false);
+//        AccessoryPojo accessoryPojo;
+//        accessoryPojo.AID = 0;
+//        accessoryPojo.Name = "IPHub";
+//        accessoryPojo.IconType = 0;
+//        accessoryPojo.Connection = 1;
+//        accessoryPojo.IsGateway = false;
         
         shared_ptr<ElementPojo> pElement1(new ElementPojo);
         pElement1->Element = "switch";

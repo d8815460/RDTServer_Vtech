@@ -28,7 +28,6 @@ static const char* createAccessory =    "CREATE TABLE Accessory ("
                                         "IsGateway          BOOLEAN"
                                         ");";
 /******************************************* 修改處 *****************************************************/
-
 struct AccessoryPojo : public Pojo
 {
     vector<ValueObject> valueObjectList;
@@ -47,6 +46,15 @@ struct AccessoryPojo : public Pojo
     {
         pElementPojoList = shared_ptr<vector<shared_ptr<Pojo>>>(new vector<shared_ptr<Pojo>>());
     }
+    
+    /******************************************* 修改處 *****************************************************/
+    Contractor5(AccessoryPojo,
+                int,         AID,
+                std::string, Name,
+                int,         IconType,
+                int,         Connection,
+                bool,        IsGateway)
+    /******************************************* 修改處 *****************************************************/
     
     void genValueObject()
     {
