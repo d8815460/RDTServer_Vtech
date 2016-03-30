@@ -91,6 +91,8 @@
 		A2A17A281C7D568A008AEFD4 /* BaseData.hpp in Headers */ = {isa = PBXBuildFile; fileRef = A2A17A261C7D568A008AEFD4 /* BaseData.hpp */; };
 		A2A17A2B1C7D8C24008AEFD4 /* VtechJsonRDTServerCommand.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A2A17A291C7D8C24008AEFD4 /* VtechJsonRDTServerCommand.cpp */; };
 		A2A17A2C1C7D8C24008AEFD4 /* VtechJsonRDTServerCommand.hpp in Headers */ = {isa = PBXBuildFile; fileRef = A2A17A2A1C7D8C24008AEFD4 /* VtechJsonRDTServerCommand.hpp */; };
+		A2A1F45E1CABC3DE007D4489 /* VtechHardwareException.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A2A1F45C1CABC3DE007D4489 /* VtechHardwareException.cpp */; };
+		A2A1F45F1CABC3DE007D4489 /* VtechHardwareException.hpp in Headers */ = {isa = PBXBuildFile; fileRef = A2A1F45D1CABC3DE007D4489 /* VtechHardwareException.hpp */; };
 		A2A3C2551C91176800ABED16 /* Pojo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A2A3C2531C91176800ABED16 /* Pojo.cpp */; };
 		A2A3C2561C91176800ABED16 /* Pojo.hpp in Headers */ = {isa = PBXBuildFile; fileRef = A2A3C2541C91176800ABED16 /* Pojo.hpp */; };
 		A2A3C25E1C9119E400ABED16 /* ElementNODao.hpp in Headers */ = {isa = PBXBuildFile; fileRef = A2A3C25C1C9119E400ABED16 /* ElementNODao.hpp */; };
@@ -201,6 +203,8 @@
 		A2A17A261C7D568A008AEFD4 /* BaseData.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = BaseData.hpp; path = RDTServer/DeviceAPI/BaseData.hpp; sourceTree = SOURCE_ROOT; };
 		A2A17A291C7D8C24008AEFD4 /* VtechJsonRDTServerCommand.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = VtechJsonRDTServerCommand.cpp; path = RDTServer/DeviceAPI/VtechJsonRDTServerCommand.cpp; sourceTree = SOURCE_ROOT; };
 		A2A17A2A1C7D8C24008AEFD4 /* VtechJsonRDTServerCommand.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = VtechJsonRDTServerCommand.hpp; path = RDTServer/DeviceAPI/VtechJsonRDTServerCommand.hpp; sourceTree = SOURCE_ROOT; };
+		A2A1F45C1CABC3DE007D4489 /* VtechHardwareException.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = VtechHardwareException.cpp; path = RDTServer/DeviceAPI/VtechHardwareException.cpp; sourceTree = SOURCE_ROOT; };
+		A2A1F45D1CABC3DE007D4489 /* VtechHardwareException.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = VtechHardwareException.hpp; path = RDTServer/DeviceAPI/VtechHardwareException.hpp; sourceTree = SOURCE_ROOT; };
 		A2A3C2531C91176800ABED16 /* Pojo.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Pojo.cpp; path = RDTServer/DeviceAPI/Pojo.cpp; sourceTree = SOURCE_ROOT; };
 		A2A3C2541C91176800ABED16 /* Pojo.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = Pojo.hpp; path = RDTServer/DeviceAPI/Pojo.hpp; sourceTree = SOURCE_ROOT; };
 		A2A3C25C1C9119E400ABED16 /* ElementNODao.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = ElementNODao.hpp; path = RDTServer/DeviceAPI/ElementNODao.hpp; sourceTree = SOURCE_ROOT; };
@@ -514,6 +518,8 @@
 				A21E95B41C8691AE00D4FFCF /* CommandException.cpp */,
 				A25E5AE41C90318D00B49656 /* DatabaseException.hpp */,
 				A25E5AE31C90318D00B49656 /* DatabaseException.cpp */,
+				A2A1F45D1CABC3DE007D4489 /* VtechHardwareException.hpp */,
+				A2A1F45C1CABC3DE007D4489 /* VtechHardwareException.cpp */,
 			);
 			name = Exception;
 			sourceTree = "<group>";
@@ -564,6 +570,7 @@
 				A2A3C2561C91176800ABED16 /* Pojo.hpp in Headers */,
 				A2A17A2C1C7D8C24008AEFD4 /* VtechJsonRDTServerCommand.hpp in Headers */,
 				A26FB6C11C635F8C007E3648 /* WifiIPStack.h in Headers */,
+				A2A1F45F1CABC3DE007D4489 /* VtechHardwareException.hpp in Headers */,
 				A26FB5FC1C635E08007E3648 /* BinraryRDTServerCommand.hpp in Headers */,
 				A26FB6E71C63600A007E3648 /* features.h in Headers */,
 				A26FB6E81C63600A007E3648 /* forwards.h in Headers */,
@@ -669,6 +676,7 @@
 				A2AF5D751C7C395300104205 /* BinraryRDTCommand.cpp in Sources */,
 				A21E95B61C8691AE00D4FFCF /* CommandException.cpp in Sources */,
 				A26FB6AA1C635F67007E3648 /* MQTTConnectClient.c in Sources */,
+				A2A1F45E1CABC3DE007D4489 /* VtechHardwareException.cpp in Sources */,
 				A26FB5D51C635DD1007E3648 /* Utility.cpp in Sources */,
 				A26FB6F01C63600B007E3648 /* json_value.cpp in Sources */,
 				A26FB6AB1C635F67007E3648 /* MQTTConnectServer.c in Sources */,

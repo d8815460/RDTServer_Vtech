@@ -119,8 +119,6 @@ using namespace std;
 
 struct ValueObject
 {
-    ValueObject() {}
-    
     ValueObject(DatabaseType type, std::string key, int nValue)
     {
         this->type = type;

@@ -38,10 +38,12 @@ struct ElementNOPojo : public Pojo
     
     ElementNOPojo() {}
     
+    /******************************************* 修改處 *****************************************************/
     Contractor3(ElementNOPojo, SubPojoListNO(),
                 int,            ElementNO,
                 std::string,    Value,
                 bool,           NtfyEnable)
+    /******************************************* 修改處 *****************************************************/
     
     void genValueObject()
     {
@@ -51,8 +53,6 @@ struct ElementNOPojo : public Pojo
             createValueObject(DatabaseType_INTEGER, fkElementSerial)
             createValueObject(DatabaseType_INTEGER, ElementNO)
             createValueObject(DatabaseType_TEXT,    Value)
-            
-            // 需要addJson
             createValueObject(DatabaseType_INTEGER, NtfyEnable)
         };
         /******************************************* 修改處 *****************************************************/
@@ -63,6 +63,10 @@ struct ElementNOPojo : public Pojo
     {
         /******************************************* 修改處 *****************************************************/
         addJson(json, NtfyEnable);
+        
+        // ElementNO
+        // Value
+        // 在下面加
         /******************************************* 修改處 *****************************************************/
         
         json[to_string(ElementNO)] = Value;

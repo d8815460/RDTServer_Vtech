@@ -53,7 +53,7 @@ DatabaseManager::DatabaseManager()
         
         shared_ptr<ElementNOPojo> pNO1(new ElementNOPojo(0, "轟天", true));
 //        pNO1->ElementNO = 0;
-//        pNO1->Value = "1";
+//        pNO1->Value = "轟天";
 //        pNO1->NtfyEnable = true;
         
         shared_ptr<ElementNOPojo> pNO2(new ElementNOPojo(1, "大鑫", true));

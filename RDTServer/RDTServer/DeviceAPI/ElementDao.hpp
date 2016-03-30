@@ -30,7 +30,6 @@ struct ElementPojo : public Pojo
     
     int         fkAccessorySerial;
     std::string Element;
-//    bool        NtfyEnable;
     
     shared_ptr<vector<shared_ptr<Pojo>>> pSubPojoList;
     
@@ -39,8 +38,10 @@ struct ElementPojo : public Pojo
         pSubPojoList = shared_ptr<vector<shared_ptr<Pojo>>>(new vector<shared_ptr<Pojo>>());
     }
     
+    /******************************************* 修改處 *****************************************************/
     Contractor1(ElementPojo, SubPojoListYES(),
                 std::string, Element)
+    /******************************************* 修改處 *****************************************************/
     
     void genValueObject()
     {
