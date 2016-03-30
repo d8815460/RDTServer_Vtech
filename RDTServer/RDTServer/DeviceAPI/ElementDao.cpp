@@ -24,7 +24,7 @@ void ElementDao::readCallback(shared_ptr<vector<shared_ptr<Pojo>>> outPtrPojoLis
 //            LOGD("pElementPojo->elementSerial:%d", pElementPojo->elementSerial);
             
             /* 取得 pElementPojoList 裡所有的資料 */
-            pElementPojo->pElementNOPojoList = ElementNODao::read(pElementPojo->elementSerial);
+            pElementPojo->pSubPojoList = ElementNODao::read(pElementPojo->elementSerial);
         }
         /******************************************* 修改處 *****************************************************/
         if_index_int_va(1, pElementPojo->fkAccessorySerial, data)
@@ -58,7 +58,7 @@ void ElementDao::create(shared_ptr<ElementPojo> pElementPojo)
     
     int rowid = (int) sqlite3_last_insert_rowid(databaseManager.getSqliteDatabase());
                                     
-    for (shared_ptr<Pojo> pPojo : *pElementPojo->pElementNOPojoList) {
+    for (shared_ptr<Pojo> pPojo : *pElementPojo->pSubPojoList) {
         shared_ptr<ElementNOPojo>& pElementNOPojo = (shared_ptr<ElementNOPojo>&) pPojo;
         
         pElementPojo->elementSerial = rowid;
@@ -79,7 +79,7 @@ void ElementDao::update(shared_ptr<ElementPojo> pElementPojo)
     std::string sql = pElementPojo->updateSQL("UPDATE Element SET ", pElementPojo->valueObjectList);
     databaseManager.exec(sql.c_str());
     
-    for (shared_ptr<Pojo> pPojo : *pElementPojo->pElementNOPojoList) {
+    for (shared_ptr<Pojo> pPojo : *pElementPojo->pSubPojoList) {
         shared_ptr<ElementNOPojo>& pElementNOPojo = (shared_ptr<ElementNOPojo>&) pPojo;
 //        LOGD("pElementPojo->name:%s", pElementPojo->name.c_str());
         

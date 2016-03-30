@@ -45,7 +45,7 @@ void AccessoryDao::readCallback(shared_ptr<vector<shared_ptr<Pojo>>> outPtrPojoL
 //            LOGD("pAccessoryPojo->accessorySerial:%d", pAccessoryPojo->accessorySerial);
             
             /* 取得 pElementPojoList 裡所有的資料 */
-            pAccessoryPojo->pElementPojoList = ElementDao::read(pAccessoryPojo->accessorySerial);
+            pAccessoryPojo->pSubPojoList = ElementDao::read(pAccessoryPojo->accessorySerial);
 //            for (shared_ptr<Pojo> pPojo : *pAccessoryPojo->pElementPojoList) {
 //                pPojo->print();
 //            }
@@ -90,7 +90,7 @@ void AccessoryDao::create(AccessoryPojo& accessoryPojo)
     
     int rowid = (int) sqlite3_last_insert_rowid(databaseManager.getSqliteDatabase());
     
-    for (shared_ptr<Pojo> pPojo : *accessoryPojo.pElementPojoList) {
+    for (shared_ptr<Pojo> pPojo : *accessoryPojo.pSubPojoList) {
         shared_ptr<ElementPojo>& pElementPojo = (shared_ptr<ElementPojo>&) pPojo;
         
         accessoryPojo.accessorySerial =rowid ;
@@ -111,8 +111,8 @@ void AccessoryDao::update(AccessoryPojo& accessoryPojo)
     std::string sql = accessoryPojo.updateSQL("UPDATE Accessory SET ", accessoryPojo.valueObjectList);
     databaseManager.exec(sql.c_str());
     
-    if (accessoryPojo.pElementPojoList != NULL) {
-        for (shared_ptr<Pojo> pPojo : *accessoryPojo.pElementPojoList) {
+    if (accessoryPojo.pSubPojoList != NULL) {
+        for (shared_ptr<Pojo> pPojo : *accessoryPojo.pSubPojoList) {
             shared_ptr<ElementPojo>& pElementPojo = (shared_ptr<ElementPojo>&) pPojo;
             ElementDao::update(pElementPojo);
         }

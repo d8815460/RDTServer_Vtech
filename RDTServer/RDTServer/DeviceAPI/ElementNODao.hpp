@@ -30,13 +30,18 @@ struct ElementNOPojo : public Pojo
     vector<ValueObject> valueObjectList;
     
     int elementNOSerial;
-    
     int         fkElementSerial;
+    
     int         ElementNO;
     std::string Value;
     bool        NtfyEnable;
     
     ElementNOPojo() {}
+    
+    Contractor3(ElementNOPojo, SubPojoListNO(),
+                int,            ElementNO,
+                std::string,    Value,
+                bool,           NtfyEnable)
     
     void genValueObject()
     {

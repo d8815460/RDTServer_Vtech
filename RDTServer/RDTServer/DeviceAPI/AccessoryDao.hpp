@@ -28,6 +28,7 @@ static const char* createAccessory =    "CREATE TABLE Accessory ("
                                         "IsGateway          BOOLEAN"
                                         ");";
 /******************************************* 修改處 *****************************************************/
+
 struct AccessoryPojo : public Pojo
 {
     vector<ValueObject> valueObjectList;
@@ -40,15 +41,15 @@ struct AccessoryPojo : public Pojo
     int         Connection;
     bool        IsGateway;
     
-    shared_ptr<vector<shared_ptr<Pojo>>> pElementPojoList;
+    shared_ptr<vector<shared_ptr<Pojo>>> pSubPojoList;
     
     AccessoryPojo()
     {
-        pElementPojoList = shared_ptr<vector<shared_ptr<Pojo>>>(new vector<shared_ptr<Pojo>>());
+        pSubPojoList = shared_ptr<vector<shared_ptr<Pojo>>>(new vector<shared_ptr<Pojo>>());
     }
     
     /******************************************* 修改處 *****************************************************/
-    Contractor5(AccessoryPojo,
+    Contractor5(AccessoryPojo, SubPojoListYES(),
                 int,         AID,
                 std::string, Name,
                 int,         IconType,
@@ -93,7 +94,7 @@ struct AccessoryPojo : public Pojo
         
 //        subJsonList["Connection"]
         
-        for (vector<shared_ptr<Pojo>>::iterator it=pElementPojoList->begin() ; it!=pElementPojoList->end() ; it++) {
+        for (vector<shared_ptr<Pojo>>::iterator it=pSubPojoList->begin() ; it!=pSubPojoList->end() ; it++) {
             shared_ptr<Pojo> pPojo = *it;
             
             pPojo->toJson(subJsonList);
@@ -140,8 +141,8 @@ struct AccessoryPojo : public Pojo
         LOGD("AID:%d", AID);
         LOGD("IconType:%d", IconType);
         
-        if (pElementPojoList != NULL) {
-            for (shared_ptr<Pojo> pPojo : *pElementPojoList) {
+        if (pSubPojoList != NULL) {
+            for (shared_ptr<Pojo> pPojo : *pSubPojoList) {
                 pPojo->print();
             }
         }

@@ -48,20 +48,22 @@ DatabaseManager::DatabaseManager()
 //        accessoryPojo.Connection = 1;
 //        accessoryPojo.IsGateway = false;
         
-        shared_ptr<ElementPojo> pElement1(new ElementPojo);
-        pElement1->Element = "switch";
+        shared_ptr<ElementPojo> pElement1(new ElementPojo("switch"));
+//        pElement1->Element = "switch";
         
-        shared_ptr<ElementNOPojo> pNO1(new ElementNOPojo);
-        pNO1->ElementNO = 0;
-        pNO1->Value = "1";
+        shared_ptr<ElementNOPojo> pNO1(new ElementNOPojo(0, "轟天", true));
+//        pNO1->ElementNO = 0;
+//        pNO1->Value = "1";
+//        pNO1->NtfyEnable = true;
         
-        shared_ptr<ElementNOPojo> pNO2(new ElementNOPojo);
-        pNO2->ElementNO = 1;
-        pNO2->Value = "大鑫";
+        shared_ptr<ElementNOPojo> pNO2(new ElementNOPojo(1, "大鑫", true));
+//        pNO2->ElementNO = 1;
+//        pNO2->Value = "大鑫";
+//        pNO1->NtfyEnable = true;
         
-        accessoryPojo.pElementPojoList->push_back(pElement1);
-        pElement1->pElementNOPojoList->push_back(pNO1);
-        pElement1->pElementNOPojoList->push_back(pNO2);
+        accessoryPojo.pSubPojoList->push_back(pElement1);
+        pElement1->pSubPojoList->push_back(pNO1);
+        pElement1->pSubPojoList->push_back(pNO2);
         
         AccessoryDao::create(accessoryPojo);
     }

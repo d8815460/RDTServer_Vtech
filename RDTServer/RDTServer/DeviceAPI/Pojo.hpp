@@ -47,41 +47,46 @@
 #define Declare(type, value) \
     type value
 
-#define Contractor1(method, val, p)   \
-    method(Declare(val, p))  \
+#define SubPojoListYES() \
+    pSubPojoList = shared_ptr<vector<shared_ptr<Pojo>>>(new vector<shared_ptr<Pojo>>());
+
+#define SubPojoListNO()
+
+#define Contractor1(method, subPojoList, k, v)   \
+    method(Declare(k, v))  \
     {                        \
-        ContractorAssign(p); \
-        pElementPojoList = shared_ptr<vector<shared_ptr<Pojo>>>(new vector<shared_ptr<Pojo>>()); \
+        ContractorAssign(v); \
+        subPojoList \
     }
 
-#define Contractor2(method, k1, v1, k2, v2)   \
+#define Contractor2(method, subPojoList, k1, v1, k2, v2)   \
     method(Declare(k1, v1), Declare(k2, v2))  \
     {                        \
         ContractorAssign(v1); \
         ContractorAssign(v2); \
-        pElementPojoList = shared_ptr<vector<shared_ptr<Pojo>>>(new vector<shared_ptr<Pojo>>()); \
+        subPojoList \
     }
 
-#define Contractor3(method, k1, v1, k2, v2, k3, v3)   \
+#define Contractor3(method, subPojoList, k1, v1, k2, v2, k3, v3)   \
     method(Declare(k1, v1), Declare(k2, v2), Declare(k3, v3))  \
     {                        \
         ContractorAssign(v1); \
         ContractorAssign(v2); \
         ContractorAssign(v3); \
-        pElementPojoList = shared_ptr<vector<shared_ptr<Pojo>>>(new vector<shared_ptr<Pojo>>()); \
+        subPojoList \
     }
 
-#define Contractor4(method, k1, v1, k2, v2, k3, v3, k4, v4)   \
+#define Contractor4(method, subPojoList, k1, v1, k2, v2, k3, v3, k4, v4)   \
     method(Declare(k1, v1), Declare(k2, v2), Declare(k3, v3), Declare(k4, v4))  \
     {                        \
         ContractorAssign(v1); \
         ContractorAssign(v2); \
         ContractorAssign(v3); \
         ContractorAssign(v4); \
-        pElementPojoList = shared_ptr<vector<shared_ptr<Pojo>>>(new vector<shared_ptr<Pojo>>()); \
+        subPojoList \
     }
 
-#define Contractor5(method, k1, v1, k2, v2, k3, v3, k4, v4, k5, v5)   \
+#define Contractor5(method, subPojoList, k1, v1, k2, v2, k3, v3, k4, v4, k5, v5)   \
     method(Declare(k1, v1), Declare(k2, v2), Declare(k3, v3), Declare(k4, v4), Declare(k5, v5))  \
     {                        \
         ContractorAssign(v1); \
@@ -89,10 +94,10 @@
         ContractorAssign(v3); \
         ContractorAssign(v4); \
         ContractorAssign(v5); \
-        pElementPojoList = shared_ptr<vector<shared_ptr<Pojo>>>(new vector<shared_ptr<Pojo>>()); \
+        subPojoList \
     }
 
-#define Contractor6(method, k1, v1, k2, v2, k3, v3, k4, v4, k5, v5, k6, v6)   \
+#define Contractor6(method, subPojoList, k1, v1, k2, v2, k3, v3, k4, v4, k5, v5, k6, v6)   \
     method(Declare(k1, v1), Declare(k2, v2), Declare(k3, v3), Declare(k4, v4), Declare(k5, v5), Declare(k6, v6))  \
     {                        \
         ContractorAssign(v1); \
@@ -101,7 +106,7 @@
         ContractorAssign(v4); \
         ContractorAssign(v5); \
         ContractorAssign(v6); \
-        pElementPojoList = shared_ptr<vector<shared_ptr<Pojo>>>(new vector<shared_ptr<Pojo>>()); \
+        subPojoList \
     }
 
 enum DatabaseType

@@ -170,9 +170,9 @@ void VtechIPHubGatewayHardward::onCommandHardwardRecv_CreateItem(CommandHardward
             pNO2->NtfyEnable = true;
             
             // 放入相關階層
-            pAccessoryPojo->pElementPojoList->push_back(pElement1);
-            pElement1->pElementNOPojoList->push_back(pNO1);
-            pElement1->pElementNOPojoList->push_back(pNO2);
+            pAccessoryPojo->pSubPojoList->push_back(pElement1);
+            pElement1->pSubPojoList->push_back(pNO1);
+            pElement1->pSubPojoList->push_back(pNO2);
             
             // 將accessoryPojo放入pojoList
             pCommandHardwardRecv_CreateItems->pojoList->push_back(pAccessoryPojo);

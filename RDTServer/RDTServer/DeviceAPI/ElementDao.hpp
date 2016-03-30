@@ -32,12 +32,15 @@ struct ElementPojo : public Pojo
     std::string Element;
 //    bool        NtfyEnable;
     
-    shared_ptr<vector<shared_ptr<Pojo>>> pElementNOPojoList;
+    shared_ptr<vector<shared_ptr<Pojo>>> pSubPojoList;
     
     ElementPojo()
     {
-        pElementNOPojoList = shared_ptr<vector<shared_ptr<Pojo>>>(new vector<shared_ptr<Pojo>>());
+        pSubPojoList = shared_ptr<vector<shared_ptr<Pojo>>>(new vector<shared_ptr<Pojo>>());
     }
+    
+    Contractor1(ElementPojo, SubPojoListYES(),
+                std::string, Element)
     
     void genValueObject()
     {
@@ -56,7 +59,7 @@ struct ElementPojo : public Pojo
         Json::Value jsonList;
         Json::Value subJsonList;
         
-        for (vector<shared_ptr<Pojo>>::iterator it=pElementNOPojoList->begin() ; it!=pElementNOPojoList->end() ; it++) {
+        for (vector<shared_ptr<Pojo>>::iterator it=pSubPojoList->begin() ; it!=pSubPojoList->end() ; it++) {
             shared_ptr<Pojo> pPojo = *it;
             
             pPojo->toJson(subJsonList);
@@ -105,8 +108,8 @@ struct ElementPojo : public Pojo
         LOGD("fkAccessorySerial:%d", fkAccessorySerial);
         LOGD("Element:%s", Element.c_str());
         
-        if (pElementNOPojoList != NULL) {
-            for (shared_ptr<Pojo> pPojo : *pElementNOPojoList) {
+        if (pSubPojoList != NULL) {
+            for (shared_ptr<Pojo> pPojo : *pSubPojoList) {
                 pPojo->print();
             }
         }

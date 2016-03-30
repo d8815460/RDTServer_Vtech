@@ -95,18 +95,18 @@ void* JsonRDTClientCommand::threadInput(void *arg)
             // version 2.1
             {
                 /* Get All Accessories */
-    //            root["Function"] = "read";
-    //            item["List"] = "ListAccessory";
-    //            root["If"] = item;
+                root["Function"] = "read";
+                item["List"] = "ListAccessory";
+                root["If"] = item;
             }
             
             {
-                /* Add Accessories */
-                root["Function"] = "write";
-                Json::Value array;
-                array.append(-1);
-                item["AID"] = array;
-                root["If"] = item;
+//                /* Add Accessories */
+//                root["Function"] = "write";
+//                Json::Value array;
+//                array.append(-1);
+//                item["AID"] = array;
+//                root["If"] = item;
             }
             
             // 新增group
