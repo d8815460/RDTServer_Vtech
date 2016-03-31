@@ -73,7 +73,7 @@ DatabaseManager::DatabaseManager()
 //    LOGD("ID:%lld\n", sqlite3_last_insert_rowid(m_pDatabase));
     
     shared_ptr<vector<shared_ptr<Pojo>>> pojoList = NULL;
-//    pojoList = AccessoryDao::read();
+//    pojoList = AccessoryDao::readAll();
     
 //    // 更新資料
 //    for (shared_ptr<Pojo> pPojo : *pojoList) {
@@ -113,7 +113,6 @@ int DatabaseManager::exec(const char* sql)
     
     char *errMsg = NULL;
     
-    /* 新增一筆資料 */
     int count = sqlite3_exec(m_pDatabase, sql, 0, 0, &errMsg);
 //    LOGD("count:%d", count);
     

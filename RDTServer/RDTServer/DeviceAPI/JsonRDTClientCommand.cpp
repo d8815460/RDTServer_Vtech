@@ -8,6 +8,7 @@
 
 #include "JsonRDTClientCommand.hpp"
 #include <iostream>
+#include <fstream>
 #include <cstring>
 #include <unistd.h>
 #include "Common.hpp"
@@ -93,15 +94,15 @@ void* JsonRDTClientCommand::threadInput(void *arg)
 //            root["target"] = "AID:1&FNC:switch:1;AID:2&FNC:switch:1";
             
             // version 2.1
-            {
-                /* Get All Accessories */
-                root["Function"] = "read";
-                item["List"] = "ListAccessory";
-                root["If"] = item;
-            }
+            // Get All Accessories
+//            {
+//                root["Function"] = "read";
+//                item["List"] = "ListAccessory";
+//                root["If"] = item;
+//            }
             
+            // Add Accessories
             {
-//                /* Add Accessories */
 //                root["Function"] = "write";
 //                Json::Value array;
 //                array.append(-1);
@@ -109,22 +110,28 @@ void* JsonRDTClientCommand::threadInput(void *arg)
 //                root["If"] = item;
             }
             
-            // 新增group
-//            root["operation"] = "create";
-//            root["target"] = "/group/";
-            
-            // 刪除group
-//            root["operation"] = "delete";
-//            root["target"] = "/group/1/";
-            
-//            arraryItems["cpp"] = "jsoncpp";
-//            arraryItems["java"] = "jsoninjava";
-//            arraryItems["php"] = "support";
-//            arrayObject.append(arraryItems);
-//            root["request"] = arrayObject;
+            // Delete Accessory
+            {
+                root["Function"] = "delete";
+                Json::Value array;
+                array.append(0);
+                item["AID"] = array;
+                root["If"] = item;
+            }
             
             std::string json = root.toStyledString();
-            LOGD("json傳送資料:%s", json.c_str());
+            LOGD("json傳送資料\n:%s", json.c_str());
+            
+//            const char* filename = "GetAllAccessories.json";
+//            char jsonString[MAX_BUFFER_SIZE];
+//            fstream fp;
+//            fp.open(filename, ios::in); // 開啟檔案
+//            if(!fp){ // 如果開啟檔案失敗，fp為0；成功，fp為非0
+//                LOGD("Fail to open file");
+//            }
+//            fp.read(jsonString, MAX_BUFFER_SIZE);
+//            fp.close(); // 關閉檔案
+//            LOGD("jsonString:%s", jsonString);
             
             JsonRDTClientCommand_ParseSendData parseSendData;
             parseSendData.channelID = *it;

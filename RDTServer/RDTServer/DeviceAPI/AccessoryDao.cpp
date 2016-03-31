@@ -140,8 +140,45 @@ int AccessoryDao::deleteWithSerial(int accessorySerial)
     return databaseManager.exec(buffer);
 }
 
-shared_ptr<vector<shared_ptr<Pojo>>> AccessoryDao::read()
+int AccessoryDao::deleteWithAID(int AID)
+{
+    DatabaseManager& databaseManager = DatabaseManager::getInstance();
+    
+    shared_ptr<Pojo> pPojo = AccessoryDao::read(AID);
+    if (pPojo != NULL) {
+       shared_ptr<AccessoryPojo>& pAccessoryPojo = (shared_ptr<AccessoryPojo>&) pPojo;
+        ElementDao::deleteWithFKAccessorySerial(pAccessoryPojo->accessorySerial);
+        
+        char buffer[Pojo_Buffer_Size];
+        sprintf(buffer, "DELETE FROM Accessory WHERE AID = %d;", AID);
+        
+        return databaseManager.exec(buffer);
+    }
+    else {
+        return 0;
+    }
+}
+
+shared_ptr<vector<shared_ptr<Pojo>>> AccessoryDao::readAll()
 {
     DatabaseManager& databaseManager = DatabaseManager::getInstance();
     return databaseManager.read("SELECT * FROM Accessory;", AccessoryDao::readCallback);
+}
+
+shared_ptr<Pojo> AccessoryDao::read(int AID)
+{
+    DatabaseManager& databaseManager = DatabaseManager::getInstance();
+    
+    char buffer[Pojo_Buffer_Size];
+    sprintf(buffer, "SELECT * FROM Accessory WHERE AID = %d;", AID);
+    
+    shared_ptr<vector<shared_ptr<Pojo>>> pPojoList = databaseManager.read(buffer, AccessoryDao::readCallback);
+    
+    // 只能有一筆
+    if (pPojoList->size() == 1) {
+        return (*pPojoList)[0];
+    }
+    else {
+        return NULL;
+    }
 }

@@ -61,12 +61,12 @@
 /* Begin PBXCopyFilesBuildPhase section */
 		A2BF71781AC95A4600379199 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = /usr/share/man/man1/;
-			dstSubfolderSpec = 0;
+			buildActionMask = 12;
+			dstPath = usr/share/man/man1;
+			dstSubfolderSpec = 16;
 			files = (
 			);
-			runOnlyForDeploymentPostprocessing = 1;
+			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
 
@@ -576,6 +576,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				INSTALL_PATH = "";
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -611,6 +612,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				INSTALL_PATH = "";
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = macosx;
@@ -620,6 +622,9 @@
 		A2BF71821AC95A4600379199 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				DEPLOYMENT_LOCATION = NO;
+				EXECUTABLE_EXTENSION = "$(PROJECT_DIR)";
+				EXECUTABLE_PREFIX = "";
 				FRAMEWORK_SEARCH_PATHS = "";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/RDTServer/DeviceAPI/PrefixHeader.pch";
@@ -632,6 +637,7 @@
 					"RDTServer/3th_party/jsoncpp-1.6.5/include",
 					"RDTServer/3th_party/sqlite-amalgamation-3110100",
 				);
+				INSTALL_PATH = "";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					../TUTK_Kalay_Platform_SDK_2.1.3/Lib/MAC,
@@ -652,6 +658,9 @@
 		A2BF71831AC95A4600379199 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				DEPLOYMENT_LOCATION = NO;
+				EXECUTABLE_EXTENSION = "$(PROJECT_DIR)";
+				EXECUTABLE_PREFIX = "";
 				FRAMEWORK_SEARCH_PATHS = "";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/RDTServer/DeviceAPI/PrefixHeader.pch";
@@ -664,6 +673,7 @@
 					"RDTServer/3th_party/jsoncpp-1.6.5/include",
 					"RDTServer/3th_party/sqlite-amalgamation-3110100",
 				);
+				INSTALL_PATH = "";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					../TUTK_Kalay_Platform_SDK_2.1.3/Lib/MAC,

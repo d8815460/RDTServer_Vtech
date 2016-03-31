@@ -141,33 +141,34 @@ void JsonRDTServerCommand::processCommandTarget(Json::Value& inJsonObject, Json:
         if (IfObject.isMember("List")) {
             std::string value = IfObject["List"].asString();
             if (value.find("ListAccessory") != std::string::npos) {
-                shared_ptr<vector<shared_ptr<Pojo>>> pojoList = AccessoryDao::read();
+                shared_ptr<vector<shared_ptr<Pojo>>> pojoList = AccessoryDao::readAll();
                 
                 Utility::pojoListToJson(inJsonObject, outJsonObject, pojoList);
 //                LOGD("產生json = \n%s", outJsonObject.toStyledString().c_str());
                 
                 pCommandBase = new CommandHardwardRecv_ReadItems();
-                CommandHardwardRecv_ReadItems* preadItems = (CommandHardwardRecv_ReadItems*) pCommandBase;
-                preadItems->dataType = DataType_Accessory;
-                preadItems->pojoList = pojoList;
-                m_pCommandHardwardEvent->onCommandHardwardRecv_ReadItems(preadItems);
+                CommandHardwardRecv_ReadItems* pItems = (CommandHardwardRecv_ReadItems*) pCommandBase;
+                pItems->dataType = DataType_Accessory;
+                pItems->pojoList = pojoList;
+                m_pCommandHardwardEvent->onCommandHardwardRecv_ReadItems(pItems);
             }
         }
     }
     else if (function.find("write") != std::string::npos) {
         if (IfObject.isMember("AID")) {
-            Json::Value value = IfObject["AID"];
+            Json::Value AIDArray = IfObject["AID"];
             
-            if (value.size() == 1) {
+            if (AIDArray.size() == 1) {
                 // 新增 accessory, AID = [-1]
-                if (value[0] == -1) {
+                if (AIDArray[0] == -1) {
                     pCommandBase = new CommandHardwardRecv_CreateItems();
-                    CommandHardwardRecv_CreateItems* pCreateItems = (CommandHardwardRecv_CreateItems*) pCommandBase;
-                    pCreateItems->dataType = DataType_Accessory;
-                    m_pCommandHardwardEvent->onCommandHardwardRecv_CreateItem(pCreateItems);
+                    CommandHardwardRecv_CreateItems* pItems = (CommandHardwardRecv_CreateItems*) pCommandBase;
+                    pItems->dataType = DataType_Accessory;
+                    m_pCommandHardwardEvent->onCommandHardwardRecv_CreateItem(pItems);
                     
-                    if (pCreateItems->dataType == DataType_Accessory) {
-                        for (shared_ptr<Pojo> pPojo : *pCreateItems->pojoList) {
+                    // 刪除成功
+                    if (pItems->errorCode == 0) {
+                        for (shared_ptr<Pojo> pPojo : *pItems->pojoList) {
                             shared_ptr<AccessoryPojo>& pAccessoryPojo = (shared_ptr<AccessoryPojo>&) pPojo;
                             
                             AccessoryDao::create(*pAccessoryPojo);
@@ -178,7 +179,28 @@ void JsonRDTServerCommand::processCommandTarget(Json::Value& inJsonObject, Json:
             }
         }
     }
+    else if (function.find("delete") != std::string::npos) {
+        if (IfObject.isMember("AID")) {
+            Json::Value AIDArray = IfObject["AID"];
+            
+            for (int i=0 ; i<AIDArray.size() ; i++) {
+                int AID = AIDArray[i].asInt();
+                pCommandBase = new CommandHardwardRecv_DeleteItems();
+                CommandHardwardRecv_DeleteItems* pItems = (CommandHardwardRecv_DeleteItems*) pCommandBase;
+                pItems->dataType = DataType_Accessory;
+                pItems->id = AID;
+                m_pCommandHardwardEvent->onCommandHardwardRecv_DeleteItems(pItems);
+                
+                // 刪除成功
+                if (pItems->errorCode == 0) {
+                    AccessoryDao::deleteWithAID(AID);
+                }
+            }
+        }
+    }
     
+    // Common
+    outJsonObject["SenderInfo"] = inJsonObject;
     outJsonObject["ErrorCode"] = pCommandBase->errorCode;
     
     delete pCommandBase;
@@ -190,7 +212,7 @@ void JsonRDTServerCommand::processCommandTarget(Json::Value& inJsonObject, Json:
 //        m_pCommandHardwardEvent->onCommandHardwardRecv_ProductCode(&commandHardwardRecv_ProductCode);
 //        
 //        // 上報通知
-////        m_pCommandHardwardEvent->onCommandHardwardNotify(<#CommandHardwardNotifyData *pCommandHardwardNotifyData#>);
+////        m_pCommandHardwardEvent->onCommandHardwardNotify(CommandHardwardNotifyData *pCommandHardwardNotifyData);
 //        
 //        // 輸出 JSON
 //        Json::Value arraryItems;
@@ -205,7 +227,7 @@ void JsonRDTServerCommand::processCommandTarget(Json::Value& inJsonObject, Json:
 //        m_pCommandHardwardEvent->onCommandHardwardRecv_ProductName(&commandHardwardRecv_ProductName);
 //        
 //        // 上報通知
-////        m_pCommandHardwardEvent->onCommandHardwardNotify(<#CommandHardwardNotifyData *pCommandHardwardNotifyData#>);
+////        m_pCommandHardwardEvent->onCommandHardwardNotify(CommandHardwardNotifyData *pCommandHardwardNotifyData);
 //        
 //        // 輸出 JSON
 //        Json::Value arraryItems;
