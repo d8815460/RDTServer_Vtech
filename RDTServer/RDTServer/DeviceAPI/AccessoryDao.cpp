@@ -140,7 +140,7 @@ int AccessoryDao::deleteWithSerialList(vector<int>& accessorySerialList)
         ValueObject obj(DatabaseType_INTEGER, "accessorySerial", accessorySerial);
         objList.push_back(obj);
     }
-    string SQL = Pojo::genInSQL("DELETE FROM Accessory WHERE accessorySerial in (", objList);
+    string SQL = Pojo::genInSQL("DELETE FROM Accessory WHERE accessorySerial", objList);
     
     return databaseManager.exec(SQL.c_str());
 }
@@ -154,18 +154,20 @@ int AccessoryDao::deleteWithAIDList(vector<int>& AIDList)
         shared_ptr<vector<shared_ptr<AccessoryPojo>>>& pAccessoryPojoList = (shared_ptr<vector<shared_ptr<AccessoryPojo>>>&) pPojoList;
         
         if (pAccessoryPojoList->size() > 0) {
+            // 呼叫下一層Delete
             vector<int> accessorySerialList;
             for (shared_ptr<AccessoryPojo> pAccessory : *pAccessoryPojoList) {
                 accessorySerialList.push_back(pAccessory->accessorySerial);
             }
             ElementDao::deleteWithFKAccessorySerialList(accessorySerialList);
             
+            // 這一層的刪除
             vector<ValueObject> objList;
             for (int AID : AIDList) {
                 ValueObject obj(DatabaseType_INTEGER, "AID", AID);
                 objList.push_back(obj);
             }
-            string SQL = Pojo::genInSQL("DELETE FROM Accessory WHERE AID in (", objList);
+            string SQL = Pojo::genInSQL("DELETE FROM Accessory WHERE AID", objList);
             return databaseManager.exec(SQL.c_str());
         }
     }
@@ -188,7 +190,7 @@ shared_ptr<vector<shared_ptr<Pojo>>> AccessoryDao::read(vector<int>& AIDList)
         ValueObject obj(DatabaseType_INTEGER, "AID", AID);
         objList.push_back(obj);
     }
-    string SQL = Pojo::genInSQL("SELECT * FROM Accessory WHERE AID in (", objList);
+    string SQL = Pojo::genInSQL("SELECT * FROM Accessory WHERE AID", objList);
     
     shared_ptr<vector<shared_ptr<Pojo>>> pPojoList = databaseManager.read(SQL.c_str(), AccessoryDao::readCallback);
     return pPojoList;

@@ -49,7 +49,7 @@ shared_ptr<vector<shared_ptr<Pojo>>> ElementDao::read(vector<int>& fkAccessorySe
         ValueObject obj(DatabaseType_INTEGER, "fkAccessorySerial", fkAccessorySerial);
         objList.push_back(obj);
     }
-    string SQL = Pojo::genInSQL("SELECT * FROM Element WHERE fkAccessorySerial in (", objList);
+    string SQL = Pojo::genInSQL("SELECT * FROM Element WHERE fkAccessorySerial", objList);
     
     return databaseManager.read(SQL.c_str(), ElementDao::readCallback);
 }
@@ -117,6 +117,7 @@ int ElementDao::deleteWithFKAccessorySerialList(vector<int>& accessorySerialList
 {
     DatabaseManager& databaseManager = DatabaseManager::getInstance();
     
+    // 呼叫下一層Delete
     vector<int> elementSerialList;
     shared_ptr<vector<shared_ptr<Pojo>>> pPojoList = ElementDao::read(accessorySerialList);
     for (shared_ptr<Pojo> pPojo : *pPojoList) {
@@ -126,12 +127,13 @@ int ElementDao::deleteWithFKAccessorySerialList(vector<int>& accessorySerialList
     }
     ElementNODao::deleteWithFKElementSerialList(elementSerialList);
     
+    // 這一層的刪除
     vector<ValueObject> objList;
     for (int elementSerial : elementSerialList) {
         ValueObject obj(DatabaseType_INTEGER, "elementSerial", elementSerial);
         objList.push_back(obj);
     }
-    string SQL = Pojo::genInSQL("DELETE FROM Element WHERE fkAccessorySerial in (", objList);
+    string SQL = Pojo::genInSQL("DELETE FROM Element WHERE fkAccessorySerial", objList);
     
     return databaseManager.exec(SQL.c_str());
 }

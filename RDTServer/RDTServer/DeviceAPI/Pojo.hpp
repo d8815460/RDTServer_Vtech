@@ -220,6 +220,7 @@ struct Pojo
     static std::string genInSQL(std::string prefixSQL, vector<ValueObject>& objList)
     {
         std::string SQL = prefixSQL;
+        SQL.append(" in (");
         
         for (ValueObject obj : objList) {
             if (obj.type == DatabaseType_INTEGER) {
