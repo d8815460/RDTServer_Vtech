@@ -146,7 +146,7 @@ void JsonRDTServerCommand::processCommandTarget(Json::Value& inJsonObject, Json:
                 // 讀取Accessory
                 shared_ptr<vector<shared_ptr<Pojo>>> pojoList = AccessoryDao::readAll();
                 
-                // 寫入至輸出
+                // 寫入至json輸出
                 Utility::pojoListToJson(inJsonObject, outJsonObject, pojoList);
 //                LOGD("產生json = \n%s", outJsonObject.toStyledString().c_str());
                 
@@ -167,7 +167,7 @@ void JsonRDTServerCommand::processCommandTarget(Json::Value& inJsonObject, Json:
                 // 讀取Accessory
                 shared_ptr<vector<shared_ptr<Pojo>>> pojoList = AccessoryDao::read(AIDList);
                 
-                // 寫入至輸出
+                // 寫入至json輸出
                 Utility::pojoListToJson(inJsonObject, outJsonObject, pojoList);
                 
                 pCommandBase = new CommandHardwardRecv_ReadItems();
@@ -195,7 +195,10 @@ void JsonRDTServerCommand::processCommandTarget(Json::Value& inJsonObject, Json:
                     for (shared_ptr<Pojo> pPojo : *pItems->pojoList) {
                         shared_ptr<AccessoryPojo>& pAccessoryPojo = (shared_ptr<AccessoryPojo>&) pPojo;
                         
+                        // 新增Accessory
                         AccessoryDao::create(*pAccessoryPojo);
+                        
+                        // 寫入至json輸出
                         Utility::pojoToJson(inJsonObject, outJsonObject, pPojo);
                     }
                 }
