@@ -97,11 +97,6 @@ void* JsonRDTClientCommand::threadInput(void *arg)
             // Get All Accessories
 //            {
 //                root["Function"] = "read";
-//                item["List"] = "ListAccessory";
-//                root["If"] = item;
-//            }
-//            {
-//                root["Function"] = "read";
 //                Json::Value array;
 //                array.append(-1);
 //                item["AID"] = array;

@@ -138,25 +138,7 @@ void JsonRDTServerCommand::processCommandTarget(Json::Value& inJsonObject, Json:
     
     // 讀取
     if (function.find("read") != std::string::npos) {
-        if (IfObject.isMember("List")) {
-            std::string value = IfObject["List"].asString();
-            
-            if (value.find("ListAccessory") != std::string::npos) {
-                // 讀取Accessory
-                shared_ptr<vector<shared_ptr<Pojo>>> pojoList = AccessoryDao::readAll();
-                
-                // 寫入至輸出
-                Utility::pojoListToJson(inJsonObject, outJsonObject, pojoList);
-//                LOGD("產生json = \n%s", outJsonObject.toStyledString().c_str());
-                
-                pCommandBase = new CommandHardwardRecv_ReadItems();
-                CommandHardwardRecv_ReadItems* pItems = (CommandHardwardRecv_ReadItems*) pCommandBase;
-                pItems->dataType = DataType_Accessory;
-                pItems->pojoList = pojoList;
-                m_pCommandHardwardEvent->onCommandHardwardRecv_ReadItems(pItems);
-            }
-        }
-        else if (IfObject.isMember("AID")) {
+        if (IfObject.isMember("AID")) {
             Json::Value AIDArray = IfObject["AID"];
             
             // 查詢所有accessories, AID = [-1]
@@ -175,6 +157,7 @@ void JsonRDTServerCommand::processCommandTarget(Json::Value& inJsonObject, Json:
                 m_pCommandHardwardEvent->onCommandHardwardRecv_ReadItems(pItems);
             }
             else {
+                // 指定AID查詢
                 vector<int> AIDList;
                 for (int i=0 ; i<AIDArray.size() ; i++) {
                     int AID = AIDArray[i].asInt();
