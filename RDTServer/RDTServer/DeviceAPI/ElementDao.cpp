@@ -24,7 +24,9 @@ void ElementDao::readCallback(shared_ptr<vector<shared_ptr<Pojo>>> outPtrPojoLis
 //            LOGD("pElementPojo->elementSerial:%d", pElementPojo->elementSerial);
             
             /* 取得 pElementPojoList 裡所有的資料 */
-            pElementPojo->pSubPojoList = ElementNODao::read(pElementPojo->elementSerial);
+            vector<int> elementSerialList;
+            elementSerialList.push_back(pElementPojo->elementSerial);
+            pElementPojo->pSubPojoList = ElementNODao::read(elementSerialList);
         }
         /******************************************* 修改處 *****************************************************/
         if_index_int_va(1, pElementPojo->fkAccessorySerial, data)
@@ -38,14 +40,18 @@ void ElementDao::readCallback(shared_ptr<vector<shared_ptr<Pojo>>> outPtrPojoLis
     outPtrPojoList->push_back(pElementPojo);
 }
 
-shared_ptr<vector<shared_ptr<Pojo>>> ElementDao::read(int fkAccessorySerial)
+shared_ptr<vector<shared_ptr<Pojo>>> ElementDao::read(vector<int>& fkAccessorySerialList)
 {
     DatabaseManager& databaseManager = DatabaseManager::getInstance();
     
-    char buffer[Pojo_Buffer_Size];
-    sprintf(buffer, "SELECT * FROM Element WHERE fkAccessorySerial = %d;", fkAccessorySerial);
+    vector<ValueObject> objList;
+    for (int fkAccessorySerial : fkAccessorySerialList) {
+        ValueObject obj(DatabaseType_INTEGER, "fkAccessorySerial", fkAccessorySerial);
+        objList.push_back(obj);
+    }
+    string SQL = Pojo::genInSQL("SELECT * FROM Element WHERE fkAccessorySerial in (", objList);
     
-    return databaseManager.read(buffer, ElementDao::readCallback);
+    return databaseManager.read(SQL.c_str(), ElementDao::readCallback);
 }
 
 void ElementDao::create(shared_ptr<ElementPojo> pElementPojo)
@@ -107,13 +113,25 @@ int ElementDao::deleteWithSerial(int elementSerial)
     return databaseManager.exec(buffer);
 }
 
-int ElementDao::deleteWithFKAccessorySerial(int fkAccessorySerial)
+int ElementDao::deleteWithFKAccessorySerialList(vector<int>& accessorySerialList)
 {
     DatabaseManager& databaseManager = DatabaseManager::getInstance();
     
-    char buffer[Pojo_Buffer_Size];
-    sprintf(buffer, "DELETE FROM Element WHERE fkAccessorySerial = %d;", fkAccessorySerial);
-    LOGD("buffer:%s", buffer);
+    vector<int> elementSerialList;
+    shared_ptr<vector<shared_ptr<Pojo>>> pPojoList = ElementDao::read(accessorySerialList);
+    for (shared_ptr<Pojo> pPojo : *pPojoList) {
+        shared_ptr<ElementPojo>& pElementPojo = (shared_ptr<ElementPojo>&) pPojo;
+        
+        elementSerialList.push_back(pElementPojo->fkAccessorySerial);
+    }
+    ElementNODao::deleteWithFKElementSerialList(elementSerialList);
     
-    return databaseManager.exec(buffer);
+    vector<ValueObject> objList;
+    for (int elementSerial : elementSerialList) {
+        ValueObject obj(DatabaseType_INTEGER, "elementSerial", elementSerial);
+        objList.push_back(obj);
+    }
+    string SQL = Pojo::genInSQL("DELETE FROM Element WHERE fkAccessorySerial in (", objList);
+    
+    return databaseManager.exec(SQL.c_str());
 }

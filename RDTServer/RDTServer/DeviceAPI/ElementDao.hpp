@@ -73,36 +73,6 @@ struct ElementPojo : public Pojo
 //        LOGD("產生json = \n%s", json.toStyledString().c_str());
     }
     
-//    virtual std::string toJson()
-//    {
-//        std::string json;
-//        
-//        json.append(QUOTES).append("Element").append(QUOTES_COLON).append(QUOTES).append(element).append(QUOTES).append(COMMA).append(NEW_LINE);
-//        
-//        json.append(QUOTES).append("ListElementNO").append(QUOTES_COLON_BRACKETS).append(NEW_LINE);
-//                
-//        for (vector<shared_ptr<Pojo>>::iterator it=pElementNOPojoList->begin() ; it!=pElementNOPojoList->end() ; it++) {
-//            shared_ptr<Pojo> pPojo = *it;
-//            
-//            json.append("{");
-//            json.append(pPojo->toJson());
-//            json.append("}");
-//            
-//            // 不是最後一個
-//            if (it != pElementNOPojoList->end() - 1) {
-//                json.append(COMMA);
-//            }
-//            // 最後一個
-////            else {
-////                // 移除最後一個逗號
-////                json = json.erase(json.size()-1, 1);
-////            }
-//        }
-//        json.append("]");
-//        
-//        return json;
-//    }
-    
     virtual void print()
     {
         LOGD("elementSerial:%d", elementSerial);
@@ -125,9 +95,9 @@ public:
     
     static int deleteAll();
     static int deleteWithSerial(int elementSerial);
-    static int deleteWithFKAccessorySerial(int fkAccessorySerial);
+    static int deleteWithFKAccessorySerialList(vector<int>& accessorySerialList);
     
-    static shared_ptr<vector<shared_ptr<Pojo>>> read(int fkAccessorySerial);
+    static shared_ptr<vector<shared_ptr<Pojo>>> read(vector<int>& accessorySerialList);
     
 private:
     static void readCallback(shared_ptr<vector<shared_ptr<Pojo>>> outPtrPojoList, int row, vector<char*>& colList);

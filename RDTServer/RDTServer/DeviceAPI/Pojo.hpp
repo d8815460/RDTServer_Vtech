@@ -216,6 +216,27 @@ struct Pojo
         LOGD("sql:%s", sql.c_str());
         return sql;
     }
+    
+    static std::string genInSQL(std::string prefixSQL, vector<ValueObject>& objList)
+    {
+        std::string SQL = prefixSQL;
+        
+        for (ValueObject obj : objList) {
+            if (obj.type == DatabaseType_INTEGER) {
+                SQL.append(to_string(obj.nValue)).append(", ");
+            }
+            else {
+                SQL.append("'").append(obj.strValue).append("'").append(", ");
+            }
+        }
+        
+        SQL.erase(SQL.size() - 2);
+//        LOGD("SQL2:%s", SQL.c_str());
+        SQL.append(")");
+        
+        LOGD("SQL: %s", SQL.c_str());
+        return SQL;
+    }
 };
 
 #endif /* Pojo_hpp */

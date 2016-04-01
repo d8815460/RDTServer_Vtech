@@ -34,14 +34,18 @@ void ElementNODao::readCallback(shared_ptr<vector<shared_ptr<Pojo>>> outPtrPojoL
     outPtrPojoList->push_back(pElementNOPojo);
 }
 
-shared_ptr<vector<shared_ptr<Pojo>>> ElementNODao::read(int fkAccessorySerial)
+shared_ptr<vector<shared_ptr<Pojo>>> ElementNODao::read(vector<int>& elementSerialList)
 {
     DatabaseManager& databaseManager = DatabaseManager::getInstance();
     
-    char buffer[Pojo_Buffer_Size];
-    sprintf(buffer, "SELECT * FROM ElementNO WHERE fkElementSerial = %d;", fkAccessorySerial);
+    vector<ValueObject> objList;
+    for (int elementSerial : elementSerialList) {
+        ValueObject obj(DatabaseType_INTEGER, "elementSerial", elementSerial);
+        objList.push_back(obj);
+    }
+    string SQL = Pojo::genInSQL("SELECT * FROM ElementNO WHERE fkElementSerial in (", objList);
     
-    return databaseManager.read(buffer, ElementNODao::readCallback);
+    return databaseManager.read(SQL.c_str(), ElementNODao::readCallback);
 }
 
 void ElementNODao::create(shared_ptr<ElementNOPojo> pElementNOPojo)
@@ -80,13 +84,16 @@ int ElementNODao::deleteWithSerial(int elementNOSerial)
     return databaseManager.exec(buffer);
 }
 
-int ElementNODao::deleteWithFKAccessorySerial(int fkAccessorySerial)
+int ElementNODao::deleteWithFKElementSerialList(vector<int>& elementSerialList)
 {
     DatabaseManager& databaseManager = DatabaseManager::getInstance();
     
-    char buffer[Pojo_Buffer_Size];
-    sprintf(buffer, "DELETE FROM ElementNO WHERE fkAccessorySerial = %d;", fkAccessorySerial);
-    LOGD("buffer:%s", buffer);
+    vector<ValueObject> objList;
+    for (int fkElementSerial : elementSerialList) {
+        ValueObject obj(DatabaseType_INTEGER, "fkElementSerial", fkElementSerial);
+        objList.push_back(obj);
+    }
+    string SQL = Pojo::genInSQL("DELETE FROM ElementNO WHERE fkElementSerial in (", objList);
     
-    return databaseManager.exec(buffer);
+    return databaseManager.exec(SQL.c_str());
 }

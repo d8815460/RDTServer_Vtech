@@ -147,7 +147,7 @@ void VtechIPHubGatewayHardward::onCommandHardwardRecv_CreateItem(CommandHardward
             
             // 建立accessoryPojo
             shared_ptr<AccessoryPojo> pAccessoryPojo(new AccessoryPojo);
-            pAccessoryPojo->AID = 1;
+            pAccessoryPojo->AID = 10;
             pAccessoryPojo->Name = "PIR Sensor";
             pAccessoryPojo->IconType = 1;
             pAccessoryPojo->Connection = 1;

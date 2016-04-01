@@ -136,13 +136,16 @@ void JsonRDTServerCommand::processCommandTarget(Json::Value& inJsonObject, Json:
     
     CommandBase* pCommandBase = NULL;
     
-    // 查詢
+    // 讀取
     if (function.find("read") != std::string::npos) {
         if (IfObject.isMember("List")) {
             std::string value = IfObject["List"].asString();
+            
             if (value.find("ListAccessory") != std::string::npos) {
+                // 讀取Accessory
                 shared_ptr<vector<shared_ptr<Pojo>>> pojoList = AccessoryDao::readAll();
                 
+                // 寫入至輸出
                 Utility::pojoListToJson(inJsonObject, outJsonObject, pojoList);
 //                LOGD("產生json = \n%s", outJsonObject.toStyledString().c_str());
                 
@@ -153,47 +156,88 @@ void JsonRDTServerCommand::processCommandTarget(Json::Value& inJsonObject, Json:
                 m_pCommandHardwardEvent->onCommandHardwardRecv_ReadItems(pItems);
             }
         }
+        else if (IfObject.isMember("AID")) {
+            Json::Value AIDArray = IfObject["AID"];
+            
+            // 查詢所有accessories, AID = [-1]
+            if (AIDArray.size() == 1 && AIDArray[0] == -1) {
+                // 讀取Accessory
+                shared_ptr<vector<shared_ptr<Pojo>>> pojoList = AccessoryDao::readAll();
+                
+                // 寫入至輸出
+                Utility::pojoListToJson(inJsonObject, outJsonObject, pojoList);
+//                LOGD("產生json = \n%s", outJsonObject.toStyledString().c_str());
+                
+                pCommandBase = new CommandHardwardRecv_ReadItems();
+                CommandHardwardRecv_ReadItems* pItems = (CommandHardwardRecv_ReadItems*) pCommandBase;
+                pItems->dataType = DataType_Accessory;
+                pItems->pojoList = pojoList;
+                m_pCommandHardwardEvent->onCommandHardwardRecv_ReadItems(pItems);
+            }
+            else {
+                vector<int> AIDList;
+                for (int i=0 ; i<AIDArray.size() ; i++) {
+                    int AID = AIDArray[i].asInt();
+                    AIDList.push_back(AID);
+                }
+                
+                // 讀取Accessory
+                shared_ptr<vector<shared_ptr<Pojo>>> pojoList = AccessoryDao::read(AIDList);
+                
+                // 寫入至輸出
+                Utility::pojoListToJson(inJsonObject, outJsonObject, pojoList);
+                
+                pCommandBase = new CommandHardwardRecv_ReadItems();
+                CommandHardwardRecv_ReadItems* pItems = (CommandHardwardRecv_ReadItems*) pCommandBase;
+                pItems->dataType = DataType_Accessory;
+                pItems->pojoList = pojoList;
+                m_pCommandHardwardEvent->onCommandHardwardRecv_ReadItems(pItems);
+            }
+        }
     }
+    // 新增或修改
     else if (function.find("write") != std::string::npos) {
         if (IfObject.isMember("AID")) {
             Json::Value AIDArray = IfObject["AID"];
             
-            if (AIDArray.size() == 1) {
-                // 新增 accessory, AID = [-1]
-                if (AIDArray[0] == -1) {
-                    pCommandBase = new CommandHardwardRecv_CreateItems();
-                    CommandHardwardRecv_CreateItems* pItems = (CommandHardwardRecv_CreateItems*) pCommandBase;
-                    pItems->dataType = DataType_Accessory;
-                    m_pCommandHardwardEvent->onCommandHardwardRecv_CreateItem(pItems);
-                    
-                    // 刪除成功
-                    if (pItems->errorCode == 0) {
-                        for (shared_ptr<Pojo> pPojo : *pItems->pojoList) {
-                            shared_ptr<AccessoryPojo>& pAccessoryPojo = (shared_ptr<AccessoryPojo>&) pPojo;
-                            
-                            AccessoryDao::create(*pAccessoryPojo);
-                            Utility::pojoToJson(inJsonObject, outJsonObject, pPojo);
-                        }
+            // 新增accessory, AID = [-1]
+            if (AIDArray.size() == 1 && AIDArray[0] == -1) {
+                pCommandBase = new CommandHardwardRecv_CreateItems();
+                CommandHardwardRecv_CreateItems* pItems = (CommandHardwardRecv_CreateItems*) pCommandBase;
+                pItems->dataType = DataType_Accessory;
+                m_pCommandHardwardEvent->onCommandHardwardRecv_CreateItem(pItems);
+                
+                // 新增成功
+                if (pItems->errorCode == 0) {
+                    for (shared_ptr<Pojo> pPojo : *pItems->pojoList) {
+                        shared_ptr<AccessoryPojo>& pAccessoryPojo = (shared_ptr<AccessoryPojo>&) pPojo;
+                        
+                        AccessoryDao::create(*pAccessoryPojo);
+                        Utility::pojoToJson(inJsonObject, outJsonObject, pPojo);
                     }
                 }
             }
         }
     }
+    // 刪除
     else if (function.find("delete") != std::string::npos) {
         if (IfObject.isMember("AID")) {
             Json::Value AIDArray = IfObject["AID"];
             
+            vector<int> AIDList;
             for (int i=0 ; i<AIDArray.size() ; i++) {
                 int AID = AIDArray[i].asInt();
+                AIDList.push_back(AID);
+                
                 pCommandBase = new CommandHardwardRecv_DeleteItems();
                 CommandHardwardRecv_DeleteItems* pItems = (CommandHardwardRecv_DeleteItems*) pCommandBase;
                 pItems->dataType = DataType_Accessory;
-                pItems->id = AID;
+                pItems->pIDList = &AIDList;
                 m_pCommandHardwardEvent->onCommandHardwardRecv_DeleteItems(pItems);
                 
                 // 刪除成功
                 if (pItems->errorCode == 0) {
-                    AccessoryDao::deleteWithAID(AID);
+                    AccessoryDao::deleteWithAIDList(AIDList);
                 }
             }
         }

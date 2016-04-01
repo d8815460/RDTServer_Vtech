@@ -29,7 +29,7 @@ struct ElementNOPojo : public Pojo
 {
     vector<ValueObject> valueObjectList;
     
-    int elementNOSerial;
+    int         elementNOSerial;
     int         fkElementSerial;
     
     int         ElementNO;
@@ -71,17 +71,7 @@ struct ElementNOPojo : public Pojo
         
         json[to_string(ElementNO)] = Value;
     }
-    
-//    virtual std::string toJson()
-//    {
-//        std::string json;
-//        
-//        json.append(QUOTES).append("ElementNO").append(QUOTES_COLON).append(to_string(elementNO)).append(COMMA).append(NEW_LINE);
-//        json.append(QUOTES).append("value").append(QUOTES_COLON).append(QUOTES).append(value).append(QUOTES).append(NEW_LINE);
-//        
-//        return json;
-//    }
-    
+        
     virtual void print()
     {
         LOGD("elementNOSerial:%d", elementNOSerial);
@@ -99,9 +89,9 @@ public:
     
     static int deleteAll();
     static int deleteWithSerial(int elementNOSerial);
-    static int deleteWithFKAccessorySerial(int fkAccessorySerial);
+    static int deleteWithFKElementSerialList(vector<int>& elementSerialList);
     
-    static shared_ptr<vector<shared_ptr<Pojo>>> read(int fkAccessorySerial);
+    static shared_ptr<vector<shared_ptr<Pojo>>> read(vector<int>& elementSerialList);
     
 private:
     static void readCallback(shared_ptr<vector<shared_ptr<Pojo>>> outPtrPojoList, int row, vector<char*>& colList);

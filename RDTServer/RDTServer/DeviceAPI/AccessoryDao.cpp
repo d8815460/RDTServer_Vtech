@@ -45,7 +45,10 @@ void AccessoryDao::readCallback(shared_ptr<vector<shared_ptr<Pojo>>> outPtrPojoL
 //            LOGD("pAccessoryPojo->accessorySerial:%d", pAccessoryPojo->accessorySerial);
             
             /* 取得 pElementPojoList 裡所有的資料 */
-            pAccessoryPojo->pSubPojoList = ElementDao::read(pAccessoryPojo->accessorySerial);
+            vector<int> accessorySerialList;
+            accessorySerialList.push_back(pAccessoryPojo->accessorySerial);
+            
+            pAccessoryPojo->pSubPojoList = ElementDao::read(accessorySerialList);
 //            for (shared_ptr<Pojo> pPojo : *pAccessoryPojo->pElementPojoList) {
 //                pPojo->print();
 //            }
@@ -128,31 +131,41 @@ int AccessoryDao::deleteAll()
     return databaseManager.exec("DELETE FROM Accessory;");
 }
 
-int AccessoryDao::deleteWithSerial(int accessorySerial)
+int AccessoryDao::deleteWithSerialList(vector<int>& accessorySerialList)
 {
     DatabaseManager& databaseManager = DatabaseManager::getInstance();
     
-    char buffer[Pojo_Buffer_Size];
-    sprintf(buffer, "DELETE FROM Accessory WHERE accessorySerial = %d;", accessorySerial);
+    vector<ValueObject> objList;
+    for (int accessorySerial : accessorySerialList) {
+        ValueObject obj(DatabaseType_INTEGER, "accessorySerial", accessorySerial);
+        objList.push_back(obj);
+    }
+    string SQL = Pojo::genInSQL("DELETE FROM Accessory WHERE accessorySerial in (", objList);
     
-    ElementDao::deleteWithFKAccessorySerial(accessorySerial);
-    
-    return databaseManager.exec(buffer);
+    return databaseManager.exec(SQL.c_str());
 }
 
-int AccessoryDao::deleteWithAID(int AID)
+int AccessoryDao::deleteWithAIDList(vector<int>& AIDList)
 {
     DatabaseManager& databaseManager = DatabaseManager::getInstance();
     
-    shared_ptr<Pojo> pPojo = AccessoryDao::read(AID);
-    if (pPojo != NULL) {
-       shared_ptr<AccessoryPojo>& pAccessoryPojo = (shared_ptr<AccessoryPojo>&) pPojo;
-        ElementDao::deleteWithFKAccessorySerial(pAccessoryPojo->accessorySerial);
+    shared_ptr<vector<shared_ptr<Pojo>>> pPojoList = AccessoryDao::read(AIDList);
+    if (pPojoList != NULL) {
+        shared_ptr<vector<shared_ptr<AccessoryPojo>>>& pAccessoryPojoList = (shared_ptr<vector<shared_ptr<AccessoryPojo>>>&) pPojoList;
         
-        char buffer[Pojo_Buffer_Size];
-        sprintf(buffer, "DELETE FROM Accessory WHERE AID = %d;", AID);
+        vector<int> accessorySerialList;
+        for (shared_ptr<AccessoryPojo> pAccessory : *pAccessoryPojoList) {
+            accessorySerialList.push_back(pAccessory->accessorySerial);
+        }
+        ElementDao::deleteWithFKAccessorySerialList(accessorySerialList);
         
-        return databaseManager.exec(buffer);
+        vector<ValueObject> objList;
+        for (int AID : AIDList) {
+            ValueObject obj(DatabaseType_INTEGER, "AID", AID);
+            objList.push_back(obj);
+        }
+        string SQL = Pojo::genInSQL("DELETE FROM Accessory WHERE AID in (", objList);
+        return databaseManager.exec(SQL.c_str());
     }
     else {
         return 0;
@@ -165,20 +178,17 @@ shared_ptr<vector<shared_ptr<Pojo>>> AccessoryDao::readAll()
     return databaseManager.read("SELECT * FROM Accessory;", AccessoryDao::readCallback);
 }
 
-shared_ptr<Pojo> AccessoryDao::read(int AID)
+shared_ptr<vector<shared_ptr<Pojo>>> AccessoryDao::read(vector<int>& AIDList)
 {
     DatabaseManager& databaseManager = DatabaseManager::getInstance();
     
-    char buffer[Pojo_Buffer_Size];
-    sprintf(buffer, "SELECT * FROM Accessory WHERE AID = %d;", AID);
-    
-    shared_ptr<vector<shared_ptr<Pojo>>> pPojoList = databaseManager.read(buffer, AccessoryDao::readCallback);
-    
-    // 只能有一筆
-    if (pPojoList->size() == 1) {
-        return (*pPojoList)[0];
+    vector<ValueObject> objList;
+    for (int AID : AIDList) {
+        ValueObject obj(DatabaseType_INTEGER, "AID", AID);
+        objList.push_back(obj);
     }
-    else {
-        return NULL;
-    }
+    string SQL = Pojo::genInSQL("SELECT * FROM Accessory WHERE AID in (", objList);
+    
+    shared_ptr<vector<shared_ptr<Pojo>>> pPojoList = databaseManager.read(SQL.c_str(), AccessoryDao::readCallback);
+    return pPojoList;
 }

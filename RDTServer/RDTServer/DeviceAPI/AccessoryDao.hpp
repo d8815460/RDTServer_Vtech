@@ -129,11 +129,11 @@ public:
     static void update(AccessoryPojo& pojo);
     
     static int deleteAll();
-    static int deleteWithSerial(int accessorySerial);
-    static int deleteWithAID(int AID);
+    static int deleteWithSerialList(vector<int>& accessorySerialList);
+    static int deleteWithAIDList(vector<int>& AIDList);
     
     static shared_ptr<vector<shared_ptr<Pojo>>> readAll();
-    static shared_ptr<Pojo> read(int AID);
+    static shared_ptr<vector<shared_ptr<Pojo>>> read(vector<int>& AIDList);
     
 private:
     AccessoryDao() {};

@@ -40,26 +40,33 @@ DatabaseManager::DatabaseManager()
     /******************************************* 修改處 *****************************************************/
     {
         /* 新增一筆資料 */
+        // AID, Name, IconType, Connection, IsGateway;
         AccessoryPojo accessoryPojo(0, "IPHub", 0, 1, false);
-//        AccessoryPojo accessoryPojo;
-//        accessoryPojo.AID = 0;
-//        accessoryPojo.Name = "IPHub";
-//        accessoryPojo.IconType = 0;
-//        accessoryPojo.Connection = 1;
-//        accessoryPojo.IsGateway = false;
         
+        // Element
         shared_ptr<ElementPojo> pElement1(new ElementPojo("switch"));
-//        pElement1->Element = "switch";
         
+        // ElementNO, Value, NtfyEnable
         shared_ptr<ElementNOPojo> pNO1(new ElementNOPojo(0, "轟天", true));
-//        pNO1->ElementNO = 0;
-//        pNO1->Value = "轟天";
-//        pNO1->NtfyEnable = true;
-        
         shared_ptr<ElementNOPojo> pNO2(new ElementNOPojo(1, "大鑫", true));
-//        pNO2->ElementNO = 1;
-//        pNO2->Value = "大鑫";
-//        pNO1->NtfyEnable = true;
+        
+        accessoryPojo.pSubPojoList->push_back(pElement1);
+        pElement1->pSubPojoList->push_back(pNO1);
+        pElement1->pSubPojoList->push_back(pNO2);
+        
+        AccessoryDao::create(accessoryPojo);
+    }
+    {
+        /* 新增一筆資料 */
+        // AID, Name, IconType, Connection, IsGateway;
+        AccessoryPojo accessoryPojo(1, "PC Home", 1, 1, false);
+        
+        // Element
+        shared_ptr<ElementPojo> pElement1(new ElementPojo("switch"));
+        
+        // ElementNO, Value, NtfyEnable
+        shared_ptr<ElementNOPojo> pNO1(new ElementNOPojo(0, "轟天2", true));
+        shared_ptr<ElementNOPojo> pNO2(new ElementNOPojo(1, "大鑫2", true));
         
         accessoryPojo.pSubPojoList->push_back(pElement1);
         pElement1->pSubPojoList->push_back(pNO1);

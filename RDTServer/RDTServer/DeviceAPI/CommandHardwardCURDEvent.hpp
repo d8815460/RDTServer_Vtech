@@ -28,7 +28,7 @@ struct CommandHardwardRecv_CreateItems : CommandBase
 
 struct CommandHardwardRecv_DeleteItems : CommandBase
 {
-    int id;
+    vector<int>* pIDList;
 };
 
 struct CommandHardwardRecv_ReadItems : CommandBase

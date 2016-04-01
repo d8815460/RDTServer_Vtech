@@ -100,15 +100,29 @@ void* JsonRDTClientCommand::threadInput(void *arg)
 //                item["List"] = "ListAccessory";
 //                root["If"] = item;
 //            }
+//            {
+//                root["Function"] = "read";
+//                Json::Value array;
+//                array.append(-1);
+//                item["AID"] = array;
+//                root["If"] = item;
+//            }
+//            {
+//                root["Function"] = "read";
+//                Json::Value array;
+//                array.append(0);
+//                item["AID"] = array;
+//                root["If"] = item;
+//            }
             
             // Add Accessories
-            {
+//            {
 //                root["Function"] = "write";
 //                Json::Value array;
 //                array.append(-1);
 //                item["AID"] = array;
 //                root["If"] = item;
-            }
+//            }
             
             // Delete Accessory
             {
