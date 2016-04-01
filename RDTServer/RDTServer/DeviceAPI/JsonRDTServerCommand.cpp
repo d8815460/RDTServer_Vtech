@@ -237,7 +237,7 @@ void JsonRDTServerCommand::processCommandTarget(Json::Value& inJsonObject, Json:
                 
                 // 刪除成功
                 if (pItems->errorCode == 0) {
-                    AccessoryDao::deleteWithAIDList(AIDList);
+                    pCommandBase->errorCode = AccessoryDao::deleteWithAIDList(AIDList);
                 }
             }
         }

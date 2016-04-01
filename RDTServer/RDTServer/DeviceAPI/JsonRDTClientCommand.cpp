@@ -126,12 +126,21 @@ void* JsonRDTClientCommand::threadInput(void *arg)
             
             // Delete Accessory
             {
+                // 刪除存在的Accessory
                 root["Function"] = "delete";
                 Json::Value array;
                 array.append(0);
                 item["AID"] = array;
                 root["If"] = item;
             }
+//            {
+//                // 刪除不存在的Accessory
+//                root["Function"] = "delete";
+//                Json::Value array;
+//                array.append(5);
+//                item["AID"] = array;
+//                root["If"] = item;
+//            }
             
             std::string json = root.toStyledString();
             LOGD("json傳送資料\n:%s", json.c_str());

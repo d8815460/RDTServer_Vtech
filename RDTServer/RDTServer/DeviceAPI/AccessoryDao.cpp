@@ -153,23 +153,24 @@ int AccessoryDao::deleteWithAIDList(vector<int>& AIDList)
     if (pPojoList != NULL) {
         shared_ptr<vector<shared_ptr<AccessoryPojo>>>& pAccessoryPojoList = (shared_ptr<vector<shared_ptr<AccessoryPojo>>>&) pPojoList;
         
-        vector<int> accessorySerialList;
-        for (shared_ptr<AccessoryPojo> pAccessory : *pAccessoryPojoList) {
-            accessorySerialList.push_back(pAccessory->accessorySerial);
+        if (pAccessoryPojoList->size() > 0) {
+            vector<int> accessorySerialList;
+            for (shared_ptr<AccessoryPojo> pAccessory : *pAccessoryPojoList) {
+                accessorySerialList.push_back(pAccessory->accessorySerial);
+            }
+            ElementDao::deleteWithFKAccessorySerialList(accessorySerialList);
+            
+            vector<ValueObject> objList;
+            for (int AID : AIDList) {
+                ValueObject obj(DatabaseType_INTEGER, "AID", AID);
+                objList.push_back(obj);
+            }
+            string SQL = Pojo::genInSQL("DELETE FROM Accessory WHERE AID in (", objList);
+            return databaseManager.exec(SQL.c_str());
         }
-        ElementDao::deleteWithFKAccessorySerialList(accessorySerialList);
-        
-        vector<ValueObject> objList;
-        for (int AID : AIDList) {
-            ValueObject obj(DatabaseType_INTEGER, "AID", AID);
-            objList.push_back(obj);
-        }
-        string SQL = Pojo::genInSQL("DELETE FROM Accessory WHERE AID in (", objList);
-        return databaseManager.exec(SQL.c_str());
     }
-    else {
-        return 0;
-    }
+    
+    return DatabaseException_ErrorCode_Error_Deleting_Database;
 }
 
 shared_ptr<vector<shared_ptr<Pojo>>> AccessoryDao::readAll()
