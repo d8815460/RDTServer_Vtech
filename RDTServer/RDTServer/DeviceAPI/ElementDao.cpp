@@ -59,7 +59,7 @@ void ElementDao::create(shared_ptr<ElementPojo> pElementPojo)
     DatabaseManager& databaseManager = DatabaseManager::getInstance();
     
     pElementPojo->genValueObject();
-    std::string sql = pElementPojo->createSQL("INSERT INTO Element (elementSerial, ", pElementPojo->valueObjectList);
+    std::string sql = Pojo::createSQL("INSERT INTO Element (elementSerial,", pElementPojo->valueObjectList);
     databaseManager.exec(sql.c_str());
     
     int rowid = (int) sqlite3_last_insert_rowid(databaseManager.getSqliteDatabase());
@@ -82,7 +82,7 @@ void ElementDao::update(shared_ptr<ElementPojo> pElementPojo)
     DatabaseManager& databaseManager = DatabaseManager::getInstance();
     
     pElementPojo->genValueObject();
-    std::string sql = pElementPojo->updateSQL("UPDATE Element SET ", pElementPojo->valueObjectList);
+    std::string sql = Pojo::updateSQL("UPDATE Element SET", pElementPojo->valueObjectList);
     databaseManager.exec(sql.c_str());
     
     for (shared_ptr<Pojo> pPojo : *pElementPojo->pSubPojoList) {

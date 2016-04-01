@@ -53,7 +53,7 @@ void ElementNODao::create(shared_ptr<ElementNOPojo> pElementNOPojo)
     DatabaseManager& databaseManager = DatabaseManager::getInstance();
     
     pElementNOPojo->genValueObject();
-    std::string sql = pElementNOPojo->createSQL("INSERT INTO ElementNO (elementNOSerial, ", pElementNOPojo->valueObjectList);
+    std::string sql = Pojo::createSQL("INSERT INTO ElementNO (elementNOSerial,", pElementNOPojo->valueObjectList);
     databaseManager.exec(sql.c_str());
 }
 
@@ -62,7 +62,7 @@ void ElementNODao::update(shared_ptr<ElementNOPojo> pElementNOPojo)
     DatabaseManager& databaseManager = DatabaseManager::getInstance();
     
     pElementNOPojo->genValueObject();
-    std::string sql = pElementNOPojo->updateSQL("UPDATE ElementNO SET ", pElementNOPojo->valueObjectList);
+    std::string sql = Pojo::updateSQL("UPDATE ElementNO SET", pElementNOPojo->valueObjectList);
     databaseManager.exec(sql.c_str());
 }
 

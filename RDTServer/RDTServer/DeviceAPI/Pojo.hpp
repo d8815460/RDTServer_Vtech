@@ -151,9 +151,10 @@ struct Pojo
     
     virtual void print() = 0;
     
-    std::string createSQL(std::string prefixSQL, vector<ValueObject>& objList)
+    static std::string createSQL(std::string prefixSQL, vector<ValueObject>& objList)
     {
         std::string sql = prefixSQL;
+        sql.append(" ");
         std::string sql1 = "";
         std::string sql2 = "";
         
@@ -184,9 +185,10 @@ struct Pojo
         return sql;
     }
     
-    std::string updateSQL(std::string prefixSQL, vector<ValueObject>& objList)
+    static std::string updateSQL(std::string prefixSQL, vector<ValueObject>& objList)
     {
         std::string sql = prefixSQL;
+        sql.append(" ");
         std::string sql1 = "";
         std::string sql2 = "";
         

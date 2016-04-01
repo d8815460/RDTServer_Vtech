@@ -88,7 +88,7 @@ void AccessoryDao::create(AccessoryPojo& accessoryPojo)
     LOGD("ID:%lld\n", sqlite3_last_insert_rowid(databaseManager.getSqliteDatabase()));
     
     accessoryPojo.genValueObject();
-    std::string sql = accessoryPojo.createSQL("INSERT INTO Accessory (accessorySerial, ", accessoryPojo.valueObjectList);
+    std::string sql = Pojo::createSQL("INSERT INTO Accessory (accessorySerial,", accessoryPojo.valueObjectList);
     databaseManager.exec(sql.c_str());
     
     int rowid = (int) sqlite3_last_insert_rowid(databaseManager.getSqliteDatabase());
@@ -111,7 +111,7 @@ void AccessoryDao::update(AccessoryPojo& accessoryPojo)
     DatabaseManager& databaseManager = DatabaseManager::getInstance();
     
     accessoryPojo.genValueObject();
-    std::string sql = accessoryPojo.updateSQL("UPDATE Accessory SET ", accessoryPojo.valueObjectList);
+    std::string sql = Pojo::updateSQL("UPDATE Accessory SET", accessoryPojo.valueObjectList);
     databaseManager.exec(sql.c_str());
     
     if (accessoryPojo.pSubPojoList != NULL) {
