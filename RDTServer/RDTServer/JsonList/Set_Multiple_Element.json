@@ -1,0 +1,12 @@
+{
+	"Serno": 87654321,
+	"Function": "write",
+	"If": {
+	    "AID": [4,5],
+	    "Element":["Switch"],
+	    "ElementNO":[1]
+	},
+	"Then": {
+	    "Value":"true"
+	}
+}

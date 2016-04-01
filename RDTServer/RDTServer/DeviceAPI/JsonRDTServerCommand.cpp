@@ -386,13 +386,14 @@ void JsonRDTServerCommand::recvData(int channelID, BYTE* buffer, int totalLength
     Utility::printData(__PRETTY_FUNCTION__, __LINE__, (BYTE*)json, totalLength - span - 2);
     
     LOGD("JSON接收長度:%d", totalLength - span - 2);
-    LOGD("JSON接收資料:%s", json);
+//    LOGD("JSON接收資料:\n%s", json);
     
     Json::Reader reader;
     Json::Value inJsonObject;
     Json::Value outJsonObject;
     if (reader.parse(json, inJsonObject))
     {
+        LOGD("inJsonObject:\n%s", inJsonObject.toStyledString().c_str());
         processCommandTarget(inJsonObject, outJsonObject);
         
         // Common

@@ -59,105 +59,32 @@ void* JsonRDTClientCommand::threadInput(void *arg)
             set<int>::iterator it = pJsonRDTClientCommand->m_nChannelIDList.end();
             it--;
             
-            Json::Value root;
-            Json::Value item;
-            
             unsigned int serno = 87654321;
-            root["Serno"] = serno;
+            string filename = "JsonList/";
             
-//            root["operation"] = "read";
-//            root["target"] = "/accessory/0/product_code/";
+//            filename.append("Get_All_Accessories.json");
+//            filename.append("Add_Accessories.json");
+            filename.append("Delete_Accessories.json");
+//            filename.append("Set_Multiple_Element.json");
             
-//            root["operation"] = "read";
-//            root["target"] = "/accessory/0/product_name/";
-            
-            // 新增accessory
-//            root["operation"] = "create";
-//            root["target"] = "/accessory/";
-            
-            // 刪除accessory
-//            root["operation"] = "delete";
-//            root["target"] = "/accessory/1/";
-            
-            // 更新accessory
-//            root["operation"] = "update";
-//            root["target"] = "/accessory/1/function_code/switch/value/1";
-            
-//            root["target"] = "[/accessory/1/function_code/switch/value/1, /accessory/2/function_code/switch/value/1]";
-//            root["target"] = "function_code/switch/value/1";
-//            root["target"] = "/accessory/1/";
-            
-//            root["target"] = "UPDATE FunctionCode SET value = 1 where accessory_id = 1";
-            
-//            root["target"] = "[/accessory/1/function_code/switch/1, /accessory/2/function_code/switch/1]";
-//            root["target"] = "AID:1/FNC:switch:1";
-//            root["target"] = "AID:1&FNC:switch:1;AID:2&FNC:switch:1";
-            
-            // version 2.1
-            // Get All Accessories
-//            {
-//                root["Function"] = "read";
-//                Json::Value array;
-//                array.append(-1);
-//                item["AID"] = array;
-//                root["If"] = item;
-//            }
-//            {
-//                root["Function"] = "read";
-//                Json::Value array;
-//                array.append(0);
-//                item["AID"] = array;
-//                root["If"] = item;
-//            }
-            
-            // Add Accessories
-//            {
-//                root["Function"] = "write";
-//                Json::Value array;
-//                array.append(-1);
-//                item["AID"] = array;
-//                root["If"] = item;
-//            }
-            
-            // Delete Accessory
-            {
-                // 刪除存在的Accessory
-                root["Function"] = "delete";
-                Json::Value array;
-                array.append(0);
-                item["AID"] = array;
-                root["If"] = item;
+            char jsonString[MAX_BUFFER_SIZE];
+            fstream fp;
+            fp.open(filename, ios::in); // 開啟檔案
+            if(!fp){ // 如果開啟檔案失敗，fp為0；成功，fp為非0
+                LOGE("Fail to open file");
+                return NULL;
             }
-//            {
-//                // 刪除不存在的Accessory
-//                root["Function"] = "delete";
-//                Json::Value array;
-//                array.append(5);
-//                item["AID"] = array;
-//                root["If"] = item;
-//            }
-            
-            std::string json = root.toStyledString();
-            LOGD("json傳送資料\n:%s", json.c_str());
-            
-//            const char* filename = "GetAllAccessories.json";
-//            char jsonString[MAX_BUFFER_SIZE];
-//            fstream fp;
-//            fp.open(filename, ios::in); // 開啟檔案
-//            if(!fp){ // 如果開啟檔案失敗，fp為0；成功，fp為非0
-//                LOGD("Fail to open file");
-//            }
-//            fp.read(jsonString, MAX_BUFFER_SIZE);
-//            fp.close(); // 關閉檔案
-//            LOGD("jsonString:%s", jsonString);
+            fp.read(jsonString, MAX_BUFFER_SIZE);
+            fp.close(); // 關閉檔案
+            LOGD("jsonString:%s", jsonString);
             
             JsonRDTClientCommand_ParseSendData parseSendData;
             parseSendData.channelID = *it;
             parseSendData.serno = serno;
             parseSendData.totalCount = 1;
             parseSendData.count = 1;
-            parseSendData.pData = (BYTE*) json.c_str();
-            parseSendData.dataLength = (int) json.length();
+            parseSendData.pData = (BYTE*) jsonString;
+            parseSendData.dataLength = (int) strlen(jsonString);
             pJsonRDTClientCommand->parseSendData(&parseSendData);
             
             /********** 上報 **********/

@@ -22,6 +22,7 @@
 		A27836451C3B8A9700283F81 /* MQTTUnsubscribeClient.c in Sources */ = {isa = PBXBuildFile; fileRef = A278363A1C3B8A9700283F81 /* MQTTUnsubscribeClient.c */; };
 		A27836461C3B8A9700283F81 /* MQTTUnsubscribeServer.c in Sources */ = {isa = PBXBuildFile; fileRef = A278363B1C3B8A9700283F81 /* MQTTUnsubscribeServer.c */; };
 		A27836491C3B8AC900283F81 /* linux.h in Sources */ = {isa = PBXBuildFile; fileRef = A27836481C3B8AC900283F81 /* linux.h */; };
+		A2AC73211CAE4BF300338BA1 /* JsonList in CopyFiles */ = {isa = PBXBuildFile; fileRef = A2AC73201CAE4BF300338BA1 /* JsonList */; };
 		A2BED3141C71769300AF9D4E /* Body.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A2BED2EC1C71769300AF9D4E /* Body.cpp */; };
 		A2BED3151C71769300AF9D4E /* JsonRDTClientDevice.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A2BED2EE1C71769300AF9D4E /* JsonRDTClientDevice.cpp */; };
 		A2BED3161C71769300AF9D4E /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A2BED2F01C71769300AF9D4E /* main.cpp */; };
@@ -62,9 +63,10 @@
 		A2BF71781AC95A4600379199 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 12;
-			dstPath = usr/share/man/man1;
+			dstPath = "";
 			dstSubfolderSpec = 16;
 			files = (
+				A2AC73211CAE4BF300338BA1 /* JsonList in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -117,6 +119,8 @@
 		A278363C1C3B8A9700283F81 /* StackTrace.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StackTrace.h; path = RDTServer/3th_party/Paho_MQTT/MQTTPacket/src/StackTrace.h; sourceTree = "<group>"; };
 		A27836481C3B8AC900283F81 /* linux.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = linux.h; path = RDTServer/3th_party/Paho_MQTT/MQTTClient/linux/linux.h; sourceTree = "<group>"; };
 		A2913CF91C6348ED00AF81AF /* CMakeLists.txt */ = {isa = PBXFileReference; lastKnownFileType = text; name = CMakeLists.txt; path = DeviceAPI/CMakeLists.txt; sourceTree = "<group>"; };
+		A2AC731F1CAE4BC600338BA1 /* JsonList */ = {isa = PBXFileReference; lastKnownFileType = folder; path = JsonList; sourceTree = "<group>"; };
+		A2AC73201CAE4BF300338BA1 /* JsonList */ = {isa = PBXFileReference; lastKnownFileType = folder; name = JsonList; path = RDTServer/JsonList; sourceTree = "<group>"; };
 		A2BED2EC1C71769300AF9D4E /* Body.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Body.cpp; path = Targate/TUTKDevice/Body.cpp; sourceTree = "<group>"; };
 		A2BED2ED1C71769300AF9D4E /* Body.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = Body.hpp; path = Targate/TUTKDevice/Body.hpp; sourceTree = "<group>"; };
 		A2BED2EE1C71769300AF9D4E /* JsonRDTClientDevice.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = JsonRDTClientDevice.cpp; path = Targate/TUTKDevice/JsonRDTClientDevice.cpp; sourceTree = "<group>"; };
@@ -182,6 +186,7 @@
 		A20067EE1C61FADF00FEEA08 /* Other */ = {
 			isa = PBXGroup;
 			children = (
+				A2AC731F1CAE4BC600338BA1 /* JsonList */,
 				A2913CF71C6335C900AF81AF /* TUTKDevice */,
 				A2913CF81C6335CF00AF81AF /* DeviceAPI */,
 				A20067EF1C61FAF900FEEA08 /* runClient.sh */,
@@ -374,6 +379,7 @@
 		A2BF71711AC95A4600379199 = {
 			isa = PBXGroup;
 			children = (
+				A2AC73201CAE4BF300338BA1 /* JsonList */,
 				A2BED3891C71AFF100AF9D4E /* DeviceAPI.xcodeproj */,
 				A2BF717C1AC95A4600379199 /* TUTKDevice */,
 				A20067EE1C61FADF00FEEA08 /* Other */,
