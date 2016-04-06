@@ -129,10 +129,10 @@ void JsonRDTServerCommand::processCommandTarget(Json::Value& inJsonObject, Json:
     LOGD("Function:%s", function.c_str());
     
     // 找出key
-    //        Json::Value::Members members = IfKey.getMemberNames();
-    //        for (int j=0 ; j<members.size() ; j++) {
-    //            LOGD("key:%s", members[j].c_str());
-    //        }
+//    Json::Value::Members members = IfKey.getMemberNames();
+//    for (int j=0 ; j<members.size() ; j++) {
+//        LOGD("key:%s", members[j].c_str());
+//    }
     
     CommandBase* pCommandBase = NULL;
     
@@ -231,7 +231,11 @@ void JsonRDTServerCommand::processCommandTarget(Json::Value& inJsonObject, Json:
     
     // Common
     outJsonObject["SenderInfo"] = inJsonObject;
-    outJsonObject["ErrorCode"] = pCommandBase->errorCode;
+    
+    // 當DeviceAPI發生錯誤ErrorCode != 0, 就不去抓取硬體的ErrorCode，所以DeviceAPI發生錯誤就已DeviceAPI ErrorCode為主, DeivceAPI沒錯就抓看看硬體的ErrorCode
+    if (outJsonObject["ErrorCode"] == 0) {
+        outJsonObject["ErrorCode"] = pCommandBase->errorCode;
+    }
     
     delete pCommandBase;
     

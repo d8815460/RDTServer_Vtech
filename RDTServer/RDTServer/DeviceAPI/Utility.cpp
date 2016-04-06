@@ -12,6 +12,7 @@
 #include "RDTAPIs.h"
 #include "Common.hpp"
 #include "config.h"
+#include "RDTProtocolException.hpp"
 
 // curl
 #include <cstdlib>
@@ -92,16 +93,10 @@ void Utility::showException(Exception& e)
 
 void Utility::pojoToJson(Json::Value& inJsonObject, Json::Value& outJsonObject, shared_ptr<Pojo>& pPojo)
 {
-    Json::Value listAccessory;
-        
-    Json::Value object;
-    pPojo->toJson(object);
-//        LOGD("產生json = \n%s", accessoryJson.toStyledString().c_str());
+    shared_ptr<vector<shared_ptr<Pojo>>> pojoList(new vector<shared_ptr<Pojo>>);
+    pojoList->push_back(pPojo);
     
-    listAccessory["ListAccessory"] = object;
-    outJsonObject["Response"] = listAccessory;
-    
-    //    LOGD("產生json = \n%s", root.toStyledString().c_str());
+    pojoListToJson(inJsonObject, outJsonObject, pojoList);
 }
 
 void Utility::pojoListToJson(Json::Value& inJsonObject, Json::Value& outJsonObject, shared_ptr<vector<shared_ptr<Pojo>>>& pojoList)
@@ -109,9 +104,15 @@ void Utility::pojoListToJson(Json::Value& inJsonObject, Json::Value& outJsonObje
     Json::Value listAccessory;
     
     Json::Value subObject;
-    for (shared_ptr<Pojo> pPojo : *pojoList) {
-        pPojo->toJson(subObject);
-        //        LOGD("產生json = \n%s", accessoryJson.toStyledString().c_str());
+    
+    if (pojoList->size() > 0) {
+        for (shared_ptr<Pojo> pPojo : *pojoList) {
+            pPojo->toJson(subObject);
+    //        LOGD("產生json = \n%s", accessoryJson.toStyledString().c_str());
+        }
+    }
+    else {
+        outJsonObject["ErrorCode"] = RDTProtocolException_Data_Access_Error;
     }
     
     listAccessory["ListAccessory"] = subObject;

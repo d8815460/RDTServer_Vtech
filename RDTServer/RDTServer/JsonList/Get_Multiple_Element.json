@@ -1,0 +1,9 @@
+{
+    "Serno":87654321,
+    "Function":"read",
+    "If":{
+        "AID":[0,1],
+        "Element":["switch"],
+        "ElementNO":[0,1]
+    }
+}

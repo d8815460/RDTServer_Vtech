@@ -2,7 +2,7 @@
 	"Serno": 87654321,
 	"Function": "write",
 	"If": {
-	    "AID": [4,5],
+	    "AID": [0,1],
 	    "Element":["Switch"],
 	    "ElementNO":[1]
 	},
