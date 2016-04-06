@@ -9,6 +9,7 @@
 #include "AccessoryDao.hpp"
 #include <string>
 #include "ElementDao.hpp"
+#include "ElementNODao.hpp"
 
 //void loopVA_Args(Json::Value& json, int count, const char* value, ...)
 //{
@@ -194,5 +195,50 @@ shared_ptr<vector<shared_ptr<Pojo>>> AccessoryDao::read(vector<int>& AIDList)
     string SQL = Pojo::genInSQL("SELECT * FROM Accessory WHERE AID", objList);
     
     shared_ptr<vector<shared_ptr<Pojo>>> pPojoList = databaseManager.read(SQL.c_str(), true, AccessoryDao::readCallback);
+    return pPojoList;
+}
+
+shared_ptr<vector<shared_ptr<Pojo>>> AccessoryDao::readNestWithSQL(string& whereSQL)
+{
+    string selectSQL = "SELECT DISTINCT ";
+    string fromSQL = ".* FROM Accessory INNER JOIN Element INNER JOIN ElementNO ON ";
+    
+    string SQL = selectSQL;
+    SQL.append("Accessory");
+    SQL.append(fromSQL);
+    SQL.append(whereSQL);
+    LOGD("SQL:\n%s", SQL.c_str());
+    shared_ptr<vector<shared_ptr<Pojo>>> pojoList = AccessoryDao::readWithSQL(SQL);
+    
+//    for (shared_ptr<Pojo> pPojo : *pojoList) {
+//        shared_ptr<AccessoryPojo>& pAccessoryPojo = (shared_ptr<AccessoryPojo>&) pPojo;
+//        
+//        string SQL = selectSQL;
+//        SQL.append("Element");
+//        SQL.append(fromSQL);
+//        SQL.append(whereSQL);
+//        LOGD("SQL:\n%s", SQL.c_str());
+//        pAccessoryPojo->pSubPojoList = ElementDao::readWithSQL(SQL);
+//        
+//        for (shared_ptr<Pojo> pPojo : *pAccessoryPojo->pSubPojoList) {
+//            shared_ptr<ElementPojo>& pElementPojo = (shared_ptr<ElementPojo>&) pPojo;
+//            
+//            string SQL = selectSQL;
+//            SQL.append("ElementNO");
+//            SQL.append(fromSQL);
+//            SQL.append(whereSQL);
+//            LOGD("SQL:\n%s", SQL.c_str());
+//            pElementPojo->pSubPojoList = ElementNODao::readWithSQL(SQL);
+//        }
+//    }
+    
+    return pojoList;
+}
+
+shared_ptr<vector<shared_ptr<Pojo>>> AccessoryDao::readWithSQL(string& SQL)
+{
+    DatabaseManager& databaseManager = DatabaseManager::getInstance();
+    
+    shared_ptr<vector<shared_ptr<Pojo>>> pPojoList = databaseManager.read(SQL.c_str(), false, AccessoryDao::readCallback);
     return pPojoList;
 }

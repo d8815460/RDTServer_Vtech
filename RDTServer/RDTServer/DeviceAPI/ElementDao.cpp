@@ -56,6 +56,14 @@ shared_ptr<vector<shared_ptr<Pojo>>> ElementDao::read(vector<int>& fkAccessorySe
     return databaseManager.read(SQL.c_str(), true, ElementDao::readCallback);
 }
 
+shared_ptr<vector<shared_ptr<Pojo>>> ElementDao::readWithSQL(string& SQL)
+{
+    DatabaseManager& databaseManager = DatabaseManager::getInstance();
+        
+    shared_ptr<vector<shared_ptr<Pojo>>> pPojoList = databaseManager.read(SQL.c_str(), false, ElementDao::readCallback);
+    return pPojoList;
+}
+
 void ElementDao::create(shared_ptr<ElementPojo> pElementPojo)
 {
     DatabaseManager& databaseManager = DatabaseManager::getInstance();

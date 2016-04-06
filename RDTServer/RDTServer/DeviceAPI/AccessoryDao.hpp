@@ -134,9 +134,11 @@ public:
     
     static shared_ptr<vector<shared_ptr<Pojo>>> readAll();
     static shared_ptr<vector<shared_ptr<Pojo>>> read(vector<int>& AIDList);
+    static shared_ptr<vector<shared_ptr<Pojo>>> readNestWithSQL(string& whereSQL);
+    
+    static shared_ptr<vector<shared_ptr<Pojo>>> readWithSQL(string& SQL);
     
 private:
-    AccessoryDao() {};
     static void readCallback(shared_ptr<vector<shared_ptr<Pojo>>> outPtrPojoList, int row, vector<char*>& colList, bool isNest);
 };
 

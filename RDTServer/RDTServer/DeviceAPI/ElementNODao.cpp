@@ -48,6 +48,14 @@ shared_ptr<vector<shared_ptr<Pojo>>> ElementNODao::read(vector<int>& elementSeri
     return databaseManager.read(SQL.c_str(), true, ElementNODao::readCallback);
 }
 
+shared_ptr<vector<shared_ptr<Pojo>>> ElementNODao::readWithSQL(string& SQL)
+{
+    DatabaseManager& databaseManager = DatabaseManager::getInstance();
+    
+    shared_ptr<vector<shared_ptr<Pojo>>> pPojoList = databaseManager.read(SQL.c_str(), false, ElementNODao::readCallback);
+    return pPojoList;
+}
+
 void ElementNODao::create(shared_ptr<ElementNOPojo> pElementNOPojo)
 {
     DatabaseManager& databaseManager = DatabaseManager::getInstance();

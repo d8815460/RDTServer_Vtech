@@ -98,6 +98,7 @@ public:
     static int deleteWithFKAccessorySerialList(vector<int>& accessorySerialList);
     
     static shared_ptr<vector<shared_ptr<Pojo>>> read(vector<int>& accessorySerialList);
+    static shared_ptr<vector<shared_ptr<Pojo>>> readWithSQL(string& SQL);
     
 private:
     static void readCallback(shared_ptr<vector<shared_ptr<Pojo>>> outPtrPojoList, int row, vector<char*>& colList, bool isNest);
