@@ -203,36 +203,54 @@ shared_ptr<vector<shared_ptr<Pojo>>> AccessoryDao::readNestWithSQL(string& where
     string selectSQL = "SELECT DISTINCT ";
     string fromSQL = ".* FROM Accessory INNER JOIN Element INNER JOIN ElementNO ON ";
     
-    string SQL = selectSQL;
-    SQL.append("Accessory");
-    SQL.append(fromSQL);
-    SQL.append(whereSQL);
-    LOGD("SQL:\n%s", SQL.c_str());
-    shared_ptr<vector<shared_ptr<Pojo>>> pojoList = AccessoryDao::readWithSQL(SQL);
+    string accessorySQL = selectSQL;
+    accessorySQL.append("Accessory");
+    accessorySQL.append(fromSQL);
+    accessorySQL.append(whereSQL);
+    LOGD("accessorySQL:\n%s", accessorySQL.c_str());
+    shared_ptr<vector<shared_ptr<Pojo>>> accessoryPojoList = AccessoryDao::readWithSQL(accessorySQL);
     
-//    for (shared_ptr<Pojo> pPojo : *pojoList) {
-//        shared_ptr<AccessoryPojo>& pAccessoryPojo = (shared_ptr<AccessoryPojo>&) pPojo;
-//        
-//        string SQL = selectSQL;
-//        SQL.append("Element");
-//        SQL.append(fromSQL);
-//        SQL.append(whereSQL);
-//        LOGD("SQL:\n%s", SQL.c_str());
-//        pAccessoryPojo->pSubPojoList = ElementDao::readWithSQL(SQL);
-//        
-//        for (shared_ptr<Pojo> pPojo : *pAccessoryPojo->pSubPojoList) {
-//            shared_ptr<ElementPojo>& pElementPojo = (shared_ptr<ElementPojo>&) pPojo;
-//            
-//            string SQL = selectSQL;
-//            SQL.append("ElementNO");
-//            SQL.append(fromSQL);
-//            SQL.append(whereSQL);
-//            LOGD("SQL:\n%s", SQL.c_str());
-//            pElementPojo->pSubPojoList = ElementNODao::readWithSQL(SQL);
-//        }
-//    }
+    string elementSQL = selectSQL;
+    elementSQL.append("Element");
+    elementSQL.append(fromSQL);
+    elementSQL.append(whereSQL);
+    LOGD("SQL:\n%s", elementSQL.c_str());
+    shared_ptr<vector<shared_ptr<Pojo>>> elementPojoList = ElementDao::readWithSQL(elementSQL);
     
-    return pojoList;
+    string elementNOSQL = selectSQL;
+    elementNOSQL.append("ElementNO");
+    elementNOSQL.append(fromSQL);
+    elementNOSQL.append(whereSQL);
+    LOGD("elementNOSQL:\n%s", elementNOSQL.c_str());
+    shared_ptr<vector<shared_ptr<Pojo>>> elementNOPojoList = ElementNODao::readWithSQL(elementNOSQL);
+    
+    for (shared_ptr<Pojo> pPojo : *accessoryPojoList) {
+        shared_ptr<AccessoryPojo>& pAccessoryPojo = (shared_ptr<AccessoryPojo>&) pPojo;
+        
+        for (shared_ptr<Pojo> pPojo : *elementPojoList) {
+            shared_ptr<ElementPojo>& pElementPojo = (shared_ptr<ElementPojo>&) pPojo;
+            
+            if (pAccessoryPojo->accessorySerial == pElementPojo->fkAccessorySerial) {
+                pAccessoryPojo->pSubPojoList->push_back(pElementPojo);
+                break;
+            }
+        }
+    }
+    
+    for (shared_ptr<Pojo> pPojo : *elementPojoList) {
+        shared_ptr<ElementPojo>& pElementPojo = (shared_ptr<ElementPojo>&) pPojo;
+        
+        for (shared_ptr<Pojo> pPojo : *elementNOPojoList) {
+            shared_ptr<ElementNOPojo>& pElementNOPojo = (shared_ptr<ElementNOPojo>&) pPojo;
+            
+            if (pElementPojo->elementSerial == pElementNOPojo->fkElementSerial) {
+                pElementPojo->pSubPojoList->push_back(pElementNOPojo);
+                break;
+            }
+        }
+    }
+    
+    return accessoryPojoList;
 }
 
 shared_ptr<vector<shared_ptr<Pojo>>> AccessoryDao::readWithSQL(string& SQL)
