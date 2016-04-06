@@ -30,7 +30,7 @@
 //    va_end(vl);
 //}
 
-void AccessoryDao::readCallback(shared_ptr<vector<shared_ptr<Pojo>>> outPtrPojoList, int row, vector<char*>& colList)
+void AccessoryDao::readCallback(shared_ptr<vector<shared_ptr<Pojo>>> outPtrPojoList, int row, vector<char*>& colList, bool isNest)
 {
     shared_ptr<AccessoryPojo> pAccessoryPojo(new AccessoryPojo());
 //    LOGD("use_count:%ld", pAccessoryPojo.use_count());
@@ -44,15 +44,16 @@ void AccessoryDao::readCallback(shared_ptr<vector<shared_ptr<Pojo>>> outPtrPojoL
             pAccessoryPojo->accessorySerial = stoi(data);
 //            LOGD("pAccessoryPojo->accessorySerial:%d", pAccessoryPojo->accessorySerial);
             
-            /* 取得 pElementPojoList 裡所有的資料 */
-            vector<int> accessorySerialList;
-            accessorySerialList.push_back(pAccessoryPojo->accessorySerial);
-            
-            pAccessoryPojo->pSubPojoList = ElementDao::read(accessorySerialList);
-//            for (shared_ptr<Pojo> pPojo : *pAccessoryPojo->pElementPojoList) {
-//                pPojo->print();
-//            }
-
+            if (isNest == true) {
+                /* 取得 pElementPojoList 裡所有的資料 */
+                vector<int> accessorySerialList;
+                accessorySerialList.push_back(pAccessoryPojo->accessorySerial);
+                
+                pAccessoryPojo->pSubPojoList = ElementDao::read(accessorySerialList);
+                //            for (shared_ptr<Pojo> pPojo : *pAccessoryPojo->pElementPojoList) {
+                //                pPojo->print();
+                //            }
+            }
         }
         /******************************************* 修改處 *****************************************************/
         if_index_int_va(1, pAccessoryPojo->AID, data)
@@ -178,7 +179,7 @@ int AccessoryDao::deleteWithAIDList(vector<int>& AIDList)
 shared_ptr<vector<shared_ptr<Pojo>>> AccessoryDao::readAll()
 {
     DatabaseManager& databaseManager = DatabaseManager::getInstance();
-    return databaseManager.read("SELECT * FROM Accessory;", AccessoryDao::readCallback);
+    return databaseManager.read("SELECT * FROM Accessory;", true, AccessoryDao::readCallback);
 }
 
 shared_ptr<vector<shared_ptr<Pojo>>> AccessoryDao::read(vector<int>& AIDList)
@@ -192,6 +193,6 @@ shared_ptr<vector<shared_ptr<Pojo>>> AccessoryDao::read(vector<int>& AIDList)
     }
     string SQL = Pojo::genInSQL("SELECT * FROM Accessory WHERE AID", objList);
     
-    shared_ptr<vector<shared_ptr<Pojo>>> pPojoList = databaseManager.read(SQL.c_str(), AccessoryDao::readCallback);
+    shared_ptr<vector<shared_ptr<Pojo>>> pPojoList = databaseManager.read(SQL.c_str(), true, AccessoryDao::readCallback);
     return pPojoList;
 }

@@ -11,7 +11,7 @@
 #include "DatabaseManager.hpp"
 #include "ElementNODao.hpp"
 
-void ElementDao::readCallback(shared_ptr<vector<shared_ptr<Pojo>>> outPtrPojoList, int row, vector<char*>& colList)
+void ElementDao::readCallback(shared_ptr<vector<shared_ptr<Pojo>>> outPtrPojoList, int row, vector<char*>& colList, bool isNest)
 {
     shared_ptr<ElementPojo> pElementPojo(new ElementPojo());
     
@@ -23,10 +23,12 @@ void ElementDao::readCallback(shared_ptr<vector<shared_ptr<Pojo>>> outPtrPojoLis
             pElementPojo->elementSerial = stoi(data);
 //            LOGD("pElementPojo->elementSerial:%d", pElementPojo->elementSerial);
             
-            /* 取得 pElementPojoList 裡所有的資料 */
-            vector<int> elementSerialList;
-            elementSerialList.push_back(pElementPojo->elementSerial);
-            pElementPojo->pSubPojoList = ElementNODao::read(elementSerialList);
+            if (isNest == true) {
+                /* 取得 pElementPojoList 裡所有的資料 */
+                vector<int> elementSerialList;
+                elementSerialList.push_back(pElementPojo->elementSerial);
+                pElementPojo->pSubPojoList = ElementNODao::read(elementSerialList);
+            }
         }
         /******************************************* 修改處 *****************************************************/
         if_index_int_va(1, pElementPojo->fkAccessorySerial, data)
@@ -51,7 +53,7 @@ shared_ptr<vector<shared_ptr<Pojo>>> ElementDao::read(vector<int>& fkAccessorySe
     }
     string SQL = Pojo::genInSQL("SELECT * FROM Element WHERE fkAccessorySerial", objList);
     
-    return databaseManager.read(SQL.c_str(), ElementDao::readCallback);
+    return databaseManager.read(SQL.c_str(), true, ElementDao::readCallback);
 }
 
 void ElementDao::create(shared_ptr<ElementPojo> pElementPojo)

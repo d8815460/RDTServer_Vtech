@@ -94,7 +94,7 @@ public:
     static shared_ptr<vector<shared_ptr<Pojo>>> read(vector<int>& elementSerialList);
     
 private:
-    static void readCallback(shared_ptr<vector<shared_ptr<Pojo>>> outPtrPojoList, int row, vector<char*>& colList);
+    static void readCallback(shared_ptr<vector<shared_ptr<Pojo>>> outPtrPojoList, int row, vector<char*>& colList, bool isNest);
 };
 
 #endif /* ElementNODao_hpp */

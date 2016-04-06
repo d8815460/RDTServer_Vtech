@@ -9,7 +9,7 @@
 #include "ElementNODao.hpp"
 #include "DatabaseManager.hpp"
 
-void ElementNODao::readCallback(shared_ptr<vector<shared_ptr<Pojo>>> outPtrPojoList, int row, vector<char*>& colList)
+void ElementNODao::readCallback(shared_ptr<vector<shared_ptr<Pojo>>> outPtrPojoList, int row, vector<char*>& colList, bool isNest)
 {
     shared_ptr<ElementNOPojo> pElementNOPojo(new ElementNOPojo());
     
@@ -45,7 +45,7 @@ shared_ptr<vector<shared_ptr<Pojo>>> ElementNODao::read(vector<int>& elementSeri
     }
     string SQL = Pojo::genInSQL("SELECT * FROM ElementNO WHERE fkElementSerial", objList);
     
-    return databaseManager.read(SQL.c_str(), ElementNODao::readCallback);
+    return databaseManager.read(SQL.c_str(), true, ElementNODao::readCallback);
 }
 
 void ElementNODao::create(shared_ptr<ElementNOPojo> pElementNOPojo)

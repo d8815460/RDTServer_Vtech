@@ -137,7 +137,7 @@ public:
     
 private:
     AccessoryDao() {};
-    static void readCallback(shared_ptr<vector<shared_ptr<Pojo>>> outPtrPojoList, int row, vector<char*>& colList);
+    static void readCallback(shared_ptr<vector<shared_ptr<Pojo>>> outPtrPojoList, int row, vector<char*>& colList, bool isNest);
 };
 
 #endif /* AccessoryDao_hpp */

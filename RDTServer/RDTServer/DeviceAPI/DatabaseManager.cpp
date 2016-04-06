@@ -140,7 +140,7 @@ int DatabaseManager::exec(const char* sql)
     return count;
 }
 
-shared_ptr<vector<shared_ptr<Pojo>>> DatabaseManager::read(const char* sql, DatabaseManager_ReadCallback callback)
+shared_ptr<vector<shared_ptr<Pojo>>> DatabaseManager::read(const char* sql, bool isNest, DatabaseManager_ReadCallback callback)
 {
     shared_ptr<vector<shared_ptr<Pojo>>> pPojoList(new vector<shared_ptr<Pojo>>);
     
@@ -166,7 +166,7 @@ shared_ptr<vector<shared_ptr<Pojo>>> DatabaseManager::read(const char* sql, Data
         }
         
         if (i > 0) {
-            callback(pPojoList, i, colList);
+            callback(pPojoList, i, colList, isNest);
             colList.clear();
         }
         

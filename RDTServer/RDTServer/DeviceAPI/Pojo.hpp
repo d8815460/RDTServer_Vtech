@@ -119,6 +119,14 @@ using namespace std;
 
 struct ValueObject
 {
+    DatabaseType type;
+    std::string key;
+    
+    //    union {
+    int         nValue;
+    std::string strValue;
+    //    };
+    
     ValueObject(DatabaseType type, std::string key, int nValue)
     {
         this->type = type;
@@ -132,14 +140,20 @@ struct ValueObject
         this->key = key;
         this->strValue = strValue;
     }
+};
+
+struct TableObject
+{
+    std::string tableName;
+    vector<ValueObject> valueObjectList;
+    TableObject* pSubTableObject;
     
-    DatabaseType type;
-    std::string key;
-    
-//    union {
-        int         nValue;
-        std::string strValue;
-//    };
+    TableObject(std::string tableName, vector<ValueObject>& valueObjectList, TableObject* pSubTableObject)
+    {
+        this->tableName = tableName;
+        this->valueObjectList = valueObjectList;
+        this->pSubTableObject = pSubTableObject;
+    }
 };
 
 struct Pojo
@@ -203,8 +217,8 @@ struct Pojo
             }
         }
         
-        //        LOGD("sql1:%s", sql1.c_str());
-        //        LOGD("sql2:%s", sql2.c_str());
+//        LOGD("sql1:%s", sql1.c_str());
+//        LOGD("sql2:%s", sql2.c_str());
         sql1.erase(sql1.size() - 2);
         sql2.erase(sql2.size() - 2);
         LOGD("sql1:%s", sql1.c_str());
