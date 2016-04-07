@@ -210,25 +210,13 @@ shared_ptr<vector<shared_ptr<Pojo>>> AccessoryDao::readNestWithSQL(string& where
     string selectSQL = "SELECT DISTINCT ";
     string fromSQL = " FROM Accessory INNER JOIN Element INNER JOIN ElementNO ON ";
     
-    string accessorySQL = selectSQL;
-    accessorySQL.append("Accessory.*");
-    accessorySQL.append(fromSQL);
-    accessorySQL.append(whereSQL);
-    LOGD("accessorySQL:\n%s", accessorySQL.c_str());
+    string accessorySQL = Pojo::genAccessoryNestReadSQL("Accessory.*", whereSQL);
     shared_ptr<vector<shared_ptr<Pojo>>> accessoryPojoList = AccessoryDao::readWithSQL(accessorySQL);
     
-    string elementSQL = selectSQL;
-    elementSQL.append("Element.*");
-    elementSQL.append(fromSQL);
-    elementSQL.append(whereSQL);
-    LOGD("SQL:\n%s", elementSQL.c_str());
+    string elementSQL = Pojo::genAccessoryNestReadSQL("Element.*", whereSQL);
     shared_ptr<vector<shared_ptr<Pojo>>> elementPojoList = ElementDao::readWithSQL(elementSQL);
     
-    string elementNOSQL = selectSQL;
-    elementNOSQL.append("ElementNO.*");
-    elementNOSQL.append(fromSQL);
-    elementNOSQL.append(whereSQL);
-    LOGD("elementNOSQL:\n%s", elementNOSQL.c_str());
+    string elementNOSQL = Pojo::genAccessoryNestReadSQL("ElementNO.*", whereSQL);
     shared_ptr<vector<shared_ptr<Pojo>>> elementNOPojoList = ElementNODao::readWithSQL(elementNOSQL);
     
     for (shared_ptr<Pojo> pPojo : *accessoryPojoList) {

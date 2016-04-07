@@ -233,6 +233,20 @@ struct Pojo
         return sql;
     }
     
+    static std::string genAccessoryNestReadSQL(std::string selectFrom, std::string whereSQL)
+    {
+        string selectSQL = "SELECT DISTINCT ";
+        string jsonTableSQL = " FROM Accessory INNER JOIN Element INNER JOIN ElementNO ON ";
+        
+        string SQL = selectSQL;
+        SQL.append(selectFrom);
+        SQL.append(jsonTableSQL);
+        SQL.append(whereSQL);
+        LOGD("accessorySQL:\n%s", SQL.c_str());
+        
+        return SQL;
+    }
+    
     static std::string genInSQL(vector<ValueObject>& objList, bool isContainAND)
     {
         std::string SQL = "";
