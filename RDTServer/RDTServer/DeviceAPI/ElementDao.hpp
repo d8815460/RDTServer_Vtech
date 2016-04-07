@@ -48,8 +48,8 @@ struct ElementPojo : public Pojo
         //        if (valueObjectList.size() == 0) {
         /******************************************* 修改處 *****************************************************/
         valueObjectList = {
-            createValueObject(DatabaseType_INTEGER, fkAccessorySerial)
-            createValueObject(DatabaseType_TEXT,    Element)
+            createValueObject(fkAccessorySerial),
+            createValueObject(Element),
         };
         /******************************************* 修改處 *****************************************************/
         //        }

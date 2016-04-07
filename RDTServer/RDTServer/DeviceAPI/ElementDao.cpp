@@ -48,7 +48,7 @@ shared_ptr<vector<shared_ptr<Pojo>>> ElementDao::read(vector<int>& fkAccessorySe
     
     vector<ValueObject> objList;
     for (int fkAccessorySerial : fkAccessorySerialList) {
-        ValueObject obj(DatabaseType_INTEGER, "fkAccessorySerial", fkAccessorySerial);
+        ValueObject obj("fkAccessorySerial", fkAccessorySerial);
         objList.push_back(obj);
     }
     
@@ -142,7 +142,7 @@ int ElementDao::deleteWithFKAccessorySerialList(vector<int>& accessorySerialList
     // 這一層的刪除
     vector<ValueObject> objList;
     for (int elementSerial : elementSerialList) {
-        ValueObject obj(DatabaseType_INTEGER, "elementSerial", elementSerial);
+        ValueObject obj("elementSerial", elementSerial);
         objList.push_back(obj);
     }
     

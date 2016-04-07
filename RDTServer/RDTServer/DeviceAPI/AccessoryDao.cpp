@@ -139,7 +139,7 @@ int AccessoryDao::deleteWithSerialList(vector<int>& accessorySerialList)
     
     vector<ValueObject> objList;
     for (int accessorySerial : accessorySerialList) {
-        ValueObject obj(DatabaseType_INTEGER, "accessorySerial", accessorySerial);
+        ValueObject obj("accessorySerial", accessorySerial);
         objList.push_back(obj);
     }
     
@@ -168,7 +168,7 @@ int AccessoryDao::deleteWithAIDList(vector<int>& AIDList)
             // 這一層的刪除
             vector<ValueObject> objList;
             for (int AID : AIDList) {
-                ValueObject obj(DatabaseType_INTEGER, "AID", AID);
+                ValueObject obj("AID", AID);
                 objList.push_back(obj);
             }
             
@@ -194,7 +194,7 @@ shared_ptr<vector<shared_ptr<Pojo>>> AccessoryDao::read(vector<int>& AIDList)
     
     vector<ValueObject> objList;
     for (int AID : AIDList) {
-        ValueObject obj(DatabaseType_INTEGER, "AID", AID);
+        ValueObject obj("AID", AID);
         objList.push_back(obj);
     }
     

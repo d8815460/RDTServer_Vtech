@@ -38,8 +38,8 @@
         str_va(key, data); \
     }
 
-#define createValueObject(type, vo) \
-    ValueObject(type, #vo, vo),
+#define createValueObject(v) \
+    ValueObject(#v, v)
 
 #define ContractorAssign(key) \
     this->key = key
@@ -127,16 +127,16 @@ struct ValueObject
     std::string strValue;
     //    };
     
-    ValueObject(DatabaseType type, std::string key, int nValue)
+    ValueObject(std::string key, int nValue)
     {
-        this->type = type;
+        this->type = DatabaseType_INTEGER;
         this->key = key;
         this->nValue = nValue;
     }
     
-    ValueObject(DatabaseType type, std::string key, std::string strValue)
+    ValueObject(std::string key, std::string strValue)
     {
-        this->type = type;
+        this->type = DatabaseType_TEXT;
         this->key = key;
         this->strValue = strValue;
     }

@@ -166,7 +166,7 @@ void JsonRDTServerCommand::processCommandTarget(Json::Value& inJsonObject, Json:
                 vector<ValueObject> voList;
                 for (int i=0 ; i<jsonArray.size() ; i++) {
                     int AID = jsonArray[i].asInt();
-                    voList.push_back(ValueObject(DatabaseType_INTEGER, "AID", AID));
+                    voList.push_back(ValueObject("AID", AID));
                 }
                 
                 SQL = Pojo::genInSQL(voList, false);
@@ -181,7 +181,7 @@ void JsonRDTServerCommand::processCommandTarget(Json::Value& inJsonObject, Json:
                 vector<ValueObject> voList;
                 for (int i=0 ; i<jsonArray.size() ; i++) {
                     string element = jsonArray[i].asString();
-                    voList.push_back(ValueObject(DatabaseType_TEXT, "Element", element));
+                    voList.push_back(ValueObject("Element", element));
                 }
                 
                 SQL.append(Pojo::genInSQL(voList, true));
@@ -194,7 +194,7 @@ void JsonRDTServerCommand::processCommandTarget(Json::Value& inJsonObject, Json:
                 vector<ValueObject> voList;
                 for (int i=0 ; i<jsonArray.size() ; i++) {
                     int ElementNO = jsonArray[i].asInt();
-                    voList.push_back(ValueObject(DatabaseType_INTEGER, "ElementNO", ElementNO));
+                    voList.push_back(ValueObject("ElementNO", ElementNO));
                 }
                 
                 SQL.append(Pojo::genInSQL(voList, true));

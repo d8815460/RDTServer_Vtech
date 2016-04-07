@@ -62,11 +62,11 @@ struct AccessoryPojo : public Pojo
 //        if (valueObjectList.size() == 0) {
             /******************************************* 修改處 *****************************************************/
             valueObjectList = {
-                createValueObject(DatabaseType_INTEGER, AID)
-                createValueObject(DatabaseType_TEXT,    Name)
-                createValueObject(DatabaseType_INTEGER, IconType)
-                createValueObject(DatabaseType_INTEGER, Connection)
-                createValueObject(DatabaseType_INTEGER, IsGateway)
+                createValueObject(AID),
+                createValueObject(Name),
+                createValueObject(IconType),
+                createValueObject(Connection),
+                createValueObject(IsGateway),
             };
             /******************************************* 修改處 *****************************************************/
 //        }

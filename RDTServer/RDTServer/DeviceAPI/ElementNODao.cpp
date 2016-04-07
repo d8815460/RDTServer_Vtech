@@ -40,7 +40,7 @@ shared_ptr<vector<shared_ptr<Pojo>>> ElementNODao::read(vector<int>& elementSeri
     
     vector<ValueObject> objList;
     for (int elementSerial : elementSerialList) {
-        ValueObject obj(DatabaseType_INTEGER, "elementSerial", elementSerial);
+        ValueObject obj("elementSerial", elementSerial);
         objList.push_back(obj);
     }
     
@@ -100,7 +100,7 @@ int ElementNODao::deleteWithFKElementSerialList(vector<int>& elementSerialList)
     
     vector<ValueObject> objList;
     for (int fkElementSerial : elementSerialList) {
-        ValueObject obj(DatabaseType_INTEGER, "fkElementSerial", fkElementSerial);
+        ValueObject obj("fkElementSerial", fkElementSerial);
         objList.push_back(obj);
     }
     

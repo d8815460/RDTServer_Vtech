@@ -101,16 +101,16 @@ DatabaseManager::DatabaseManager()
     
     // 依照查詢條件生成Accessory
     vector<ValueObject> vo;
-    vo.push_back(ValueObject(DatabaseType_INTEGER, "AID", 0));
-    vo.push_back(ValueObject(DatabaseType_INTEGER, "AID", 1));
+    vo.push_back(ValueObject("AID", 0));
+    vo.push_back(ValueObject("AID", 1));
     string SQL = Pojo::genInSQL(vo, false);
     
     vo.clear();
-    vo.push_back(ValueObject(DatabaseType_TEXT, "Element", "switch"));
+    vo.push_back(ValueObject("Element", "switch"));
     SQL.append(Pojo::genInSQL(vo, true));
     
     vo.clear();
-    vo.push_back(ValueObject(DatabaseType_INTEGER, "ElementNo", 1));
+    vo.push_back(ValueObject("ElementNo", 1));
     SQL.append(Pojo::genInSQL(vo, true));
     
     Json::Value json;
