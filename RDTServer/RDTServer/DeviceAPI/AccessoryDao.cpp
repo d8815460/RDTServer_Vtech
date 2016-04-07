@@ -239,7 +239,7 @@ shared_ptr<vector<shared_ptr<Pojo>>> AccessoryDao::readNestWithSQL(string& where
             
             if (pAccessoryPojo->accessorySerial == pElementPojo->fkAccessorySerial) {
                 pAccessoryPojo->pSubPojoList->push_back(pElementPojo);
-                break;
+//                break;
             }
         }
     }
@@ -252,7 +252,7 @@ shared_ptr<vector<shared_ptr<Pojo>>> AccessoryDao::readNestWithSQL(string& where
             
             if (pElementPojo->elementSerial == pElementNOPojo->fkElementSerial) {
                 pElementPojo->pSubPojoList->push_back(pElementNOPojo);
-                break;
+//                break;
             }
         }
     }

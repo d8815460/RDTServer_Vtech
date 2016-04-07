@@ -238,10 +238,10 @@ struct Pojo
         std::string SQL = "";
         
         if (isContainAND == true) {
-            SQL.append(" AND ");
+            SQL.append(" AND");
         }
         
-        SQL.append(objList[0].key);
+        SQL.append(" ").append(objList[0].key);
         SQL.append(" in (");
         
         for (ValueObject obj : objList) {
