@@ -71,8 +71,8 @@ void* JsonRDTClientCommand::threadInput(void *arg)
 //            filename.append("Delete_Accessories.json");
             
             // Element
-            filename.append("Get_Multiple_Element.json");
-//            filename.append("Set_Multiple_Element.json");
+//            filename.append("Get_Multiple_Element.json");
+            filename.append("Set_Multiple_Element.json");
             
             char jsonString[MAX_BUFFER_SIZE];
             fstream fp;

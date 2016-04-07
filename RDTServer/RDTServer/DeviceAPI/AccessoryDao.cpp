@@ -205,7 +205,7 @@ shared_ptr<vector<shared_ptr<Pojo>>> AccessoryDao::read(vector<int>& AIDList)
     return pPojoList;
 }
 
-shared_ptr<vector<shared_ptr<Pojo>>> AccessoryDao::readNestWithSQL(string& whereSQL)
+shared_ptr<vector<shared_ptr<Pojo>>> AccessoryDao::readNestWithWhereSQL(string& whereSQL)
 {
     string selectSQL = "SELECT DISTINCT ";
     string fromSQL = " FROM Accessory INNER JOIN Element INNER JOIN ElementNO ON ";

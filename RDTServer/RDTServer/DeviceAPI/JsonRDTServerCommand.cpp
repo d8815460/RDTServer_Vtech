@@ -157,7 +157,7 @@ void JsonRDTServerCommand::processCommandTarget(Json::Value& inJsonObject, Json:
                 m_pCommandHardwardEvent->onCommandHardwardRecv_ReadItems(pItems);
             }
             else {
-                string SQL = "";
+                string whereSQL = "";
                 
                 // 依照查詢條件生成Accessory
                 vector<ValueObject> voList;
@@ -166,7 +166,7 @@ void JsonRDTServerCommand::processCommandTarget(Json::Value& inJsonObject, Json:
                     voList.push_back(ValueObject("AID", AID));
                 }
                 
-                SQL = Pojo::genInSQL(voList, false);
+                whereSQL = Pojo::genInSQL(voList, false);
                 
                 if (IfObject.isMember("Element")) {
                     Json::Value jsonArray = IfObject["Element"];
@@ -178,7 +178,7 @@ void JsonRDTServerCommand::processCommandTarget(Json::Value& inJsonObject, Json:
                         voList.push_back(ValueObject("Element", Element));
                     }
                     
-                    SQL.append(Pojo::genInSQL(voList, true));
+                    whereSQL.append(Pojo::genInSQL(voList, true));
                 }
                 
                 if (IfObject.isMember("ElementNO")) {
@@ -191,11 +191,11 @@ void JsonRDTServerCommand::processCommandTarget(Json::Value& inJsonObject, Json:
                         voList.push_back(ValueObject("ElementNO", ElementNO));
                     }
                     
-                    SQL.append(Pojo::genInSQL(voList, true));
+                    whereSQL.append(Pojo::genInSQL(voList, true));
                 }
                 
                 Json::Value json;
-                shared_ptr<vector<shared_ptr<Pojo>>> pojoList = AccessoryDao::readNestWithSQL(SQL);
+                shared_ptr<vector<shared_ptr<Pojo>>> pojoList = AccessoryDao::readNestWithWhereSQL(whereSQL);
                 
                 // 寫入至json輸出
                 Utility::pojoListToJson(inJsonObject, outJsonObject, pojoList);
@@ -210,8 +210,6 @@ void JsonRDTServerCommand::processCommandTarget(Json::Value& inJsonObject, Json:
     }
     // 新增或修改
     else if (function.find("write") != std::string::npos) {
-        string SQL = "";
-        
         if (IfObject.isMember("AID")) {
             Json::Value jsonArray = IfObject["AID"];
             
@@ -236,7 +234,7 @@ void JsonRDTServerCommand::processCommandTarget(Json::Value& inJsonObject, Json:
                 }
             }
             else {
-                string SQL = "";
+                string whereSQL = "";
                 
                 // 依照查詢條件生成Accessory
                 vector<ValueObject> voList;
@@ -245,7 +243,7 @@ void JsonRDTServerCommand::processCommandTarget(Json::Value& inJsonObject, Json:
                     voList.push_back(ValueObject("AID", AID));
                 }
                 
-                SQL = Pojo::genInSQL(voList, false);
+                whereSQL = Pojo::genInSQL(voList, false);
                 
                 if (IfObject.isMember("Element")) {
                     Json::Value jsonArray = IfObject["Element"];
@@ -257,7 +255,7 @@ void JsonRDTServerCommand::processCommandTarget(Json::Value& inJsonObject, Json:
                         voList.push_back(ValueObject("Element", Element));
                     }
                     
-                    SQL.append(Pojo::genInSQL(voList, true));
+                    whereSQL.append(Pojo::genInSQL(voList, true));
                 }
                 
                 if (IfObject.isMember("ElementNO")) {
@@ -270,15 +268,14 @@ void JsonRDTServerCommand::processCommandTarget(Json::Value& inJsonObject, Json:
                         voList.push_back(ValueObject("ElementNO", ElementNO));
                     }
                     
-                    SQL.append(Pojo::genInSQL(voList, true));
+                    whereSQL.append(Pojo::genInSQL(voList, true));
                 }
                 
-                LOGD("SQL:%s", SQL.c_str());
+                LOGD("SQL:%s", whereSQL.c_str());
                 Json::Value json;
-                shared_ptr<vector<shared_ptr<Pojo>>> pojoList = AccessoryDao::readNestWithSQL(SQL);
+                shared_ptr<vector<shared_ptr<Pojo>>> pojoList = AccessoryDao::readNestWithWhereSQL(whereSQL);
                 
                 // 驗證pojoList
-                pojoList = AccessoryDao::readNestWithSQL(SQL);
                 for (shared_ptr<Pojo> pPojo : *pojoList) {
                     pPojo->toJson(json);
                 }
