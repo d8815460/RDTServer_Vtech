@@ -94,8 +94,10 @@ void ElementDao::update(shared_ptr<ElementPojo> pElementPojo)
     DatabaseManager& databaseManager = DatabaseManager::getInstance();
     
     pElementPojo->genValueObject();
-    std::string sql = Pojo::updateSQL("UPDATE Element SET", pElementPojo->valueObjectList);
-    databaseManager.exec(sql.c_str());
+    
+    std::string SQL = "UPDATE Element SET";
+    SQL.append(Pojo::genUpdateSetSQL(pElementPojo->valueObjectList));
+    databaseManager.exec(SQL.c_str());
     
     for (shared_ptr<Pojo> pPojo : *pElementPojo->pSubPojoList) {
         shared_ptr<ElementNOPojo>& pElementNOPojo = (shared_ptr<ElementNOPojo>&) pPojo;

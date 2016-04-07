@@ -113,8 +113,9 @@ void AccessoryDao::update(AccessoryPojo& accessoryPojo)
     DatabaseManager& databaseManager = DatabaseManager::getInstance();
     
     accessoryPojo.genValueObject();
-    std::string sql = Pojo::updateSQL("UPDATE Accessory SET", accessoryPojo.valueObjectList);
-    databaseManager.exec(sql.c_str());
+    std::string SQL = "UPDATE Accessory SET";
+    SQL.append(Pojo::genUpdateSetSQL(accessoryPojo.valueObjectList));
+    databaseManager.exec(SQL.c_str());
     
     if (accessoryPojo.pSubPojoList != NULL) {
         for (shared_ptr<Pojo> pPojo : *accessoryPojo.pSubPojoList) {

@@ -72,8 +72,9 @@ void ElementNODao::update(shared_ptr<ElementNOPojo> pElementNOPojo)
     DatabaseManager& databaseManager = DatabaseManager::getInstance();
     
     pElementNOPojo->genValueObject();
-    std::string sql = Pojo::updateSQL("UPDATE ElementNO SET", pElementNOPojo->valueObjectList);
-    databaseManager.exec(sql.c_str());
+    std::string SQL = "UPDATE ElementNO SET";
+    SQL.append(Pojo::genUpdateSetSQL(pElementNOPojo->valueObjectList));
+    databaseManager.exec(SQL.c_str());
 }
 
 int ElementNODao::deleteAll()

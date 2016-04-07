@@ -199,10 +199,9 @@ struct Pojo
         return sql;
     }
     
-    static std::string updateSQL(std::string prefixSQL, vector<ValueObject>& objList)
+    static std::string genUpdateSetSQL(vector<ValueObject>& objList)
     {
-        std::string sql = prefixSQL;
-        sql.append(" ");
+        std::string sql = " ";
         std::string sql1 = "";
         std::string sql2 = "";
         
