@@ -2,6 +2,25 @@ Message("CMAKE_CURRENT_SOURCE_DIR = ${CMAKE_CURRENT_SOURCE_DIR}")
 
 project(TUTKDevice)
 
+# Copy files from source directory to destination directory, substituting any
+# variables.  Create destination directory if it does not exist.
+macro(configure_files srcDir destDir)
+    message(STATUS "Configuring directory ${destDir}")
+    make_directory(${destDir})
+
+    file(GLOB templateFiles RELATIVE ${srcDir} ${srcDir}/*)
+    foreach(templateFile ${templateFiles})
+        set(srcTemplatePath ${srcDir}/${templateFile})
+        if(NOT IS_DIRECTORY ${srcTemplatePath})
+            message(STATUS "Configuring file ${templateFile}")
+            configure_file(
+                    ${srcTemplatePath}
+                    ${destDir}/${templateFile}
+                    @ONLY)
+        endif(NOT IS_DIRECTORY ${srcTemplatePath})
+    endforeach(templateFile)
+endmacro(configure_files)
+
 ###################### Base #############################
 include_directories(${CMAKE_CURRENT_SOURCE_DIR})
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/../../DeviceAPI)
@@ -39,6 +58,14 @@ elseif (CMAKE_SYSTEM_NAME MATCHES "Darwin")
 elseif (CMAKE_SYSTEM_NAME MATCHES "Linux")
     target_link_libraries(TUTKDevice DeviceAPI RDTAPIs IOTCAPIs pthread curlpp jsoncpp sqlite3 dl)
 endif()
+
+# copy json folder
+configure_files("${CMAKE_CURRENT_SOURCE_DIR}/../../JsonList" "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/JsonList")
+
+#file(GLOB MY_PUBLIC_HEADERS
+#  "myDir/*.h"
+#)
+#file(COPY ${MY_PUBLIC_HEADERS} DESTINATION myDestination)
 
 ###################### Base #############################
 
