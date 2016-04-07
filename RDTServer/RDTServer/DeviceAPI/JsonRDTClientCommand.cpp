@@ -65,13 +65,13 @@ void* JsonRDTClientCommand::threadInput(void *arg)
             // Accessory
 //            filename.append("Get_All_Accessories.json");
 //            filename.append("Get_One_Accessory.json");
-//            filename.append("Get_Two_Accessories.json");
+            filename.append("Get_Two_Accessories.json");
 //            filename.append("Get_Not_Exist_Accessory.json");
 //            filename.append("Add_Accessories.json");
 //            filename.append("Delete_Accessories.json");
             
             // Element
-            filename.append("Get_Multiple_Element.json");
+//            filename.append("Get_Multiple_Element.json");
 //            filename.append("Set_Multiple_Element.json");
             
             char jsonString[MAX_BUFFER_SIZE];

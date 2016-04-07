@@ -157,15 +157,16 @@ void JsonRDTServerCommand::processCommandTarget(Json::Value& inJsonObject, Json:
                 m_pCommandHardwardEvent->onCommandHardwardRecv_ReadItems(pItems);
             }
             else {
-                // 指定AID查詢
-                vector<int> AIDList;
+                // 依照查詢條件生成Accessory
+                vector<ValueObject> voList;
                 for (int i=0 ; i<AIDArray.size() ; i++) {
                     int AID = AIDArray[i].asInt();
-                    AIDList.push_back(AID);
+                    voList.push_back(ValueObject(DatabaseType_INTEGER, "AID", AID));
                 }
+                string SQL = Pojo::genInSQL(voList, false);
                 
-                // 讀取Accessory
-                shared_ptr<vector<shared_ptr<Pojo>>> pojoList = AccessoryDao::read(AIDList);
+                Json::Value json;
+                shared_ptr<vector<shared_ptr<Pojo>>> pojoList = AccessoryDao::readNestWithSQL(SQL);
                 
                 // 寫入至json輸出
                 Utility::pojoListToJson(inJsonObject, outJsonObject, pojoList);
@@ -233,140 +234,11 @@ void JsonRDTServerCommand::processCommandTarget(Json::Value& inJsonObject, Json:
     outJsonObject["SenderInfo"] = inJsonObject;
     
     // 當DeviceAPI發生錯誤ErrorCode != 0, 就不去抓取硬體的ErrorCode，所以DeviceAPI發生錯誤就已DeviceAPI ErrorCode為主, DeivceAPI沒錯就抓看看硬體的ErrorCode
-    if (outJsonObject["ErrorCode"] == 0) {
+    if (!outJsonObject["ErrorCode"] || outJsonObject["ErrorCode"] == 0) {
         outJsonObject["ErrorCode"] = pCommandBase->errorCode;
     }
     
     delete pCommandBase;
-    
-//    // vertify
-//    // 辨識最上面一層
-//    if (target.find("product_code") != std::string::npos) {
-//        CommandHardwardRecv_ProductCode commandHardwardRecv_ProductCode;
-//        m_pCommandHardwardEvent->onCommandHardwardRecv_ProductCode(&commandHardwardRecv_ProductCode);
-//        
-//        // 上報通知
-////        m_pCommandHardwardEvent->onCommandHardwardNotify(CommandHardwardNotifyData *pCommandHardwardNotifyData);
-//        
-//        // 輸出 JSON
-//        Json::Value arraryItems;
-//        Json::Value arrayObject;
-//        arraryItems["index"] = "0";
-//        arraryItems["value"] = commandHardwardRecv_ProductCode.productCode;
-//        arrayObject.append(arraryItems);
-//        outJsonObject["response"] = arrayObject;
-//    }
-//    else if (target.find("product_name") != std::string::npos) {
-//        CommandHardwardRecv_ProductName commandHardwardRecv_ProductName;
-//        m_pCommandHardwardEvent->onCommandHardwardRecv_ProductName(&commandHardwardRecv_ProductName);
-//        
-//        // 上報通知
-////        m_pCommandHardwardEvent->onCommandHardwardNotify(CommandHardwardNotifyData *pCommandHardwardNotifyData);
-//        
-//        // 輸出 JSON
-//        Json::Value arraryItems;
-//        Json::Value arrayObject;
-//        arraryItems["index"] = "0";
-//        arraryItems["value"] = commandHardwardRecv_ProductName.productName;
-//        arrayObject.append(arraryItems);
-//        outJsonObject["response"] = arrayObject;
-//    }
-//    else if (target.find("accessory") != std::string::npos) {
-//        std::string accessory = findWord(target, std::string("accessory"));
-//        CommandBase* pCommand = NULL;
-//        
-//        // 新增
-//        if (operation == "create") {
-//            AccessoryData* pAccessoryData = new AccessoryData();
-////            pAccessoryData->print();
-//            pCommand = new CommandHardwardRecv_CreateItems();
-//            CommandHardwardRecv_CreateItems* pCommandHardwardRecv_CreateItems = (CommandHardwardRecv_CreateItems*) pCommand;
-//            pCommandHardwardRecv_CreateItems->dataType = DataType_Accessory;
-//            pCommandHardwardRecv_CreateItems->pBaseData = pAccessoryData;
-//            m_pCommandHardwardEvent->onCommandHardwardRecv_CreateItem(pCommandHardwardRecv_CreateItems);
-//            pAccessoryData->print();
-//            
-//            m_accessoryList.push_back(pAccessoryData);
-//        }
-//        // 刪除
-//        else if (operation == "delete") {
-//            size_t pos2 = target.rfind("/") - 1;
-//            size_t pos1 = target.rfind("/", pos2);                                                                 
-//            string number = target.substr(pos1 + 1, pos2 - pos1);
-//            int accessoryId = stoi(number.c_str());
-//            
-//            pCommand = new CommandHardwardRecv_DeleteItems();
-//            CommandHardwardRecv_DeleteItems* pDeleteItems = (CommandHardwardRecv_DeleteItems*) pCommand;
-//            pDeleteItems->dataType = DataType_Accessory;
-//            pDeleteItems->id = accessoryId;
-//            m_pCommandHardwardEvent->onCommandHardwardRecv_DeleteItems(pDeleteItems);
-////            m_accessoryList.erase();
-//        }
-//        // 查詢
-//        else if (operation == "read") {
-//            CommandHardwardRecv_ReadItems readItems;
-//            pCommand = &readItems;
-//            readItems.dataType = DataType_Accessory;
-////            commandHardwardRecv_ReadItems.m_accessoryList
-//            m_pCommandHardwardEvent->onCommandHardwardRecv_ReadItems(&readItems);
-//        }
-//        // 修改
-//        else if (operation == "update") {
-//            int accessoryId = stoi(accessory.c_str());
-//            for (int i=0 ; i<m_accessoryList.size() ; i++) {
-//                if (m_accessoryList[i]->accessoryId == accessoryId) {
-//                    std::string functionCode = findWord(target, std::string("function_code"));
-//                    for (int j=0 ; j<m_accessoryList[i]->functionCodeDataList.size() ; j++) {
-//                        if (m_accessoryList[i]->functionCodeDataList[j]->functonCode == "switch") {
-//                            std::string valueString = findWord(target, std::string("value"));
-////                            LOGD("value:%s", value.c_str());
-//                            int value = atoi(valueString.c_str());
-//                            
-//                            m_accessoryList[i]->functionCodeDataList[j]->functionCodeValueDataList[0]->value = value;
-//                            
-//                            FunctionCodeValueData* pFunctionCodeValueData = new FunctionCodeValueData();
-//                            pFunctionCodeValueData->value = value;
-//                            
-//                            FunctionCodeData* pFunctionCodeData = new FunctionCodeData();
-//                            pFunctionCodeData->functonCode = functionCode;
-//                            pFunctionCodeData->functionCodeValueDataList.push_back(pFunctionCodeValueData);
-//                            
-//                            AccessoryData* pAccessoryData = new AccessoryData();
-//                            pAccessoryData->accessoryId = accessoryId;
-//                            pAccessoryData->functionCodeDataList.push_back(pFunctionCodeData);
-//                            
-//                            pCommand = new CommandHardwardRecv_UpdateItems();
-//                            CommandHardwardRecv_UpdateItems* pUpdateItems = (CommandHardwardRecv_UpdateItems*) pCommand;
-//                            pUpdateItems->dataType = DataType_Accessory;
-//                            pUpdateItems->baseDataList.push_back(pAccessoryData);
-//                            
-//                            m_pCommandHardwardEvent->onCommandHardwardRecv_UpdateItems(pUpdateItems);
-//                            
-//                            break;
-//                        }
-//                    }
-//                }
-//            }
-//        }
-//        else {
-//            throw CommandException(__PRETTY_FUNCTION__, __LINE__, CommandException_ErrorCode_No_Match_Command_Operation);
-//        }
-//        
-//        // 發生錯誤
-//        if (pCommand->errorCode != 0) {
-//            // Error Code
-//            outJsonObject["error_code"] = pCommand->errorCode;
-//        }
-//        else {
-//            outJsonObject["error_code"] = 0;
-//        }
-//        delete pCommand;
-//    }
-    
-//    else {
-//        LOGE("processCommandTarget Error");
-//        throw CommandException(__PRETTY_FUNCTION__, __LINE__, CommandException_ErrorCode_No_Match_Command_Target);
-//    }
 }
 
 #pragma mark - Command

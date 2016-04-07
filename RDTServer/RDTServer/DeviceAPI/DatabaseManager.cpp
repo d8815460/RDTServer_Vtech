@@ -99,17 +99,16 @@ DatabaseManager::DatabaseManager()
     // 刪除資料
 //    AccessoryDao::deleteWithSerial(1);
     
+    // 依照查詢條件生成Accessory
     vector<ValueObject> vo;
     vo.push_back(ValueObject(DatabaseType_INTEGER, "AID", 0));
     vo.push_back(ValueObject(DatabaseType_INTEGER, "AID", 1));
     string SQL = Pojo::genInSQL(vo, false);
     
-//    SQL.append(" AND Element in ('switch')");
     vo.clear();
     vo.push_back(ValueObject(DatabaseType_TEXT, "Element", "switch"));
     SQL.append(Pojo::genInSQL(vo, true));
     
-//    SQL.append(" AND ElementNo in (1)");
     vo.clear();
     vo.push_back(ValueObject(DatabaseType_INTEGER, "ElementNo", 1));
     SQL.append(Pojo::genInSQL(vo, true));
