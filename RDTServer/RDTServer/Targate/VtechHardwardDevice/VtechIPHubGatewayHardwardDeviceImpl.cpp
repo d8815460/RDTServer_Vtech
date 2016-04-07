@@ -138,11 +138,13 @@ void VtechIPHubGatewayHardwardImpl::onCommandHardwardRecv_CreateItem(CommandHard
     switch (pCommandHardwardRecv_CreateItems->dataType) {
         case DataType_Accessory: {
             // 將新增資料填入
-            AccessoryData* pAccessoryData = (AccessoryData*) pCommandHardwardRecv_CreateItems->pBaseData;
-            pAccessoryData->accessoryId = 1;
-            pAccessoryData->accessoryType = 1;
-            pAccessoryData->addFunctionCodeData("switch", 1);
-            pAccessoryData->addFunctionCodeData("color", 1, 2);
+            shared_ptr<vector<shared_ptr<Pojo>>> pAccessoryList = (shared_ptr<vector<shared_ptr<Pojo>>>) pCommandHardwardRecv_CreateItems->pojoList;
+            for (shared_ptr<Pojo> pPojo : *pAccessoryList) {
+                shared_ptr<AccessoryPojo>& accessoryPojo = (shared_ptr<AccessoryPojo>&) pPojo;
+                
+                LOGD("AID:%d", accessoryPojo->AID);
+                LOGD("IconType:%d", accessoryPojo->IconType);
+            }
         }   break;
             
         default: {
