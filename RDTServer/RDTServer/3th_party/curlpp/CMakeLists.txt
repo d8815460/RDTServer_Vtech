@@ -133,9 +133,16 @@ DisplayList("Using Example Files:" "${ExamplesFileList}")
 # Documented at https://cmake.org/cmake/help/v3.0/module/FindCURL.html?highlight=curlpp
 # Seems simple.
 
+if (CMAKE_TARGET_ARCHITECTURES MATCHES "arm")
+	FIND_LIBRARY(CURL_LIBRARY NAMES curl CURL curllib libcurl PATHS ${CMAKE_CURRENT_SOURCE_DIR}/../libcurl/arm NO_DEFAULT_PATH)		
+	find_path(CURL_INCLUDE_DIR NAMES curl/curl.h PATHS ${CMAKE_CURRENT_SOURCE_DIR}/../libcurl/arm)
+endif()
+
 message(STATUS "Looking for CURL")
 include(FindCURL)
 find_package(CURL REQUIRED)
+
+
 
 if(${CURL_FOUND})
   message(STATUS "Found CURL version: ${CURL_VERSION_STRING}")
@@ -149,6 +156,7 @@ endif(${CURL_FOUND})
 include_directories( 
   ${IncludeFolder}
   ${CURL_INCLUDE_DIRS}
+#	${CMAKE_CURRENT_SOURCE_DIR}/../libcurl/arm
 )
 
 #########################################################################################

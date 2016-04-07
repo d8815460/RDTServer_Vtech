@@ -10,6 +10,11 @@ include_directories(${CMAKE_CURRENT_SOURCE_DIR}/../../3th_party/curlpp/include)
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/../../3th_party/jsoncpp-1.6.5/include)
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/../../3th_party/sqlite-amalgamation-3110100)
 
+if (CMAKE_TARGET_ARCHITECTURES MATCHES "arm")
+	include_directories(${CMAKE_CURRENT_SOURCE_DIR}/../../3th_party/libcurl/arm)
+endif()
+
+
 Message("CMAKE_SYSTEM_NAME = ${CMAKE_SYSTEM_NAME}")
 link_directories(${CMAKE_LIBRARY_OUTPUT_DIRECTORY})
 link_directories(${CMAKE_ARCHIVE_OUTPUT_DIRECTORY})
