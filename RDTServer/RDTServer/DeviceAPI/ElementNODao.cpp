@@ -43,7 +43,9 @@ shared_ptr<vector<shared_ptr<Pojo>>> ElementNODao::read(vector<int>& elementSeri
         ValueObject obj(DatabaseType_INTEGER, "elementSerial", elementSerial);
         objList.push_back(obj);
     }
-    string SQL = Pojo::genInSQL("SELECT * FROM ElementNO WHERE fkElementSerial", objList);
+    
+    string SQL = "SELECT * FROM ElementNO WHERE fkElementSerial";
+    SQL.append(Pojo::genInSQL(objList));
     
     return databaseManager.read(SQL.c_str(), true, ElementNODao::readCallback);
 }
@@ -101,7 +103,9 @@ int ElementNODao::deleteWithFKElementSerialList(vector<int>& elementSerialList)
         ValueObject obj(DatabaseType_INTEGER, "fkElementSerial", fkElementSerial);
         objList.push_back(obj);
     }
-    string SQL = Pojo::genInSQL("DELETE FROM ElementNO WHERE fkElementSerial", objList);
+    
+    string SQL = "DELETE FROM ElementNO WHERE fkElementSerial";
+    SQL.append(Pojo::genInSQL(objList));
     
     return databaseManager.exec(SQL.c_str());
 }

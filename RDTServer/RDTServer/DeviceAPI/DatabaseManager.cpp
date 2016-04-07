@@ -100,7 +100,9 @@ DatabaseManager::DatabaseManager()
 //    AccessoryDao::deleteWithSerial(1);
     
     Json::Value json;
-    string SQL = "AID in (0, 1) AND Element in ('switch') AND ElementNo in (1)";
+    string SQL = " AID in (0, 1)";
+    SQL.append(" AND Element in ('switch')");
+    SQL.append(" AND ElementNo in (1)");
     pojoList = AccessoryDao::readNestWithSQL(SQL);
     for (shared_ptr<Pojo> pPojo : *pojoList) {
         pPojo->toJson(json);
