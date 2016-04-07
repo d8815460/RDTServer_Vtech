@@ -206,11 +206,27 @@ shared_ptr<vector<shared_ptr<Pojo>>> AccessoryDao::read(vector<int>& AIDList)
     return pPojoList;
 }
 
+void AccessoryDao::updateNestWithWhereSQL(string& selectWhereSQL, vector<ValueObject>& objList)
+{
+    string whereSQL = " WHERE ElementNO in (";
+    
+    DatabaseManager& databaseManager = DatabaseManager::getInstance();
+    string selectSQL = Pojo::genAccessoryNestReadSQL("ElementNO", selectWhereSQL);
+    whereSQL.append(selectSQL);
+    whereSQL.append(")");
+    
+    string SQL = "UPDATE ElementNO";
+    SQL.append(Pojo::genUpdateSetSQL(objList));
+    SQL.append(whereSQL);
+    LOGD("SQL:\n%s", SQL.c_str());
+    
+    databaseManager.exec(SQL.c_str());
+    
+//    "Update ElementNO SET Value = 'haha' WHERE ElementNO in ()";
+}
+
 shared_ptr<vector<shared_ptr<Pojo>>> AccessoryDao::readNestWithWhereSQL(string& whereSQL)
 {
-    string selectSQL = "SELECT DISTINCT ";
-    string fromSQL = " FROM Accessory INNER JOIN Element INNER JOIN ElementNO ON ";
-    
     string accessorySQL = Pojo::genAccessoryNestReadSQL("Accessory.*", whereSQL);
     shared_ptr<vector<shared_ptr<Pojo>>> accessoryPojoList = AccessoryDao::readWithSQL(accessorySQL);
     

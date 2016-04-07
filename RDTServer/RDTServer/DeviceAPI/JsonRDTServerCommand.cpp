@@ -234,61 +234,61 @@ void JsonRDTServerCommand::processCommandTarget(Json::Value& inJsonObject, Json:
                 }
             }
             else {
-                string whereSQL = "";
+                pCommandBase = new CommandHardwardRecv_CreateItems();
+                CommandHardwardRecv_CreateItems* pItems = (CommandHardwardRecv_CreateItems*) pCommandBase;
+                pItems->dataType = DataType_Accessory;
+                m_pCommandHardwardEvent->onCommandHardwardRecv_CreateItem(pItems);
                 
-                // 依照查詢條件生成Accessory
-                vector<ValueObject> voList;
-                for (int i=0 ; i<jsonArray.size() ; i++) {
-                    int AID = jsonArray[i].asInt();
-                    voList.push_back(ValueObject("AID", AID));
-                }
-                
-                whereSQL = Pojo::genInSQL(voList, false);
-                
-                if (IfObject.isMember("Element")) {
-                    Json::Value jsonArray = IfObject["Element"];
+                // 新增成功
+                if (pItems->errorCode == 0) {
+                    string whereSQL = "";
                     
-                    // 依照查詢條件生成
+                    // 依照查詢條件生成Accessory
                     vector<ValueObject> voList;
                     for (int i=0 ; i<jsonArray.size() ; i++) {
-                        string Element = jsonArray[i].asString();
-                        voList.push_back(ValueObject("Element", Element));
+                        int AID = jsonArray[i].asInt();
+                        voList.push_back(ValueObject("AID", AID));
                     }
                     
-                    whereSQL.append(Pojo::genInSQL(voList, true));
-                }
-                
-                if (IfObject.isMember("ElementNO")) {
-                    Json::Value jsonArray = IfObject["ElementNO"];
+                    whereSQL = Pojo::genInSQL(voList, false);
                     
-                    // 依照查詢條件生成
-                    vector<ValueObject> voList;
-                    for (int i=0 ; i<jsonArray.size() ; i++) {
-                        int ElementNO = jsonArray[i].asInt();
-                        voList.push_back(ValueObject("ElementNO", ElementNO));
+                    if (IfObject.isMember("Element")) {
+                        Json::Value jsonArray = IfObject["Element"];
+                        
+                        // 依照查詢條件生成
+                        vector<ValueObject> voList;
+                        for (int i=0 ; i<jsonArray.size() ; i++) {
+                            string Element = jsonArray[i].asString();
+                            voList.push_back(ValueObject("Element", Element));
+                        }
+                        
+                        whereSQL.append(Pojo::genInSQL(voList, true));
                     }
                     
-                    whereSQL.append(Pojo::genInSQL(voList, true));
+                    if (IfObject.isMember("ElementNO")) {
+                        Json::Value jsonArray = IfObject["ElementNO"];
+                        
+                        // 依照查詢條件生成
+                        vector<ValueObject> voList;
+                        for (int i=0 ; i<jsonArray.size() ; i++) {
+                            int ElementNO = jsonArray[i].asInt();
+                            voList.push_back(ValueObject("ElementNO", ElementNO));
+                        }
+                        
+                        whereSQL.append(Pojo::genInSQL(voList, true));
+                    }
+                    
+                    LOGD("SQL:%s", whereSQL.c_str());
+                    Json::Value json;
+                    vector<ValueObject> objList;
+                    
+                    Json::Value thenObject = inJsonObject["Then"];
+                    if (thenObject.isMember("Value")) {
+                        string value = thenObject["Value"].asString();
+                        objList.push_back(ValueObject("ElementNO", value));
+                        AccessoryDao::updateNestWithWhereSQL(whereSQL, objList);
+                    }
                 }
-                
-                LOGD("SQL:%s", whereSQL.c_str());
-                Json::Value json;
-                shared_ptr<vector<shared_ptr<Pojo>>> pojoList = AccessoryDao::readNestWithWhereSQL(whereSQL);
-                
-                // 驗證pojoList
-                for (shared_ptr<Pojo> pPojo : *pojoList) {
-                    pPojo->toJson(json);
-                }
-                LOGD("json:\n%s", json.toStyledString().c_str());
-                
-//                // 寫入至json輸出
-//                Utility::pojoListToJson(inJsonObject, outJsonObject, pojoList);
-//                
-//                pCommandBase = new CommandHardwardRecv_ReadItems();
-//                CommandHardwardRecv_ReadItems* pItems = (CommandHardwardRecv_ReadItems*) pCommandBase;
-//                pItems->dataType = DataType_Accessory;
-//                pItems->pojoList = pojoList;
-//                m_pCommandHardwardEvent->onCommandHardwardRecv_ReadItems(pItems);
             }
         }
     }

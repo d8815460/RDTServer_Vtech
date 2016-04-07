@@ -128,10 +128,15 @@ public:
     static void create(AccessoryPojo& pojo);
     static void update(AccessoryPojo& pojo);
     
+    // 更新
+    static void updateNestWithWhereSQL(string& selectWhereSQL, vector<ValueObject>& objList);
+    
+    // 刪除
     static int deleteAll();
     static int deleteWithSerialList(vector<int>& accessorySerialList);
     static int deleteWithAIDList(vector<int>& AIDList);
     
+    // 查詢
     static shared_ptr<vector<shared_ptr<Pojo>>> readAll();
     static shared_ptr<vector<shared_ptr<Pojo>>> read(vector<int>& AIDList);
     static shared_ptr<vector<shared_ptr<Pojo>>> readNestWithWhereSQL(string& whereSQL);

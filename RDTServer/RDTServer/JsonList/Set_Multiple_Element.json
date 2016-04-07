@@ -7,6 +7,6 @@
 	    "ElementNO":[1]
 	},
 	"Then": {
-	    "Value":true
+	    "Value": "新的值"
 	}
 }

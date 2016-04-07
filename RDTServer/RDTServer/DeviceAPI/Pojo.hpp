@@ -201,35 +201,51 @@ struct Pojo
     
     static std::string genUpdateSetSQL(vector<ValueObject>& objList)
     {
-        std::string sql = " ";
-        std::string sql1 = "";
-        std::string sql2 = "";
-        
-        for (ValueObject obj : objList) {
-            sql1.append(obj.key).append(" = ");
-            
-            if (obj.type == DatabaseType_INTEGER) {
-                sql2.append(to_string(obj.nValue)).append(", ");
-            }
-            else {
-                sql2.append("'").append(obj.strValue).append("'").append(", ");
-            }
-        }
-        
+//        std::string sql = " ";
+//        std::string sql1 = "";
+//        std::string sql2 = "";
+//        
+//        for (ValueObject obj : objList) {
+//            sql1.append(obj.key).append(" = ");
+//            
+//            if (obj.type == DatabaseType_INTEGER) {
+//                sql2.append(to_string(obj.nValue)).append(", ");
+//            }
+//            else {
+//                sql2.append("'").append(obj.strValue).append("'").append(", ");
+//            }
+//        }
+//        
+////        LOGD("sql1:%s", sql1.c_str());
+////        LOGD("sql2:%s", sql2.c_str());
+//        sql1.erase(sql1.size() - 2);
+//        sql2.erase(sql2.size() - 2);
 //        LOGD("sql1:%s", sql1.c_str());
 //        LOGD("sql2:%s", sql2.c_str());
-        sql1.erase(sql1.size() - 2);
-        sql2.erase(sql2.size() - 2);
-        LOGD("sql1:%s", sql1.c_str());
-        LOGD("sql2:%s", sql2.c_str());
+//        
+//        sql.append(sql1);
+//        sql.append(") VALUES (NULL, ");
+//        sql.append(sql2);
+//        sql.append(")");
+//        
+//        LOGD("sql:%s", sql.c_str());
+//        return sql;
         
-        sql.append(sql1);
-        sql.append(") VALUES (NULL, ");
-        sql.append(sql2);
-        sql.append(")");
+        std::string SQL = " SET ";
+        for (ValueObject obj : objList) {
+            SQL.append(obj.key).append(" = ");
+
+            if (obj.type == DatabaseType_INTEGER) {
+                SQL.append(to_string(obj.nValue)).append(", ");
+            }
+            else {
+                SQL.append("'").append(obj.strValue).append("'").append(", ");
+            }
+        }
+        SQL.erase(SQL.size() - 2);
+        LOGD("SQL:%s", SQL.c_str());
         
-        LOGD("sql:%s", sql.c_str());
-        return sql;
+        return SQL;
     }
     
     static std::string genAccessoryNestReadSQL(std::string selectFrom, std::string whereSQL)

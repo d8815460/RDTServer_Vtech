@@ -95,7 +95,7 @@ void ElementDao::update(shared_ptr<ElementPojo> pElementPojo)
     
     pElementPojo->genValueObject();
     
-    std::string SQL = "UPDATE Element SET";
+    std::string SQL = "UPDATE Element ";
     SQL.append(Pojo::genUpdateSetSQL(pElementPojo->valueObjectList));
     databaseManager.exec(SQL.c_str());
     
