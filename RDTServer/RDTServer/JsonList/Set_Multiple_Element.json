@@ -3,10 +3,10 @@
 	"Function": "write",
 	"If": {
 	    "AID": [0,1],
-	    "Element":["Switch"],
+	    "Element":["switch"],
 	    "ElementNO":[1]
 	},
 	"Then": {
-	    "Value":"true"
+	    "Value":true
 	}
 }
