@@ -99,26 +99,26 @@ DatabaseManager::DatabaseManager()
     // 刪除資料
 //    AccessoryDao::deleteWithSerial(1);
     
-    // 依照查詢條件生成Accessory
-    vector<ValueObject> vo;
-    vo.push_back(ValueObject("AID", 0));
-    vo.push_back(ValueObject("AID", 1));
-    string SQL = Pojo::genInSQL(vo, false);
-    
-    vo.clear();
-    vo.push_back(ValueObject("Element", "switch"));
-    SQL.append(Pojo::genInSQL(vo, true));
-    
-    vo.clear();
-    vo.push_back(ValueObject("ElementNo", 1));
-    SQL.append(Pojo::genInSQL(vo, true));
-    
-    Json::Value json;
-    pojoList = AccessoryDao::readNestWithSQL(SQL);
-    for (shared_ptr<Pojo> pPojo : *pojoList) {
-        pPojo->toJson(json);
-    }
-    LOGD("json:\n%s", json.toStyledString().c_str());
+//    // 依照查詢條件生成Accessory
+//    vector<ValueObject> vo;
+//    vo.push_back(ValueObject("AID", 0));
+//    vo.push_back(ValueObject("AID", 1));
+//    string SQL = Pojo::genInSQL(vo, false);
+//    
+//    vo.clear();
+//    vo.push_back(ValueObject("Element", "switch"));
+//    SQL.append(Pojo::genInSQL(vo, true));
+//    
+//    vo.clear();
+//    vo.push_back(ValueObject("ElementNo", 1));
+//    SQL.append(Pojo::genInSQL(vo, true));
+//    
+//    Json::Value json;
+//    pojoList = AccessoryDao::readNestWithSQL(SQL);
+//    for (shared_ptr<Pojo> pPojo : *pojoList) {
+//        pPojo->toJson(json);
+//    }
+//    LOGD("json:\n%s", json.toStyledString().c_str());
 }
 
 void DatabaseManager::open()

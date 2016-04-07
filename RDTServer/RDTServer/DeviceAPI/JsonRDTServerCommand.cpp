@@ -177,11 +177,11 @@ void JsonRDTServerCommand::processCommandTarget(Json::Value& inJsonObject, Json:
             if (IfObject.isMember("Element")) {
                 Json::Value jsonArray = IfObject["Element"];
                 
-                // 依照查詢條件生成Accessory
+                // 依照查詢條件生成
                 vector<ValueObject> voList;
                 for (int i=0 ; i<jsonArray.size() ; i++) {
-                    string element = jsonArray[i].asString();
-                    voList.push_back(ValueObject("Element", element));
+                    string Element = jsonArray[i].asString();
+                    voList.push_back(ValueObject("Element", Element));
                 }
                 
                 SQL.append(Pojo::genInSQL(voList, true));
@@ -190,7 +190,7 @@ void JsonRDTServerCommand::processCommandTarget(Json::Value& inJsonObject, Json:
             if (IfObject.isMember("ElementNO")) {
                 Json::Value jsonArray = IfObject["ElementNO"];
                 
-                // 依照查詢條件生成Accessory
+                // 依照查詢條件生成
                 vector<ValueObject> voList;
                 for (int i=0 ; i<jsonArray.size() ; i++) {
                     int ElementNO = jsonArray[i].asInt();
