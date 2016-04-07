@@ -53,7 +53,7 @@ shared_ptr<vector<shared_ptr<Pojo>>> ElementDao::read(vector<int>& fkAccessorySe
     }
     
     string SQL = "SELECT * FROM Element WHERE fkAccessorySerial";
-    SQL.append(Pojo::genInSQL(objList));
+    SQL.append(Pojo::genInSQL(objList, false));
     
     return databaseManager.read(SQL.c_str(), true, ElementDao::readCallback);
 }
@@ -147,7 +147,7 @@ int ElementDao::deleteWithFKAccessorySerialList(vector<int>& accessorySerialList
     }
     
     string SQL = "DELETE FROM Element WHERE fkAccessorySerial";
-    SQL.append(Pojo::genInSQL(objList));
+    SQL.append(Pojo::genInSQL(objList, false));
     
     return databaseManager.exec(SQL.c_str());
 }

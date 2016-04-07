@@ -144,7 +144,7 @@ int AccessoryDao::deleteWithSerialList(vector<int>& accessorySerialList)
     }
     
     string SQL = "DELETE FROM Accessory WHERE accessorySerial";
-    SQL.append(Pojo::genInSQL(objList));
+    SQL.append(Pojo::genInSQL(objList, false));
     
     return databaseManager.exec(SQL.c_str());
 }
@@ -173,7 +173,7 @@ int AccessoryDao::deleteWithAIDList(vector<int>& AIDList)
             }
             
             string SQL = "DELETE FROM Accessory WHERE AID";
-            SQL.append(Pojo::genInSQL(objList));
+            SQL.append(Pojo::genInSQL(objList, false));
             
             return databaseManager.exec(SQL.c_str());
         }
@@ -199,7 +199,7 @@ shared_ptr<vector<shared_ptr<Pojo>>> AccessoryDao::read(vector<int>& AIDList)
     }
     
     string SQL = "SELECT * FROM Accessory WHERE AID";
-    SQL.append(Pojo::genInSQL(objList));
+    SQL.append(Pojo::genInSQL(objList, false));
     
     shared_ptr<vector<shared_ptr<Pojo>>> pPojoList = databaseManager.read(SQL.c_str(), true, AccessoryDao::readCallback);
     return pPojoList;

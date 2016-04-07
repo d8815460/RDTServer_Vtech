@@ -233,14 +233,15 @@ struct Pojo
         return sql;
     }
     
-    static std::string genInSQL(vector<ValueObject>& objList, bool isContainAND = false)
+    static std::string genInSQL(vector<ValueObject>& objList, bool isContainAND)
     {
         std::string SQL = "";
         
         if (isContainAND == true) {
-            SQL.append(" AND");
+            SQL.append(" AND ");
         }
         
+        SQL.append(objList[0].key);
         SQL.append(" in (");
         
         for (ValueObject obj : objList) {

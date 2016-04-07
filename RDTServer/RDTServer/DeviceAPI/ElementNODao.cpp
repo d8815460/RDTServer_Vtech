@@ -45,7 +45,7 @@ shared_ptr<vector<shared_ptr<Pojo>>> ElementNODao::read(vector<int>& elementSeri
     }
     
     string SQL = "SELECT * FROM ElementNO WHERE fkElementSerial";
-    SQL.append(Pojo::genInSQL(objList));
+    SQL.append(Pojo::genInSQL(objList, false));
     
     return databaseManager.read(SQL.c_str(), true, ElementNODao::readCallback);
 }
@@ -105,7 +105,7 @@ int ElementNODao::deleteWithFKElementSerialList(vector<int>& elementSerialList)
     }
     
     string SQL = "DELETE FROM ElementNO WHERE fkElementSerial";
-    SQL.append(Pojo::genInSQL(objList));
+    SQL.append(Pojo::genInSQL(objList, false));
     
     return databaseManager.exec(SQL.c_str());
 }

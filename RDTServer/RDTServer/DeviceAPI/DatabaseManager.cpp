@@ -99,10 +99,22 @@ DatabaseManager::DatabaseManager()
     // 刪除資料
 //    AccessoryDao::deleteWithSerial(1);
     
+    vector<ValueObject> vo;
+    vo.push_back(ValueObject(DatabaseType_INTEGER, "AID", 0));
+    vo.push_back(ValueObject(DatabaseType_INTEGER, "AID", 1));
+    string SQL = Pojo::genInSQL(vo, false);
+    
+//    SQL.append(" AND Element in ('switch')");
+    vo.clear();
+    vo.push_back(ValueObject(DatabaseType_TEXT, "Element", "switch"));
+    SQL.append(Pojo::genInSQL(vo, true));
+    
+//    SQL.append(" AND ElementNo in (1)");
+    vo.clear();
+    vo.push_back(ValueObject(DatabaseType_INTEGER, "ElementNo", 1));
+    SQL.append(Pojo::genInSQL(vo, true));
+    
     Json::Value json;
-    string SQL = " AID in (0, 1)";
-    SQL.append(" AND Element in ('switch')");
-    SQL.append(" AND ElementNo in (1)");
     pojoList = AccessoryDao::readNestWithSQL(SQL);
     for (shared_ptr<Pojo> pPojo : *pojoList) {
         pPojo->toJson(json);
