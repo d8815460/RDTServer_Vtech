@@ -58,11 +58,11 @@ void AccessoryDao::readCallback(shared_ptr<vector<shared_ptr<Pojo>>> outPtrPojoL
         }
         /******************************************* 修改處 *****************************************************/
         if_index_int_va(1, pAccessoryPojo->fkRoomSerial, data)
-        if_index_int_va(1, pAccessoryPojo->AID, data)
-        if_index_str_va(2, pAccessoryPojo->Name, data)
-        if_index_int_va(3, pAccessoryPojo->IconType, data)
-        if_index_int_va(4, pAccessoryPojo->Connection, data)
-        if_index_int_va(5, pAccessoryPojo->IsGateway, data)
+        if_index_int_va(2, pAccessoryPojo->AID, data)
+        if_index_str_va(3, pAccessoryPojo->Name, data)
+        if_index_int_va(4, pAccessoryPojo->IconType, data)
+        if_index_int_va(5, pAccessoryPojo->Connection, data)
+        if_index_int_va(6, pAccessoryPojo->IsGateway, data)
         /******************************************* 修改處 *****************************************************/
         else {
 //            ValueObject& valObj = pAccessoryPojo->valueObjectList[i-1];

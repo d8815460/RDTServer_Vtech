@@ -15,6 +15,7 @@
 #include "DatabaseManager.hpp"
 #include "Common.hpp"
 #include <json/reader.h>
+#include "RoomDao.hpp"
 
 using namespace std;
 
@@ -36,7 +37,9 @@ struct AccessoryPojo : public Pojo
     
     int         accessorySerial;
     
+    shared_ptr<RoomPojo>    pRoomPojo;
     int         fkRoomSerial;
+    
     int         AID;
     std::string Name;
     int         IconType;
@@ -51,13 +54,6 @@ struct AccessoryPojo : public Pojo
     }
     
     /******************************************* 修改處 *****************************************************/
-//    Contractor5(AccessoryPojo, SubPojoList(),
-//                int,         AID,
-//                std::string, Name,
-//                int,         IconType,
-//                int,         Connection,
-//                bool,        IsGateway)
-    
     Contractor6(AccessoryPojo, SubPojoList(),
                 int,         fkRoomSerial,
                 int,         AID,
@@ -77,7 +73,6 @@ struct AccessoryPojo : public Pojo
             createValueObject(IconType),
             createValueObject(Connection),
             createValueObject(IsGateway),
-            createValueObject(fkRoomSerial),
         };
         /******************************************* 修改處 *****************************************************/
     }
@@ -88,7 +83,8 @@ struct AccessoryPojo : public Pojo
         
         /******************************************* 修改處 *****************************************************/
         // AID在下面加
-        addJson(subJsonList, fkRoomSerial);
+//        addJson(subJsonList, fkRoomSerial);
+        
         addJson(subJsonList, Name);
         addJson(subJsonList, IconType);
         addJson(subJsonList, Connection);

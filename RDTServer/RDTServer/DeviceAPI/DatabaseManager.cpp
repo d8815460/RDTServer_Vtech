@@ -41,6 +41,7 @@ DatabaseManager::DatabaseManager()
     exec(createElement);
     exec(createElementNO);
     
+    int currentAID = 0;
     /******************************************* 修改處 *****************************************************/
     {
         shared_ptr<RoomPojo> pRoomPojo(new RoomPojo("MyRoom", 0));
@@ -49,7 +50,7 @@ DatabaseManager::DatabaseManager()
     {
         /* 新增一筆資料 */
         // fkRoomSerial, AID, Name, IconType, Connection, IsGateway;
-        AccessoryPojo accessoryPojo(1, 0, "IPHub", 0, 1, false);
+        AccessoryPojo accessoryPojo(1, currentAID++, "IPHub", 0, 1, false);
         
         // Element
         shared_ptr<ElementPojo> pElement1(new ElementPojo("switch"));
@@ -67,7 +68,7 @@ DatabaseManager::DatabaseManager()
     {
         /* 新增一筆資料 */
         // AID, Name, IconType, Connection, IsGateway
-        AccessoryPojo accessoryPojo(1, 1, "PC Home", 1, 1, false);
+        AccessoryPojo accessoryPojo(1, currentAID++, "PC Home", 1, 1, false);
         
         // Element
         shared_ptr<ElementPojo> pElement1(new ElementPojo("switch"));
@@ -85,7 +86,7 @@ DatabaseManager::DatabaseManager()
     {
         /* 新增一筆資料 */
         // fkRoomSerial, AID, Name, IconType, Connection, IsGateway
-        AccessoryPojo accessoryPojo(0, 1, "My Home", 1, 1, false);
+        AccessoryPojo accessoryPojo(0, currentAID++, "My Home", 1, 1, false);
         
         // Element
         shared_ptr<ElementPojo> pElement1(new ElementPojo("trigger"));
