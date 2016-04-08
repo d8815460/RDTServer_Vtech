@@ -1,0 +1,7 @@
+{
+    "Serno":87654321,
+    "Function":"delete",
+    "If":{
+        "AID":[0]
+    }
+}

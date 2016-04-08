@@ -10,21 +10,30 @@
 #define CommandHardwardCURDEvent_hpp
 
 #include <stdio.h>
+#include <memory>
+#include <json/reader.h>
+#include "Pojo.hpp"
 #include "BaseData.hpp"
 
 struct CommandHardwardRecv_CreateItems : CommandBase
 {
-    BaseData* pBaseData;
+    shared_ptr<vector<shared_ptr<Pojo>>> pojoList;
+    
+    CommandHardwardRecv_CreateItems()
+    {
+        shared_ptr<vector<shared_ptr<Pojo>>> pp(new vector<shared_ptr<Pojo>>);
+        pojoList = pp;
+    }
 };
 
 struct CommandHardwardRecv_DeleteItems : CommandBase
 {
-    int id;
+    vector<int>* pIDList;
 };
 
 struct CommandHardwardRecv_ReadItems : CommandBase
 {
-    vector<BaseData*> baseDataList;
+    shared_ptr<vector<shared_ptr<Pojo>>> pojoList;
 };
 
 struct CommandHardwardRecv_UpdateItems : CommandBase

@@ -18,13 +18,15 @@ struct Exception
 {
     const char* function;
     int line;
+    string errorDomain;
     int errorCode;
     string errorMessage;
     
-    Exception(const char* function, int line, int errorCode, const char* errorMessage)
+    Exception(const char* function, int line, const char* errorDomain, int errorCode, const char* errorMessage)
     {
         this->function = function;
         this->line = line;
+        this->errorDomain = errorDomain;
         this->errorCode = errorCode;
         this->errorMessage = errorMessage;
     }

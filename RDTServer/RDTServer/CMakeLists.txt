@@ -3,6 +3,62 @@ Message("CMAKE_CURRENT_SOURCE_DIR = ${CMAKE_CURRENT_SOURCE_DIR}")
 cmake_minimum_required(VERSION 2.8.12.2)
 set(CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/CMake")
 
+###################### 版本號 #############################
+set (DEVICE_API_VERSION_MAJOR 0)
+set (DEVICE_API_VERSION_MINOR 1)
+set (DEVICE_API_VERSION_PATCH 3)
+###################### 版本號 #############################
+
+###################### 配置文件 #############################
+# 加入一個配置頭文件，用於處理CMake的對源碼的設置
+configure_file (
+  "${CMAKE_CURRENT_SOURCE_DIR}/DeviceAPI/config.h.in"
+  "${CMAKE_CURRENT_SOURCE_DIR}/DeviceAPI/config.h"
+  )
+###################### 配置文件 #############################
+
+###################### CPack 安装包 #############################
+include (InstallRequiredSystemLibraries)
+#set (CPACK_RESOURCE_FILE_LICENSE "${CMAKE_CURRENT_SOURCE_DIR}/License.txt")
+set (CPACK_PACKAGE_VERSION_MAJOR "${DEVICE_API_VERSION_MAJOR}")
+set (CPACK_PACKAGE_VERSION_MINOR "${DEVICE_API_VERSION_MINOR}")
+set (CPACK_PACKAGE_VERSION_PATCH "${DEVICE_API_VERSION_PATCH}")
+include (CPack)
+###################### CPack 安装包 #############################
+
+###################### Disable warnings #############################
+macro(add_lldb_definitions)
+  # We don't want no semicolons on LLDB_DEFINITIONS:
+  foreach(arg ${ARGN})
+    set(LLDB_DEFINITIONS "${LLVM_DEFINITIONS} ${arg}")
+  endforeach(arg)
+  add_definitions( ${ARGN} )
+endmacro(add_lldb_definitions)
+
+# Disable Clang warnings
+if (CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
+  add_lldb_definitions(
+    -Wno-deprecated-declarations # Suppress "deprecated auto_ptr" warnings
+  )
+endif()
+
+if (CMAKE_CXX_COMPILER_ID STREQUAL "Clang" AND CMAKE_CXX_COMPILER_VERSION VERSION_GREATER "3.3")
+  add_lldb_definitions(
+    -Wno-deprecated-register # Suppress "deprecated register keyword" warnings
+  )
+endif()
+
+# Disable MSVC warnings
+if( MSVC )
+  add_lldb_definitions(
+    -wd4018 # Suppress 'warning C4018: '>=' : signed/unsigned mismatch'
+    -wd4068 # Suppress 'warning C4068: unknown pragma'
+    -wd4150 # Suppress 'warning C4150: deletion of pointer to incomplete type'
+    -wd4521 # Suppress 'warning C4521: 'type' : multiple copy constructors specified'
+  )
+endif()
+###################### Disable warnings #############################
+
 ###################### cotire #############################
 include(cotire)
 ###################### cotire #############################
@@ -55,9 +111,10 @@ else()
 endif()
 ###################### CXX11 #############################
 
+add_subdirectory(3th_party/sqlite-amalgamation-3110100)
+#add_subdirectory(3th_party/litesql-src-0.3.17)
 add_subdirectory(3th_party/curlpp)
 add_subdirectory(3th_party/jsoncpp-1.6.5)
-add_subdirectory(3th_party/sqlite-amalgamation-3110100)
 add_subdirectory(DeviceAPI)
 add_subdirectory(Targate/TUTKDevice)
 add_subdirectory(Targate/VtechDevice)

@@ -12,13 +12,17 @@
 #include <stdio.h>
 #include <memory>
 #include "Device.hpp"
+
 #include "Pojo.hpp"
+#include "AccessoryDao.hpp"
 
 typedef void (*JsonRecvDataCallback)(int channelID, BYTE* buffer, int totalLength);
 
 class Utility
 {
 public:
+    static void displayVersion();
+    
     static void reverse(BYTE* data, const int length);
     static unsigned long bytes2UnsignedLong(BYTE* data, const int length);
     static unsigned long bytes2UnsignedLongWithBeginData(BYTE* data, int* pIndex, const int length);
@@ -26,7 +30,10 @@ public:
     static void printData(const char* function, int line, const BYTE* data, const int length);
     static void showException(Exception& e);
     
-    static void pojoListToJson(Json::Value& root, shared_ptr<vector<shared_ptr<Pojo>>>& pojoList);
+    static void sendParseRest(const char *url, const char* appID, const char* masterKey, const char* restKey, const char* json);
+    
+    static void pojoToJson(Json::Value& inJsonObject, Json::Value& outJsonObject, shared_ptr<Pojo>& pPojo);
+    static void pojoListToJson(Json::Value& inJsonObject, Json::Value& outJsonObject, shared_ptr<vector<shared_ptr<Pojo>>>& pojoList);
     
 //    template <typename T>
 //    static T setValue(BYTE* pBuffer, int* pIndex, T value);

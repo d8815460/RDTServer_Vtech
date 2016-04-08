@@ -1,0 +1,12 @@
+{
+	"Serno": 87654321,
+	"Function": "write",
+	"If": {
+	    "AID": [0,1],
+	    "Element":["switch"],
+	    "ElementNO":[1]
+	},
+	"Then": {
+	    "Value": "新的值"
+	}
+}

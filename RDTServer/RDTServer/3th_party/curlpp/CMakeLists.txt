@@ -171,7 +171,7 @@ add_library(${PROJECT_NAME} ${HeaderFileList} ${SourceFileList})
 target_link_libraries(${PROJECT_NAME} ${CURL_LIBRARIES})
 
 # Create a meta target to create examples
-add_custom_target(build_all_examples COMMENT A target that requires all the examples.)
+#add_custom_target(build_all_examples COMMENT A target that requires all the examples.)
 
 #message(STATUS "Creating build rules for Examples:")
 #foreach(Example ${ExamplesFileList})

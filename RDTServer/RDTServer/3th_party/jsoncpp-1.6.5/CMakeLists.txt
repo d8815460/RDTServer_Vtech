@@ -86,37 +86,36 @@ CONFIGURE_FILE( "${PROJECT_SOURCE_DIR}/version.in"
                 "${PROJECT_SOURCE_DIR}/version"
                 NEWLINE_STYLE UNIX )
 
-macro(UseCompilationWarningAsError)
-	if ( MSVC )
-        # Only enabled in debug because some old versions of VS STL generate
-        # warnings when compiled in release configuration.
-		set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} /WX ")
-	endif( MSVC )
-endmacro()
+#macro(UseCompilationWarningAsError)
+#	if ( MSVC )
+#        # Only enabled in debug because some old versions of VS STL generate
+#        # warnings when compiled in release configuration.
+#		set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} /WX ")
+#	endif( MSVC )
+#endmacro()
 
 # Include our configuration header
 INCLUDE_DIRECTORIES( ${jsoncpp_SOURCE_DIR}/include )
 
-if ( MSVC )
-    # Only enabled in debug because some old versions of VS STL generate
-    # unreachable code warning when compiled in release configuration.
-    set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} /W4 ")
-endif( MSVC )
+#if ( MSVC )
+#    # Only enabled in debug because some old versions of VS STL generate
+#    # unreachable code warning when compiled in release configuration.
+#    set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} /W4 ")
+#endif( MSVC )
 
-if (CMAKE_CXX_COMPILER_ID MATCHES "Clang")
-  # using regular Clang or AppleClang
-  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -Werror -Wall -Wconversion -Wshadow -Wno-sign-conversion")
-elseif ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU")
-  # using GCC
-	if(DEFINED ENV{IPHUB})
-        set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++0x -fpermissive -Wall -Wconversion -Wshadow -Wextra -pedantic")
-    else()
-        set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -Werror -Wall -Wconversion -Wshadow -Wextra -pedantic")
-    endif()
-
-
-  # not yet ready for -Wsign-conversion
-endif()
+#if (CMAKE_CXX_COMPILER_ID MATCHES "Clang")
+#  # using regular Clang or AppleClang
+#  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -Werror -Wall -Wconversion -Wshadow -Wno-sign-conversion")
+#elseif ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU")
+#  # using GCC
+#	if(DEFINED ENV{IPHUB})
+#        set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++0x -fpermissive -Wall -Wconversion -Wshadow -Wextra -pedantic")
+#    else()
+#        set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -Werror -Wall -Wconversion -Wshadow -Wextra -pedantic")
+#    endif()
+#
+#  # not yet ready for -Wsign-conversion
+#endif()
 
 IF(JSONCPP_WITH_WARNING_AS_ERROR)
     UseCompilationWarningAsError()

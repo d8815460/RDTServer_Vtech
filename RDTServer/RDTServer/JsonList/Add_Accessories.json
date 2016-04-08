@@ -1,0 +1,7 @@
+{
+    "Serno":87654321,
+    "Function":"write",
+    "If":{
+        "AID":[-1]
+    }
+}

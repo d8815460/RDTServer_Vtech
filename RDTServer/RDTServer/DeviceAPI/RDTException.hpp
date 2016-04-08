@@ -45,7 +45,7 @@ struct RDTException : public Exception
     
     static std::map<int, const char*> errorMessageMap;
     
-    RDTException(const char* function, int line, int errorCode) : Exception(function, line, errorCode, errorMessageMap[errorCode]) {}
+    RDTException(const char* function, int line, int errorCode) : Exception(function, line, "RDTException", errorCode, errorMessageMap[errorCode]) {}
 };
     
 #endif /* RDTException_hpp" */

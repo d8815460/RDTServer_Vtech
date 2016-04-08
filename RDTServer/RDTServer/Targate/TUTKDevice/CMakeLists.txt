@@ -2,13 +2,33 @@ Message("CMAKE_CURRENT_SOURCE_DIR = ${CMAKE_CURRENT_SOURCE_DIR}")
 
 project(TUTKDevice)
 
+# Copy files from source directory to destination directory, substituting any
+# variables.  Create destination directory if it does not exist.
+macro(configure_files srcDir destDir)
+    message(STATUS "Configuring directory ${destDir}")
+    make_directory(${destDir})
+
+    file(GLOB templateFiles RELATIVE ${srcDir} ${srcDir}/*)
+    foreach(templateFile ${templateFiles})
+        set(srcTemplatePath ${srcDir}/${templateFile})
+        if(NOT IS_DIRECTORY ${srcTemplatePath})
+            message(STATUS "Configuring file ${templateFile}")
+            configure_file(
+                    ${srcTemplatePath}
+                    ${destDir}/${templateFile}
+                    @ONLY)
+        endif(NOT IS_DIRECTORY ${srcTemplatePath})
+    endforeach(templateFile)
+endmacro(configure_files)
+
 ###################### Base #############################
 include_directories(${CMAKE_CURRENT_SOURCE_DIR})
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/../../DeviceAPI)
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/../../../../TUTK_Kalay_Platform_SDK_2.1.3/Include)
-include_directories(${CMAKE_CURRENT_SOURCE_DIR}/../../3th_party/curlpp/include)
-include_directories(${CMAKE_CURRENT_SOURCE_DIR}/../../3th_party/jsoncpp-1.6.5/include)
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/../../3th_party/sqlite-amalgamation-3110100)
+#include_directories(${CMAKE_CURRENT_SOURCE_DIR}/../../3th_party/litesql-src-0.3.17/include)
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/../../3th_party/jsoncpp-1.6.5/include)
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/../../3th_party/curlpp/include)
 
 if (CMAKE_TARGET_ARCHITECTURES MATCHES "arm")
 	include_directories(${CMAKE_CURRENT_SOURCE_DIR}/../../3th_party/libcurl/arm)
@@ -44,7 +64,27 @@ elseif (CMAKE_SYSTEM_NAME MATCHES "Linux")
     target_link_libraries(TUTKDevice DeviceAPI RDTAPIs IOTCAPIs pthread curlpp jsoncpp sqlite3 dl)
 endif()
 
+# copy json folder
+configure_files("${CMAKE_CURRENT_SOURCE_DIR}/../../JsonList" "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/JsonList")
+
+#file(GLOB MY_PUBLIC_HEADERS
+#  "myDir/*.h"
+#)
+#file(COPY ${MY_PUBLIC_HEADERS} DESTINATION myDestination)
+
 ###################### Base #############################
+
+# 指定安装路徑
+#install (TARGETS TUTKDevice DESTINATION bin)
+#install (FILES "${PROJECT_BINARY_DIR}/config.h"
+#         DESTINATION include)
+
+install(TARGETS TUTKDevice
+        RUNTIME DESTINATION bin
+        LIBRARY DESTINATION lib
+        ARCHIVE DESTINATION lib
+        PUBLIC_HEADER DESTINATION include
+        )
 
 ######################## cotire ###########################
 # cotire sets the following properties

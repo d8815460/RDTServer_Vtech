@@ -18,6 +18,7 @@
 #include "AccessoryTypeEnum.hpp"
 #include "BinraryRDTServerConnect.hpp"
 #include "BinraryRDTServerCommand.hpp"
+#include "SystemException.hpp"
 
 using namespace std;
 
@@ -25,10 +26,11 @@ Device* Device::m_pInstance = NULL;
 
 Device::Device()
 {
+    Utility::displayVersion();
     LOGD("Device");
     
     if (m_pInstance != NULL) {
-        throw Exception(__PRETTY_FUNCTION__, __LINE__, -1, "Device two constrator error");
+        throw SystemException(__PRETTY_FUNCTION__, __LINE__, SystemException_ErrorCode_Device_two_constrator_error);
     }
     else {
         m_pInstance = this;

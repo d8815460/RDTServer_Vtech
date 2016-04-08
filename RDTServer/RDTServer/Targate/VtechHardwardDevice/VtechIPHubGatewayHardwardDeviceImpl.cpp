@@ -10,6 +10,7 @@
 #include <iostream>
 #include <cstring>
 #include "Common.hpp"
+#include "AccessoryDao.hpp"
 
 #include "unixclientstream.hpp"
 #include "exception.hpp"
@@ -227,11 +228,13 @@ void VtechIPHubGatewayHardwardImpl::onCommandHardwardRecv_CreateItem(CommandHard
     switch (pCommandHardwardRecv_CreateItems->dataType) {
         case DataType_Accessory: {
             // 將新增資料填入
-            AccessoryData* pAccessoryData = (AccessoryData*) pCommandHardwardRecv_CreateItems->pBaseData;
-            pAccessoryData->accessoryId = 1;
-            pAccessoryData->accessoryType = 1;
-            pAccessoryData->addFunctionCodeData("switch", 1);
-            pAccessoryData->addFunctionCodeData("color", 1, 2);
+            shared_ptr<vector<shared_ptr<Pojo>>> pAccessoryList = (shared_ptr<vector<shared_ptr<Pojo>>>) pCommandHardwardRecv_CreateItems->pojoList;
+            for (shared_ptr<Pojo> pPojo : *pAccessoryList) {
+                shared_ptr<AccessoryPojo>& accessoryPojo = (shared_ptr<AccessoryPojo>&) pPojo;
+                
+                LOGD("AID:%d", accessoryPojo->AID);
+                LOGD("IconType:%d", accessoryPojo->IconType);
+            }
         }   break;
             
         default: {
@@ -267,10 +270,12 @@ void VtechIPHubGatewayHardwardImpl::onCommandHardwardRecv_ReadItems(CommandHardw
     switch (pCommandHardwardRecv_ReadItems->dataType) {
         case DataType_Accessory: {
             // 針對收到的資料做為參考
-            vector<AccessoryData*>* pAccessoryList = (vector<AccessoryData*>*) &pCommandHardwardRecv_ReadItems->baseDataList;
-            for (int i=0 ; i<pAccessoryList->size() ; i++) {
-                LOGD("accessoryId:%d", (*pAccessoryList)[i]->accessoryId);
-                LOGD("accessoryType:%d", (*pAccessoryList)[i]->accessoryType);
+            shared_ptr<vector<shared_ptr<Pojo>>> pAccessoryList = (shared_ptr<vector<shared_ptr<Pojo>>>) pCommandHardwardRecv_ReadItems->pojoList;
+            for (shared_ptr<Pojo> pPojo : *pAccessoryList) {
+                shared_ptr<AccessoryPojo>& accessoryPojo = (shared_ptr<AccessoryPojo>&) pPojo;
+                
+                LOGD("AID:%d", accessoryPojo->AID);
+                LOGD("IconType:%d", accessoryPojo->IconType);
             }
         }   break;
             

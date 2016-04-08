@@ -59,7 +59,7 @@ private:
         
 #pragma mark - JsonRDTServerCommand
 protected:
-    virtual void processCommandTarget(const Json::Value& jsonObject, Json::Value& outJsonObject) throw (CommandException);
+    virtual void processCommandTarget(Json::Value& jsonObject, Json::Value& outJsonObject) throw (CommandException);
     
 #pragma mark - member
 protected:
