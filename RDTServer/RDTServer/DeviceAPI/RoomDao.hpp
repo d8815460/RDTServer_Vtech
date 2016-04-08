@@ -35,7 +35,7 @@ struct RoomPojo : public Pojo
     RoomPojo() {}
     
     /******************************************* 修改處 *****************************************************/
-    Contractor2(RoomPojo, SubPojoListNO(),
+    Contractor2(RoomPojo, NotingSubPojoList(),
                 std::string,    RoomName,
                 int,            RoomSeq)
     /******************************************* 修改處 *****************************************************/

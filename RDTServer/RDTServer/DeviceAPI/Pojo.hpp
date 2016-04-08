@@ -47,10 +47,10 @@
 #define Declare(type, value) \
     type value
 
-#define SubPojoListYES() \
+#define SubPojoList() \
     pSubPojoList = shared_ptr<vector<shared_ptr<Pojo>>>(new vector<shared_ptr<Pojo>>());
 
-#define SubPojoListNO()
+#define NotingSubPojoList()
 
 #define Contractor1(method, subPojoList, k, v)   \
     method(Declare(k, v))  \

@@ -39,7 +39,7 @@ struct ElementPojo : public Pojo
     }
     
     /******************************************* 修改處 *****************************************************/
-    Contractor1(ElementPojo, SubPojoListYES(),
+    Contractor1(ElementPojo, SubPojoList(),
                 std::string, Element)
     /******************************************* 修改處 *****************************************************/
     

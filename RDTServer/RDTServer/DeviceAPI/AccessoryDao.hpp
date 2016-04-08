@@ -50,7 +50,7 @@ struct AccessoryPojo : public Pojo
     }
     
     /******************************************* 修改處 *****************************************************/
-    Contractor5(AccessoryPojo, SubPojoListYES(),
+    Contractor5(AccessoryPojo, SubPojoList(),
                 int,         AID,
                 std::string, Name,
                 int,         IconType,

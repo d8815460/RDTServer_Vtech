@@ -39,7 +39,7 @@ struct ElementNOPojo : public Pojo
     ElementNOPojo() {}
     
     /******************************************* 修改處 *****************************************************/
-    Contractor3(ElementNOPojo, SubPojoListNO(),
+    Contractor3(ElementNOPojo, NotingSubPojoList(),
                 int,            ElementNO,
                 std::string,    Value,
                 bool,           NtfyEnable)
