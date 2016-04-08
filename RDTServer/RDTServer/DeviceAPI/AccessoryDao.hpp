@@ -21,6 +21,7 @@ using namespace std;
 /******************************************* 修改處 *****************************************************/
 static const char* createAccessory =    "CREATE TABLE Accessory ("
                                         "accessorySerial    INTEGER PRIMARY KEY,"
+                                        "fkRoomSerial       INTEGER REFERENCES Room(RoomSerial),"
                                         "AID                INTEGER,"
                                         "Name               TEXT,"
                                         "IconType           INTEGER,"
@@ -83,16 +84,6 @@ struct AccessoryPojo : public Pojo
         addJson(subJsonList, Connection);
         addJson(subJsonList, IsGateway);
         /******************************************* 修改處 *****************************************************/
-        
-//        for (map<std::string, enum DatabaseType>::iterator it=mapping.begin() ; it!=mapping.end() ; it++) {
-////            LOGD("first:%s", it->first.c_str());
-//            addJson(subJsonList, it->first.c_str());
-//        }
-        
-//        addJson(subJsonList, IconType);
-//        addJson(subJsonList, Connection);
-        
-//        subJsonList["Connection"]
         
         for (vector<shared_ptr<Pojo>>::iterator it=pSubPojoList->begin() ; it!=pSubPojoList->end() ; it++) {
             shared_ptr<Pojo> pPojo = *it;

@@ -10,6 +10,8 @@
 		A21DC20E1C9970CB00D081DC /* ElementNODao.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A21DC20D1C9970CB00D081DC /* ElementNODao.cpp */; };
 		A21E95B61C8691AE00D4FFCF /* CommandException.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A21E95B41C8691AE00D4FFCF /* CommandException.cpp */; };
 		A21E95B71C8691AE00D4FFCF /* CommandException.hpp in Headers */ = {isa = PBXBuildFile; fileRef = A21E95B51C8691AE00D4FFCF /* CommandException.hpp */; };
+		A21FD8151CB75AA600B3E654 /* RoomDao.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A21FD8131CB75AA600B3E654 /* RoomDao.cpp */; };
+		A21FD8161CB75AA600B3E654 /* RoomDao.hpp in Headers */ = {isa = PBXBuildFile; fileRef = A21FD8141CB75AA600B3E654 /* RoomDao.hpp */; };
 		A22B59721CB4AF9F00406906 /* RDTProtocolException.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A22B59701CB4AF9F00406906 /* RDTProtocolException.cpp */; };
 		A22B59731CB4AF9F00406906 /* RDTProtocolException.hpp in Headers */ = {isa = PBXBuildFile; fileRef = A22B59711CB4AF9F00406906 /* RDTProtocolException.hpp */; };
 		A2340FDE1C85A9000001D776 /* IOTCException.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A2340FDC1C85A9000001D776 /* IOTCException.cpp */; };
@@ -121,6 +123,8 @@
 		A21DC20D1C9970CB00D081DC /* ElementNODao.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ElementNODao.cpp; path = RDTServer/DeviceAPI/ElementNODao.cpp; sourceTree = SOURCE_ROOT; };
 		A21E95B41C8691AE00D4FFCF /* CommandException.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CommandException.cpp; path = RDTServer/DeviceAPI/CommandException.cpp; sourceTree = SOURCE_ROOT; };
 		A21E95B51C8691AE00D4FFCF /* CommandException.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = CommandException.hpp; path = RDTServer/DeviceAPI/CommandException.hpp; sourceTree = SOURCE_ROOT; };
+		A21FD8131CB75AA600B3E654 /* RoomDao.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = RoomDao.cpp; path = RDTServer/DeviceAPI/RoomDao.cpp; sourceTree = SOURCE_ROOT; };
+		A21FD8141CB75AA600B3E654 /* RoomDao.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = RoomDao.hpp; path = RDTServer/DeviceAPI/RoomDao.hpp; sourceTree = SOURCE_ROOT; };
 		A22B59701CB4AF9F00406906 /* RDTProtocolException.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = RDTProtocolException.cpp; path = RDTServer/DeviceAPI/RDTProtocolException.cpp; sourceTree = SOURCE_ROOT; };
 		A22B59711CB4AF9F00406906 /* RDTProtocolException.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = RDTProtocolException.hpp; path = RDTServer/DeviceAPI/RDTProtocolException.hpp; sourceTree = SOURCE_ROOT; };
 		A2340FDC1C85A9000001D776 /* IOTCException.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = IOTCException.cpp; path = RDTServer/DeviceAPI/IOTCException.cpp; sourceTree = SOURCE_ROOT; };
@@ -472,6 +476,8 @@
 			children = (
 				A2A3C2541C91176800ABED16 /* Pojo.hpp */,
 				A2A3C2531C91176800ABED16 /* Pojo.cpp */,
+				A21FD8141CB75AA600B3E654 /* RoomDao.hpp */,
+				A21FD8131CB75AA600B3E654 /* RoomDao.cpp */,
 				A2A3C2641C9152F200ABED16 /* AccessoryDao.hpp */,
 				A2A3C2631C9152F200ABED16 /* AccessoryDao.cpp */,
 				A2A3C26B1C91721300ABED16 /* ElementDao.hpp */,
@@ -596,6 +602,7 @@
 				A26FB6021C635E08007E3648 /* JsonRDTServerCommand.hpp in Headers */,
 				A26FB60C1C635E30007E3648 /* CommandHardwardEvent.hpp in Headers */,
 				A26FB6C91C635FAF007E3648 /* linux.h in Headers */,
+				A21FD8161CB75AA600B3E654 /* RoomDao.hpp in Headers */,
 				A26FB5D41C635DD1007E3648 /* Utility.hpp in Headers */,
 				A26FB5E51C635DEB007E3648 /* BinraryRDTClientConnect.hpp in Headers */,
 				A26FB6B31C635F67007E3648 /* MQTTSubscribe.h in Headers */,
@@ -677,6 +684,7 @@
 				A26FB6AD1C635F67007E3648 /* MQTTFormat.c in Sources */,
 				A2A17A271C7D568A008AEFD4 /* BaseData.cpp in Sources */,
 				A26FB6B71C635F67007E3648 /* MQTTUnsubscribeClient.c in Sources */,
+				A21FD8151CB75AA600B3E654 /* RoomDao.cpp in Sources */,
 				A22B59721CB4AF9F00406906 /* RDTProtocolException.cpp in Sources */,
 				A25E5AE91C9037AA00B49656 /* DatabaseManager.cpp in Sources */,
 				A26FB5E61C635DEB007E3648 /* BinraryRDTClientConnect.cpp in Sources */,

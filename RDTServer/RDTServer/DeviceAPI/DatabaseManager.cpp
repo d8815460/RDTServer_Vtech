@@ -7,11 +7,14 @@
 //
 
 #include "DatabaseManager.hpp"
+#include <json/reader.h>
+#include "Utility.hpp"
+
+// Dao
+#include "RoomDao.hpp"
 #include "AccessoryDao.hpp"
 #include "ElementDao.hpp"
 #include "ElementNODao.hpp"
-#include <json/reader.h>
-#include "Utility.hpp"
 
 DatabaseManager DatabaseManager::m_Instance = DatabaseManager();
 
@@ -33,11 +36,22 @@ DatabaseManager::DatabaseManager()
     open();
     
     /* 建立 Table */
+    exec(createRoom);
     exec(createAccessory);
     exec(createElement);
     exec(createElementNO);
     
     /******************************************* 修改處 *****************************************************/
+    {
+        shared_ptr<RoomPojo> pRoomPojo(new RoomPojo("MyRoom", 0));
+        RoomDao::create(pRoomPojo);
+    }
+    
+    {
+        shared_ptr<RoomPojo> pRoomPojo(new RoomPojo("Has Room", 0));
+        RoomDao::create(pRoomPojo);
+    }
+    
     {
         /* 新增一筆資料 */
         // AID, Name, IconType, Connection, IsGateway;
@@ -56,6 +70,7 @@ DatabaseManager::DatabaseManager()
         
         AccessoryDao::create(accessoryPojo);
     }
+    
     {
         /* 新增一筆資料 */
         // AID, Name, IconType, Connection, IsGateway;
