@@ -173,7 +173,7 @@ int AccessoryDao::deleteWithAIDList(vector<int>& AIDList)
                 objList.push_back(obj);
             }
             
-            string SQL = "DELETE FROM Accessory WHERE AID";
+            string SQL = "DELETE FROM Accessory WHERE";
             SQL.append(Pojo::genInSQL(objList, false));
             
             return databaseManager.exec(SQL.c_str());
@@ -199,7 +199,7 @@ shared_ptr<vector<shared_ptr<Pojo>>> AccessoryDao::read(vector<int>& AIDList)
         objList.push_back(obj);
     }
     
-    string SQL = "SELECT * FROM Accessory WHERE AID";
+    string SQL = "SELECT * FROM Accessory WHERE";
     SQL.append(Pojo::genInSQL(objList, false));
     
     shared_ptr<vector<shared_ptr<Pojo>>> pPojoList = databaseManager.read(SQL.c_str(), true, AccessoryDao::readCallback);
