@@ -2,7 +2,7 @@
 #ifndef _COMMON_H_
 #define _COMMON_H_
 
-#define MAX_BUFFER_SIZE 2048
+#define MAX_BUFFER_SIZE 5120
 #define BUFFER_SIZE 300
 
 #define NEW_LINE "\n"
