@@ -42,11 +42,11 @@ void* JsonRDTClientCommand::threadInput(void *arg)
 {
     JsonRDTClientCommand* pJsonRDTClientCommand = (JsonRDTClientCommand*) arg;
     
-    std::string pInput;
+    std::string pInputString;
     while(true) {
 //        LOGD("請輸入一個字元:");
-        cin >> pInput;
-        LOGD("input:%s", pInput.c_str());
+        cin >> pInputString;
+        LOGD("input:%s", pInputString.c_str());
         
         LOGD("===================================================================================================================================");
         int count = 0;
@@ -62,7 +62,12 @@ void* JsonRDTClientCommand::threadInput(void *arg)
             unsigned int serno = 87654321;
             string filename = "JsonList/";
             
-            filename.append(pInput);
+            // 沒有包含.json，就加入.json
+            if (pInputString.rfind(".json") == std::string::npos) {
+                pInputString.append(".json");
+            }
+            
+            filename.append(pInputString);
                             
             // Accessory
 //            filename.append("Get_All_Accessories.json");
