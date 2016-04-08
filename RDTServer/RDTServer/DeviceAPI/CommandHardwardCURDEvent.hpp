@@ -33,12 +33,12 @@ struct CommandHardwardRecv_DeleteItems : CommandBase
 
 struct CommandHardwardRecv_ReadItems : CommandBase
 {
-    shared_ptr<vector<shared_ptr<Pojo>>> pojoList;
+    shared_ptr<vector<shared_ptr<Pojo>>> pPojoList;
 };
 
 struct CommandHardwardRecv_UpdateItems : CommandBase
 {
-    vector<BaseData*> baseDataList;
+    shared_ptr<vector<shared_ptr<Pojo>>> pPojoList;
 };
 
 class CommandHardwardCURDEvent

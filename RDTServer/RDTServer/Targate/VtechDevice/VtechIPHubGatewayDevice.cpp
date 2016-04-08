@@ -195,7 +195,7 @@ void VtechIPHubGatewayHardward::onCommandHardwardRecv_DeleteItems(CommandHardwar
         case DataType_Accessory: {
             // remove pCommandHardwardRecv_DeleteItems->id;
         }   break;
-            
+        
         default: {
             LOGE("對應不到dataType");
         }   break;
@@ -211,7 +211,7 @@ void VtechIPHubGatewayHardward::onCommandHardwardRecv_ReadItems(CommandHardwardR
     switch (pCommandHardwardRecv_ReadItems->dataType) {
         case DataType_Accessory: {
             // 針對收到的資料做為參考
-            shared_ptr<vector<shared_ptr<Pojo>>> pAccessoryList = (shared_ptr<vector<shared_ptr<Pojo>>>) pCommandHardwardRecv_ReadItems->pojoList;
+            shared_ptr<vector<shared_ptr<Pojo>>> pAccessoryList = (shared_ptr<vector<shared_ptr<Pojo>>>) pCommandHardwardRecv_ReadItems->pPojoList;
             for (shared_ptr<Pojo> pPojo : *pAccessoryList) {
                 shared_ptr<AccessoryPojo>& accessoryPojo = (shared_ptr<AccessoryPojo>&) pPojo;
                 
@@ -219,7 +219,7 @@ void VtechIPHubGatewayHardward::onCommandHardwardRecv_ReadItems(CommandHardwardR
                 LOGD("iconType:%d", accessoryPojo->IconType);
             }
         }   break;
-            
+        
         default: {
             LOGE("對應不到dataType");
         }   break;
@@ -233,57 +233,19 @@ void VtechIPHubGatewayHardward::onCommandHardwardRecv_UpdateItems(CommandHardwar
     // 根據不同的DataType取得資料
     switch (pCommandHardwardRecv_UpdateItems->dataType) {
         case DataType_Accessory: {
-            // 針對收到的資料做為更新硬體參考
-            vector<AccessoryData*> accessoryList = (vector<AccessoryData*>&) pCommandHardwardRecv_UpdateItems->baseDataList;
-            
-            for (int i=0 ; i<accessoryList.size() ; i++) {
-                LOGD("accessoryId:%d", accessoryList[i]->accessoryId);
+            // 針對收到的資料做為參考
+            shared_ptr<vector<shared_ptr<Pojo>>> pAccessoryList = (shared_ptr<vector<shared_ptr<Pojo>>>) pCommandHardwardRecv_UpdateItems->pPojoList;
+            for (shared_ptr<Pojo> pPojo : *pAccessoryList) {
+                shared_ptr<AccessoryPojo>& accessoryPojo = (shared_ptr<AccessoryPojo>&) pPojo;
                 
-                for (int j=0 ; j<accessoryList[i]->functionCodeDataList.size() ; j++) {
-                    LOGD("functionCode:%s", accessoryList[i]->functionCodeDataList[j]->functonCode.c_str());
-                    
-                    for (int k=0 ; k<accessoryList[i]->functionCodeDataList[j]->functionCodeValueDataList.size() ; k++) {
-                        LOGD("value:%d", accessoryList[i]->functionCodeDataList[j]->functionCodeValueDataList[k]->value);
-                        
-                    }
-                }
+                LOGD("AID:%d", accessoryPojo->AID);
+                LOGD("iconType:%d", accessoryPojo->IconType);
+                // Update資料
             }
         }   break;
-            
+        
         default: {
             LOGE("對應不到dataType");
         }   break;
     }
-    
-    // 通知update
-    FunctionCodeValueData* pFunctionCodeValueData = new FunctionCodeValueData();
-    pFunctionCodeValueData->value = 1;
-    
-    FunctionCodeData* pFunctionCodeData = new FunctionCodeData();
-    pFunctionCodeData->functonCode = 1;
-    pFunctionCodeData->functionCodeValueDataList.push_back(pFunctionCodeValueData);
-
-    AccessoryData* pAccessoryData = new AccessoryData();
-    pAccessoryData->accessoryId = 1;
-    pAccessoryData->functionCodeDataList.push_back(pFunctionCodeData);
-    
-    CommandHardwardSend_UpdateItems sendUpdateItems;
-    sendUpdateItems.baseDataList.push_back(pAccessoryData);
-    sendUpdateItems.dataType = DataType_Accessory;
-    sendUpdateItems.errorCode = 0;
-    
-    Device* pDevice = Device::getInstance();
-    JsonRDTCommand* jsonRDTCommand = (JsonRDTCommand*) pDevice->getCommand();
-    jsonRDTCommand->commandHardwardSend_UpdateItems(&sendUpdateItems);
-    
-    // 通知update
-//    LOGD("通知update");
-//    CommandHardwardSend_UpdateItems sendUpdateItems;
-//    sendUpdateItems.baseDataList = pUpdateItems->baseDataList;
-//    sendUpdateItems.dataType = pUpdateItems->dataType;
-//    sendUpdateItems.errorCode = pUpdateItems->errorCode;
-//    
-//    Device* pDevice = Device::getInstance();
-//    JsonRDTCommand* jsonRDTCommand = (JsonRDTCommand*) pDevice->getCommand();
-//    jsonRDTCommand->commandHardwardSend_UpdateItems(&sendUpdateItems);
 }
