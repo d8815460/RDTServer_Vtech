@@ -22,7 +22,7 @@ JsonRDTCommand::JsonRDTCommand(CommandEvent* pCommandEvent, CommandHardwardEvent
     LOGD("JsonRDTServerCommand");
     
     m_CommandData.version1 = 2;
-    m_CommandData.version2 = 0;
+    m_CommandData.version2 = 1;
     m_CommandData.version3 = 0;
 }
 
