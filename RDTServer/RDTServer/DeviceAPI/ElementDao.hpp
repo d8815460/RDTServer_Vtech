@@ -45,14 +45,12 @@ struct ElementPojo : public Pojo
     
     void genValueObject()
     {
-        //        if (valueObjectList.size() == 0) {
         /******************************************* 修改處 *****************************************************/
         valueObjectList = {
             createValueObject(fkAccessorySerial),
             createValueObject(Element),
         };
         /******************************************* 修改處 *****************************************************/
-        //        }
     }
     
     virtual void toJson(Json::Value& json)

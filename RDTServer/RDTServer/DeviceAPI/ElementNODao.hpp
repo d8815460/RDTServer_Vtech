@@ -47,7 +47,6 @@ struct ElementNOPojo : public Pojo
     
     void genValueObject()
     {
-        //        if (valueObjectList.size() == 0) {
         /******************************************* 修改處 *****************************************************/
         valueObjectList = {
             createValueObject(fkElementSerial),
@@ -56,7 +55,6 @@ struct ElementNOPojo : public Pojo
             createValueObject(NtfyEnable),
         };
         /******************************************* 修改處 *****************************************************/
-        //        }
     }
     
     virtual void toJson(Json::Value& json)

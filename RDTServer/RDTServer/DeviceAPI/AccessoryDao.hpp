@@ -36,6 +36,7 @@ struct AccessoryPojo : public Pojo
     
     int         accessorySerial;
     
+    int         fkRoomSerial;
     int         AID;
     std::string Name;
     int         IconType;
@@ -50,7 +51,15 @@ struct AccessoryPojo : public Pojo
     }
     
     /******************************************* 修改處 *****************************************************/
-    Contractor5(AccessoryPojo, SubPojoList(),
+//    Contractor5(AccessoryPojo, SubPojoList(),
+//                int,         AID,
+//                std::string, Name,
+//                int,         IconType,
+//                int,         Connection,
+//                bool,        IsGateway)
+    
+    Contractor6(AccessoryPojo, SubPojoList(),
+                int,         fkRoomSerial,
                 int,         AID,
                 std::string, Name,
                 int,         IconType,
@@ -60,17 +69,17 @@ struct AccessoryPojo : public Pojo
     
     void genValueObject()
     {
-//        if (valueObjectList.size() == 0) {
-            /******************************************* 修改處 *****************************************************/
-            valueObjectList = {
-                createValueObject(AID),
-                createValueObject(Name),
-                createValueObject(IconType),
-                createValueObject(Connection),
-                createValueObject(IsGateway),
-            };
-            /******************************************* 修改處 *****************************************************/
-//        }
+        /******************************************* 修改處 *****************************************************/
+        valueObjectList = {
+            createValueObject(fkRoomSerial),
+            createValueObject(AID),
+            createValueObject(Name),
+            createValueObject(IconType),
+            createValueObject(Connection),
+            createValueObject(IsGateway),
+            createValueObject(fkRoomSerial),
+        };
+        /******************************************* 修改處 *****************************************************/
     }
     
     virtual void toJson(Json::Value& json)
@@ -79,6 +88,7 @@ struct AccessoryPojo : public Pojo
         
         /******************************************* 修改處 *****************************************************/
         // AID在下面加
+        addJson(subJsonList, fkRoomSerial);
         addJson(subJsonList, Name);
         addJson(subJsonList, IconType);
         addJson(subJsonList, Connection);

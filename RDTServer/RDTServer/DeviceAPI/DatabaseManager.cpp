@@ -46,16 +46,10 @@ DatabaseManager::DatabaseManager()
         shared_ptr<RoomPojo> pRoomPojo(new RoomPojo("MyRoom", 0));
         RoomDao::create(pRoomPojo);
     }
-    
-    {
-        shared_ptr<RoomPojo> pRoomPojo(new RoomPojo("Has Room", 0));
-        RoomDao::create(pRoomPojo);
-    }
-    
     {
         /* 新增一筆資料 */
-        // AID, Name, IconType, Connection, IsGateway;
-        AccessoryPojo accessoryPojo(0, "IPHub", 0, 1, false);
+        // fkRoomSerial, AID, Name, IconType, Connection, IsGateway;
+        AccessoryPojo accessoryPojo(1, 0, "IPHub", 0, 1, false);
         
         // Element
         shared_ptr<ElementPojo> pElement1(new ElementPojo("switch"));
@@ -70,11 +64,10 @@ DatabaseManager::DatabaseManager()
         
         AccessoryDao::create(accessoryPojo);
     }
-    
     {
         /* 新增一筆資料 */
-        // AID, Name, IconType, Connection, IsGateway;
-        AccessoryPojo accessoryPojo(1, "PC Home", 1, 1, false);
+        // AID, Name, IconType, Connection, IsGateway
+        AccessoryPojo accessoryPojo(1, 1, "PC Home", 1, 1, false);
         
         // Element
         shared_ptr<ElementPojo> pElement1(new ElementPojo("switch"));
@@ -82,6 +75,24 @@ DatabaseManager::DatabaseManager()
         // ElementNO, Value, NtfyEnable
         shared_ptr<ElementNOPojo> pNO1(new ElementNOPojo(0, "轟天2", true));
         shared_ptr<ElementNOPojo> pNO2(new ElementNOPojo(1, "大鑫2", true));
+        
+        accessoryPojo.pSubPojoList->push_back(pElement1);
+        pElement1->pSubPojoList->push_back(pNO1);
+        pElement1->pSubPojoList->push_back(pNO2);
+        
+        AccessoryDao::create(accessoryPojo);
+    }
+    {
+        /* 新增一筆資料 */
+        // fkRoomSerial, AID, Name, IconType, Connection, IsGateway
+        AccessoryPojo accessoryPojo(0, 1, "My Home", 1, 1, false);
+        
+        // Element
+        shared_ptr<ElementPojo> pElement1(new ElementPojo("trigger"));
+        
+        // ElementNO, Value, NtfyEnable
+        shared_ptr<ElementNOPojo> pNO1(new ElementNOPojo(0, "轟天3", true));
+        shared_ptr<ElementNOPojo> pNO2(new ElementNOPojo(1, "大鑫3", true));
         
         accessoryPojo.pSubPojoList->push_back(pElement1);
         pElement1->pSubPojoList->push_back(pNO1);
