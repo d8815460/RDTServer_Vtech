@@ -6,7 +6,7 @@ set(CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/CMake")
 ###################### 版本號 #############################
 set (DEVICE_API_VERSION_MAJOR 0)
 set (DEVICE_API_VERSION_MINOR 1)
-set (DEVICE_API_VERSION_PATCH 2)
+set (DEVICE_API_VERSION_PATCH 3)
 ###################### 版本號 #############################
 
 ###################### 配置文件 #############################
