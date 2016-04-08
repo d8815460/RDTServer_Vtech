@@ -42,11 +42,11 @@ void* JsonRDTClientCommand::threadInput(void *arg)
 {
     JsonRDTClientCommand* pJsonRDTClientCommand = (JsonRDTClientCommand*) arg;
     
-    char pInput;
+    std::string pInput;
     while(true) {
 //        LOGD("請輸入一個字元:");
         cin >> pInput;
-        LOGD("input:%c", pInput);
+        LOGD("input:%s", pInput.c_str());
         
         LOGD("===================================================================================================================================");
         int count = 0;
@@ -62,6 +62,8 @@ void* JsonRDTClientCommand::threadInput(void *arg)
             unsigned int serno = 87654321;
             string filename = "JsonList/";
             
+            filename.append(pInput);
+                            
             // Accessory
 //            filename.append("Get_All_Accessories.json");
 //            filename.append("Get_One_Accessory.json");
@@ -72,7 +74,7 @@ void* JsonRDTClientCommand::threadInput(void *arg)
             
             // Element
 //            filename.append("Get_Multiple_Element.json");
-            filename.append("Set_Multiple_Element.json");
+//            filename.append("Set_Multiple_Element.json");
             
             char jsonString[MAX_BUFFER_SIZE];
             fstream fp;
