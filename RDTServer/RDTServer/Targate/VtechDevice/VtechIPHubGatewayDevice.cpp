@@ -32,7 +32,7 @@
 #include "AccessoryTypeEnum.hpp"
 #include "AccessoryDao.hpp"
 #include "ElementDao.hpp"
-#include "ElementNoDao.hpp"
+#include "ElementNODao.hpp"
 
 VtechIPHubGatewayDevice::VtechIPHubGatewayDevice()
 {
