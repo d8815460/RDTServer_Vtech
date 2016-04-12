@@ -54,137 +54,104 @@ Hardward* VtechIPHubGatewayHardwardDeviceImpl::createHardward()
 
 void* VtechIPHubGatewayHardwardImpl::socketInput(void *arg)
 {
-   while(true)
-   {
-      unsigned char buffer[BUFFER_SIZE];
-      memset(buffer, 0, BUFFER_SIZE);
+    while(true)
+    {
+        unsigned char buffer[BUFFER_SIZE];
+        memset(buffer, 0, BUFFER_SIZE);
        
-      try {
-  			sock.rcv(buffer,BUFFER_SIZE-1);
-  			LOGD("we found received payload from unix socket = %s \n",buffer);
-  			char* json = (char*) (buffer);
-    		LOGD("received json data:%s", json);
-  			Json::Reader reader;
-  			Json::Value inJsonObject;
-			
-//        if (reader.parse(json, inJsonObject))
-//  			{
-// 				LOGD("JSON object can be parsed");		
-// 				std::string operation= inJsonObject["operation"].asString();
-// 				LOGD("received json operation = %s", operation.c_str());
+        try {
+            sock.rcv(buffer,BUFFER_SIZE-1);
+            LOGD("we found received payload from unix socket = %s \n",buffer);
+            char* json = (char*) (buffer);
+            LOGD("received json data:%s", json);
+            Json::Reader reader;
+            Json::Value inJsonObject;
+                
+            if (reader.parse(json, inJsonObject)) {
+                LOGD("JSON object can be parsed");
+                std::string operation= inJsonObject["operation"].asString();
+                LOGD("received json operation = %s", operation.c_str());
 
-// 				unsigned int accessoryId= inJsonObject["accessoryId"].asUInt();
-// 				LOGD("received json accessoryId = %d", accessoryId);
+                unsigned int accessoryId= inJsonObject["accessoryId"].asUInt();
+                LOGD("received json accessoryId = %d", accessoryId);
 
-// 				std::string functionCode= inJsonObject["functionCode"].asString();
-// 				LOGD("received json functionCode = %s", functionCode.c_str());
+                std::string functionCode= inJsonObject["functionCode"].asString();
+                LOGD("received json functionCode = %s", functionCode.c_str());
 
-// 				unsigned int value= inJsonObject["value"].asUInt();
-// 				LOGD("received json value = %d", value);
+                unsigned int value= inJsonObject["value"].asUInt();
+                LOGD("received json value = %d", value);
 
-// 				if (operation.compare("update") == 0)
-// 				{
-// 					LOGD("Vtech check we need to call the update below \n");
-// /*
-// 					we should now call the update api below
-// */
+                if (operation.compare("update") == 0) {
+                    LOGD("Vtech check we need to call the update below \n");
+                    
+                    {
+                        /* 新增一筆Accessory資料 */
+                        // param1: AID代表accessory id
+                        // param2: Name 一個名字,用於標示目標類型的一種可視化手段
+                        // param3: IconType 會面呈現的Icon所代表的型態，如IPHub
+                        // param4: Connection 連線狀態，
+                        // param5: IsGateway is gateway or not
+                        shared_ptr<AccessoryPojo> pAccessoryPojo(new AccessoryPojo(1, "PC Home", 1, 1, false));
+                        
+                        // param1: Element 一個元件有單個或多個element NO
+                        shared_ptr<ElementPojo> pElement1(new ElementPojo("switch"));
+                        
+                        // param1: ElementNO 一個元件的編號
+                        // param2: Value 由一個字串組成，字串的類型可能是數值，字串或整數，也有可能是其他的。它的類型由Metadata決定一個 key 通常會有一個 value
+                        // param3: NtfyEnable 是否開啟推播
+                        shared_ptr<ElementNOPojo> pNO1(new ElementNOPojo(0, "轟天2", true));
+                        shared_ptr<ElementNOPojo> pNO2(new ElementNOPojo(1, "大鑫2", true));
+                        
+                        pAccessoryPojo->pSubPojoList->push_back(pElement1);
+                        pElement1->pSubPojoList->push_back(pNO1);
+                        pElement1->pSubPojoList->push_back(pNO2);
+                        
+                        CommandHardwardSend_UpdateItems items;
+                        items.dataType = DataType_Accessory;
+                        items.pPojoList->push_back(pAccessoryPojo);
+                        
+                        Device* pDevice = Device::getInstance();
+                        JsonRDTCommand* jsonRDTCommand = (JsonRDTCommand*) pDevice->getCommand();
+                        jsonRDTCommand->commandHardwardSend_UpdateItems(&items);
 
-//         // 通知update
-//         FunctionCodeValueData* pFunctionCodeValueData = new FunctionCodeValueData();
-//         pFunctionCodeValueData->value = value;
-        
-//         FunctionCodeData* pFunctionCodeData = new FunctionCodeData();
-//         pFunctionCodeData->functonCode = functionCode.c_str();
-//         pFunctionCodeData->functionCodeValueDataList.push_back(pFunctionCodeValueData);
-
-//         AccessoryData* pAccessoryData = new AccessoryData();
-//         pAccessoryData->accessoryId = accessoryId;
-//         pAccessoryData->functionCodeDataList.push_back(pFunctionCodeData);
-        
-//         CommandHardwardSend_UpdateItems sendUpdateItems;
-//         sendUpdateItems.baseDataList.push_back(pAccessoryData);
-//         sendUpdateItems.dataType = DataType_Accessory;
-//         sendUpdateItems.errorCode = 0;
-        
-//         Device* pDevice = Device::getInstance();
-//         JsonRDTCommand* jsonRDTCommand = (JsonRDTCommand*) pDevice->getCommand();
-//         jsonRDTCommand->commandHardwardSend_UpdateItems(&sendUpdateItems);
-        
-//         執行後在Server上看到
-//         收到 hardward json = 
-//         {
-//            "operation" : "update",
-//            "request" : {
-//               "accessories" : [
-//                  {
-//                     "accessory_id" : 1,
-//                     "accessory_type" : 0,
-//                     "function_codes" : [
-//                        {
-//                           "functon_code" : "motion",
-//                           "index" : 0,
-//                           "value" : 1
-//                        }
-//                     ]
-//                  }
-//               ]
-//            },
-//            "serno" : 12345678,
-//            "target" : "/accessory/"
-//         }
-        
-
-// 				// FunctionCodeValueData* pFunctionCodeValueData = new FunctionCodeValueData();
-// 				// pFunctionCodeValueData->value = value;
-				
-// 				// FunctionCodeData* pFunctionCodeData = new FunctionCodeData();
-// 				// pFunctionCodeData->functonCode = functionCode;
-// 				// pFunctionCodeData->functionCodeValueDataList.push_back(pFunctionCodeValueData);
-
-// 				// AccessoryData* pAccessoryData = new AccessoryData();
-// 				// pAccessoryData->accessoryId = accessoryId;
-// 				// pAccessoryData->functionCodeDataList.push_back(pFunctionCodeData);
-
-// 				// CommandBase* pCommand = NULL;
-// 				// pCommand = new CommandHardwardRecv_UpdateItems();
-// 				// CommandHardwardRecv_UpdateItems* pUpdateItems = (CommandHardwardRecv_UpdateItems*) pCommand;
-// 				// pUpdateItems->dataType = DataType_Accessory;
-// 				// pUpdateItems->baseDataList.push_back(pAccessoryData);
-
-// 				// // 通知update
-// 				// LOGD("通知update");
-// 				// CommandHardwardSend_UpdateItems sendUpdateItems;
-// 				// sendUpdateItems.baseDataList = pUpdateItems->baseDataList;
-// 				// sendUpdateItems.dataType = pUpdateItems->dataType;
-// 				// sendUpdateItems.errorCode = pUpdateItems->errorCode;
-				
-// 				// Device* pDevice = Device::getInstance();
-// 				// JsonRDTCommand* jsonRDTCommand = (JsonRDTCommand*) pDevice->getCommand();
-// 				// jsonRDTCommand->commandHardwardSend_UpdateItems(&sendUpdateItems);
-
-
-
-// 				}
-
-// 				else if (operation.compare("reply") == 0)
-// 				{
-// 					LOGD("Vtech check we check for error code below \n");
-// 					ULEErrorCode = inJsonObject["errorCode"].asUInt();
-// 					LOGD("received json errorCode= %d", ULEErrorCode);
-
-// 				}
-
-// 				else
-// 					LOGD("Vtech check it's not a valid operation \n");
-//			   }
-      }
-      catch (const libsocket::socket_exception& exc)
-      {
-         std::cerr << exc.mesg;
-      }
-   }
-   
-   return NULL;
+                        /*
+                        會看到如下log
+                        {
+                           "1" : {
+                              "Connection" : 1,
+                              "IconType" : 1,
+                              "IsGateway" : false,
+                              "ListElement" : {
+                                 "switch" : {
+                                    "0" : "轟天2",
+                                    "1" : "大鑫2",
+                                    "NtfyEnable" : true
+                                 }
+                              },
+                              "Name" : "PC Home"
+                           }
+                        }
+                        */
+                    }
+				}
+				else if (operation.compare("reply") == 0)
+				{
+					LOGD("Vtech check we check for error code below \n");
+					ULEErrorCode = inJsonObject["errorCode"].asUInt();
+					LOGD("received json errorCode= %d", ULEErrorCode);
+				}
+				else {
+					LOGD("Vtech check it's not a valid operation \n");
+			    }
+            }
+        }
+        catch (const libsocket::socket_exception& exc)
+        {
+            std::cerr << exc.mesg;
+        }
+    }
+    
+    return NULL;
 }
 
 #pragma mark - Method

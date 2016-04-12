@@ -174,10 +174,10 @@ void JsonRDTCommand::commandHardwardSend_ReadItems(CommandHardwardSend_ReadItems
             // 針對收到的資料做為參考
             shared_ptr<vector<shared_ptr<Pojo>>> pPojoList = (shared_ptr<vector<shared_ptr<Pojo>>>) pCommandHardwardRecv_ReadItems->pPojoList;
             for (shared_ptr<Pojo> pPojo : *pPojoList) {
-                shared_ptr<AccessoryPojo>& accessoryPojo = (shared_ptr<AccessoryPojo>&) pPojo;
+                shared_ptr<AccessoryPojo>& pAccessoryPojo = (shared_ptr<AccessoryPojo>&) pPojo;
                 
-                LOGD("AID:%d", accessoryPojo->AID);
-                LOGD("iconType:%d", accessoryPojo->IconType);
+                LOGD("AID:%d", pAccessoryPojo->AID);
+                LOGD("iconType:%d", pAccessoryPojo->IconType);
             }
         }   break;
             
@@ -196,10 +196,14 @@ void JsonRDTCommand::commandHardwardSend_UpdateItems(CommandHardwardSend_UpdateI
             // 針對收到的資料做為參考
             shared_ptr<vector<shared_ptr<Pojo>>> pPojoList = (shared_ptr<vector<shared_ptr<Pojo>>>) pCommandHardwardSend_UpdateItems->pPojoList;
             for (shared_ptr<Pojo> pPojo : *pPojoList) {
-                shared_ptr<AccessoryPojo>& accessoryPojo = (shared_ptr<AccessoryPojo>&) pPojo;
+                shared_ptr<AccessoryPojo>& pAccessoryPojo = (shared_ptr<AccessoryPojo>&) pPojo;
                 
-                LOGD("AID:%d", accessoryPojo->AID);
-                LOGD("iconType:%d", accessoryPojo->IconType);
+                LOGD("AID:%d", pAccessoryPojo->AID);
+                LOGD("iconType:%d", pAccessoryPojo->IconType);
+                
+                Json::Value json;
+                pAccessoryPojo->toJson(json);
+                LOGD("json:%s", json.toStyledString().c_str());
             }
         }   break;
             
