@@ -83,24 +83,36 @@ DatabaseManager::DatabaseManager()
         
         AccessoryDao::create(accessoryPojo);
     }
-    {
-        /* 新增一筆資料 */
-        // fkRoomSerial, AID, Name, IconType, Connection, IsGateway
-        AccessoryPojo accessoryPojo(0, currentAID++, "My Home", 1, 1, false);
-        
-        // Element
-        shared_ptr<ElementPojo> pElement1(new ElementPojo("trigger"));
-        
-        // ElementNO, Value, NtfyEnable
-        shared_ptr<ElementNOPojo> pNO1(new ElementNOPojo(0, "轟天3", true));
-        shared_ptr<ElementNOPojo> pNO2(new ElementNOPojo(1, "大鑫3", true));
-        
-        accessoryPojo.pSubPojoList->push_back(pElement1);
-        pElement1->pSubPojoList->push_back(pNO1);
-        pElement1->pSubPojoList->push_back(pNO2);
-        
-        AccessoryDao::create(accessoryPojo);
-    }
+//    {
+//        /* 新增一筆Accessory資料 */
+//        // param1: AID代表accessory id
+//        // param2: Name 一個名字,用於標示目標類型的一種可視化手段
+//        // param3: IconType 會面呈現的Icon所代表的型態，如IPHub
+//        // param4: Connection 連線狀態，
+//        // param5: IsGateway is gateway or not
+//        shared_ptr<AccessoryPojo> pAccessoryPojo(new AccessoryPojo(1, "PC Home", 1, 1, false));
+//        
+//        // param1: Element 一個元件有單個或多個element NO
+//        shared_ptr<ElementPojo> pElement1(new ElementPojo("switch"));
+//        
+//        // param1: ElementNO 一個元件的編號
+//        // param2: Value 由一個字串組成，字串的類型可能是數值，字串或整數，也有可能是其他的。它的類型由Metadata決定一個 key 通常會有一個 value
+//        // param3: NtfyEnable 是否開啟推播
+//        shared_ptr<ElementNOPojo> pNO1(new ElementNOPojo(0, "轟天2", true));
+//        shared_ptr<ElementNOPojo> pNO2(new ElementNOPojo(1, "大鑫2", true));
+//        
+//        pAccessoryPojo->pSubPojoList->push_back(pElement1);
+//        pElement1->pSubPojoList->push_back(pNO1);
+//        pElement1->pSubPojoList->push_back(pNO2);
+//        
+//        CommandHardwardSend_UpdateItems items;
+//        items.dataType = DataType_Accessory;
+//        items.pPojoList->push_back(pAccessoryPojo);
+//        
+//        Device* pDevice = Device::getInstance();
+//        JsonRDTCommand* jsonRDTCommand = (JsonRDTCommand*) pDevice->getCommand();
+//        jsonRDTCommand->commandHardwardSend_UpdateItems(&items);
+//    }
     /******************************************* 修改處 *****************************************************/
     
     /* 取得該筆資料的 ID */

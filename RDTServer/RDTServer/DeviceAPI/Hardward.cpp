@@ -78,7 +78,7 @@ void Hardward::onCommandHardwardRecv_ReadItems(CommandHardwardRecv_ReadItems* pC
     switch (pCommandHardwardRecv_ReadItems->dataType) {
         case DataType_Accessory: {
             // 針對收到的資料做為參考
-            shared_ptr<vector<shared_ptr<Pojo>>> pAccessoryList = (shared_ptr<vector<shared_ptr<Pojo>>>) pCommandHardwardRecv_ReadItems->pojoList;
+            shared_ptr<vector<shared_ptr<Pojo>>> pAccessoryList = (shared_ptr<vector<shared_ptr<Pojo>>>) pCommandHardwardRecv_ReadItems->pPojoList;
             for (shared_ptr<Pojo> pPojo : *pAccessoryList) {
                 shared_ptr<AccessoryPojo>& accessoryPojo = (shared_ptr<AccessoryPojo>&) pPojo;
                 
@@ -101,7 +101,7 @@ void Hardward::onCommandHardwardRecv_UpdateItems(CommandHardwardRecv_UpdateItems
     switch (pCommandHardwardRecv_UpdateItems->dataType) {
         case DataType_Accessory: {
             // 針對收到的資料做為更新硬體參考
-            vector<AccessoryData*> accessoryList = (vector<AccessoryData*>&) pCommandHardwardRecv_UpdateItems->baseDataList;
+            vector<AccessoryData*> accessoryList = (vector<AccessoryData*>&) pCommandHardwardRecv_UpdateItems->pPojoList;
             
             for (int i=0 ; i<accessoryList.size() ; i++) {
                 LOGD("accessoryId:%d", accessoryList[i]->accessoryId);

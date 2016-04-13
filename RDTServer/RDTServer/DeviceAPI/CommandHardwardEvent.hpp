@@ -22,7 +22,7 @@ struct CommandHardwardRecvJsonData
 
 struct CommandHardwardNotifyData : CommandBase
 {
-    vector<BaseData*> baseDataList;
+    vector<Pojo*> baseDataList;
 };
 
 struct CommandHardwardRecv_ProductCode : CommandBase

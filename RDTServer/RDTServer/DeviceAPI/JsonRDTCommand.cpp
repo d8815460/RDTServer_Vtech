@@ -172,14 +172,14 @@ void JsonRDTCommand::commandHardwardSend_ReadItems(CommandHardwardSend_ReadItems
     switch (pCommandHardwardRecv_ReadItems->dataType) {
         case DataType_Accessory: {
             // 針對收到的資料做為參考
-            shared_ptr<vector<shared_ptr<Pojo>>> pAccessoryList = (shared_ptr<vector<shared_ptr<Pojo>>>) pCommandHardwardRecv_ReadItems->pojoList;
-            for (shared_ptr<Pojo> pPojo : *pAccessoryList) {
-                shared_ptr<AccessoryPojo>& accessoryPojo = (shared_ptr<AccessoryPojo>&) pPojo;
+            shared_ptr<vector<shared_ptr<Pojo>>> pPojoList = (shared_ptr<vector<shared_ptr<Pojo>>>) pCommandHardwardRecv_ReadItems->pPojoList;
+            for (shared_ptr<Pojo> pPojo : *pPojoList) {
+                shared_ptr<AccessoryPojo>& pAccessoryPojo = (shared_ptr<AccessoryPojo>&) pPojo;
                 
-                LOGD("AID:%d", accessoryPojo->AID);
-                LOGD("iconType:%d", accessoryPojo->IconType);
+                LOGD("AID:%d", pAccessoryPojo->AID);
+                LOGD("iconType:%d", pAccessoryPojo->IconType);
             }
-        }
+        }   break;
             
         default:
             LOGE("對應不到dataType");
@@ -192,44 +192,20 @@ void JsonRDTCommand::commandHardwardSend_UpdateItems(CommandHardwardSend_UpdateI
     LOGD("commandHardwardSend_UpdateItems");
     
     switch (pCommandHardwardSend_UpdateItems->dataType) {
-        case DataType_Accessory:
-            // 準備json
-            if (pCommandHardwardSend_UpdateItems->baseDataList.size() > 0) {
-                std::string json = pCommandHardwardSend_UpdateItems->baseDataList[0]->toJson();
-                LOGD("json = \n%s", json.c_str());
+        case DataType_Accessory: {
+            // 針對收到的資料做為參考
+            shared_ptr<vector<shared_ptr<Pojo>>> pPojoList = (shared_ptr<vector<shared_ptr<Pojo>>>) pCommandHardwardSend_UpdateItems->pPojoList;
+            for (shared_ptr<Pojo> pPojo : *pPojoList) {
+                shared_ptr<AccessoryPojo>& pAccessoryPojo = (shared_ptr<AccessoryPojo>&) pPojo;
                 
-                Json::Reader reader;
-                Json::Value jsonObject;
-                if (reader.parse(json, jsonObject))
-                {
-                    Json::Value root;
-                    
-                    // Common
-                    root["serno"] = 12345678;
-                    root["operation"] = "update";
-                    root["target"] = "/accessory/";
-                    root["request"] = jsonObject;
-                    
-                    json = root.toStyledString();
-                    LOGD("收到 hardward json = \n%s", json.c_str());
-                    
-                    // 發送上報
-//                    set<int>::iterator it = m_nChannelIDList.end();
-//                    it--;
-//                    int channelID = (*it);
-//                    sendJsonData(channelID, root);
-                    
-//                    for (set<int>::iterator it=m_nChannelIDList.begin() ; it!=m_nChannelIDList.end() ; it++) {
-//                        int channelID = (*it);
-//                        sendJsonData(channelID, root);
-//                    }
-                }
+                LOGD("AID:%d", pAccessoryPojo->AID);
+                LOGD("iconType:%d", pAccessoryPojo->IconType);
+                
+                Json::Value json;
+                pAccessoryPojo->toJson(json);
+                LOGD("json:%s", json.toStyledString().c_str());
             }
-            
-            break;
-            
-        case DataType_Group:
-            break;
+        }   break;
             
         default:
             throw CommandException(__PRETTY_FUNCTION__, __LINE__, CommandException_ErrorCode_DataType_Not_Found);

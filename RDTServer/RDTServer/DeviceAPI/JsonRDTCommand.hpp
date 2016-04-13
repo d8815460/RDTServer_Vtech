@@ -6,6 +6,28 @@
 //  Copyright © 2016年 jakey. All rights reserved.
 //
 
+/*
+Revision Table
+------------|------------------|---------------|-------------------
+ Version    | Name             | Date          | Description
+------------|------------------|---------------|-------------------
+ 0.1.2      | jakey            | 3月           | 實作protocol 2.0版本對應的Hardward interface
+------------|------------------|---------------|-------------------
+ 0.1.3      | jakey            | 4月12日        | 實作protocol 2.1版本對應的Hardward interface
+            |                  |               | commandHardwardSend_CreateItem  修改項目 shared_ptr<vector<shared_ptr<Pojo>>> pojoList
+            |                  |               | commandHardwardSend_DeleteItems 修改項目 shared_ptr<vector<shared_ptr<Pojo>>> pojoList
+            |                  |               | commandHardwardSend_ReadItems   修改項目 vector<int>* pIDList 包含刪除項目的識別碼清單
+            |                  |               | commandHardwardSend_UpdateItems 修改項目 shared_ptr<vector<shared_ptr<Pojo>>> pojoList
+            |                  |               |
+            |                  |               | 如果 DataType dataType = DataType_Accessory，則指的是AccessoryPojo，AccessoryPojo包含多個ElementPojo
+            |                  |               | shared_ptr<vector<shared_ptr<Pojo>>> pojoList
+            |                  |               | AccessoryPojo 在 AccessoryDao.hpp，pSubPojoList包含多個ElementPojo
+            |                  |               | ElementPojo 在 ElementDao.hpp，pSubPojoList包含多個ElementNOPojo
+            |                  |               | ElementNOPojo 在 ElementNODao.hpp
+            |                  |               |
+------------|------------------|---------------|-------------------
+*/
+
 #ifndef JsonRDTCommand_hpp
 #define JsonRDTCommand_hpp
 
@@ -79,11 +101,11 @@ public:
     /**
      * \brief 硬體傳送新增項目
      *
-     * \details 當收到新增項目時，系統將會建立新項目，存放在struct，包含資料項目BaseData,必須根據實際DataType填入相關資料
+     * \details 請將資料存放在struct，必須根據實際DataType填入相關資料
      *
-     * \param dataType  實際資料型態
-     * \param errorCode 發生錯誤時的錯誤碼
-     * \param pBaseData 包含新增項目相關的資料
+     * \param DataType dataType  實際資料型態，如DataType_Accessory
+     * \param int errorCode      發生錯誤時的錯誤碼，0為成功，非0為失敗
+     * \param shared_ptr<vector<shared_ptr<Pojo>>> pojoList 包含新增項目相關的資料，如dataType為DataType_Accessory，請參閱AccessoryDao.hpp中class AccessoryPojo所定義的屬性
      *
      */
     virtual void commandHardwardSend_CreateItem(CommandHardwardSend_CreateItems* pCommandHardwardRecv_CreateItems);
@@ -91,11 +113,11 @@ public:
     /**
      * \brief 硬體傳送刪除項目
      *
-     * \details 硬體傳送刪除項目時，系統將會發送id，存放在struct,必須根據實際DataType刪除相關資料
+     * \details 請將資料存放在struct，必須根據實際DataType填入相關資料
      *
-     * \param dataType  實際資料型態
-     * \param errorCode 發生錯誤時的錯誤碼
-     * \param id        包含刪除項目的識別碼
+     * \param DataType dataType  實際資料型態，如DataType_Accessory
+     * \param int errorCode      發生錯誤時的錯誤碼，0為成功，非0為失敗
+     * \param vector<int>* pIDList 包含刪除項目的識別碼清單
      *
      */
     virtual void commandHardwardSend_DeleteItems(CommandHardwardSend_DeleteItems* pCommandHardwardRecv_DeleteItems);
@@ -103,11 +125,11 @@ public:
     /**
      * \brief 硬體傳送讀取資料項目清單
      *
-     * \details 硬體傳送讀取資料項目時，系統將會發送BaseData清單，存放在struct，必須根據實際DataType查詢相關資料
+     * \details 請將資料存放在struct，必須根據實際DataType填入相關資料
      *
-     * \param dataType      實際資料型態
-     * \param errorCode     發生錯誤時的錯誤碼
-     * \param baseDataList  包含查詢項目清單
+     * \param DataType dataType  實際資料型態，如DataType_Accessory
+     * \param int errorCode      發生錯誤時的錯誤碼，0為成功，非0為失敗
+     * \param shared_ptr<vector<shared_ptr<Pojo>>> pojoList 包含新增項目相關的資料，如dataType為DataType_Accessory，請參閱AccessoryDao.hpp中class AccessoryPojo所定義的屬性
      *
      */
     virtual void commandHardwardSend_ReadItems(CommandHardwardSend_ReadItems* pCommandHardwardRecv_ReadItems);
@@ -115,11 +137,11 @@ public:
     /**
      * \brief 硬體傳送更新資料項目清單
      *
-     * \details 硬體傳送更新項目，如將燈打開或是PIR觸發，硬體針對實際狀況發送BaseData清單，存放在struct，必須根據實際DataType更新相關資料
+     * \details 請將資料存放在struct，必須根據實際DataType填入相關資料
      *
-     * \param dataType      實際資料型態
-     * \param errorCode     發生錯誤時的錯誤碼
-     * \param baseDataList  包含更新項目清單
+     * \param DataType dataType  實際資料型態，如DataType_Accessory
+     * \param int errorCode      發生錯誤時的錯誤碼，0為成功，非0為失敗
+     * \param shared_ptr<vector<shared_ptr<Pojo>>> pojoList 包含新增項目相關的資料，如dataType為DataType_Accessory，請參閱AccessoryDao.hpp中class AccessoryPojo所定義的屬性
      *
      */
     virtual void commandHardwardSend_UpdateItems(CommandHardwardSend_UpdateItems* pCommandHardwardSend_UpdateItems) throw (CommandException);

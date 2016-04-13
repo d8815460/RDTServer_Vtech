@@ -19,7 +19,7 @@
 #include "AccessoryTypeEnum.hpp"
 #include "AccessoryDao.hpp"
 #include "ElementDao.hpp"
-#include "ElementNoDao.hpp"
+#include "ElementNODao.hpp"
 #include "VtechHardwareException.hpp"
 
 JsonRDTServerCommand::JsonRDTServerCommand(CommandEvent* pCommandEvent, CommandHardwardEvent* pCommandHardwardEvent, Connect* pConnect, CommandData* pCommandData) : JsonRDTCommand(pCommandEvent, pCommandHardwardEvent, pConnect, pCommandData)
@@ -153,7 +153,7 @@ void JsonRDTServerCommand::processCommandTarget(Json::Value& inJsonObject, Json:
                 pCommandBase = new CommandHardwardRecv_ReadItems();
                 CommandHardwardRecv_ReadItems* pItems = (CommandHardwardRecv_ReadItems*) pCommandBase;
                 pItems->dataType = DataType_Accessory;
-                pItems->pojoList = pojoList;
+                pItems->pPojoList = pojoList;
                 m_pCommandHardwardEvent->onCommandHardwardRecv_ReadItems(pItems);
             }
             else {
@@ -203,7 +203,7 @@ void JsonRDTServerCommand::processCommandTarget(Json::Value& inJsonObject, Json:
                 pCommandBase = new CommandHardwardRecv_ReadItems();
                 CommandHardwardRecv_ReadItems* pItems = (CommandHardwardRecv_ReadItems*) pCommandBase;
                 pItems->dataType = DataType_Accessory;
-                pItems->pojoList = pojoList;
+                pItems->pPojoList = pojoList;
                 m_pCommandHardwardEvent->onCommandHardwardRecv_ReadItems(pItems);
             }
         }
@@ -233,55 +233,57 @@ void JsonRDTServerCommand::processCommandTarget(Json::Value& inJsonObject, Json:
                     }
                 }
             }
+            // 修改
             else {
-                pCommandBase = new CommandHardwardRecv_CreateItems();
-                CommandHardwardRecv_CreateItems* pItems = (CommandHardwardRecv_CreateItems*) pCommandBase;
+                string whereSQL = "";
+                
+                // 依照查詢條件生成Accessory
+                vector<ValueObject> voList;
+                for (int i=0 ; i<jsonArray.size() ; i++) {
+                    int AID = jsonArray[i].asInt();
+                    voList.push_back(ValueObject("AID", AID));
+                }
+                
+                whereSQL = Pojo::genInSQL(voList, false);
+                
+                if (IfObject.isMember("Element")) {
+                    Json::Value jsonArray = IfObject["Element"];
+                    
+                    // 依照查詢條件生成
+                    vector<ValueObject> voList;
+                    for (int i=0 ; i<jsonArray.size() ; i++) {
+                        string Element = jsonArray[i].asString();
+                        voList.push_back(ValueObject("Element", Element));
+                    }
+                    
+                    whereSQL.append(Pojo::genInSQL(voList, true));
+                }
+                
+                if (IfObject.isMember("ElementNO")) {
+                    Json::Value jsonArray = IfObject["ElementNO"];
+                    
+                    // 依照查詢條件生成
+                    vector<ValueObject> voList;
+                    for (int i=0 ; i<jsonArray.size() ; i++) {
+                        int ElementNO = jsonArray[i].asInt();
+                        voList.push_back(ValueObject("ElementNO", ElementNO));
+                    }
+                    
+                    whereSQL.append(Pojo::genInSQL(voList, true));
+                }
+                
+                LOGD("SQL:%s", whereSQL.c_str());
+                Json::Value json;
+                
+                pCommandBase = new CommandHardwardRecv_UpdateItems();
+                CommandHardwardRecv_UpdateItems* pItems = (CommandHardwardRecv_UpdateItems*) pCommandBase;
                 pItems->dataType = DataType_Accessory;
-                m_pCommandHardwardEvent->onCommandHardwardRecv_CreateItem(pItems);
+                pItems->pPojoList = AccessoryDao::readNestWithWhereSQL(whereSQL);
+                m_pCommandHardwardEvent->onCommandHardwardRecv_UpdateItems(pItems);
                 
                 // 新增成功
                 if (pItems->errorCode == 0) {
-                    string whereSQL = "";
-                    
-                    // 依照查詢條件生成Accessory
-                    vector<ValueObject> voList;
-                    for (int i=0 ; i<jsonArray.size() ; i++) {
-                        int AID = jsonArray[i].asInt();
-                        voList.push_back(ValueObject("AID", AID));
-                    }
-                    
-                    whereSQL = Pojo::genInSQL(voList, false);
-                    
-                    if (IfObject.isMember("Element")) {
-                        Json::Value jsonArray = IfObject["Element"];
-                        
-                        // 依照查詢條件生成
-                        vector<ValueObject> voList;
-                        for (int i=0 ; i<jsonArray.size() ; i++) {
-                            string Element = jsonArray[i].asString();
-                            voList.push_back(ValueObject("Element", Element));
-                        }
-                        
-                        whereSQL.append(Pojo::genInSQL(voList, true));
-                    }
-                    
-                    if (IfObject.isMember("ElementNO")) {
-                        Json::Value jsonArray = IfObject["ElementNO"];
-                        
-                        // 依照查詢條件生成
-                        vector<ValueObject> voList;
-                        for (int i=0 ; i<jsonArray.size() ; i++) {
-                            int ElementNO = jsonArray[i].asInt();
-                            voList.push_back(ValueObject("ElementNO", ElementNO));
-                        }
-                        
-                        whereSQL.append(Pojo::genInSQL(voList, true));
-                    }
-                    
-                    LOGD("SQL:%s", whereSQL.c_str());
-                    Json::Value json;
                     vector<ValueObject> objList;
-                    
                     Json::Value thenObject = inJsonObject["Then"];
                     if (thenObject.isMember("Value")) {
                         string value = thenObject["Value"].asString();
