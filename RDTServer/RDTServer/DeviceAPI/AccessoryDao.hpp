@@ -25,6 +25,7 @@ static const char* createAccessory =    "CREATE TABLE Accessory ("
                                         "fkRoomSerial       INTEGER REFERENCES Room(RoomSerial),"
                                         "AID                INTEGER,"
                                         "Name               TEXT,"
+                                        "AccSeq             INTEGER,"
                                         "IconType           INTEGER,"
                                         "Connection         INTEGER,"
                                         "IsGateway          BOOLEAN"
@@ -42,6 +43,7 @@ struct AccessoryPojo : public Pojo
     
     int         AID;
     std::string Name;
+    int         AccSeq;
     int         IconType;
     int         Connection;
     bool        IsGateway;
@@ -54,10 +56,11 @@ struct AccessoryPojo : public Pojo
     }
     
     /******************************************* 修改處 *****************************************************/
-    Contractor6(AccessoryPojo, SubPojoList(),
+    Contractor7(AccessoryPojo, SubPojoList(),
                 int,         fkRoomSerial,
                 int,         AID,
                 std::string, Name,
+                int,         AccSeq,
                 int,         IconType,
                 int,         Connection,
                 bool,        IsGateway)
@@ -70,6 +73,7 @@ struct AccessoryPojo : public Pojo
             createValueObject(fkRoomSerial),
             createValueObject(AID),
             createValueObject(Name),
+            createValueObject(AccSeq),
             createValueObject(IconType),
             createValueObject(Connection),
             createValueObject(IsGateway),
@@ -86,6 +90,7 @@ struct AccessoryPojo : public Pojo
 //        addJson(subJsonList, fkRoomSerial);
         
         addJson(subJsonList, Name);
+        addJson(subJsonList, AccSeq);
         addJson(subJsonList, IconType);
         addJson(subJsonList, Connection);
         addJson(subJsonList, IsGateway);
@@ -126,7 +131,8 @@ public:
     static void update(AccessoryPojo& pojo);
     
     // 更新
-    static void updateNestWithWhereSQL(string& selectWhereSQL, vector<ValueObject>& objList);
+    static void updateElementNOWithWhereSQL(string& selectWhereSQL, vector<ValueObject>& objList);
+    static void updateAccessoryWithWhereSQL(string& selectWhereSQL, vector<ValueObject>& objList);
     
     // 刪除
     static int deleteAll();

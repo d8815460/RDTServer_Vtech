@@ -1,0 +1,20 @@
+{
+    "Serno": 87654321,
+    "Function": "write",
+    "If": {
+        "List": "ListAccessory"
+    },
+    "Then": {
+        "ListAccessory": {
+            "0": {
+                "AccSeq": 4,
+                "Room": {
+                    "RoomSeq": 2
+                }
+            },
+            "1": {
+                "AccSeq.": 2
+            }
+        }
+    }
+}

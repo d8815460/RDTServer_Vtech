@@ -48,9 +48,8 @@ DatabaseManager::DatabaseManager()
         RoomDao::create(pRoomPojo);
     }
     {
-        /* 新增一筆資料 */
-        // fkRoomSerial, AID, Name, IconType, Connection, IsGateway;
-        AccessoryPojo accessoryPojo(1, currentAID++, "IPHub", 0, 1, false);
+        // fkRoomSerial, AID, Name, AccSeq, IconType, Connection, IsGateway;
+        AccessoryPojo accessoryPojo(1, currentAID++, "IPHub", 1, 0, 1, false);
         
         // Element
         shared_ptr<ElementPojo> pElement1(new ElementPojo("switch"));
@@ -66,9 +65,8 @@ DatabaseManager::DatabaseManager()
         AccessoryDao::create(accessoryPojo);
     }
     {
-        /* 新增一筆資料 */
-        // AID, Name, IconType, Connection, IsGateway
-        AccessoryPojo accessoryPojo(1, currentAID++, "PC Home", 1, 1, false);
+        // fkRoomSerial, AID, Name, AccSeq, IconType, Connection, IsGateway;
+        AccessoryPojo accessoryPojo(1, currentAID++, "PC Home", 2, 1, 1, false);
         
         // Element
         shared_ptr<ElementPojo> pElement1(new ElementPojo("switch"));

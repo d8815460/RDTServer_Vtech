@@ -60,9 +60,10 @@ void AccessoryDao::readCallback(shared_ptr<vector<shared_ptr<Pojo>>> outPtrPojoL
         if_index_int_va(1, pAccessoryPojo->fkRoomSerial, data)
         if_index_int_va(2, pAccessoryPojo->AID, data)
         if_index_str_va(3, pAccessoryPojo->Name, data)
-        if_index_int_va(4, pAccessoryPojo->IconType, data)
-        if_index_int_va(5, pAccessoryPojo->Connection, data)
-        if_index_int_va(6, pAccessoryPojo->IsGateway, data)
+        if_index_int_va(4, pAccessoryPojo->AccSeq, data)
+        if_index_int_va(5, pAccessoryPojo->IconType, data)
+        if_index_int_va(6, pAccessoryPojo->Connection, data)
+        if_index_int_va(7, pAccessoryPojo->IsGateway, data)
         /******************************************* 修改處 *****************************************************/
         else {
 //            ValueObject& valObj = pAccessoryPojo->valueObjectList[i-1];
@@ -207,7 +208,7 @@ shared_ptr<vector<shared_ptr<Pojo>>> AccessoryDao::read(vector<int>& AIDList)
     return pPojoList;
 }
 
-void AccessoryDao::updateNestWithWhereSQL(string& selectWhereSQL, vector<ValueObject>& objList)
+void AccessoryDao::updateElementNOWithWhereSQL(string& selectWhereSQL, vector<ValueObject>& objList)
 {
     string whereSQL = " WHERE ElementNO in (";
     
@@ -222,8 +223,23 @@ void AccessoryDao::updateNestWithWhereSQL(string& selectWhereSQL, vector<ValueOb
     LOGD("SQL:\n%s", SQL.c_str());
     
     databaseManager.exec(SQL.c_str());
+}
+
+void AccessoryDao::updateAccessoryWithWhereSQL(string& selectWhereSQL, vector<ValueObject>& objList)
+{
+    string whereSQL = " WHERE AccSeq in (";
     
-//    "Update ElementNO SET Value = 'haha' WHERE ElementNO in ()";
+    DatabaseManager& databaseManager = DatabaseManager::getInstance();
+    string selectSQL = Pojo::genAccessoryNestReadSQL("AccSeq", selectWhereSQL);
+    whereSQL.append(selectSQL);
+    whereSQL.append(")");
+    
+    string SQL = "UPDATE Accessory";
+    SQL.append(Pojo::genUpdateSetSQL(objList));
+    SQL.append(whereSQL);
+    LOGD("SQL:\n%s", SQL.c_str());
+    
+    databaseManager.exec(SQL.c_str());
 }
 
 shared_ptr<vector<shared_ptr<Pojo>>> AccessoryDao::readNestWithWhereSQL(string& whereSQL)

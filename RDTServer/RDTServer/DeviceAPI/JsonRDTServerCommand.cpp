@@ -210,6 +210,8 @@ void JsonRDTServerCommand::processCommandTarget(Json::Value& inJsonObject, Json:
     }
     // 新增或修改
     else if (function.find("write") != std::string::npos) {
+        string whereSQL = "";
+        
         if (IfObject.isMember("AID")) {
             Json::Value jsonArray = IfObject["AID"];
             
@@ -235,8 +237,6 @@ void JsonRDTServerCommand::processCommandTarget(Json::Value& inJsonObject, Json:
             }
             // 修改
             else {
-                string whereSQL = "";
-                
                 // 依照查詢條件生成Accessory
                 vector<ValueObject> voList;
                 for (int i=0 ; i<jsonArray.size() ; i++) {
@@ -275,23 +275,57 @@ void JsonRDTServerCommand::processCommandTarget(Json::Value& inJsonObject, Json:
                 LOGD("SQL:%s", whereSQL.c_str());
                 Json::Value json;
                 
+                shared_ptr<vector<shared_ptr<Pojo>>> pPojoList = AccessoryDao::readNestWithWhereSQL(whereSQL);
+                
                 pCommandBase = new CommandHardwardRecv_UpdateItems();
                 CommandHardwardRecv_UpdateItems* pItems = (CommandHardwardRecv_UpdateItems*) pCommandBase;
                 pItems->dataType = DataType_Accessory;
-                pItems->pPojoList = AccessoryDao::readNestWithWhereSQL(whereSQL);
+                pItems->pPojoList = pPojoList;
                 m_pCommandHardwardEvent->onCommandHardwardRecv_UpdateItems(pItems);
                 
                 // 新增成功
                 if (pItems->errorCode == 0) {
-                    vector<ValueObject> objList;
-                    Json::Value thenObject = inJsonObject["Then"];
-                    if (thenObject.isMember("Value")) {
-                        string value = thenObject["Value"].asString();
-                        objList.push_back(ValueObject("ElementNO", value));
-                        AccessoryDao::updateNestWithWhereSQL(whereSQL, objList);
-                    }
+                    
                 }
             }
+        }
+        
+        vector<ValueObject> objList;
+        Json::Value thenObject = inJsonObject["Then"];
+        
+        // Accessory -> AccSeq
+        if (thenObject.isMember("ListAccessory")) {
+            Json::Value listAccessory = thenObject["ListAccessory"];
+            
+            Json::Value::Members listAccessoryMembers = listAccessory.getMemberNames();
+            for (Json::Value AIDValue : listAccessoryMembers) {
+                string AID = AIDValue.asString();
+                LOGD("AID:%s", AID.c_str());
+                Json::Value accessory = listAccessory[AID];
+//                LOGD("accessory:%s", accessory.toStyledString().c_str());
+                
+                if (accessory.isMember("AccSeq")) {
+                    int AccSeq = accessory["AccSeq"].asInt();
+                    objList.push_back(ValueObject("AccSeq", AccSeq));
+                    
+//                    if (accessory.isMember("Room")) {
+//                        Json::Value Room = accessory["Room"];
+//                        if (Room.isMember("RoomSeq")) {
+//                            int RoomSeq = Room["RoomSeq"].asInt();
+//                            objList.push_back(ValueObject("RoomSeq", RoomSeq));
+//                        }
+//                    }
+                    
+                    AccessoryDao::updateAccessoryWithWhereSQL(whereSQL, objList);
+                }
+            }
+        }
+        
+        // ElementNO -> Value
+        if (thenObject.isMember("Value")) {
+            string value = thenObject["Value"].asString();
+            objList.push_back(ValueObject("ElementNO", value));
+            AccessoryDao::updateElementNOWithWhereSQL(whereSQL, objList);
         }
     }
     // 刪除
@@ -322,9 +356,10 @@ void JsonRDTServerCommand::processCommandTarget(Json::Value& inJsonObject, Json:
     outJsonObject["SenderInfo"] = inJsonObject;
     
     // 當DeviceAPI發生錯誤ErrorCode != 0, 就不去抓取硬體的ErrorCode，所以DeviceAPI發生錯誤就已DeviceAPI ErrorCode為主, DeivceAPI沒錯就抓看看硬體的ErrorCode
-    if (!outJsonObject["ErrorCode"] || outJsonObject["ErrorCode"] == 0) {
-        outJsonObject["ErrorCode"] = pCommandBase->errorCode;
-    }
+//    if (!outJsonObject["ErrorCode"] || outJsonObject["ErrorCode"] == 0) {
+//        outJsonObject["ErrorCode"] = pCommandBase->errorCode;
+//    }
+    outJsonObject["ErrorCode"] = 0;
     
     delete pCommandBase;
 }

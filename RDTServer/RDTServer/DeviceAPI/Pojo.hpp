@@ -109,6 +109,19 @@
         subPojoList \
     }
 
+#define Contractor7(method, subPojoList, k1, v1, k2, v2, k3, v3, k4, v4, k5, v5, k6, v6, k7, v7)   \
+    method(Declare(k1, v1), Declare(k2, v2), Declare(k3, v3), Declare(k4, v4), Declare(k5, v5), Declare(k6, v6), Declare(k7, v7))  \
+    {                        \
+        ContractorAssign(v1); \
+        ContractorAssign(v2); \
+        ContractorAssign(v3); \
+        ContractorAssign(v4); \
+        ContractorAssign(v5); \
+        ContractorAssign(v6); \
+        ContractorAssign(v7); \
+        subPojoList \
+    }
+
 enum DatabaseType
 {
     DatabaseType_INTEGER,
@@ -251,7 +264,11 @@ struct Pojo
     static std::string genAccessoryNestReadSQL(std::string selectFrom, std::string whereSQL)
     {
         string selectSQL = "SELECT DISTINCT ";
-        string jsonTableSQL = " FROM Accessory INNER JOIN Element INNER JOIN ElementNO ON ";
+        string jsonTableSQL = " FROM Accessory INNER JOIN Element INNER JOIN ElementNO ";
+        
+        if (whereSQL.size() > 0) {
+            jsonTableSQL.append("ON ");
+        }
         
         string SQL = selectSQL;
         SQL.append(selectFrom);
