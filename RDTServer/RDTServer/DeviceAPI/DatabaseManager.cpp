@@ -24,63 +24,64 @@ DatabaseManager::DatabaseManager()
 {
     LOGD("DatabaseManager");
         
-    // 移除Database file
-    if(remove(Database_File_Name) != 0 ) {
-        LOGE("Error deleting file");
-//        throw DatabaseException(__PRETTY_FUNCTION__, __LINE__, DatabaseException_ErrorCode_Error_Deleting_Database);
-    }
-    else {
-        LOGD("File successfully deleted");
-    }
+//    // 移除Database file
+//    if(remove(Database_File_Name) != 0 ) {
+//        LOGE("Error deleting file");
+////        throw DatabaseException(__PRETTY_FUNCTION__, __LINE__, DatabaseException_ErrorCode_Error_Deleting_Database);
+//    }
+//    else {
+//        LOGD("File successfully deleted");
+//    }
+//    
+//    open();
+//    
+//    /* 建立 Table */
+//    exec(createRoom);
+//    exec(createAccessory);
+//    exec(createElement);
+//    exec(createElementNO);
+//    
+//    int currentAID = 0;
+//    /******************************************* 修改處 *****************************************************/
+//    {
+//        shared_ptr<RoomPojo> pRoomPojo(new RoomPojo("MyRoom", 0));
+//        RoomDao::create(pRoomPojo);
+//    }
+//    {
+//        // fkRoomSerial, AID, Name, AccSeq, IconType, Connection, IsGateway;
+//        AccessoryPojo accessoryPojo(1, currentAID++, "IPHub", 1, 0, 1, false);
+//        
+//        // Element
+//        shared_ptr<ElementPojo> pElement1(new ElementPojo("switch"));
+//        
+//        // ElementNO, Value, NtfyEnable
+//        shared_ptr<ElementNOPojo> pNO1(new ElementNOPojo(0, "轟天", true));
+//        shared_ptr<ElementNOPojo> pNO2(new ElementNOPojo(1, "大鑫", true));
+//        
+//        accessoryPojo.pSubPojoList->push_back(pElement1);
+//        pElement1->pSubPojoList->push_back(pNO1);
+//        pElement1->pSubPojoList->push_back(pNO2);
+//        
+//        AccessoryDao::create(accessoryPojo);
+//    }
+//    {
+//        // fkRoomSerial, AID, Name, AccSeq, IconType, Connection, IsGateway;
+//        AccessoryPojo accessoryPojo(1, currentAID++, "PC Home", 2, 1, 1, false);
+//        
+//        // Element
+//        shared_ptr<ElementPojo> pElement1(new ElementPojo("switch"));
+//        
+//        // ElementNO, Value, NtfyEnable
+//        shared_ptr<ElementNOPojo> pNO1(new ElementNOPojo(0, "轟天2", true));
+//        shared_ptr<ElementNOPojo> pNO2(new ElementNOPojo(1, "大鑫2", true));
+//        
+//        accessoryPojo.pSubPojoList->push_back(pElement1);
+//        pElement1->pSubPojoList->push_back(pNO1);
+//        pElement1->pSubPojoList->push_back(pNO2);
+//        
+//        AccessoryDao::create(accessoryPojo);
+//    }
     
-    open();
-    
-    /* 建立 Table */
-    exec(createRoom);
-    exec(createAccessory);
-    exec(createElement);
-    exec(createElementNO);
-    
-    int currentAID = 0;
-    /******************************************* 修改處 *****************************************************/
-    {
-        shared_ptr<RoomPojo> pRoomPojo(new RoomPojo("MyRoom", 0));
-        RoomDao::create(pRoomPojo);
-    }
-    {
-        // fkRoomSerial, AID, Name, AccSeq, IconType, Connection, IsGateway;
-        AccessoryPojo accessoryPojo(1, currentAID++, "IPHub", 1, 0, 1, false);
-        
-        // Element
-        shared_ptr<ElementPojo> pElement1(new ElementPojo("switch"));
-        
-        // ElementNO, Value, NtfyEnable
-        shared_ptr<ElementNOPojo> pNO1(new ElementNOPojo(0, "轟天", true));
-        shared_ptr<ElementNOPojo> pNO2(new ElementNOPojo(1, "大鑫", true));
-        
-        accessoryPojo.pSubPojoList->push_back(pElement1);
-        pElement1->pSubPojoList->push_back(pNO1);
-        pElement1->pSubPojoList->push_back(pNO2);
-        
-        AccessoryDao::create(accessoryPojo);
-    }
-    {
-        // fkRoomSerial, AID, Name, AccSeq, IconType, Connection, IsGateway;
-        AccessoryPojo accessoryPojo(1, currentAID++, "PC Home", 2, 1, 1, false);
-        
-        // Element
-        shared_ptr<ElementPojo> pElement1(new ElementPojo("switch"));
-        
-        // ElementNO, Value, NtfyEnable
-        shared_ptr<ElementNOPojo> pNO1(new ElementNOPojo(0, "轟天2", true));
-        shared_ptr<ElementNOPojo> pNO2(new ElementNOPojo(1, "大鑫2", true));
-        
-        accessoryPojo.pSubPojoList->push_back(pElement1);
-        pElement1->pSubPojoList->push_back(pNO1);
-        pElement1->pSubPojoList->push_back(pNO2);
-        
-        AccessoryDao::create(accessoryPojo);
-    }
 //    {
 //        /* 新增一筆Accessory資料 */
 //        // param1: AID代表accessory id
@@ -116,7 +117,7 @@ DatabaseManager::DatabaseManager()
     /* 取得該筆資料的 ID */
 //    LOGD("ID:%lld\n", sqlite3_last_insert_rowid(m_pDatabase));
     
-    shared_ptr<vector<shared_ptr<Pojo>>> pojoList = NULL;
+//    shared_ptr<vector<shared_ptr<Pojo>>> pojoList = NULL;
 //    pojoList = AccessoryDao::readAll();
     
 //    // 更新資料
