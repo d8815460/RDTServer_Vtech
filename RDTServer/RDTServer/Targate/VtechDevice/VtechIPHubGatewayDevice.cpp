@@ -55,17 +55,27 @@ void VtechIPHubGatewayDevice::reset()
     /* Function Status 1 */
     VtechJsonRDTServerCommand* pRDTServerCommand = (VtechJsonRDTServerCommand*) m_pCommand;
     
-    vector<AccessoryData*>* pAccessoryList = pRDTServerCommand->getAccessoryList();
-    AccessoryData* pAccessory = new AccessoryData();
-    pAccessory->accessoryId = 1;
-    pAccessory->accessoryType = 1;
-    pAccessory->addFunctionCodeData("switch", 0);
-//    pAccessory->addFunctionCodeData("color", 255, 255, 255);
-    pAccessoryList->push_back(pAccessory);
+    shared_ptr<vector<shared_ptr<AccessoryPojo>>>& pAccessoryList = pRDTServerCommand->getAccessoryList();
     
-    vector<GroupData*>* pGroupList = pRDTServerCommand->getGeoupList();
-    GroupData* pGroupData = new GroupData();
-    pGroupList->push_back(pGroupData);
+    int currentAID = 0;
+    // fkRoomSerial, AID, Name, AccSeq, IconType, Connection, IsGateway;
+    shared_ptr<AccessoryPojo> pAccessoryPojo(new AccessoryPojo(1, currentAID++, "IPHub", 1, 0, 1, false));
+    
+    // Element
+    shared_ptr<ElementPojo> pElement1(new ElementPojo("switch"));
+    
+    // ElementNO, Value, NtfyEnable
+    shared_ptr<ElementNOPojo> pNO1(new ElementNOPojo(0, "轟天", true));
+    shared_ptr<ElementNOPojo> pNO2(new ElementNOPojo(1, "大鑫", true));
+    
+    pAccessoryPojo->pSubPojoList->push_back(pElement1);
+    pElement1->pSubPojoList->push_back(pNO1);
+    pElement1->pSubPojoList->push_back(pNO2);
+    pAccessoryList->push_back(pAccessoryPojo);
+    
+//    vector<GroupData*>* pGroupList = pRDTServerCommand->getGeoupList();
+//    GroupData* pGroupData = new GroupData();
+//    pGroupList->push_back(pGroupData);
     
 //    pAccessories->addFunctionStatus(pFunctionInfo, VtechIPHubGatewayFunctionCode_QueryConnectStatus, 1, 1);
 //    pAccessories->addFunctionStatus(pFunctionInfo, VtechIPHubGatewayFunctionCode_QueryPowerStatus, 1, 1);

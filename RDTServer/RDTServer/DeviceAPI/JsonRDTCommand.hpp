@@ -33,8 +33,8 @@ Revision Table
 
 #include <stdio.h>
 #include "Command.hpp"
-#include "BaseData.hpp"
 #include "CommandException.hpp"
+#include "AccessoryDao.hpp"
 
 struct JsonRDTCommand_ParseSendData : ParseSendData
 {
@@ -84,9 +84,9 @@ public:
     JsonRDTCommand(CommandEvent* pCommandEvent, CommandHardwardEvent* pCommandHardwardEvent, Connect* pConnect, CommandData* pCommandData = NULL);
     ~JsonRDTCommand();
     
-    vector<AccessoryData*>* getAccessoryList()
+    shared_ptr<vector<shared_ptr<AccessoryPojo>>>& getAccessoryList()
     {
-        return &m_accessoryList;
+        return m_pAccessoryList;
     }
     
 #pragma mark - ConnectEvent
@@ -159,7 +159,7 @@ protected:
 protected:
     set<int>                m_nChannelIDList;
     
-    vector<AccessoryData*>  m_accessoryList;
+    shared_ptr<vector<shared_ptr<AccessoryPojo>>>  m_pAccessoryList;
 };
 
 #endif /* JsonRDTCommand_hpp */

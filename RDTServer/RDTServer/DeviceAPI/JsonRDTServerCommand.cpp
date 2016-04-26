@@ -22,6 +22,18 @@
 #include "ElementNODao.hpp"
 #include "VtechHardwareException.hpp"
 
+#define setIntVO(k) \
+    if (vo.key.compare(#k) == 0) { \
+        pAccessoryPojo->k = root[vo.key].asInt(); \
+        LOGD("k:%d", pAccessoryPojo->k); \
+    }
+
+#define setStrVO(k) \
+    if (vo.key.compare(#k) == 0) { \
+        pAccessoryPojo->k = root[vo.key].asString(); \
+        LOGD("k:%s", pAccessoryPojo->k.c_str()); \
+    }
+
 JsonRDTServerCommand::JsonRDTServerCommand(CommandEvent* pCommandEvent, CommandHardwardEvent* pCommandHardwardEvent, Connect* pConnect, CommandData* pCommandData) : JsonRDTCommand(pCommandEvent, pCommandHardwardEvent, pConnect, pCommandData)
 {
     LOGD("JsonRDTServerCommand");
@@ -119,6 +131,30 @@ std::string JsonRDTServerCommand::findWord(std::string& string, const std::strin
     return "";
 }
 
+void JsonRDTServerCommand::parse(Json::Value& root, int AID, vector<ValueObject>& propertyList)
+{
+    for (shared_ptr<AccessoryPojo>& pAccessoryPojo : *m_pAccessoryList) {
+        if (AID == pAccessoryPojo->AID) {
+            for (ValueObject vo : propertyList) {
+                if (root.isMember(vo.key)) {
+                    LOGD("key:%s", vo.key.c_str());
+                    LOGD("value:%s", root[vo.key].asString().c_str());
+                    
+                    // Accessory
+                    setIntVO(fkRoomSerial)
+                    setIntVO(AID)
+                    setStrVO(Name)
+                    setIntVO(AccSeq)
+                    setIntVO(IconType)
+                    setIntVO(Connection)
+                    setIntVO(IsGateway)
+                }
+            }
+        }
+    }
+    
+}
+
 #pragma mark - JsonRDTServerCommand
 
 void JsonRDTServerCommand::processCommandTarget(Json::Value& inJsonObject, Json::Value& outJsonObject) throw (CommandException)
@@ -143,18 +179,21 @@ void JsonRDTServerCommand::processCommandTarget(Json::Value& inJsonObject, Json:
             
             // 查詢所有accessories, AID = [-1]
             if (jsonArray.size() == 1 && jsonArray[0] == -1) {
-                // 讀取Accessory
-                shared_ptr<vector<shared_ptr<Pojo>>> pojoList = AccessoryDao::readAll();
+//                // 讀取Accessory
+//                shared_ptr<vector<shared_ptr<Pojo>>> pojoList = AccessoryDao::readAll();
+//                
+//                // 寫入至json輸出
+//                Utility::pojoListToJson(inJsonObject, outJsonObject, pojoList);
+////                LOGD("產生json = \n%s", outJsonObject.toStyledString().c_str());
+//                
+//                pCommandBase = new CommandHardwardRecv_ReadItems();
+//                CommandHardwardRecv_ReadItems* pItems = (CommandHardwardRecv_ReadItems*) pCommandBase;
+//                pItems->dataType = DataType_Accessory;
+//                pItems->pPojoList = pojoList;
+//                m_pCommandHardwardEvent->onCommandHardwardRecv_ReadItems(pItems);
                 
-                // 寫入至json輸出
+                shared_ptr<vector<shared_ptr<Pojo>>>& pojoList = (shared_ptr<vector<shared_ptr<Pojo>>>&) m_pAccessoryList;
                 Utility::pojoListToJson(inJsonObject, outJsonObject, pojoList);
-//                LOGD("產生json = \n%s", outJsonObject.toStyledString().c_str());
-                
-                pCommandBase = new CommandHardwardRecv_ReadItems();
-                CommandHardwardRecv_ReadItems* pItems = (CommandHardwardRecv_ReadItems*) pCommandBase;
-                pItems->dataType = DataType_Accessory;
-                pItems->pPojoList = pojoList;
-                m_pCommandHardwardEvent->onCommandHardwardRecv_ReadItems(pItems);
             }
             else {
                 string whereSQL = "";
@@ -293,31 +332,38 @@ void JsonRDTServerCommand::processCommandTarget(Json::Value& inJsonObject, Json:
         vector<ValueObject> objList;
         Json::Value thenObject = inJsonObject["Then"];
         
+        AccessoryPojo pojo;
+        pojo.genValueObject();
+        vector<ValueObject>& propertyList = pojo.valueObjectList;
+        
         // Accessory -> AccSeq
         if (thenObject.isMember("ListAccessory")) {
             Json::Value listAccessory = thenObject["ListAccessory"];
             
             Json::Value::Members listAccessoryMembers = listAccessory.getMemberNames();
             for (Json::Value AIDValue : listAccessoryMembers) {
-                string AID = AIDValue.asString();
-                LOGD("AID:%s", AID.c_str());
-                Json::Value accessory = listAccessory[AID];
+                string AIDString = AIDValue.asString();
+                int AID = stoi(AIDString);
+                LOGD("AID:%d", AID);
+                Json::Value accessory = listAccessory[AIDString];
 //                LOGD("accessory:%s", accessory.toStyledString().c_str());
                 
-                if (accessory.isMember("AccSeq")) {
-                    int AccSeq = accessory["AccSeq"].asInt();
-                    objList.push_back(ValueObject("AccSeq", AccSeq));
-                    
-//                    if (accessory.isMember("Room")) {
-//                        Json::Value Room = accessory["Room"];
-//                        if (Room.isMember("RoomSeq")) {
-//                            int RoomSeq = Room["RoomSeq"].asInt();
-//                            objList.push_back(ValueObject("RoomSeq", RoomSeq));
-//                        }
-//                    }
-                    
-                    AccessoryDao::updateAccessoryWithWhereSQL(whereSQL, objList);
-                }
+                parse(accessory, AID, propertyList);
+                
+//                if (accessory.isMember("AccSeq")) {
+//                    int AccSeq = accessory["AccSeq"].asInt();
+//                    objList.push_back(ValueObject("AccSeq", AccSeq));
+//                    
+////                    if (accessory.isMember("Room")) {
+////                        Json::Value Room = accessory["Room"];
+////                        if (Room.isMember("RoomSeq")) {
+////                            int RoomSeq = Room["RoomSeq"].asInt();
+////                            objList.push_back(ValueObject("RoomSeq", RoomSeq));
+////                        }
+////                    }
+//                    
+//                    AccessoryDao::updateAccessoryWithWhereSQL(whereSQL, objList);
+//                }
             }
         }
         

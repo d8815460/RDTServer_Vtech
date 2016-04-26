@@ -56,6 +56,7 @@ protected:
 #pragma mark - Method
 private:
     std::string findWord(std::string& string, const std::string& word);
+    void parse(Json::Value& root, int AID, vector<ValueObject>& propertyList);
         
 #pragma mark - JsonRDTServerCommand
 protected:

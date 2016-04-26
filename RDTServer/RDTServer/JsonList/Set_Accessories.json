@@ -8,12 +8,13 @@
         "ListAccessory": {
             "0": {
                 "AccSeq": 4,
+                "IsGateway": true,
                 "Room": {
                     "RoomSeq": 2
                 }
             },
             "1": {
-                "AccSeq.": 2
+                "AccSeq": 2
             }
         }
     }

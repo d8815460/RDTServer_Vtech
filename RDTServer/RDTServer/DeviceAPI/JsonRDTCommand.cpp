@@ -15,7 +15,12 @@
 #include "Utility.hpp"
 #include "IOTCAPIs.h"
 #include "RDTAPIs.h"
+
+// Dao
+#include "RoomDao.hpp"
 #include "AccessoryDao.hpp"
+#include "ElementDao.hpp"
+#include "ElementNODao.hpp"
 
 JsonRDTCommand::JsonRDTCommand(CommandEvent* pCommandEvent, CommandHardwardEvent* pCommandHardwardEvent, Connect* pConnect, CommandData* pCommandData) : Command(pCommandEvent, pCommandHardwardEvent, pConnect, pCommandData)
 {
@@ -24,13 +29,71 @@ JsonRDTCommand::JsonRDTCommand(CommandEvent* pCommandEvent, CommandHardwardEvent
     m_CommandData.version1 = 2;
     m_CommandData.version2 = 1;
     m_CommandData.version3 = 0;
+    
+    shared_ptr<vector<shared_ptr<AccessoryPojo>>> pp(new vector<shared_ptr<AccessoryPojo>>);
+    m_pAccessoryList = pp;
+    
+    {
+        /* 新增一筆Accessory資料 */
+        // param1: fkRoomSerial Room流水號
+        // param2: AID代表accessory id
+        // param3: Name 一個名字,用於標示目標類型的一種可視化手段
+        // oaram4: AccSeq The accessory's sequence , the default value is 0.
+        // param5: IconType 會面呈現的Icon所代表的型態，如IPHub
+        // param6: Connection 連線狀態，
+        // param7: IsGateway is gateway or not
+        shared_ptr<AccessoryPojo> pAccessoryPojo(new AccessoryPojo(1, 1, "PC Home", 1, 1, 1, true));
+
+        // param1: Element 一個元件有單個或多個element NO
+        shared_ptr<ElementPojo> pElement1(new ElementPojo("switch"));
+
+        // param1: ElementNO 一個元件的編號
+        // param2: Value 由一個字串組成，字串的類型可能是數值，字串或整數，也有可能是其他的。它的類型由Metadata決定一個 key 通常會有一個 value
+        // param3: NtfyEnable 是否開啟推播
+        shared_ptr<ElementNOPojo> pNO1(new ElementNOPojo(0, "轟天1", true));
+        shared_ptr<ElementNOPojo> pNO2(new ElementNOPojo(1, "大鑫1", true));
+
+        pAccessoryPojo->pSubPojoList->push_back(pElement1);
+        pElement1->pSubPojoList->push_back(pNO1);
+        pElement1->pSubPojoList->push_back(pNO2);
+
+        CommandHardwardSend_UpdateItems items;
+        items.dataType = DataType_Accessory;
+        items.pPojoList->push_back(pAccessoryPojo);
+    }
+    {
+        /* 新增一筆Accessory資料 */
+        // param1: fkRoomSerial Room流水號
+        // param2: AID代表accessory id
+        // param3: Name 一個名字,用於標示目標類型的一種可視化手段
+        // oaram4: AccSeq The accessory's sequence , the default value is 0.
+        // param5: IconType 會面呈現的Icon所代表的型態，如IPHub
+        // param6: Connection 連線狀態，
+        // param7: IsGateway is gateway or not
+        shared_ptr<AccessoryPojo> pAccessoryPojo(new AccessoryPojo(2, 2, "Super", 2, 2, 2, false));
+        
+        // param1: Element 一個元件有單個或多個element NO
+        shared_ptr<ElementPojo> pElement1(new ElementPojo("switch"));
+        
+        // param1: ElementNO 一個元件的編號
+        // param2: Value 由一個字串組成，字串的類型可能是數值，字串或整數，也有可能是其他的。它的類型由Metadata決定一個 key 通常會有一個 value
+        // param3: NtfyEnable 是否開啟推播
+        shared_ptr<ElementNOPojo> pNO1(new ElementNOPojo(0, "轟天2", true));
+        shared_ptr<ElementNOPojo> pNO2(new ElementNOPojo(1, "大鑫2", true));
+        
+        pAccessoryPojo->pSubPojoList->push_back(pElement1);
+        pElement1->pSubPojoList->push_back(pNO1);
+        pElement1->pSubPojoList->push_back(pNO2);
+        
+        CommandHardwardSend_UpdateItems items;
+        items.dataType = DataType_Accessory;
+        items.pPojoList->push_back(pAccessoryPojo);
+    }
 }
 
 JsonRDTCommand::~JsonRDTCommand()
 {
-    for (int i=0 ; i<m_accessoryList.size() ; i++) {
-        delete m_accessoryList[i];
-    }
+    m_pAccessoryList->clear();
 }
 
 #pragma mark - ConnectEvent
