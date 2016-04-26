@@ -86,12 +86,14 @@ void* VtechIPHubGatewayHardwardImpl::socketInput(void *arg)
                     
                     {
                         /* 新增一筆Accessory資料 */
-                        // param1: AID代表accessory id
-                        // param2: Name 一個名字,用於標示目標類型的一種可視化手段
-                        // param3: IconType 會面呈現的Icon所代表的型態，如IPHub
-                        // param4: Connection 連線狀態，
-                        // param5: IsGateway is gateway or not
-                        shared_ptr<AccessoryPojo> pAccessoryPojo(new AccessoryPojo(1, "PC Home", 1, 1, false));
+                        // param1: fkRoomSerial代表關聯到RoomSerial
+                        // param2: AID代表accessory id
+                        // param3: Name 一個名字,用於標示目標類型的一種可視化手段
+                        // param3: AccSeq 代表accessory的位置
+                        // param4: AccIconType 會面呈現的Icon所代表的型態，如IPHub
+                        // param5: Connection 連線狀態
+                        // param6: IsGateway is gateway or not
+                        shared_ptr<AccessoryPojo> pAccessoryPojo(new AccessoryPojo(0, 1, "PC Home", 1, 1, 1, false));
                         
                         // param1: Element 一個元件有單個或多個element NO
                         shared_ptr<ElementPojo> pElement1(new ElementPojo("switch"));
@@ -203,7 +205,7 @@ void VtechIPHubGatewayHardwardImpl::onCommandHardwardRecv_CreateItem(CommandHard
             shared_ptr<AccessoryPojo> pAccessoryPojo(new AccessoryPojo);
             pAccessoryPojo->AID = 10;
             pAccessoryPojo->Name = "PIR Sensor";
-            pAccessoryPojo->IconType = 1;
+            pAccessoryPojo->AccIconType = 1;
             pAccessoryPojo->Connection = 1;
             pAccessoryPojo->IsGateway = true;
             
@@ -270,7 +272,7 @@ void VtechIPHubGatewayHardwardImpl::onCommandHardwardRecv_ReadItems(CommandHardw
                 shared_ptr<AccessoryPojo>& accessoryPojo = (shared_ptr<AccessoryPojo>&) pPojo;
                 
                 LOGD("AID:%d", accessoryPojo->AID);
-                LOGD("iconType:%d", accessoryPojo->IconType);
+                LOGD("AccIconType:%d", accessoryPojo->AccIconType);
             }
         }   break;
         
@@ -293,7 +295,7 @@ void VtechIPHubGatewayHardwardImpl::onCommandHardwardRecv_UpdateItems(CommandHar
                 shared_ptr<AccessoryPojo>& accessoryPojo = (shared_ptr<AccessoryPojo>&) pPojo;
                 
                 LOGD("AID:%d", accessoryPojo->AID);
-                LOGD("iconType:%d", accessoryPojo->IconType);
+                LOGD("AccIconType:%d", accessoryPojo->AccIconType);
                 // Update資料
             }
         }   break;
