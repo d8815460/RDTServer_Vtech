@@ -240,7 +240,7 @@ void JsonRDTCommand::commandHardwardSend_ReadItems(CommandHardwardSend_ReadItems
                 shared_ptr<AccessoryPojo>& pAccessoryPojo = (shared_ptr<AccessoryPojo>&) pPojo;
                 
                 LOGD("AID:%d", pAccessoryPojo->AID);
-                LOGD("iconType:%d", pAccessoryPojo->IconType);
+                LOGD("iconType:%d", pAccessoryPojo->AccIconType);
             }
         }   break;
             
@@ -262,7 +262,7 @@ void JsonRDTCommand::commandHardwardSend_UpdateItems(CommandHardwardSend_UpdateI
                 shared_ptr<AccessoryPojo>& pAccessoryPojo = (shared_ptr<AccessoryPojo>&) pPojo;
                 
                 LOGD("AID:%d", pAccessoryPojo->AID);
-                LOGD("iconType:%d", pAccessoryPojo->IconType);
+                LOGD("iconType:%d", pAccessoryPojo->AccIconType);
                 
                 Json::Value json;
                 pAccessoryPojo->toJson(json);

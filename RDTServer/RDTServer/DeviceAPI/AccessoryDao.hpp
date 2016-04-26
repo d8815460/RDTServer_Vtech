@@ -26,7 +26,7 @@ static const char* createAccessory =    "CREATE TABLE Accessory ("
                                         "AID                INTEGER,"
                                         "Name               TEXT,"
                                         "AccSeq             INTEGER,"
-                                        "IconType           INTEGER,"
+                                        "AccIconType        INTEGER,"
                                         "Connection         INTEGER,"
                                         "IsGateway          BOOLEAN"
                                         ");";
@@ -44,7 +44,7 @@ struct AccessoryPojo : public Pojo
     int         AID;
     std::string Name;
     int         AccSeq;
-    int         IconType;
+    int         AccIconType;
     int         Connection;
     bool        IsGateway;
     
@@ -61,7 +61,7 @@ struct AccessoryPojo : public Pojo
                 int,         AID,
                 std::string, Name,
                 int,         AccSeq,
-                int,         IconType,
+                int,         AccIconType,
                 int,         Connection,
                 bool,        IsGateway)
     /******************************************* 修改處 *****************************************************/
@@ -74,7 +74,7 @@ struct AccessoryPojo : public Pojo
             createValueObject(AID),
             createValueObject(Name),
             createValueObject(AccSeq),
-            createValueObject(IconType),
+            createValueObject(AccIconType),
             createValueObject(Connection),
             createValueObject(IsGateway),
         };
@@ -91,7 +91,7 @@ struct AccessoryPojo : public Pojo
         
         addJson(subJsonList, Name);
         addJson(subJsonList, AccSeq);
-        addJson(subJsonList, IconType);
+        addJson(subJsonList, AccIconType);
         addJson(subJsonList, Connection);
         addJson(subJsonList, IsGateway);
         /******************************************* 修改處 *****************************************************/
@@ -112,7 +112,7 @@ struct AccessoryPojo : public Pojo
         LOGD("================================================================================");
         LOGD("accessorySerial:%d", accessorySerial);
         LOGD("AID:%d", AID);
-        LOGD("IconType:%d", IconType);
+        LOGD("IconType:%d", AccIconType);
         
         if (pSubPojoList != NULL) {
             for (shared_ptr<Pojo> pPojo : *pSubPojoList) {

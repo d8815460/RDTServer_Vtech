@@ -159,7 +159,7 @@ void VtechIPHubGatewayHardward::onCommandHardwardRecv_CreateItem(CommandHardward
             shared_ptr<AccessoryPojo> pAccessoryPojo(new AccessoryPojo);
             pAccessoryPojo->AID = 10;
             pAccessoryPojo->Name = "PIR Sensor";
-            pAccessoryPojo->IconType = 1;
+            pAccessoryPojo->AccIconType = 1;
             pAccessoryPojo->Connection = 1;
             pAccessoryPojo->IsGateway = true;
             
@@ -226,7 +226,7 @@ void VtechIPHubGatewayHardward::onCommandHardwardRecv_ReadItems(CommandHardwardR
                 shared_ptr<AccessoryPojo>& accessoryPojo = (shared_ptr<AccessoryPojo>&) pPojo;
                 
                 LOGD("AID:%d", accessoryPojo->AID);
-                LOGD("iconType:%d", accessoryPojo->IconType);
+                LOGD("AccIconType:%d", accessoryPojo->AccIconType);
             }
         }   break;
         
@@ -249,7 +249,7 @@ void VtechIPHubGatewayHardward::onCommandHardwardRecv_UpdateItems(CommandHardwar
                 shared_ptr<AccessoryPojo>& accessoryPojo = (shared_ptr<AccessoryPojo>&) pPojo;
                 
                 LOGD("AID:%d", accessoryPojo->AID);
-                LOGD("iconType:%d", accessoryPojo->IconType);
+                LOGD("AccIconType:%d", accessoryPojo->AccIconType);
                 // Update資料
             }
         }   break;

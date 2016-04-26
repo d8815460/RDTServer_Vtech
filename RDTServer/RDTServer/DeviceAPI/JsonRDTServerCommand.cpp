@@ -145,7 +145,7 @@ void JsonRDTServerCommand::parse(Json::Value& root, int AID, vector<ValueObject>
                     setIntVO(AID)
                     setStrVO(Name)
                     setIntVO(AccSeq)
-                    setIntVO(IconType)
+                    setIntVO(AccIconType)
                     setIntVO(Connection)
                     setIntVO(IsGateway)
                 }

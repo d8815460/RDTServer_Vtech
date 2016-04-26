@@ -61,7 +61,7 @@ void AccessoryDao::readCallback(shared_ptr<vector<shared_ptr<Pojo>>> outPtrPojoL
         if_index_int_va(2, pAccessoryPojo->AID, data)
         if_index_str_va(3, pAccessoryPojo->Name, data)
         if_index_int_va(4, pAccessoryPojo->AccSeq, data)
-        if_index_int_va(5, pAccessoryPojo->IconType, data)
+        if_index_int_va(5, pAccessoryPojo->AccIconType, data)
         if_index_int_va(6, pAccessoryPojo->Connection, data)
         if_index_int_va(7, pAccessoryPojo->IsGateway, data)
         /******************************************* 修改處 *****************************************************/
