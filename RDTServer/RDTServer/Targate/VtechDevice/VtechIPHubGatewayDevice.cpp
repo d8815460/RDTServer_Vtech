@@ -31,6 +31,7 @@
 // Database
 #include "AccessoryTypeEnum.hpp"
 #include "AccessoryDao.hpp"
+#include "ServicePojo.hpp"
 #include "ElementDao.hpp"
 #include "ElementNODao.hpp"
 
@@ -58,20 +59,66 @@ void VtechIPHubGatewayDevice::reset()
     shared_ptr<vector<shared_ptr<AccessoryPojo>>>& pAccessoryList = pRDTServerCommand->getAccessoryList();
     
     int currentAID = 0;
-    // fkRoomSerial, AID, Name, AccSeq, IconType, Connection, IsGateway;
-    shared_ptr<AccessoryPojo> pAccessoryPojo(new AccessoryPojo(1, currentAID++, "IPHub", 1, 0, 1, false));
-    
-    // Element
-    shared_ptr<ElementPojo> pElement1(new ElementPojo("switch"));
-    
-    // ElementNO, Value, NtfyEnable
-    shared_ptr<ElementNOPojo> pNO1(new ElementNOPojo(0, "轟天", true));
-    shared_ptr<ElementNOPojo> pNO2(new ElementNOPojo(1, "大鑫", true));
-    
-    pAccessoryPojo->pSubPojoList->push_back(pElement1);
-    pElement1->pSubPojoList->push_back(pNO1);
-    pElement1->pSubPojoList->push_back(pNO2);
-    pAccessoryList->push_back(pAccessoryPojo);
+    {
+        /* 新增一筆Accessory資料 */
+        // param1: fkRoomSerial Room流水號
+        // param2: AID代表accessory id
+        // param3: Name 一個名字,用於標示目標類型的一種可視化手段
+        // oaram4: AccSeq The accessory's sequence , the default value is 0.
+        // param5: IconType 會面呈現的Icon所代表的型態，如IPHub
+        // param6: Connection 連線狀態，
+        // param7: IsGateway is gateway or not
+        shared_ptr<AccessoryPojo> pAccessoryPojo(new AccessoryPojo(1, 1, "PC Home", 1, 1, 1, true));
+
+        // param1: Service 一個元件有單個或多個Element
+        shared_ptr<ServicePojo> pService1(new ServicePojo("switchService"));
+
+        // param1: Element 一個元件有單個或多個ElementNO
+        shared_ptr<ElementPojo> pElement1(new ElementPojo("switch"));
+
+        // param1: ElementNO 一個元件的編號
+        // param2: Value 由一個字串組成，字串的類型可能是數值，字串或整數，也有可能是其他的。它的類型由Metadata決定一個 key 通常會有一個 value
+        // param3: NtfyEnable 是否開啟推播
+        shared_ptr<ElementNOPojo> pNO1(new ElementNOPojo(0, "轟天1", true));
+        shared_ptr<ElementNOPojo> pNO2(new ElementNOPojo(1, "大鑫1", true));
+
+        pAccessoryPojo->pSubPojoList->push_back(pService1);
+        pService1->pSubPojoList->push_back(pElement1);
+        pElement1->pSubPojoList->push_back(pNO1);
+        pElement1->pSubPojoList->push_back(pNO2);
+
+        pAccessoryList->push_back(pAccessoryPojo);
+    }
+    {
+        /* 新增一筆Accessory資料 */
+        // param1: fkRoomSerial Room流水號
+        // param2: AID代表accessory id
+        // param3: Name 一個名字,用於標示目標類型的一種可視化手段
+        // oaram4: AccSeq The accessory's sequence , the default value is 0.
+        // param5: IconType 會面呈現的Icon所代表的型態，如IPHub
+        // param6: Connection 連線狀態，
+        // param7: IsGateway is gateway or not
+        shared_ptr<AccessoryPojo> pAccessoryPojo(new AccessoryPojo(2, 2, "Super", 2, 2, 2, false));
+
+        // param1: Service 一個元件有單個或多個Element
+        shared_ptr<ServicePojo> pService1(new ServicePojo("switchService"));
+
+        // param1: Element 一個元件有單個或多個element NO
+        shared_ptr<ElementPojo> pElement1(new ElementPojo("switch"));
+
+        // param1: ElementNO 一個元件的編號
+        // param2: Value 由一個字串組成，字串的類型可能是數值，字串或整數，也有可能是其他的。它的類型由Metadata決定一個 key 通常會有一個 value
+        // param3: NtfyEnable 是否開啟推播
+        shared_ptr<ElementNOPojo> pNO1(new ElementNOPojo(0, "轟天2", true));
+        shared_ptr<ElementNOPojo> pNO2(new ElementNOPojo(1, "大鑫2", true));
+
+        pAccessoryPojo->pSubPojoList->push_back(pService1);
+        pService1->pSubPojoList->push_back(pElement1);
+        pElement1->pSubPojoList->push_back(pNO1);
+        pElement1->pSubPojoList->push_back(pNO2);
+        
+        pAccessoryList->push_back(pAccessoryPojo);
+    }
     
 //    vector<GroupData*>* pGroupList = pRDTServerCommand->getGeoupList();
 //    GroupData* pGroupData = new GroupData();

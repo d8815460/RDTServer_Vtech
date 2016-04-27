@@ -99,7 +99,6 @@
 		A2A1F45F1CABC3DE007D4489 /* VtechHardwareException.hpp in Headers */ = {isa = PBXBuildFile; fileRef = A2A1F45D1CABC3DE007D4489 /* VtechHardwareException.hpp */; };
 		A2A1F4621CABD3EE007D4489 /* SystemException.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A2A1F4601CABD3EE007D4489 /* SystemException.cpp */; };
 		A2A1F4631CABD3EE007D4489 /* SystemException.hpp in Headers */ = {isa = PBXBuildFile; fileRef = A2A1F4611CABD3EE007D4489 /* SystemException.hpp */; };
-		A2A3C2551C91176800ABED16 /* Pojo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A2A3C2531C91176800ABED16 /* Pojo.cpp */; };
 		A2A3C2561C91176800ABED16 /* Pojo.hpp in Headers */ = {isa = PBXBuildFile; fileRef = A2A3C2541C91176800ABED16 /* Pojo.hpp */; };
 		A2A3C25E1C9119E400ABED16 /* ElementNODao.hpp in Headers */ = {isa = PBXBuildFile; fileRef = A2A3C25C1C9119E400ABED16 /* ElementNODao.hpp */; };
 		A2A3C2651C9152F200ABED16 /* AccessoryDao.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A2A3C2631C9152F200ABED16 /* AccessoryDao.cpp */; };
@@ -110,13 +109,9 @@
 		A2AD00461CA006A80092E7EF /* libcurlpp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A2AD00451CA006A80092E7EF /* libcurlpp.a */; };
 		A2AF5D751C7C395300104205 /* BinraryRDTCommand.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A2AF5D731C7C395300104205 /* BinraryRDTCommand.cpp */; };
 		A2AF5D761C7C395300104205 /* BinraryRDTCommand.hpp in Headers */ = {isa = PBXBuildFile; fileRef = A2AF5D741C7C395300104205 /* BinraryRDTCommand.hpp */; };
-		A2B024471CCF60DD00A39831 /* AccessoryPojo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A2B024451CCF60DD00A39831 /* AccessoryPojo.cpp */; };
 		A2B024481CCF60DD00A39831 /* AccessoryPojo.hpp in Headers */ = {isa = PBXBuildFile; fileRef = A2B024461CCF60DD00A39831 /* AccessoryPojo.hpp */; };
-		A2B0244B1CCF618F00A39831 /* ElementPojo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A2B024491CCF618F00A39831 /* ElementPojo.cpp */; };
 		A2B0244C1CCF618F00A39831 /* ElementPojo.hpp in Headers */ = {isa = PBXBuildFile; fileRef = A2B0244A1CCF618F00A39831 /* ElementPojo.hpp */; };
-		A2B0244F1CCF673400A39831 /* ElementNOPojo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A2B0244D1CCF673400A39831 /* ElementNOPojo.cpp */; };
 		A2B024501CCF673400A39831 /* ElementNOPojo.hpp in Headers */ = {isa = PBXBuildFile; fileRef = A2B0244E1CCF673400A39831 /* ElementNOPojo.hpp */; };
-		A2B024531CCF71FE00A39831 /* ServicePojo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A2B024511CCF71FE00A39831 /* ServicePojo.cpp */; };
 		A2B024541CCF71FE00A39831 /* ServicePojo.hpp in Headers */ = {isa = PBXBuildFile; fileRef = A2B024521CCF71FE00A39831 /* ServicePojo.hpp */; };
 		A2B024571CCF721D00A39831 /* ServiceDao.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A2B024551CCF721D00A39831 /* ServiceDao.cpp */; };
 		A2B024581CCF721D00A39831 /* ServiceDao.hpp in Headers */ = {isa = PBXBuildFile; fileRef = A2B024561CCF721D00A39831 /* ServiceDao.hpp */; };
@@ -227,7 +222,6 @@
 		A2A1F45D1CABC3DE007D4489 /* VtechHardwareException.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = VtechHardwareException.hpp; path = RDTServer/DeviceAPI/VtechHardwareException.hpp; sourceTree = SOURCE_ROOT; };
 		A2A1F4601CABD3EE007D4489 /* SystemException.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = SystemException.cpp; path = RDTServer/DeviceAPI/SystemException.cpp; sourceTree = SOURCE_ROOT; };
 		A2A1F4611CABD3EE007D4489 /* SystemException.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = SystemException.hpp; path = RDTServer/DeviceAPI/SystemException.hpp; sourceTree = SOURCE_ROOT; };
-		A2A3C2531C91176800ABED16 /* Pojo.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Pojo.cpp; path = RDTServer/DeviceAPI/Pojo.cpp; sourceTree = SOURCE_ROOT; };
 		A2A3C2541C91176800ABED16 /* Pojo.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = Pojo.hpp; path = RDTServer/DeviceAPI/Pojo.hpp; sourceTree = SOURCE_ROOT; };
 		A2A3C25C1C9119E400ABED16 /* ElementNODao.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = ElementNODao.hpp; path = RDTServer/DeviceAPI/ElementNODao.hpp; sourceTree = SOURCE_ROOT; };
 		A2A3C2631C9152F200ABED16 /* AccessoryDao.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AccessoryDao.cpp; path = RDTServer/DeviceAPI/AccessoryDao.cpp; sourceTree = SOURCE_ROOT; };
@@ -239,13 +233,9 @@
 		A2AF26A01C73038B00F30460 /* CMakeLists.txt */ = {isa = PBXFileReference; lastKnownFileType = text; name = CMakeLists.txt; path = RDTServer/Targate/VtechDevice/CMakeLists.txt; sourceTree = "<group>"; };
 		A2AF5D731C7C395300104205 /* BinraryRDTCommand.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = BinraryRDTCommand.cpp; path = RDTServer/DeviceAPI/BinraryRDTCommand.cpp; sourceTree = SOURCE_ROOT; };
 		A2AF5D741C7C395300104205 /* BinraryRDTCommand.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = BinraryRDTCommand.hpp; path = RDTServer/DeviceAPI/BinraryRDTCommand.hpp; sourceTree = SOURCE_ROOT; };
-		A2B024451CCF60DD00A39831 /* AccessoryPojo.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AccessoryPojo.cpp; path = RDTServer/DeviceAPI/AccessoryPojo.cpp; sourceTree = SOURCE_ROOT; };
 		A2B024461CCF60DD00A39831 /* AccessoryPojo.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = AccessoryPojo.hpp; path = RDTServer/DeviceAPI/AccessoryPojo.hpp; sourceTree = SOURCE_ROOT; };
-		A2B024491CCF618F00A39831 /* ElementPojo.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ElementPojo.cpp; path = RDTServer/DeviceAPI/ElementPojo.cpp; sourceTree = SOURCE_ROOT; };
 		A2B0244A1CCF618F00A39831 /* ElementPojo.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = ElementPojo.hpp; path = RDTServer/DeviceAPI/ElementPojo.hpp; sourceTree = SOURCE_ROOT; };
-		A2B0244D1CCF673400A39831 /* ElementNOPojo.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ElementNOPojo.cpp; path = RDTServer/DeviceAPI/ElementNOPojo.cpp; sourceTree = SOURCE_ROOT; };
 		A2B0244E1CCF673400A39831 /* ElementNOPojo.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = ElementNOPojo.hpp; path = RDTServer/DeviceAPI/ElementNOPojo.hpp; sourceTree = SOURCE_ROOT; };
-		A2B024511CCF71FE00A39831 /* ServicePojo.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ServicePojo.cpp; path = RDTServer/DeviceAPI/ServicePojo.cpp; sourceTree = SOURCE_ROOT; };
 		A2B024521CCF71FE00A39831 /* ServicePojo.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = ServicePojo.hpp; path = RDTServer/DeviceAPI/ServicePojo.hpp; sourceTree = SOURCE_ROOT; };
 		A2B024551CCF721D00A39831 /* ServiceDao.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ServiceDao.cpp; path = RDTServer/DeviceAPI/ServiceDao.cpp; sourceTree = SOURCE_ROOT; };
 		A2B024561CCF721D00A39831 /* ServiceDao.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = ServiceDao.hpp; path = RDTServer/DeviceAPI/ServiceDao.hpp; sourceTree = SOURCE_ROOT; };
@@ -271,6 +261,18 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		A266FE841CD0697100622B8F /* Pojo */ = {
+			isa = PBXGroup;
+			children = (
+				A2A3C2541C91176800ABED16 /* Pojo.hpp */,
+				A2B024461CCF60DD00A39831 /* AccessoryPojo.hpp */,
+				A2B024521CCF71FE00A39831 /* ServicePojo.hpp */,
+				A2B0244A1CCF618F00A39831 /* ElementPojo.hpp */,
+				A2B0244E1CCF673400A39831 /* ElementNOPojo.hpp */,
+			);
+			name = Pojo;
+			sourceTree = "<group>";
+		};
 		A26FB5DA1C635DE2007E3648 /* Connect */ = {
 			isa = PBXGroup;
 			children = (
@@ -484,6 +486,7 @@
 		A2A3C24D1C9115B000ABED16 /* Database */ = {
 			isa = PBXGroup;
 			children = (
+				A266FE841CD0697100622B8F /* Pojo */,
 				A2A3C24E1C91161000ABED16 /* Dao */,
 				A25E5AE81C9037AA00B49656 /* DatabaseManager.hpp */,
 				A25E5AE71C9037AA00B49656 /* DatabaseManager.cpp */,
@@ -494,14 +497,6 @@
 		A2A3C24E1C91161000ABED16 /* Dao */ = {
 			isa = PBXGroup;
 			children = (
-				A2A3C2541C91176800ABED16 /* Pojo.hpp */,
-				A2A3C2531C91176800ABED16 /* Pojo.cpp */,
-				A2B024461CCF60DD00A39831 /* AccessoryPojo.hpp */,
-				A2B024451CCF60DD00A39831 /* AccessoryPojo.cpp */,
-				A2B024521CCF71FE00A39831 /* ServicePojo.hpp */,
-				A2B024511CCF71FE00A39831 /* ServicePojo.cpp */,
-				A2B0244A1CCF618F00A39831 /* ElementPojo.hpp */,
-				A2B024491CCF618F00A39831 /* ElementPojo.cpp */,
 				A21FD8141CB75AA600B3E654 /* RoomDao.hpp */,
 				A21FD8131CB75AA600B3E654 /* RoomDao.cpp */,
 				A2A3C2641C9152F200ABED16 /* AccessoryDao.hpp */,
@@ -510,8 +505,6 @@
 				A2B024551CCF721D00A39831 /* ServiceDao.cpp */,
 				A2A3C26B1C91721300ABED16 /* ElementDao.hpp */,
 				A2A3C26A1C91721300ABED16 /* ElementDao.cpp */,
-				A2B0244E1CCF673400A39831 /* ElementNOPojo.hpp */,
-				A2B0244D1CCF673400A39831 /* ElementNOPojo.cpp */,
 				A2A3C25C1C9119E400ABED16 /* ElementNODao.hpp */,
 				A21DC20D1C9970CB00D081DC /* ElementNODao.cpp */,
 			);
@@ -710,14 +703,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A2A3C2551C91176800ABED16 /* Pojo.cpp in Sources */,
 				A2340FDE1C85A9000001D776 /* IOTCException.cpp in Sources */,
-				A2B0244B1CCF618F00A39831 /* ElementPojo.cpp in Sources */,
 				A26FB5E81C635DEB007E3648 /* BinraryRDTServerConnect.cpp in Sources */,
 				A25E5AE51C90318D00B49656 /* DatabaseException.cpp in Sources */,
 				A26FB5F91C635E08007E3648 /* Command.cpp in Sources */,
 				A26FB6B81C635F67007E3648 /* MQTTUnsubscribeServer.c in Sources */,
-				A2B024471CCF60DD00A39831 /* AccessoryPojo.cpp in Sources */,
 				A26FB6AD1C635F67007E3648 /* MQTTFormat.c in Sources */,
 				A2B024571CCF721D00A39831 /* ServiceDao.cpp in Sources */,
 				A2A17A271C7D568A008AEFD4 /* BaseData.cpp in Sources */,
@@ -729,7 +719,6 @@
 				A26FB6031C635E08007E3648 /* JsonRDTServerCommand.cpp in Sources */,
 				A2B44AF11C85948900DD49F6 /* RDTException.cpp in Sources */,
 				A26FB6B41C635F67007E3648 /* MQTTSubscribeClient.c in Sources */,
-				A2B0244F1CCF673400A39831 /* ElementNOPojo.cpp in Sources */,
 				A21DC20E1C9970CB00D081DC /* ElementNODao.cpp in Sources */,
 				A26FB6AF1C635F67007E3648 /* MQTTPacket.c in Sources */,
 				A2A3C26C1C91721300ABED16 /* ElementDao.cpp in Sources */,
@@ -754,7 +743,6 @@
 				A26FB5FD1C635E08007E3648 /* BinraryRDTServerCommand.cpp in Sources */,
 				A26FB6AC1C635F67007E3648 /* MQTTDeserializePublish.c in Sources */,
 				A26FB5D31C635DD1007E3648 /* UTF.cpp in Sources */,
-				A2B024531CCF71FE00A39831 /* ServicePojo.cpp in Sources */,
 				A2BBADCB1C8973A900B41503 /* Hardward.cpp in Sources */,
 				A26FB6B51C635F67007E3648 /* MQTTSubscribeServer.c in Sources */,
 			);

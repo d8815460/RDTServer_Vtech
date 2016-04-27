@@ -13,6 +13,7 @@
 #include <vector>
 #include <memory>
 #include "Pojo.hpp"
+#include "ServicePojo.hpp"
 
 using namespace std;
 
