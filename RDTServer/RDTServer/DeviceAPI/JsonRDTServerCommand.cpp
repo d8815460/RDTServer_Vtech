@@ -143,7 +143,7 @@ void JsonRDTServerCommand::parse(Json::Value& root, int AID, vector<ValueObject>
                     // Accessory
                     setIntVO(fkRoomSerial)
                     setIntVO(AID)
-                    setStrVO(Name)
+                    setStrVO(AccName)
                     setIntVO(AccSeq)
                     setIntVO(AccIconType)
                     setIntVO(Connection)

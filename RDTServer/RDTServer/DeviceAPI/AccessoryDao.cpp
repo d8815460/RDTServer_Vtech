@@ -51,15 +51,15 @@ void AccessoryDao::readCallback(shared_ptr<vector<shared_ptr<Pojo>>> outPtrPojoL
                 accessorySerialList.push_back(pAccessoryPojo->accessorySerial);
                 
                 pAccessoryPojo->pSubPojoList = ElementDao::read(accessorySerialList);
-                //            for (shared_ptr<Pojo> pPojo : *pAccessoryPojo->pElementPojoList) {
-                //                pPojo->print();
-                //            }
+//                for (shared_ptr<Pojo> pPojo : *pAccessoryPojo->pElementPojoList) {
+//                    pPojo->print();
+//                }
             }
         }
         /******************************************* 修改處 *****************************************************/
         if_index_int_va(1, pAccessoryPojo->fkRoomSerial, data)
         if_index_int_va(2, pAccessoryPojo->AID, data)
-        if_index_str_va(3, pAccessoryPojo->Name, data)
+        if_index_str_va(3, pAccessoryPojo->AccName, data)
         if_index_int_va(4, pAccessoryPojo->AccSeq, data)
         if_index_int_va(5, pAccessoryPojo->AccIconType, data)
         if_index_int_va(6, pAccessoryPojo->Connection, data)

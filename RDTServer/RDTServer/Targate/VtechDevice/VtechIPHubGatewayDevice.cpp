@@ -68,7 +68,7 @@ void VtechIPHubGatewayDevice::reset()
         // param5: IconType 會面呈現的Icon所代表的型態，如IPHub
         // param6: Connection 連線狀態，
         // param7: IsGateway is gateway or not
-        shared_ptr<AccessoryPojo> pAccessoryPojo(new AccessoryPojo(1, 1, "PC Home", 1, 1, 1, true));
+        shared_ptr<AccessoryPojo> pAccessoryPojo(new AccessoryPojo(1, currentAID++, "PC Home", 1, 1, 1, true));
 
         // param1: Service 一個元件有單個或多個Element
         shared_ptr<ServicePojo> pService1(new ServicePojo("switchService"));
@@ -98,7 +98,7 @@ void VtechIPHubGatewayDevice::reset()
         // param5: IconType 會面呈現的Icon所代表的型態，如IPHub
         // param6: Connection 連線狀態，
         // param7: IsGateway is gateway or not
-        shared_ptr<AccessoryPojo> pAccessoryPojo(new AccessoryPojo(2, 2, "Super", 2, 2, 2, false));
+        shared_ptr<AccessoryPojo> pAccessoryPojo(new AccessoryPojo(2, currentAID++, "Super", 2, 2, 2, false));
 
         // param1: Service 一個元件有單個或多個Element
         shared_ptr<ServicePojo> pService1(new ServicePojo("switchService"));
@@ -205,7 +205,7 @@ void VtechIPHubGatewayHardward::onCommandHardwardRecv_CreateItem(CommandHardward
             // 建立accessoryPojo
             shared_ptr<AccessoryPojo> pAccessoryPojo(new AccessoryPojo);
             pAccessoryPojo->AID = 10;
-            pAccessoryPojo->Name = "PIR Sensor";
+            pAccessoryPojo->AccName = "PIR Sensor";
             pAccessoryPojo->AccIconType = 1;
             pAccessoryPojo->Connection = 1;
             pAccessoryPojo->IsGateway = true;

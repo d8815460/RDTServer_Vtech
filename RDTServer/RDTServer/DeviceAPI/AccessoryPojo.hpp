@@ -37,7 +37,7 @@ struct AccessoryPojo : public Pojo
     int         fkRoomSerial;
     
     int         AID;
-    std::string Name;
+    std::string AccName;
     int         AccSeq;
     int         AccIconType;
     int         Connection;
@@ -54,7 +54,7 @@ struct AccessoryPojo : public Pojo
     Contractor7(AccessoryPojo, SubPojoList(),
                 int,         fkRoomSerial,
                 int,         AID,
-                std::string, Name,
+                std::string, AccName,
                 int,         AccSeq,
                 int,         AccIconType,
                 int,         Connection,
@@ -67,7 +67,7 @@ struct AccessoryPojo : public Pojo
         valueObjectList = {
             createValueObject(fkRoomSerial),
             createValueObject(AID),
-            createValueObject(Name),
+            createValueObject(AccName),
             createValueObject(AccSeq),
             createValueObject(AccIconType),
             createValueObject(Connection),
@@ -84,7 +84,7 @@ struct AccessoryPojo : public Pojo
         // AID在下面加
         //        addJson(subJsonList, fkRoomSerial);
         
-        addJson(subJsonList, Name);
+        addJson(subJsonList, AccName);
         addJson(subJsonList, AccSeq);
         addJson(subJsonList, AccIconType);
         addJson(subJsonList, Connection);
