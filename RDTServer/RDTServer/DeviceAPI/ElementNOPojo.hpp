@@ -26,9 +26,6 @@ struct ElementNOPojo : public Pojo
 {
     vector<ValueObject> valueObjectList;
     
-    int         elementNOSerial;
-    int         fkElementSerial;
-    
     int         ElementNO;
     std::string Value;
     bool        NtfyEnable;
@@ -46,7 +43,6 @@ struct ElementNOPojo : public Pojo
     {
         /******************************************* 修改處 *****************************************************/
         valueObjectList = {
-            createValueObject(fkElementSerial),
             createValueObject(ElementNO),
             createValueObject(Value),
             createValueObject(NtfyEnable),
@@ -69,8 +65,6 @@ struct ElementNOPojo : public Pojo
     
     virtual void print()
     {
-        LOGD("elementNOSerial:%d", elementNOSerial);
-        LOGD("fkElementSerial:%d", fkElementSerial);
         LOGD("ElementNO:%d", ElementNO);
         LOGD("Value:%s", Value.c_str());
     }

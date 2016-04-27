@@ -37,49 +37,49 @@ void AccessoryDao::readCallback(shared_ptr<vector<shared_ptr<Pojo>>> outPtrPojoL
 //    LOGD("use_count:%ld", pAccessoryPojo.use_count());
 //    pAccessoryPojo->genValueObject();   // 值會不正確
     
-    for (size_t i=0 ; i<colList.size() ; i++) {
-        char* data = colList[i];
-//        LOGD("data:%s", data);
-        
-        if (i == 0) {
-            pAccessoryPojo->accessorySerial = stoi(data);
-//            LOGD("pAccessoryPojo->accessorySerial:%d", pAccessoryPojo->accessorySerial);
-            
-            if (isNest == true) {
-                /* 取得 pElementPojoList 裡所有的資料 */
-                vector<int> accessorySerialList;
-                accessorySerialList.push_back(pAccessoryPojo->accessorySerial);
-                
-                pAccessoryPojo->pSubPojoList = ElementDao::read(accessorySerialList);
-//                for (shared_ptr<Pojo> pPojo : *pAccessoryPojo->pElementPojoList) {
-//                    pPojo->print();
-//                }
-            }
-        }
-        /******************************************* 修改處 *****************************************************/
-        if_index_int_va(1, pAccessoryPojo->fkRoomSerial, data)
-        if_index_int_va(2, pAccessoryPojo->AID, data)
-        if_index_str_va(3, pAccessoryPojo->AccName, data)
-        if_index_int_va(4, pAccessoryPojo->AccSeq, data)
-        if_index_int_va(5, pAccessoryPojo->AccIconType, data)
-        if_index_int_va(6, pAccessoryPojo->Connection, data)
-        if_index_int_va(7, pAccessoryPojo->IsGateway, data)
-        /******************************************* 修改處 *****************************************************/
-        else {
-//            ValueObject& valObj = pAccessoryPojo->valueObjectList[i-1];
-//            if (valObj.type == DatabaseType_INTEGER) {
-////                pAccessoryPojo->AID = stoi(data);
-//                int iData = stoi(data);
-//                addPojo(pAccessoryPojo, valObj.key, iData);
+//    for (size_t i=0 ; i<colList.size() ; i++) {
+//        char* data = colList[i];
+////        LOGD("data:%s", data);
+//        
+//        if (i == 0) {
+//            pAccessoryPojo->accessorySerial = stoi(data);
+////            LOGD("pAccessoryPojo->accessorySerial:%d", pAccessoryPojo->accessorySerial);
+//            
+//            if (isNest == true) {
+//                /* 取得 pElementPojoList 裡所有的資料 */
+//                vector<int> accessorySerialList;
+//                accessorySerialList.push_back(pAccessoryPojo->accessorySerial);
+//                
+//                pAccessoryPojo->pSubPojoList = ElementDao::read(accessorySerialList);
+////                for (shared_ptr<Pojo> pPojo : *pAccessoryPojo->pElementPojoList) {
+////                    pPojo->print();
+////                }
 //            }
-//            else {
-////                pAccessoryPojo->Name = data;
-//                addPojo(pAccessoryPojo, valObj.key, data);
-//            }
-            
-            throw DatabaseException(__PRETTY_FUNCTION__, __LINE__, DatabaseException_ErrorCode_Column_Over_The_Range);
-        }
-    }
+//        }
+//        /******************************************* 修改處 *****************************************************/
+//        if_index_int_va(1, pAccessoryPojo->fkRoomSerial, data)
+//        if_index_int_va(2, pAccessoryPojo->AID, data)
+//        if_index_str_va(3, pAccessoryPojo->AccName, data)
+//        if_index_int_va(4, pAccessoryPojo->AccSeq, data)
+//        if_index_int_va(5, pAccessoryPojo->AccIconType, data)
+//        if_index_int_va(6, pAccessoryPojo->Connection, data)
+//        if_index_int_va(7, pAccessoryPojo->IsGateway, data)
+//        /******************************************* 修改處 *****************************************************/
+//        else {
+////            ValueObject& valObj = pAccessoryPojo->valueObjectList[i-1];
+////            if (valObj.type == DatabaseType_INTEGER) {
+//////                pAccessoryPojo->AID = stoi(data);
+////                int iData = stoi(data);
+////                addPojo(pAccessoryPojo, valObj.key, iData);
+////            }
+////            else {
+//////                pAccessoryPojo->Name = data;
+////                addPojo(pAccessoryPojo, valObj.key, data);
+////            }
+//            
+//            throw DatabaseException(__PRETTY_FUNCTION__, __LINE__, DatabaseException_ErrorCode_Column_Over_The_Range);
+//        }
+//    }
     
 //    pAccessoryPojo->genValueObject(); // 值會正確
     outPtrPojoList->push_back(pAccessoryPojo);
@@ -95,13 +95,13 @@ void AccessoryDao::create(AccessoryPojo& accessoryPojo)
     std::string sql = Pojo::createSQL("INSERT INTO Accessory (accessorySerial,", accessoryPojo.valueObjectList);
     databaseManager.exec(sql.c_str());
     
-    int rowid = (int) sqlite3_last_insert_rowid(databaseManager.getSqliteDatabase());
+//    int rowid = (int) sqlite3_last_insert_rowid(databaseManager.getSqliteDatabase());
     
     for (shared_ptr<Pojo> pPojo : *accessoryPojo.pSubPojoList) {
         shared_ptr<ElementPojo>& pElementPojo = (shared_ptr<ElementPojo>&) pPojo;
         
-        accessoryPojo.accessorySerial =rowid ;
-        pElementPojo->fkAccessorySerial = accessoryPojo.accessorySerial;
+//        accessoryPojo.accessorySerial =rowid ;
+//        pElementPojo->fkAccessorySerial = accessoryPojo.accessorySerial;
         
 //        LOGD("accessoryPojo.accessorySerial:%d", accessoryPojo.accessorySerial);
 //        LOGD("pElementPojo->name:%s", pElementPojo->name.c_str());
@@ -162,11 +162,11 @@ int AccessoryDao::deleteWithAIDList(vector<int>& AIDList)
         
         if (pAccessoryPojoList->size() > 0) {
             // 呼叫下一層Delete
-            vector<int> accessorySerialList;
-            for (shared_ptr<AccessoryPojo> pAccessory : *pAccessoryPojoList) {
-                accessorySerialList.push_back(pAccessory->accessorySerial);
-            }
-            ElementDao::deleteWithFKAccessorySerialList(accessorySerialList);
+//            vector<int> accessorySerialList;
+//            for (shared_ptr<AccessoryPojo> pAccessory : *pAccessoryPojoList) {
+//                accessorySerialList.push_back(pAccessory->accessorySerial);
+//            }
+//            ElementDao::deleteWithFKAccessorySerialList(accessorySerialList);
             
             // 這一層的刪除
             vector<ValueObject> objList;
@@ -254,28 +254,28 @@ shared_ptr<vector<shared_ptr<Pojo>>> AccessoryDao::readNestWithWhereSQL(string& 
     shared_ptr<vector<shared_ptr<Pojo>>> elementNOPojoList = ElementNODao::readWithSQL(elementNOSQL);
     
     for (shared_ptr<Pojo> pPojo : *accessoryPojoList) {
-        shared_ptr<AccessoryPojo>& pAccessoryPojo = (shared_ptr<AccessoryPojo>&) pPojo;
+//        shared_ptr<AccessoryPojo>& pAccessoryPojo = (shared_ptr<AccessoryPojo>&) pPojo;
         
         for (shared_ptr<Pojo> pPojo : *elementPojoList) {
-            shared_ptr<ElementPojo>& pElementPojo = (shared_ptr<ElementPojo>&) pPojo;
+//            shared_ptr<ElementPojo>& pElementPojo = (shared_ptr<ElementPojo>&) pPojo;
             
-            if (pAccessoryPojo->accessorySerial == pElementPojo->fkAccessorySerial) {
-                pAccessoryPojo->pSubPojoList->push_back(pElementPojo);
-//                break;
-            }
+//            if (pAccessoryPojo->accessorySerial == pElementPojo->fkAccessorySerial) {
+//                pAccessoryPojo->pSubPojoList->push_back(pElementPojo);
+////                break;
+//            }
         }
     }
     
     for (shared_ptr<Pojo> pPojo : *elementPojoList) {
-        shared_ptr<ElementPojo>& pElementPojo = (shared_ptr<ElementPojo>&) pPojo;
+//        shared_ptr<ElementPojo>& pElementPojo = (shared_ptr<ElementPojo>&) pPojo;
         
         for (shared_ptr<Pojo> pPojo : *elementNOPojoList) {
-            shared_ptr<ElementNOPojo>& pElementNOPojo = (shared_ptr<ElementNOPojo>&) pPojo;
+//            shared_ptr<ElementNOPojo>& pElementNOPojo = (shared_ptr<ElementNOPojo>&) pPojo;
             
-            if (pElementPojo->elementSerial == pElementNOPojo->fkElementSerial) {
-                pElementPojo->pSubPojoList->push_back(pElementNOPojo);
-//                break;
-            }
+//            if (pElementPojo->elementSerial == pElementNOPojo->fkElementSerial) {
+//                pElementPojo->pSubPojoList->push_back(pElementNOPojo);
+////                break;
+//            }
         }
     }
     

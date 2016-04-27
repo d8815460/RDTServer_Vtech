@@ -17,9 +17,6 @@ struct ServicePojo : public Pojo
 {
     vector<ValueObject> valueObjectList;
     
-    int elementSerial;
-    
-    int         fkAccessorySerial;
     std::string Service;
     
     shared_ptr<vector<shared_ptr<Pojo>>> pSubPojoList;
@@ -38,7 +35,6 @@ struct ServicePojo : public Pojo
     {
         /******************************************* 修改處 *****************************************************/
         valueObjectList = {
-            createValueObject(fkAccessorySerial),
             createValueObject(Service),
         };
         /******************************************* 修改處 *****************************************************/
@@ -64,8 +60,6 @@ struct ServicePojo : public Pojo
     
     virtual void print()
     {
-        LOGD("elementSerial:%d", elementSerial);
-        LOGD("fkAccessorySerial:%d", fkAccessorySerial);
         LOGD("Service:%s", Service.c_str());
         
         if (pSubPojoList != NULL) {

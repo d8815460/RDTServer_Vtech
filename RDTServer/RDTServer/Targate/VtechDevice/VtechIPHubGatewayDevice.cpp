@@ -61,14 +61,13 @@ void VtechIPHubGatewayDevice::reset()
     int currentAID = 0;
     {
         /* 新增一筆Accessory資料 */
-        // param1: fkRoomSerial Room流水號
         // param2: AID代表accessory id
         // param3: Name 一個名字,用於標示目標類型的一種可視化手段
         // oaram4: AccSeq The accessory's sequence , the default value is 0.
         // param5: IconType 會面呈現的Icon所代表的型態，如IPHub
         // param6: Connection 連線狀態，
         // param7: IsGateway is gateway or not
-        shared_ptr<AccessoryPojo> pAccessoryPojo(new AccessoryPojo(1, currentAID++, "PC Home", 1, 1, 1, true));
+        shared_ptr<AccessoryPojo> pAccessoryPojo(new AccessoryPojo(currentAID++, "PC Home", 1, 1, 1, true));
 
         // param1: Service 一個元件有單個或多個Element
         shared_ptr<ServicePojo> pService1(new ServicePojo("switchService"));
@@ -98,7 +97,7 @@ void VtechIPHubGatewayDevice::reset()
         // param5: IconType 會面呈現的Icon所代表的型態，如IPHub
         // param6: Connection 連線狀態，
         // param7: IsGateway is gateway or not
-        shared_ptr<AccessoryPojo> pAccessoryPojo(new AccessoryPojo(2, currentAID++, "Super", 2, 2, 2, false));
+        shared_ptr<AccessoryPojo> pAccessoryPojo(new AccessoryPojo(currentAID++, "Super", 2, 2, 2, false));
 
         // param1: Service 一個元件有單個或多個Element
         shared_ptr<ServicePojo> pService1(new ServicePojo("switchService"));

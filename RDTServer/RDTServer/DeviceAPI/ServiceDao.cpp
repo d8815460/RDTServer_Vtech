@@ -19,15 +19,15 @@ void ServiceDao::readCallback(shared_ptr<vector<shared_ptr<Pojo>>> outPtrPojoLis
         //        LOGD("data:%s", data);
         
         if (i == 0) {
-            pServicePojo->elementSerial = stoi(data);
-            //            LOGD("pServicePojo->elementSerial:%d", pServicePojo->elementSerial);
-            
-            if (isNest == true) {
-                /* 取得 pServicePojoList 裡所有的資料 */
-                vector<int> elementSerialList;
-                elementSerialList.push_back(pServicePojo->elementSerial);
-//                pServicePojo->pSubPojoList = ElementNODao::read(elementSerialList);
-            }
+//            pServicePojo->elementSerial = stoi(data);
+//            //            LOGD("pServicePojo->elementSerial:%d", pServicePojo->elementSerial);
+//            
+//            if (isNest == true) {
+//                /* 取得 pServicePojoList 裡所有的資料 */
+//                vector<int> elementSerialList;
+//                elementSerialList.push_back(pServicePojo->elementSerial);
+////                pServicePojo->pSubPojoList = ElementNODao::read(elementSerialList);
+//            }
         }
         /******************************************* 修改處 *****************************************************/
 //        if_index_int_va(1, pServicePojo->fkAccessorySerial, data)

@@ -15,29 +15,29 @@ void ElementDao::readCallback(shared_ptr<vector<shared_ptr<Pojo>>> outPtrPojoLis
 {
     shared_ptr<ElementPojo> pElementPojo(new ElementPojo());
     
-    for (size_t i=0 ; i<colList.size() ; i++) {
-        char* data = colList[i];
-//        LOGD("data:%s", data);
-        
-        if (i == 0) {
-            pElementPojo->elementSerial = stoi(data);
-//            LOGD("pElementPojo->elementSerial:%d", pElementPojo->elementSerial);
-            
-            if (isNest == true) {
-                /* 取得 pElementPojoList 裡所有的資料 */
-                vector<int> elementSerialList;
-                elementSerialList.push_back(pElementPojo->elementSerial);
-                pElementPojo->pSubPojoList = ElementNODao::read(elementSerialList);
-            }
-        }
-        /******************************************* 修改處 *****************************************************/
-        if_index_int_va(1, pElementPojo->fkAccessorySerial, data)
-        if_index_str_va(2, pElementPojo->Element, data)
-        /******************************************* 修改處 *****************************************************/
-        else {
-            throw DatabaseException(__PRETTY_FUNCTION__, __LINE__, DatabaseException_ErrorCode_Column_Over_The_Range);
-        }
-    }
+//    for (size_t i=0 ; i<colList.size() ; i++) {
+//        char* data = colList[i];
+////        LOGD("data:%s", data);
+//        
+//        if (i == 0) {
+//            pElementPojo->elementSerial = stoi(data);
+////            LOGD("pElementPojo->elementSerial:%d", pElementPojo->elementSerial);
+//            
+//            if (isNest == true) {
+//                /* 取得 pElementPojoList 裡所有的資料 */
+//                vector<int> elementSerialList;
+//                elementSerialList.push_back(pElementPojo->elementSerial);
+//                pElementPojo->pSubPojoList = ElementNODao::read(elementSerialList);
+//            }
+//        }
+//        /******************************************* 修改處 *****************************************************/
+//        if_index_int_va(1, pElementPojo->fkAccessorySerial, data)
+//        if_index_str_va(2, pElementPojo->Element, data)
+//        /******************************************* 修改處 *****************************************************/
+//        else {
+//            throw DatabaseException(__PRETTY_FUNCTION__, __LINE__, DatabaseException_ErrorCode_Column_Over_The_Range);
+//        }
+//    }
     
     outPtrPojoList->push_back(pElementPojo);
 }
@@ -74,13 +74,13 @@ void ElementDao::create(shared_ptr<ElementPojo> pElementPojo)
     std::string sql = Pojo::createSQL("INSERT INTO Element (elementSerial,", pElementPojo->valueObjectList);
     databaseManager.exec(sql.c_str());
     
-    int rowid = (int) sqlite3_last_insert_rowid(databaseManager.getSqliteDatabase());
-                                    
+//    int rowid = (int) sqlite3_last_insert_rowid(databaseManager.getSqliteDatabase());
+    
     for (shared_ptr<Pojo> pPojo : *pElementPojo->pSubPojoList) {
         shared_ptr<ElementNOPojo>& pElementNOPojo = (shared_ptr<ElementNOPojo>&) pPojo;
         
-        pElementPojo->elementSerial = rowid;
-        pElementNOPojo->fkElementSerial = pElementPojo->elementSerial;
+//        pElementPojo->elementSerial = rowid;
+//        pElementNOPojo->fkElementSerial = pElementPojo->elementSerial;
         
 //        LOGD("pElementPojo->name:%s", pElementPojo->name.c_str());
 //        LOGD("pElementPojo->elementSerial:%d", pElementPojo->elementSerial);
@@ -135,9 +135,9 @@ int ElementDao::deleteWithFKAccessorySerialList(vector<int>& accessorySerialList
     vector<int> elementSerialList;
     shared_ptr<vector<shared_ptr<Pojo>>> pPojoList = ElementDao::read(accessorySerialList);
     for (shared_ptr<Pojo> pPojo : *pPojoList) {
-        shared_ptr<ElementPojo>& pElementPojo = (shared_ptr<ElementPojo>&) pPojo;
+//        shared_ptr<ElementPojo>& pElementPojo = (shared_ptr<ElementPojo>&) pPojo;
         
-        elementSerialList.push_back(pElementPojo->fkAccessorySerial);
+//        elementSerialList.push_back(pElementPojo->fkAccessorySerial);
     }
     ElementNODao::deleteWithFKElementSerialList(elementSerialList);
     

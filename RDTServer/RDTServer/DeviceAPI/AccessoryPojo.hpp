@@ -31,10 +31,7 @@ struct AccessoryPojo : public Pojo
 {
     vector<ValueObject> valueObjectList;
     
-    int         accessorySerial;
-    
     shared_ptr<RoomPojo>    pRoomPojo;
-    int         fkRoomSerial;
     
     int         AID;
     std::string AccName;
@@ -51,8 +48,7 @@ struct AccessoryPojo : public Pojo
     }
     
     /******************************************* 修改處 *****************************************************/
-    Contractor7(AccessoryPojo, SubPojoList(),
-                int,         fkRoomSerial,
+    Contractor6(AccessoryPojo, SubPojoList(),
                 int,         AID,
                 std::string, AccName,
                 int,         AccSeq,
@@ -65,7 +61,6 @@ struct AccessoryPojo : public Pojo
     {
         /******************************************* 修改處 *****************************************************/
         valueObjectList = {
-            createValueObject(fkRoomSerial),
             createValueObject(AID),
             createValueObject(AccName),
             createValueObject(AccSeq),
@@ -82,8 +77,6 @@ struct AccessoryPojo : public Pojo
         
         /******************************************* 修改處 *****************************************************/
         // AID在下面加
-        //        addJson(subJsonList, fkRoomSerial);
-        
         addJson(subJsonList, AccName);
         addJson(subJsonList, AccSeq);
         addJson(subJsonList, AccIconType);
@@ -105,7 +98,6 @@ struct AccessoryPojo : public Pojo
     virtual void print()
     {
         LOGD("================================================================================");
-        LOGD("accessorySerial:%d", accessorySerial);
         LOGD("AID:%d", AID);
         LOGD("IconType:%d", AccIconType);
         

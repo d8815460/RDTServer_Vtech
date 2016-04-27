@@ -141,7 +141,6 @@ void JsonRDTServerCommand::parse(Json::Value& root, int AID, vector<ValueObject>
                     LOGD("value:%s", root[vo.key].asString().c_str());
                     
                     // Accessory
-                    setIntVO(fkRoomSerial)
                     setIntVO(AID)
                     setStrVO(AccName)
                     setIntVO(AccSeq)
