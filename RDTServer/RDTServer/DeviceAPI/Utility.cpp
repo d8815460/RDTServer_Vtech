@@ -161,3 +161,19 @@ void Utility::sendParseRest(const char *url, const char* appID, const char* mast
         std::cout << e.what() << std::endl;
     }
 }
+
+void Utility::parse(shared_ptr<vector<shared_ptr<AccessoryPojo>>>& pAccessoryPojoList, Json::Value& root, int AID, vector<ValueObject>& propertyList, Parse_Callback& callback)
+{
+    for (shared_ptr<AccessoryPojo>& pAccessoryPojo : *pAccessoryPojoList) {
+        if (AID == pAccessoryPojo->AID) {
+            for (ValueObject vo : propertyList) {
+                if (root.isMember(vo.key)) {
+                    LOGD("key:%s", vo.key.c_str());
+                    LOGD("value:%s", root[vo.key].asString().c_str());
+                    
+                    callback(root, AID, propertyList);
+                }
+            }
+        }
+    }
+}

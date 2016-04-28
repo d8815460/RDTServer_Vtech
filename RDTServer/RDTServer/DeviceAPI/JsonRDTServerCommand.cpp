@@ -131,29 +131,6 @@ std::string JsonRDTServerCommand::findWord(std::string& string, const std::strin
     return "";
 }
 
-void JsonRDTServerCommand::parse(Json::Value& root, int AID, vector<ValueObject>& propertyList)
-{
-    for (shared_ptr<AccessoryPojo>& pAccessoryPojo : *m_pAccessoryList) {
-        if (AID == pAccessoryPojo->AID) {
-            for (ValueObject vo : propertyList) {
-                if (root.isMember(vo.key)) {
-                    LOGD("key:%s", vo.key.c_str());
-                    LOGD("value:%s", root[vo.key].asString().c_str());
-                    
-                    // Accessory
-                    setIntVO(AID)
-                    setStrVO(AccName)
-                    setIntVO(AccSeq)
-                    setIntVO(AccIconType)
-                    setIntVO(Connection)
-                    setIntVO(IsGateway)
-                }
-            }
-        }
-    }
-    
-}
-
 #pragma mark - JsonRDTServerCommand
 
 void JsonRDTServerCommand::processCommandTarget(Json::Value& inJsonObject, Json::Value& outJsonObject) throw (CommandException)
@@ -347,7 +324,15 @@ void JsonRDTServerCommand::processCommandTarget(Json::Value& inJsonObject, Json:
                 Json::Value accessory = listAccessory[AIDString];
 //                LOGD("accessory:%s", accessory.toStyledString().c_str());
                 
-                parse(accessory, AID, propertyList);
+//                parse(accessory, AID, propertyList);
+//                
+//                // Set Accessory
+//                setIntVO(AID)
+//                setStrVO(AccName)
+//                setIntVO(AccSeq)
+//                setIntVO(AccIconType)
+//                setIntVO(Connection)
+//                setIntVO(IsGateway)
                 
 //                if (accessory.isMember("AccSeq")) {
 //                    int AccSeq = accessory["AccSeq"].asInt();
@@ -370,7 +355,7 @@ void JsonRDTServerCommand::processCommandTarget(Json::Value& inJsonObject, Json:
         if (thenObject.isMember("Value")) {
             string value = thenObject["Value"].asString();
             objList.push_back(ValueObject("ElementNO", value));
-            AccessoryDao::updateElementNOWithWhereSQL(whereSQL, objList);
+//            AccessoryDao::updateElementNOWithWhereSQL(whereSQL, objList);
         }
     }
     // 刪除
@@ -391,7 +376,7 @@ void JsonRDTServerCommand::processCommandTarget(Json::Value& inJsonObject, Json:
                 
                 // 刪除成功
                 if (pItems->errorCode == 0) {
-                    pCommandBase->errorCode = AccessoryDao::deleteWithAIDList(AIDList);
+                    pCommandBase->errorCode = AccessoryDao::deleteIt(m_pAccessoryList, AIDList);
                 }
             }
         }

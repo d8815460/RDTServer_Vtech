@@ -10,6 +10,7 @@
 #include <string>
 #include "ElementDao.hpp"
 #include "ElementNODao.hpp"
+#include "Utility.hpp"
 
 //void loopVA_Args(Json::Value& json, int count, const char* value, ...)
 //{
@@ -39,7 +40,7 @@ void AccessoryDao::readCallback(shared_ptr<vector<shared_ptr<Pojo>>> outPtrPojoL
     
 //    for (size_t i=0 ; i<colList.size() ; i++) {
 //        char* data = colList[i];
-////        LOGD("data:%s", data);
+//        LOGD("data:%s", data);
 //        
 //        if (i == 0) {
 //            pAccessoryPojo->accessorySerial = stoi(data);
@@ -56,7 +57,7 @@ void AccessoryDao::readCallback(shared_ptr<vector<shared_ptr<Pojo>>> outPtrPojoL
 ////                }
 //            }
 //        }
-//        /******************************************* 修改處 *****************************************************/
+        /******************************************* 修改處 *****************************************************/
 //        if_index_int_va(1, pAccessoryPojo->fkRoomSerial, data)
 //        if_index_int_va(2, pAccessoryPojo->AID, data)
 //        if_index_str_va(3, pAccessoryPojo->AccName, data)
@@ -64,23 +65,23 @@ void AccessoryDao::readCallback(shared_ptr<vector<shared_ptr<Pojo>>> outPtrPojoL
 //        if_index_int_va(5, pAccessoryPojo->AccIconType, data)
 //        if_index_int_va(6, pAccessoryPojo->Connection, data)
 //        if_index_int_va(7, pAccessoryPojo->IsGateway, data)
-//        /******************************************* 修改處 *****************************************************/
+        /******************************************* 修改處 *****************************************************/
 //        else {
-////            ValueObject& valObj = pAccessoryPojo->valueObjectList[i-1];
-////            if (valObj.type == DatabaseType_INTEGER) {
-//////                pAccessoryPojo->AID = stoi(data);
-////                int iData = stoi(data);
-////                addPojo(pAccessoryPojo, valObj.key, iData);
-////            }
-////            else {
-//////                pAccessoryPojo->Name = data;
-////                addPojo(pAccessoryPojo, valObj.key, data);
-////            }
+//            ValueObject& valObj = pAccessoryPojo->valueObjectList[i-1];
+//            if (valObj.type == DatabaseType_INTEGER) {
+////                pAccessoryPojo->AID = stoi(data);
+//                int iData = stoi(data);
+//                addPojo(pAccessoryPojo, valObj.key, iData);
+//            }
+//            else {
+////                pAccessoryPojo->Name = data;
+//                addPojo(pAccessoryPojo, valObj.key, data);
+//            }
 //            
 //            throw DatabaseException(__PRETTY_FUNCTION__, __LINE__, DatabaseException_ErrorCode_Column_Over_The_Range);
 //        }
 //    }
-    
+//    
 //    pAccessoryPojo->genValueObject(); // 值會正確
     outPtrPojoList->push_back(pAccessoryPojo);
 }
@@ -127,33 +128,55 @@ void AccessoryDao::update(AccessoryPojo& accessoryPojo)
     }
 }
 
-int AccessoryDao::deleteAll()
+void AccessoryDao::deleteCallback(Json::Value& root, int AID, vector<ValueObject>& propertyList)
 {
-    DatabaseManager& databaseManager = DatabaseManager::getInstance();
-    
-    ElementDao::deleteAll();
-    
-    return databaseManager.exec("DELETE FROM Accessory;");
+    LOGD("AID");
 }
 
-int AccessoryDao::deleteWithSerialList(vector<int>& accessorySerialList)
+int AccessoryDao::deleteIt(shared_ptr<vector<shared_ptr<AccessoryPojo>>>& pPojoList, vector<int> aidList)
 {
-    DatabaseManager& databaseManager = DatabaseManager::getInstance();
-    
-    vector<ValueObject> objList;
-    for (int accessorySerial : accessorySerialList) {
-        ValueObject obj("accessorySerial", accessorySerial);
-        objList.push_back(obj);
+    for (int AID : aidList) {
+        for(size_t i=pPojoList->size()-1 ; i>=0 ; i--) {
+            if ((*pPojoList)[i]->AID == AID) {
+                pPojoList->erase(pPojoList->begin() + i);
+                break;
+            }
+        }
     }
     
-    string SQL = "DELETE FROM Accessory WHERE accessorySerial";
-    SQL.append(Pojo::genInSQL(objList, false));
+//    LOGD("size:%ld", pPojoList->size());
+//    LOGD("%d", (*pPojoList)[0]->AID);
     
-    return databaseManager.exec(SQL.c_str());
+    return 0; // Error Code
 }
 
-int AccessoryDao::deleteWithAIDList(vector<int>& AIDList)
-{
+//int AccessoryDao::deleteAll()
+//{
+//    DatabaseManager& databaseManager = DatabaseManager::getInstance();
+//    
+//    ElementDao::deleteAll();
+//    
+//    return databaseManager.exec("DELETE FROM Accessory;");
+//}
+
+//int AccessoryDao::deleteWithSerialList(vector<int>& accessorySerialList)
+//{
+//    DatabaseManager& databaseManager = DatabaseManager::getInstance();
+//    
+//    vector<ValueObject> objList;
+//    for (int accessorySerial : accessorySerialList) {
+//        ValueObject obj("accessorySerial", accessorySerial);
+//        objList.push_back(obj);
+//    }
+//    
+//    string SQL = "DELETE FROM Accessory WHERE accessorySerial";
+//    SQL.append(Pojo::genInSQL(objList, false));
+//    
+//    return databaseManager.exec(SQL.c_str());
+//}
+
+//int AccessoryDao::deleteWithAIDList(vector<int>& AIDList)
+//{
 //    DatabaseManager& databaseManager = DatabaseManager::getInstance();
 //    
 //    shared_ptr<vector<shared_ptr<Pojo>>> pPojoList = AccessoryDao::read(AIDList);
@@ -181,13 +204,9 @@ int AccessoryDao::deleteWithAIDList(vector<int>& AIDList)
 //            return databaseManager.exec(SQL.c_str());
 //        }
 //    }
-    
-    for () {
-        <#statements#>
-    }
-    
-    return DatabaseException_ErrorCode_Error_Deleting_Database;
-}
+//    
+//    return DatabaseException_ErrorCode_Error_Deleting_Database;
+//}
 
 shared_ptr<vector<shared_ptr<Pojo>>> AccessoryDao::readAll()
 {
@@ -212,39 +231,39 @@ shared_ptr<vector<shared_ptr<Pojo>>> AccessoryDao::read(vector<int>& AIDList)
     return pPojoList;
 }
 
-void AccessoryDao::updateElementNOWithWhereSQL(string& selectWhereSQL, vector<ValueObject>& objList)
-{
-    string whereSQL = " WHERE ElementNO in (";
-    
-    DatabaseManager& databaseManager = DatabaseManager::getInstance();
-    string selectSQL = Pojo::genAccessoryNestReadSQL("ElementNO", selectWhereSQL);
-    whereSQL.append(selectSQL);
-    whereSQL.append(")");
-    
-    string SQL = "UPDATE ElementNO";
-    SQL.append(Pojo::genUpdateSetSQL(objList));
-    SQL.append(whereSQL);
-    LOGD("SQL:\n%s", SQL.c_str());
-    
-    databaseManager.exec(SQL.c_str());
-}
+//void AccessoryDao::updateElementNOWithWhereSQL(string& selectWhereSQL, vector<ValueObject>& objList)
+//{
+//    string whereSQL = " WHERE ElementNO in (";
+//    
+//    DatabaseManager& databaseManager = DatabaseManager::getInstance();
+//    string selectSQL = Pojo::genAccessoryNestReadSQL("ElementNO", selectWhereSQL);
+//    whereSQL.append(selectSQL);
+//    whereSQL.append(")");
+//    
+//    string SQL = "UPDATE ElementNO";
+//    SQL.append(Pojo::genUpdateSetSQL(objList));
+//    SQL.append(whereSQL);
+//    LOGD("SQL:\n%s", SQL.c_str());
+//    
+//    databaseManager.exec(SQL.c_str());
+//}
 
-void AccessoryDao::updateAccessoryWithWhereSQL(string& selectWhereSQL, vector<ValueObject>& objList)
-{
-    string whereSQL = " WHERE AccSeq in (";
-    
-    DatabaseManager& databaseManager = DatabaseManager::getInstance();
-    string selectSQL = Pojo::genAccessoryNestReadSQL("AccSeq", selectWhereSQL);
-    whereSQL.append(selectSQL);
-    whereSQL.append(")");
-    
-    string SQL = "UPDATE Accessory";
-    SQL.append(Pojo::genUpdateSetSQL(objList));
-    SQL.append(whereSQL);
-    LOGD("SQL:\n%s", SQL.c_str());
-    
-    databaseManager.exec(SQL.c_str());
-}
+//void AccessoryDao::updateAccessoryWithWhereSQL(string& selectWhereSQL, vector<ValueObject>& objList)
+//{
+//    string whereSQL = " WHERE AccSeq in (";
+//    
+//    DatabaseManager& databaseManager = DatabaseManager::getInstance();
+//    string selectSQL = Pojo::genAccessoryNestReadSQL("AccSeq", selectWhereSQL);
+//    whereSQL.append(selectSQL);
+//    whereSQL.append(")");
+//    
+//    string SQL = "UPDATE Accessory";
+//    SQL.append(Pojo::genUpdateSetSQL(objList));
+//    SQL.append(whereSQL);
+//    LOGD("SQL:\n%s", SQL.c_str());
+//    
+//    databaseManager.exec(SQL.c_str());
+//}
 
 shared_ptr<vector<shared_ptr<Pojo>>> AccessoryDao::readNestWithWhereSQL(string& whereSQL)
 {

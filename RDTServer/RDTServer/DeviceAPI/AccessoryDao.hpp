@@ -25,14 +25,17 @@ public:
     static void create(AccessoryPojo& pojo);
     static void update(AccessoryPojo& pojo);
     
+    void deleteCallback(Json::Value& root, int AID, vector<ValueObject>& propertyList);
+    static int deleteIt(shared_ptr<vector<shared_ptr<AccessoryPojo>>>& pPojoList, vector<int> aidList);
+    
     // 更新
-    static void updateElementNOWithWhereSQL(string& selectWhereSQL, vector<ValueObject>& objList);
-    static void updateAccessoryWithWhereSQL(string& selectWhereSQL, vector<ValueObject>& objList);
+//    static void updateElementNOWithWhereSQL(string& selectWhereSQL, vector<ValueObject>& objList);
+//    static void updateAccessoryWithWhereSQL(string& selectWhereSQL, vector<ValueObject>& objList);
     
     // 刪除
-    static int deleteAll();
-    static int deleteWithSerialList(vector<int>& accessorySerialList);
-    static int deleteWithAIDList(vector<int>& AIDList);
+//    static int deleteAll();
+//    static int deleteWithSerialList(vector<int>& accessorySerialList);
+//    static int deleteWithAIDList(vector<int>& AIDList);
     
     // 查詢
     static shared_ptr<vector<shared_ptr<Pojo>>> readAll();

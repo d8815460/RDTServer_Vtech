@@ -12,10 +12,12 @@
 #include <stdio.h>
 #include <memory>
 #include "Device.hpp"
+#include "Utility.hpp"
 
 #include "Pojo.hpp"
 #include "AccessoryDao.hpp"
 
+typedef void (*Parse_Callback) (Json::Value& root, int AID, vector<ValueObject>& propertyList);
 typedef void (*JsonRecvDataCallback)(int channelID, BYTE* buffer, int totalLength);
 
 class Utility
@@ -34,6 +36,8 @@ public:
     
     static void pojoToJson(Json::Value& inJsonObject, Json::Value& outJsonObject, shared_ptr<Pojo>& pPojo);
     static void pojoListToJson(Json::Value& inJsonObject, Json::Value& outJsonObject, shared_ptr<vector<shared_ptr<Pojo>>>& pojoList);
+    
+    static void parse(shared_ptr<vector<shared_ptr<AccessoryPojo>>>& pAccessoryPojoList, Json::Value& root, int AID, vector<ValueObject>& propertyList, Parse_Callback& callback);
     
 //    template <typename T>
 //    static T setValue(BYTE* pBuffer, int* pIndex, T value);
