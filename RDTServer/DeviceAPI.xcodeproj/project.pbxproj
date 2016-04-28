@@ -20,6 +20,7 @@
 		A25E5AE61C90318D00B49656 /* DatabaseException.hpp in Headers */ = {isa = PBXBuildFile; fileRef = A25E5AE41C90318D00B49656 /* DatabaseException.hpp */; };
 		A25E5AE91C9037AA00B49656 /* DatabaseManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A25E5AE71C9037AA00B49656 /* DatabaseManager.cpp */; };
 		A25E5AEA1C9037AA00B49656 /* DatabaseManager.hpp in Headers */ = {isa = PBXBuildFile; fileRef = A25E5AE81C9037AA00B49656 /* DatabaseManager.hpp */; };
+		A266FE881CD0C77900622B8F /* MetadataPojo.hpp in Headers */ = {isa = PBXBuildFile; fileRef = A266FE861CD0C77900622B8F /* MetadataPojo.hpp */; };
 		A26FB5D01C635DD1007E3648 /* platform_Config.h in Headers */ = {isa = PBXBuildFile; fileRef = A26FB5C01C635DD1007E3648 /* platform_Config.h */; };
 		A26FB5D11C635DD1007E3648 /* PrefixHeader.pch in Headers */ = {isa = PBXBuildFile; fileRef = A26FB5C11C635DD1007E3648 /* PrefixHeader.pch */; };
 		A26FB5D21C635DD1007E3648 /* UTF.hpp in Headers */ = {isa = PBXBuildFile; fileRef = A26FB5C21C635DD1007E3648 /* UTF.hpp */; };
@@ -138,6 +139,7 @@
 		A25E5AE41C90318D00B49656 /* DatabaseException.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = DatabaseException.hpp; path = RDTServer/DeviceAPI/DatabaseException.hpp; sourceTree = SOURCE_ROOT; };
 		A25E5AE71C9037AA00B49656 /* DatabaseManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = DatabaseManager.cpp; path = RDTServer/DeviceAPI/DatabaseManager.cpp; sourceTree = SOURCE_ROOT; };
 		A25E5AE81C9037AA00B49656 /* DatabaseManager.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = DatabaseManager.hpp; path = RDTServer/DeviceAPI/DatabaseManager.hpp; sourceTree = SOURCE_ROOT; };
+		A266FE861CD0C77900622B8F /* MetadataPojo.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = MetadataPojo.hpp; path = RDTServer/DeviceAPI/MetadataPojo.hpp; sourceTree = SOURCE_ROOT; };
 		A26FB5C01C635DD1007E3648 /* platform_Config.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = platform_Config.h; path = RDTServer/DeviceAPI/platform_Config.h; sourceTree = SOURCE_ROOT; };
 		A26FB5C11C635DD1007E3648 /* PrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PrefixHeader.pch; path = RDTServer/DeviceAPI/PrefixHeader.pch; sourceTree = SOURCE_ROOT; };
 		A26FB5C21C635DD1007E3648 /* UTF.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = UTF.hpp; path = RDTServer/DeviceAPI/UTF.hpp; sourceTree = SOURCE_ROOT; };
@@ -269,6 +271,7 @@
 				A2B024521CCF71FE00A39831 /* ServicePojo.hpp */,
 				A2B0244A1CCF618F00A39831 /* ElementPojo.hpp */,
 				A2B0244E1CCF673400A39831 /* ElementNOPojo.hpp */,
+				A266FE861CD0C77900622B8F /* MetadataPojo.hpp */,
 			);
 			name = Pojo;
 			sourceTree = "<group>";
@@ -609,6 +612,7 @@
 				A2A17A281C7D568A008AEFD4 /* BaseData.hpp in Headers */,
 				A2BBADCC1C8973A900B41503 /* Hardward.hpp in Headers */,
 				A26FB6B91C635F67007E3648 /* StackTrace.h in Headers */,
+				A266FE881CD0C77900622B8F /* MetadataPojo.hpp in Headers */,
 				A26FB6EE1C63600B007E3648 /* json_tool.h in Headers */,
 				A26FB6C01C635F8B007E3648 /* IPStack.h in Headers */,
 				A2B024501CCF673400A39831 /* ElementNOPojo.hpp in Headers */,

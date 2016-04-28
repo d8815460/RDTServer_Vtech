@@ -154,32 +154,36 @@ int AccessoryDao::deleteWithSerialList(vector<int>& accessorySerialList)
 
 int AccessoryDao::deleteWithAIDList(vector<int>& AIDList)
 {
-    DatabaseManager& databaseManager = DatabaseManager::getInstance();
-    
-    shared_ptr<vector<shared_ptr<Pojo>>> pPojoList = AccessoryDao::read(AIDList);
-    if (pPojoList != NULL) {
-        shared_ptr<vector<shared_ptr<AccessoryPojo>>>& pAccessoryPojoList = (shared_ptr<vector<shared_ptr<AccessoryPojo>>>&) pPojoList;
-        
-        if (pAccessoryPojoList->size() > 0) {
-            // 呼叫下一層Delete
-//            vector<int> accessorySerialList;
-//            for (shared_ptr<AccessoryPojo> pAccessory : *pAccessoryPojoList) {
-//                accessorySerialList.push_back(pAccessory->accessorySerial);
+//    DatabaseManager& databaseManager = DatabaseManager::getInstance();
+//    
+//    shared_ptr<vector<shared_ptr<Pojo>>> pPojoList = AccessoryDao::read(AIDList);
+//    if (pPojoList != NULL) {
+//        shared_ptr<vector<shared_ptr<AccessoryPojo>>>& pAccessoryPojoList = (shared_ptr<vector<shared_ptr<AccessoryPojo>>>&) pPojoList;
+//        
+//        if (pAccessoryPojoList->size() > 0) {
+//            // 呼叫下一層Delete
+////            vector<int> accessorySerialList;
+////            for (shared_ptr<AccessoryPojo> pAccessory : *pAccessoryPojoList) {
+////                accessorySerialList.push_back(pAccessory->accessorySerial);
+////            }
+////            ElementDao::deleteWithFKAccessorySerialList(accessorySerialList);
+//            
+//            // 這一層的刪除
+//            vector<ValueObject> objList;
+//            for (int AID : AIDList) {
+//                ValueObject obj("AID", AID);
+//                objList.push_back(obj);
 //            }
-//            ElementDao::deleteWithFKAccessorySerialList(accessorySerialList);
-            
-            // 這一層的刪除
-            vector<ValueObject> objList;
-            for (int AID : AIDList) {
-                ValueObject obj("AID", AID);
-                objList.push_back(obj);
-            }
-            
-            string SQL = "DELETE FROM Accessory WHERE";
-            SQL.append(Pojo::genInSQL(objList, false));
-            
-            return databaseManager.exec(SQL.c_str());
-        }
+//            
+//            string SQL = "DELETE FROM Accessory WHERE";
+//            SQL.append(Pojo::genInSQL(objList, false));
+//            
+//            return databaseManager.exec(SQL.c_str());
+//        }
+//    }
+    
+    for () {
+        <#statements#>
     }
     
     return DatabaseException_ErrorCode_Error_Deleting_Database;
