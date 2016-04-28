@@ -99,6 +99,12 @@ void Utility::pojoToJson(Json::Value& inJsonObject, Json::Value& outJsonObject, 
     pojoListToJson(inJsonObject, outJsonObject, pojoList);
 }
 
+void Utility::pojoListToJson(Json::Value& inJsonObject, Json::Value& outJsonObject, shared_ptr<vector<shared_ptr<AccessoryPojo>>>& pAccessoryPojoList)
+{
+    shared_ptr<vector<shared_ptr<Pojo>>>& pojo = (shared_ptr<vector<shared_ptr<Pojo>>>&) pAccessoryPojoList;
+    pojoListToJson(inJsonObject, outJsonObject, pojo);
+}
+
 void Utility::pojoListToJson(Json::Value& inJsonObject, Json::Value& outJsonObject, shared_ptr<vector<shared_ptr<Pojo>>>& pojoList)
 {
     Json::Value listAccessory;

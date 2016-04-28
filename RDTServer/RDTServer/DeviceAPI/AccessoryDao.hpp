@@ -22,7 +22,9 @@ using namespace std;
 class AccessoryDao
 {
 public:
-    static void create(AccessoryPojo& pojo);
+    static void create(shared_ptr<AccessoryPojo>& pAccessoryPojo);
+    static void createList(shared_ptr<vector<shared_ptr<AccessoryPojo>>>& pAccessoryPojoList);
+    
     static void update(AccessoryPojo& pojo);
     
     void deleteCallback(Json::Value& root, int AID, vector<ValueObject>& propertyList);

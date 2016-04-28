@@ -17,12 +17,12 @@
 
 struct CommandHardwardRecv_CreateItems : CommandBase
 {
-    shared_ptr<vector<shared_ptr<Pojo>>> pojoList;
+    shared_ptr<vector<shared_ptr<Pojo>>> pPojoList;
     
     CommandHardwardRecv_CreateItems()
     {
         shared_ptr<vector<shared_ptr<Pojo>>> pp(new vector<shared_ptr<Pojo>>);
-        pojoList = pp;
+        pPojoList = pp;
     }
 };
 

@@ -500,10 +500,10 @@
 		A2A3C24E1C91161000ABED16 /* Dao */ = {
 			isa = PBXGroup;
 			children = (
-				A21FD8141CB75AA600B3E654 /* RoomDao.hpp */,
-				A21FD8131CB75AA600B3E654 /* RoomDao.cpp */,
 				A2A3C2641C9152F200ABED16 /* AccessoryDao.hpp */,
 				A2A3C2631C9152F200ABED16 /* AccessoryDao.cpp */,
+				A21FD8141CB75AA600B3E654 /* RoomDao.hpp */,
+				A21FD8131CB75AA600B3E654 /* RoomDao.cpp */,
 				A2B024561CCF721D00A39831 /* ServiceDao.hpp */,
 				A2B024551CCF721D00A39831 /* ServiceDao.cpp */,
 				A2A3C26B1C91721300ABED16 /* ElementDao.hpp */,

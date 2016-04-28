@@ -18,9 +18,72 @@
 
 #include "AccessoryTypeEnum.hpp"
 #include "AccessoryDao.hpp"
+#include "ServicePojo.hpp"
 #include "ElementDao.hpp"
 #include "ElementNODao.hpp"
 #include "VtechHardwareException.hpp"
+
+/*
+ APP <-> 模擬器 <-> HW
+ 
+ obj -> pojo
+ 
+ parse 解析 json2obj
+           obj2json -> senderInfo
+ 
+ isSim = true
+ 新增 -> add
+ 輸入:AIDList
+ 輸出:objList, errorCode
+ 
+ 修改 -> update
+ 輸入:objList
+ 輸出:errorCode
+ 
+ 刪除 -> delete
+ 輸入:AIDList
+ 輸出:errorCode
+ 
+ 查詢 -> select
+ 輸入:
+ 1.
+ "AID"=-1
+ 
+ 2.
+ "AID":[50]
+ 
+ 3.
+ "AID":[0]
+ 
+ 4.
+ "AID":[0, 1]
+ 
+ 5.
+ "AID":[0,1],
+ "Element":["switch"],
+ "ElementNO":[0,1]
+ 
+ 6.
+ "If": {
+    "List": "ListAccessory"
+ },
+ "Then": {
+     "ListAccessory": {
+        "0": {
+            "AccSeq": 4,
+            "IsGateway": true,
+            "Room": {
+                "RoomSeq": 2
+            }
+        },
+        "1": {
+            "AccSeq": 2
+        }
+     }
+ }
+ 
+ 輸出:objList, errorCode
+ */
 
 #define setIntVO(k) \
     if (vo.key.compare(#k) == 0) { \
@@ -160,57 +223,59 @@ void JsonRDTServerCommand::processCommandTarget(Json::Value& inJsonObject, Json:
 //                
 //                // 寫入至json輸出
 //                Utility::pojoListToJson(inJsonObject, outJsonObject, pojoList);
-////                LOGD("產生json = \n%s", outJsonObject.toStyledString().c_str());
-//                
-//                pCommandBase = new CommandHardwardRecv_ReadItems();
-//                CommandHardwardRecv_ReadItems* pItems = (CommandHardwardRecv_ReadItems*) pCommandBase;
-//                pItems->dataType = DataType_Accessory;
-//                pItems->pPojoList = pojoList;
-//                m_pCommandHardwardEvent->onCommandHardwardRecv_ReadItems(pItems);
+//                LOGD("產生json = \n%s", outJsonObject.toStyledString().c_str());
                 
-                shared_ptr<vector<shared_ptr<Pojo>>>& pojoList = (shared_ptr<vector<shared_ptr<Pojo>>>&) m_pAccessoryList;
-                Utility::pojoListToJson(inJsonObject, outJsonObject, pojoList);
+                // 填入清單
+                pCommandBase = new CommandHardwardRecv_ReadItems();
+                CommandHardwardRecv_ReadItems* pItems = (CommandHardwardRecv_ReadItems*) pCommandBase;
+                pItems->dataType = DataType_Accessory;
+                m_pCommandHardwardEvent->onCommandHardwardRecv_ReadItems(pItems);
+                
+                // obj2Json
+                Utility::pojoListToJson(inJsonObject, outJsonObject, pItems->pPojoList);
             }
             else {
                 string whereSQL = "";
                 
-                // 依照查詢條件生成Accessory
-                vector<ValueObject> voList;
-                for (int i=0 ; i<jsonArray.size() ; i++) {
-                    int AID = jsonArray[i].asInt();
-                    voList.push_back(ValueObject("AID", AID));
-                }
+//                // 依照查詢條件生成Accessory
+//                vector<ValueObject> voList;
+//                for (int i=0 ; i<jsonArray.size() ; i++) {
+//                    int AID = jsonArray[i].asInt();
+//                    voList.push_back(ValueObject("AID", AID));
+//                }
+//                
+//                whereSQL = Pojo::genInSQL(voList, false);
+//                
+//                if (IfObject.isMember("Element")) {
+//                    Json::Value jsonArray = IfObject["Element"];
+//                    
+//                    // 依照查詢條件生成
+//                    vector<ValueObject> voList;
+//                    for (int i=0 ; i<jsonArray.size() ; i++) {
+//                        string Element = jsonArray[i].asString();
+//                        voList.push_back(ValueObject("Element", Element));
+//                    }
+//                    
+//                    whereSQL.append(Pojo::genInSQL(voList, true));
+//                }
+//                
+//                if (IfObject.isMember("ElementNO")) {
+//                    Json::Value jsonArray = IfObject["ElementNO"];
+//                    
+//                    // 依照查詢條件生成
+//                    vector<ValueObject> voList;
+//                    for (int i=0 ; i<jsonArray.size() ; i++) {
+//                        int ElementNO = jsonArray[i].asInt();
+//                        voList.push_back(ValueObject("ElementNO", ElementNO));
+//                    }
+//                    
+//                    whereSQL.append(Pojo::genInSQL(voList, true));
+//                }
+//                
+//                Json::Value json;
+//                shared_ptr<vector<shared_ptr<Pojo>>> pojoList = AccessoryDao::readNestWithWhereSQL(whereSQL);
                 
-                whereSQL = Pojo::genInSQL(voList, false);
-                
-                if (IfObject.isMember("Element")) {
-                    Json::Value jsonArray = IfObject["Element"];
-                    
-                    // 依照查詢條件生成
-                    vector<ValueObject> voList;
-                    for (int i=0 ; i<jsonArray.size() ; i++) {
-                        string Element = jsonArray[i].asString();
-                        voList.push_back(ValueObject("Element", Element));
-                    }
-                    
-                    whereSQL.append(Pojo::genInSQL(voList, true));
-                }
-                
-                if (IfObject.isMember("ElementNO")) {
-                    Json::Value jsonArray = IfObject["ElementNO"];
-                    
-                    // 依照查詢條件生成
-                    vector<ValueObject> voList;
-                    for (int i=0 ; i<jsonArray.size() ; i++) {
-                        int ElementNO = jsonArray[i].asInt();
-                        voList.push_back(ValueObject("ElementNO", ElementNO));
-                    }
-                    
-                    whereSQL.append(Pojo::genInSQL(voList, true));
-                }
-                
-                Json::Value json;
-                shared_ptr<vector<shared_ptr<Pojo>>> pojoList = AccessoryDao::readNestWithWhereSQL(whereSQL);
+                shared_ptr<vector<shared_ptr<Pojo>>> pojoList = NULL;
                 
                 // 寫入至json輸出
                 Utility::pojoListToJson(inJsonObject, outJsonObject, pojoList);
@@ -239,15 +304,47 @@ void JsonRDTServerCommand::processCommandTarget(Json::Value& inJsonObject, Json:
                 
                 // 新增成功
                 if (pItems->errorCode == 0) {
-                    for (shared_ptr<Pojo> pPojo : *pItems->pojoList) {
-                        shared_ptr<AccessoryPojo>& pAccessoryPojo = (shared_ptr<AccessoryPojo>&) pPojo;
+                    // 新增Accessory
+                    
+                    if (pItems->pPojoList->size() == 0) {
+                        /* 新增一筆Accessory資料 */
+                        // param1: AID代表accessory id
+                        // param2: Name 一個名字,用於標示目標類型的一種可視化手段
+                        // param3: AccSeq The accessory's sequence , the default value is 0.
+                        // param4: IconType 會面呈現的Icon所代表的型態，如IPHub
+                        // param5: Connection 連線狀態
+                        // param6: IsGateway is gateway or not
+                        shared_ptr<AccessoryPojo> pAccessoryPojo(new AccessoryPojo(getMaxAID(), "Light", 2, 2, 2, false));
                         
-                        // 新增Accessory
-                        AccessoryDao::create(*pAccessoryPojo);
+                        // param1: Service 一個元件有單個或多個Element
+                        shared_ptr<ServicePojo> pService1(new ServicePojo("LightService"));
                         
-                        // 寫入至json輸出
-                        Utility::pojoToJson(inJsonObject, outJsonObject, pPojo);
+                        // param1: Element 一個元件有單個或多個element NO
+                        shared_ptr<ElementPojo> pElement1(new ElementPojo("switch"));
+                        
+                        // param1: ElementNO 一個元件的編號
+                        // param2: Value 由一個字串組成，字串的類型可能是數值，字串或整數，也有可能是其他的。它的類型由Metadata決定一個 key 通常會有一個 value
+                        // param3: NtfyEnable 是否開啟推播
+                        shared_ptr<ElementNOPojo> pNO1(new ElementNOPojo(0, "轟天2", true));
+                        shared_ptr<ElementNOPojo> pNO2(new ElementNOPojo(1, "大鑫2", true));
+                        
+                        pAccessoryPojo->pSubPojoList->push_back(pService1);
+                        pService1->pSubPojoList->push_back(pElement1);
+                        pElement1->pSubPojoList->push_back(pNO1);
+                        pElement1->pSubPojoList->push_back(pNO2);
+                        
+                        m_pAccessoryList->push_back(pAccessoryPojo);
                     }
+                    else {
+                        for (size_t i=0 ; i<pItems->pPojoList->size() ; i++) {
+                            shared_ptr<AccessoryPojo>& pAccessoryPojo = (shared_ptr<AccessoryPojo>&) (*pItems->pPojoList)[i];
+                            
+                            m_pAccessoryList->push_back(pAccessoryPojo);
+                        }
+                    }
+                    
+                    // 寫入至json輸出
+//                    Utility::pojoListToJson(inJsonObject, outJsonObject, m_pAccessoryList);
                 }
             }
             // 修改
@@ -310,7 +407,7 @@ void JsonRDTServerCommand::processCommandTarget(Json::Value& inJsonObject, Json:
         
         AccessoryPojo pojo;
         pojo.genValueObject();
-        vector<ValueObject>& propertyList = pojo.valueObjectList;
+//        vector<ValueObject>& propertyList = pojo.valueObjectList;
         
         // Accessory -> AccSeq
         if (thenObject.isMember("ListAccessory")) {
@@ -367,16 +464,23 @@ void JsonRDTServerCommand::processCommandTarget(Json::Value& inJsonObject, Json:
             for (int i=0 ; i<AIDArray.size() ; i++) {
                 int AID = AIDArray[i].asInt();
                 AIDList.push_back(AID);
-                
-                pCommandBase = new CommandHardwardRecv_DeleteItems();
-                CommandHardwardRecv_DeleteItems* pItems = (CommandHardwardRecv_DeleteItems*) pCommandBase;
-                pItems->dataType = DataType_Accessory;
-                pItems->pIDList = &AIDList;
-                m_pCommandHardwardEvent->onCommandHardwardRecv_DeleteItems(pItems);
-                
-                // 刪除成功
-                if (pItems->errorCode == 0) {
-                    pCommandBase->errorCode = AccessoryDao::deleteIt(m_pAccessoryList, AIDList);
+            }
+            
+            pCommandBase = new CommandHardwardRecv_DeleteItems();
+            CommandHardwardRecv_DeleteItems* pItems = (CommandHardwardRecv_DeleteItems*) pCommandBase;
+            pItems->dataType = DataType_Accessory;
+            pItems->pIDList = &AIDList;
+            m_pCommandHardwardEvent->onCommandHardwardRecv_DeleteItems(pItems);
+            
+            // 刪除成功
+            if (pItems->errorCode == 0) {
+                for (int AID : AIDList) {
+                    for(size_t i=m_pAccessoryList->size()-1 ; i>=0 ; i--) {
+                        if ((*m_pAccessoryList)[i]->AID == AID) {
+                            m_pAccessoryList->erase(m_pAccessoryList->begin() + i);
+                            break;
+                        }
+                    }
                 }
             }
         }

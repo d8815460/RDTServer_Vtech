@@ -8,9 +8,11 @@
 
 #include "AccessoryDao.hpp"
 #include <string>
+#include "Utility.hpp"
+
 #include "ElementDao.hpp"
 #include "ElementNODao.hpp"
-#include "Utility.hpp"
+#include "ServicePojo.hpp"
 
 //void loopVA_Args(Json::Value& json, int count, const char* value, ...)
 //{
@@ -86,28 +88,72 @@ void AccessoryDao::readCallback(shared_ptr<vector<shared_ptr<Pojo>>> outPtrPojoL
     outPtrPojoList->push_back(pAccessoryPojo);
 }
 
-void AccessoryDao::create(AccessoryPojo& accessoryPojo)
+void AccessoryDao::create(shared_ptr<AccessoryPojo>& pAccessoryPojo)
 {
-    DatabaseManager& databaseManager = DatabaseManager::getInstance();
+//    DatabaseManager& databaseManager = DatabaseManager::getInstance();
+//    LOGD("ID:%lld\n", sqlite3_last_insert_rowid(databaseManager.getSqliteDatabase()));
+//    
+//    accessoryPojo.genValueObject();
+//    std::string sql = Pojo::createSQL("INSERT INTO Accessory (accessorySerial,", accessoryPojo.valueObjectList);
+//    databaseManager.exec(sql.c_str());
+//    
+////    int rowid = (int) sqlite3_last_insert_rowid(databaseManager.getSqliteDatabase());
+//    
+//    for (shared_ptr<Pojo> pPojo : *accessoryPojo.pSubPojoList) {
+//        shared_ptr<ElementPojo>& pElementPojo = (shared_ptr<ElementPojo>&) pPojo;
+//        
+////        accessoryPojo.accessorySerial =rowid ;
+////        pElementPojo->fkAccessorySerial = accessoryPojo.accessorySerial;
+//        
+////        LOGD("accessoryPojo.accessorySerial:%d", accessoryPojo.accessorySerial);
+////        LOGD("pElementPojo->name:%s", pElementPojo->name.c_str());
+//        
+//        ElementDao::create(pElementPojo);
+//    }
     
-    LOGD("ID:%lld\n", sqlite3_last_insert_rowid(databaseManager.getSqliteDatabase()));
+//    {
+//        /* 新增一筆Accessory資料 */
+//        // param1: AID代表accessory id
+//        // param2: Name 一個名字,用於標示目標類型的一種可視化手段
+//        // param3: AccSeq The accessory's sequence , the default value is 0.
+//        // param4: IconType 會面呈現的Icon所代表的型態，如IPHub
+//        // param5: Connection 連線狀態，
+//        // param6: IsGateway is gateway or not
+//        shared_ptr<AccessoryPojo> pAccessoryPojo(new AccessoryPojo(pRDTServerCommand->getMaxAID(), "Super", 2, 2, 2, false));
+//        
+//        // param1: Service 一個元件有單個或多個Element
+//        shared_ptr<ServicePojo> pService1(new ServicePojo("switchService"));
+//        
+//        // param1: Element 一個元件有單個或多個element NO
+//        shared_ptr<ElementPojo> pElement1(new ElementPojo("switch"));
+//        
+//        // param1: ElementNO 一個元件的編號
+//        // param2: Value 由一個字串組成，字串的類型可能是數值，字串或整數，也有可能是其他的。它的類型由Metadata決定一個 key 通常會有一個 value
+//        // param3: NtfyEnable 是否開啟推播
+//        shared_ptr<ElementNOPojo> pNO1(new ElementNOPojo(0, "轟天2", true));
+//        shared_ptr<ElementNOPojo> pNO2(new ElementNOPojo(1, "大鑫2", true));
+//        
+//        pAccessoryPojo->pSubPojoList->push_back(pService1);
+//        pService1->pSubPojoList->push_back(pElement1);
+//        pElement1->pSubPojoList->push_back(pNO1);
+//        pElement1->pSubPojoList->push_back(pNO2);
+//        
+//        pAccessoryList->push_back(pAccessoryPojo);
+//    }
     
-    accessoryPojo.genValueObject();
-    std::string sql = Pojo::createSQL("INSERT INTO Accessory (accessorySerial,", accessoryPojo.valueObjectList);
-    databaseManager.exec(sql.c_str());
-    
-//    int rowid = (int) sqlite3_last_insert_rowid(databaseManager.getSqliteDatabase());
-    
-    for (shared_ptr<Pojo> pPojo : *accessoryPojo.pSubPojoList) {
-        shared_ptr<ElementPojo>& pElementPojo = (shared_ptr<ElementPojo>&) pPojo;
+    if (pAccessoryPojo == NULL) {
         
-//        accessoryPojo.accessorySerial =rowid ;
-//        pElementPojo->fkAccessorySerial = accessoryPojo.accessorySerial;
+    }
+    
+    
+}
+
+void AccessoryDao::createList(shared_ptr<vector<shared_ptr<AccessoryPojo>>>& pAccessoryPojoList)
+{
+    for (size_t i=0 ; i<pAccessoryPojoList->size() ; i++) {
+        shared_ptr<AccessoryPojo>& pAccessoryPojo = (shared_ptr<AccessoryPojo>&) (*pAccessoryPojoList)[i];
         
-//        LOGD("accessoryPojo.accessorySerial:%d", accessoryPojo.accessorySerial);
-//        LOGD("pElementPojo->name:%s", pElementPojo->name.c_str());
-        
-        ElementDao::create(pElementPojo);
+        create(pAccessoryPojo);
     }
 }
 

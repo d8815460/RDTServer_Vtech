@@ -64,6 +64,7 @@ public:
     char* getPassword()          { return m_CommandData.pPassword; }
     char* getSSID()              { return m_CommandData.pSSID; }
     char* getSSIDPassword()      { return m_CommandData.pSSIDPassword; }
+    int getMaxAID()              { return m_CommandData.nMaxAID++; }
     
 private:
     void init();

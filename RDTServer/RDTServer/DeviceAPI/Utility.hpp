@@ -35,6 +35,8 @@ public:
     static void sendParseRest(const char *url, const char* appID, const char* masterKey, const char* restKey, const char* json);
     
     static void pojoToJson(Json::Value& inJsonObject, Json::Value& outJsonObject, shared_ptr<Pojo>& pPojo);
+    
+    static void pojoListToJson(Json::Value& inJsonObject, Json::Value& outJsonObject, shared_ptr<vector<shared_ptr<AccessoryPojo>>>& pojoList);
     static void pojoListToJson(Json::Value& inJsonObject, Json::Value& outJsonObject, shared_ptr<vector<shared_ptr<Pojo>>>& pojoList);
     
     static void parse(shared_ptr<vector<shared_ptr<AccessoryPojo>>>& pAccessoryPojoList, Json::Value& root, int AID, vector<ValueObject>& propertyList, Parse_Callback& callback);

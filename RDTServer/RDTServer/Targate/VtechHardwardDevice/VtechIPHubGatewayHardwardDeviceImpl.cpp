@@ -18,6 +18,7 @@
 // Database
 #include "AccessoryTypeEnum.hpp"
 #include "AccessoryDao.hpp"
+#include "ServiceDao.hpp"
 #include "ElementDao.hpp"
 #include "ElementNODao.hpp"
 
@@ -85,36 +86,39 @@ void* VtechIPHubGatewayHardwardImpl::socketInput(void *arg)
                     LOGD("Vtech check we need to call the update below \n");
                     
                     {
+                        Device* pDevice = Device::getInstance();
+                        JsonRDTCommand* pJsonRDTCommand = (JsonRDTCommand*) pDevice->getCommand();
+
                         /* 新增一筆Accessory資料 */
-                        // param1: fkRoomSerial代表關聯到RoomSerial
-                        // param2: AID代表accessory id
-                        // param3: Name 一個名字,用於標示目標類型的一種可視化手段
-                        // param3: AccSeq 代表accessory的位置
-                        // param4: AccIconType 會面呈現的Icon所代表的型態，如IPHub
-                        // param5: Connection 連線狀態
+                        // param1: AID代表accessory id
+                        // param2: Name 一個名字,用於標示目標類型的一種可視化手段
+                        // param3: AccSeq The accessory's sequence , the default value is 0.
+                        // param4: IconType 會面呈現的Icon所代表的型態，如IPHub
+                        // param5: Connection 連線狀態，
                         // param6: IsGateway is gateway or not
-                        shared_ptr<AccessoryPojo> pAccessoryPojo(new AccessoryPojo(0, 1, "PC Home", 1, 1, 1, false));
-                        
-                        // param1: Element 一個元件有單個或多個element NO
+                        shared_ptr<AccessoryPojo> pAccessoryPojo(new AccessoryPojo(pJsonRDTCommand->getMaxAID(), "PC Home", 1, 1, 1, true));
+
+                        // param1: Service 一個元件有單個或多個Element
+                        shared_ptr<ServicePojo> pService1(new ServicePojo("switchService"));
+
+                        // param1: Element 一個元件有單個或多個ElementNO
                         shared_ptr<ElementPojo> pElement1(new ElementPojo("switch"));
-                        
+
                         // param1: ElementNO 一個元件的編號
                         // param2: Value 由一個字串組成，字串的類型可能是數值，字串或整數，也有可能是其他的。它的類型由Metadata決定一個 key 通常會有一個 value
                         // param3: NtfyEnable 是否開啟推播
                         shared_ptr<ElementNOPojo> pNO1(new ElementNOPojo(0, "轟天2", true));
                         shared_ptr<ElementNOPojo> pNO2(new ElementNOPojo(1, "大鑫2", true));
-                        
-                        pAccessoryPojo->pSubPojoList->push_back(pElement1);
+
+                        pAccessoryPojo->pSubPojoList->push_back(pService1);
+                        pService1->pSubPojoList->push_back(pElement1);
                         pElement1->pSubPojoList->push_back(pNO1);
                         pElement1->pSubPojoList->push_back(pNO2);
-                        
+
                         CommandHardwardSend_UpdateItems items;
                         items.dataType = DataType_Accessory;
                         items.pPojoList->push_back(pAccessoryPojo);
-                        
-                        Device* pDevice = Device::getInstance();
-                        JsonRDTCommand* jsonRDTCommand = (JsonRDTCommand*) pDevice->getCommand();
-                        jsonRDTCommand->commandHardwardSend_UpdateItems(&items);
+                        pJsonRDTCommand->commandHardwardSend_UpdateItems(&items);
 
                         /*
                         會看到如下log
@@ -199,39 +203,39 @@ void VtechIPHubGatewayHardwardImpl::onCommandHardwardRecv_CreateItem(CommandHard
     // 根據不同的DataType取得資料
     switch (pCommandHardwardRecv_CreateItems->dataType) {
         case DataType_Accessory: {
-            /* 新增一筆資料 */
+            Device* pDevice = Device::getInstance();
+            JsonRDTCommand* pJsonRDTCommand = (JsonRDTCommand*) pDevice->getCommand();
             
-            // 建立accessoryPojo
-            shared_ptr<AccessoryPojo> pAccessoryPojo(new AccessoryPojo);
-            pAccessoryPojo->AID = 10;
-            pAccessoryPojo->Name = "PIR Sensor";
-            pAccessoryPojo->AccIconType = 1;
-            pAccessoryPojo->Connection = 1;
-            pAccessoryPojo->IsGateway = true;
+            /* 新增一筆Accessory資料 */
+            // param1: AID代表accessory id
+            // param2: Name 一個名字,用於標示目標類型的一種可視化手段
+            // param3: AccSeq The accessory's sequence , the default value is 0.
+            // param4: IconType 會面呈現的Icon所代表的型態，如IPHub
+            // param5: Connection 連線狀態，
+            // param6: IsGateway is gateway or not
+            shared_ptr<AccessoryPojo> pAccessoryPojo(new AccessoryPojo(pJsonRDTCommand->getMaxAID(), "PC Home", 1, 1, 1, true));
             
-            // 建立ElementPojo
-            shared_ptr<ElementPojo> pElement1(new ElementPojo);
-            pElement1->Element = "switch";
+            // param1: Service 一個元件有單個或多個Element
+            shared_ptr<ServicePojo> pService1(new ServicePojo("switchService"));
             
-            // 建立ElementNOPojo
-            shared_ptr<ElementNOPojo> pNO1(new ElementNOPojo);
-            pNO1->ElementNO = 0;
-            pNO1->Value = "1";
-            pNO1->NtfyEnable = true;
+            // param1: Element 一個元件有單個或多個ElementNO
+            shared_ptr<ElementPojo> pElement1(new ElementPojo("switch"));
             
-            // 建立ElementNOPojo
-            shared_ptr<ElementNOPojo> pNO2(new ElementNOPojo);
-            pNO2->ElementNO = 1;
-            pNO2->Value = "100";
-            pNO2->NtfyEnable = true;
+            // param1: ElementNO 一個元件的編號
+            // param2: Value 由一個字串組成，字串的類型可能是數值，字串或整數，也有可能是其他的。它的類型由Metadata決定一個 key 通常會有一個 value
+            // param3: NtfyEnable 是否開啟推播
+            shared_ptr<ElementNOPojo> pNO1(new ElementNOPojo(0, "轟天1", true));
+            shared_ptr<ElementNOPojo> pNO2(new ElementNOPojo(1, "大鑫1", true));
             
-            // 放入相關階層
-            pAccessoryPojo->pSubPojoList->push_back(pElement1);
+            pAccessoryPojo->pSubPojoList->push_back(pService1);
+            pService1->pSubPojoList->push_back(pElement1);
             pElement1->pSubPojoList->push_back(pNO1);
             pElement1->pSubPojoList->push_back(pNO2);
             
-            // 將accessoryPojo放入pojoList
-            pCommandHardwardRecv_CreateItems->pojoList->push_back(pAccessoryPojo);
+            pCommandHardwardRecv_CreateItems->pPojoList->push_back(pAccessoryPojo);
+            
+            // 模擬器儲存
+            pJsonRDTCommand->getAccessoryList()->push_back(pAccessoryPojo);
         }   break;
             
         default: {
