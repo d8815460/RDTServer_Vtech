@@ -33,6 +33,7 @@ struct CommandHardwardRecv_DeleteItems : CommandBase
 
 struct CommandHardwardRecv_ReadItems : CommandBase
 {
+    
     shared_ptr<vector<shared_ptr<Pojo>>> pPojoList;
     
     CommandHardwardRecv_ReadItems()

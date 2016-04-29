@@ -45,23 +45,31 @@
  輸出:errorCode
  
  查詢 -> select
- 輸入:
  1.
+ 輸入:
  "AID"=-1
+ 輸出:objList, errorCode
  
  2.
+ 輸入:
  "AID":[50]
+ 輸出:objList, errorCode
  
  3.
+ 輸入:
  "AID":[0]
+ 輸出:objList, errorCode
  
  4.
+ 輸入:
  "AID":[0, 1]
+ 輸出:objList, errorCode
  
  5.
  "AID":[0,1],
  "Element":["switch"],
  "ElementNO":[0,1]
+ 輸出:objList, errorCode
  
  6.
  "If": {
@@ -81,7 +89,6 @@
         }
      }
  }
- 
  輸出:objList, errorCode
  */
 
