@@ -24,6 +24,20 @@
 #include "VtechHardwareException.hpp"
 
 /*
+ 新增
+ App->Parse->HW->Save->return
+ 
+ 刪除
+ App->parse->HW->Save->return
+ 
+ 修改
+ App->parse->HW->Save->return
+ 
+ 查詢
+ App->parse->Save->return
+ 
+ 雙向同步
+ 
  APP <-> 模擬器 <-> HW
  
  obj -> pojo
