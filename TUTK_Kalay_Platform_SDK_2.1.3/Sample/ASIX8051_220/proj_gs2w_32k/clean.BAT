@@ -1,1 +1,0 @@
-del /q /f output\* *.obj *.map *.sbr *.hex
