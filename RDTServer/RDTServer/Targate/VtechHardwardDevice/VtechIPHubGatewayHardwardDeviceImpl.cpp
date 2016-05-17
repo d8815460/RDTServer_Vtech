@@ -43,7 +43,11 @@ VtechIPHubGatewayHardwardDeviceImpl::VtechIPHubGatewayHardwardDeviceImpl()
 #endif
     
 	Json::Value root;
-	root["operation"] = "update";
+
+    root["id"] = "0035482900";
+    root["functionName"] = "toggle";
+	root["functionState"] = "true";
+
 	const char* json = root.toStyledString().c_str();
     LOGD("json:%s", json);
 	VtechIPHubGatewayHardwardImpl::test_sendToGateway((char*)json, (int) strlen(json));;
