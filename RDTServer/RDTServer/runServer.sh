@@ -3,6 +3,6 @@ cmake ..
 make
 
 cd ../bin/linux/i386
-./VtechHardwardDevice C7KUB944VZFMUH6GYHDJ
+./VtechHardwardDevice CNYUAX6WUTBCUM6GUHY1
 
 

@@ -36,6 +36,10 @@ public:
    
 #pragma mark - Method
    void sendToGateway(char* payload, int length);
+
+#pragma mark - Method
+   static void test_sendToGateway(char* payload, int length);
+
     
 #pragma mark - CommandHardwardEvent
 	virtual void onCommandHardwardRecvJson(CommandHardwardRecvJsonData* pCommandHardwardRecvJsonData);

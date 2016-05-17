@@ -229,6 +229,9 @@ void VtechIPHubGatewayHardward::onCommandHardwardRecv_ReadItems(CommandHardwardR
 void VtechIPHubGatewayHardward::onCommandHardwardRecv_UpdateItems(CommandHardwardRecv_UpdateItems* pCommandHardwardRecv_UpdateItems)
 {
     LOGD("onCommandHardwardRecv_UpdateItems");
+
+	Json::Value root;
+	root["operation"] = "update";
     
     // 根據不同的DataType取得資料
     switch (pCommandHardwardRecv_UpdateItems->dataType) {

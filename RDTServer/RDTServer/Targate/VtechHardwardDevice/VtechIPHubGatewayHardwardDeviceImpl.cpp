@@ -36,10 +36,19 @@ VtechIPHubGatewayHardwardDeviceImpl::VtechIPHubGatewayHardwardDeviceImpl()
 {
   LOGD("VtechIPHubGatewayHardwardDeviceImpl");
 
-
+#if 0
 	LOGD("Vtech check to create socket input thread here");
     pthread_t pThreadsocketInput;
     pthread_create(&pThreadsocketInput, NULL, &VtechIPHubGatewayHardwardImpl::socketInput, (void*)this);
+#endif
+    
+	Json::Value root;
+	root["operation"] = "update";
+	const char* json = root.toStyledString().c_str();
+    LOGD("json:%s", json);
+	VtechIPHubGatewayHardwardImpl::test_sendToGateway((char*)json, (int) strlen(json));;
+
+	
 
 }
 
@@ -156,6 +165,22 @@ void* VtechIPHubGatewayHardwardImpl::socketInput(void *arg)
 
 #pragma mark - Method
 
+void VtechIPHubGatewayHardwardImpl::test_sendToGateway(char* payload, int length)
+{
+   LOGD("Vtech call to send to gateway");
+   
+   try
+   {
+       sock.snd(payload,length-1);
+   }
+   catch (const libsocket::socket_exception& exc)
+   {
+       std::cerr << exc.mesg;
+   }
+}
+
+#pragma mark - Method
+
 void VtechIPHubGatewayHardwardImpl::sendToGateway(char* payload, int length)
 {
    LOGD("Vtech call to send to gateway");
@@ -169,6 +194,7 @@ void VtechIPHubGatewayHardwardImpl::sendToGateway(char* payload, int length)
        std::cerr << exc.mesg;
    }
 }
+
 
 
 #pragma mark - VtechIPHubGatewayHardwardImpl::VtechIPHubGatewayHardwardImpl

@@ -47,7 +47,19 @@ void JsonRDTServerCommand::onConnectRecvData(ConnectRecvData* pConnectRecvData)
 void* JsonRDTServerCommand::threadInput(void *arg)
 {
     JsonRDTServerCommand* pJsonRDTServerCommand = (JsonRDTServerCommand*) arg;
-    
+
+	LOGD("\n");
+	LOGD("VTech test socket writing below \n");
+	LOGD("\n");
+
+	CommandBase* pCommandBase = NULL;
+	pCommandBase = new CommandHardwardRecv_UpdateItems();
+	CommandHardwardRecv_UpdateItems* pItems = (CommandHardwardRecv_UpdateItems*) pCommandBase;
+// 	m_pCommandHardwardEvent->onCommandHardwardRecv_UpdateItems(pItems);
+
+
+
+
     char pInput;
     while(true) {
         LOGD("請輸入一個字元:");
