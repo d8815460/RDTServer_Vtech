@@ -1,0 +1,357 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		6412ABDC1CE9D05E007814BB /* jsmn.c in Sources */ = {isa = PBXBuildFile; fileRef = 6412ABDB1CE9D05E007814BB /* jsmn.c */; };
+		6412ABDE1CE9D069007814BB /* kalay_device.c in Sources */ = {isa = PBXBuildFile; fileRef = 6412ABDD1CE9D069007814BB /* kalay_device.c */; };
+		6412AC231CE9DEAD007814BB /* kalay_device.c in Sources */ = {isa = PBXBuildFile; fileRef = 6412ABDD1CE9D069007814BB /* kalay_device.c */; };
+		6412AC241CE9DEAD007814BB /* jsmn.c in Sources */ = {isa = PBXBuildFile; fileRef = 6412ABDB1CE9D05E007814BB /* jsmn.c */; };
+		6412AC271CE9DEAD007814BB /* libIOTCAPIs_ALL.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 64A7B31E1CE59CF800E552B0 /* libIOTCAPIs_ALL.a */; };
+		6412AC311CEAA625007814BB /* rdt_daemon.c in Sources */ = {isa = PBXBuildFile; fileRef = 6412ABDF1CE9D073007814BB /* rdt_daemon.c */; };
+		6412AC321CEAA632007814BB /* rdt_daemon.c in Sources */ = {isa = PBXBuildFile; fileRef = 6412ABDF1CE9D073007814BB /* rdt_daemon.c */; };
+		64A7B31F1CE59CF800E552B0 /* libIOTCAPIs_ALL.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 64A7B31E1CE59CF800E552B0 /* libIOTCAPIs_ALL.a */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		6412AC281CE9DEAD007814BB /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "include/$(PRODUCT_NAME)";
+			dstSubfolderSpec = 16;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		64A7B30A1CE59BF300E552B0 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "include/$(PRODUCT_NAME)";
+			dstSubfolderSpec = 16;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		6412ABDB1CE9D05E007814BB /* jsmn.c */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.objc; fileEncoding = 4; name = jsmn.c; path = ../../../../src/kalay_device/jsmn.c; sourceTree = "<group>"; };
+		6412ABDD1CE9D069007814BB /* kalay_device.c */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.objc; fileEncoding = 4; name = kalay_device.c; path = ../../../../src/kalay_device/kalay_device.c; sourceTree = "<group>"; };
+		6412ABDF1CE9D073007814BB /* rdt_daemon.c */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.objc; fileEncoding = 4; name = rdt_daemon.c; path = ../../../../src/kalay_device/rdt_daemon.c; sourceTree = "<group>"; };
+		6412AC2C1CE9DEAD007814BB /* libkalay_device_mac.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libkalay_device_mac.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		64A7B30C1CE59BF300E552B0 /* libkalay_device.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libkalay_device.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		64A7B31E1CE59CF800E552B0 /* libIOTCAPIs_ALL.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libIOTCAPIs_ALL.a; path = ../../../iotc/Lib/iOS/libIOTCAPIs_ALL.a; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		6412AC261CE9DEAD007814BB /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6412AC271CE9DEAD007814BB /* libIOTCAPIs_ALL.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		64A7B3091CE59BF300E552B0 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				64A7B31F1CE59CF800E552B0 /* libIOTCAPIs_ALL.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		64A7B3031CE59BF300E552B0 = {
+			isa = PBXGroup;
+			children = (
+				64A7B31E1CE59CF800E552B0 /* libIOTCAPIs_ALL.a */,
+				64A7B30E1CE59BF300E552B0 /* kalay_device */,
+				64A7B30D1CE59BF300E552B0 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		64A7B30D1CE59BF300E552B0 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				64A7B30C1CE59BF300E552B0 /* libkalay_device.a */,
+				6412AC2C1CE9DEAD007814BB /* libkalay_device_mac.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		64A7B30E1CE59BF300E552B0 /* kalay_device */ = {
+			isa = PBXGroup;
+			children = (
+				6412ABDF1CE9D073007814BB /* rdt_daemon.c */,
+				6412ABDD1CE9D069007814BB /* kalay_device.c */,
+				6412ABDB1CE9D05E007814BB /* jsmn.c */,
+			);
+			path = kalay_device;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		6412AC211CE9DEAD007814BB /* kalay_device_mac */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6412AC291CE9DEAD007814BB /* Build configuration list for PBXNativeTarget "kalay_device_mac" */;
+			buildPhases = (
+				6412AC221CE9DEAD007814BB /* Sources */,
+				6412AC261CE9DEAD007814BB /* Frameworks */,
+				6412AC281CE9DEAD007814BB /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = kalay_device_mac;
+			productName = kalay_device;
+			productReference = 6412AC2C1CE9DEAD007814BB /* libkalay_device_mac.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+		64A7B30B1CE59BF300E552B0 /* kalay_device */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 64A7B3151CE59BF300E552B0 /* Build configuration list for PBXNativeTarget "kalay_device" */;
+			buildPhases = (
+				64A7B3081CE59BF300E552B0 /* Sources */,
+				64A7B3091CE59BF300E552B0 /* Frameworks */,
+				64A7B30A1CE59BF300E552B0 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = kalay_device;
+			productName = kalay_device;
+			productReference = 64A7B30C1CE59BF300E552B0 /* libkalay_device.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		64A7B3041CE59BF300E552B0 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0730;
+				ORGANIZATIONNAME = "Eddy Chang";
+				TargetAttributes = {
+					64A7B30B1CE59BF300E552B0 = {
+						CreatedOnToolsVersion = 7.3.1;
+					};
+				};
+			};
+			buildConfigurationList = 64A7B3071CE59BF300E552B0 /* Build configuration list for PBXProject "kalay_device" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 64A7B3031CE59BF300E552B0;
+			productRefGroup = 64A7B30D1CE59BF300E552B0 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				64A7B30B1CE59BF300E552B0 /* kalay_device */,
+				6412AC211CE9DEAD007814BB /* kalay_device_mac */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		6412AC221CE9DEAD007814BB /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6412AC231CE9DEAD007814BB /* kalay_device.c in Sources */,
+				6412AC241CE9DEAD007814BB /* jsmn.c in Sources */,
+				6412AC321CEAA632007814BB /* rdt_daemon.c in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		64A7B3081CE59BF300E552B0 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6412ABDE1CE9D069007814BB /* kalay_device.c in Sources */,
+				6412ABDC1CE9D05E007814BB /* jsmn.c in Sources */,
+				6412AC311CEAA625007814BB /* rdt_daemon.c in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		6412AC2A1CE9DEAD007814BB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				LIBRARY_SEARCH_PATHS = ../../../iotc/Lib/iOS;
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx10.11;
+				SKIP_INSTALL = YES;
+				USER_HEADER_SEARCH_PATHS = "../../../iotc/Include ../../../inc";
+			};
+			name = Debug;
+		};
+		6412AC2B1CE9DEAD007814BB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				LIBRARY_SEARCH_PATHS = ../../../iotc/Lib/iOS;
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx10.11;
+				SKIP_INSTALL = YES;
+				USER_HEADER_SEARCH_PATHS = "../../../iotc/Include ../../../inc";
+			};
+			name = Release;
+		};
+		64A7B3131CE59BF300E552B0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
+			};
+			name = Debug;
+		};
+		64A7B3141CE59BF300E552B0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		64A7B3161CE59BF300E552B0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				LIBRARY_SEARCH_PATHS = ../../../iotc/Lib/iOS;
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				USER_HEADER_SEARCH_PATHS = "../../../iotc/Include ../../../inc";
+			};
+			name = Debug;
+		};
+		64A7B3171CE59BF300E552B0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				LIBRARY_SEARCH_PATHS = ../../../iotc/Lib/iOS;
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				USER_HEADER_SEARCH_PATHS = "../../../iotc/Include ../../../inc";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		6412AC291CE9DEAD007814BB /* Build configuration list for PBXNativeTarget "kalay_device_mac" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6412AC2A1CE9DEAD007814BB /* Debug */,
+				6412AC2B1CE9DEAD007814BB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		64A7B3071CE59BF300E552B0 /* Build configuration list for PBXProject "kalay_device" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				64A7B3131CE59BF300E552B0 /* Debug */,
+				64A7B3141CE59BF300E552B0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		64A7B3151CE59BF300E552B0 /* Build configuration list for PBXNativeTarget "kalay_device" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				64A7B3161CE59BF300E552B0 /* Debug */,
+				64A7B3171CE59BF300E552B0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 64A7B3041CE59BF300E552B0 /* Project object */;
+}
