@@ -1,3 +1,6 @@
 #!/bin/bash 
 echo "start client emulator"
-node on_off.js $1
+cd examples++
+#make
+./unix_client
+

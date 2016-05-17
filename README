@@ -1,5 +1,7 @@
-to run socketio server, goto server folder and then execute ./server.sh
+to run unix socket server, goto server folder and then execute ./server.sh
 
-to run socketio client, goto client folder and then execute ./client.sh followed by the arugment, e.g. ./client.sh 1 (turn light on), if no arugment then it's the same as ./client.sh 0 (turn light off)
+to run unix socket client, goto client folder and then execute ./client.sh 
+
+currently the server will just dump out the message written from client
 
   
