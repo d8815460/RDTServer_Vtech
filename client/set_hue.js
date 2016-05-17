@@ -9,30 +9,41 @@ var options ={
   transports: ['websocket'],
 };
 
+//var emulator_cmd = {
+
+//      "broker": "devicemanager",
+//      "id": "0298ed5e25",
+//      "functionName": "setHue",
+//      "args": [
+//        20,
+//		0
+//      ]
+//}
+
 var emulator_cmd = {
 
       "broker": "devicemanager",
       "id": "0298ed5e25",
-      "functionName": "toggle",
+      "functionName": "setHue",
       "args": [
-        true
+        20
       ]
 }
 
+
 var client1 = io.connect(socketURL);
 
-var args = process.argv.slice(2);
+var hue = parseInt(process.argv.slice(2));
 
-var AC_action = args=='1' ? true : false;
-
-//console.log(AC_action);
+if (isNaN(hue))
+	hue = 0;
 
   client1.on('connect', function(){
 	console.log('Baldwin check its connected to client side');
 
-	emulator_cmd.args[0] = AC_action; // mark out for testing only
+	emulator_cmd.args[0] = hue; // mark out for testing only
 	client1.emit('command',emulator_cmd,function(data){
-		console.log('Send on/off command');
+		console.log('send sethue command');
 		console.log(data);
 	}
 	)
