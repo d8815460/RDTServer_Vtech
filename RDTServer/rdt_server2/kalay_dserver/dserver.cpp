@@ -243,7 +243,7 @@ int kalay_device_server_agent_start(char *UID,char *unixsocket_path)
     int ret;
     int rdtCh;
     int fw_sock_status = -1;
-    int i;
+    int i, action;
 
 
     __agent_start = 1;
@@ -277,6 +277,9 @@ int kalay_device_server_agent_start(char *UID,char *unixsocket_path)
     
 
     i = 0;
+
+	action = 0;
+
     //keep communicating with server
     while(__agent_start == 1)
     {
@@ -294,15 +297,43 @@ int kalay_device_server_agent_start(char *UID,char *unixsocket_path)
     	{
     		//unsigned char payload[] = {0x74,0x65,0x73,0x74};
 
+
+std::string payload1 (\
+"{\r\n\
+   \"functionName\" : \"toggle\",");
+
+std::string payload2 (\
+"\r\n\
+   \"functionState\" : true,");
+
+std::string payload2a (\
+"\r\n\
+   \"functionState\" : ");
+
+std::string payload2b (",");
+
+std::string payload3 (\
+"\r\n\
+   \"id\" : \"0035482900123\"\r\n\
+}");
+
+std::string total_payload;
+
+action = !action;
+string arg = std::to_string(action);
+
+total_payload = payload1 + payload2a + arg + payload2b + payload3;
+
+#if 0
 unsigned char payload[]=\
 "{\r\n\
    \"functionName\" : \"toggle\",\r\n\
-   \"functionState\" : \"true\",\r\n\
+   \"functionState\" : 1,\r\n\
    \"id\" : \"0035482900\"\r\n\
 }";
-
-
-    		sock.snd(payload,sizeof(payload));
+#endif
+			sock.snd(total_payload.c_str(),total_payload.length()); // for JSON to parse properly on server side
+//     		sock.snd(payload,sizeof(payload)-1); // for JSON to parse properly on server side
     	}
 
 
