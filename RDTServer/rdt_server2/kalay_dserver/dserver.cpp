@@ -13,7 +13,6 @@
 #include "dserver.h"
 #include "../iotc/Include/IOTCAPIs.h"
 #include "../iotc/Include/RDTAPIs.h"
-#include "jsmn.h"
 
 using namespace std;
 
@@ -243,7 +242,7 @@ int kalay_device_server_agent_start(char *UID,char *unixsocket_path)
     int ret;
     int rdtCh;
     int fw_sock_status = -1;
-    int i;
+    int i, action;
 
 
     __agent_start = 1;
@@ -277,6 +276,9 @@ int kalay_device_server_agent_start(char *UID,char *unixsocket_path)
     
 
     i = 0;
+
+	action = 0;
+
     //keep communicating with server
     while(__agent_start == 1)
     {
@@ -294,28 +296,20 @@ int kalay_device_server_agent_start(char *UID,char *unixsocket_path)
     	{
     		//unsigned char payload[] = {0x74,0x65,0x73,0x74};
 
-/*
-unsigned char payload[]=\
-"{\r\n\
-   \"functionName\" : \"toggle\",\r\n\
-   \"functionState\" : \"true\",\r\n\
-   \"id\" : \"0035482900\"\r\n\
-}";
-*/
-    		//sock.snd(payload,sizeof(payload));
+			action = !action;
+			string arg = std::to_string(action);	
 
 			Json::Value root;
+			std::string total_payload;
 
 		    root["id"] = "0035482900";
 		    root["functionName"] = "toggle";
-			root["functionState"] = "true";
+			root["functionState"] = arg.c_str();
 
-			const char* json = root.toStyledString().c_str();
+			total_payload = root.toStyledString().c_str();
 
-
-
-    		
-			sock.snd(json,strlen(json));
+			sock.snd(total_payload.c_str(),total_payload.length()); // for JSON to parse properly on server side
+//     		sock.snd(payload,sizeof(payload)-1); // for JSON to parse properly on server side
     	}
 
 
