@@ -6,7 +6,7 @@
 #include <unistd.h>
 
 #include <iomanip> 
-
+#include <json/json.h>
 
 
 #include "kalay_dserver.h"
@@ -294,15 +294,28 @@ int kalay_device_server_agent_start(char *UID,char *unixsocket_path)
     	{
     		//unsigned char payload[] = {0x74,0x65,0x73,0x74};
 
+/*
 unsigned char payload[]=\
 "{\r\n\
    \"functionName\" : \"toggle\",\r\n\
    \"functionState\" : \"true\",\r\n\
    \"id\" : \"0035482900\"\r\n\
 }";
+*/
+    		//sock.snd(payload,sizeof(payload));
+
+			Json::Value root;
+
+		    root["id"] = "0035482900";
+		    root["functionName"] = "toggle";
+			root["functionState"] = "true";
+
+			const char* json = root.toStyledString().c_str();
 
 
-    		sock.snd(payload,sizeof(payload));
+
+    		
+			sock.snd(json,strlen(json));
     	}
 
 
