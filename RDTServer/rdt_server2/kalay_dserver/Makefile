@@ -8,15 +8,16 @@ ifeq ("$(platform)","x86")
         CFLAGS=-m32
 endif
 
-CLIB= -lsocket++ -lpthread -ljsoncpp -lIOTCAPIs -lRDTAPIs
+SRC=kalay_dserver.cpp dserver.cpp device_parser.cpp device_api.cpp rdtcnnt.cpp
+LIB= -lsocket++ -lpthread -ljsoncpp -lIOTCAPIs -lRDTAPIs
 
 all:
 	@echo === Target Platform [$(platform)] ===  	
 
 ifeq ("$(platform)","x86")
-	g++ --std=c++0x $(CFLAGS) -O2 -Wall kalay_dserver.cpp dserver.cpp   -L../lib  -L../iotc/Lib/Linux/x86 $(CLIB) -o kalay_dserver
+	g++ --std=c++0x $(CFLAGS) -O2 -Wall $(SRC)  -L../lib  -L../iotc/Lib/Linux/x86 $(LIB) -o kalay_dserver
 else ifeq ("$(platform)","arm")
-	arm-dspg-linux-gnueabi-g++ --std=c++0x $(CFLAGS) -O2 -fpermissive -Wall kalay_dserver.cpp dserver.cpp   -L../lib/arm  -L../iotc/Lib/Linux/arm $(CLIB) -o kalay_dserver
+	arm-dspg-linux-gnueabi-g++ --std=c++0x $(CFLAGS) -O2 -fpermissive -Wall $(SRC) -L../lib/arm  -L../iotc/Lib/Linux/arm $(LIB) -o kalay_dserver
 endif
 
 clean:

@@ -11,41 +11,16 @@
 
 #include "kalay_dserver.h"
 #include "dserver.h"
-#include "../iotc/Include/IOTCAPIs.h"
-#include "../iotc/Include/RDTAPIs.h"
+#include "rdtcnnt.h"
 
 using namespace std;
 
-#define RDT_WAIT_TIMEMS 3000
 
 static int __agent_start = 0;
 
-static char *__myUID[20];
+char *__myUID[20];
 
 
-#define RDTCNNT_NEW 1
-#define RDTCNNT_IOTC_CONNECTING 2
-#define RDTCNNT_IOTC_CONNECTED 3
-#define RDTCNNT_RDT_CONNECTING 4
-#define RDTCNNT_RDT_CONNECTED 4
-
-struct stRDTcnnt
-{
-	char target_uid[20];
-	int  action;
-	int  iotc_sid;
-	int  rdt_id;
-	int  tx_counter;
-	int  cnnt_state;
-	struct st_SInfo Sinfo;
-};
-
-#define MAX_RDT_CONNECTION 32
-
-pthread_mutex_t mutex_rdt_cnnt_array;
-
-struct stRDTcnnt __rdt_cnnt[MAX_RDT_CONNECTION];
-int __cnt_rdt_cnnt = 0;
 
 using libsocket::unix_stream_client;
 using std::string;
@@ -94,7 +69,6 @@ int connect_fw_socket(char *path)
 void *_thread_Listen(void *arg)
 {
 	int iotc_sid;
-	int i;
 
 	while(__agent_start == 1)
     {
@@ -104,71 +78,20 @@ void *_thread_Listen(void *arg)
 		{
 			const char *mode[3] = {"P2P", "RLY", "LAN"};
 			struct st_SInfo Sinfo;
+			int rc;
 
 			IOTC_Session_Check(iotc_sid, &Sinfo);
 			printf("Client from %s:%d Mode=%s\n",Sinfo.RemoteIP, Sinfo.RemotePort, mode[(int)Sinfo.Mode]);
 
 
-			pthread_mutex_lock(&mutex_rdt_cnnt_array);
+			rc = rdtcnnt_new_iotc_conntected(iotc_sid);
 
-			for(i=0;i<MAX_RDT_CONNECTION;i++)
+			if ( rc < 0 )
 			{
-				if ( __rdt_cnnt[i].action == 0 )
-				{
-					__rdt_cnnt[i].action = RDTCNNT_IOTC_CONNECTED;
-					__rdt_cnnt[i].iotc_sid = iotc_sid;
-					__rdt_cnnt[i].rdt_id = -1;
-					break;
-				}
+				printf("Error:No available session.\n");
 			}
-
-			pthread_mutex_unlock(&mutex_rdt_cnnt_array);	
+			
 		}
-
-
-		pthread_mutex_lock(&mutex_rdt_cnnt_array);
-
-		for(i=0;i<MAX_RDT_CONNECTION;i++)
-		{
-			if ( __rdt_cnnt[i].action == RDTCNNT_IOTC_CONNECTED )
-			{
-				int rdt_id;
-
-				__rdt_cnnt[i].action = RDTCNNT_RDT_CONNECTING;
-				
-				rdt_id = RDT_Create(__rdt_cnnt[i].iotc_sid, RDT_WAIT_TIMEMS, 0);
-				if ( rdt_id < 0 )
-				{
-					printf("RDT create fail:%d \n",rdt_id);
-
-					IOTC_Session_Close(__rdt_cnnt[i].iotc_sid);
-
-					memset(&__rdt_cnnt[i],0,sizeof(struct stRDTcnnt)); // Clean session info
-				}
-				else
-				{
-					printf("RDT create OK:%d \n",rdt_id);
-
-					__rdt_cnnt[i].action = RDTCNNT_RDT_CONNECTED;
-					__rdt_cnnt[i].rdt_id = rdt_id;
-					__rdt_cnnt[i].tx_counter = 0;
-				}
-			}
-		}
-
-		pthread_mutex_unlock(&mutex_rdt_cnnt_array);
-
-
-
-
-			/*{
-				struct st_SInfo info;
-				if( IOTC_Session_Check(SID, &info) < 0)
-				{
-					
-					break;
-				}			
-			} */
 	}
 
 	pthread_exit(0);
@@ -177,55 +100,18 @@ void *_thread_Listen(void *arg)
 
 int init_dserver_env()
 {	
-	int i;
-	__cnt_rdt_cnnt = 0;
 
-	 pthread_mutex_init(&mutex_rdt_cnnt_array, NULL);
+	rdtcnnt_init();
 
-	pthread_mutex_lock(&mutex_rdt_cnnt_array);
-
-	for(i=0;i<MAX_RDT_CONNECTION;i++)
-		memset(&__rdt_cnnt[i],0,sizeof(struct stRDTcnnt));
-
-	pthread_mutex_unlock(&mutex_rdt_cnnt_array);
-
+	
 	return 0;
 }
 
 
 int release_dserver_env()
 {	
-	int i;
-	
-	
+	rdtcnnt_destroy();
 
-	pthread_mutex_lock(&mutex_rdt_cnnt_array);
-
-	for(i=0;i<MAX_RDT_CONNECTION;i++)
-	{
-		if ( __rdt_cnnt[i].action  > 0 )
-		{
-			if ( __rdt_cnnt[i].rdt_id >= 0 )
-			{
-				RDT_Destroy(__rdt_cnnt[i].rdt_id);
-				__rdt_cnnt[i].rdt_id = -1;
-			}
-
-
-			if ( __rdt_cnnt[i].iotc_sid >= 0 )
-			{
-				IOTC_Session_Close( __rdt_cnnt[i].iotc_sid);		
-				__rdt_cnnt[i].iotc_sid = -1;		
-			}
-		}
-
-		memset(&__rdt_cnnt[i],0,sizeof(struct stRDTcnnt));
-
-	}
-
-	pthread_mutex_unlock(&mutex_rdt_cnnt_array);
-
-	pthread_mutex_destroy(&mutex_rdt_cnnt_array);
 
 
 	return 0;
@@ -235,14 +121,13 @@ int release_dserver_env()
 
 int kalay_device_server_agent_start(char *UID,char *unixsocket_path)
 {
-	char szBuff[4096];
-
 	pthread_t threadID_Login;
 	pthread_t threadID_Listen;
     int ret;
     int rdtCh;
     int fw_sock_status = -1;
-    int i, action;
+    int action;
+    int timer_counter = 0;
 
 
     __agent_start = 1;
@@ -275,9 +160,9 @@ int kalay_device_server_agent_start(char *UID,char *unixsocket_path)
 	pthread_detach(threadID_Listen);
     
 
-    i = 0;
 
 	action = 0;
+
 
     //keep communicating with server
     while(__agent_start == 1)
@@ -292,7 +177,7 @@ int kalay_device_server_agent_start(char *UID,char *unixsocket_path)
     		}
     	}
 
-    	if ( fw_sock_status > 0 )
+    	if ( fw_sock_status > 0 && (timer_counter % 1000) == 0 )
     	{
     		//unsigned char payload[] = {0x74,0x65,0x73,0x74};
 
@@ -313,62 +198,12 @@ int kalay_device_server_agent_start(char *UID,char *unixsocket_path)
     	}
 
 
+    	rdtcnnt_check_status();
 
+		
 
-		pthread_mutex_lock(&mutex_rdt_cnnt_array);
-
-		for(i=0;i<MAX_RDT_CONNECTION;i++)
-		{
-			if ( __rdt_cnnt[i].action >= RDTCNNT_IOTC_CONNECTED )
-			{
-				__rdt_cnnt[i].cnnt_state = IOTC_Session_Check(__rdt_cnnt[i].iotc_sid, &__rdt_cnnt[i].Sinfo);
-				if ( __rdt_cnnt[i].cnnt_state < 0 )
-				{
-					printf("RDT Cnnt err:%d \n",__rdt_cnnt[i].cnnt_state);
-					if ( 	__rdt_cnnt[i].cnnt_state == IOTC_ER_REMOTE_TIMEOUT_DISCONNECT 
-						|| __rdt_cnnt[i].cnnt_state == IOTC_ER_SESSION_CLOSE_BY_REMOTE  	)
-					{
-					}
-
-					if ( __rdt_cnnt[i].rdt_id >= 0  )
-					{
-						RDT_Destroy(__rdt_cnnt[i].rdt_id);
-						__rdt_cnnt[i].rdt_id = -1;
-					}
-
-
-					IOTC_Session_Close(__rdt_cnnt[i].iotc_sid);
-
-					memset(&__rdt_cnnt[i],0,sizeof(struct stRDTcnnt)); // Clean session info					
-
-					printf("free session %d \n",i);
-				}
-			}
-
-			if ( __rdt_cnnt[i].action == RDTCNNT_RDT_CONNECTED	)
-			{
-				ret = RDT_Read(__rdt_cnnt[i].rdt_id, szBuff, 1024, RDT_WAIT_TIMEMS);			
-
-				if ( ret > 0 )
-				{
-					szBuff[ret] = 0;
-					printf("redt recv rdt_array[%d] [%d]:\n%s\n",i,ret,szBuff);
-
-
-					sprintf(szBuff,"test response.json[%d]\r\n",__rdt_cnnt[i].tx_counter);
-
-
-					ret =  RDT_Write(__rdt_cnnt[i].rdt_id, szBuff, strlen(szBuff));    		
-					__rdt_cnnt[i].tx_counter++;	
-				}			
-			}		
-		}
-			
-
-		pthread_mutex_unlock(&mutex_rdt_cnnt_array);
-
-
-        usleep(1000000);
+        usleep(1000);
+        timer_counter+=1;
     }
 
 
