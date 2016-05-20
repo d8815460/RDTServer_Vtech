@@ -17,7 +17,7 @@
 using namespace std;
 
 
-int device_parser(int session,unsigned char *option,unsigned char *data)
+int device_parser(int session,unsigned char *option,int option_len,unsigned char *data,int data_len)
 {
 	Json::Reader reader;
 	Json::Value value;
@@ -27,6 +27,18 @@ int device_parser(int session,unsigned char *option,unsigned char *data)
 	{
 		string uid = value["uid"].asString();
 		string api = value["api"].asString();
+
+
+		if ( option != NULL && (option[1]&0x01) )
+		{
+
+			unsigned int rdt_ticket_no;
+
+			rdt_ticket_no = (((unsigned int)option[2]) << 8 ) | option[3] ;
+
+			value["rdt_ticket"] = rdt_ticket_no;
+		}
+
 
 		printf("UID:%s\n",uid.c_str());
 		printf("api:%s\n",api.c_str());

@@ -28,10 +28,14 @@ void deviceapi_get_gateway(int session,Json::Value &request)
 	Json::Value locations;
 	Json::Value accessories;
 
-	int rc;							
+	int rc;					
+	unsigned int rdt_ticket;		
 
 	unsigned char szBuff[1024*16];
+	int option_len = 0;
 	int send_length;
+
+	rdt_ticket = request["rdt_ticket"].asUInt();
 
 	response["id"] = (char*) __myUID;
 	response["name"] = "Getway 01";
@@ -55,10 +59,10 @@ void deviceapi_get_gateway(int session,Json::Value &request)
 	accessories[1]["icon"] = 0;
 	accessories[1]["trigger"] = 0;
 
-		locations[0]["accessories"] = accessories;
+	locations[0]["accessories"] = accessories;
 
 	locations[1]["id"] = "l02";
-		locations[1]["name"] = "Bathroom";
+	locations[1]["name"] = "Bathroom";
 
 	accessories.clear();
 
@@ -76,7 +80,7 @@ void deviceapi_get_gateway(int session,Json::Value &request)
 	accessories[1]["icon"] = 0;
 	accessories[1]["trigger"] = 0;
 
-		locations[1]["accessories"] = accessories;
+	locations[1]["accessories"] = accessories;
 
 	locations[2]["id"] = "l03";
 	locations[2]["name"] = "Kitchen";
@@ -123,17 +127,36 @@ void deviceapi_get_gateway(int session,Json::Value &request)
 	//printf("Dump RDT json: \n%s\n",payload.c_str());
 
 
+	szBuff[0]= 0xfe;
+	szBuff[1]= 0xef;
 
-szBuff[0]= 0xfe;
-szBuff[1]= 0xef;
+	if ( rdt_ticket > 0 )
+	{
+		option_len = 4;
 
-szBuff[2]= 0x00; // option length
-szBuff[3]= 0x00; // option length
+		szBuff[2]= ((option_len&0xff00)>>8);
+		szBuff[3]= (option_len)&0xff;
 
-szBuff[4]= payload.length()/256;
-szBuff[5]= payload.length()%256;
-memcpy(&szBuff[6],payload.c_str(),payload.length());
-send_length = 6+payload.length();
+printf("eddy test send ticket %d\n",rdt_ticket);
+
+		szBuff[3+1] = 0x00;
+		szBuff[3+2] = 0x01;
+		szBuff[3+3] = ((rdt_ticket&0xff00)>>8);
+		szBuff[3+4] = (rdt_ticket)&0xff;
+	}
+	else
+	{
+		option_len = 0;
+
+		szBuff[2]= 0x00;
+		szBuff[3]= 0x00;
+	}
+
+	szBuff[4+option_len]= payload.length()/256;
+	szBuff[5+option_len]= payload.length()%256;
+	memcpy(&szBuff[6+option_len],payload.c_str(),payload.length());
+	send_length = 6+option_len+payload.length();
+
 
 	rc =  RDT_Write(__rdt_cnnt[session].rdt_id,(char*)szBuff,send_length);    		
 
@@ -153,11 +176,15 @@ void deviceapi_get_accessory_detail(int session,Json::Value &request)
 	Json::Value root;
 	Json::Value response;
 	Json::Value color;
+	unsigned int rdt_ticket;
 
 	int rc;
 
 	unsigned char szBuff[1024*16];
 	int send_length;
+	int option_len = 0;
+
+	rdt_ticket = request["rdt_ticket"].asUInt();
 
 
 	color["hue"] = 23;
@@ -180,17 +207,34 @@ void deviceapi_get_accessory_detail(int session,Json::Value &request)
 
 
 
-szBuff[0]= 0xfe;
-szBuff[1]= 0xef;
+	szBuff[0]= 0xfe;
+	szBuff[1]= 0xef;
 
-szBuff[2]= 0x00; // option length
-szBuff[3]= 0x00; // option length
+	if ( rdt_ticket > 0 )
+	{
+		option_len = 4;
 
-szBuff[4]= payload.length()/256;
-szBuff[5]= payload.length()%256;
-memcpy(&szBuff[6],payload.c_str(),payload.length());
-send_length = 6+payload.length();
-	
+		szBuff[2]= option_len/256;
+		szBuff[3]= option_len%256;
+
+		szBuff[3+1] = 0x00;
+		szBuff[3+2] = 0x01;
+		szBuff[3+3] = ((rdt_ticket&0xff00)>>8);
+		szBuff[3+4] = (rdt_ticket)&0xff;
+	}
+	else
+	{
+		option_len = 0;
+
+		szBuff[2]= 0x00;
+		szBuff[3]= 0x00;
+	}
+
+	szBuff[4+option_len]= payload.length()/256;
+	szBuff[5+option_len]= payload.length()%256;
+	memcpy(&szBuff[6+option_len],payload.c_str(),payload.length());
+	send_length = 6+option_len+payload.length();
+		
 
 
 	//printf("Dump RDT json: \n%s\n",payload.c_str());

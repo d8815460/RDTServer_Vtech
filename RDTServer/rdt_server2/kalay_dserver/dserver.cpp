@@ -61,6 +61,8 @@ int connect_fw_socket(char *path)
     {
 	std::cerr << exc.mesg;
 		ret = -1;
+
+		usleep(1000000);
     }
 
 	return ret;
@@ -196,7 +198,11 @@ int rdtcnnt_check_status()
 
 			if ( rc == 1 )
 			{
-				device_parser(i,__rdt_cnnt[i].rdtread_option,__rdt_cnnt[i].rdtread_data);
+				device_parser(i
+					,__rdt_cnnt[i].rdtread_option
+					,__rdt_cnnt[i].rdtread_option_length
+					,__rdt_cnnt[i].rdtread_data
+					,__rdt_cnnt[i].rdtread_data_length);
 
 
 				rdtcnnt_reset_packet(i);
@@ -212,15 +218,58 @@ int rdtcnnt_check_status()
 }
 
 
+int fw_sock_status = -1;
+
+void *_thread_unixsocket_read(void *arg)
+{
+
+
+	if ( fw_sock_status > 0 )
+	{
+		char fw_recv_buff[1024*16];
+		int rc;
+
+
+		while(1)
+		{
+
+			try {
+				rc = sock.rcv(fw_recv_buff,sizeof(fw_recv_buff));
+
+				if ( rc > 0 )
+				{
+					fw_recv_buff[rc] = 0;
+					printf("unix socket receive:\n%s\n---------------\n",fw_recv_buff);
+				}
+
+		    } catch (const libsocket::socket_exception& exc)
+		    {
+				std::cerr << exc.mesg;
+
+				break;
+		    }
+
+			
+		}
+
+
+		
+	}
+
+	pthread_exit(0);
+}
+
+
 
 
 int kalay_device_server_agent_start(char *UID,char *unixsocket_path)
 {
-	pthread_t threadID_Login;
-	pthread_t threadID_Listen;
+	pthread_t thread_id_Login;
+	pthread_t thread_id_Listen;
+	pthread_t thread_id_unixsocket_read;
     int ret;
     int rdtCh;
-    int fw_sock_status = -1;
+
     int action;
     int timer_counter = 0;
 
@@ -248,12 +297,14 @@ int kalay_device_server_agent_start(char *UID,char *unixsocket_path)
 	strncpy((char*)__myUID,UID,20);
 
 
-	pthread_create(&threadID_Login, NULL, &_thread_Login, (void *)__myUID);	
-	pthread_detach(threadID_Login);
+	pthread_create(&thread_id_Login, NULL, &_thread_Login, (void *)__myUID);	
+	pthread_detach(thread_id_Login);
 
-	pthread_create(&threadID_Listen, NULL, &_thread_Listen, (void *)__myUID);	
-	pthread_detach(threadID_Listen);
+	pthread_create(&thread_id_Listen, NULL, &_thread_Listen, (void *)__myUID);	
+	pthread_detach(thread_id_Listen);
     
+	pthread_create(&thread_id_unixsocket_read, NULL, &_thread_unixsocket_read, NULL);	
+	pthread_detach(thread_id_unixsocket_read);
 
 
 	action = 0;
@@ -291,6 +342,7 @@ int kalay_device_server_agent_start(char *UID,char *unixsocket_path)
 			sock.snd(total_payload.c_str(),total_payload.length()); // for JSON to parse properly on server side
 //     		sock.snd(payload,sizeof(payload)-1); // for JSON to parse properly on server side
     	}
+
 
 
     	rdtcnnt_check_status();
