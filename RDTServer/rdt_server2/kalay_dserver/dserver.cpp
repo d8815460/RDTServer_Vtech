@@ -246,7 +246,7 @@ void *_thread_unixsocket_read(void *arg)
 		    {
 				std::cerr << exc.mesg;
 
-				break;
+				//break;
 		    }
 
 			
