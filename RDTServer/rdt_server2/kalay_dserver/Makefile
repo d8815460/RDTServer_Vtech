@@ -17,7 +17,7 @@ all:
 ifeq ("$(platform)","x86")
 	g++ --std=c++0x $(CFLAGS) -g -O2 -Wall $(SRC) -I../headers -I../iotc/Include -L../lib  -L../iotc/Lib/Linux/x86 $(LIB) -o kalay_dserver
 else ifeq ("$(platform)","arm")
-	arm-dspg-linux-gnueabi-g++ --std=c++0x $(CFLAGS) -O2 -fpermissive -Wall $(SRC) -I../iotc/Include -L../lib/arm  -L../iotc/Lib/Linux/arm $(LIB) -o kalay_dserver
+	arm-dspg-linux-gnueabi-g++ --std=c++0x $(CFLAGS) -O2 -fpermissive -Wall $(SRC) -I../headers -I../iotc/Include -L../lib/arm  -L../iotc/Lib/Linux/arm $(LIB) -o kalay_dserver
 endif
 
 clean:
