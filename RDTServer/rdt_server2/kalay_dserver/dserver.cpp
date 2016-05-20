@@ -12,6 +12,7 @@
 #include "kalay_dserver.h"
 #include "dserver.h"
 #include "rdtcnnt.h"
+#include "device_parser.h"
 
 using namespace std;
 
@@ -116,6 +117,100 @@ int release_dserver_env()
 
 	return 0;
 }
+
+
+int rdtcnnt_check_status()
+{
+	int i;
+	
+	pthread_mutex_lock(&mutex_rdt_cnnt_array);
+
+	for(i=0;i<MAX_RDT_CONNECTION;i++)
+	{
+		if ( __rdt_cnnt[i].action == RDTCNNT_IOTC_CONNECTED )
+		{
+			int rdt_id;
+
+			__rdt_cnnt[i].action = RDTCNNT_RDT_CONNECTING;
+			
+			rdt_id = RDT_Create(__rdt_cnnt[i].iotc_sid, RDT_WAIT_TIMEMS, 0);
+			if ( rdt_id < 0 )
+			{
+				printf("RDT create fail:%d \n",rdt_id);
+
+				IOTC_Session_Close(__rdt_cnnt[i].iotc_sid);
+				__rdt_cnnt[i].iotc_sid = -1;
+
+				pthread_mutex_destroy(&__rdt_cnnt[i].mutex_datalink);
+
+				memset(&__rdt_cnnt[i],0,sizeof(struct stRDTcnnt)); // Clean session info
+				__cnt_rdt_cnnt--;
+			}
+			else
+			{
+				printf("RDT create OK:%d \n",rdt_id);
+
+				__rdt_cnnt[i].action = RDTCNNT_RDT_CONNECTED;
+				__rdt_cnnt[i].rdt_id = rdt_id;
+				__rdt_cnnt[i].tx_counter = 0;
+			}
+		}
+
+
+
+
+		if ( __rdt_cnnt[i].action >= RDTCNNT_IOTC_CONNECTED )
+		{
+			__rdt_cnnt[i].cnnt_state = IOTC_Session_Check(__rdt_cnnt[i].iotc_sid, &__rdt_cnnt[i].Sinfo);
+			if ( __rdt_cnnt[i].cnnt_state < 0 )
+			{
+				printf("RDT Cnnt err:%d \n",__rdt_cnnt[i].cnnt_state);
+				if ( 	__rdt_cnnt[i].cnnt_state == IOTC_ER_REMOTE_TIMEOUT_DISCONNECT 
+					|| __rdt_cnnt[i].cnnt_state == IOTC_ER_SESSION_CLOSE_BY_REMOTE  	)
+				{
+				}
+
+				if ( __rdt_cnnt[i].rdt_id >= 0  )
+				{
+					RDT_Destroy(__rdt_cnnt[i].rdt_id);
+					__rdt_cnnt[i].rdt_id = -1;
+				}
+
+
+				IOTC_Session_Close(__rdt_cnnt[i].iotc_sid);
+				__rdt_cnnt[i].iotc_sid = -1;
+
+				pthread_mutex_destroy(&__rdt_cnnt[i].mutex_datalink);
+
+				memset(&__rdt_cnnt[i],0,sizeof(struct stRDTcnnt)); // Clean session info					
+				__cnt_rdt_cnnt--;
+
+				printf("free session %d \n",i);
+			}
+		}
+
+		if ( __rdt_cnnt[i].action == RDTCNNT_RDT_CONNECTED	)
+		{
+			int rc;
+			rc  = rdtcnnt_check_packet(i);
+
+			if ( rc == 1 )
+			{
+				device_parser(i,__rdt_cnnt[i].rdtread_option,__rdt_cnnt[i].rdtread_data);
+
+
+				rdtcnnt_reset_packet(i);
+			}
+		}		
+	}
+		
+
+	pthread_mutex_unlock(&mutex_rdt_cnnt_array);
+
+
+	return 0;
+}
+
 
 
 
