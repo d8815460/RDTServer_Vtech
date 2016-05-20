@@ -224,6 +224,11 @@ void *_thread_unixsocket_read(void *arg)
 {
 	char fw_recv_buff[1024*16];
 	int rc;
+	int state = 0;
+	unsigned long json_len = 0;
+	unsigned long readpos = 0;
+
+
 
 
 	while(1)
@@ -232,14 +237,51 @@ void *_thread_unixsocket_read(void *arg)
 		{
 			try {
 
-				rc = sock.rcv(fw_recv_buff,sizeof(fw_recv_buff));
-
-				if ( rc > 0 )
+				if ( state < 4)
 				{
-					fw_recv_buff[rc] = 0;
-					printf("unix socket receive:\n%s\n---------------\n",fw_recv_buff);
+					rc = sock.rcv(fw_recv_buff,1);
+					if ( rc == 1 )
+					{
+						json_len <<= 8;
+						json_len = fw_recv_buff[0];
+						
+						state++;
+					}
+					
 				}
+				else 
+				{
+					int recv_size = json_len - readpos;
 
+					if ( recv_size > (int) sizeof(fw_recv_buff)  )
+						recv_size = sizeof(fw_recv_buff);
+
+					rc = sock.rcv(&fw_recv_buff[readpos],recv_size);
+
+					if ( rc > 0 )
+					{
+						Json::Reader reader;
+						Json::Value value;						
+
+						readpos += rc;
+							
+						if ( readpos == json_len )
+						{
+							fw_recv_buff[json_len] = 0;
+
+							if ( reader.parse((char*) fw_recv_buff, value) )
+							{
+								printf("unixsocket receive:\n%s\n---------------\n",value.toStyledString().c_str());
+							}
+							else
+							{
+								printf("unixsocket receive a non-json format string\n");
+							}
+
+							state = 0;
+						}
+					}
+				}
 		    } catch (const libsocket::socket_exception& exc)
 		    {
 				std::cerr << exc.mesg;
@@ -319,6 +361,9 @@ int kalay_device_server_agent_start(char *UID,char *unixsocket_path)
     	if ( fw_sock_status > 0 && (timer_counter % 1000) == 0 )
     	{
     		//unsigned char payload[] = {0x74,0x65,0x73,0x74};
+    		unsigned char payload_length_buffer[4];
+    		unsigned long payload_length;
+
 
 			action = !action;
 			string arg = std::to_string(action);	
@@ -331,6 +376,15 @@ int kalay_device_server_agent_start(char *UID,char *unixsocket_path)
 			root["functionState"] = arg.c_str();
 
 			total_payload = root.toStyledString().c_str();
+
+			payload_length = total_payload.length();
+
+			payload_length_buffer[0] = (((unsigned long)payload_length) &0xff000000)>>24;
+			payload_length_buffer[1] = (((unsigned long)payload_length) &0x00ff0000)>>16;
+			payload_length_buffer[2] = (((unsigned long)payload_length) &0x0000ff00)>>8;
+			payload_length_buffer[3] = (((unsigned long)payload_length) &0x000000ff);
+
+			sock.snd(payload_length_buffer,4); // send json length
 
 			sock.snd(total_payload.c_str(),total_payload.length()); // for JSON to parse properly on server side
     	}
