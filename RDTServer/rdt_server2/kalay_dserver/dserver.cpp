@@ -222,18 +222,16 @@ int fw_sock_status = -1;
 
 void *_thread_unixsocket_read(void *arg)
 {
+	char fw_recv_buff[1024*16];
+	int rc;
 
 
-	if ( fw_sock_status > 0 )
+	while(1)
 	{
-		char fw_recv_buff[1024*16];
-		int rc;
-
-
-		while(1)
+		if ( fw_sock_status > 0 )
 		{
-
 			try {
+
 				rc = sock.rcv(fw_recv_buff,sizeof(fw_recv_buff));
 
 				if ( rc > 0 )
@@ -248,12 +246,7 @@ void *_thread_unixsocket_read(void *arg)
 
 				//break;
 		    }
-
-			
 		}
-
-
-		
 	}
 
 	pthread_exit(0);
@@ -340,7 +333,6 @@ int kalay_device_server_agent_start(char *UID,char *unixsocket_path)
 			total_payload = root.toStyledString().c_str();
 
 			sock.snd(total_payload.c_str(),total_payload.length()); // for JSON to parse properly on server side
-//     		sock.snd(payload,sizeof(payload)-1); // for JSON to parse properly on server side
     	}
 
 

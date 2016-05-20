@@ -22,6 +22,8 @@ int device_parser(int session,unsigned char *option,int option_len,unsigned char
 	Json::Reader reader;
 	Json::Value value;
 	
+printf("dump recv: len:%d \n%s\n",data_len,data);
+
 
 	if (reader.parse((char*) data, value))
 	{
