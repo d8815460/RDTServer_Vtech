@@ -233,9 +233,11 @@ void *_thread_unixsocket_read(void *arg)
 
 	while(1)
 	{
+//printf("eddy tetst fw_sockt_status %d \n",fw_sock_status);
 		if ( fw_sock_status > 0 )
 		{
 			try {
+//printf("eddy test state:%d \n",state);
 
 				if ( state < 4)
 				{
@@ -253,8 +255,13 @@ void *_thread_unixsocket_read(void *arg)
 				{
 					int recv_size = json_len - readpos;
 
+printf("eddy test recv_len:%d \n",(int) json_len);					
+
 					if ( recv_size > (int) sizeof(fw_recv_buff)  )
 						recv_size = sizeof(fw_recv_buff);
+
+
+
 
 					rc = sock.rcv(&fw_recv_buff[readpos],recv_size);
 
@@ -279,6 +286,7 @@ void *_thread_unixsocket_read(void *arg)
 							}
 
 							state = 0;
+							readpos = 0;
 						}
 					}
 				}
@@ -288,6 +296,10 @@ void *_thread_unixsocket_read(void *arg)
 
 				//break;
 		    }
+		}
+		else
+		{
+			usleep(500000);
 		}
 	}
 
