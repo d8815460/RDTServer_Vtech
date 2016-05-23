@@ -327,6 +327,7 @@ int kalay_device_server_agent_start(char *UID,char *unixsocket_path)
 
     int action;
     int timer_counter = 0;
+    string test = "";	
 
 
     __agent_start = 1;
@@ -365,6 +366,7 @@ int kalay_device_server_agent_start(char *UID,char *unixsocket_path)
 	action = 0;
 
 
+
     //keep communicating with server
     while(__agent_start == 1)
     {
@@ -381,7 +383,7 @@ int kalay_device_server_agent_start(char *UID,char *unixsocket_path)
     	if ( fw_sock_status > 0 && (timer_counter % 1000) == 0 )
     	{
     		//unsigned char payload[] = {0x74,0x65,0x73,0x74};
-    		unsigned char payload_length_buffer[4];
+    		unsigned char payload_length_buffer[4+2048];
     		unsigned long payload_length;
     		int rc;
 
@@ -389,10 +391,12 @@ int kalay_device_server_agent_start(char *UID,char *unixsocket_path)
 			action = !action;
 			string arg = std::to_string(action);	
 
+
 			Json::Value root;
 			std::string total_payload;
 
 		    root["id"] = "0035482900";
+		    //root["no"] = test.c_str();  test += "0";
 		    root["functionName"] = "toggle";
 			root["functionState"] = arg.c_str();
 
@@ -405,11 +409,20 @@ int kalay_device_server_agent_start(char *UID,char *unixsocket_path)
 			payload_length_buffer[2] = (((unsigned long)payload_length) &0x0000ff00)>>8;
 			payload_length_buffer[3] = (((unsigned long)payload_length) &0x000000ff);
 
-			rc = sock.snd(payload_length_buffer,4); // send json length
-			printf("Test send len 4 - ret :%d\n",rc);
 
-			rc = sock.snd(total_payload.c_str(),total_payload.length()); // for JSON to parse properly on server side
-			printf("Test send len %d - ret :%d\n",rc,total_payload.length());
+			//strcpy((char*)&payload_length_buffer[4],(char*)total_payload.c_str());
+
+//rc = sock.snd(payload_length_buffer,4+payload_length); // send json length
+//printf("Test send len 4 %x %x %x %x - ret :%d\n",payload_length_buffer[0],payload_length_buffer[1],payload_length_buffer[2],payload_length_buffer[3],rc);
+
+
+
+			rc = sock.snd(payload_length_buffer,4); // send json length
+			printf("Test send len 4 %x %x %x %x - ret :%d\n",payload_length_buffer[0],payload_length_buffer[1],payload_length_buffer[2],payload_length_buffer[3],rc);
+
+usleep(1000);
+			rc = sock.snd(total_payload.c_str(),payload_length); // for JSON to parse properly on server side
+			printf("Test send len %d - ret :%d\n",(int) payload_length,rc);
     	}
 
 
