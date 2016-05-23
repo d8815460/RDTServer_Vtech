@@ -255,7 +255,7 @@ void *_thread_unixsocket_read(void *arg)
 				{
 					int recv_size = json_len - readpos;
 
-printf("eddy test recv_len:%d \n",(int) json_len);					
+//printf("eddy test recv_len:%d \n",(int) json_len);					
 
 					if ( recv_size > (int) sizeof(fw_recv_buff)  )
 						recv_size = sizeof(fw_recv_buff);
@@ -269,6 +269,8 @@ printf("eddy test recv_len:%d \n",(int) json_len);
 					{
 						Json::Reader reader;
 						Json::Value value;						
+						std::string recv_json;
+
 
 						readpos += rc;
 							
@@ -278,7 +280,13 @@ printf("eddy test recv_len:%d \n",(int) json_len);
 
 							if ( reader.parse((char*) fw_recv_buff, value) )
 							{
-								printf("unixsocket receive:\n%s\n---------------\n",value.toStyledString().c_str());
+								recv_json = value.toStyledString().c_str();
+
+								printf("unixsocket receive len:%d :\n data-len : %d\n %s\n---------------\n"
+									,(int)json_len
+									,recv_json.length()
+									,recv_json.c_str() );
+
 							}
 							else
 							{
@@ -375,6 +383,7 @@ int kalay_device_server_agent_start(char *UID,char *unixsocket_path)
     		//unsigned char payload[] = {0x74,0x65,0x73,0x74};
     		unsigned char payload_length_buffer[4];
     		unsigned long payload_length;
+    		int rc;
 
 
 			action = !action;
@@ -396,9 +405,11 @@ int kalay_device_server_agent_start(char *UID,char *unixsocket_path)
 			payload_length_buffer[2] = (((unsigned long)payload_length) &0x0000ff00)>>8;
 			payload_length_buffer[3] = (((unsigned long)payload_length) &0x000000ff);
 
-			sock.snd(payload_length_buffer,4); // send json length
+			rc = sock.snd(payload_length_buffer,4); // send json length
+			printf("Test send len 4 - ret :%d\n",rc);
 
-			sock.snd(total_payload.c_str(),total_payload.length()); // for JSON to parse properly on server side
+			rc = sock.snd(total_payload.c_str(),total_payload.length()); // for JSON to parse properly on server side
+			printf("Test send len %d - ret :%d\n",rc,total_payload.length());
     	}
 
 
