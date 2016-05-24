@@ -420,7 +420,7 @@ int kalay_device_server_agent_start(char *UID,char *unixsocket_path)
 			rc = sock.snd(payload_length_buffer,4); // send json length
 			printf("Test send len 4 %x %x %x %x - ret :%d\n",payload_length_buffer[0],payload_length_buffer[1],payload_length_buffer[2],payload_length_buffer[3],rc);
 
-usleep(1000);
+usleep(3000); // for debug only
 			rc = sock.snd(total_payload.c_str(),payload_length); // for JSON to parse properly on server side
 			printf("Test send len %d - ret :%d\n",(int) payload_length,rc);
     	}

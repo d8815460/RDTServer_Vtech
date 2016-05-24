@@ -16,13 +16,423 @@
 
 using namespace std;
 
-
-
-
-void deviceapi_get_gateway(int session,Json::Value &request)
+int sendto_rdt_client (int session,unsigned int rdt_ticket,char *data)
 {
-	std::string payload;
+	unsigned char szBuff[1024*16];
+	int send_length;
+	int option_len = 0;
+	int rc;
+	int data_length;
 
+	data_length  = strlen(data);
+
+
+	szBuff[0]= 0xfe;
+	szBuff[1]= 0xef;
+
+	if ( rdt_ticket > 0 )
+	{
+		option_len = 4;
+
+		szBuff[2]= option_len/256;
+		szBuff[3]= option_len%256;
+
+		szBuff[3+1] = 0x00;
+		szBuff[3+2] = 0x01;
+		szBuff[3+3] = ((rdt_ticket&0xff00)>>8);
+		szBuff[3+4] = (rdt_ticket)&0xff;
+	}
+	else
+	{
+		option_len = 0;
+
+		szBuff[2]= 0x00;
+		szBuff[3]= 0x00;
+	}
+
+	szBuff[4+option_len]= (data_length&0xff00)>>8;
+	szBuff[5+option_len]= (data_length&0x00ff);
+	memcpy(&szBuff[6+option_len],data,data_length);
+	send_length = 6+option_len+data_length;
+		
+
+
+	//printf("Dump RDT json: \n%s\n",payload.c_str());
+
+	rc =  RDT_Write(__rdt_cnnt[session].rdt_id,(char*)szBuff,send_length); 
+
+	if ( rc < 0 )
+	{
+		
+	}
+
+	return rc;
+
+}
+
+// Implemente API functions -----------------------------
+
+void deviceapi_get_gateway_about (int session,Json::Value &request)
+{
+
+	Json::Value root;
+	Json::Value response;
+	unsigned int rdt_ticket;
+	int rc;
+
+
+	rdt_ticket = request["rdt_ticket"].asUInt();
+
+
+	response["uid"] = "DRFTBHN6XXUUVM6KWTE1";
+	response["status"] = 1;
+	response["mac_address"] = "00:0c:29:36:3f:b1",
+	response["udid"] = "udid-00001";	
+	response["firmware_version"] = "1.0.0";
+	response["hardware_version"] = "1.0.1";
+	response["ip_address"] = "192.168.1.12";
+	response["subnet_mask"] = "255.255.255.0";
+	response["gateway_name"] = "V-Tech IP-Hub";
+
+
+
+	root["error"] = 0;
+	root["response"] = response;
+
+	rc = sendto_rdt_client(session,rdt_ticket,(char*)root.toStyledString().c_str());
+
+
+	if ( rc < 0 )
+	{
+
+	}
+
+	return;
+}
+
+void deviceapi_get_accessory_about (int session,Json::Value &request)
+{
+
+	Json::Value root;
+	Json::Value response;
+	unsigned int rdt_ticket;
+	int rc;
+
+
+	rdt_ticket = request["rdt_ticket"].asUInt();
+
+
+	response["uid"] = "DRFTBHN6XXUUVM6KWTE1";
+	response["udid"] = "DRFTBHN6XXUUVM6KWTE1";	
+	response["type"] = 1;
+	response["firmware_version"] = "1.0.0";
+
+
+	root["error"] = 0;
+	root["response"] = response;
+
+	rc = sendto_rdt_client(session,rdt_ticket,(char*)root.toStyledString().c_str());
+
+
+	if ( rc < 0 )
+	{
+
+	}
+
+	return;
+}
+
+void deviceapi_get_accessory_detail (int session,Json::Value &request)
+{
+	Json::Value root;
+	Json::Value response;
+	Json::Value color_hsb;
+	Json::Value color_brightness;
+	Json::Value location;
+
+	unsigned int rdt_ticket;
+	int rc;
+
+
+	rdt_ticket = request["rdt_ticket"].asUInt();
+
+	location["id"] = "l01";
+	location["name"] = "Location 01";
+
+	color_hsb["hue"] = 23;
+	color_hsb["saturation"] = 0.5;
+	color_hsb["brightness"] = 0.5;
+
+	color_brightness["brightness"] = 23;
+	color_brightness["temperature"] = 5000;
+
+
+	response["uid"] = "DRFTBHN6XXUUVM6KWTE1";
+	response["id"] = "a01";
+	response["name"] = "Light";
+	response["type"] = 0,
+	response["icon"] = 0;	
+	response["status"] = 1;
+	response["location"] = location;
+	response["color_hsb"] = color_hsb;
+	response["color_brightness"] = color_brightness;
+
+
+	root["error"] = 0;
+	root["response"] = response;
+
+	rc = sendto_rdt_client(session,rdt_ticket,(char*)root.toStyledString().c_str());
+
+
+	if ( rc < 0 )
+	{
+
+	}
+
+	return;
+}
+
+void deviceapi_get_group_free_lights (int session,Json::Value &request)
+{
+	Json::Value root;
+	Json::Value response;
+	Json::Value objects;
+
+	unsigned int rdt_ticket;
+	int rc;
+
+
+	rdt_ticket = request["rdt_ticket"].asUInt();
+
+
+	objects[0]["id"] = "a01";
+	objects[0]["name"] = "Light 1";
+
+	objects[1]["id"] = "a02";
+	objects[1]["name"] = "Light 2";
+
+	objects[2]["id"] = "a03";
+	objects[2]["name"] = "Light 3";
+
+
+	response["uid"] = "DRFTBHN6XXUUVM6KWTE1";
+	response["id"] = "a01";
+	response["objects"] = objects;
+
+
+	root["error"] = 0;
+	root["response"] = response;
+
+	rc = sendto_rdt_client(session,rdt_ticket,(char*)root.toStyledString().c_str());
+
+
+	if ( rc < 0 )
+	{
+
+	}
+
+	return;
+}
+
+void deviceapi_set_detail (int session,Json::Value &request)
+{
+	Json::Value root;
+	Json::Value response;
+	Json::Value objects;
+
+	Json::Value color_hsb;
+	Json::Value color_brightness;	
+
+	unsigned int rdt_ticket;
+	int rc;
+
+
+	rdt_ticket = request["rdt_ticket"].asUInt();
+
+
+
+	color_hsb["hue"] = 23;
+	color_hsb["saturation"] = 0.5;
+	color_hsb["brightness"] = 0.5;
+
+	color_brightness["brightness"] = 23;
+	color_brightness["temperature"] = 5000;	
+
+
+	response["api"] = "set_detail";
+	response["id"] = "a01";
+
+	response["icon"] = 0;
+	response["status"] = 1;
+	response["color_hsb"] = color_hsb;
+	response["color_brightness"] = color_brightness;
+
+
+	root["error"] = 0;
+	root["response"] = response;
+
+	rc = sendto_rdt_client(session,rdt_ticket,(char*)root.toStyledString().c_str());
+
+
+	if ( rc < 0 )
+	{
+
+	}
+
+	return;
+}
+
+void deviceapi_remove (int session,Json::Value &request)
+{
+	Json::Value root;
+	Json::Value response;
+	Json::Value objects;
+
+	unsigned int rdt_ticket;
+	int rc;
+
+
+	rdt_ticket = request["rdt_ticket"].asUInt();
+
+
+	response["api"] = "remove";
+	response["id"] = "a01";
+
+
+	root["error"] = 0;
+	root["response"] = response;
+
+	rc = sendto_rdt_client(session,rdt_ticket,(char*)root.toStyledString().c_str());
+
+
+	if ( rc < 0 )
+	{
+
+	}
+
+
+	return;
+}
+
+void deviceapi_get_activities (int session,Json::Value &request)
+{
+	Json::Value root;
+	Json::Value response;
+	Json::Value objects;
+
+	unsigned int rdt_ticket;
+	int rc;
+
+
+	rdt_ticket = request["rdt_ticket"].asUInt();
+
+
+	response["uid"] = "DRFTBHN6XXUUVM6KWTE1";
+
+	objects[0]["unix_time"] = "122739743";
+	objects[0]["message"] = "Garage Door is open";
+
+	objects[1]["unix_time"] = "122753243";
+	objects[1]["message"] = "Garage Door is close";
+
+	response["objects"] = objects;
+
+
+	root["error"] = 0;
+	root["response"] = response;
+
+	rc = sendto_rdt_client(session,rdt_ticket,(char*)root.toStyledString().c_str());
+
+
+	if ( rc < 0 )
+	{
+
+	}
+
+
+	return;
+}
+
+void deviceapi_get_light_effects (int session,Json::Value &request)
+{
+	Json::Value root;
+	Json::Value response;
+	Json::Value objects;
+
+	unsigned int rdt_ticket;
+	int rc;
+
+
+	rdt_ticket = request["rdt_ticket"].asUInt();
+
+
+	objects[0]["id"] = "e01";
+	objects[0]["name"] = "Effect 01";
+	objects[0]["is_selected"] = true;
+
+	objects[1]["id"] = "e02";
+	objects[1]["name"] = "Effect 02";
+	objects[1]["is_selected"] = false;
+
+	objects[2]["id"] = "e03";
+	objects[2]["name"] = "Effect 03";
+	objects[2]["is_selected"] = false;
+
+
+	response["uid"] = "DRFTBHN6XXUUVM6KWTE1";
+	response["objects"] = objects;
+ 
+	root["error"] = 0;
+	root["response"] = response;
+
+	rc = sendto_rdt_client(session,rdt_ticket,(char*)root.toStyledString().c_str());
+
+
+	if ( rc < 0 )
+	{
+
+	}
+
+
+	return;
+}
+
+void deviceapi_set_light_effects (int session,Json::Value &request)
+{
+	Json::Value root;
+	Json::Value response;
+	Json::Value objects;
+
+	unsigned int rdt_ticket;
+	int rc;
+
+
+	rdt_ticket = request["rdt_ticket"].asUInt();
+
+
+	objects[0]["id"] = "e01";
+
+
+	response["api"] = "set_light_effects";
+	response["id"] = "a01";
+	response["objects"] = objects;
+ 
+	root["error"] = 0;
+	root["response"] = response;
+
+	rc = sendto_rdt_client(session,rdt_ticket,(char*)root.toStyledString().c_str());
+
+
+	if ( rc < 0 )
+	{
+
+	}
+
+	return;
+}
+
+void deviceapi_get_gateway (int session,Json::Value &request)
+{
 	Json::Value root;
 	Json::Value response;
 	Json::Value locations;
@@ -31,9 +441,6 @@ void deviceapi_get_gateway(int session,Json::Value &request)
 	int rc;					
 	unsigned int rdt_ticket;		
 
-	unsigned char szBuff[1024*16];
-	int option_len = 0;
-	int send_length;
 
 	rdt_ticket = request["rdt_ticket"].asUInt();
 
@@ -123,130 +530,905 @@ void deviceapi_get_gateway(int session,Json::Value &request)
 	root["response"] = response;
 
 
-	payload = root.toStyledString().c_str();
-	//printf("Dump RDT json: \n%s\n",payload.c_str());
+	rc = sendto_rdt_client(session,rdt_ticket,(char*)root.toStyledString().c_str());
 
-
-	szBuff[0]= 0xfe;
-	szBuff[1]= 0xef;
-
-	if ( rdt_ticket > 0 )
-	{
-		option_len = 4;
-
-		szBuff[2]= ((option_len&0xff00)>>8);
-		szBuff[3]= (option_len)&0xff;
-
-printf("eddy test send ticket %d\n",rdt_ticket);
-
-		szBuff[3+1] = 0x00;
-		szBuff[3+2] = 0x01;
-		szBuff[3+3] = ((rdt_ticket&0xff00)>>8);
-		szBuff[3+4] = (rdt_ticket)&0xff;
-	}
-	else
-	{
-		option_len = 0;
-
-		szBuff[2]= 0x00;
-		szBuff[3]= 0x00;
-	}
-
-	szBuff[4+option_len]= payload.length()/256;
-	szBuff[5+option_len]= payload.length()%256;
-	memcpy(&szBuff[6+option_len],payload.c_str(),payload.length());
-	send_length = 6+option_len+payload.length();
-
-
-	rc =  RDT_Write(__rdt_cnnt[session].rdt_id,(char*)szBuff,send_length);    		
 
 	if ( rc < 0 )
 	{
-
+		
 	}
 
 
 	return;
 }
 
-void deviceapi_get_accessory_detail(int session,Json::Value &request)
+void deviceapi_add_accessories (int session,Json::Value &request)
 {
-	std::string payload;
-	
 	Json::Value root;
 	Json::Value response;
-	Json::Value color;
-	unsigned int rdt_ticket;
+	Json::Value objects;
 
+	unsigned int rdt_ticket;
 	int rc;
 
-	unsigned char szBuff[1024*16];
-	int send_length;
-	int option_len = 0;
 
 	rdt_ticket = request["rdt_ticket"].asUInt();
 
 
-	color["hue"] = 23;
-	color["saturation"] = 345;
-	color["brightness"] = 2323;
-	color["temperature"] = 24;
+	objects[0]["id"] = "a01";
+	objects[1]["id"] = "a02";
 
 
-	response["id"] = "a01";
-	response["name"] = "Light";
-	response["status"] = 1,
-	response["location"] = "location 1";	
-	response["effects"] = "Default effect 2";
-	response["color"] = color;
-
+	response["api"] = "add_accessories";
+	response["objects"] = objects;
+ 
 	root["error"] = 0;
 	root["response"] = response;
 
-	payload = root.toStyledString().c_str();
+	rc = sendto_rdt_client(session,rdt_ticket,(char*)root.toStyledString().c_str());
 
-
-
-	szBuff[0]= 0xfe;
-	szBuff[1]= 0xef;
-
-	if ( rdt_ticket > 0 )
-	{
-		option_len = 4;
-
-		szBuff[2]= option_len/256;
-		szBuff[3]= option_len%256;
-
-		szBuff[3+1] = 0x00;
-		szBuff[3+2] = 0x01;
-		szBuff[3+3] = ((rdt_ticket&0xff00)>>8);
-		szBuff[3+4] = (rdt_ticket)&0xff;
-	}
-	else
-	{
-		option_len = 0;
-
-		szBuff[2]= 0x00;
-		szBuff[3]= 0x00;
-	}
-
-	szBuff[4+option_len]= payload.length()/256;
-	szBuff[5+option_len]= payload.length()%256;
-	memcpy(&szBuff[6+option_len],payload.c_str(),payload.length());
-	send_length = 6+option_len+payload.length();
-		
-
-
-	//printf("Dump RDT json: \n%s\n",payload.c_str());
-
-	rc =  RDT_Write(__rdt_cnnt[session].rdt_id,(char*)szBuff,send_length); 
 
 	if ( rc < 0 )
 	{
-		
+
+	}
+
+	return;
+}
+
+void deviceapi_merge_accessories (int session,Json::Value &request)
+{
+	Json::Value root;
+	Json::Value response;
+	Json::Value objects;
+
+	unsigned int rdt_ticket;
+	int rc;
+
+
+	rdt_ticket = request["rdt_ticket"].asUInt();
+
+
+	objects[0]["id"] = "a01";
+	objects[1]["id"] = "a02";
+
+
+	response["api"] = "merge_accessories";
+	response["objects"] = objects;
+ 
+	root["error"] = 0;
+	root["response"] = response;
+
+	rc = sendto_rdt_client(session,rdt_ticket,(char*)root.toStyledString().c_str());
+
+
+	if ( rc < 0 )
+	{
+
+	}
+
+	return;
+}
+
+void deviceapi_backup_gateway (int session,Json::Value &request)
+{
+	Json::Value root;
+	Json::Value response;
+
+	unsigned int rdt_ticket;
+	int rc;
+
+
+	rdt_ticket = request["rdt_ticket"].asUInt();
+
+
+
+	response["api"] = "backup_gateway";
+ 
+	root["error"] = 0;
+	root["response"] = response;
+
+	rc = sendto_rdt_client(session,rdt_ticket,(char*)root.toStyledString().c_str());
+
+
+	if ( rc < 0 )
+	{
+
+	}
+
+	return;
+}
+
+void deviceapi_restore_gateway (int session,Json::Value &request)
+{
+	Json::Value root;
+	Json::Value response;
+
+	unsigned int rdt_ticket;
+	int rc;
+
+
+	rdt_ticket = request["rdt_ticket"].asUInt();
+
+
+
+	response["api"] = "restore_gateway";
+ 
+	root["error"] = 0;
+	root["response"] = response;
+
+	rc = sendto_rdt_client(session,rdt_ticket,(char*)root.toStyledString().c_str());
+
+
+	if ( rc < 0 )
+	{
+
+	}
+
+	return;
+}
+
+void deviceapi_reset_gateway (int session,Json::Value &request)
+{
+	Json::Value root;
+	Json::Value response;
+
+	unsigned int rdt_ticket;
+	int rc;
+
+
+	rdt_ticket = request["rdt_ticket"].asUInt();
+
+
+
+	response["api"] = "reset_gateway";
+ 
+	root["error"] = 0;
+	root["response"] = response;
+
+	rc = sendto_rdt_client(session,rdt_ticket,(char*)root.toStyledString().c_str());
+
+
+	if ( rc < 0 )
+	{
+
+	}
+
+	return;
+}
+
+void deviceapi_update_gateway (int session,Json::Value &request)
+{
+	Json::Value root;
+	Json::Value response;
+
+	unsigned int rdt_ticket;
+	int rc;
+
+
+	rdt_ticket = request["rdt_ticket"].asUInt();
+
+
+
+	response["api"] = "update_gateway";
+ 
+	root["error"] = 0;
+	root["response"] = response;
+
+	rc = sendto_rdt_client(session,rdt_ticket,(char*)root.toStyledString().c_str());
+
+
+	if ( rc < 0 )
+	{
+
+	}
+
+	return;
+}
+
+void deviceapi_get_detail (int session,Json::Value &request)
+{
+	Json::Value root;
+	Json::Value response;
+	Json::Value location;
+	Json::Value objects;
+
+	unsigned int rdt_ticket;
+	int rc;
+
+
+	rdt_ticket = request["rdt_ticket"].asUInt();
+
+	// group
+
+
+	response["uid"] = (char*) __myUID;
+	response["id"] = "g01";
+	response["status"] = 1;
+	response["name"] = "Group 1";
+
+	location["id"] = "l01";
+	location["name"] = "Location 01";
+
+	response["location"] = location;
+
+
+	objects[0]["id"] = "a01";
+	objects[0]["name"] = "name";
+	objects[0]["type"] = 0;
+	objects[0]["icon"] = 0;
+	objects[0]["status"] = 1;
+
+
+	objects[1]["id"] = "a02";
+	objects[1]["name"] = "Light 2";
+	objects[1]["type"] = 0;
+	objects[1]["icon"] = 0;
+	objects[1]["status"] = 1;
+
+
+	objects[2]["id"] = "a03";
+	objects[2]["name"] = "Light 3";
+	objects[2]["type"] = 0;
+	objects[2]["icon"] = 0;
+	objects[2]["status"] = 1;
+
+	response["objects"] = objects;
+
+ 
+	root["error"] = 0;
+	root["response"] = response;
+
+	rc = sendto_rdt_client(session,rdt_ticket,(char*)root.toStyledString().c_str());
+
+
+	if ( rc < 0 )
+	{
+
 	}
 
 
 	return;
 }
+
+void deviceapi_get_other_groups (int session,Json::Value &request)
+{
+	Json::Value root;
+	Json::Value response;
+	Json::Value objects;
+
+	unsigned int rdt_ticket;
+	int rc;
+
+
+	rdt_ticket = request["rdt_ticket"].asUInt();
+
+	// group
+
+
+	response["uid"] = (char*) __myUID;
+
+
+	objects[0]["id"] = "g01";
+	objects[0]["name"] = "Group 1";
+
+
+	objects[1]["id"] = "g02";
+	objects[1]["name"] = "Group 2";
+
+
+	objects[2]["id"] = "g03";
+	objects[2]["name"] = "Group 2";
+
+	response["objects"] = objects;
+
+ 
+	root["error"] = 0;
+	root["response"] = response;
+
+	rc = sendto_rdt_client(session,rdt_ticket,(char*)root.toStyledString().c_str());
+
+
+	if ( rc < 0 )
+	{
+
+	}
+
+	return;
+}
+
+//void deviceapi_set_detail (int session,Json::Value &request)
+
+
+void deviceapi_add_an_accessory_to_group (int session,Json::Value &request)
+{
+	Json::Value root;
+	Json::Value response;
+
+	unsigned int rdt_ticket;
+	int rc;
+
+
+	rdt_ticket = request["rdt_ticket"].asUInt();
+
+	// group
+
+
+	response["api"] = "add_an_accessory_to_group";
+
+ 
+	root["error"] = 0;
+	root["response"] = response;
+
+	rc = sendto_rdt_client(session,rdt_ticket,(char*)root.toStyledString().c_str());
+
+
+	if ( rc < 0 )
+	{
+
+	}
+
+	return;
+}
+
+void deviceapi_remove_accessories_from_group (int session,Json::Value &request)
+{
+	Json::Value root;
+	Json::Value response;
+
+	unsigned int rdt_ticket;
+	int rc;
+
+
+	rdt_ticket = request["rdt_ticket"].asUInt();
+
+	// group
+
+
+	response["api"] = "remove_accessories_from_group";
+
+ 
+	root["error"] = 0;
+	root["response"] = response;
+
+	rc = sendto_rdt_client(session,rdt_ticket,(char*)root.toStyledString().c_str());
+
+
+	if ( rc < 0 )
+	{
+
+	}
+
+	return;
+}
+
+void deviceapi_get_locations (int session,Json::Value &request)
+{
+	Json::Value root;
+	Json::Value response;
+	Json::Value objects;
+
+	unsigned int rdt_ticket;
+	int rc;
+
+
+	rdt_ticket = request["rdt_ticket"].asUInt();
+
+	// group
+
+
+	response["uid"] = (char*) __myUID;
+
+
+	objects[0]["id"] = "l00";
+	objects[0]["name"] = "Bedroom";
+	objects[0]["is_editable"] = true;
+
+
+	objects[1]["id"] = "l01";
+	objects[1]["name"] = "Garage";
+	objects[1]["is_editable"] = false;
+
+	objects[2]["id"] = "l02";
+	objects[2]["name"] = "Kitchen";
+	objects[2]["is_editable"] = false;
+
+	
+	response["objects"] = objects;
+
+ 
+	root["error"] = 0;
+	root["response"] = response;
+
+	rc = sendto_rdt_client(session,rdt_ticket,(char*)root.toStyledString().c_str());
+
+
+	if ( rc < 0 )
+	{
+
+	}
+
+	return;
+}
+
+void deviceapi_add_accessories_to_location (int session,Json::Value &request)
+{
+	Json::Value root;
+	Json::Value response;
+	Json::Value objects;
+
+	unsigned int rdt_ticket;
+	int rc;
+
+
+	rdt_ticket = request["rdt_ticket"].asUInt();
+
+	// group
+
+
+	response["uid"] = (char*) __myUID;
+
+
+	objects[0]["id"] = "a01";
+	objects[0]["name"] = "Accessory 01";
+
+
+	objects[1]["id"] = "a01";
+	objects[1]["name"] = "Accessory Sensor";
+
+	objects[2]["id"] = "a03";
+	objects[2]["name"] = "Accessory Light";
+
+	objects[3]["id"] = "a02";
+	objects[3]["name"] = "Accessory 02";
+
+	
+	response["objects"] = objects;
+
+ 
+	root["error"] = 0;
+	root["response"] = response;
+
+	rc = sendto_rdt_client(session,rdt_ticket,(char*)root.toStyledString().c_str());
+
+
+	if ( rc < 0 )
+	{
+
+	}
+
+	return;
+}
+
+void deviceapi_create_a_location (int session,Json::Value &request)
+{
+	Json::Value root;
+	Json::Value response;
+
+	unsigned int rdt_ticket;
+	int rc;
+
+
+	rdt_ticket = request["rdt_ticket"].asUInt();
+
+	// group
+
+
+	response["uid"] = (char*) __myUID;
+	response["id"] = "l00";
+	response["name"] = "Location 0";
+
+
+ 
+	root["error"] = 0;
+	root["response"] = response;
+
+	rc = sendto_rdt_client(session,rdt_ticket,(char*)root.toStyledString().c_str());
+
+
+	if ( rc < 0 )
+	{
+
+	}
+
+	return;
+}
+
+void deviceapi_remove_locations (int session,Json::Value &request)
+{
+	Json::Value root;
+	Json::Value response;
+
+	unsigned int rdt_ticket;
+	int rc;
+
+
+	rdt_ticket = request["rdt_ticket"].asUInt();
+
+	// group
+
+
+	response["api"] = "remove_locations";
+
+	
+ 
+	root["error"] = 0;
+	root["response"] = response;
+
+	rc = sendto_rdt_client(session,rdt_ticket,(char*)root.toStyledString().c_str());
+
+
+	if ( rc < 0 )
+	{
+
+	}
+
+	return;	
+}
+//void deviceapi_get_detail (int session,Json::Value &request)
+void deviceapi_set_schedule_detail (int session,Json::Value &request)
+{
+	Json::Value root;
+	Json::Value response;
+
+	unsigned int rdt_ticket;
+	int rc;
+
+
+	rdt_ticket = request["rdt_ticket"].asUInt();
+
+	// group
+
+
+	response["api"] = "set_schedule_detail";
+
+	
+
+ 
+	root["error"] = 0;
+	root["response"] = response;
+
+	rc = sendto_rdt_client(session,rdt_ticket,(char*)root.toStyledString().c_str());
+
+
+	if ( rc < 0 )
+	{
+
+	}
+
+	return;
+}
+
+void deviceapi_add_a_schedule (int session,Json::Value &request)
+{
+	Json::Value root;
+	Json::Value response;
+
+	unsigned int rdt_ticket;
+	int rc;
+
+
+	rdt_ticket = request["rdt_ticket"].asUInt();
+
+	// group
+
+
+	response["api"] = "add_a_schedule";
+
+	
+
+ 
+	root["error"] = 0;
+	root["response"] = response;
+
+	rc = sendto_rdt_client(session,rdt_ticket,(char*)root.toStyledString().c_str());
+
+
+	if ( rc < 0 )
+	{
+
+	}
+	
+	return;
+}
+
+//void deviceapi_remove_a_schedule (int session,Json::Value &request)
+void deviceapi_get_accessory_setting (int session,Json::Value &request)
+{
+	Json::Value root;
+	Json::Value response;
+
+	unsigned int rdt_ticket;
+	int rc;
+
+
+	rdt_ticket = request["rdt_ticket"].asUInt();
+
+	// group
+
+
+	response["api"] = "remove_a_schedule";
+
+	
+
+ 
+	root["error"] = 0;
+	root["response"] = response;
+
+	rc = sendto_rdt_client(session,rdt_ticket,(char*)root.toStyledString().c_str());
+
+
+	if ( rc < 0 )
+	{
+
+	}
+	
+	return;
+}
+
+void deviceapi_get_gateway_setting (int session,Json::Value &request)
+{
+	Json::Value root;
+	Json::Value response;
+	Json::Value objects;
+
+	unsigned int rdt_ticket;
+	int rc;
+
+
+	rdt_ticket = request["rdt_ticket"].asUInt();
+
+	// group
+
+	response["uid"] = (char*) __myUID;
+	response["home"] = "appl";
+	response["led_light_status"] = true;
+	
+	response["objects"] = objects;
+
+ 
+	root["error"] = 0;
+	root["response"] = response;
+
+	rc = sendto_rdt_client(session,rdt_ticket,(char*)root.toStyledString().c_str());
+
+
+	if ( rc < 0 )
+	{
+
+	}
+	
+	return;
+}
+
+void deviceapi_set_accessory_setting (int session,Json::Value &request)
+{
+	Json::Value root;
+	Json::Value response;
+	Json::Value objects;
+
+	unsigned int rdt_ticket;
+	int rc;
+
+
+	rdt_ticket = request["rdt_ticket"].asUInt();
+
+	// group
+
+	response["api"] = "set_accessory_setting";
+	response["id"] = "s01";
+	
+	response["objects"] = objects;
+
+ 
+	root["error"] = 0;
+	root["response"] = response;
+
+	rc = sendto_rdt_client(session,rdt_ticket,(char*)root.toStyledString().c_str());
+
+
+	if ( rc < 0 )
+	{
+
+	}
+
+
+	return;
+}
+
+//void deviceapi_set_accessory_setting (int session,Json::Value &request)
+void deviceapi_set_gateway_setting (int session,Json::Value &request)
+{
+	Json::Value root;
+	Json::Value response;
+	Json::Value objects;
+
+	unsigned int rdt_ticket;
+	int rc;
+
+
+	rdt_ticket = request["rdt_ticket"].asUInt();
+
+	// group
+
+	response["api"] = "set_gateway_setting";
+	
+	response["objects"] = objects;
+
+ 
+	root["error"] = 0;
+	root["response"] = response;
+
+	rc = sendto_rdt_client(session,rdt_ticket,(char*)root.toStyledString().c_str());
+
+
+	if ( rc < 0 )
+	{
+
+	}
+
+	return;
+}
+
+void deviceapi_get_objects (int session,Json::Value &request)
+{
+	Json::Value root;
+	Json::Value response;
+	Json::Value objects;
+
+	unsigned int rdt_ticket;
+	int rc;
+
+
+	rdt_ticket = request["rdt_ticket"].asUInt();
+
+	// group
+
+
+	response["uid"] = (char*) __myUID;
+
+
+	objects[0]["id"] = "s011";
+	objects[0]["name"] = "Switch 1";
+
+
+	objects[1]["id"] = "s012";
+	objects[1]["name"] = "Switch 2";
+
+	objects[2]["id"] = "s013";
+	objects[2]["name"] = "Switch 3";
+
+	objects[3]["id"] = "s014";
+	objects[3]["name"] = "Switch 4";
+
+	
+	response["objects"] = objects;
+
+ 
+	root["error"] = 0;
+	root["response"] = response;
+
+	rc = sendto_rdt_client(session,rdt_ticket,(char*)root.toStyledString().c_str());
+
+
+	if ( rc < 0 )
+	{
+
+	}
+
+	return;
+}
+
+//void deviceapi_get_detail (int session,Json::Value &request)
+//void deviceapi_set_detail (int session,Json::Value &request)
+void deviceapi_remove_a_switch_accessory (int session,Json::Value &request)
+{
+	Json::Value root;
+	Json::Value response;
+
+	unsigned int rdt_ticket;
+	int rc;
+
+
+	rdt_ticket = request["rdt_ticket"].asUInt();
+
+	// group
+
+	response["api"] = "remove_a_switch_accessory";
+	
+
+ 
+	root["error"] = 0;
+	root["response"] = response;
+
+	rc = sendto_rdt_client(session,rdt_ticket,(char*)root.toStyledString().c_str());
+
+
+	if ( rc < 0 )
+	{
+
+	}	
+	return;
+}
+
+void deviceapi_get_tasks (int session,Json::Value &request)
+{
+	Json::Value root;
+	Json::Value response;
+	Json::Value objects;
+
+	unsigned int rdt_ticket;
+	int rc;
+
+
+	rdt_ticket = request["rdt_ticket"].asUInt();
+
+	// group
+
+
+	response["uid"] = (char*) __myUID;
+
+
+	objects[0]["id"] = "t01";
+	objects[0]["name"] = "Task 1";
+	objects[0]["is_activated"] = true;
+
+
+	objects[1]["id"] = "t02";
+	objects[1]["name"] = "Task 2";
+	objects[1]["is_activated"] = false;
+
+
+	
+	response["objects"] = objects;
+
+ 
+	root["error"] = 0;
+	root["response"] = response;
+
+	rc = sendto_rdt_client(session,rdt_ticket,(char*)root.toStyledString().c_str());
+
+
+	if ( rc < 0 )
+	{
+
+	}
+
+
+	return;
+}
+
+//void deviceapi_get_detail (int session,Json::Value &request)
+//void deviceapi_set_detail(session,value);
+void deviceapi_add_a_task (int session,Json::Value &request)
+{
+	Json::Value root;
+	Json::Value response;
+
+	unsigned int rdt_ticket;
+	int rc;
+
+
+	rdt_ticket = request["rdt_ticket"].asUInt();
+
+	// group
+
+	response["api"] = "add_a_task";
+ 
+	root["error"] = 0;
+	root["response"] = response;
+
+	rc = sendto_rdt_client(session,rdt_ticket,(char*)root.toStyledString().c_str());
+
+
+	if ( rc < 0 )
+	{
+
+	}
+
+
+	return;
+}
+
+//void deviceapi_remove (int session,Json::Value &request)
 
