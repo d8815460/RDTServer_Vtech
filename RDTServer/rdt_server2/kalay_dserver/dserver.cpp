@@ -325,7 +325,7 @@ int kalay_device_server_agent_start(char *UID,char *unixsocket_path)
     int ret;
     int rdtCh;
 
-    int action;
+    int action,seq;
     int timer_counter = 0;
     string test = "";	
 
@@ -363,7 +363,9 @@ int kalay_device_server_agent_start(char *UID,char *unixsocket_path)
 	pthread_detach(thread_id_unixsocket_read);
 
 
-	action = 0;
+	action = 20;
+
+	seq = 0;
 
 
 
@@ -388,17 +390,31 @@ int kalay_device_server_agent_start(char *UID,char *unixsocket_path)
     		int rc;
 
 
-			action = !action;
-			string arg = std::to_string(action);	
+// 			action = !action;
+
+			seq++;
+
+// 			if (action == 20)
+// 				action = 80;
+// 			else
+// 				action = 20;
+
+	
+			string arg = std::to_string(seq);	
 
 
 			Json::Value root;
 			std::string total_payload;
 
-		    root["id"] = "0035482900";
+// 		    root["id"] = "0298ed5e25";
 		    //root["no"] = test.c_str();  test += "0";
-		    root["functionName"] = "toggle";
-			root["functionState"] = arg.c_str();
+
+
+// 			root["functionName"] = "toggle";
+		    root["func"] = "getAll";
+// 			root["functionState"] = arg.c_str();
+
+			root["seq"] = arg.c_str();
 
 			total_payload = root.toStyledString().c_str();
 
