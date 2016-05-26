@@ -222,24 +222,54 @@ int fw_sock_status = -1;
 
 void *_thread_unixsocket_read(void *arg)
 {
-	char fw_recv_buff[1024*16];
+	char *fw_recv_buff = NULL;
+	unsigned int recv_buff_size = 4;
 	int rc;
 	int state = 0;
-	unsigned long json_len = 0;
-	unsigned long readpos = 0;
+	unsigned int json_len = 0;
+	unsigned int readpos = 0;
+
+	fw_recv_buff = (char*)malloc(recv_buff_size);
+
+	if ( fw_recv_buff == NULL )
+	{
+		printf("Error: unixsocket receive buffer malloc(%d) fail \n",recv_buff_size);
+
+		pthread_exit(0);  // FixMe: TBD error handle
+	}
 
 
 
 
 	while(1)
 	{
-//printf("eddy tetst fw_sockt_status %d \n",fw_sock_status);
 		if ( fw_sock_status > 0 )
 		{
 			try {
-//printf("eddy test state:%d \n",state);
+				if ( state == -1 ) // Ignore this packet
+				{
+					unsigned int recv_size = json_len - readpos;
 
-				if ( state < 4)
+
+					if ( recv_size >  recv_buff_size  )
+						recv_size = recv_buff_size;
+
+					rc = sock.rcv(fw_recv_buff,recv_size); // pass
+
+					if ( rc > 0 )
+					{
+						readpos += rc;
+							
+						if ( readpos == json_len )
+						{
+							printf("Error: unixsocket ignore a json because no enought receive buffer(size:%d)\n",json_len);
+
+							state = 0;
+							readpos = 0;
+						}
+					}
+				}
+				else if ( state < 4)
 				{
 					rc = sock.rcv(fw_recv_buff,1);
 					if ( rc == 1 )
@@ -249,18 +279,54 @@ void *_thread_unixsocket_read(void *arg)
 						
 						state++;
 					}
-					
+
+					if ( state == 4 )
+					{
+						if ( recv_buff_size < (json_len+1) ) // will add string terminal character to make sure json parser works.
+						{
+							int new_recv_buff_size;
+
+							if ( fw_recv_buff != NULL )
+							{
+								free(fw_recv_buff);
+								fw_recv_buff = NULL;
+							}
+
+							new_recv_buff_size = (json_len+1+1023)/1024*1024; // increment by K avoid busy for malloc 
+							// FixMe: consider reduce size if new buffer size is too huge and just for once
+
+							fw_recv_buff = (char*)malloc(new_recv_buff_size);
+
+							if ( fw_recv_buff == NULL ) 
+							{
+								
+								printf("Error: unixsocket receive buffer malloc(%d) fail \n",new_recv_buff_size);
+								state = -1; // Ignore this packet FixMe: TBD error handle 
+
+								// try to recovery size to orginal
+								fw_recv_buff = (char*)malloc(recv_buff_size);
+
+								if ( fw_recv_buff == NULL )
+								{
+									printf("Error: unixsocket receive buffer malloc(%d) fail(receovery) \n",recv_buff_size);
+
+									break; // FixMe : TBD error handle
+								}
+							}
+							else
+							{
+								recv_buff_size = new_recv_buff_size;
+								printf("unixsocket receive buffer resize to %d \n",new_recv_buff_size);
+							}							
+						}
+					}
 				}
 				else 
 				{
-					int recv_size = json_len - readpos;
+					unsigned int recv_size = json_len - readpos;
 
-//printf("eddy test recv_len:%d \n",(int) json_len);					
-
-					if ( recv_size > (int) sizeof(fw_recv_buff)  )
-						recv_size = sizeof(fw_recv_buff);
-
-
+					if ( recv_size >  (recv_buff_size-1)  ) // it should not happen 
+						recv_size = recv_buff_size-1;
 
 
 					rc = sock.rcv(&fw_recv_buff[readpos],recv_size);
@@ -311,6 +377,15 @@ void *_thread_unixsocket_read(void *arg)
 		}
 	}
 
+
+	if ( fw_recv_buff != NULL )
+	{
+		free(fw_recv_buff);
+		fw_recv_buff = NULL;
+		recv_buff_size = 0;
+	}
+
+
 	pthread_exit(0);
 }
 
@@ -325,7 +400,8 @@ int kalay_device_server_agent_start(char *UID,char *unixsocket_path)
     int ret;
     int rdtCh;
 
-    int action,seq;
+    int action;
+    unsigned int seq;
     int timer_counter = 0;
     string test = "";	
 
@@ -393,6 +469,11 @@ int kalay_device_server_agent_start(char *UID,char *unixsocket_path)
 // 			action = !action;
 
 			seq++;
+			if ( (seq & 0x80000000) ) // Control seq in "1-0x7fffffff"
+				seq = 1;
+
+
+				 
 
 // 			if (action == 20)
 // 				action = 80;
