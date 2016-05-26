@@ -11,7 +11,10 @@
 
 #include "kalay_dserver.h"
 #include "dserver.h"
+#include "dtable.h"
 #include "device_api.h"
+
+
 
 
 using namespace std;
@@ -79,24 +82,61 @@ void deviceapi_get_gateway_about (int session,Json::Value &request)
 	Json::Value response;
 	unsigned int rdt_ticket;
 	int rc;
+	int err = 1;
+	string err_str;
 
 
 	rdt_ticket = request["rdt_ticket"].asUInt();
 
 
-	response["uid"] = "DRFTBHN6XXUUVM6KWTE1";
-	response["status"] = 1;
-	response["mac_address"] = "00:0c:29:36:3f:b1",
-	response["udid"] = "udid-00001";	
-	response["firmware_version"] = "1.0.0";
-	response["hardware_version"] = "1.0.1";
-	response["ip_address"] = "192.168.1.12";
-	response["subnet_mask"] = "255.255.255.0";
-	response["gateway_name"] = "V-Tech IP-Hub";
+	response["uid"] = (char*) __myUID;
+	response["api"] = "get_gateway_about";
+
+
+	try {
+		CMyObject *pGateway = __allObjects.m_mapAllObjects[0x70000001];
+		
+
+		if ( pGateway != NULL )
+		{
+			map<string,int>::iterator iNum;
+			map<string,string>::iterator iStr;
+
+			for(iNum = pGateway->m_attr_num.begin(); iNum!=pGateway->m_attr_num.end(); ++iNum)
+			{
+				//printf("eddy test attr:%s value:%d \n",iNum->first.c_str(),iNum->second);
+
+				response[iNum->first.c_str()] = iNum->second;
+			}
+
+			for(iStr = pGateway->m_attr_str.begin(); iStr!=pGateway->m_attr_str.end(); ++iStr)
+			{
+				//printf("eddy test attr:%s value:%s \n",iStr->first.c_str(),iStr->second.c_str());
+
+				response[iStr->first.c_str()] = iStr->second.c_str();
+			}
+
+			err = 0;
+		}
+		else
+		{
+			err = -1;
+			err_str = "not found";
+		}
+	
+
+
+    } catch (const libsocket::socket_exception& exc)
+    {
+		std::cerr << exc.mesg;
+		err_str = exc.mesg;
+    }
 
 
 
-	root["error"] = 0;
+	root["error"] = err;
+	if ( err_str.length() != 0 )
+		root["error_str"] = err_str;
 	root["response"] = response;
 
 	rc = sendto_rdt_client(session,rdt_ticket,(char*)root.toStyledString().c_str());
@@ -121,14 +161,15 @@ void deviceapi_get_accessory_about (int session,Json::Value &request)
 
 	rdt_ticket = request["rdt_ticket"].asUInt();
 
-
-	response["uid"] = "DRFTBHN6XXUUVM6KWTE1";
-	response["udid"] = "DRFTBHN6XXUUVM6KWTE1";	
+	response["uid"] = (char*) __myUID;;
+	response["api"] = "get_gateway_about";
+	response["udid"] = "0035482900";	
 	response["type"] = 1;
 	response["firmware_version"] = "1.0.0";
 
 
 	root["error"] = 0;
+
 	root["response"] = response;
 
 	rc = sendto_rdt_client(session,rdt_ticket,(char*)root.toStyledString().c_str());
@@ -152,36 +193,66 @@ void deviceapi_get_accessory_detail (int session,Json::Value &request)
 
 	unsigned int rdt_ticket;
 	int rc;
+	unsigned int id;
 
 
 	rdt_ticket = request["rdt_ticket"].asUInt();
 
-	location["id"] = "l01";
-	location["name"] = "Location 01";
-
-	color_hsb["hue"] = 23;
-	color_hsb["saturation"] = 0.5;
-	color_hsb["brightness"] = 0.5;
-
-	color_brightness["brightness"] = 23;
-	color_brightness["temperature"] = 5000;
 
 
-	response["uid"] = "DRFTBHN6XXUUVM6KWTE1";
-	response["id"] = "a01";
-	response["name"] = "Light";
-	response["type"] = 0,
-	response["icon"] = 0;	
-	response["status"] = 1;
-	response["location"] = location;
-	response["color_hsb"] = color_hsb;
-	response["color_brightness"] = color_brightness;
+	id = request["id"].asUInt();
+
+	if ( id == 1 )  // Light
+	{
+		location["id"] = 0x13000001;
+		location["name"] = "Bedroom";
+
+		color_hsb["hue"] = 23;
+		color_hsb["saturation"] = 0.5;
+		color_hsb["brightness"] = 0.5;
+
+		color_brightness["brightness"] = 23;
+		color_brightness["temperature"] = 5000;
 
 
-	root["error"] = 0;
-	root["response"] = response;
 
-	rc = sendto_rdt_client(session,rdt_ticket,(char*)root.toStyledString().c_str());
+		response["uid"] = (char*) __myUID;;
+		response["api"] = "get_accessory_detail";
+
+		response["id"] = 0x01000002;
+		response["name"] = "Light 01";
+		response["type"] = 0,
+		response["icon"] = 0;	
+		response["status"] = 1;
+		response["location"] = location;
+		response["color_hsb"] = color_hsb;
+		response["color_brightness"] = color_brightness;
+
+
+		root["error"] = 0;
+		root["response"] = response;
+
+		rc = sendto_rdt_client(session,rdt_ticket,(char*)root.toStyledString().c_str());
+	}
+	else if ( id == 2 )  // wall switch
+	{
+		response["uid"] = (char*) __myUID;;
+		response["api"] = "get_accessory_detail";
+
+		response["id"] = 0x01000002;
+		response["name"] = "Wall Switch";
+		response["type"] = 4,
+		response["icon"] = 0;	
+		response["status"] = 1;
+		response["low_battery"] = 1;
+
+
+		root["error"] = 0;
+		root["response"] = response;
+
+		rc = sendto_rdt_client(session,rdt_ticket,(char*)root.toStyledString().c_str());
+	}
+
 
 
 	if ( rc < 0 )
@@ -215,7 +286,7 @@ void deviceapi_get_group_free_lights (int session,Json::Value &request)
 	objects[2]["name"] = "Light 3";
 
 
-	response["uid"] = "DRFTBHN6XXUUVM6KWTE1";
+	response["uid"] = (char*) __myUID;;
 	response["id"] = "a01";
 	response["objects"] = objects;
 
@@ -240,15 +311,29 @@ void deviceapi_set_detail (int session,Json::Value &request)
 	Json::Value response;
 	Json::Value objects;
 
+	Json::Value location;
+
 	Json::Value color_hsb;
 	Json::Value color_brightness;	
 
 	unsigned int rdt_ticket;
 	int rc;
-
+	unsigned int id;
+	int status;
 
 	rdt_ticket = request["rdt_ticket"].asUInt();
 
+	id = request["id"].asUInt();
+
+	status = request["status"].asInt();
+
+	if ( id == 1 )  // Light
+	{
+
+	}
+
+		location["id"] = 0x13000001;
+		location["name"] = "Bedroom";
 
 
 	color_hsb["hue"] = 23;
@@ -258,14 +343,16 @@ void deviceapi_set_detail (int session,Json::Value &request)
 	color_brightness["brightness"] = 23;
 	color_brightness["temperature"] = 5000;	
 
-
+	response["uid"] = (char*) __myUID;;
 	response["api"] = "set_detail";
-	response["id"] = "a01";
+	response["id"] = 0x01000002;
+
 
 	response["icon"] = 0;
-	response["status"] = 1;
+	response["status"] = status;
 	response["color_hsb"] = color_hsb;
 	response["color_brightness"] = color_brightness;
+	response["location"] = location;
 
 
 	root["error"] = 0;
@@ -327,7 +414,7 @@ void deviceapi_get_activities (int session,Json::Value &request)
 	rdt_ticket = request["rdt_ticket"].asUInt();
 
 
-	response["uid"] = "DRFTBHN6XXUUVM6KWTE1";
+	response["uid"] = (char*) __myUID;;
 
 	objects[0]["unix_time"] = "122739743";
 	objects[0]["message"] = "Garage Door is open";
@@ -379,7 +466,7 @@ void deviceapi_get_light_effects (int session,Json::Value &request)
 	objects[2]["is_selected"] = false;
 
 
-	response["uid"] = "DRFTBHN6XXUUVM6KWTE1";
+	response["uid"] = (char*) __myUID;;
 	response["objects"] = objects;
  
 	root["error"] = 0;
@@ -431,6 +518,8 @@ void deviceapi_set_light_effects (int session,Json::Value &request)
 	return;
 }
 
+
+
 void deviceapi_get_gateway (int session,Json::Value &request)
 {
 	Json::Value root;
@@ -444,43 +533,44 @@ void deviceapi_get_gateway (int session,Json::Value &request)
 
 	rdt_ticket = request["rdt_ticket"].asUInt();
 
-	response["id"] = (char*) __myUID;
+	response["uid"] = (char*) __myUID;
+	response["api"] = "get_gateway";
 	response["name"] = "Getway 01";
 
-	locations[0]["id"] = "l01",
+	locations[0]["id"] = 0x13000001,
 	locations[0]["name"] = "Bedroom";
 
 	accessories.clear();
 
-	accessories[0]["id"] = "a01";
+	accessories[0]["id"] = 0x01000001;
 	accessories[0]["name"] = "Switch 01";
 	accessories[0]["status"] = 0;
 	accessories[0]["type"] =  4;
 	accessories[0]["icon"] = 0; // 0 is use default icon
 	accessories[0]["trigger"] = 0;
 
-	accessories[1]["id"] = "a02";
+	accessories[1]["id"] = 0x01000002;
 	accessories[1]["name"] = "Light 01";
 	accessories[1]["status"] = 1;
-	accessories[1]["type"] = 1;
+	accessories[1]["type"] = 0;
 	accessories[1]["icon"] = 0;
 	accessories[1]["trigger"] = 0;
 
 	locations[0]["accessories"] = accessories;
 
-	locations[1]["id"] = "l02";
+	locations[1]["id"] = 0x13000002;
 	locations[1]["name"] = "Bathroom";
 
 	accessories.clear();
 
-	accessories[0]["id"] = "a03";
+	accessories[0]["id"] = 0x01000003;
 	accessories[0]["name"] = "Switch 02";
 	accessories[0]["status"] = 0;
 	accessories[0]["type"] = 4;
 	accessories[0]["icon"] = 0;
 	accessories[0]["trigger"] = 0;
 
-	accessories[1]["id"] = "g01";
+	accessories[1]["id"] = 0x12000001;
 	accessories[1]["name"] = "Group 01";
 	accessories[1]["status"] = 0;
 	accessories[1]["type"] = 5;
@@ -489,36 +579,36 @@ void deviceapi_get_gateway (int session,Json::Value &request)
 
 	locations[1]["accessories"] = accessories;
 
-	locations[2]["id"] = "l03";
+	locations[2]["id"] = 0x13000002;
 	locations[2]["name"] = "Kitchen";
 
 	accessories.clear();
 
-	accessories[0]["id"] = "a04";
+	accessories[0]["id"] = 0x01000004;
 	accessories[0]["name"] = "Garage Door Sensor 01";
 	accessories[0]["status"] = 2;
 	accessories[0]["type"] = 2;
 	accessories[0]["icon"] = 0;
 	accessories[0]["trigger"] = 1;
 
-	accessories[1]["id"] = "a05";
+	accessories[1]["id"] = 0x01000005;
 	accessories[1]["name"] = "Light 02";
 	accessories[1]["status"] = 1;
-	accessories[1]["type"] = 1;
+	accessories[1]["type"] = 0;
 	accessories[1]["icon"] = 0;
 	accessories[1]["trigger"] = 0;
 
-	accessories[2]["id"] = "a06";
+	accessories[2]["id"] = 0x01000006;
 	accessories[2]["name"] = "Light 03";
 	accessories[2]["status"] = 1;
-	accessories[2]["type"] = 1;
+	accessories[2]["type"] = 0;
 	accessories[2]["icon"] = 0;
 	accessories[2]["trigger"] = 0;
 
-	accessories[3]["id"] = "a07";
+	accessories[3]["id"] = 0x01000007;
 	accessories[3]["name"] = "Light 04";
 	accessories[3]["status"] = 1;
-	accessories[3]["type"] = 1;
+	accessories[3]["type"] = 0;
 	accessories[3]["icon"] = 0;
 	accessories[3]["trigger"] = 0;
 

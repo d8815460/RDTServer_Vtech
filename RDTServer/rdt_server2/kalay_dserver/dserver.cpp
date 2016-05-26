@@ -1,5 +1,3 @@
-#include "../headers/unixclientstream.hpp"
-#include "../headers/exception.hpp"
 #include <string>
 #include <iostream>
 #include <string.h>
@@ -8,25 +6,20 @@
 #include <iomanip> 
 #include <json/json.h>
 
-
 #include "kalay_dserver.h"
 #include "dserver.h"
 #include "rdtcnnt.h"
 #include "device_parser.h"
+#include "fw_api.h"
 
-using namespace std;
+
+using std::string;
 
 
 static int __agent_start = 0;
 
 char *__myUID[20];
 
-
-
-using libsocket::unix_stream_client;
-using std::string;
-
-unix_stream_client sock;
 
 void *_thread_Login(void *arg)
 {
@@ -48,25 +41,6 @@ void *_thread_Login(void *arg)
 	pthread_exit(0);
 }
 
-int connect_fw_socket(char *path)
-{
-;
-	int ret = 0;
- 
-	try {
-		sock.connect(path);
-
- 		ret = 1;
-    } catch (const libsocket::socket_exception& exc)
-    {
-	std::cerr << exc.mesg;
-		ret = -1;
-
-		usleep(1000000);
-    }
-
-	return ret;
-}
 
 
 void *_thread_Listen(void *arg)
@@ -218,193 +192,18 @@ int rdtcnnt_check_status()
 }
 
 
-int fw_sock_status = -1;
-
-void *_thread_unixsocket_read(void *arg)
-{
-	char *fw_recv_buff = NULL;
-	unsigned int recv_buff_size = 4;
-	int rc;
-	int state = 0;
-	unsigned int json_len = 0;
-	unsigned int readpos = 0;
-
-	fw_recv_buff = (char*)malloc(recv_buff_size);
-
-	if ( fw_recv_buff == NULL )
-	{
-		printf("Error: unixsocket receive buffer malloc(%d) fail \n",recv_buff_size);
-
-		pthread_exit(0);  // FixMe: TBD error handle
-	}
-
-
-
-
-	while(1)
-	{
-		if ( fw_sock_status > 0 )
-		{
-			try {
-				if ( state == -1 ) // Ignore this packet
-				{
-					unsigned int recv_size = json_len - readpos;
-
-
-					if ( recv_size >  recv_buff_size  )
-						recv_size = recv_buff_size;
-
-					rc = sock.rcv(fw_recv_buff,recv_size); // pass
-
-					if ( rc > 0 )
-					{
-						readpos += rc;
-							
-						if ( readpos == json_len )
-						{
-							printf("Error: unixsocket ignore a json because no enought receive buffer(size:%d)\n",json_len);
-
-							state = 0;
-							readpos = 0;
-						}
-					}
-				}
-				else if ( state < 4)
-				{
-					rc = sock.rcv(fw_recv_buff,1);
-					if ( rc == 1 )
-					{
-						json_len <<= 8;
-						json_len |= ((unsigned char) fw_recv_buff[0]);
-						
-						state++;
-					}
-
-					if ( state == 4 )
-					{
-						if ( recv_buff_size < (json_len+1) ) // will add string terminal character to make sure json parser works.
-						{
-							int new_recv_buff_size;
-
-							if ( fw_recv_buff != NULL )
-							{
-								free(fw_recv_buff);
-								fw_recv_buff = NULL;
-							}
-
-							new_recv_buff_size = (json_len+1+1023)/1024*1024; // increment by K avoid busy for malloc 
-
-printf("eddy test new_recv_buff_size :%d jsonlen:%d \n",new_recv_buff_size,json_len);
-
-							// FixMe: consider reduce size if new buffer size is too huge and just for once
-
-							fw_recv_buff = (char*)malloc(new_recv_buff_size);
-
-							if ( fw_recv_buff == NULL ) 
-							{
-								
-								printf("Error: unixsocket receive buffer malloc(%d) fail \n",new_recv_buff_size);
-								state = -1; // Ignore this packet FixMe: TBD error handle 
-
-								// try to recovery size to orginal
-								fw_recv_buff = (char*)malloc(recv_buff_size);
-
-								if ( fw_recv_buff == NULL )
-								{
-									printf("Error: unixsocket receive buffer malloc(%d) fail(receovery) \n",recv_buff_size);
-
-									break; // FixMe : TBD error handle
-								}
-							}
-							else
-							{
-								recv_buff_size = new_recv_buff_size;
-								printf("unixsocket receive buffer resize to %d \n",new_recv_buff_size);
-							}							
-						}
-					}
-				}
-				else 
-				{
-					unsigned int recv_size = json_len - readpos;
-
-					if ( recv_size >  (recv_buff_size-1)  ) // it should not happen 
-						recv_size = recv_buff_size-1;
-
-
-					rc = sock.rcv(&fw_recv_buff[readpos],recv_size);
-
-					if ( rc > 0 )
-					{
-						Json::Reader reader;
-						Json::Value value;						
-						std::string recv_json;
-
-
-						readpos += rc;
-							
-						if ( readpos == json_len )
-						{
-							fw_recv_buff[json_len] = 0;
-
-							if ( reader.parse((char*) fw_recv_buff, value) )
-							{
-								recv_json = value.toStyledString().c_str();
-
-								printf("unixsocket receive len:%d :\n data-len : %d\n %s\n---------------\n"
-									,(int)json_len
-									,recv_json.length()
-									,recv_json.c_str() );
-
-							}
-							else
-							{
-								printf("unixsocket receive a non-json format string\n");
-							}
-
-							state = 0;
-							readpos = 0;
-						}
-					}
-				}
-		    } catch (const libsocket::socket_exception& exc)
-		    {
-				std::cerr << exc.mesg;
-
-				//break;
-		    }
-		}
-		else
-		{
-			usleep(500000);
-		}
-	}
-
-
-	if ( fw_recv_buff != NULL )
-	{
-		free(fw_recv_buff);
-		fw_recv_buff = NULL;
-		recv_buff_size = 0;
-	}
-
-
-	pthread_exit(0);
-}
-
-
 
 
 int kalay_device_server_agent_start(char *UID,char *unixsocket_path)
 {
 	pthread_t thread_id_Login;
 	pthread_t thread_id_Listen;
-	pthread_t thread_id_unixsocket_read;
+	
     int ret;
     int rdtCh;
 
-    int action;
-    unsigned int seq;
+    //int action;
+    
     int timer_counter = 0;
     string test = "";	
 
@@ -438,103 +237,29 @@ int kalay_device_server_agent_start(char *UID,char *unixsocket_path)
 	pthread_create(&thread_id_Listen, NULL, &_thread_Listen, (void *)__myUID);	
 	pthread_detach(thread_id_Listen);
     
-	pthread_create(&thread_id_unixsocket_read, NULL, &_thread_unixsocket_read, NULL);	
-	pthread_detach(thread_id_unixsocket_read);
 
 
-	action = 20;
-
-	seq = 0;
-
+	fwapi_connect(unixsocket_path);
 
 
     //keep communicating with server
     while(__agent_start == 1)
     {
-    	if ( fw_sock_status == -1 )
+    	fwapi_cnnt_check_status();
+
+
+    	if ( fwapi_cnnt_get_status() > 0 && (timer_counter % 5000) == 0 )
     	{
-    		fw_sock_status = connect_fw_socket(unixsocket_path);
-
-    		if ( fw_sock_status > 0 )
-    		{
-				printf("fw socket connected\n");
-    		}
+    		fwapi_getall();
     	}
-
-    	if ( fw_sock_status > 0 && (timer_counter % 1000) == 0 )
-    	{
-    		//unsigned char payload[] = {0x74,0x65,0x73,0x74};
-    		unsigned char payload_length_buffer[4+2048];
-    		unsigned long payload_length;
-    		int rc;
-
-
-// 			action = !action;
-
-			seq++;
-			if ( (seq & 0x80000000) ) // Control seq in "1-0x7fffffff"
-				seq = 1;
-
-
-				 
-
-// 			if (action == 20)
-// 				action = 80;
-// 			else
-// 				action = 20;
-
-	
-			string arg = std::to_string(seq);	
-
-
-			Json::Value root;
-			std::string total_payload;
-
-// 		    root["id"] = "0298ed5e25";
-		    //root["no"] = test.c_str();  test += "0";
-
-
-// 			root["functionName"] = "toggle";
-		    root["func"] = "getAll";
-// 			root["functionState"] = arg.c_str();
-
-			root["seq"] = arg.c_str();
-
-			total_payload = root.toStyledString().c_str();
-
-			payload_length = total_payload.length();
-
-			payload_length_buffer[0] = (((unsigned long)payload_length) &0xff000000)>>24;
-			payload_length_buffer[1] = (((unsigned long)payload_length) &0x00ff0000)>>16;
-			payload_length_buffer[2] = (((unsigned long)payload_length) &0x0000ff00)>>8;
-			payload_length_buffer[3] = (((unsigned long)payload_length) &0x000000ff);
-
-
-			//strcpy((char*)&payload_length_buffer[4],(char*)total_payload.c_str());
-
-//rc = sock.snd(payload_length_buffer,4+payload_length); // send json length
-//printf("Test send len 4 %x %x %x %x - ret :%d\n",payload_length_buffer[0],payload_length_buffer[1],payload_length_buffer[2],payload_length_buffer[3],rc);
-
-
-
-			rc = sock.snd(payload_length_buffer,4); // send json length
-			printf("Test send len 4 %x %x %x %x - ret :%d\n",payload_length_buffer[0],payload_length_buffer[1],payload_length_buffer[2],payload_length_buffer[3],rc);
-
-usleep(3000); // for debug only
-			rc = sock.snd(total_payload.c_str(),payload_length); // for JSON to parse properly on server side
-			printf("Test send len %d - ret :%d\n",(int) payload_length,rc);
-    	}
-
-
 
     	rdtcnnt_check_status();
-
-		
 
         usleep(1000);
         timer_counter+=1;
     }
 
+	
 
 
 	RDT_DeInitialize();
