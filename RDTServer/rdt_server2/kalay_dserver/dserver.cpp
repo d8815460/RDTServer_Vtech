@@ -275,7 +275,7 @@ void *_thread_unixsocket_read(void *arg)
 					if ( rc == 1 )
 					{
 						json_len <<= 8;
-						json_len = fw_recv_buff[0];
+						json_len |= ((unsigned char) fw_recv_buff[0]);
 						
 						state++;
 					}
@@ -293,6 +293,9 @@ void *_thread_unixsocket_read(void *arg)
 							}
 
 							new_recv_buff_size = (json_len+1+1023)/1024*1024; // increment by K avoid busy for malloc 
+
+printf("eddy test new_recv_buff_size :%d jsonlen:%d \n",new_recv_buff_size,json_len);
+
 							// FixMe: consider reduce size if new buffer size is too huge and just for once
 
 							fw_recv_buff = (char*)malloc(new_recv_buff_size);
