@@ -167,7 +167,12 @@ printf("eddy test new Gateway\n");
 									printf("Obj Set key : %s  = %s \n",key.asString().c_str(),value.asString().c_str());	
 
 									if ( pObject->m_attr_str[key.asString()] == "on" )
-										pObject->m_attr_str["status"] = value.asString();
+									{
+										if ( value.asInt() == 0 )
+											pObject->m_attr_num["status"] = 1;
+										else 
+											pObject->m_attr_num["status"] = 0;
+									}
 
 									if ( value.isString() )
 										pObject->m_attr_str[key.asString().c_str()] = value.asString();
