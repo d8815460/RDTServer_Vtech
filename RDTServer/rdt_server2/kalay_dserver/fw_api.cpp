@@ -316,3 +316,102 @@ int fwapi_getall()
 
 	return 0;
 }
+
+
+
+int fwapi_set(Json::Value &objects)
+{
+
+//unsigned char payload[] = {0x74,0x65,0x73,0x74};
+	unsigned char payload_length_buffer[4+2048];
+	unsigned long payload_length;
+	int rc;
+
+
+	__seq++;
+	if ( (__seq & 0x80000000) ) // Control seq in "1-0x7fffffff"
+		__seq = 1;
+
+
+	string arg = std::to_string(__seq);	
+
+
+	Json::Value root;
+	std::string total_payload;
+
+    root["func"] = "set";
+
+	root["seq"] = arg.c_str();
+
+	root["objects"] = objects;
+
+	total_payload = root.toStyledString().c_str();
+
+printf("eddy test payload\n%s\n",total_payload.c_str());
+
+
+	payload_length = total_payload.length();
+
+	payload_length_buffer[0] = (((unsigned long)payload_length) &0xff000000)>>24;
+	payload_length_buffer[1] = (((unsigned long)payload_length) &0x00ff0000)>>16;
+	payload_length_buffer[2] = (((unsigned long)payload_length) &0x0000ff00)>>8;
+	payload_length_buffer[3] = (((unsigned long)payload_length) &0x000000ff);
+
+
+	rc = sock.snd(payload_length_buffer,4); // send json length
+	printf("Test send len 4 %x %x %x %x - ret :%d\n",payload_length_buffer[0],payload_length_buffer[1],payload_length_buffer[2],payload_length_buffer[3],rc);
+
+
+	rc = sock.snd(total_payload.c_str(),payload_length); // for JSON to parse properly on server side
+	printf("Test send len %d - ret :%d\n",(int) payload_length,rc);
+
+	return 0;
+}
+
+
+int fwapi_get(Json::Value &objects)
+{
+
+//unsigned char payload[] = {0x74,0x65,0x73,0x74};
+	unsigned char payload_length_buffer[4+2048];
+	unsigned long payload_length;
+	int rc;
+
+
+	__seq++;
+	if ( (__seq & 0x80000000) ) // Control seq in "1-0x7fffffff"
+		__seq = 1;
+
+
+	string arg = std::to_string(__seq);	
+
+
+	Json::Value root;
+	std::string total_payload;
+
+    root["func"] = "get";
+
+	root["seq"] = arg.c_str();
+	root["objects"] = objects;
+
+	total_payload = root.toStyledString().c_str();
+
+	payload_length = total_payload.length();
+
+	payload_length_buffer[0] = (((unsigned long)payload_length) &0xff000000)>>24;
+	payload_length_buffer[1] = (((unsigned long)payload_length) &0x00ff0000)>>16;
+	payload_length_buffer[2] = (((unsigned long)payload_length) &0x0000ff00)>>8;
+	payload_length_buffer[3] = (((unsigned long)payload_length) &0x000000ff);
+
+
+	rc = sock.snd(payload_length_buffer,4); // send json length
+	printf("Test send len 4 %x %x %x %x - ret :%d\n",payload_length_buffer[0],payload_length_buffer[1],payload_length_buffer[2],payload_length_buffer[3],rc);
+
+
+	rc = sock.snd(total_payload.c_str(),payload_length); // for JSON to parse properly on server side
+	printf("Test send len %d - ret :%d\n",(int) payload_length,rc);
+
+	return 0;
+}
+
+

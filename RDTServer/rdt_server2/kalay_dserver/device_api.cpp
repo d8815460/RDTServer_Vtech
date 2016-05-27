@@ -14,7 +14,7 @@
 #include "dtable.h"
 #include "device_api.h"
 
-
+#include "fw_api.h"
 
 
 using namespace std;
@@ -102,14 +102,14 @@ void deviceapi_get_gateway_about (int session,Json::Value &request)
 			map<string,int>::iterator iNum;
 			map<string,string>::iterator iStr;
 
-			for(iNum = pGateway->m_attr_num.begin(); iNum!=pGateway->m_attr_num.end(); ++iNum)
+			for(iNum = pGateway->m_about_num.begin(); iNum!=pGateway->m_about_num.end(); ++iNum)
 			{
 				//printf("eddy test attr:%s value:%d \n",iNum->first.c_str(),iNum->second);
 
 				response[iNum->first.c_str()] = iNum->second;
 			}
 
-			for(iStr = pGateway->m_attr_str.begin(); iStr!=pGateway->m_attr_str.end(); ++iStr)
+			for(iStr = pGateway->m_about_str.begin(); iStr!=pGateway->m_about_str.end(); ++iStr)
 			{
 				//printf("eddy test attr:%s value:%s \n",iStr->first.c_str(),iStr->second.c_str());
 
@@ -157,18 +157,65 @@ void deviceapi_get_accessory_about (int session,Json::Value &request)
 	Json::Value response;
 	unsigned int rdt_ticket;
 	int rc;
+	int id;
+	int err = 1;
+	string err_str;	
 
 
 	rdt_ticket = request["rdt_ticket"].asUInt();
 
 	response["uid"] = (char*) __myUID;;
-	response["api"] = "get_gateway_about";
-	response["udid"] = "0035482900";	
-	response["type"] = 1;
-	response["firmware_version"] = "1.0.0";
+	response["api"] = "get_accessory_about";
+
+	id = request["id"].asUInt();
+
+	printf("get_accessory_about id :%d \n",id);
 
 
-	root["error"] = 0;
+	try {
+		CMyObject *pAccessory = __allObjects.m_mapAllObjects[id];
+		
+		if ( pAccessory != NULL )
+		{
+			map<string,int>::iterator iNum;
+			map<string,string>::iterator iStr;
+
+			response["id"] 	= pAccessory->m_id;
+			response["type"] = pAccessory->m_attr_num["type"];
+
+
+			for(iNum = pAccessory->m_about_num.begin(); iNum!=pAccessory->m_about_num.end(); ++iNum)
+			{
+				//printf("eddy test attr:%s value:%d \n",iNum->first.c_str(),iNum->second);
+
+				response[iNum->first.c_str()] = iNum->second;
+			}
+
+			for(iStr = pAccessory->m_about_str.begin(); iStr!=pAccessory->m_about_str.end(); ++iStr)
+			{
+				//printf("eddy test attr:%s value:%s \n",iStr->first.c_str(),iStr->second.c_str());
+
+				response[iStr->first.c_str()] = iStr->second.c_str();
+			}
+
+			err = 0;
+		}
+		else
+		{
+			err = -1;
+			err_str = "not found";
+		}
+    } catch (const libsocket::socket_exception& exc)
+    {
+		std::cerr << exc.mesg;
+		err_str = exc.mesg;
+    }
+
+
+
+	root["error"] = err;
+	if ( err_str.length() != 0 )
+		root["error_str"] = err_str;
 
 	root["response"] = response;
 
@@ -194,66 +241,135 @@ void deviceapi_get_accessory_detail (int session,Json::Value &request)
 	unsigned int rdt_ticket;
 	int rc;
 	unsigned int id;
+	int err = 1;
+	string err_str;	
 
 
 	rdt_ticket = request["rdt_ticket"].asUInt();
 
-
+	response["uid"] = (char*) __myUID;;
+	response["api"] = "get_accessory_detail";
 
 	id = request["id"].asUInt();
 
-	if ( id == 1 )  // Light
-	{
-		location["id"] = 0x13000001;
-		location["name"] = "Bedroom";
-
-		color_hsb["hue"] = 23;
-		color_hsb["saturation"] = 0.5;
-		color_hsb["brightness"] = 0.5;
-
-		color_brightness["brightness"] = 23;
-		color_brightness["temperature"] = 5000;
+	printf("get_accessory_detail id :%d \n",id);
 
 
 
-		response["uid"] = (char*) __myUID;;
-		response["api"] = "get_accessory_detail";
-
-		response["id"] = 0x01000002;
-		response["name"] = "Light 01";
-		response["type"] = 0,
-		response["icon"] = 0;	
-		response["status"] = 1;
-		response["location"] = location;
-		response["color_hsb"] = color_hsb;
-		response["color_brightness"] = color_brightness;
 
 
-		root["error"] = 0;
-		root["response"] = response;
-
-		rc = sendto_rdt_client(session,rdt_ticket,(char*)root.toStyledString().c_str());
-	}
-	else if ( id == 2 )  // wall switch
-	{
-		response["uid"] = (char*) __myUID;;
-		response["api"] = "get_accessory_detail";
-
-		response["id"] = 0x01000002;
-		response["name"] = "Wall Switch";
-		response["type"] = 4,
-		response["icon"] = 0;	
-		response["status"] = 1;
-		response["low_battery"] = 1;
 
 
-		root["error"] = 0;
-		root["response"] = response;
+	try {
+		CMyObject *pObject = __allObjects.m_mapAllObjects[id];
+		
+		if ( pObject != NULL )
+		{
+			map<string,int>::iterator iNum;
+			map<string,string>::iterator iStr;
+			//int accessoryType;
 
-		rc = sendto_rdt_client(session,rdt_ticket,(char*)root.toStyledString().c_str());
-	}
+			response["id"] = pObject->m_id;
+
+			//accessoryType = pAccessory->m_attr_num["type"];	
 
 
+
+			if (    pObject->m_id >  0x01000000 
+				 && pObject->m_id <  0x10000000  ) // Accessory
+			{
+				CAccessory *pAccessory = (CAccessory*) pObject;
+				if ( pAccessory->m_pLocation != NULL ) 
+				{
+					location["id"] = pAccessory->m_pLocation->m_id;
+					location["name"] = pAccessory->m_pLocation->m_attr_str["name"];
+
+					response["location"] = location;
+				}
+
+			}
+			else if (    (pObject->m_id >> 24) == 0x12 ) // Group
+			{
+				CGroup *pGroup = (CGroup*)pObject;
+				if ( pGroup->m_pLocation != NULL ) 
+				{
+					location["id"] = pGroup->m_pLocation->m_id;
+					location["name"] = pGroup->m_pLocation->m_attr_str["name"];
+
+					response["location"] = location;
+				}
+
+			}				
+				
+
+
+			for(iNum = pObject->m_attr_num.begin(); iNum!=pObject->m_attr_num.end(); ++iNum)
+			{
+				//printf("eddy test attr:%s value:%d \n",iNum->first.c_str(),iNum->second);
+
+
+				if (  iNum->first == "color_hsb" ) // accessoryType == 1  
+				{
+					Json::Value color_hsb;
+					unsigned int value = iNum->second;
+
+					color_hsb["hue"] = (value&0x00ff0000)>>16;
+					color_hsb["saturation"] = ((double)((value&0xff00)>>8))/0x100 ;
+					color_hsb["brightness"] = ((double)((value&0x00ff)))/0x100 ;
+
+					response["color_hsb"] = color_hsb;
+				}
+				else if (  iNum->first == "color_brightness" ) // accessoryType == 1  
+				{
+					Json::Value color_brightness;
+					unsigned int value = iNum->second;
+
+					color_brightness["brightness"] = (value&0xff000000)>>24;;
+					color_brightness["temperature"] = (value&0x00ffffff);
+
+
+					response["color_brightness"] = color_brightness;
+				}
+				else
+				{
+					response[iNum->first.c_str()] = iNum->second;
+
+				}
+
+
+
+				
+			}
+
+			for(iStr = pObject->m_attr_str.begin(); iStr!=pObject->m_attr_str.end(); ++iStr)
+			{
+				//printf("eddy test attr:%s value:%s \n",iStr->first.c_str(),iStr->second.c_str());
+
+				response[iStr->first.c_str()] = iStr->second.c_str();
+			}
+
+			err = 0;
+		}
+		else
+		{
+			err = -1;
+			err_str = "not found";
+		}
+    } catch (const libsocket::socket_exception& exc)
+    {
+		std::cerr << exc.mesg;
+		err_str = exc.mesg;
+    }
+
+
+
+	root["error"] = err;
+	if ( err_str.length() != 0 )
+		root["error_str"] = err_str;
+
+	root["response"] = response;
+
+	rc = sendto_rdt_client(session,rdt_ticket,(char*)root.toStyledString().c_str());
 
 	if ( rc < 0 )
 	{
@@ -319,52 +435,187 @@ void deviceapi_set_detail (int session,Json::Value &request)
 	unsigned int rdt_ticket;
 	int rc;
 	unsigned int id;
-	int status;
+	int err = 1;
+	string err_str;		
+	
 
 	rdt_ticket = request["rdt_ticket"].asUInt();
 
-	id = request["id"].asUInt();
-
-	status = request["status"].asInt();
-
-	if ( id == 1 )  // Light
-	{
-
-	}
-
-		location["id"] = 0x13000001;
-		location["name"] = "Bedroom";
-
-
-	color_hsb["hue"] = 23;
-	color_hsb["saturation"] = 0.5;
-	color_hsb["brightness"] = 0.5;
-
-	color_brightness["brightness"] = 23;
-	color_brightness["temperature"] = 5000;	
 
 	response["uid"] = (char*) __myUID;;
 	response["api"] = "set_detail";
-	response["id"] = 0x01000002;
+
+	id = request["id"].asUInt();
+
+	
+
+		printf("get_accessory_detail id :%d \n",id);
 
 
-	response["icon"] = 0;
-	response["status"] = status;
-	response["color_hsb"] = color_hsb;
-	response["color_brightness"] = color_brightness;
-	response["location"] = location;
+	try {
+		CMyObject *pObject = __allObjects.m_mapAllObjects[id];
 
 
-	root["error"] = 0;
+		if ( pObject != NULL )
+		{
+			map<string,int>::iterator iNum;
+			map<string,string>::iterator iStr;
+			//int accessoryType;
+
+
+			// Change Value +++
+			{
+				Json::ValueIterator itr;
+
+				for(itr=request.begin();itr != request.end(); itr++)
+				{
+					Json::Value key = itr.key();
+					Json::Value value = (*itr);
+
+					if ( 	key.asString() != "api"
+						 && key.asString() != "id"
+						 && key.asString() != "rdt_ticket"
+						 && key.asString() != "uid"			)
+					{
+
+						printf("Set key : %s       value:%s \n",key.asString().c_str(),value.asString().c_str());
+
+						if ( value.isString() )
+							pObject->m_attr_str[key.asString().c_str()] = value.asString();
+						else if ( value.isDouble() )
+							pObject->m_attr_num[key.asString().c_str()] = value.asDouble();
+						else
+							pObject->m_attr_num[key.asString().c_str()] = value.asUInt();
+					}
+				}
+
+
+				// Set to FW
+				{
+		    		Json::Value objects;
+
+		    		objects[0]["id"] = "0012345678";
+		    		objects[0]["on"] = request["status"];
+
+		    		fwapi_set(objects);
+				}
+
+
+			}
+
+			// Change Value ---
+
+
+
+
+
+			response["id"] = pObject->m_id;
+
+			//accessoryType = pAccessory->m_attr_num["type"];	
+
+
+
+			if (    pObject->m_id >  0x01000000 
+				 && pObject->m_id <  0x10000000  ) // Accessory
+			{
+				CAccessory *pAccessory = (CAccessory*) pObject;
+				if ( pAccessory->m_pLocation != NULL ) 
+				{
+					location["id"] = pAccessory->m_pLocation->m_id;
+					location["name"] = pAccessory->m_pLocation->m_attr_str["name"];
+
+					response["location"] = location;
+				}
+
+			}
+			else if (    (pObject->m_id >> 24) == 0x12 ) // Group
+			{
+				CGroup *pGroup = (CGroup*)pObject;
+				if ( pGroup->m_pLocation != NULL ) 
+				{
+					location["id"] = pGroup->m_pLocation->m_id;
+					location["name"] = pGroup->m_pLocation->m_attr_str["name"];
+
+					response["location"] = location;
+				}
+
+			}				
+				
+
+
+			for(iNum = pObject->m_attr_num.begin(); iNum!=pObject->m_attr_num.end(); ++iNum)
+			{
+				//printf("eddy test attr:%s value:%d \n",iNum->first.c_str(),iNum->second);
+
+
+				if (  iNum->first == "color_hsb" ) // accessoryType == 1  
+				{
+					Json::Value color_hsb;
+					unsigned int value = iNum->second;
+
+					color_hsb["hue"] = (value&0x00ff0000)>>16;
+					color_hsb["saturation"] = ((double)((value&0xff00)>>8))/0x100 ;
+					color_hsb["brightness"] = ((double)((value&0x00ff)))/0x100 ;
+
+					response["color_hsb"] = color_hsb;
+				}
+				else if (  iNum->first == "color_brightness" ) // accessoryType == 1  
+				{
+					Json::Value color_brightness;
+					unsigned int value = iNum->second;
+
+					color_brightness["brightness"] = (value&0xff000000)>>24;;
+					color_brightness["temperature"] = (value&0x00ffffff);
+
+
+					response["color_brightness"] = color_brightness;
+				}
+				else
+				{
+					response[iNum->first.c_str()] = iNum->second;
+
+				}
+
+
+
+				
+			}
+
+			for(iStr = pObject->m_attr_str.begin(); iStr!=pObject->m_attr_str.end(); ++iStr)
+			{
+				//printf("eddy test attr:%s value:%s \n",iStr->first.c_str(),iStr->second.c_str());
+
+				response[iStr->first.c_str()] = iStr->second.c_str();
+			}
+
+			err = 0;
+		}
+		else
+		{
+			err = -1;
+			err_str = "not found";
+		}
+    } catch (const libsocket::socket_exception& exc)
+    {
+		std::cerr << exc.mesg;
+		err_str = exc.mesg;
+    }
+
+
+
+	root["error"] = err;
+	if ( err_str.length() != 0 )
+		root["error_str"] = err_str;
+
 	root["response"] = response;
 
 	rc = sendto_rdt_client(session,rdt_ticket,(char*)root.toStyledString().c_str());
-
 
 	if ( rc < 0 )
 	{
 
 	}
+
 
 	return;
 }
@@ -528,95 +779,94 @@ void deviceapi_get_gateway (int session,Json::Value &request)
 	Json::Value accessories;
 
 	int rc;					
-	unsigned int rdt_ticket;		
+	unsigned int rdt_ticket;	
+	int err = 1;
+	string err_str;
 
 
 	rdt_ticket = request["rdt_ticket"].asUInt();
 
+
+
+//++++
+
+
+
+	try {
+			TAllObjectMap::iterator p;
+			list<CMyObject*>::iterator j;
+			int nLocationCnt = 0;
+
+
+			for(p = __allObjects.m_mapAllLocations.begin(); p!=__allObjects.m_mapAllLocations.end(); ++p)
+			{
+				CLocation *pLocation;
+				int nAccessoryCnt = 0;
+
+				
+				pLocation = (CLocation*) p->second;
+
+
+				locations[nLocationCnt]["id"] =  pLocation->m_id,
+				locations[nLocationCnt]["name"] =  pLocation->m_attr_str["name"].c_str();
+
+				
+				accessories.clear();
+
+				for(j = pLocation->m_listObject.begin(); j!=pLocation->m_listObject.end(); ++j)
+				{
+					CMyObject *pObject;
+					map<string,int>::iterator iNum;
+					map<string,string>::iterator iStr;					
+
+					pObject = *j;
+
+					accessories[nAccessoryCnt]["id"] = pObject->m_id;
+
+
+					for(iNum = pObject->m_attr_num.begin(); iNum!=pObject->m_attr_num.end(); ++iNum)
+					{
+						//printf("eddy test attr:%s value:%d \n",iNum->first.c_str(),iNum->second);
+
+						accessories[nAccessoryCnt][iNum->first.c_str()] = iNum->second;
+					}
+
+					for(iStr = pObject->m_attr_str.begin(); iStr!=pObject->m_attr_str.end(); ++iStr)
+					{
+						//printf("eddy test attr:%s value:%s \n",iStr->first.c_str(),iStr->second.c_str());
+
+						accessories[nAccessoryCnt][iStr->first.c_str()] = iStr->second.c_str();
+					}
+
+
+					nAccessoryCnt++;
+				}
+
+				locations[nLocationCnt]["accessories"] = accessories;	
+
+				nLocationCnt++;
+
+			}
+
+			err = 0;
+
+    } catch (const libsocket::socket_exception& exc)
+    {
+		std::cerr << exc.mesg;
+		err_str = exc.mesg;
+    }
+
+
+
 	response["uid"] = (char*) __myUID;
 	response["api"] = "get_gateway";
 	response["name"] = "Getway 01";
-
-	locations[0]["id"] = 0x13000001,
-	locations[0]["name"] = "Bedroom";
-
-	accessories.clear();
-
-	accessories[0]["id"] = 0x01000001;
-	accessories[0]["name"] = "Switch 01";
-	accessories[0]["status"] = 0;
-	accessories[0]["type"] =  4;
-	accessories[0]["icon"] = 0; // 0 is use default icon
-	accessories[0]["trigger"] = 0;
-
-	accessories[1]["id"] = 0x01000002;
-	accessories[1]["name"] = "Light 01";
-	accessories[1]["status"] = 1;
-	accessories[1]["type"] = 0;
-	accessories[1]["icon"] = 0;
-	accessories[1]["trigger"] = 0;
-
-	locations[0]["accessories"] = accessories;
-
-	locations[1]["id"] = 0x13000002;
-	locations[1]["name"] = "Bathroom";
-
-	accessories.clear();
-
-	accessories[0]["id"] = 0x01000003;
-	accessories[0]["name"] = "Switch 02";
-	accessories[0]["status"] = 0;
-	accessories[0]["type"] = 4;
-	accessories[0]["icon"] = 0;
-	accessories[0]["trigger"] = 0;
-
-	accessories[1]["id"] = 0x12000001;
-	accessories[1]["name"] = "Group 01";
-	accessories[1]["status"] = 0;
-	accessories[1]["type"] = 5;
-	accessories[1]["icon"] = 0;
-	accessories[1]["trigger"] = 0;
-
-	locations[1]["accessories"] = accessories;
-
-	locations[2]["id"] = 0x13000002;
-	locations[2]["name"] = "Kitchen";
-
-	accessories.clear();
-
-	accessories[0]["id"] = 0x01000004;
-	accessories[0]["name"] = "Garage Door Sensor 01";
-	accessories[0]["status"] = 2;
-	accessories[0]["type"] = 2;
-	accessories[0]["icon"] = 0;
-	accessories[0]["trigger"] = 1;
-
-	accessories[1]["id"] = 0x01000005;
-	accessories[1]["name"] = "Light 02";
-	accessories[1]["status"] = 1;
-	accessories[1]["type"] = 0;
-	accessories[1]["icon"] = 0;
-	accessories[1]["trigger"] = 0;
-
-	accessories[2]["id"] = 0x01000006;
-	accessories[2]["name"] = "Light 03";
-	accessories[2]["status"] = 1;
-	accessories[2]["type"] = 0;
-	accessories[2]["icon"] = 0;
-	accessories[2]["trigger"] = 0;
-
-	accessories[3]["id"] = 0x01000007;
-	accessories[3]["name"] = "Light 04";
-	accessories[3]["status"] = 1;
-	accessories[3]["type"] = 0;
-	accessories[3]["icon"] = 0;
-	accessories[3]["trigger"] = 0;
-
-	locations[2]["accessories"] = accessories;
-
 	response["locations"] = locations;
 
-	root["error"] = 0;
+
+	root["error"] = err;
+	if ( err_str.length() != 0 )
+		root["error_str"] = err_str;
 	root["response"] = response;
 
 

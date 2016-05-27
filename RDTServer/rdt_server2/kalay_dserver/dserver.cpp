@@ -248,10 +248,13 @@ int kalay_device_server_agent_start(char *UID,char *unixsocket_path)
     	fwapi_cnnt_check_status();
 
 
-    	if ( fwapi_cnnt_get_status() > 0 && (timer_counter % 5000) == 0 )
+    	if ( fwapi_cnnt_get_status() > 0 && (timer_counter % 30000) == 0 )
     	{
     		fwapi_getall();
     	}
+
+
+
 
     	rdtcnnt_check_status();
 

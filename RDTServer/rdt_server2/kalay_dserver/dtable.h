@@ -24,6 +24,10 @@
 		string m_sClassType;
 		map<string,int> m_attr_num;
 		map<string,string> m_attr_str;
+
+		map<string,int> m_about_num;
+		map<string,string> m_about_str;
+
 		int m_id;
 	};
 
@@ -42,10 +46,37 @@
 		~CAccessory();
 
 	public:
-		CLocation *m_pLocation;
-		CGroup	*m_pGroup;
+		CLocation 	*m_pLocation;
+		CGroup		*m_pGroup;
 	};
 	
+
+	class CGroup : public CMyObject
+	{
+	public:
+		CGroup(int id) : CMyObject(id,"group")
+		{
+			m_pLocation = NULL;
+		}
+
+		~CGroup();
+		
+	public:
+		string m_name;
+		list<CMyObject*>  m_accessory;
+		CLocation 		 *m_pLocation;
+
+	public:
+		int addAccessory(CAccessory *pAccessory)
+		{
+			pAccessory->m_pGroup = this;
+
+			m_accessory.push_back(pAccessory);
+
+			return 1;
+		}
+	};
+
 
 
 
@@ -60,41 +91,29 @@
 		
 	public:
 		string m_name;
-		list<CMyObject*> m_accessory;
+		list<CMyObject*> m_listObject;
 
 	public:
 		int addAccessory(CAccessory *pAccessory)
 		{
-			m_accessory.push_back(pAccessory);
 			pAccessory->m_pLocation = this;
 
+			m_listObject.push_back(pAccessory);
+
 			return 1;
-		}		
-	};
+		}	
 
-
-	class CGroup : public CMyObject
-	{
-	public:
-		CGroup(int id) : CMyObject(id,"group")
+		int addGroup(CGroup *pGroup)
 		{
-		}
+			pGroup->m_pLocation = this;
 
-		~CGroup();
-		
-	public:
-		string m_name;
-		list<CMyObject*> m_accessory;
-
-	public:
-		int addAccessory(CAccessory *pAccessory)
-		{
-			m_accessory.push_back(pAccessory);
-			pAccessory->m_pGroup = this;
+			m_listObject.push_back(pGroup);
 
 			return 1;
 		}
 	};
+
+
 
 
 
@@ -112,9 +131,12 @@
 
 	public:
 		TAllObjectMap m_mapAllObjects;
+		TAllObjectMap m_mapAllLocations;
+		TAllObjectMap m_mapAllGroups;
 
 	public:
 		int dump();
+		int dumpByLocation();
 	};
 
 	extern CAllObjects __allObjects;
