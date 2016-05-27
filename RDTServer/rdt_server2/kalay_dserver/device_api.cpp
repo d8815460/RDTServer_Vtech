@@ -234,8 +234,6 @@ void deviceapi_get_accessory_detail (int session,Json::Value &request)
 {
 	Json::Value root;
 	Json::Value response;
-	Json::Value color_hsb;
-	Json::Value color_brightness;
 	Json::Value location;
 
 	unsigned int rdt_ticket;
@@ -308,33 +306,8 @@ void deviceapi_get_accessory_detail (int session,Json::Value &request)
 				//printf("eddy test attr:%s value:%d \n",iNum->first.c_str(),iNum->second);
 
 
-				if (  iNum->first == "color_hsb" ) // accessoryType == 1  
-				{
-					Json::Value color_hsb;
-					unsigned int value = iNum->second;
 
-					color_hsb["hue"] = (value&0x00ff0000)>>16;
-					color_hsb["saturation"] = ((double)((value&0xff00)>>8))/0x100 ;
-					color_hsb["brightness"] = ((double)((value&0x00ff)))/0x100 ;
-
-					response["color_hsb"] = color_hsb;
-				}
-				else if (  iNum->first == "color_brightness" ) // accessoryType == 1  
-				{
-					Json::Value color_brightness;
-					unsigned int value = iNum->second;
-
-					color_brightness["brightness"] = (value&0xff000000)>>24;;
-					color_brightness["temperature"] = (value&0x00ffffff);
-
-
-					response["color_brightness"] = color_brightness;
-				}
-				else
-				{
-					response[iNum->first.c_str()] = iNum->second;
-
-				}
+				response[iNum->first.c_str()] = iNum->second;
 
 
 
@@ -429,8 +402,6 @@ void deviceapi_set_detail (int session,Json::Value &request)
 
 	Json::Value location;
 
-	Json::Value color_hsb;
-	Json::Value color_brightness;	
 
 	unsigned int rdt_ticket;
 	int rc;
@@ -491,11 +462,16 @@ void deviceapi_set_detail (int session,Json::Value &request)
 
 
 				// Set to FW
+				if ( pObject->m_about_str["udid"] == "0012345678" )
 				{
 		    		Json::Value objects;
 
-		    		objects[0]["id"] = "0012345678";
-		    		objects[0]["on"] = request["status"];
+		    		objects[0]["id"] = pObject->m_about_str["udid"]; // "0012345678";
+		    		
+		    		if ( request["status"].asInt() == 0 )
+		    			objects[0]["on"] = 1;
+		    		else
+		    			objects[0]["on"] = 0;
 
 		    		fwapi_set(objects);
 				}
@@ -548,33 +524,7 @@ void deviceapi_set_detail (int session,Json::Value &request)
 				//printf("eddy test attr:%s value:%d \n",iNum->first.c_str(),iNum->second);
 
 
-				if (  iNum->first == "color_hsb" ) // accessoryType == 1  
-				{
-					Json::Value color_hsb;
-					unsigned int value = iNum->second;
-
-					color_hsb["hue"] = (value&0x00ff0000)>>16;
-					color_hsb["saturation"] = ((double)((value&0xff00)>>8))/0x100 ;
-					color_hsb["brightness"] = ((double)((value&0x00ff)))/0x100 ;
-
-					response["color_hsb"] = color_hsb;
-				}
-				else if (  iNum->first == "color_brightness" ) // accessoryType == 1  
-				{
-					Json::Value color_brightness;
-					unsigned int value = iNum->second;
-
-					color_brightness["brightness"] = (value&0xff000000)>>24;;
-					color_brightness["temperature"] = (value&0x00ffffff);
-
-
-					response["color_brightness"] = color_brightness;
-				}
-				else
-				{
-					response[iNum->first.c_str()] = iNum->second;
-
-				}
+				response[iNum->first.c_str()] = iNum->second;
 
 
 

@@ -98,8 +98,14 @@ CAllObjects::CAllObjects()
 	pAccessory->m_attr_num["icon"] = 0;
 	pAccessory->m_attr_num["trigger"] = 0;
 
-	pAccessory->m_attr_num["color_hsb"] = 0x00238080;
-	pAccessory->m_attr_num["color_brightness"] = 0x23001388;
+
+    pAccessory->m_attr_num["color_hue"] = 23;
+    pAccessory->m_attr_num["color_saturation"] = 50;
+    pAccessory->m_attr_num["color_brightness"] = 50;
+    pAccessory->m_attr_num["white_brightness"] = 50;
+    pAccessory->m_attr_num["white_temperature"] = 5000;
+
+
 
 
 	pAccessory->m_about_str["udid"] = "0035482900";	
@@ -191,8 +197,11 @@ CAllObjects::CAllObjects()
 	pAccessory->m_attr_num["trigger"] = 0;
 
 
-	pAccessory->m_attr_num["color_hsb"] = 0x00233232;
-	pAccessory->m_attr_num["color_brightness"] = 0x23001388;
+    pAccessory->m_attr_num["color_hue"] = 23;
+    pAccessory->m_attr_num["color_saturation"] = 50;
+    pAccessory->m_attr_num["color_brightness"] = 50;
+    pAccessory->m_attr_num["white_brightness"] = 50;
+    pAccessory->m_attr_num["white_temperature"] = 5000;
 
 
 	pAccessory->m_about_str["udid"] = "0035482900";	
@@ -210,9 +219,11 @@ CAllObjects::CAllObjects()
 	pAccessory->m_attr_num["icon"] = 0;
 	pAccessory->m_attr_num["trigger"] = 0;
 
-
-	pAccessory->m_attr_num["color_hsb"] = 0x00233232;
-	pAccessory->m_attr_num["color_brightness"] = 0x23001388;
+    pAccessory->m_attr_num["color_hue"] = 23;
+    pAccessory->m_attr_num["color_saturation"] = 50;
+    pAccessory->m_attr_num["color_brightness"] = 50;
+    pAccessory->m_attr_num["white_brightness"] = 50;
+    pAccessory->m_attr_num["white_temperature"] = 5000;
 
 
 	pAccessory->m_about_str["udid"] = "0035482900";	
@@ -230,8 +241,11 @@ CAllObjects::CAllObjects()
 	pAccessory->m_attr_num["icon"] = 0;
 	pAccessory->m_attr_num["trigger"] = 0;
 
-	pAccessory->m_attr_num["color_hsb"] = 0x00233232;
-	pAccessory->m_attr_num["color_brightness"] = 0x23001388;
+    pAccessory->m_attr_num["color_hue"] = 23;
+    pAccessory->m_attr_num["color_saturation"] = 50;
+    pAccessory->m_attr_num["color_brightness"] = 50;
+    pAccessory->m_attr_num["white_brightness"] = 50;
+    pAccessory->m_attr_num["white_temperature"] = 5000;
 
 
 	pAccessory->m_about_str["udid"] = "0035482900";	

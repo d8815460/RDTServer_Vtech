@@ -8,7 +8,7 @@ ifeq ("$(platform)","x86")
         CFLAGS=-m32
 endif
 
-SRC=kalay_dserver.cpp dserver.cpp dtable.cpp device_parser.cpp device_api.cpp rdtcnnt.c fw_api.cpp 
+SRC=kalay_dserver.cpp dserver.cpp dtable.cpp device_parser.cpp device_api.cpp rdtcnnt.c fw_api.cpp  fw_parser.cpp
 LIB= -lsocket++ -lpthread -ljsoncpp -lIOTCAPIs -lRDTAPIs
 
 all:

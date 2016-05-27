@@ -15,6 +15,7 @@
 #include "device_api.h"
 
 #include "fw_api.h"
+#include "fw_parser.h"
 
 using namespace std;
 using libsocket::unix_stream_client;
@@ -144,7 +145,7 @@ void *_thread_unixsocket_read(void *arg)
 					{
 						Json::Reader reader;
 						Json::Value value;						
-						std::string recv_json;
+						
 
 
 						readpos += rc;
@@ -155,13 +156,7 @@ void *_thread_unixsocket_read(void *arg)
 
 							if ( reader.parse((char*) fw_recv_buff, value) )
 							{
-								recv_json = value.toStyledString().c_str();
-
-								printf("unixsocket receive len:%d :\n data-len : %d\n %s\n---------------\n"
-									,(int)json_len
-									,recv_json.length()
-									,recv_json.c_str() );
-
+								fw_parser(value);
 							}
 							else
 							{
