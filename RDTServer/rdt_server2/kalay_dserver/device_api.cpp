@@ -462,7 +462,7 @@ void deviceapi_set_detail (int session,Json::Value &request)
 
 
 				// Set to FW
-				if ( pObject->m_about_str["udid"] == "0012345678" )
+				//if ( pObject->m_about_str["udid"] == "0012345678" )
 				{
 		    		Json::Value objects;
 
