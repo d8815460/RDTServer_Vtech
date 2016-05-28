@@ -23,12 +23,35 @@ using std::string;
 
 unix_stream_client sock;
 
+
+static int __fwapi_inited = 0;
+
 static unsigned int __seq = 0;
 
 static int  __fw_sock_status = -1;
 static char __unixsocket_path[512] = { 0 };
 
 
+pthread_mutex_t mutex_seq;
+
+unsigned int getSeq()
+{
+	int ret = -1;
+
+	pthread_mutex_lock(&mutex_seq);
+
+
+	__seq++;
+	if ( (__seq & 0x80000000) ) // Control seq in "1-0x7fffffff"
+		__seq = 1;
+
+	ret = __seq;
+
+
+	pthread_mutex_unlock(&mutex_seq);
+
+	return ret;
+}
 
 
 void *_thread_unixsocket_read(void *arg)
@@ -193,8 +216,25 @@ void *_thread_unixsocket_read(void *arg)
 	pthread_exit(0);
 }
 
+int fwapi_init()
+{
+	if ( __fwapi_inited != 0  )
+		return 0;
+
+	__fwapi_inited = 1;
+	pthread_mutex_init(&mutex_rdt_cnnt_array, NULL);
+
+	return 1;
+}
 
 
+int fwapi_destroy()
+{
+	pthread_mutex_destroy(&mutex_rdt_cnnt_array);
+	__fwapi_inited = 0;
+
+	return 0;
+}
 
 int fwapi_connect(char *path)
 {
@@ -258,9 +298,6 @@ int fwapi_getall()
 
 // 			action = !action;
 
-	__seq++;
-	if ( (__seq & 0x80000000) ) // Control seq in "1-0x7fffffff"
-		__seq = 1;
 
 
 // 			if (action == 20)
@@ -269,7 +306,7 @@ int fwapi_getall()
 // 				action = 20;
 
 
-	string arg = std::to_string(__seq);	
+	string arg = std::to_string(getSeq());	
 
 
 	Json::Value root;
@@ -323,12 +360,10 @@ int fwapi_set(Json::Value &objects)
 	int rc;
 
 
-	__seq++;
-	if ( (__seq & 0x80000000) ) // Control seq in "1-0x7fffffff"
-		__seq = 1;
 
 
-	string arg = std::to_string(__seq);	
+
+	string arg = std::to_string(getSeq());	
 
 
 	Json::Value root;
@@ -342,7 +377,7 @@ int fwapi_set(Json::Value &objects)
 
 	total_payload = root.toStyledString().c_str();
 
-printf("eddy test payload\n%s\n",total_payload.c_str());
+	printf("payload\n%s\n",total_payload.c_str());
 
 
 	payload_length = total_payload.length();
@@ -354,11 +389,18 @@ printf("eddy test payload\n%s\n",total_payload.c_str());
 
 
 	rc = sock.snd(payload_length_buffer,4); // send json length
-	printf("Test send len 4 %x %x %x %x - ret :%d\n",payload_length_buffer[0],payload_length_buffer[1],payload_length_buffer[2],payload_length_buffer[3],rc);
 
+	if ( rc < 0 )
+	{
+
+	}
 
 	rc = sock.snd(total_payload.c_str(),payload_length); // for JSON to parse properly on server side
-	printf("Test send len %d - ret :%d\n",(int) payload_length,rc);
+
+	if ( rc < 0 )
+	{
+		
+	}
 
 	return 0;
 }
@@ -373,12 +415,8 @@ int fwapi_get(Json::Value &objects)
 	int rc;
 
 
-	__seq++;
-	if ( (__seq & 0x80000000) ) // Control seq in "1-0x7fffffff"
-		__seq = 1;
 
-
-	string arg = std::to_string(__seq);	
+	string arg = std::to_string(getSeq());	
 
 
 	Json::Value root;
