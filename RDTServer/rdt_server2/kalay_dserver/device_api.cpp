@@ -473,7 +473,7 @@ void deviceapi_set_detail (int session,Json::Value &request)
 		    		else
 		    			objects[0]["on"] = 0;
 
-		    		fwapi_set(objects);
+		    		__ipHub.fwapi_set(objects);
 				}
 
 

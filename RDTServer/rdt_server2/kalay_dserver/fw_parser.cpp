@@ -16,12 +16,12 @@
 
 #include "dtable.h"
 
-#include "fw_parser.h"
+
 #include "fw_api.h"
 
 
 
-int fw_parser(Json::Value& root)
+int CVtechIPHub::parser(Json::Value& root)
 {
 	std::string recv_json;
 	Json::Value objects;

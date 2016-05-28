@@ -1,4 +1,4 @@
-#include "../headers/unixclientstream.hpp"
+
 #include "../headers/exception.hpp"
 #include <string>
 #include <iostream>
@@ -9,43 +9,60 @@
 #include <json/json.h>
 
 
-#include "kalay_dserver.h"
-#include "dserver.h"
-#include "device_parser.h"
-#include "device_api.h"
-
 #include "fw_api.h"
-#include "fw_parser.h"
+
 
 using namespace std;
-using libsocket::unix_stream_client;
-using std::string;
-
-unix_stream_client sock;
 
 
-static int __fwapi_inited = 0;
 
-static unsigned int __seq = 0;
-
-static int  __fw_sock_status = -1;
-static char __unixsocket_path[512] = { 0 };
+void *_thread_unixsocket_read(void *arg);
 
 
-pthread_mutex_t mutex_seq;
+CVtechIPHub __ipHub("/tmp/unixsocket");
 
-unsigned int getSeq()
+
+CVtechIPHub::CVtechIPHub(const char *unixsocket_path)
+{
+	pthread_mutex_init(&mutex_seq, NULL);
+
+	statusSock = -1;
+	seq = 0;
+	getAllDone = 0;
+
+	if ( unixsocket_path != NULL )
+		strcpy(_unixsocket_path,unixsocket_path);
+	else
+		strcpy(_unixsocket_path,"");
+
+	runThread = 1;
+
+
+	pthread_create(&thread_id_unixsocket_read, NULL, &_thread_unixsocket_read, this);	
+	pthread_detach(thread_id_unixsocket_read); 
+}
+
+CVtechIPHub::~CVtechIPHub()
+{
+	runThread = 0;
+
+	pthread_mutex_destroy(&mutex_seq);
+}
+
+
+
+unsigned int CVtechIPHub::getSeq()
 {
 	int ret = -1;
 
 	pthread_mutex_lock(&mutex_seq);
 
 
-	__seq++;
-	if ( (__seq & 0x80000000) ) // Control seq in "1-0x7fffffff"
-		__seq = 1;
+	seq++;
+	if ( (seq & 0x80000000) ) // Control seq in "1-0x7fffffff"
+		seq = 1;
 
-	ret = __seq;
+	ret = seq;
 
 
 	pthread_mutex_unlock(&mutex_seq);
@@ -56,12 +73,15 @@ unsigned int getSeq()
 
 void *_thread_unixsocket_read(void *arg)
 {
+	CVtechIPHub *ipHub;
 	char *fw_recv_buff = NULL;
 	unsigned int recv_buff_size = 4;
 	int rc;
 	int state = 0;
 	unsigned int json_len = 0;
 	unsigned int readpos = 0;
+
+	ipHub = (CVtechIPHub*) arg;
 
 	fw_recv_buff = (char*)malloc(recv_buff_size);
 
@@ -72,9 +92,14 @@ void *_thread_unixsocket_read(void *arg)
 		pthread_exit(0);  // FixMe: TBD error handle
 	}
 
-	while(1)
+	while(ipHub->runThread)
 	{
-		if ( fwapi_cnnt_get_status() > 0 )
+
+		if ( ipHub->statusSock == -1 )
+		{
+			ipHub->connectToGateway();
+		}
+		else if ( ipHub->fwapi_cnnt_get_status() > 0 )
 		{
 			try {
 				if ( state == -1 ) // Ignore this packet
@@ -85,7 +110,9 @@ void *_thread_unixsocket_read(void *arg)
 					if ( recv_size >  recv_buff_size  )
 						recv_size = recv_buff_size;
 
-					rc = sock.rcv(fw_recv_buff,recv_size); // pass
+
+					rc = ipHub->sock.rcv(fw_recv_buff,recv_size); // pass
+				
 
 					if ( rc > 0 )
 					{
@@ -102,7 +129,7 @@ void *_thread_unixsocket_read(void *arg)
 				}
 				else if ( state < 4)
 				{
-					rc = sock.rcv(fw_recv_buff,1);
+					rc = ipHub->sock.rcv(fw_recv_buff,1);
 					if ( rc == 1 )
 					{
 						json_len <<= 8;
@@ -162,7 +189,7 @@ void *_thread_unixsocket_read(void *arg)
 						recv_size = recv_buff_size-1;
 
 
-					rc = sock.rcv(&fw_recv_buff[readpos],recv_size);
+					rc = ipHub->sock.rcv(&fw_recv_buff[readpos],recv_size);
 
 					if ( rc > 0 )
 					{
@@ -179,7 +206,7 @@ void *_thread_unixsocket_read(void *arg)
 
 							if ( reader.parse((char*) fw_recv_buff, value) )
 							{
-								fw_parser(value);
+								ipHub->parser(value);
 							}
 							else
 							{
@@ -216,89 +243,83 @@ void *_thread_unixsocket_read(void *arg)
 	pthread_exit(0);
 }
 
-int fwapi_init()
+
+
+int CVtechIPHub::connectToGateway()
 {
-	if ( __fwapi_inited != 0  )
-		return 0;
-
-	__fwapi_inited = 1;
-	pthread_mutex_init(&mutex_rdt_cnnt_array, NULL);
-
-	return 1;
-}
-
-
-int fwapi_destroy()
-{
-	pthread_mutex_destroy(&mutex_rdt_cnnt_array);
-	__fwapi_inited = 0;
-
-	return 0;
-}
-
-int fwapi_connect(char *path)
-{
-	pthread_t thread_id_unixsocket_read;
-
-	if ( path != NULL )
-		strcpy(__unixsocket_path,path);
- 
 	try {
-		sock.connect(__unixsocket_path);
+		sock.connect(_unixsocket_path);
 
-		__fw_sock_status = 1;
+		getAllDone = 0;
+		fwapi_getall();
 
-
-		pthread_create(&thread_id_unixsocket_read, NULL, &_thread_unixsocket_read, NULL);	
-		pthread_detach(thread_id_unixsocket_read);
-
+		statusSock = 1;
 
     } catch (const libsocket::socket_exception& exc)
     {
-	std::cerr << exc.mesg;
-		__fw_sock_status = -1;
+		std::cerr << exc.mesg;
+
+		statusSock = -1;
 
 		usleep(1000000);
     }
 
-	return __fw_sock_status;
+	return statusSock;
 }
 
 
-int fwapi_cnnt_check_status()
+
+
+int CVtechIPHub::fwapi_cnnt_get_status()
 {
-	if ( __fw_sock_status == -1 )
-	{
-		__fw_sock_status = fwapi_connect(NULL);
-
-		if ( __fw_sock_status > 0 )
-		{
-			printf("fw socket connected\n");
-		}
-	}
-
-	return __fw_sock_status;
+	return statusSock;
 }
 
 
-int fwapi_cnnt_get_status()
+int CVtechIPHub::sendToGateway(const char *payload,int payload_length)
 {
-	return __fw_sock_status;
-}
-
-
-int fwapi_getall()
-{
-
-//unsigned char payload[] = {0x74,0x65,0x73,0x74};
-	unsigned char payload_length_buffer[4+2048];
-	unsigned long payload_length;
+	int ret = 0;
+	unsigned char buffLength[4];
 	int rc;
 
 
+	buffLength[0] = (((unsigned long)payload_length) &0xff000000)>>24;
+	buffLength[1] = (((unsigned long)payload_length) &0x00ff0000)>>16;
+	buffLength[2] = (((unsigned long)payload_length) &0x0000ff00)>>8;
+	buffLength[3] = (((unsigned long)payload_length) &0x000000ff);
+
+
+	//strcpy((char*)&payload_length_buffer[4],(char*)total_payload.c_str());
+
+//rc = sock.snd(payload_length_buffer,4+payload_length); // send json length
+//printf("Test send len 4 %x %x %x %x - ret :%d\n",payload_length_buffer[0],payload_length_buffer[1],payload_length_buffer[2],payload_length_buffer[3],rc);
+
+
+
+	rc = sock.snd(buffLength,4); // send json length
+
+	if ( rc < 0 )
+	{ // ## FixMe  - no error Handle
+
+	}
+
+
+	rc = sock.snd(payload,payload_length); // for JSON to parse properly on server side
+
+	if ( rc < 0 )
+	{ // ## FixMe  - no error Handle
+
+	}
+
+	return ret;
+}
+
+
+int CVtechIPHub::fwapi_getall()
+{
+
+//unsigned char payload[] = {0x74,0x65,0x73,0x74};
 // 			action = !action;
-
-
 
 // 			if (action == 20)
 // 				action = 80;
@@ -324,44 +345,17 @@ int fwapi_getall()
 
 	total_payload = root.toStyledString().c_str();
 
-	payload_length = total_payload.length();
-
-	payload_length_buffer[0] = (((unsigned long)payload_length) &0xff000000)>>24;
-	payload_length_buffer[1] = (((unsigned long)payload_length) &0x00ff0000)>>16;
-	payload_length_buffer[2] = (((unsigned long)payload_length) &0x0000ff00)>>8;
-	payload_length_buffer[3] = (((unsigned long)payload_length) &0x000000ff);
-
-
-	//strcpy((char*)&payload_length_buffer[4],(char*)total_payload.c_str());
-
-//rc = sock.snd(payload_length_buffer,4+payload_length); // send json length
-//printf("Test send len 4 %x %x %x %x - ret :%d\n",payload_length_buffer[0],payload_length_buffer[1],payload_length_buffer[2],payload_length_buffer[3],rc);
-
-
-
-	rc = sock.snd(payload_length_buffer,4); // send json length
-	printf("Test send len 4 %x %x %x %x - ret :%d\n",payload_length_buffer[0],payload_length_buffer[1],payload_length_buffer[2],payload_length_buffer[3],rc);
-
-
-	rc = sock.snd(total_payload.c_str(),payload_length); // for JSON to parse properly on server side
-	printf("Test send len %d - ret :%d\n",(int) payload_length,rc);
+	sendToGateway(total_payload.c_str(),total_payload.length());
 
 	return 0;
 }
 
 
 
-int fwapi_set(Json::Value &objects)
+int CVtechIPHub::fwapi_set(Json::Value &objects)
 {
 
 //unsigned char payload[] = {0x74,0x65,0x73,0x74};
-	unsigned char payload_length_buffer[4+2048];
-	unsigned long payload_length;
-	int rc;
-
-
-
-
 
 	string arg = std::to_string(getSeq());	
 
@@ -380,40 +374,14 @@ int fwapi_set(Json::Value &objects)
 	printf("payload\n%s\n",total_payload.c_str());
 
 
-	payload_length = total_payload.length();
-
-	payload_length_buffer[0] = (((unsigned long)payload_length) &0xff000000)>>24;
-	payload_length_buffer[1] = (((unsigned long)payload_length) &0x00ff0000)>>16;
-	payload_length_buffer[2] = (((unsigned long)payload_length) &0x0000ff00)>>8;
-	payload_length_buffer[3] = (((unsigned long)payload_length) &0x000000ff);
-
-
-	rc = sock.snd(payload_length_buffer,4); // send json length
-
-	if ( rc < 0 )
-	{
-
-	}
-
-	rc = sock.snd(total_payload.c_str(),payload_length); // for JSON to parse properly on server side
-
-	if ( rc < 0 )
-	{
-		
-	}
+	sendToGateway(total_payload.c_str(),total_payload.length());
 
 	return 0;
 }
 
 
-int fwapi_get(Json::Value &objects)
+int CVtechIPHub::fwapi_get(Json::Value &objects)
 {
-
-//unsigned char payload[] = {0x74,0x65,0x73,0x74};
-	unsigned char payload_length_buffer[4+2048];
-	unsigned long payload_length;
-	int rc;
-
 
 
 	string arg = std::to_string(getSeq());	
@@ -429,20 +397,9 @@ int fwapi_get(Json::Value &objects)
 
 	total_payload = root.toStyledString().c_str();
 
-	payload_length = total_payload.length();
-
-	payload_length_buffer[0] = (((unsigned long)payload_length) &0xff000000)>>24;
-	payload_length_buffer[1] = (((unsigned long)payload_length) &0x00ff0000)>>16;
-	payload_length_buffer[2] = (((unsigned long)payload_length) &0x0000ff00)>>8;
-	payload_length_buffer[3] = (((unsigned long)payload_length) &0x000000ff);
 
 
-	rc = sock.snd(payload_length_buffer,4); // send json length
-	printf("Test send len 4 %x %x %x %x - ret :%d\n",payload_length_buffer[0],payload_length_buffer[1],payload_length_buffer[2],payload_length_buffer[3],rc);
-
-
-	rc = sock.snd(total_payload.c_str(),payload_length); // for JSON to parse properly on server side
-	printf("Test send len %d - ret :%d\n",(int) payload_length,rc);
+	sendToGateway(total_payload.c_str(),total_payload.length());
 
 	return 0;
 }
