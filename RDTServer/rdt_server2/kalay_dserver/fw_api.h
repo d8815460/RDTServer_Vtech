@@ -35,7 +35,7 @@
 
 		int parser(Json::Value& root);
 
-	friend void *_thread_unixsocket_read(void *arg);
+	friend void *thread_unixsocket_read(void *arg);
 
 	public:
 

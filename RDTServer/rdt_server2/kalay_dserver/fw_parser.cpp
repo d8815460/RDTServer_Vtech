@@ -150,7 +150,7 @@ printf("eddy test new Gateway\n");
 								pObject->m_about_str["firmware_version"] = "1.0.0";
 
 								if ( pLocation != NULL )		
-									pLocation->addAccessory((CAccessory*)pObject);
+									pLocation->add(pObject);
 
 								__allObjects.m_mapAllObjects[pObject->m_id] = pObject;								
 							}

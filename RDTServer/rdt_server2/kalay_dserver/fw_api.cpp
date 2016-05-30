@@ -16,7 +16,7 @@ using namespace std;
 
 
 
-void *_thread_unixsocket_read(void *arg);
+void *thread_unixsocket_read(void *arg);
 
 
 CVtechIPHub __ipHub("/tmp/unixsocket");
@@ -38,7 +38,7 @@ CVtechIPHub::CVtechIPHub(const char *unixsocket_path)
 	runThread = 1;
 
 
-	pthread_create(&thread_id_unixsocket_read, NULL, &_thread_unixsocket_read, this);	
+	pthread_create(&thread_id_unixsocket_read, NULL, &thread_unixsocket_read, this);	
 	pthread_detach(thread_id_unixsocket_read); 
 }
 
@@ -71,7 +71,7 @@ unsigned int CVtechIPHub::getSeq()
 }
 
 
-void *_thread_unixsocket_read(void *arg)
+void *thread_unixsocket_read(void *arg)
 {
 	CVtechIPHub *ipHub;
 	char *fw_recv_buff = NULL;

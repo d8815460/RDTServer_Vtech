@@ -21,6 +21,11 @@ CAllObjects::CAllObjects()
 	CGroup     *pGroup;
 	CAccessory *pAccessory;
 
+	pthread_mutex_init(&mutex_global_id, NULL);
+
+
+	global_id = 0;
+
 
 	m_mapAllObjects.insert(TAllObjectPair(0x01000001,new CAccessory(0x01000001)));
 	m_mapAllObjects[0x01000002] = new CAccessory(0x01000002);
@@ -65,7 +70,7 @@ CAllObjects::CAllObjects()
 	pAccessory->m_about_str["udid"] = "0035482900";	
 	pAccessory->m_about_str["firmware_version"] = "1.0.0";	
 
-	pLocation->addAccessory(pAccessory);
+	pLocation->add(pAccessory);
 
 	m_mapAllObjects[pAccessory->m_id] = pAccessory;
 
@@ -84,7 +89,7 @@ CAllObjects::CAllObjects()
 	pAccessory->m_about_str["udid"] = "0035482900";	
 	pAccessory->m_about_str["firmware_version"] = "1.0.0";	
 
-	pLocation->addAccessory(pAccessory);
+	pLocation->add(pAccessory);
 
 	m_mapAllObjects[pAccessory->m_id] = pAccessory;
 
@@ -111,7 +116,7 @@ CAllObjects::CAllObjects()
 	pAccessory->m_about_str["udid"] = "0035482900";	
 	pAccessory->m_about_str["firmware_version"] = "1.0.0";		
 
-	pLocation->addAccessory(pAccessory);
+	pLocation->add(pAccessory);
 	m_mapAllObjects[pAccessory->m_id] = pAccessory;
 
 
@@ -139,7 +144,7 @@ CAllObjects::CAllObjects()
 	pAccessory->m_about_str["udid"] = "0035482900";	
 	pAccessory->m_about_str["firmware_version"] = "1.0.0";		
 
-	pLocation->addAccessory(pAccessory);
+	pLocation->add(pAccessory);
 	m_mapAllObjects[pAccessory->m_id] = pAccessory;
 
 //----------------------------------------------------------------
@@ -155,7 +160,7 @@ CAllObjects::CAllObjects()
 	pAccessory->m_about_str["udid"] = "0035482900";	
 	pAccessory->m_about_str["firmware_version"] = "1.0.0";		
 
-	pLocation->addGroup(pGroup);
+	pLocation->add(pGroup);
 
 
 	m_mapAllObjects[pGroup->m_id] = pGroup;
@@ -184,7 +189,7 @@ CAllObjects::CAllObjects()
 	pAccessory->m_about_str["udid"] = "0035482900";	
 	pAccessory->m_about_str["firmware_version"] = "1.0.0";		
 
-	pLocation->addAccessory(pAccessory);
+	pLocation->add(pAccessory);
 	m_mapAllObjects[pAccessory->m_id] = pAccessory;
 
 //----------------------------------------------------------------
@@ -207,7 +212,7 @@ CAllObjects::CAllObjects()
 	pAccessory->m_about_str["udid"] = "0035482900";	
 	pAccessory->m_about_str["firmware_version"] = "1.0.0";		
 
-	pLocation->addAccessory(pAccessory);
+	pLocation->add(pAccessory);
 	m_mapAllObjects[pAccessory->m_id] = pAccessory;
 
 //----------------------------------------------------------------
@@ -229,7 +234,7 @@ CAllObjects::CAllObjects()
 	pAccessory->m_about_str["udid"] = "0035482900";	
 	pAccessory->m_about_str["firmware_version"] = "1.0.0";		
 
-	pLocation->addAccessory(pAccessory);
+	pLocation->add(pAccessory);
 	m_mapAllObjects[pAccessory->m_id] = pAccessory;
 
 //----------------------------------------------------------------
@@ -251,7 +256,7 @@ CAllObjects::CAllObjects()
 	pAccessory->m_about_str["udid"] = "0035482900";	
 	pAccessory->m_about_str["firmware_version"] = "1.0.0";		
 
-	pLocation->addAccessory(pAccessory);
+	pLocation->add(pAccessory);
 	m_mapAllObjects[pAccessory->m_id] = pAccessory;
 
 	
@@ -339,6 +344,22 @@ int CAllObjects::dumpByLocation()
 
 
 	return 0;
+}
+
+
+unsigned int CAllObjects::getID(unsigned int type)
+{
+	unsigned int ret = -1;
+
+	pthread_mutex_lock(&mutex_global_id);
+
+	global_id++;
+	global_id &= 0x00ffffff;
+	ret = (global_id | type);
+
+	pthread_mutex_unlock(&mutex_global_id);
+
+	return ret;
 }
 
 

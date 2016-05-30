@@ -1194,41 +1194,66 @@ void deviceapi_remove_accessories_from_group (int session,Json::Value &request)
 
 void deviceapi_get_locations (int session,Json::Value &request)
 {
+
+// ++++
 	Json::Value root;
 	Json::Value response;
-	Json::Value objects;
+	Json::Value locations;
 
-	unsigned int rdt_ticket;
-	int rc;
+	int rc;					
+	unsigned int rdt_ticket;	
+	int err = 1;
+	string err_str;
 
 
 	rdt_ticket = request["rdt_ticket"].asUInt();
 
-	// group
+
+
+	try {
+			TAllObjectMap::iterator p;
+			list<CMyObject*>::iterator j;
+			int nLocationCnt = 0;
+
+
+			for(p = __allObjects.m_mapAllLocations.begin(); p!=__allObjects.m_mapAllLocations.end(); ++p)
+			{
+				CLocation *pLocation;
+
+				
+				pLocation = (CLocation*) p->second;
+
+
+				locations[nLocationCnt]["id"] =  pLocation->m_id,
+				locations[nLocationCnt]["name"] =  pLocation->m_attr_str["name"].c_str();
+				locations[nLocationCnt]["is_editable"] = true;
+
+
+				nLocationCnt++;
+
+			}
+
+			err = 0;
+
+    } catch (const libsocket::socket_exception& exc)
+    {
+		std::cerr << exc.mesg;
+		err_str = exc.mesg;
+    }
+
 
 
 	response["uid"] = (char*) __myUID;
+	response["api"] = "get_locations";
+	response["objects"] = locations;
 
 
-	objects[0]["id"] = "l00";
-	objects[0]["name"] = "Bedroom";
-	objects[0]["is_editable"] = true;
-
-
-	objects[1]["id"] = "l01";
-	objects[1]["name"] = "Garage";
-	objects[1]["is_editable"] = false;
-
-	objects[2]["id"] = "l02";
-	objects[2]["name"] = "Kitchen";
-	objects[2]["is_editable"] = false;
-
-	
-	response["objects"] = objects;
-
- 
-	root["error"] = 0;
+	root["error"] = err;
+	if ( err_str.length() != 0 )
+		root["error_str"] = err_str;
 	root["response"] = response;
+
+// ----
 
 	rc = sendto_rdt_client(session,rdt_ticket,(char*)root.toStyledString().c_str());
 
@@ -1243,40 +1268,80 @@ void deviceapi_get_locations (int session,Json::Value &request)
 
 void deviceapi_add_accessories_to_location (int session,Json::Value &request)
 {
+// +++
 	Json::Value root;
 	Json::Value response;
+	CLocation *pLocation = NULL;
+	string strLocationName;
 	Json::Value objects;
+	Json::Value responseObjects;
+
 
 	unsigned int rdt_ticket;
+	int err = 1;
+	string err_str;
+
+	int idLocation;	
 	int rc;
+	int i;
+	int idAccessory;
+	
 
 
 	rdt_ticket = request["rdt_ticket"].asUInt();
 
-	// group
+
+	idLocation = request["id"].asUInt();
+
+	objects = request["objects"];
+
+
+	strLocationName = request["name"].asString();
+
+	// location
+	try {
+
+		pLocation =  (CLocation *)__allObjects.m_mapAllLocations[idLocation];  // FixMe: We should check it first
+
+		
+
+		for(i=0;i<(int)objects.size();i++)
+		{
+			CMyObject *pObject = NULL;
+
+			idAccessory = objects[i]["id"].asUInt();
+
+			pObject = __allObjects.m_mapAllLocations[idAccessory];
+
+			if ( pObject != NULL )
+			{
+				//pObject->m_pLocation = pLocation;
+				pLocation->add(pObject);
+			}
+
+			responseObjects[i]["id"] = idAccessory;
+		}
+
+		err = 0;
+
+    } catch (const libsocket::socket_exception& exc)
+    {
+		std::cerr << exc.mesg;
+		err_str = exc.mesg;
+    }
+
 
 
 	response["uid"] = (char*) __myUID;
+	response["api"] = "add_accessories_to_location";
 
-
-	objects[0]["id"] = "a01";
-	objects[0]["name"] = "Accessory 01";
-
-
-	objects[1]["id"] = "a01";
-	objects[1]["name"] = "Accessory Sensor";
-
-	objects[2]["id"] = "a03";
-	objects[2]["name"] = "Accessory Light";
-
-	objects[3]["id"] = "a02";
-	objects[3]["name"] = "Accessory 02";
-
-	
-	response["objects"] = objects;
+	response["id"] = idLocation;
+	response["objects"] = responseObjects;
 
  
-	root["error"] = 0;
+	root["error"] = err;
+	if ( err_str.length() != 0 )
+		root["error_str"] = err_str;
 	root["response"] = response;
 
 	rc = sendto_rdt_client(session,rdt_ticket,(char*)root.toStyledString().c_str());
@@ -1287,30 +1352,75 @@ void deviceapi_add_accessories_to_location (int session,Json::Value &request)
 
 	}
 
+// ---
+
 	return;
 }
 
-void deviceapi_create_a_location (int session,Json::Value &request)
+void deviceapi_set_a_location (int session,Json::Value &request)
 {
 	Json::Value root;
 	Json::Value response;
+	CLocation *pLocation = NULL;
+	string strLocationName;
+
 
 	unsigned int rdt_ticket;
+	int err = 1;
+	string err_str;
+
+	int id;	
 	int rc;
 
 
 	rdt_ticket = request["rdt_ticket"].asUInt();
 
-	// group
+
+	id = request["id"].asUInt();
+
+
+	strLocationName = request["name"].asString();
+
+	// location
+	try {
+
+		pLocation =  (CLocation *)__allObjects.m_mapAllLocations[id];  // FixMe: We should check it first
+
+		if ( pLocation == NULL )
+		{
+			pLocation = new CLocation(0x13000002); 
+
+			pLocation->m_attr_str["name"] = strLocationName;
+
+			__allObjects.m_mapAllObjects[pLocation->m_id] = pLocation;
+			__allObjects.m_mapAllLocations[pLocation->m_id] = pLocation;
+		}
+		else
+		{
+			pLocation->m_attr_str["name"] = strLocationName;
+		}
+
+			err = 0;
+
+    } catch (const libsocket::socket_exception& exc)
+    {
+		std::cerr << exc.mesg;
+		err_str = exc.mesg;
+    }
+
 
 
 	response["uid"] = (char*) __myUID;
-	response["id"] = "l00";
-	response["name"] = "Location 0";
+	response["api"] = "set_a_location";
+
+	response["id"] = id;
+	response["name"] = strLocationName;
 
 
  
-	root["error"] = 0;
+	root["error"] = err;
+	if ( err_str.length() != 0 )
+		root["error_str"] = err_str;
 	root["response"] = response;
 
 	rc = sendto_rdt_client(session,rdt_ticket,(char*)root.toStyledString().c_str());
@@ -1328,21 +1438,66 @@ void deviceapi_remove_locations (int session,Json::Value &request)
 {
 	Json::Value root;
 	Json::Value response;
+	Json::Value objects;
 
 	unsigned int rdt_ticket;
+	int err = 1;
+	string err_str;
+
 	int rc;
+	int i;
+	int id;
 
 
 	rdt_ticket = request["rdt_ticket"].asUInt();
+	objects = request["objects"];
 
-	// group
+
+	// location
+	try {
+
+		for(i=0;i<(int)objects.size();i++)
+		{
+			TAllObjectMap::iterator it;
+			CLocation *pLocation = NULL;
+
+			id = objects[i]["id"].asUInt();
+
+			it = __allObjects.m_mapAllObjects.find(id);
+			if ( it != __allObjects.m_mapAllObjects.end() ) // Found it
+			{
+				pLocation = (CLocation *)it->second;
+				__allObjects.m_mapAllObjects.erase(it);
+			}
+
+			it = __allObjects.m_mapAllLocations.find(id);
+			if ( it != __allObjects.m_mapAllLocations.end() ) // Found it
+			{
+				__allObjects.m_mapAllObjects.erase(it);
+			}
+
+			if ( pLocation != NULL )
+			delete pLocation;
+		}		
+
+		err = 0;
+
+    } catch (const libsocket::socket_exception& exc)
+    {
+		std::cerr << exc.mesg;
+		err_str = exc.mesg;
+    }
+
+
 
 
 	response["api"] = "remove_locations";
 
 	
  
-	root["error"] = 0;
+	root["error"] = err;
+	if ( err_str.length() != 0 )
+		root["error_str"] = err_str;
 	root["response"] = response;
 
 	rc = sendto_rdt_client(session,rdt_ticket,(char*)root.toStyledString().c_str());

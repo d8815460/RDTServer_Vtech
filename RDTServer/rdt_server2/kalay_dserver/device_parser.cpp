@@ -136,9 +136,9 @@ int device_parser(int session,unsigned char *option,int option_len,unsigned char
 		{
 			deviceapi_add_accessories_to_location(session,value);
 		}
-		else if ( strcmp(api.c_str(),"create_a_location") == 0 ) //
+		else if ( strcmp(api.c_str(),"set_a_location") == 0 ) //
 		{
-			deviceapi_create_a_location(session,value);
+			deviceapi_set_a_location(session,value);
 		}
 //		else if ( strcmp(api.c_str(),"remove_locations") == 0 ) //
 //		{

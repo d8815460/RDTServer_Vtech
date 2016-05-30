@@ -26,7 +26,7 @@
 	//void deviceapi_remove_accessories_from_group (int session,Json::Value &request);
 	void deviceapi_get_locations (int session,Json::Value &request);
 	void deviceapi_add_accessories_to_location (int session,Json::Value &request);
-	void deviceapi_create_a_location (int session,Json::Value &request);
+	void deviceapi_set_a_location (int session,Json::Value &request);
 	void deviceapi_remove_locations (int session,Json::Value &request);
 	//void deviceapi_get_detail (int session,Json::Value &request);
 	void deviceapi_set_schedule_detail (int session,Json::Value &request);

@@ -8,6 +8,9 @@
 
 	using namespace std;
 
+	class CLocation;
+	class CGroup;	
+
 	class CMyObject
 	{
 	public:
@@ -15,6 +18,9 @@
 		{
 			m_id = id;
 			m_sClassType = myClassType;
+
+			m_pLocation = NULL;
+			m_pGroup = NULL;
 		}
 		
 		virtual ~CMyObject()
@@ -30,25 +36,25 @@
 		map<string,string> m_about_str;
 
 		int m_id;
+
+
+		CLocation 	*m_pLocation;
+		CGroup		*m_pGroup;		
 	};
 
-	class CLocation;
-	class CGroup;
+
 
 	class CAccessory : public CMyObject
 	{
 	public:
 		CAccessory(int id) : CMyObject(id,"accessory")
 		{
-			m_pLocation = NULL;
-			m_pGroup = NULL;
 		}
 
 		~CAccessory();
 
 	public:
-		CLocation 	*m_pLocation;
-		CGroup		*m_pGroup;
+
 	};
 	
 
@@ -57,7 +63,7 @@
 	public:
 		CGroup(int id) : CMyObject(id,"group")
 		{
-			m_pLocation = NULL;
+
 		}
 
 		~CGroup();
@@ -65,14 +71,13 @@
 	public:
 		string m_name;
 		list<CMyObject*>  m_accessory;
-		CLocation 		 *m_pLocation;
 
 	public:
-		int addAccessory(CAccessory *pAccessory)
+		int add (CMyObject *pObject)
 		{
-			pAccessory->m_pGroup = this;
+			pObject->m_pGroup = this;
 
-			m_accessory.push_back(pAccessory);
+			m_accessory.push_back(pObject);
 
 			return 1;
 		}
@@ -95,20 +100,11 @@
 		list<CMyObject*> m_listObject;
 
 	public:
-		int addAccessory(CAccessory *pAccessory)
+		int add (CMyObject *pObject)
 		{
-			pAccessory->m_pLocation = this;
+			pObject->m_pLocation = this;
 
-			m_listObject.push_back(pAccessory);
-
-			return 1;
-		}	
-
-		int addGroup(CGroup *pGroup)
-		{
-			pGroup->m_pLocation = this;
-
-			m_listObject.push_back(pGroup);
+			m_listObject.push_back(pObject);
 
 			return 1;
 		}
@@ -130,10 +126,19 @@
 		CAllObjects();
 		~CAllObjects();
 
+	private:
+		pthread_mutex_t mutex_global_id;
+		unsigned int global_id;
+
+	public: 
+		unsigned int getID(unsigned int type);
+
 	public:
 		TAllObjectMap m_mapAllObjects;
 		TAllObjectMap m_mapAllLocations;
 		TAllObjectMap m_mapAllGroups;
+
+
 
 	public:
 		int dump();
