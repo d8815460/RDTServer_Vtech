@@ -40,11 +40,15 @@
 	void deviceapi_get_objects (int session,Json::Value &request);
 	//void deviceapi_get_detail (int session,Json::Value &request);
 	//void deviceapi_set_detail (int session,Json::Value &request);
+	void deviceapi_get_switches (int session,Json::Value &request);
 	void deviceapi_remove_a_switch_accessory (int session,Json::Value &request);
 	void deviceapi_get_tasks (int session,Json::Value &request);
 	//void deviceapi_get_detail (int session,Json::Value &request);
 	//void deviceapi_set_detail(session,value);
 	void deviceapi_add_a_task (int session,Json::Value &request);
 	//void deviceapi_remove (int session,Json::Value &request);
+
+
+	void deviceapi_api_not_found (int session,Json::Value &request);
 
 #endif

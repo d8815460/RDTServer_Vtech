@@ -192,10 +192,14 @@ int device_parser(int session,unsigned char *option,int option_len,unsigned char
 //		{
 //			deviceapi_set_detail(session,value);
 //		}
-//		else if ( strcmp(api.c_str(),"remove_a_switch_accessory") == 0 ) //
-//		{
-//			deviceapi_remove_a_switch_accessory(session,value);
-//		}		
+		else if ( strcmp(api.c_str(),"get_switches") == 0 ) //
+		{
+			deviceapi_get_switches(session,value);
+		}		
+		else if ( strcmp(api.c_str(),"remove_a_switch_accessory") == 0 ) //
+		{
+			deviceapi_remove_a_switch_accessory(session,value);
+		}		
 		else if ( strcmp(api.c_str(),"get_tasks") == 0 ) //
 		{
 			deviceapi_get_tasks(session,value);
@@ -216,11 +220,15 @@ int device_parser(int session,unsigned char *option,int option_len,unsigned char
 //		{
 //			deviceapi_remove(session,value);
 //		}
+		else
+		{
+			deviceapi_api_not_found(session,value);
+		}
 
 	}
 	else
 	{
-		printf("Receive a non-json format string\n");
+		printf("Receive a non-json format string len:%d str:%s \n",data_len,data);
 	}
 
 	return 0;

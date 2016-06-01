@@ -8,19 +8,29 @@
 
 	using namespace std;
 
+	#define IDTYPE_ACCESSORY  0x01000000
+	#define IDTYPE_GROUP		0x12000000
+	#define IDTYPE_LOCATION	0x13000000
+	#define IDTYPE_GATEWAY	0x70000000
+
 	class CLocation;
 	class CGroup;	
+	class CWallSwitch;
 
 	class CMyObject
 	{
 	public:
-		CMyObject(int id,string myClassType)
+		CMyObject(const char *myClassType,int id,const char *name,int type )
 		{
 			m_id = id;
+			m_type = type;
 			m_sClassType = myClassType;
+			m_name = name;
 
 			m_pLocation = NULL;
 			m_pGroup = NULL;
+
+			m_attr_str["name"] = m_name;
 		}
 		
 		virtual ~CMyObject()
@@ -35,11 +45,27 @@
 		map<string,int> m_about_num;
 		map<string,string> m_about_str;
 
+		list<CMyObject*>  m_listObject;
+
 		int m_id;
+		int m_type;
+		string m_name;
 
 
-		CLocation 	*m_pLocation;
-		CGroup		*m_pGroup;		
+
+		CLocation 		*m_pLocation;
+		CGroup			*m_pGroup;
+		CWallSwitch 	*m_pWallSwitch;	
+
+	protected:
+		int addToList (CMyObject *pObject)
+		{
+			m_listObject.push_back(pObject);
+
+			return 1;
+		}		
+
+	public:
 	};
 
 
@@ -47,7 +73,7 @@
 	class CAccessory : public CMyObject
 	{
 	public:
-		CAccessory(int id) : CMyObject(id,"accessory")
+		CAccessory(int id,const char *name,int type) : CMyObject("accessory",id,name,type)
 		{
 		}
 
@@ -56,28 +82,45 @@
 	public:
 
 	};
+
+	class CWallSwitch : public CAccessory
+	{
+	public:
+		CWallSwitch(int id,const char *name,int type) : CAccessory(id,name,type)
+		{
+		}
+
+		~CWallSwitch();
+
+	public:
+		int add (CMyObject *pObject)
+		{
+			pObject->m_pWallSwitch = this;
+
+			addToList(pObject);
+
+			return 1;
+		}
+
+	};	
 	
 
 	class CGroup : public CMyObject
 	{
 	public:
-		CGroup(int id) : CMyObject(id,"group")
+		CGroup(int id,const char *name) : CMyObject("group",id,name,0)
 		{
-
 		}
 
 		~CGroup();
 		
-	public:
-		string m_name;
-		list<CMyObject*>  m_accessory;
 
 	public:
 		int add (CMyObject *pObject)
 		{
 			pObject->m_pGroup = this;
 
-			m_accessory.push_back(pObject);
+			addToList(pObject);
 
 			return 1;
 		}
@@ -89,22 +132,19 @@
 	class CLocation : public CMyObject
 	{
 	public:
-		CLocation(int id) : CMyObject(id,"location")
+		CLocation(int id,const char *name) : CMyObject("location",id,name,0x0301)
 		{
 		}
 
 		~CLocation();
 		
-	public:
-		string m_name;
-		list<CMyObject*> m_listObject;
 
 	public:
 		int add (CMyObject *pObject)
 		{
 			pObject->m_pLocation = this;
 
-			m_listObject.push_back(pObject);
+			addToList(pObject);
 
 			return 1;
 		}
@@ -129,9 +169,17 @@
 	private:
 		pthread_mutex_t mutex_global_id;
 		unsigned int global_id;
+		CLocation  *locationOther;
+
 
 	public: 
-		unsigned int getID(unsigned int type);
+		unsigned int getID(unsigned int idtype);
+		CLocation *getLocationOther()
+		{
+			return locationOther;
+		}
+		unsigned int m_idGateway;
+
 
 	public:
 		TAllObjectMap m_mapAllObjects;

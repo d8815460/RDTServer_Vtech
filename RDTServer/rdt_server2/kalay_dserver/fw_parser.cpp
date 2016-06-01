@@ -67,16 +67,16 @@ int CVtechIPHub::parser(Json::Value& root)
 
 						if ( id == "0" ) // __GATEWAY__
 						{
-							CMyObject *pGateway = __allObjects.m_mapAllObjects[0x70000001];
+							CMyObject *pGateway = __allObjects.m_mapAllObjects[__allObjects.m_idGateway];
+
 
 
 							if ( pGateway == NULL )
 							{
-printf("eddy test new Gateway\n");
-								pGateway = new CAccessory(0x70000001); //GateWay
+								pGateway = new CAccessory(__allObjects.getID(IDTYPE_GATEWAY),"V-Tech IP-Hub",0xff00); //GateWay
 
 	
-								pGateway->m_about_num["status"] = 1;
+								pGateway->m_about_num["on"] = 1;
 								pGateway->m_about_str["mac_address"] = "00:0c:29:36:3f:b1",
 								pGateway->m_about_str["udid"] = "udid-00001";	
 								pGateway->m_about_str["firmware_version"] = "1.0.0";
@@ -85,7 +85,8 @@ printf("eddy test new Gateway\n");
 								pGateway->m_about_str["subnet_mask"] = "255.255.255.0";
 								pGateway->m_about_str["gateway_name"] = "V-Tech IP-Hub";	
 
-								__allObjects.m_mapAllObjects[pGateway->m_id] = pGateway;								
+								__allObjects.m_mapAllObjects[pGateway->m_id] = pGateway;
+								__allObjects.m_idGateway = pGateway->m_id;								
 							}
 
 
@@ -127,14 +128,12 @@ printf("eddy test new Gateway\n");
 
 							if ( pObject == NULL )
 							{
-								CLocation *pLocation = (CLocation*)__allObjects.m_mapAllObjects[0x13000001]; // Find location
-								
-	printf("New device \n");
-								pObject = new CAccessory(0x01020000);
+								//CLocation *pLocation = (CLocation*)__allObjects.m_mapAllObjects[0x13000001]; // Find location
+								printf("New device \n");
 
-								pObject->m_attr_str["name"] = "IP-Hub Light";
-								pObject->m_attr_num["status"] = 1;
-								pObject->m_attr_num["type"] = 0;
+								pObject = new CAccessory(__allObjects.getID(IDTYPE_ACCESSORY),"IP-Hub Light",0x0109);
+
+								pObject->m_attr_num["on"] = 1;
 								pObject->m_attr_num["icon"] = 0;
 								pObject->m_attr_num["trigger"] = 0;
 
@@ -149,8 +148,8 @@ printf("eddy test new Gateway\n");
 								pObject->m_about_str["udid"] = id;	
 								pObject->m_about_str["firmware_version"] = "1.0.0";
 
-								if ( pLocation != NULL )		
-									pLocation->add(pObject);
+								if ( __allObjects.getLocationOther() != NULL )		
+									__allObjects.getLocationOther()->add(pObject);
 
 								__allObjects.m_mapAllObjects[pObject->m_id] = pObject;								
 							}
@@ -164,29 +163,27 @@ printf("eddy test new Gateway\n");
 
 								if ( key != "id" )
 								{
-									printf("Obj Set key : %s  = %s \n",key.asString().c_str(),value.asString().c_str());	
-
-									if ( pObject->m_attr_str[key.asString()] == "on" )
-									{
-										if ( value.asInt() == 0 )
-											pObject->m_attr_num["status"] = 1;
-										else 
-											pObject->m_attr_num["status"] = 0;
-									}
-
 									if ( value.isString() )
+									{
+										printf("Obj Set key : %s  = %s (str) \n",key.asString().c_str(),value.asString().c_str());	
 										pObject->m_attr_str[key.asString().c_str()] = value.asString();
-									else if ( value.isDouble() )
-										pObject->m_attr_num[key.asString().c_str()] = value.asDouble();
+										
+									}
+									//else if ( value.isDouble() )
+									//{
+									//	printf("type-double\n");
+									//	pObject->m_attr_num[key.asString().c_str()] = value.asDouble();
+									//}
 									else
+									{
+										printf("Obj Set key : %s  = %s (num) \n",key.asString().c_str(),value.asString().c_str());	
 										pObject->m_attr_num[key.asString().c_str()] = value.asUInt();
+									}
+										
 								}
 								
 							}
 						}
-
-
-						printf("\n");
 					}
 				}
 			}
