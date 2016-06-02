@@ -7,6 +7,7 @@
 #include <json/json.h>
 
 
+#include "dserver.h"
 #include "dtable.h"
 
 
@@ -19,18 +20,26 @@ CAllObjects __allObjects;
 
 CAllObjects::CAllObjects()
 {
-	CMyObject  *pGateway;
+	CGateway  *pGateway;
 
-	
+	CLocation  *pBedroom;
+	CLocation  *pBathroom;
+	CLocation  *pKitchen;
+	CLocation  *pLivingroom;
 
-	CLocation  *pLocationBedroom;
-	CLocation  *pLocationBathroom;
-	CLocation  *pLocationKitchen;
-	CGroup     *pGroup;
+	CGroup     *pGroup01;
+	CGroup     *pGroup02;
+	CGroup     *pGroup03;
+
 	CAccessory *pAccessory;
+
 	CWallSwitch *pWallSwitch01;
 	CWallSwitch *pWallSwitch02;
 	CWallSwitch *pWallSwitch03;
+
+	CLightBulb *pLightBulb;
+
+	Json::Value jsonArray;
 
 	pthread_mutex_init(&mutex_global_id, NULL);
 
@@ -44,17 +53,9 @@ CAllObjects::CAllObjects()
 
 
 	// insert Gateway
-	pGateway = new CAccessory(getID(IDTYPE_GATEWAY),"V-Tech IP-Hub",0xff00); //GateWay
+	pGateway = new CGateway(getID(IDTYPE_GATEWAY),"V-Tech IP-Hub"); //Gateway
 
 	
-	pGateway->m_about_num["on"] = 1;
-	pGateway->m_about_str["mac_address"] = "00:0c:29:36:3f:b1",
-	pGateway->m_about_str["udid"] = "udid-00001";	
-	pGateway->m_about_str["firmware_version"] = "1.0.0";
-	pGateway->m_about_str["hardware_version"] = "1.0.1";
-	pGateway->m_about_str["ip_address"] = "192.168.1.12";
-	pGateway->m_about_str["subnet_mask"] = "255.255.255.0";
-	pGateway->m_about_str["gateway_name"] = "V-Tech IP-Hub";	
 
 	m_mapAllObjects[pGateway->m_id] = pGateway;
 
@@ -65,376 +66,339 @@ CAllObjects::CAllObjects()
 	locationOther = new CLocation(getID(IDTYPE_LOCATION),"Other");
 
 
+	locationOther->m_attr_num["editable"] = 0;
+
+
 	m_mapAllObjects[locationOther->m_id] = locationOther;
 	m_mapAllLocations[locationOther->m_id] = locationOther;	
 
 
 	//----------------------------------------------------------------
 
-	pLocationBedroom = new CLocation(getID(IDTYPE_LOCATION),"Bedroom"); 
+	pBedroom = new CLocation(getID(IDTYPE_LOCATION),"Bedroom"); 
 	
+	pBedroom->m_attr_num["editable"] = 1;
 
-
-	m_mapAllObjects[pLocationBedroom->m_id] = pLocationBedroom;
-	m_mapAllLocations[pLocationBedroom->m_id] = pLocationBedroom;
+	m_mapAllObjects[pBedroom->m_id] = pBedroom;
+	m_mapAllLocations[pBedroom->m_id] = pBedroom;
 
 
 	//----------------------------------------------------------------
-	pWallSwitch01 = new CWallSwitch(getID(IDTYPE_ACCESSORY),"Wall Switch 01",0x0101);
+	pWallSwitch01 = new CWallSwitch(getID(IDTYPE_WALLSWITCH),"Wall Switch 01",pBedroom);
 
-	pWallSwitch01->m_attr_num["on"] = 0;
-	pWallSwitch01->m_attr_num["icon"] = 0; // 0 is use default icon
-	pWallSwitch01->m_attr_num["trigger"] = 0;
-	pWallSwitch01->m_attr_num["batLow"] = 1;
-
-
-	pWallSwitch01->m_about_str["udid"] = "0035482900";	
-	pWallSwitch01->m_about_str["firmware_version"] = "1.0.0";	
-
-	pLocationBedroom->add(pWallSwitch01);
 
 	m_mapAllObjects[pWallSwitch01->m_id] = pWallSwitch01;
 
 
 	//----------------------------------------------------------------
-	pAccessory = new CAccessory(getID(IDTYPE_ACCESSORY),"Light 71",0x0109);
-
-	pAccessory->m_attr_num["on"] = 1;
-	pAccessory->m_attr_num["icon"] = 0;
-	pAccessory->m_attr_num["trigger"] = 0;
+	pLightBulb = new CLightBulb(getID(IDTYPE_ACCESSORY),"Light 71",pBedroom,NULL);
 
 
-    pAccessory->m_attr_num["color_hue"] = 23;
-    pAccessory->m_attr_num["color_saturation"] = 50;
-    pAccessory->m_attr_num["color_brightness"] = 50;
-    pAccessory->m_attr_num["white_brightness"] = 50;
-    pAccessory->m_attr_num["white_temperature"] = 5000;
-
-
-
-
-	pAccessory->m_about_str["udid"] = "0035482900";	
-	pAccessory->m_about_str["firmware_version"] = "1.0.0";		
-
-	pLocationBedroom->add(pAccessory);
-	pWallSwitch01->add(pAccessory);
-	m_mapAllObjects[pAccessory->m_id] = pAccessory;
+	pWallSwitch01->add(pLightBulb);
+	m_mapAllObjects[pLightBulb->m_id] = pLightBulb;
 
 
 	//----------------------------------------------------------------
-	pAccessory = new CAccessory(getID(IDTYPE_ACCESSORY),"Light 72",0x0109);
-
-	pAccessory->m_attr_num["on"] = 1;
-	pAccessory->m_attr_num["icon"] = 0;
-	pAccessory->m_attr_num["trigger"] = 0;
+	pLightBulb = new CLightBulb(getID(IDTYPE_ACCESSORY),"Light 72",pBedroom,NULL);
 
 
-    pAccessory->m_attr_num["color_hue"] = 23;
-    pAccessory->m_attr_num["color_saturation"] = 50;
-    pAccessory->m_attr_num["color_brightness"] = 50;
-    pAccessory->m_attr_num["white_brightness"] = 50;
-    pAccessory->m_attr_num["white_temperature"] = 5000;
-
-
-	pAccessory->m_about_str["udid"] = "0035482900";	
-	pAccessory->m_about_str["firmware_version"] = "1.0.0";		
-
-	pLocationBedroom->add(pAccessory);
-	pWallSwitch01->add(pAccessory);
-	m_mapAllObjects[pAccessory->m_id] = pAccessory;
+	pWallSwitch01->add(pLightBulb);
+	m_mapAllObjects[pLightBulb->m_id] = pLightBulb;
 
 
 	//----------------------------------------------------------------
-	pWallSwitch02 = new CWallSwitch(getID(IDTYPE_ACCESSORY),"Wall Switch 02",0x0101);
-
-	pWallSwitch02->m_attr_num["on"] = 1;
-	pWallSwitch02->m_attr_num["icon"] = 0; // 0 is use default icon
-	pWallSwitch02->m_attr_num["trigger"] = 0;
-	pWallSwitch02->m_attr_num["batLow"] = 0;
-
-
-	pWallSwitch02->m_about_str["udid"] = "0035482900";	
-	pWallSwitch02->m_about_str["firmware_version"] = "1.0.0";	
-
-	pLocationBedroom->add(pWallSwitch02);
+	pWallSwitch02 = new CWallSwitch(getID(IDTYPE_WALLSWITCH),"Wall Switch 02",pBedroom);
 
 	m_mapAllObjects[pWallSwitch02->m_id] = pWallSwitch02;
 
 
 	//----------------------------------------------------------------
-	pAccessory = new CAccessory(getID(IDTYPE_ACCESSORY),"Light 81",0x0109);
-
-	pAccessory->m_attr_num["on"] = 1;
-	pAccessory->m_attr_num["icon"] = 0;
-	pAccessory->m_attr_num["trigger"] = 0;
+	pLightBulb = new CLightBulb(getID(IDTYPE_ACCESSORY),"Light 81",pBedroom,NULL);
 
 
-    pAccessory->m_attr_num["color_hue"] = 23;
-    pAccessory->m_attr_num["color_saturation"] = 50;
-    pAccessory->m_attr_num["color_brightness"] = 50;
-    pAccessory->m_attr_num["white_brightness"] = 50;
-    pAccessory->m_attr_num["white_temperature"] = 5000;
-
-
-
-
-	pAccessory->m_about_str["udid"] = "0035482900";	
-	pAccessory->m_about_str["firmware_version"] = "1.0.0";		
-
-	pLocationBedroom->add(pAccessory);
-	pWallSwitch02->add(pAccessory);
-	m_mapAllObjects[pAccessory->m_id] = pAccessory;	
+	pWallSwitch02->add(pLightBulb);
+	m_mapAllObjects[pLightBulb->m_id] = pLightBulb;	
 
 
 	//----------------------------------------------------------------
-	pAccessory = new CAccessory(getID(IDTYPE_ACCESSORY),"Light 01",0x0109);
-
-	pAccessory->m_attr_num["on"] = 1;
-	pAccessory->m_attr_num["icon"] = 0;
-	pAccessory->m_attr_num["trigger"] = 0;
+	pLightBulb = new CLightBulb(getID(IDTYPE_ACCESSORY),"Light 01",pBedroom,NULL);
 
 
-    pAccessory->m_attr_num["color_hue"] = 23;
-    pAccessory->m_attr_num["color_saturation"] = 50;
-    pAccessory->m_attr_num["color_brightness"] = 50;
-    pAccessory->m_attr_num["white_brightness"] = 50;
-    pAccessory->m_attr_num["white_temperature"] = 5000;
-
-
-
-
-	pAccessory->m_about_str["udid"] = "0035482900";	
-	pAccessory->m_about_str["firmware_version"] = "1.0.0";		
-
-	pLocationBedroom->add(pAccessory);
-	m_mapAllObjects[pAccessory->m_id] = pAccessory;
+	m_mapAllObjects[pLightBulb->m_id] = pLightBulb;
 
 
 
 //----------------------------------------------------------------
-	pLocationBathroom = new CLocation(getID(IDTYPE_LOCATION),"Bathroom"); 
+	pBathroom = new CLocation(getID(IDTYPE_LOCATION),"Bathroom"); 
 	
+	pBathroom->m_attr_num["editable"] = 1;
 
-
-	m_mapAllObjects[pLocationBathroom->m_id] = pLocationBathroom;
-	m_mapAllLocations[pLocationBathroom->m_id] = pLocationBathroom;
+	m_mapAllObjects[pBathroom->m_id] = pBathroom;
+	m_mapAllLocations[pBathroom->m_id] = pBathroom;
 
 
 //----------------------------------------------------------------
-	pWallSwitch03 = new CWallSwitch(getID(IDTYPE_ACCESSORY),"Wall Switch 03",0x0101);
+	pWallSwitch03 = new CWallSwitch(getID(IDTYPE_WALLSWITCH),"Wall Switch 03",pBathroom);
 
 
-	pWallSwitch03->m_attr_num["on"] = 0;
-	pWallSwitch03->m_attr_num["icon"] = 0;
-	pWallSwitch03->m_attr_num["trigger"] = 0;
-	pWallSwitch03->m_attr_num["batLow"] = 1;
-
-	pWallSwitch03->m_about_str["udid"] = "0035482900";	
-	pWallSwitch03->m_about_str["firmware_version"] = "1.0.0";		
-
-	pLocationBathroom->add(pWallSwitch03);
 	m_mapAllObjects[pWallSwitch03->m_id] = pWallSwitch03;
 
 //----------------------------------------------------------------
-	pGroup = new CGroup(getID(IDTYPE_GROUP),"Group 01");	
+	pGroup01 = new CGroup(getID(IDTYPE_GROUP),"Group 01",pBathroom);	
 
-	pGroup->m_attr_num["on"] = 0;
-	pGroup->m_attr_num["icon"] = 0;
-	pGroup->m_attr_num["trigger"] = 0;
+	pGroup01->m_attr_num["groupNo"] = 1;
 
-
-	pAccessory->m_about_str["udid"] = "0035482900";	
-	pAccessory->m_about_str["firmware_version"] = "1.0.0";		
-
-	pLocationBathroom->add(pGroup);
-
-	m_mapAllObjects[pGroup->m_id] = pGroup;
-	m_mapAllGroups[pGroup->m_id] = pGroup;
+	m_mapAllObjects[pGroup01->m_id] = pGroup01;
+	m_mapAllGroups[pGroup01->m_id] = pGroup01;
 
 
 	//---------------------------------------------------------
-	pAccessory = new CAccessory(getID(IDTYPE_ACCESSORY),"Light 11",0x0109);
-
-	pAccessory->m_attr_num["on"] = 1;
-	pAccessory->m_attr_num["icon"] = 0;
-	pAccessory->m_attr_num["trigger"] = 0;
+	pLightBulb = new CLightBulb(getID(IDTYPE_ACCESSORY),"Light 11",pBathroom,pGroup01);
 
 
-    pAccessory->m_attr_num["color_hue"] = 23;
-    pAccessory->m_attr_num["color_saturation"] = 50;
-    pAccessory->m_attr_num["color_brightness"] = 50;
-    pAccessory->m_attr_num["white_brightness"] = 50;
-    pAccessory->m_attr_num["white_temperature"] = 5000;
-
-
-
-
-	pAccessory->m_about_str["udid"] = "0035482900";	
-	pAccessory->m_about_str["firmware_version"] = "1.0.0";		
-
-	pLocationBathroom->add(pAccessory);
-	pGroup->add(pAccessory);
-	m_mapAllObjects[pAccessory->m_id] = pAccessory;
+	m_mapAllObjects[pLightBulb->m_id] = pLightBulb;
 
 	//---------------------------------------------------------
-	pAccessory = new CAccessory(getID(IDTYPE_ACCESSORY),"Light 12",0x0109);
-
-	pAccessory->m_attr_num["on"] = 1;
-	pAccessory->m_attr_num["icon"] = 0;
-	pAccessory->m_attr_num["trigger"] = 0;
-
-
-    pAccessory->m_attr_num["color_hue"] = 23;
-    pAccessory->m_attr_num["color_saturation"] = 50;
-    pAccessory->m_attr_num["color_brightness"] = 50;
-    pAccessory->m_attr_num["white_brightness"] = 50;
-    pAccessory->m_attr_num["white_temperature"] = 5000;
-
-
-
-
-	pAccessory->m_about_str["udid"] = "0035482900";	
-	pAccessory->m_about_str["firmware_version"] = "1.0.0";		
-
-	pLocationBathroom->add(pAccessory);
-	pGroup->add(pAccessory);
-	m_mapAllObjects[pAccessory->m_id] = pAccessory;
-
-
-
-//----------------------------------------------------------------
-	pLocationKitchen = new CLocation(getID(IDTYPE_LOCATION),"Kitchen"); 
+	pLightBulb = new CLightBulb(getID(IDTYPE_ACCESSORY),"Light 12",pBathroom,pGroup01);
 	
 
 
-	m_mapAllObjects[pLocationKitchen->m_id] = pLocationKitchen;
-	m_mapAllLocations[pLocationKitchen->m_id] = pLocationKitchen;
+
+
+	m_mapAllObjects[pLightBulb->m_id] = pLightBulb;
+
 
 
 //----------------------------------------------------------------
-	pAccessory = new CAccessory(getID(IDTYPE_ACCESSORY),"Garage Door Sensor 01",0x0202);
+	pKitchen = new CLocation(getID(IDTYPE_LOCATION),"Kitchen"); 
+	
+	pKitchen->m_attr_num["editable"] = 1;
+
+	m_mapAllObjects[pKitchen->m_id] = pKitchen;
+	m_mapAllLocations[pKitchen->m_id] = pKitchen;
+
+
+//----------------------------------------------------------------
+	pAccessory = new CAccessory(getID(IDTYPE_ACCESSORY),"Garage Door Sensor 01",0x0201);
 
 	pAccessory->m_attr_num["on"] = 2;
 	pAccessory->m_attr_num["icon"] = 0;
 	pAccessory->m_attr_num["trigger"] = 1;
 
-	pAccessory->m_about_str["udid"] = "0035482900";	
-	pAccessory->m_about_str["firmware_version"] = "1.0.0";		
+	pAccessory->m_attr_num["alert"] = 0;
+	pAccessory->m_attr_num["testMode"] = 0;
+	pAccessory->m_attr_num["arm"] = 1;
+	pAccessory->m_attr_num["batLow"] = 0;
+	pAccessory->m_attr_num["outLink"] = 0;
 
-	pLocationKitchen->add(pAccessory);
+	pAccessory->m_about_str["udid"] = std::to_string(pAccessory->m_id);	
+	pAccessory->m_about_str["ver"] = "1.0.0";		
+
+	pKitchen->add(pAccessory);
 	m_mapAllObjects[pAccessory->m_id] = pAccessory;
 
+
 //----------------------------------------------------------------
-	pAccessory = new CAccessory(getID(IDTYPE_ACCESSORY),"Light 02",0x0109);
+	pAccessory = new CAccessory(getID(IDTYPE_ACCESSORY),"Magnetic sensor",0x0202);
+
+	pAccessory->m_attr_num["on"] = 2;
+	pAccessory->m_attr_num["icon"] = 0;
+	pAccessory->m_attr_num["trigger"] = 1;
+
+	pAccessory->m_attr_num["alert"] = 0;
+	pAccessory->m_attr_num["testMode"] = 0;
+	pAccessory->m_attr_num["arm"] = 1;
+	pAccessory->m_attr_num["batLow"] = 0;
+	pAccessory->m_attr_num["outLink"] = 0;
+
+	pAccessory->m_about_str["udid"] = std::to_string(pAccessory->m_id);	
+	pAccessory->m_about_str["ver"] = "1.0.0";		
+
+	pKitchen->add(pAccessory);
+	m_mapAllObjects[pAccessory->m_id] = pAccessory;
+
+
+//----------------------------------------------------------------
+	pAccessory = new CAccessory(getID(IDTYPE_ACCESSORY),"motion sensor",0x0203);
+
+	pAccessory->m_attr_num["on"] = 2;
+	pAccessory->m_attr_num["icon"] = 0;
+	pAccessory->m_attr_num["trigger"] = 1;
+
+	pAccessory->m_attr_num["alert"] = 0;
+	pAccessory->m_attr_num["testMode"] = 0;
+	pAccessory->m_attr_num["arm"] = 1;
+	pAccessory->m_attr_num["batLow"] = 0;
+	pAccessory->m_attr_num["outLink"] = 0;
+
+	pAccessory->m_about_str["udid"] = std::to_string(pAccessory->m_id);	
+	pAccessory->m_about_str["ver"] = "1.0.0";		
+
+	pKitchen->add(pAccessory);
+	m_mapAllObjects[pAccessory->m_id] = pAccessory;	
+
+//----------------------------------------------------------------
+	pAccessory = new CAccessory(getID(IDTYPE_ACCESSORY),"flood detector",0x0206);
+
+	pAccessory->m_attr_num["on"] = 2;
+	pAccessory->m_attr_num["icon"] = 0;
+	pAccessory->m_attr_num["trigger"] = 1;
+
+	pAccessory->m_attr_num["alert"] = 0;
+	pAccessory->m_attr_num["testMode"] = 0;
+	pAccessory->m_attr_num["arm"] = 1;
+	pAccessory->m_attr_num["batLow"] = 0;
+	pAccessory->m_attr_num["outLink"] = 0;
+
+	pAccessory->m_about_str["udid"] = std::to_string(pAccessory->m_id);	
+	pAccessory->m_about_str["ver"] = "1.0.0";		
+
+	pKitchen->add(pAccessory);
+	m_mapAllObjects[pAccessory->m_id] = pAccessory;		
+
+
+//----------------------------------------------------------------
+	pLightBulb = new CLightBulb(getID(IDTYPE_ACCESSORY),"Kitchen Light 02",pKitchen,NULL);
+
+	
+
+
+	m_mapAllObjects[pLightBulb->m_id] = pLightBulb;
+
+
+//----------------------------------------------------------------
+	pAccessory = new CAccessory(getID(IDTYPE_ACCESSORY),"AC power outlet",0x0106);
 
 	pAccessory->m_attr_num["on"] = 1;
 	pAccessory->m_attr_num["icon"] = 0;
 	pAccessory->m_attr_num["trigger"] = 0;
 
+	pAccessory->m_about_str["udid"] = std::to_string(pAccessory->m_id);	
+	pAccessory->m_about_str["ver"] = "1.0.0";		
 
-    pAccessory->m_attr_num["color_hue"] = 23;
-    pAccessory->m_attr_num["color_saturation"] = 50;
-    pAccessory->m_attr_num["color_brightness"] = 50;
-    pAccessory->m_attr_num["white_brightness"] = 50;
-    pAccessory->m_attr_num["white_temperature"] = 5000;
-
-
-	pAccessory->m_about_str["udid"] = "0035482900";	
-	pAccessory->m_about_str["firmware_version"] = "1.0.0";		
-
-	pLocationKitchen->add(pAccessory);
+	pKitchen->add(pAccessory);
 	m_mapAllObjects[pAccessory->m_id] = pAccessory;
+
 
 //----------------------------------------------------------------
-	pAccessory = new CAccessory(getID(IDTYPE_ACCESSORY),"Light 03",0x0109);
+	pLightBulb = new CLightBulb(getID(IDTYPE_ACCESSORY),"Light 03",pKitchen,NULL);
 
-	pAccessory->m_attr_num["on"] = 1;
-	pAccessory->m_attr_num["icon"] = 0;
-	pAccessory->m_attr_num["trigger"] = 0;
-
-    pAccessory->m_attr_num["color_hue"] = 23;
-    pAccessory->m_attr_num["color_saturation"] = 50;
-    pAccessory->m_attr_num["color_brightness"] = 50;
-    pAccessory->m_attr_num["white_brightness"] = 50;
-    pAccessory->m_attr_num["white_temperature"] = 5000;
-
-
-	pAccessory->m_about_str["udid"] = "0035482900";	
-	pAccessory->m_about_str["firmware_version"] = "1.0.0";		
-
-	pLocationKitchen->add(pAccessory);
-	m_mapAllObjects[pAccessory->m_id] = pAccessory;
+	m_mapAllObjects[pLightBulb->m_id] = pLightBulb;
 
 //----------------------------------------------------------------
-	pAccessory = new CAccessory(getID(IDTYPE_ACCESSORY),"Light 04",0x0109);
+	pLightBulb = new CLightBulb(getID(IDTYPE_ACCESSORY),"Light 04",pKitchen,NULL);
 
-	pAccessory->m_attr_num["on"] = 1;
-	pAccessory->m_attr_num["icon"] = 0;
-	pAccessory->m_attr_num["trigger"] = 0;
-
-    pAccessory->m_attr_num["color_hue"] = 23;
-    pAccessory->m_attr_num["color_saturation"] = 50;
-    pAccessory->m_attr_num["color_brightness"] = 50;
-    pAccessory->m_attr_num["white_brightness"] = 50;
-    pAccessory->m_attr_num["white_temperature"] = 5000;
+	m_mapAllObjects[pLightBulb->m_id] = pLightBulb;
 
 
-	pAccessory->m_about_str["udid"] = "0035482900";	
-	pAccessory->m_about_str["firmware_version"] = "1.0.0";		
+//----------------------------------------------------------------
+	pGroup02 = new CGroup(getID(IDTYPE_GROUP),"Group 02",pBathroom);	
 
-	pLocationKitchen->add(pAccessory);
-	m_mapAllObjects[pAccessory->m_id] = pAccessory;
+	pGroup01->m_attr_num["groupNo"] = 2;
 
+	m_mapAllObjects[pGroup02->m_id] = pGroup02;
+	m_mapAllGroups[pGroup02->m_id] = pGroup02;	
+
+//----------------------------------------------------------------
+	pLightBulb = new CLightBulb(getID(IDTYPE_ACCESSORY),"Light 05",pKitchen,pGroup02);
+			
+
+	m_mapAllObjects[pLightBulb->m_id] = pLightBulb;
+
+
+//----------------------------------------------------------------
+	pLightBulb = new CLightBulb(getID(IDTYPE_ACCESSORY),"Light 06",pKitchen,pGroup02);
+
+	m_mapAllObjects[pLightBulb->m_id] = pLightBulb;
+
+
+	//---------------------------------------------------------
+	pLightBulb = new CLightBulb(getID(IDTYPE_ACCESSORY),"Light 91",locationOther,pGroup02);
+
+	m_mapAllObjects[pLightBulb->m_id] = pLightBulb;
+
+	//---------------------------------------------------------
+	pLightBulb = new CLightBulb(getID(IDTYPE_ACCESSORY),"Light 92",locationOther,pGroup02);
+
+	m_mapAllObjects[pLightBulb->m_id] = pLightBulb;
 
 
 
 	//---------------------------------------------------------
-	pAccessory = new CAccessory(getID(IDTYPE_ACCESSORY),"Light 91",0x0109);
+	pLightBulb = new CLightBulb(getID(IDTYPE_ACCESSORY),"Light 93",locationOther,NULL);
 
-	pAccessory->m_attr_num["on"] = 1;
-	pAccessory->m_attr_num["icon"] = 0;
-	pAccessory->m_attr_num["trigger"] = 0;
+	m_mapAllObjects[pLightBulb->m_id] = pLightBulb;
 
-
-    pAccessory->m_attr_num["color_hue"] = 23;
-    pAccessory->m_attr_num["color_saturation"] = 50;
-    pAccessory->m_attr_num["color_brightness"] = 50;
-    pAccessory->m_attr_num["white_brightness"] = 50;
-    pAccessory->m_attr_num["white_temperature"] = 5000;
-
-
-
-
-	pAccessory->m_about_str["udid"] = "0035482900";	
-	pAccessory->m_about_str["firmware_version"] = "1.0.0";		
-
-	locationOther->add(pAccessory);
-	pGroup->add(pAccessory);
-	m_mapAllObjects[pAccessory->m_id] = pAccessory;
 
 	//---------------------------------------------------------
-	pAccessory = new CAccessory(getID(IDTYPE_ACCESSORY),"Light 92",0x0109);
+	pLightBulb = new CLightBulb(getID(IDTYPE_ACCESSORY),"Light 94",locationOther,NULL);
 
-	pAccessory->m_attr_num["on"] = 1;
-	pAccessory->m_attr_num["icon"] = 0;
-	pAccessory->m_attr_num["trigger"] = 0;
+	m_mapAllObjects[pAccessory->m_id] = pAccessory;	
 
+//----------------------------------------------------------------
 
-    pAccessory->m_attr_num["color_hue"] = 23;
-    pAccessory->m_attr_num["color_saturation"] = 50;
-    pAccessory->m_attr_num["color_brightness"] = 50;
-    pAccessory->m_attr_num["white_brightness"] = 50;
-    pAccessory->m_attr_num["white_temperature"] = 5000;
+	pLivingroom = new CLocation(getID(IDTYPE_LOCATION),"Living Room"); 
+	
+	pLivingroom->m_attr_num["editable"] = 1;
 
-
+	m_mapAllObjects[pLivingroom->m_id] = pLivingroom;
+	m_mapAllLocations[pLivingroom->m_id] = pLivingroom;	
 
 
-	pAccessory->m_about_str["udid"] = "0035482900";	
-	pAccessory->m_about_str["firmware_version"] = "1.0.0";		
 
-	locationOther->add(pAccessory);
-	pGroup->add(pAccessory);
-	m_mapAllObjects[pAccessory->m_id] = pAccessory;
+//----------------------------------------------------------------
+	pGroup03 = new CGroup(getID(IDTYPE_GROUP),"Group 03",pLivingroom);	
+
+	pGroup01->m_attr_num["groupNo"] = 3;
+
+	m_mapAllObjects[pGroup03->m_id] = pGroup03;
+	m_mapAllGroups[pGroup03->m_id] = pGroup03;	
+
+
+//----------------------------------------------------------------
+	pLightBulb = new CLightBulb(getID(IDTYPE_ACCESSORY),"Light 31",pLivingroom,NULL);
+			
+
+	m_mapAllObjects[pLightBulb->m_id] = pLightBulb;
+
+
+	//----------------------------------------------------------------
+	pLightBulb = new CLightBulb(getID(IDTYPE_ACCESSORY),"Light 32",pLivingroom,NULL);
+	
+
+	m_mapAllObjects[pLightBulb->m_id] = pLightBulb;
+
+
+	//---------------------------------------------------------
+	pLightBulb = new CLightBulb(getID(IDTYPE_ACCESSORY),"Light 95",pLivingroom,NULL);
+		
+	m_mapAllObjects[pLightBulb->m_id] = pLightBulb;
+
+
+	//---------------------------------------------------------
+	pLightBulb = new CLightBulb(getID(IDTYPE_ACCESSORY),"Light 96",pLivingroom,NULL);
+
+	m_mapAllObjects[pLightBulb->m_id] = pLightBulb;	
+
+
+	//---------------------------------------------------------
+	pLightBulb = new CLightBulb(getID(IDTYPE_ACCESSORY),"Light 97",pLivingroom,pGroup03);
+
+	m_mapAllObjects[pLightBulb->m_id] = pLightBulb;	
+
+	//---------------------------------------------------------
+	pLightBulb = new CLightBulb(getID(IDTYPE_ACCESSORY),"Light 98",pLivingroom,pGroup03);
+		
+
+
+	m_mapAllObjects[pLightBulb->m_id] = pLightBulb;	
+
+	//---------------------------------------------------------
+	pLightBulb = new CLightBulb(getID(IDTYPE_ACCESSORY),"Light 99",pLivingroom,pGroup03);
+	
+	m_mapAllObjects[pAccessory->m_id] = pAccessory;	
+
+
 
 
 	
@@ -543,14 +507,47 @@ unsigned int CAllObjects::getID(unsigned int idtype)
 }
 
 
+CLocation::CLocation(int id,const char *name) : CMyObject("location",id,name,0xff10)
+{
+}
+
 CLocation::~CLocation()
 {
 
 }
 
+CGroup::CGroup(int id,const char *name,CLocation *pLocation) : CMyObject("group",id,name,0xff11)
+{
+	if ( pLocation != NULL )
+		pLocation->add(this);	
+
+	m_attr_num["on"] = 0;
+	m_attr_num["icon"] = 0;
+	m_attr_num["trigger"] = 0;
+
+	m_attr_num["groupNo"] = 1;
+	m_attr_num["brightness"] = 60;
+	m_attr_num["hue"] = 75;
+	m_attr_num["saturation"] = 3;
+	m_attr_num["colorMode"] = 1;
+	m_attr_num["temperature"] = 7000;
+	m_attr_num["whiteIntensity"] = 95;
+	m_attr_num["brightnessLoop1"] = 30;
+	m_attr_num["hueLoop1"] = 70;
+	m_attr_num["saturationLoop1"] = 80;
+	m_attr_num["transientLoop1"] = 0x000D2F00;
+
+	m_about_str["udid"] = std::to_string(m_id);
+}
+
 CGroup::~CGroup()
 {
 
+}
+
+
+CAccessory::CAccessory(int id,const char *name,int type) : CMyObject("accessory",id,name,type)
+{
 }
 
 CAccessory::~CAccessory()
@@ -559,10 +556,80 @@ CAccessory::~CAccessory()
 }
 
 
+CLightBulb::CLightBulb(int id,const char *name,CLocation *pLocation,CGroup *pGroup) : CAccessory(id,name,0x0109)
+{
+	if ( pLocation != NULL )
+		pLocation->add(this);
+
+	if ( pGroup != NULL)
+		pGroup->add(this);
+
+	m_attr_num["on"] = 1;
+	m_attr_num["icon"] = 0;
+	m_attr_num["trigger"] = 0;
+
+    m_attr_num["brightness"] = 60;
+    m_attr_num["hue"] = 23;
+    m_attr_num["saturation"] = 40;
+    m_attr_num["colorMode"] = 0;
+    m_attr_num["temperature"] = 4500;
+    m_attr_num["whiteIntensity"] = 65;
+    m_attr_num["fadePower"] = 0;
+    m_attr_num["fadeTime"] = 1000;
+
+	m_about_str["udid"] = std::to_string(m_id);
+	m_about_str["ver"] = "1.0.0";	
+
+}
+
+CLightBulb::~CLightBulb()
+{
+}
+
+
+CWallSwitch::CWallSwitch(int id,const char *name,CLocation *pLocation) : CMyObject("wallswitch",id,name,0x0101)
+{
+	if ( pLocation != NULL )
+		pLocation->add(this);
+
+
+
+	m_attr_num["on"] = 0;
+
+	m_attr_num["icon"] = 0; // 0 is use default icon
+	m_attr_num["trigger"] = 0;
+	m_attr_num["batLow"] = 1;
+
+	m_attr_num["alert"] = 1;
+	m_attr_num["testMode"] = 1;
+
+
+	m_about_str["udid"] = std::to_string(m_id);	
+	m_about_str["ver"] = "1.0.0";	
+}
+
 CWallSwitch::~CWallSwitch()
 {
 
 }
 
 
+CGateway::CGateway(int id,const char *name) : CMyObject("gateway",id,name,0xff00)
+{
+	m_attr_num["on"] = 1;
+	m_attr_num["led"] = 0x05;
+	m_attr_num["NumOfDev"] = 0x15;
+	m_attr_str["ip"] = "192.168.1.12";
+	m_attr_str["mask"] = "255.255.255.0";
 
+
+	m_about_str["mac"] = "00:0c:29:36:3f:b1",
+	m_about_str["uid"] = (char*) __myUID,
+	m_about_str["udid"] = std::to_string(m_id);
+	m_about_str["ver"] = "1.0.0";
+	m_about_str["verH"] = "";
+}
+
+CGateway::~CGateway()
+{
+}

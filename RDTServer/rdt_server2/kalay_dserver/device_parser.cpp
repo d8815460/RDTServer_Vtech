@@ -1,15 +1,13 @@
-#include "../headers/unixclientstream.hpp"
 #include "../headers/exception.hpp"
-#include <string>
-#include <iostream>
 #include <string.h>
 #include <unistd.h>
 
-#include <iomanip> 
 #include <json/json.h>
 
+#include <string>
+#include <iostream>
 
-#include "kalay_dserver.h"
+
 #include "dserver.h"
 #include "device_parser.h"
 #include "device_api.h"

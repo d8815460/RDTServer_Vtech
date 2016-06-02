@@ -21,14 +21,11 @@
 	void deviceapi_update_gateway (int session,Json::Value &request);
 	void deviceapi_get_detail (int session,Json::Value &request);
 	void deviceapi_get_other_groups (int session,Json::Value &request);
-	//void deviceapi_set_detail (int session,Json::Value &request);
 	void deviceapi_add_an_accessory_to_group (int session,Json::Value &request);
 	//void deviceapi_remove_accessories_from_group (int session,Json::Value &request);
 	void deviceapi_get_locations (int session,Json::Value &request);
 	void deviceapi_add_accessories_to_location (int session,Json::Value &request);
 	void deviceapi_set_a_location (int session,Json::Value &request);
-	void deviceapi_remove_locations (int session,Json::Value &request);
-	//void deviceapi_get_detail (int session,Json::Value &request);
 	void deviceapi_set_schedule_detail (int session,Json::Value &request);
 	void deviceapi_add_a_schedule (int session,Json::Value &request);
 	//void deviceapi_remove_a_schedule (int session,Json::Value &request);
@@ -38,15 +35,10 @@
 	//void deviceapi_set_accessory_setting (int session,Json::Value &request);
 	void deviceapi_set_gateway_setting (int session,Json::Value &request);
 	void deviceapi_get_objects (int session,Json::Value &request);
-	//void deviceapi_get_detail (int session,Json::Value &request);
-	//void deviceapi_set_detail (int session,Json::Value &request);
 	void deviceapi_get_switches (int session,Json::Value &request);
 	void deviceapi_remove_a_switch_accessory (int session,Json::Value &request);
 	void deviceapi_get_tasks (int session,Json::Value &request);
-	//void deviceapi_get_detail (int session,Json::Value &request);
-	//void deviceapi_set_detail(session,value);
 	void deviceapi_add_a_task (int session,Json::Value &request);
-	//void deviceapi_remove (int session,Json::Value &request);
 
 
 	void deviceapi_api_not_found (int session,Json::Value &request);

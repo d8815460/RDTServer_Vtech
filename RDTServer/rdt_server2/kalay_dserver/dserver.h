@@ -10,6 +10,7 @@
 
 
 	extern char *__myUID[20];
+	extern const char *__emualtorVer;
 
 	int kalay_device_server_agent_start(char *UID,char *unixsocket_path);
 	int kalay_device_server_agent_stop();

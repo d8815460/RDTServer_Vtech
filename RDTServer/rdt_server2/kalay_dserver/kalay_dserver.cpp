@@ -1,10 +1,10 @@
 #include <stdio.h>
-#include "kalay_dserver.h"
-#include "dserver.h"
 
+#include "dserver.h"
 #include "dtable.h"
 
 // char *__testUID="DRFTBHN6XXUUVM6KWTE1";
+const char *__emualtorVer="0.1.1";
 
 int main(int argc,char *argv[])
 {

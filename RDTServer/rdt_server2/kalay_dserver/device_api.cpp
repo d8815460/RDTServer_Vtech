@@ -1,4 +1,3 @@
-#include "../headers/unixclientstream.hpp"
 #include "../headers/exception.hpp"
 #include <string>
 #include <iostream>
@@ -10,7 +9,6 @@
 #include <json/json.h>
 
 
-#include "kalay_dserver.h"
 #include "dserver.h"
 #include "dtable.h"
 #include "device_api.h"
@@ -20,15 +18,24 @@
 
 using namespace std;
 
-int sendto_rdt_client (int session,unsigned int rdt_ticket,char *data)
+int sendto_rdt_client (int session,unsigned int rdt_ticket,Json::Value& root)
 {
-	unsigned char szBuff[1024*16];
+	unsigned char szBuff[1024*32];
 	int send_length;
 	int option_len = 0;
 	int rc;
 	int data_length;
 
-	data_length  = strlen(data);
+	Json::FastWriter fastWriter;
+	std::string strSendOut;
+
+
+
+	strSendOut = fastWriter.write(root);
+
+
+	data_length  = strSendOut.length();
+
 
 
 	szBuff[0]= 0xfe;
@@ -56,7 +63,7 @@ int sendto_rdt_client (int session,unsigned int rdt_ticket,char *data)
 
 	szBuff[4+option_len]= (data_length&0xff00)>>8;
 	szBuff[5+option_len]= (data_length&0x00ff);
-	memcpy(&szBuff[6+option_len],data,data_length);
+	memcpy(&szBuff[6+option_len],strSendOut.c_str(),data_length);
 	send_length = 6+option_len+data_length;
 		
 
@@ -105,6 +112,8 @@ int __getAbout(CMyObject *pObject,Json::Value& jsonAbout)
 
 	map<string,int>::iterator iNum;
 	map<string,string>::iterator iStr;
+
+	jsonAbout["type"] = pObject->m_type;
 
 	for(iNum = pObject->m_about_num.begin(); iNum!=pObject->m_about_num.end(); ++iNum)
 	{
@@ -196,7 +205,7 @@ void deviceapi_get_gateway_about (int session,Json::Value &request)
 		root["error_str"] = err_str;
 	root["response"] = response;
 
-	rc = sendto_rdt_client(session,rdt_ticket,(char*)root.toStyledString().c_str());
+	rc = sendto_rdt_client(session,rdt_ticket,root);
 
 
 	if ( rc < 0 )
@@ -264,7 +273,7 @@ void deviceapi_get_accessory_about (int session,Json::Value &request)
 
 	root["response"] = response;
 
-	rc = sendto_rdt_client(session,rdt_ticket,(char*)root.toStyledString().c_str());
+	rc = sendto_rdt_client(session,rdt_ticket,root);
 
 
 	if ( rc < 0 )
@@ -345,7 +354,7 @@ void deviceapi_get_accessory_detail (int session,Json::Value &request)
 
 printf("get_accessory_detail:\n%s\n------------------\n",(char*)root.toStyledString().c_str());
 
-	rc = sendto_rdt_client(session,rdt_ticket,(char*)root.toStyledString().c_str());
+	rc = sendto_rdt_client(session,rdt_ticket,root);
 
 	if ( rc < 0 )
 	{
@@ -413,7 +422,7 @@ void deviceapi_get_group_free_lights (int session,Json::Value &request)
 		root["error_str"] = err_str;
 	root["response"] = response;
 
-	rc = sendto_rdt_client(session,rdt_ticket,(char*)root.toStyledString().c_str());
+	rc = sendto_rdt_client(session,rdt_ticket,root);
 
 
 	if ( rc < 0 )
@@ -439,7 +448,7 @@ void deviceapi_set_detail (int session,Json::Value &request)
 	int err = 1;
 	string err_str;		
 	
-
+printf("set_detail request:\n%s\n-------------------\n",(char*)request.toStyledString().c_str());
 	
 
 
@@ -474,6 +483,7 @@ void deviceapi_set_detail (int session,Json::Value &request)
 
 					if ( 	key.asString() != "api"
 						 && key.asString() != "id"
+						 && key.asString() != "type"
 						 && key.asString() != "rdt_ticket"
 						 && key.asString() != "uid"			)
 					{
@@ -494,6 +504,8 @@ void deviceapi_set_detail (int session,Json::Value &request)
 				//if ( pObject->m_about_str["udid"] == "0012345678" )
 				{
 		    		Json::Value objects;
+		    		
+		    		int seq = 0;
 
 		    		objects[0]["id"] = pObject->m_about_str["udid"]; // "0012345678";
 		    		
@@ -502,7 +514,23 @@ void deviceapi_set_detail (int session,Json::Value &request)
 		    		else
 		    			objects[0]["on"] = 1;
 
-		    		__ipHub.fwapi_set(objects);
+		    		seq = __ipHub.fwapi_set(objects);
+
+		    		if ( seq > 0 )
+		    		{
+		    			CTXRecord *txRecord = new CTXRecord();
+
+		    			txRecord->seq = seq;
+		    			txRecord->session = session;
+						txRecord->request = request;
+						//txRecord->response
+						txRecord->sendTime = time(NULL);
+
+						__ipHub.m_txQueue[seq] = txRecord;
+		    		}
+
+
+		    		
 				}
 
 
@@ -548,7 +576,7 @@ void deviceapi_set_detail (int session,Json::Value &request)
 
 	printf("set_detail:\n%s\n-------------------\n",(char*)root.toStyledString().c_str());
 
-	rc = sendto_rdt_client(session,rdt_ticket,(char*)root.toStyledString().c_str());
+	rc = sendto_rdt_client(session,rdt_ticket,root);
 
 	if ( rc < 0 )
 	{
@@ -559,24 +587,10 @@ void deviceapi_set_detail (int session,Json::Value &request)
 	return;
 }
 
-void deviceapi_remove (int session,Json::Value &request)
+int __remove_a_object(int idRemove)
 {
-	Json::Value root;
-	Json::Value response;
-	Json::Value objects;
-
-	unsigned int rdt_ticket;
-	int rc;
-	int err = 1;
+	int err = 0;
 	string err_str;		
-	unsigned int idRemove;
-
-
-
-	rdt_ticket = request["rdt_ticket"].asUInt();
-
-
-	idRemove = request["id"].asUInt();
 
 	try {
 		TAllObjectMap::iterator iterRemove;
@@ -585,6 +599,7 @@ void deviceapi_remove (int session,Json::Value &request)
 		iterRemove = __allObjects.m_mapAllObjects.find(idRemove);
 		if ( iterRemove != __allObjects.m_mapAllObjects.end() ) // Found it
 		{
+			int ntype;
 			pObject = iterRemove->second;
 
 			__allObjects.m_mapAllObjects.erase(iterRemove);
@@ -630,8 +645,125 @@ void deviceapi_remove (int session,Json::Value &request)
 				}
 			}
 
+
+			ntype = pObject->m_id & 0xff000000;
+
+			if ( ntype == IDTYPE_GROUP )
+			{
+				TAllObjectMap::iterator iterGroup;
+				list<CMyObject*>::iterator iterX;
+
+				iterGroup = __allObjects.m_mapAllGroups.find(pObject->m_id);
+				if ( iterGroup != __allObjects.m_mapAllGroups.end() ) // Found it
+				{
+					__allObjects.m_mapAllGroups.erase(iterGroup);
+				}
+
+				for(iterX = pObject->m_listObject.begin(); iterX!=pObject->m_listObject.end(); ++iterX)
+				{
+					CMyObject *pSubObject;
+
+					pSubObject = *iterX;
+
+					pSubObject->m_pGroup = NULL;
+				}
+			}
+			else if ( ntype == IDTYPE_LOCATION )
+			{
+				TAllObjectMap::iterator iterLocation;
+				list<CMyObject*>::iterator iterX;
+
+				iterLocation = __allObjects.m_mapAllLocations.find(pObject->m_id);
+				if ( iterLocation != __allObjects.m_mapAllLocations.end() ) // Found it
+				{
+					__allObjects.m_mapAllLocations.erase(iterLocation);
+				}
+
+				for(iterX = pObject->m_listObject.begin(); iterX!=pObject->m_listObject.end(); ++iterX)
+				{
+					CMyObject *pSubObject;
+
+					pSubObject = *iterX;
+
+					pSubObject->m_pLocation = NULL;
+				}
+			}
+			else  if ( ntype == IDTYPE_WALLSWITCH )
+			{
+				list<CMyObject*>::iterator iterX;
+
+				for(iterX = pObject->m_listObject.begin(); iterX!=pObject->m_listObject.end(); ++iterX)
+				{
+					CMyObject *pSubObject;
+
+					pSubObject = *iterX;
+
+					pSubObject->m_pWallSwitch = NULL;
+				}					
+			}
+
+
+
 			delete pObject;
+		}	
+
+
+		err = 0;
+    } catch (const libsocket::socket_exception& exc)
+    {
+		std::cerr << exc.mesg;
+		err_str = exc.mesg;
+    }
+
+
+
+
+	return err;
+}
+
+void deviceapi_remove (int session,Json::Value &request)
+{
+	Json::Value root;
+	Json::Value response;
+	Json::Value objects;
+	Json::Value responseID;
+
+	unsigned int rdt_ticket;
+	int rc;
+	int err = 1;
+	string err_str;		
+
+
+
+	rdt_ticket = request["rdt_ticket"].asUInt();
+
+
+	try {
+		Json::Value removeObject;
+
+		removeObject = request["id"];
+
+		if ( removeObject.isArray() )
+		{
+			unsigned int i;
+			int removeCnt = 0;
+
+
+			for(i=0;i<removeObject.size();i++)
+			{
+				__remove_a_object(removeObject[i].asUInt());
+
+				responseID[removeCnt] = removeObject[i].asUInt();
+
+				removeCnt++;
+			}
 		}
+		else 
+		{
+			__remove_a_object(removeObject.asUInt());
+			responseID = removeObject.asUInt();
+		}
+
 
 		err = 0;
     } catch (const libsocket::socket_exception& exc)
@@ -644,7 +776,7 @@ void deviceapi_remove (int session,Json::Value &request)
 
 	response["uid"] = (char*) __myUID;
 	response["api"] = "remove";
-	response["id"] = idRemove;
+	response["id"] = responseID;
 
 
 	root["error"] = err;
@@ -653,7 +785,7 @@ void deviceapi_remove (int session,Json::Value &request)
 	root["response"] = response;
 
 
-	rc = sendto_rdt_client(session,rdt_ticket,(char*)root.toStyledString().c_str());
+	rc = sendto_rdt_client(session,rdt_ticket,root);
 
 
 	if ( rc < 0 )
@@ -692,7 +824,7 @@ void deviceapi_get_activities (int session,Json::Value &request)
 	root["error"] = 0;
 	root["response"] = response;
 
-	rc = sendto_rdt_client(session,rdt_ticket,(char*)root.toStyledString().c_str());
+	rc = sendto_rdt_client(session,rdt_ticket,root);
 
 
 	if ( rc < 0 )
@@ -736,7 +868,7 @@ void deviceapi_get_light_effects (int session,Json::Value &request)
 	root["error"] = 0;
 	root["response"] = response;
 
-	rc = sendto_rdt_client(session,rdt_ticket,(char*)root.toStyledString().c_str());
+	rc = sendto_rdt_client(session,rdt_ticket,root);
 
 
 	if ( rc < 0 )
@@ -771,7 +903,7 @@ void deviceapi_set_light_effects (int session,Json::Value &request)
 	root["error"] = 0;
 	root["response"] = response;
 
-	rc = sendto_rdt_client(session,rdt_ticket,(char*)root.toStyledString().c_str());
+	rc = sendto_rdt_client(session,rdt_ticket,root);
 
 
 	if ( rc < 0 )
@@ -868,8 +1000,8 @@ void deviceapi_get_gateway (int session,Json::Value &request)
 
 printf("get_gateway:\n%s\n----------\n",(char*)root.toStyledString().c_str());
 
-	rc = sendto_rdt_client(session,rdt_ticket,(char*)root.toStyledString().c_str());
 
+	rc = sendto_rdt_client(session,rdt_ticket,root);
 
 	if ( rc < 0 )
 	{
@@ -903,7 +1035,7 @@ void deviceapi_add_accessories (int session,Json::Value &request)
 	root["error"] = 0;
 	root["response"] = response;
 
-	rc = sendto_rdt_client(session,rdt_ticket,(char*)root.toStyledString().c_str());
+	rc = sendto_rdt_client(session,rdt_ticket,root);
 
 
 	if ( rc < 0 )
@@ -937,7 +1069,7 @@ void deviceapi_merge_accessories (int session,Json::Value &request)
 	root["error"] = 0;
 	root["response"] = response;
 
-	rc = sendto_rdt_client(session,rdt_ticket,(char*)root.toStyledString().c_str());
+	rc = sendto_rdt_client(session,rdt_ticket,root);
 
 
 	if ( rc < 0 )
@@ -966,7 +1098,7 @@ void deviceapi_backup_gateway (int session,Json::Value &request)
 	root["error"] = 0;
 	root["response"] = response;
 
-	rc = sendto_rdt_client(session,rdt_ticket,(char*)root.toStyledString().c_str());
+	rc = sendto_rdt_client(session,rdt_ticket,root);
 
 
 	if ( rc < 0 )
@@ -995,7 +1127,7 @@ void deviceapi_restore_gateway (int session,Json::Value &request)
 	root["error"] = 0;
 	root["response"] = response;
 
-	rc = sendto_rdt_client(session,rdt_ticket,(char*)root.toStyledString().c_str());
+	rc = sendto_rdt_client(session,rdt_ticket,root);
 
 
 	if ( rc < 0 )
@@ -1024,7 +1156,7 @@ void deviceapi_reset_gateway (int session,Json::Value &request)
 	root["error"] = 0;
 	root["response"] = response;
 
-	rc = sendto_rdt_client(session,rdt_ticket,(char*)root.toStyledString().c_str());
+	rc = sendto_rdt_client(session,rdt_ticket,root);
 
 
 	if ( rc < 0 )
@@ -1053,7 +1185,7 @@ void deviceapi_update_gateway (int session,Json::Value &request)
 	root["error"] = 0;
 	root["response"] = response;
 
-	rc = sendto_rdt_client(session,rdt_ticket,(char*)root.toStyledString().c_str());
+	rc = sendto_rdt_client(session,rdt_ticket,root);
 
 
 	if ( rc < 0 )
@@ -1107,6 +1239,7 @@ printf("eddy test GroupID :%d %s\n",idGroup,pGroup->m_name.c_str());
 
 	response["uid"] = (char*) __myUID;
 	response["api"] = "get_detail";
+	response["id"] = idGroup;
 
 	response["objects"] = responseObjects;
 
@@ -1123,7 +1256,7 @@ printf("eddy test GroupID :%d %s\n",idGroup,pGroup->m_name.c_str());
 printf("deviceapi_get_detail_of_group\n%s\n-------------------\n",(char*)root.toStyledString().c_str());
 
 
-	rc = sendto_rdt_client(session,rdt_ticket,(char*)root.toStyledString().c_str());
+	rc = sendto_rdt_client(session,rdt_ticket,root);
 
 
 	if ( rc < 0 )
@@ -1185,6 +1318,7 @@ void deviceapi_get_detail_of_object(int session,Json::Value &request,int idObjec
 
 	response["uid"] = (char*) __myUID;
 	response["api"] = "get_detail";
+	response["id"] = idObject;
 
 	response["objects"] = responseObjects;
 
@@ -1200,7 +1334,7 @@ void deviceapi_get_detail_of_object(int session,Json::Value &request,int idObjec
 printf("deviceapi_get_detail_of_object\n%s\n-------------------\n",(char*)root.toStyledString().c_str());
 
 
-	rc = sendto_rdt_client(session,rdt_ticket,(char*)root.toStyledString().c_str());
+	rc = sendto_rdt_client(session,rdt_ticket,root);
 
 
 	if ( rc < 0 )
@@ -1308,7 +1442,7 @@ void deviceapi_get_other_groups (int session,Json::Value &request)
 	root["response"] = response;
 
 
-	rc = sendto_rdt_client(session,rdt_ticket,(char*)root.toStyledString().c_str());
+	rc = sendto_rdt_client(session,rdt_ticket,root);
 
 
 	if ( rc < 0 )
@@ -1380,7 +1514,7 @@ void deviceapi_add_an_accessory_to_group (int session,Json::Value &request)
 	root["response"] = response;
 
 
-	rc = sendto_rdt_client(session,rdt_ticket,(char*)root.toStyledString().c_str());
+	rc = sendto_rdt_client(session,rdt_ticket,root);
 
 
 	if ( rc < 0 )
@@ -1411,7 +1545,7 @@ void deviceapi_remove_accessories_from_group (int session,Json::Value &request)
 	root["error"] = 0;
 	root["response"] = response;
 
-	rc = sendto_rdt_client(session,rdt_ticket,(char*)root.toStyledString().c_str());
+	rc = sendto_rdt_client(session,rdt_ticket,root);
 
 
 	if ( rc < 0 )
@@ -1454,10 +1588,7 @@ void deviceapi_get_locations (int session,Json::Value &request)
 				pLocation = (CLocation*) p->second;
 
 
-				locations[nLocationCnt]["id"] =  pLocation->m_id,
-				locations[nLocationCnt]["name"] =  pLocation->m_attr_str["name"].c_str();
-				locations[nLocationCnt]["is_editable"] = true;
-
+				__getAttr(pLocation,locations[nLocationCnt]);
 
 				nLocationCnt++;
 
@@ -1485,7 +1616,7 @@ void deviceapi_get_locations (int session,Json::Value &request)
 
 // ----
 
-	rc = sendto_rdt_client(session,rdt_ticket,(char*)root.toStyledString().c_str());
+	rc = sendto_rdt_client(session,rdt_ticket,root);
 
 
 	if ( rc < 0 )
@@ -1574,7 +1705,7 @@ void deviceapi_add_accessories_to_location (int session,Json::Value &request)
 		root["error_str"] = err_str;
 	root["response"] = response;
 
-	rc = sendto_rdt_client(session,rdt_ticket,(char*)root.toStyledString().c_str());
+	rc = sendto_rdt_client(session,rdt_ticket,root);
 
 
 	if ( rc < 0 )
@@ -1620,15 +1751,19 @@ void deviceapi_set_a_location (int session,Json::Value &request)
 		{
 			pLocation = new CLocation(__allObjects.getID(IDTYPE_LOCATION),strLocationName.c_str()); 
 
-			
+			pLocation->m_attr_num["editable"] = 1;
 
 			__allObjects.m_mapAllObjects[pLocation->m_id] = pLocation;
 			__allObjects.m_mapAllLocations[pLocation->m_id] = pLocation;
 		}
 		else
 		{
-			pLocation->m_name = strLocationName;
-			pLocation->m_attr_str["name"] = strLocationName;
+			if ( pLocation->m_attr_num["editable"] != 0 )
+			{
+				pLocation->m_name = strLocationName;
+				pLocation->m_attr_str["name"] = strLocationName;
+			}
+
 		}
 
 			err = 0;
@@ -1654,7 +1789,7 @@ void deviceapi_set_a_location (int session,Json::Value &request)
 		root["error_str"] = err_str;
 	root["response"] = response;
 
-	rc = sendto_rdt_client(session,rdt_ticket,(char*)root.toStyledString().c_str());
+	rc = sendto_rdt_client(session,rdt_ticket,root);
 
 
 	if ( rc < 0 )
@@ -1665,82 +1800,7 @@ void deviceapi_set_a_location (int session,Json::Value &request)
 	return;
 }
 
-void deviceapi_remove_locations (int session,Json::Value &request)
-{
-	Json::Value root;
-	Json::Value response;
-	Json::Value objects;
 
-	unsigned int rdt_ticket;
-	int err = 1;
-	string err_str;
-
-	int rc;
-	int i;
-	int id;
-
-
-	rdt_ticket = request["rdt_ticket"].asUInt();
-	objects = request["objects"];
-
-
-	// location
-	try {
-
-		for(i=0;i<(int)objects.size();i++)
-		{
-			TAllObjectMap::iterator it;
-			CLocation *pLocation = NULL;
-
-			id = objects[i]["id"].asUInt();
-
-			it = __allObjects.m_mapAllObjects.find(id);
-			if ( it != __allObjects.m_mapAllObjects.end() ) // Found it
-			{
-				pLocation = (CLocation *)it->second;
-				__allObjects.m_mapAllObjects.erase(it);
-			}
-
-			it = __allObjects.m_mapAllLocations.find(id);
-			if ( it != __allObjects.m_mapAllLocations.end() ) // Found it
-			{
-				__allObjects.m_mapAllObjects.erase(it);
-			}
-
-			if ( pLocation != NULL )
-			delete pLocation;
-		}		
-
-		err = 0;
-
-    } catch (const libsocket::socket_exception& exc)
-    {
-		std::cerr << exc.mesg;
-		err_str = exc.mesg;
-    }
-
-
-
-
-	response["api"] = "remove_locations";
-
-	
- 
-	root["error"] = err;
-	if ( err_str.length() != 0 )
-		root["error_str"] = err_str;
-	root["response"] = response;
-
-	rc = sendto_rdt_client(session,rdt_ticket,(char*)root.toStyledString().c_str());
-
-
-	if ( rc < 0 )
-	{
-
-	}
-
-	return;	
-}
 //void deviceapi_get_detail (int session,Json::Value &request)
 void deviceapi_set_schedule_detail (int session,Json::Value &request)
 {
@@ -1764,7 +1824,7 @@ void deviceapi_set_schedule_detail (int session,Json::Value &request)
 	root["error"] = 0;
 	root["response"] = response;
 
-	rc = sendto_rdt_client(session,rdt_ticket,(char*)root.toStyledString().c_str());
+	rc = sendto_rdt_client(session,rdt_ticket,root);
 
 
 	if ( rc < 0 )
@@ -1797,7 +1857,7 @@ void deviceapi_add_a_schedule (int session,Json::Value &request)
 	root["error"] = 0;
 	root["response"] = response;
 
-	rc = sendto_rdt_client(session,rdt_ticket,(char*)root.toStyledString().c_str());
+	rc = sendto_rdt_client(session,rdt_ticket,root);
 
 
 	if ( rc < 0 )
@@ -1831,7 +1891,7 @@ void deviceapi_get_accessory_setting (int session,Json::Value &request)
 	root["error"] = 0;
 	root["response"] = response;
 
-	rc = sendto_rdt_client(session,rdt_ticket,(char*)root.toStyledString().c_str());
+	rc = sendto_rdt_client(session,rdt_ticket,root);
 
 
 	if ( rc < 0 )
@@ -1857,8 +1917,9 @@ void deviceapi_get_gateway_setting (int session,Json::Value &request)
 	// group
 
 	response["uid"] = (char*) __myUID;
+	response["api"] = "get_gateway_setting";
 	response["home"] = "appl";
-	response["led_light_status"] = true;
+	response["led"] = 0;
 	
 	response["objects"] = objects;
 
@@ -1866,7 +1927,7 @@ void deviceapi_get_gateway_setting (int session,Json::Value &request)
 	root["error"] = 0;
 	root["response"] = response;
 
-	rc = sendto_rdt_client(session,rdt_ticket,(char*)root.toStyledString().c_str());
+	rc = sendto_rdt_client(session,rdt_ticket,root);
 
 
 	if ( rc < 0 )
@@ -1900,7 +1961,7 @@ void deviceapi_set_accessory_setting (int session,Json::Value &request)
 	root["error"] = 0;
 	root["response"] = response;
 
-	rc = sendto_rdt_client(session,rdt_ticket,(char*)root.toStyledString().c_str());
+	rc = sendto_rdt_client(session,rdt_ticket,root);
 
 
 	if ( rc < 0 )
@@ -1935,7 +1996,7 @@ void deviceapi_set_gateway_setting (int session,Json::Value &request)
 	root["error"] = 0;
 	root["response"] = response;
 
-	rc = sendto_rdt_client(session,rdt_ticket,(char*)root.toStyledString().c_str());
+	rc = sendto_rdt_client(session,rdt_ticket,root);
 
 
 	if ( rc < 0 )
@@ -1984,7 +2045,7 @@ void deviceapi_get_objects (int session,Json::Value &request)
 	root["error"] = 0;
 	root["response"] = response;
 
-	rc = sendto_rdt_client(session,rdt_ticket,(char*)root.toStyledString().c_str());
+	rc = sendto_rdt_client(session,rdt_ticket,root);
 
 
 	if ( rc < 0 )
@@ -2059,7 +2120,7 @@ void deviceapi_get_switches (int session,Json::Value &request)
 
 printf("get_switches:\n%s\n----------------\n",(char*)root.toStyledString().c_str());
 
-	rc = sendto_rdt_client(session,rdt_ticket,(char*)root.toStyledString().c_str());
+	rc = sendto_rdt_client(session,rdt_ticket,root);
 
 
 	if ( rc < 0 )
@@ -2093,7 +2154,7 @@ void deviceapi_remove_a_switch_accessory (int session,Json::Value &request)
 	root["error"] = 0;
 	root["response"] = response;
 
-	rc = sendto_rdt_client(session,rdt_ticket,(char*)root.toStyledString().c_str());
+	rc = sendto_rdt_client(session,rdt_ticket,root);
 
 
 	if ( rc < 0 )
@@ -2138,7 +2199,7 @@ void deviceapi_get_tasks (int session,Json::Value &request)
 	root["error"] = 0;
 	root["response"] = response;
 
-	rc = sendto_rdt_client(session,rdt_ticket,(char*)root.toStyledString().c_str());
+	rc = sendto_rdt_client(session,rdt_ticket,root);
 
 
 	if ( rc < 0 )
@@ -2170,7 +2231,7 @@ void deviceapi_add_a_task (int session,Json::Value &request)
 	root["error"] = 0;
 	root["response"] = response;
 
-	rc = sendto_rdt_client(session,rdt_ticket,(char*)root.toStyledString().c_str());
+	rc = sendto_rdt_client(session,rdt_ticket,root);
 
 
 	if ( rc < 0 )
@@ -2217,7 +2278,7 @@ void deviceapi_api_not_found (int session,Json::Value &request)
 		root["error_str"] = err_str;
 	root["response"] = response;
 
-	rc = sendto_rdt_client(session,rdt_ticket,(char*)root.toStyledString().c_str());
+	rc = sendto_rdt_client(session,rdt_ticket,root);
 
 
 	if ( rc < 0 )

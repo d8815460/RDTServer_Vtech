@@ -6,8 +6,21 @@
 	#include <json/json.h>
 	#include <pthread.h>
 
+	#include <map>
+
 
 	using libsocket::unix_stream_client;
+
+	class CTXRecord
+	{
+	public:
+		int seq;
+		int session;
+		Json::Value response;
+		Json::Value request;
+		time_t sendTime;
+	};
+
 
 	class CVtechIPHub
 	{
@@ -25,13 +38,16 @@
 		int statusSock;
 		int runThread;
 
-		unix_stream_client sock;		
+		unix_stream_client sock;	
+
+	public:
+		std::map<unsigned int, CTXRecord *> m_txQueue;	
 
 	protected:
 		unsigned int getSeq();
 
 		int connectToGateway();
-		int sendToGateway(const char *payload_length_buffer,int payload_length);
+		int sendToGateway(Json::Value& payload);
 
 		int parser(Json::Value& root);
 

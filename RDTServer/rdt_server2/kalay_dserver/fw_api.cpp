@@ -1,13 +1,14 @@
-
 #include "../headers/exception.hpp"
-#include <string>
-#include <iostream>
 #include <string.h>
 #include <unistd.h>
 
-#include <iomanip> 
 #include <json/json.h>
 
+#include <string>
+#include <iostream>
+
+
+#include "dserver.h"
 
 #include "fw_api.h"
 
@@ -276,17 +277,31 @@ int CVtechIPHub::fwapi_cnnt_get_status()
 }
 
 
-int CVtechIPHub::sendToGateway(const char *payload,int payload_length)
+int CVtechIPHub::sendToGateway(Json::Value& payload)
 {
 	int ret = 0;
 	unsigned char buffLength[4];
 	int rc;
 
+	Json::FastWriter fastWriter;
+	std::string strSendOut;
 
-	buffLength[0] = (((unsigned long)payload_length) &0xff000000)>>24;
-	buffLength[1] = (((unsigned long)payload_length) &0x00ff0000)>>16;
-	buffLength[2] = (((unsigned long)payload_length) &0x0000ff00)>>8;
-	buffLength[3] = (((unsigned long)payload_length) &0x000000ff);
+	unsigned int strSendOutLength;
+
+
+
+	strSendOut = fastWriter.write(payload);
+
+
+	strSendOutLength  = strSendOut.length();
+
+
+
+
+	buffLength[0] = (((unsigned long)strSendOutLength) &0xff000000)>>24;
+	buffLength[1] = (((unsigned long)strSendOutLength) &0x00ff0000)>>16;
+	buffLength[2] = (((unsigned long)strSendOutLength) &0x0000ff00)>>8;
+	buffLength[3] = (((unsigned long)strSendOutLength) &0x000000ff);
 
 
 	//strcpy((char*)&payload_length_buffer[4],(char*)total_payload.c_str());
@@ -304,7 +319,7 @@ int CVtechIPHub::sendToGateway(const char *payload,int payload_length)
 	}
 
 
-	rc = sock.snd(payload,payload_length); // for JSON to parse properly on server side
+	rc = sock.snd(strSendOut.c_str(),strSendOutLength); // for JSON to parse properly on server side
 
 	if ( rc < 0 )
 	{ // ## FixMe  - no error Handle
@@ -342,10 +357,11 @@ int CVtechIPHub::fwapi_getall()
 // 			root["functionState"] = arg.c_str();
 
 	root["seq"] = arg.c_str();
+	root["ver"] = __emualtorVer;
 
 	total_payload = root.toStyledString().c_str();
 
-	sendToGateway(total_payload.c_str(),total_payload.length());
+	sendToGateway(root);
 
 	return 0;
 }
@@ -356,8 +372,8 @@ int CVtechIPHub::fwapi_set(Json::Value &objects)
 {
 
 //unsigned char payload[] = {0x74,0x65,0x73,0x74};
-
-	string arg = std::to_string(getSeq());	
+	int seq = getSeq();
+	string arg = std::to_string(seq);	
 
 
 	Json::Value root;
@@ -374,9 +390,9 @@ int CVtechIPHub::fwapi_set(Json::Value &objects)
 	printf("payload\n%s\n",total_payload.c_str());
 
 
-	sendToGateway(total_payload.c_str(),total_payload.length());
+	sendToGateway(root);
 
-	return 0;
+	return seq;
 }
 
 
@@ -399,7 +415,7 @@ int CVtechIPHub::fwapi_get(Json::Value &objects)
 
 
 
-	sendToGateway(total_payload.c_str(),total_payload.length());
+	sendToGateway(root);
 
 	return 0;
 }

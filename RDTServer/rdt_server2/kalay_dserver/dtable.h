@@ -8,10 +8,11 @@
 
 	using namespace std;
 
-	#define IDTYPE_ACCESSORY  0x01000000
+	#define IDTYPE_ACCESSORY  	0x01000000
+	#define IDTYPE_WALLSWITCH  	0x02000000
 	#define IDTYPE_GROUP		0x12000000
-	#define IDTYPE_LOCATION	0x13000000
-	#define IDTYPE_GATEWAY	0x70000000
+	#define IDTYPE_LOCATION		0x13000000
+	#define IDTYPE_GATEWAY		0x70000000
 
 	class CLocation;
 	class CGroup;	
@@ -69,27 +70,42 @@
 	};
 
 
+	class CGateway : public CMyObject
+	{
+	public:
+		CGateway(int id,const char *name);
+		~CGateway();
+
+	public:
+
+	};
+
 
 	class CAccessory : public CMyObject
 	{
 	public:
-		CAccessory(int id,const char *name,int type) : CMyObject("accessory",id,name,type)
-		{
-		}
-
+		CAccessory(int id,const char *name,int type);
 		~CAccessory();
 
 	public:
 
 	};
 
-	class CWallSwitch : public CAccessory
+
+	class CLightBulb : public CAccessory
 	{
 	public:
-		CWallSwitch(int id,const char *name,int type) : CAccessory(id,name,type)
-		{
-		}
+		CLightBulb(int id,const char *name,CLocation *pLocation,CGroup *pGroup);
+		~CLightBulb();
 
+	public:
+
+	};	
+
+	class CWallSwitch : public CMyObject
+	{
+	public:
+		CWallSwitch(int id,const char *name,CLocation *pLocation);
 		~CWallSwitch();
 
 	public:
@@ -108,10 +124,7 @@
 	class CGroup : public CMyObject
 	{
 	public:
-		CGroup(int id,const char *name) : CMyObject("group",id,name,0)
-		{
-		}
-
+		CGroup(int id,const char *name,CLocation *pLocation);
 		~CGroup();
 		
 
@@ -132,10 +145,7 @@
 	class CLocation : public CMyObject
 	{
 	public:
-		CLocation(int id,const char *name) : CMyObject("location",id,name,0x0301)
-		{
-		}
-
+		CLocation(int id,const char *name);
 		~CLocation();
 		
 
