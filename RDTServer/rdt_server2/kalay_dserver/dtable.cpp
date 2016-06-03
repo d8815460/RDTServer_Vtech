@@ -1,10 +1,11 @@
 #include "../headers/exception.hpp"
+#include <unistd.h>
+#include <json/json.h>
+
+#include <algorithm>
 #include <string>
 #include <iostream>
-#include <unistd.h>
 
-#include <iomanip> 
-#include <json/json.h>
 
 
 #include "dserver.h"
@@ -33,9 +34,14 @@ CAllObjects::CAllObjects()
 
 	CAccessory *pAccessory;
 
-	CWallSwitch *pWallSwitch01;
-	CWallSwitch *pWallSwitch02;
-	CWallSwitch *pWallSwitch03;
+	CSensor *pSensor;
+
+	CWallSwitch *pWallSwitchBedroom;
+	CWallSwitch *pWallSwitchBathroom;
+	CWallSwitch *pWallSwitchKitchen;
+	CWallSwitch *pWallSwitchLivingroom;
+
+	CSwitch 	*pSwitch;
 
 	CLightBulb *pLightBulb;
 
@@ -48,367 +54,261 @@ CAllObjects::CAllObjects()
 
 
 
-	//m_mapAllObjects.insert(TAllObjectPair(0x01000001,new CAccessory(0x01000001)));
-	//m_mapAllObjects[0x01000002] = new CAccessory(0x01000002);
-
 
 	// insert Gateway
 	pGateway = new CGateway(getID(IDTYPE_GATEWAY),"V-Tech IP-Hub"); //Gateway
-
-	
-
-	m_mapAllObjects[pGateway->m_id] = pGateway;
 
 	m_idGateway = pGateway->m_id;
 
 
 	//----------------------------------------------------------
-	locationOther = new CLocation(getID(IDTYPE_LOCATION),"Other");
+	locationOther = new CLocation("Other");
 
 
 	locationOther->m_attr_num["editable"] = 0;
 
 
-	m_mapAllObjects[locationOther->m_id] = locationOther;
-	m_mapAllLocations[locationOther->m_id] = locationOther;	
-
 
 	//----------------------------------------------------------------
 
-	pBedroom = new CLocation(getID(IDTYPE_LOCATION),"Bedroom"); 
+	pBedroom = new CLocation("Bedroom"); 
 	
 	pBedroom->m_attr_num["editable"] = 1;
 
-	m_mapAllObjects[pBedroom->m_id] = pBedroom;
-	m_mapAllLocations[pBedroom->m_id] = pBedroom;
+	//----------------------------------------------------------------
+	pWallSwitchBedroom = new CWallSwitch("Bedroom WallSwitch",pBedroom);
 
 
 	//----------------------------------------------------------------
-	pWallSwitch01 = new CWallSwitch(getID(IDTYPE_WALLSWITCH),"Wall Switch 01",pBedroom);
-
-
-	m_mapAllObjects[pWallSwitch01->m_id] = pWallSwitch01;
-
-
-	//----------------------------------------------------------------
-	pLightBulb = new CLightBulb(getID(IDTYPE_ACCESSORY),"Light 71",pBedroom,NULL);
-
-
-	pWallSwitch01->add(pLightBulb);
-	m_mapAllObjects[pLightBulb->m_id] = pLightBulb;
+	pLightBulb = new CLightBulb(getID(IDTYPE_ACCESSORY),"Bedroom Light-1",pBedroom,NULL);
+	pSwitch = new CSwitch("Bedroom Switch 01",pWallSwitchBedroom,pLightBulb);
 
 
 	//----------------------------------------------------------------
-	pLightBulb = new CLightBulb(getID(IDTYPE_ACCESSORY),"Light 72",pBedroom,NULL);
-
-
-	pWallSwitch01->add(pLightBulb);
-	m_mapAllObjects[pLightBulb->m_id] = pLightBulb;
+	pLightBulb = new CLightBulb(getID(IDTYPE_ACCESSORY),"Bedroom Light-2",pBedroom,NULL);
+	pSwitch = new CSwitch("Bedroom Switch 02",pWallSwitchBedroom,pLightBulb);
 
 
 	//----------------------------------------------------------------
-	pWallSwitch02 = new CWallSwitch(getID(IDTYPE_WALLSWITCH),"Wall Switch 02",pBedroom);
+	pLightBulb = new CLightBulb(getID(IDTYPE_ACCESSORY),"Bedroom Light-3",pBedroom,NULL);
+	pSwitch = new CSwitch("Bedroom Switch 03",pWallSwitchBedroom,pLightBulb);
 
-	m_mapAllObjects[pWallSwitch02->m_id] = pWallSwitch02;
+	//----------------------------------------------------------------
+	pLightBulb = new CLightBulb(getID(IDTYPE_ACCESSORY),"Bedroom Light-4",pBedroom,NULL);
+	pSwitch = new CSwitch("Bedroom Switch 04",pWallSwitchBedroom,pLightBulb);
+
+
+	//----------------------------------------------------------------
+	pLightBulb = new CLightBulb(getID(IDTYPE_ACCESSORY),"Bedroom Light-5",pBedroom,NULL);
+
+	//----------------------------------------------------------------
+	pLightBulb = new CLightBulb(getID(IDTYPE_ACCESSORY),"Bedroom Light-6",pBedroom,NULL);
 
 
 	//----------------------------------------------------------------
 	pLightBulb = new CLightBulb(getID(IDTYPE_ACCESSORY),"Light 81",pBedroom,NULL);
 
 
-	pWallSwitch02->add(pLightBulb);
-	m_mapAllObjects[pLightBulb->m_id] = pLightBulb;	
-
-
 	//----------------------------------------------------------------
 	pLightBulb = new CLightBulb(getID(IDTYPE_ACCESSORY),"Light 01",pBedroom,NULL);
 
 
-	m_mapAllObjects[pLightBulb->m_id] = pLightBulb;
 
 
 
 //----------------------------------------------------------------
-	pBathroom = new CLocation(getID(IDTYPE_LOCATION),"Bathroom"); 
+	pBathroom = new CLocation("Bathroom"); 
 	
 	pBathroom->m_attr_num["editable"] = 1;
 
-	m_mapAllObjects[pBathroom->m_id] = pBathroom;
-	m_mapAllLocations[pBathroom->m_id] = pBathroom;
+//----------------------------------------------------------------
+	pWallSwitchBathroom = new CWallSwitch("Bathroom WallSwitch",pBathroom);
+
 
 
 //----------------------------------------------------------------
-	pWallSwitch03 = new CWallSwitch(getID(IDTYPE_WALLSWITCH),"Wall Switch 03",pBathroom);
-
-
-	m_mapAllObjects[pWallSwitch03->m_id] = pWallSwitch03;
-
-//----------------------------------------------------------------
-	pGroup01 = new CGroup(getID(IDTYPE_GROUP),"Group 01",pBathroom);	
+	pGroup01 = new CGroup("Group 01",pBathroom);	
 
 	pGroup01->m_attr_num["groupNo"] = 1;
 
-	m_mapAllObjects[pGroup01->m_id] = pGroup01;
-	m_mapAllGroups[pGroup01->m_id] = pGroup01;
+
+	//---------------------------------------------------------
+	pLightBulb = new CLightBulb(getID(IDTYPE_ACCESSORY),"Bathroom Light-1",pBathroom,pGroup01);
+
+	//---------------------------------------------------------
+	pLightBulb = new CLightBulb(getID(IDTYPE_ACCESSORY),"Bathroom Light-2",pBathroom,pGroup01);
+
+	//---------------------------------------------------------
+	pLightBulb = new CLightBulb(getID(IDTYPE_ACCESSORY),"Bathroom Light-3",pBathroom,pGroup01);
+
+	//---------------------------------------------------------
+	pLightBulb = new CLightBulb(getID(IDTYPE_ACCESSORY),"Bathroom Light-4",pBathroom,pGroup01);	
 
 
 	//---------------------------------------------------------
-	pLightBulb = new CLightBulb(getID(IDTYPE_ACCESSORY),"Light 11",pBathroom,pGroup01);
+	pLightBulb = new CLightBulb(getID(IDTYPE_ACCESSORY),"Bathroom Light-5",pBathroom,pGroup01);
+	pSwitch = new CSwitch("Bathroom Switch 01",pWallSwitchBathroom,pLightBulb);
 
-
-	m_mapAllObjects[pLightBulb->m_id] = pLightBulb;
 
 	//---------------------------------------------------------
-	pLightBulb = new CLightBulb(getID(IDTYPE_ACCESSORY),"Light 12",pBathroom,pGroup01);
+	pLightBulb = new CLightBulb(getID(IDTYPE_ACCESSORY),"Bathroom Light-6",pBathroom,pGroup01);	
+	pSwitch = new CSwitch("Bathroom Switch 02",pWallSwitchBathroom,pLightBulb);
+
+
+	//---------------------------------------------------------
+	pLightBulb = new CLightBulb(getID(IDTYPE_ACCESSORY),"Bathroom Light-7",pBathroom,NULL);
+	pSwitch = new CSwitch("Bathroom Switch 03",pWallSwitchBathroom,pLightBulb);
+
+	//---------------------------------------------------------
+	pLightBulb = new CLightBulb(getID(IDTYPE_ACCESSORY),"Bathroom Light-8",pBathroom,NULL);
+	pSwitch = new CSwitch("Bathroom Switch 04",pWallSwitchBathroom,pLightBulb);
+
+	//---------------------------------------------------------
+	pLightBulb = new CLightBulb(getID(IDTYPE_ACCESSORY),"Bathroom Light-9",pBathroom,NULL);
+
 	
 
-
-
-
-	m_mapAllObjects[pLightBulb->m_id] = pLightBulb;
-
-
-
 //----------------------------------------------------------------
-	pKitchen = new CLocation(getID(IDTYPE_LOCATION),"Kitchen"); 
+	pKitchen = new CLocation("Kitchen"); 
 	
 	pKitchen->m_attr_num["editable"] = 1;
 
-	m_mapAllObjects[pKitchen->m_id] = pKitchen;
-	m_mapAllLocations[pKitchen->m_id] = pKitchen;
+//----------------------------------------------------------------
+	pWallSwitchKitchen = new CWallSwitch("Kitchen WallSwitch",pKitchen);
+
 
 
 //----------------------------------------------------------------
-	pAccessory = new CAccessory(getID(IDTYPE_ACCESSORY),"Garage Door Sensor 01",0x0201);
+	pSensor = new CSensor(getID(IDTYPE_ACCESSORY),"Garage Door Sensor 01",0x0201,pKitchen);
 
-	pAccessory->m_attr_num["on"] = 2;
-	pAccessory->m_attr_num["icon"] = 0;
-	pAccessory->m_attr_num["trigger"] = 1;
+//----------------------------------------------------------------
+	pSensor = new CSensor(getID(IDTYPE_ACCESSORY),"Magnetic sensor",0x0202,pKitchen);
 
-	pAccessory->m_attr_num["alert"] = 0;
-	pAccessory->m_attr_num["testMode"] = 0;
-	pAccessory->m_attr_num["arm"] = 1;
-	pAccessory->m_attr_num["batLow"] = 0;
-	pAccessory->m_attr_num["outLink"] = 0;
+	pSensor->m_attr_num["batLow"] = 1;
+	pSensor->m_attr_num["outLink"] = 1;
 
-	pAccessory->m_about_str["udid"] = std::to_string(pAccessory->m_id);	
-	pAccessory->m_about_str["ver"] = "1.0.0";		
-
-	pKitchen->add(pAccessory);
-	m_mapAllObjects[pAccessory->m_id] = pAccessory;
 
 
 //----------------------------------------------------------------
-	pAccessory = new CAccessory(getID(IDTYPE_ACCESSORY),"Magnetic sensor",0x0202);
+	pSensor = new CSensor(getID(IDTYPE_ACCESSORY),"motion sensor",0x0203,pKitchen);
 
-	pAccessory->m_attr_num["on"] = 2;
-	pAccessory->m_attr_num["icon"] = 0;
-	pAccessory->m_attr_num["trigger"] = 1;
-
-	pAccessory->m_attr_num["alert"] = 0;
-	pAccessory->m_attr_num["testMode"] = 0;
-	pAccessory->m_attr_num["arm"] = 1;
-	pAccessory->m_attr_num["batLow"] = 0;
-	pAccessory->m_attr_num["outLink"] = 0;
-
-	pAccessory->m_about_str["udid"] = std::to_string(pAccessory->m_id);	
-	pAccessory->m_about_str["ver"] = "1.0.0";		
-
-	pKitchen->add(pAccessory);
-	m_mapAllObjects[pAccessory->m_id] = pAccessory;
+//----------------------------------------------------------------
+	pSensor = new CSensor(getID(IDTYPE_ACCESSORY),"flood detector",0x0206,pKitchen);
 
 
 //----------------------------------------------------------------
-	pAccessory = new CAccessory(getID(IDTYPE_ACCESSORY),"motion sensor",0x0203);
-
-	pAccessory->m_attr_num["on"] = 2;
-	pAccessory->m_attr_num["icon"] = 0;
-	pAccessory->m_attr_num["trigger"] = 1;
-
-	pAccessory->m_attr_num["alert"] = 0;
-	pAccessory->m_attr_num["testMode"] = 0;
-	pAccessory->m_attr_num["arm"] = 1;
-	pAccessory->m_attr_num["batLow"] = 0;
-	pAccessory->m_attr_num["outLink"] = 0;
-
-	pAccessory->m_about_str["udid"] = std::to_string(pAccessory->m_id);	
-	pAccessory->m_about_str["ver"] = "1.0.0";		
-
-	pKitchen->add(pAccessory);
-	m_mapAllObjects[pAccessory->m_id] = pAccessory;	
-
-//----------------------------------------------------------------
-	pAccessory = new CAccessory(getID(IDTYPE_ACCESSORY),"flood detector",0x0206);
-
-	pAccessory->m_attr_num["on"] = 2;
-	pAccessory->m_attr_num["icon"] = 0;
-	pAccessory->m_attr_num["trigger"] = 1;
-
-	pAccessory->m_attr_num["alert"] = 0;
-	pAccessory->m_attr_num["testMode"] = 0;
-	pAccessory->m_attr_num["arm"] = 1;
-	pAccessory->m_attr_num["batLow"] = 0;
-	pAccessory->m_attr_num["outLink"] = 0;
-
-	pAccessory->m_about_str["udid"] = std::to_string(pAccessory->m_id);	
-	pAccessory->m_about_str["ver"] = "1.0.0";		
-
-	pKitchen->add(pAccessory);
-	m_mapAllObjects[pAccessory->m_id] = pAccessory;		
-
-
-//----------------------------------------------------------------
-	pLightBulb = new CLightBulb(getID(IDTYPE_ACCESSORY),"Kitchen Light 02",pKitchen,NULL);
-
-	
-
-
-	m_mapAllObjects[pLightBulb->m_id] = pLightBulb;
-
-
-//----------------------------------------------------------------
-	pAccessory = new CAccessory(getID(IDTYPE_ACCESSORY),"AC power outlet",0x0106);
+	pAccessory = new CAccessory(getID(IDTYPE_ACCESSORY),"AC power outlet",0x0106,pKitchen);
 
 	pAccessory->m_attr_num["on"] = 1;
 	pAccessory->m_attr_num["icon"] = 0;
 	pAccessory->m_attr_num["trigger"] = 0;
 
-	pAccessory->m_about_str["udid"] = std::to_string(pAccessory->m_id);	
+	pAccessory->m_fwid = std::to_string(pAccessory->m_id);	
 	pAccessory->m_about_str["ver"] = "1.0.0";		
 
-	pKitchen->add(pAccessory);
-	m_mapAllObjects[pAccessory->m_id] = pAccessory;
+
+//----------------------------------------------------------------
+	pLightBulb = new CLightBulb(getID(IDTYPE_ACCESSORY),"Kitchen Light-1",pKitchen,NULL);
+	pSwitch = new CSwitch("Kitchen Switch 01",pWallSwitchKitchen,pLightBulb);
+
+//----------------------------------------------------------------
+	pLightBulb = new CLightBulb(getID(IDTYPE_ACCESSORY),"Kitchen Light-2",pKitchen,NULL);
+	pSwitch = new CSwitch("Kitchen Switch 02",pWallSwitchKitchen,pLightBulb);
+
+//----------------------------------------------------------------
+	pLightBulb = new CLightBulb(getID(IDTYPE_ACCESSORY),"Kitchen Light-3",pKitchen,NULL);
+	pSwitch = new CSwitch("Kitchen Switch 03",pWallSwitchKitchen,pLightBulb);
+
+//----------------------------------------------------------------
+	pLightBulb = new CLightBulb(getID(IDTYPE_ACCESSORY),"Kitchen Light-4",pKitchen,NULL);
+	pSwitch = new CSwitch("Kitchen Switch 04",pWallSwitchKitchen,pLightBulb);
+
+//----------------------------------------------------------------
+	pLightBulb = new CLightBulb(getID(IDTYPE_ACCESSORY),"Kitchen Light-5",pKitchen,NULL);
+
+//----------------------------------------------------------------
+	pLightBulb = new CLightBulb(getID(IDTYPE_ACCESSORY),"Kitchen Light-6",pKitchen,NULL);
+
 
 
 //----------------------------------------------------------------
-	pLightBulb = new CLightBulb(getID(IDTYPE_ACCESSORY),"Light 03",pKitchen,NULL);
+	pGroup02 = new CGroup("Group 02",pBathroom);	
 
-	m_mapAllObjects[pLightBulb->m_id] = pLightBulb;
-
-//----------------------------------------------------------------
-	pLightBulb = new CLightBulb(getID(IDTYPE_ACCESSORY),"Light 04",pKitchen,NULL);
-
-	m_mapAllObjects[pLightBulb->m_id] = pLightBulb;
+	pGroup02->m_attr_num["groupNo"] = 2;
 
 
 //----------------------------------------------------------------
-	pGroup02 = new CGroup(getID(IDTYPE_GROUP),"Group 02",pBathroom);	
-
-	pGroup01->m_attr_num["groupNo"] = 2;
-
-	m_mapAllObjects[pGroup02->m_id] = pGroup02;
-	m_mapAllGroups[pGroup02->m_id] = pGroup02;	
+	pLightBulb = new CLightBulb(getID(IDTYPE_ACCESSORY),"Kitchen Light-4",pKitchen,pGroup02);
 
 //----------------------------------------------------------------
-	pLightBulb = new CLightBulb(getID(IDTYPE_ACCESSORY),"Light 05",pKitchen,pGroup02);
-			
-
-	m_mapAllObjects[pLightBulb->m_id] = pLightBulb;
+	pLightBulb = new CLightBulb(getID(IDTYPE_ACCESSORY),"Kitchen Light-5",pKitchen,pGroup02);
 
 
-//----------------------------------------------------------------
-	pLightBulb = new CLightBulb(getID(IDTYPE_ACCESSORY),"Light 06",pKitchen,pGroup02);
 
-	m_mapAllObjects[pLightBulb->m_id] = pLightBulb;
-
-
-	//---------------------------------------------------------
+// locationOther
+//---------------------------------------------------------
 	pLightBulb = new CLightBulb(getID(IDTYPE_ACCESSORY),"Light 91",locationOther,pGroup02);
 
-	m_mapAllObjects[pLightBulb->m_id] = pLightBulb;
-
-	//---------------------------------------------------------
+//---------------------------------------------------------
 	pLightBulb = new CLightBulb(getID(IDTYPE_ACCESSORY),"Light 92",locationOther,pGroup02);
 
-	m_mapAllObjects[pLightBulb->m_id] = pLightBulb;
-
-
-
-	//---------------------------------------------------------
+//---------------------------------------------------------
 	pLightBulb = new CLightBulb(getID(IDTYPE_ACCESSORY),"Light 93",locationOther,NULL);
 
-	m_mapAllObjects[pLightBulb->m_id] = pLightBulb;
-
-
-	//---------------------------------------------------------
+//---------------------------------------------------------
 	pLightBulb = new CLightBulb(getID(IDTYPE_ACCESSORY),"Light 94",locationOther,NULL);
 
-	m_mapAllObjects[pAccessory->m_id] = pAccessory;	
 
 //----------------------------------------------------------------
-
-	pLivingroom = new CLocation(getID(IDTYPE_LOCATION),"Living Room"); 
+	pLivingroom = new CLocation("Living Room"); 
 	
 	pLivingroom->m_attr_num["editable"] = 1;
 
-	m_mapAllObjects[pLivingroom->m_id] = pLivingroom;
-	m_mapAllLocations[pLivingroom->m_id] = pLivingroom;	
-
-
-
-//----------------------------------------------------------------
-	pGroup03 = new CGroup(getID(IDTYPE_GROUP),"Group 03",pLivingroom);	
-
-	pGroup01->m_attr_num["groupNo"] = 3;
-
-	m_mapAllObjects[pGroup03->m_id] = pGroup03;
-	m_mapAllGroups[pGroup03->m_id] = pGroup03;	
-
-
-//----------------------------------------------------------------
-	pLightBulb = new CLightBulb(getID(IDTYPE_ACCESSORY),"Light 31",pLivingroom,NULL);
-			
-
-	m_mapAllObjects[pLightBulb->m_id] = pLightBulb;
-
-
 	//----------------------------------------------------------------
-	pLightBulb = new CLightBulb(getID(IDTYPE_ACCESSORY),"Light 32",pLivingroom,NULL);
+	pWallSwitchLivingroom = new CWallSwitch("Living room WallSwitch",pLivingroom);	
+
+
+//----------------------------------------------------------------
+	pGroup03 = new CGroup("Group 03",pLivingroom);	
+
+	pGroup03->m_attr_num["groupNo"] = 3;
+
+
+
+//----------------------------------------------------------------
+	pLightBulb = new CLightBulb(getID(IDTYPE_ACCESSORY),"Living room Light-1",pLivingroom,NULL);
+			
+//----------------------------------------------------------------
+	pLightBulb = new CLightBulb(getID(IDTYPE_ACCESSORY),"Living room Light-2",pLivingroom,NULL);
 	
+//---------------------------------------------------------
+	pLightBulb = new CLightBulb(getID(IDTYPE_ACCESSORY),"Living room Light-3",pLivingroom,NULL);
+	pSwitch = new CSwitch("Living room Switch 01",pWallSwitchLivingroom,pLightBulb);
 
-	m_mapAllObjects[pLightBulb->m_id] = pLightBulb;
+//---------------------------------------------------------
+	pLightBulb = new CLightBulb(getID(IDTYPE_ACCESSORY),"Living room Light-4",pLivingroom,NULL);
+	pSwitch = new CSwitch("Living room Switch 02",pWallSwitchLivingroom,pLightBulb);
 
+//---------------------------------------------------------
+	pLightBulb = new CLightBulb(getID(IDTYPE_ACCESSORY),"Living room Light-5",pLivingroom,pGroup03);
+	pSwitch = new CSwitch("Living room Switch 03",pWallSwitchLivingroom,pLightBulb);
 
-	//---------------------------------------------------------
-	pLightBulb = new CLightBulb(getID(IDTYPE_ACCESSORY),"Light 95",pLivingroom,NULL);
+//---------------------------------------------------------
+	pLightBulb = new CLightBulb(getID(IDTYPE_ACCESSORY),"Living room Light-6",pLivingroom,pGroup03);
+	pSwitch = new CSwitch("Living room Switch 04",pWallSwitchLivingroom,pLightBulb);
 		
-	m_mapAllObjects[pLightBulb->m_id] = pLightBulb;
-
-
-	//---------------------------------------------------------
-	pLightBulb = new CLightBulb(getID(IDTYPE_ACCESSORY),"Light 96",pLivingroom,NULL);
-
-	m_mapAllObjects[pLightBulb->m_id] = pLightBulb;	
-
-
-	//---------------------------------------------------------
-	pLightBulb = new CLightBulb(getID(IDTYPE_ACCESSORY),"Light 97",pLivingroom,pGroup03);
-
-	m_mapAllObjects[pLightBulb->m_id] = pLightBulb;	
-
-	//---------------------------------------------------------
-	pLightBulb = new CLightBulb(getID(IDTYPE_ACCESSORY),"Light 98",pLivingroom,pGroup03);
-		
-
-
-	m_mapAllObjects[pLightBulb->m_id] = pLightBulb;	
-
-	//---------------------------------------------------------
-	pLightBulb = new CLightBulb(getID(IDTYPE_ACCESSORY),"Light 99",pLivingroom,pGroup03);
+//---------------------------------------------------------
+	pLightBulb = new CLightBulb(getID(IDTYPE_ACCESSORY),"Living room Light-7",pLivingroom,pGroup03);
 	
-	m_mapAllObjects[pAccessory->m_id] = pAccessory;	
 
-
-
-
-	
+	pSwitch = pSwitch;
 
 	return;
 }
 
 CAllObjects::~CAllObjects()
 {
-	TAllObjectMap::iterator p;
+	std::map<unsigned int, CMyObject *>::iterator p;
 
 	for(p = m_mapAllObjects.begin(); p!=m_mapAllObjects.end(); ++p)
 	{
@@ -426,7 +326,7 @@ CAllObjects::~CAllObjects()
 
 int CAllObjects::dump()
 {
-	TAllObjectMap::iterator p;
+	std::map<unsigned int, CMyObject *>::iterator p;
 
 	for(p = m_mapAllObjects.begin(); p!=m_mapAllObjects.end(); ++p)
 	{
@@ -450,7 +350,7 @@ int CAllObjects::dump()
 
 int CAllObjects::dumpByLocation()
 {
-	TAllObjectMap::iterator p;
+	std::map<unsigned int, CMyObject *>::iterator p;
 	list<CMyObject*>::iterator j;
 
 	printf("Dump All Objects by Location:\n");
@@ -507,16 +407,147 @@ unsigned int CAllObjects::getID(unsigned int idtype)
 }
 
 
-CLocation::CLocation(int id,const char *name) : CMyObject("location",id,name,0xff10)
+int CAllObjects::removeByID(int idRemove)
 {
+	int err = 1;
+	string err_str;		
+
+	try {
+		CMyObject *pObject = m_mapAllObjects[idRemove];
+
+		if ( pObject != NULL )
+			delete pObject;
+
+		err = 0;
+    } catch (const libsocket::socket_exception& exc)
+    {
+		std::cerr << exc.mesg;
+		err_str = exc.mesg;
+    }
+
+
+
+	return err;
 }
 
-CLocation::~CLocation()
+
+
+
+CMyObject::CMyObject(const char *myClassType,int id,const char *name,int type )
+{
+	m_id = id;
+	m_type = type;
+	m_sClassType = myClassType;
+	m_name = name;
+
+	m_pLocation = NULL;
+	m_pGroup = NULL;
+
+	m_attr_str["name"] = m_name;
+
+	m_fwid = std::to_string(m_id);// FixMe
+
+
+	__allObjects.m_mapAllObjects[m_id] = this;
+	__allObjects.m_mapObjectsByFWID[m_fwid] = this; // ??? should I do that ??
+
+
+}
+
+CMyObject::~CMyObject()
+{
+	if ( m_pLocation != NULL )
+	{
+		list<CMyObject*>::iterator iter2;
+
+		iter2 = std::find(m_pLocation->m_listObject.begin(), m_pLocation->m_listObject.end(), this);
+
+		if ( iter2 != m_pLocation->m_listObject.end() )
+		{
+			m_pLocation->m_listObject.erase(iter2);
+		}
+	}
+
+	if ( m_pGroup != NULL )
+	{
+		list<CMyObject*>::iterator iter2;
+
+		iter2 = std::find(m_pGroup->m_listObject.begin(), m_pGroup->m_listObject.end(), this);
+		if ( iter2 != m_pGroup->m_listObject.end() )
+		{
+			m_pGroup->m_listObject.erase(iter2);
+		}
+	}
+
+	if ( m_pSwitch != NULL )
+	{
+		list<CMyObject*>::iterator iter2;
+
+		iter2 = std::find(m_pSwitch->m_listObject.begin(), m_pSwitch->m_listObject.end(), this);
+		if ( iter2 != m_pSwitch->m_listObject.end() )
+		{
+			m_pSwitch->m_listObject.erase(iter2);
+		}
+
+	}
+
+
+
+
+
+	// Remove from all_object
+	{
+		std::map<unsigned int, CMyObject *>::iterator iter;
+
+		iter = __allObjects.m_mapAllObjects.find(m_id);
+		if ( iter != __allObjects.m_mapAllObjects.end() ) // Found it
+		{
+			__allObjects.m_mapAllObjects.erase(iter);
+		}
+
+	}
+
+
+	// Remove from all_object_by_fwid
+	{
+		std::map<string, CMyObject *>::iterator iter;
+
+		iter = __allObjects.m_mapObjectsByFWID.find(m_fwid);
+		if ( iter != __allObjects.m_mapObjectsByFWID.end() ) // Found it
+		{
+			__allObjects.m_mapObjectsByFWID.erase(iter);
+		}	
+	}
+
+
+}
+
+int CMyObject::addToList (CMyObject *pObject)
+{
+	m_listObject.push_back(pObject);
+
+	return 1;
+}	
+
+int CMyObject::getIDTYPE()
+{
+	return (m_id&0xff000000);
+}
+
+
+CAccessory::CAccessory(int id,const char *name,int type,CLocation *pLocation) : CMyObject("accessory",id,name,type)
+{
+	if ( pLocation != NULL )
+		pLocation->add(this);	
+}
+
+CAccessory::~CAccessory()
 {
 
 }
 
-CGroup::CGroup(int id,const char *name,CLocation *pLocation) : CMyObject("group",id,name,0xff11)
+
+CGroup::CGroup(const char *name,CLocation *pLocation) : CMyObject("group",__allObjects.getID(IDTYPE_GROUP),name,0xff11)
 {
 	if ( pLocation != NULL )
 		pLocation->add(this);	
@@ -537,30 +568,71 @@ CGroup::CGroup(int id,const char *name,CLocation *pLocation) : CMyObject("group"
 	m_attr_num["saturationLoop1"] = 80;
 	m_attr_num["transientLoop1"] = 0x000D2F00;
 
-	m_about_str["udid"] = std::to_string(m_id);
+	m_attr_num["fadePower"] = 0;
+    m_attr_num["fadeTime"] = 1000;
+	
+
+
+
+	__allObjects.m_mapAllGroups[m_id] = this;
+	
 }
 
 CGroup::~CGroup()
 {
+	std::map<unsigned int, CMyObject *>::iterator iterGroup;
+	list<CMyObject*>::iterator iterX;
+
+	iterGroup = __allObjects.m_mapAllGroups.find(m_id);
+	if ( iterGroup != __allObjects.m_mapAllGroups.end() ) // Found it
+	{
+		__allObjects.m_mapAllGroups.erase(iterGroup);
+	}
+
+	for(iterX = m_listObject.begin(); iterX!=m_listObject.end(); ++iterX)
+	{
+		CMyObject *pSubObject;
+
+		pSubObject = *iterX;
+
+		pSubObject->m_pGroup = NULL;
+	}	
 
 }
 
 
-CAccessory::CAccessory(int id,const char *name,int type) : CMyObject("accessory",id,name,type)
+CLocation::CLocation(const char *name) : CMyObject("location",__allObjects.getID(IDTYPE_LOCATION),name,0xff10)
 {
+	__allObjects.m_mapAllLocations[m_id] = this;
 }
 
-CAccessory::~CAccessory()
+CLocation::~CLocation()
 {
+	std::map<unsigned int, CMyObject *>::iterator iterLocation;
+	list<CMyObject*>::iterator iterX;
+
+	iterLocation = __allObjects.m_mapAllLocations.find(m_id);
+	if ( iterLocation != __allObjects.m_mapAllLocations.end() ) // Found it
+	{
+		__allObjects.m_mapAllLocations.erase(iterLocation);
+	}
+
+	for(iterX = m_listObject.begin(); iterX!=m_listObject.end(); ++iterX)
+	{
+		CMyObject *pSubObject;
+
+		pSubObject = *iterX;
+
+		pSubObject->m_pLocation = NULL;
+	}	
 
 }
 
 
-CLightBulb::CLightBulb(int id,const char *name,CLocation *pLocation,CGroup *pGroup) : CAccessory(id,name,0x0109)
-{
-	if ( pLocation != NULL )
-		pLocation->add(this);
 
+
+CLightBulb::CLightBulb(int id,const char *name,CLocation *pLocation,CGroup *pGroup) : CAccessory(id,name,0x0109,pLocation)
+{
 	if ( pGroup != NULL)
 		pGroup->add(this);
 
@@ -577,7 +649,6 @@ CLightBulb::CLightBulb(int id,const char *name,CLocation *pLocation,CGroup *pGro
     m_attr_num["fadePower"] = 0;
     m_attr_num["fadeTime"] = 1000;
 
-	m_about_str["udid"] = std::to_string(m_id);
 	m_about_str["ver"] = "1.0.0";	
 
 }
@@ -587,31 +658,26 @@ CLightBulb::~CLightBulb()
 }
 
 
-CWallSwitch::CWallSwitch(int id,const char *name,CLocation *pLocation) : CMyObject("wallswitch",id,name,0x0101)
+CSensor::CSensor(int id,const char *name,int type,CLocation *pLocation): CAccessory(id,name,type,pLocation)
 {
-	if ( pLocation != NULL )
-		pLocation->add(this);
+	m_attr_num["on"] = 2;
+	m_attr_num["icon"] = 0;
+	m_attr_num["trigger"] = 1;
 
+	m_attr_num["alert"] = 0;
+	m_attr_num["testMode"] = 0;
+	m_attr_num["arm"] = 1;
+	m_attr_num["batLow"] = 0;
+	m_attr_num["outLink"] = 0;
 
-
-	m_attr_num["on"] = 0;
-
-	m_attr_num["icon"] = 0; // 0 is use default icon
-	m_attr_num["trigger"] = 0;
-	m_attr_num["batLow"] = 1;
-
-	m_attr_num["alert"] = 1;
-	m_attr_num["testMode"] = 1;
-
-
-	m_about_str["udid"] = std::to_string(m_id);	
 	m_about_str["ver"] = "1.0.0";	
 }
 
-CWallSwitch::~CWallSwitch()
+CSensor::~CSensor()
 {
 
 }
+
 
 
 CGateway::CGateway(int id,const char *name) : CMyObject("gateway",id,name,0xff00)
@@ -625,11 +691,94 @@ CGateway::CGateway(int id,const char *name) : CMyObject("gateway",id,name,0xff00
 
 	m_about_str["mac"] = "00:0c:29:36:3f:b1",
 	m_about_str["uid"] = (char*) __myUID,
-	m_about_str["udid"] = std::to_string(m_id);
+
 	m_about_str["ver"] = "1.0.0";
 	m_about_str["verH"] = "";
+
+	__allObjects.m_idGateway = m_id;
 }
 
 CGateway::~CGateway()
 {
+}
+
+
+
+CWallSwitch::CWallSwitch(const char *name,CLocation *pLocation) : CMyObject("wallswitch",__allObjects.getID(IDTYPE_WALLSWITCH),name,0x0101)
+{
+	if ( pLocation != NULL )
+		pLocation->add(this);
+
+
+	m_attr_num["icon"] = 0; // 0 is use default icon
+	m_attr_num["trigger"] = 0;
+	m_attr_num["batLow"] = 1;
+
+	m_attr_num["alert"] = 1;
+	m_attr_num["testMode"] = 1;
+
+	m_about_str["ver"] = "1.0.0";	
+}
+
+CWallSwitch::~CWallSwitch()
+{
+	list<CMyObject*>::iterator iterX;
+
+	for(iterX = m_listObject.begin(); iterX!=m_listObject.end(); ++iterX)
+	{
+		CSwitch *pSwitch;
+
+		pSwitch = (CSwitch *)(*iterX);
+
+		pSwitch->m_pWallSwitch = NULL;
+	}	
+
+}
+
+int CWallSwitch::add (CSwitch *pSwitch)
+{
+	pSwitch->m_pWallSwitch = this;
+
+	addToList(pSwitch);
+
+	return 1;
+}
+
+CSwitch::CSwitch(const char *name,CWallSwitch *pWallSwitch,CAccessory *pAccessory) : CMyObject("switch",__allObjects.getID(IDTYPE_SWITCH),name,0xff20)
+{
+	m_pWallSwitch = pWallSwitch;
+
+	if ( pAccessory != NULL )
+	{
+		pAccessory->m_pSwitch = this;
+		addToList(pAccessory);
+	}
+
+
+	m_attr_num["on"] = 0;
+	m_attr_num["icon"] = 0; // 0 is use default icon
+
+	m_pWallSwitch->add(this);
+
+
+}
+
+CSwitch::~CSwitch()
+{
+	if ( m_pAccessory != NULL )
+		m_pAccessory->m_pSwitch = NULL;
+
+	//m_pWallSwitch 
+
+	if ( m_pWallSwitch != NULL )
+	{
+		list<CMyObject*>::iterator iter2;
+
+		iter2 = std::find(m_pWallSwitch->m_listObject.begin(), m_pWallSwitch->m_listObject.end(), this);
+		if ( iter2 != m_pWallSwitch->m_listObject.end() )
+		{
+			m_pWallSwitch->m_listObject.erase(iter2);
+		}
+	}
+
 }

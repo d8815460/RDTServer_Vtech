@@ -71,17 +71,17 @@ int CVtechIPHub::parser(Json::Value& root)
 		{
 			Json::ValueIterator itrAttr;
 			Json::Value aObj = (*itrObj);
-			string id;
+			string fwid;
 
 			if ( aObj["id"].isString() )
 			{
 
-				id = aObj["id"].asString();
+				fwid = aObj["id"].asString();
 
 
-				printf("ID:%s\n",id.c_str());
+				printf("ID:%s\n",fwid.c_str());
 
-				if ( id == "0" ) // __GATEWAY__
+				if ( fwid == "0" ) // __GATEWAY__
 				{
 					CGateway *pGateway = (CGateway *)__allObjects.m_mapAllObjects[__allObjects.m_idGateway];
 
@@ -89,8 +89,7 @@ int CVtechIPHub::parser(Json::Value& root)
 					{
 						pGateway = new CGateway(__allObjects.getID(IDTYPE_GATEWAY),"V-Tech IP-Hub"); //GateWay
 
-						__allObjects.m_mapAllObjects[pGateway->m_id] = pGateway;
-						__allObjects.m_idGateway = pGateway->m_id;								
+						
 					}
 
 
@@ -116,32 +115,26 @@ int CVtechIPHub::parser(Json::Value& root)
 				{
 					CMyObject *pObject = NULL;
 
-					TAllObjectMap::iterator p;
-					string udid;
+					std::map<unsigned int, CMyObject *>::iterator p;
+					
 
-					for(p = __allObjects.m_mapAllObjects.begin(); p!=__allObjects.m_mapAllObjects.end(); ++p)
-					{
-						if ( p->second->m_about_str["udid"] == id.c_str()  )
-						{ // Found it 
-							pObject = p->second;
-							printf(" found object %s ",pObject->m_attr_str["name"].c_str());
-							break;
-						}
-					}
+					pObject = __allObjects.m_mapObjectsByFWID[fwid];
+
 
 					if ( pObject == NULL )
 					{
 						//CLocation *pLocation = (CLocation*)__allObjects.m_mapAllObjects[0x13000001]; // Find location
 						printf("New device \n");
 
-
-
 						pObject = new CLightBulb(__allObjects.getID(IDTYPE_ACCESSORY),"IP-Hub Light",__allObjects.getLocationOther(),NULL);
 
-						pObject->m_about_str["udid"] = id;	
+						pObject->m_fwid = fwid;	
 
-
-						__allObjects.m_mapAllObjects[pObject->m_id] = pObject;								
+						__allObjects.m_mapObjectsByFWID[fwid] = pObject;
+					}
+					else
+					{
+						printf(" found object %s ",pObject->m_attr_str["name"].c_str());
 					}
 
 					

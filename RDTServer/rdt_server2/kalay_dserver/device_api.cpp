@@ -1,12 +1,13 @@
 #include "../headers/exception.hpp"
-#include <string>
 #include <iostream>
 #include <string.h>
 #include <unistd.h>
-#include <algorithm>
 
-#include <iomanip> 
 #include <json/json.h>
+
+#include <algorithm>
+#include <string>
+#include <iomanip> 
 
 
 #include "dserver.h"
@@ -379,7 +380,7 @@ void deviceapi_get_group_free_lights (int session,Json::Value &request)
 	rdt_ticket = request["rdt_ticket"].asUInt();
 
 	try {
-			TAllObjectMap::iterator p;
+			std::map<unsigned int, CMyObject *>::iterator p;
 			list<CMyObject*>::iterator j;
 			int nAccessoryCnt = 0;
 
@@ -492,8 +493,6 @@ printf("set_detail request:\n%s\n-------------------\n",(char*)request.toStyledS
 
 						if ( value.isString() )
 							pObject->m_attr_str[key.asString().c_str()] = value.asString();
-						else if ( value.isDouble() )
-							pObject->m_attr_num[key.asString().c_str()] = value.asDouble();
 						else
 							pObject->m_attr_num[key.asString().c_str()] = value.asUInt();
 					}
@@ -501,13 +500,12 @@ printf("set_detail request:\n%s\n-------------------\n",(char*)request.toStyledS
 
 
 				// Set to FW
-				//if ( pObject->m_about_str["udid"] == "0012345678" )
 				{
 		    		Json::Value objects;
 		    		
 		    		int seq = 0;
 
-		    		objects[0]["id"] = pObject->m_about_str["udid"]; // "0012345678";
+		    		objects[0]["id"] = pObject->m_fwid; 
 		    		
 		    		if ( request["on"].asInt() == 0 )
 		    			objects[0]["on"] = 0;
@@ -587,139 +585,6 @@ printf("set_detail request:\n%s\n-------------------\n",(char*)request.toStyledS
 	return;
 }
 
-int __remove_a_object(int idRemove)
-{
-	int err = 0;
-	string err_str;		
-
-	try {
-		TAllObjectMap::iterator iterRemove;
-		CMyObject *pObject = NULL;
-
-		iterRemove = __allObjects.m_mapAllObjects.find(idRemove);
-		if ( iterRemove != __allObjects.m_mapAllObjects.end() ) // Found it
-		{
-			int ntype;
-			pObject = iterRemove->second;
-
-			__allObjects.m_mapAllObjects.erase(iterRemove);
-
-
-			if ( pObject->m_pLocation != NULL )
-			{
-				CLocation *pLocation;
-				list<CMyObject*>::iterator iter2;
-
-				pLocation = pObject->m_pLocation ;
-
-				iter2 = std::find(pLocation->m_listObject.begin(), pLocation->m_listObject.end(), pObject);
-				if ( iter2 != pLocation->m_listObject.end() )
-				{
-					pLocation->m_listObject.erase(iter2);
-				}
-			}
-
-			if ( pObject->m_pGroup != NULL )
-			{
-				CGroup *pGroup;
-				list<CMyObject*>::iterator iter2;
-
-				pGroup = pObject->m_pGroup;
-				iter2 = std::find(pGroup->m_listObject.begin(), pGroup->m_listObject.end(), pObject);
-				if ( iter2 != pGroup->m_listObject.end() )
-				{
-					pGroup->m_listObject.erase(iter2);
-				}
-			}
-
-			if ( pObject->m_pWallSwitch != NULL )
-			{
-				CWallSwitch *pWallSwitch;
-				list<CMyObject*>::iterator iter2;
-
-				pWallSwitch = pObject->m_pWallSwitch;
-				iter2 = std::find(pWallSwitch->m_listObject.begin(), pWallSwitch->m_listObject.end(), pObject);
-				if ( iter2 != pWallSwitch->m_listObject.end() )
-				{
-					pWallSwitch->m_listObject.erase(iter2);
-				}
-			}
-
-
-			ntype = pObject->m_id & 0xff000000;
-
-			if ( ntype == IDTYPE_GROUP )
-			{
-				TAllObjectMap::iterator iterGroup;
-				list<CMyObject*>::iterator iterX;
-
-				iterGroup = __allObjects.m_mapAllGroups.find(pObject->m_id);
-				if ( iterGroup != __allObjects.m_mapAllGroups.end() ) // Found it
-				{
-					__allObjects.m_mapAllGroups.erase(iterGroup);
-				}
-
-				for(iterX = pObject->m_listObject.begin(); iterX!=pObject->m_listObject.end(); ++iterX)
-				{
-					CMyObject *pSubObject;
-
-					pSubObject = *iterX;
-
-					pSubObject->m_pGroup = NULL;
-				}
-			}
-			else if ( ntype == IDTYPE_LOCATION )
-			{
-				TAllObjectMap::iterator iterLocation;
-				list<CMyObject*>::iterator iterX;
-
-				iterLocation = __allObjects.m_mapAllLocations.find(pObject->m_id);
-				if ( iterLocation != __allObjects.m_mapAllLocations.end() ) // Found it
-				{
-					__allObjects.m_mapAllLocations.erase(iterLocation);
-				}
-
-				for(iterX = pObject->m_listObject.begin(); iterX!=pObject->m_listObject.end(); ++iterX)
-				{
-					CMyObject *pSubObject;
-
-					pSubObject = *iterX;
-
-					pSubObject->m_pLocation = NULL;
-				}
-			}
-			else  if ( ntype == IDTYPE_WALLSWITCH )
-			{
-				list<CMyObject*>::iterator iterX;
-
-				for(iterX = pObject->m_listObject.begin(); iterX!=pObject->m_listObject.end(); ++iterX)
-				{
-					CMyObject *pSubObject;
-
-					pSubObject = *iterX;
-
-					pSubObject->m_pWallSwitch = NULL;
-				}					
-			}
-
-
-
-			delete pObject;
-		}	
-
-
-		err = 0;
-    } catch (const libsocket::socket_exception& exc)
-    {
-		std::cerr << exc.mesg;
-		err_str = exc.mesg;
-    }
-
-
-
-
-	return err;
-}
 
 void deviceapi_remove (int session,Json::Value &request)
 {
@@ -751,7 +616,7 @@ void deviceapi_remove (int session,Json::Value &request)
 
 			for(i=0;i<removeObject.size();i++)
 			{
-				__remove_a_object(removeObject[i].asUInt());
+				err = __allObjects.removeByID(removeObject[i].asUInt());
 
 				responseID[removeCnt] = removeObject[i].asUInt();
 
@@ -760,12 +625,15 @@ void deviceapi_remove (int session,Json::Value &request)
 		}
 		else 
 		{
-			__remove_a_object(removeObject.asUInt());
+			err = __allObjects.removeByID(removeObject.asUInt());
 			responseID = removeObject.asUInt();
 		}
 
+		if ( err != 0 )
+		{
 
-		err = 0;
+		}
+
     } catch (const libsocket::socket_exception& exc)
     {
 		std::cerr << exc.mesg;
@@ -938,7 +806,7 @@ void deviceapi_get_gateway (int session,Json::Value &request)
 
 
 	try {
-			TAllObjectMap::iterator p;
+			std::map<unsigned int, CMyObject *>::iterator p;
 			list<CMyObject*>::iterator j;
 			int nLocationCnt = 0;
 
@@ -1197,7 +1065,7 @@ void deviceapi_update_gateway (int session,Json::Value &request)
 }
 
 
-void deviceapi_get_detail_of_group(int session,Json::Value &request,int idGroup)
+void __get_detail_of_group(int session,Json::Value &request,int idGroup)
 {
 	Json::Value root;
 	Json::Value response;
@@ -1213,14 +1081,11 @@ void deviceapi_get_detail_of_group(int session,Json::Value &request,int idGroup)
 			list<CMyObject*>::iterator iter;
 
 			rdt_ticket = request["rdt_ticket"].asUInt();
-printf("eddy test GroupID :%d\n",idGroup);
 
 			pGroup = (CGroup*) __allObjects.m_mapAllGroups[idGroup];
 
 			if ( pGroup != NULL )
 			{
-printf("eddy test GroupID :%d %s\n",idGroup,pGroup->m_name.c_str());				
-				
 				__getSubObjects(pGroup,responseObjects);
 				// Attributes of Group
 
@@ -1269,7 +1134,7 @@ printf("deviceapi_get_detail_of_group\n%s\n-------------------\n",(char*)root.to
 }
 
 
-void deviceapi_get_detail_of_object(int session,Json::Value &request,int idObject)
+void __get_detail_of_object(int session,Json::Value &request,int idObject)
 {
 	Json::Value root;
 	Json::Value response;
@@ -1347,36 +1212,53 @@ printf("deviceapi_get_detail_of_object\n%s\n-------------------\n",(char*)root.t
 }
 
 
+
+
 void deviceapi_get_detail (int session,Json::Value &request)
 {
 //+++
 
 	unsigned int id;
 	int ntype;
+	string err_str;
 
 
-	
+	try {
+		id = request["id"].asUInt();
 
-	id = request["id"].asUInt();
+		ntype = id & 0xff000000;
 
-	ntype = id & 0xff000000;
+		if ( ntype == IDTYPE_GROUP )
+		{
+			__get_detail_of_group(session,request,id);
+		}
+		else if ( ntype == IDTYPE_ACCESSORY )
+		{
+			__get_detail_of_object(session,request,id);
+		}
+		else if ( ntype == IDTYPE_LOCATION )
+		{
+			__get_detail_of_object(session,request,id);
+		}
+		else if ( ntype == IDTYPE_GATEWAY )
+		{
+			__get_detail_of_object(session,request,id);;
+		}
+		//else if ( ntype == IDTYPE_SWITCH )
+		//{
+		//	deviceapi_get_detail_of_switch(session,request,id);;
+		//}	
+		else
+		{
+			__get_detail_of_object(session,request,id);;	
+		}
 
-	if ( ntype == IDTYPE_ACCESSORY )
-	{
-		deviceapi_get_detail_of_object(session,request,id);
-	}
-	else if ( ntype == IDTYPE_GROUP )
-	{
-		deviceapi_get_detail_of_group(session,request,id);
-	}
-	else if ( ntype == IDTYPE_LOCATION )
-	{
-		deviceapi_get_detail_of_object(session,request,id);
-	}
-	else if ( ntype == IDTYPE_GATEWAY )
-	{
-		deviceapi_get_detail_of_object(session,request,id);;
-	}
+    } catch (const libsocket::socket_exception& exc)
+    {
+		std::cerr << exc.mesg;
+		err_str = exc.mesg;
+    }
+
 
 
 
@@ -1402,7 +1284,7 @@ void deviceapi_get_other_groups (int session,Json::Value &request)
 //++++
 
 	try {
-		TAllObjectMap::iterator p;
+		std::map<unsigned int, CMyObject *>::iterator p;
 		list<CMyObject*>::iterator j;
 		int nGroupCnt = 0;
 
@@ -1575,7 +1457,7 @@ void deviceapi_get_locations (int session,Json::Value &request)
 
 
 	try {
-			TAllObjectMap::iterator p;
+			std::map<unsigned int, CMyObject *>::iterator p;
 			list<CMyObject*>::iterator j;
 			int nLocationCnt = 0;
 
@@ -1749,12 +1631,9 @@ void deviceapi_set_a_location (int session,Json::Value &request)
 
 		if ( pLocation == NULL )
 		{
-			pLocation = new CLocation(__allObjects.getID(IDTYPE_LOCATION),strLocationName.c_str()); 
+			pLocation = new CLocation(strLocationName.c_str()); 
 
 			pLocation->m_attr_num["editable"] = 1;
-
-			__allObjects.m_mapAllObjects[pLocation->m_id] = pLocation;
-			__allObjects.m_mapAllLocations[pLocation->m_id] = pLocation;
 		}
 		else
 		{

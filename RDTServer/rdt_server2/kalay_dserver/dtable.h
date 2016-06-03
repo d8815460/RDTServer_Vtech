@@ -8,35 +8,24 @@
 
 	using namespace std;
 
-	#define IDTYPE_ACCESSORY  	0x01000000
-	#define IDTYPE_WALLSWITCH  	0x02000000
-	#define IDTYPE_GROUP		0x12000000
-	#define IDTYPE_LOCATION		0x13000000
-	#define IDTYPE_GATEWAY		0x70000000
+	#define IDTYPE_GATEWAY		0x00000000
+	#define IDTYPE_WALLSWITCH  	0x01000000
+	#define IDTYPE_SWITCH  		0x20000000
+	#define IDTYPE_LOCATION		0x10000000
+	#define IDTYPE_GROUP		0x11000000
+	#define IDTYPE_ACCESSORY  	0x70000000
+
 
 	class CLocation;
 	class CGroup;	
 	class CWallSwitch;
+	class CSwitch;
 
 	class CMyObject
 	{
 	public:
-		CMyObject(const char *myClassType,int id,const char *name,int type )
-		{
-			m_id = id;
-			m_type = type;
-			m_sClassType = myClassType;
-			m_name = name;
-
-			m_pLocation = NULL;
-			m_pGroup = NULL;
-
-			m_attr_str["name"] = m_name;
-		}
-		
-		virtual ~CMyObject()
-		{
-		}
+		CMyObject(const char *myClassType,int id,const char *name,int type );
+		virtual ~CMyObject();
 
 	public:		
 		string m_sClassType;
@@ -52,21 +41,16 @@
 		int m_type;
 		string m_name;
 
+		string m_fwid;
 
+		CLocation 	*m_pLocation;
+		CGroup		*m_pGroup;
+		CSwitch 	*m_pSwitch;	// for Accessory
 
-		CLocation 		*m_pLocation;
-		CGroup			*m_pGroup;
-		CWallSwitch 	*m_pWallSwitch;	
 
 	protected:
-		int addToList (CMyObject *pObject)
-		{
-			m_listObject.push_back(pObject);
-
-			return 1;
-		}		
-
-	public:
+		int addToList (CMyObject *pObject);
+		int getIDTYPE();
 	};
 
 
@@ -84,7 +68,7 @@
 	class CAccessory : public CMyObject
 	{
 	public:
-		CAccessory(int id,const char *name,int type);
+		CAccessory(int id,const char *name,int type,CLocation *pLocation);
 		~CAccessory();
 
 	public:
@@ -102,29 +86,44 @@
 
 	};	
 
+
+	class CSensor : public CAccessory
+	{
+	public:
+		CSensor(int id,const char *name,int type,CLocation *pLocation);
+		~CSensor();
+
+	public:
+
+	};	
+
 	class CWallSwitch : public CMyObject
 	{
 	public:
-		CWallSwitch(int id,const char *name,CLocation *pLocation);
+		CWallSwitch(const char *name,CLocation *pLocation);
 		~CWallSwitch();
 
 	public:
-		int add (CMyObject *pObject)
-		{
-			pObject->m_pWallSwitch = this;
-
-			addToList(pObject);
-
-			return 1;
-		}
-
+		int add (CSwitch *pSwitch);
 	};	
+
+
+	class CSwitch : public CMyObject
+	{
+	public:
+		CSwitch(const char *name,CWallSwitch *pWallSwitch,CAccessory *pAccessory);
+		~CSwitch();
+
+	public:
+		CWallSwitch	*m_pWallSwitch;
+		CAccessory 	*m_pAccessory;
+	};		
 	
 
 	class CGroup : public CMyObject
 	{
 	public:
-		CGroup(int id,const char *name,CLocation *pLocation);
+		CGroup(const char *name,CLocation *pLocation);
 		~CGroup();
 		
 
@@ -145,7 +144,7 @@
 	class CLocation : public CMyObject
 	{
 	public:
-		CLocation(int id,const char *name);
+		CLocation(const char *name);
 		~CLocation();
 		
 
@@ -162,14 +161,6 @@
 
 
 
-
-
-
-
-	typedef std::map<unsigned int, CMyObject *> TAllObjectMap;
-	typedef std::pair<unsigned int, CMyObject *> TAllObjectPair;
-
-
 	class CAllObjects
 	{
 	public:
@@ -183,24 +174,33 @@
 
 
 	public: 
+		unsigned int m_idGateway;
+
+	public:		
 		unsigned int getID(unsigned int idtype);
 		CLocation *getLocationOther()
 		{
 			return locationOther;
 		}
-		unsigned int m_idGateway;
+
 
 
 	public:
-		TAllObjectMap m_mapAllObjects;
-		TAllObjectMap m_mapAllLocations;
-		TAllObjectMap m_mapAllGroups;
+		std::map<unsigned int, CMyObject *>  m_mapAllObjects;
+		std::map<unsigned int, CMyObject *>  m_mapAllLocations;
+		std::map<unsigned int, CMyObject *>  m_mapAllGroups;
+		std::map<std::string, CMyObject *>   m_mapObjectsByFWID;
 
 
 
 	public:
 		int dump();
 		int dumpByLocation();
+
+
+		int removeByID(int idRemove);
+
+
 	};
 
 	extern CAllObjects __allObjects;
