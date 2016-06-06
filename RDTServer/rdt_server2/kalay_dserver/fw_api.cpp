@@ -387,7 +387,7 @@ int CVtechIPHub::fwapi_set(Json::Value &objects)
 
 	total_payload = root.toStyledString().c_str();
 
-	printf("payload\n%s\n",total_payload.c_str());
+	printf("fwapi_set:sendToGateway\n%s\n",total_payload.c_str());
 
 
 	sendToGateway(root);

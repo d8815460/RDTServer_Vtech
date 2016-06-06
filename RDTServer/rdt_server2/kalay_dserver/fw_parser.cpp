@@ -72,18 +72,20 @@ int CVtechIPHub::parser(Json::Value& root)
 			Json::ValueIterator itrAttr;
 			Json::Value aObj = (*itrObj);
 			string fwid;
+			unsigned int unitType;
 
 			if ( aObj["id"].isString() )
 			{
 
 				fwid = aObj["id"].asString();
+				unitType = aObj["type"].asUInt();
 
 
 				printf("ID:%s\n",fwid.c_str());
 
-				if ( fwid == "0" ) // __GATEWAY__
+				if ( fwid == "0" || unitType == 0xff00 ) // __GATEWAY__
 				{
-					CGateway *pGateway = (CGateway *)__allObjects.m_mapAllObjects[__allObjects.m_idGateway];
+					CGateway *pGateway = __allObjects.getGateway();
 
 					if ( pGateway == NULL )
 					{
@@ -98,8 +100,19 @@ int CVtechIPHub::parser(Json::Value& root)
 						Json::Value key = itrAttr.key();
 						Json::Value value = (*itrAttr);
 
-						if ( 	key != "id" 
-							 && key != "led" ) // FixMe
+						if ( 	key == "ver" )
+						{
+							printf("Gateway Set about key : %s  = %s \n",key.asString().c_str(),value.asString().c_str());	
+
+							if ( value.isString() )
+								pGateway->m_about_str[key.asString().c_str()] = value.asString();
+							else
+								pGateway->m_about_num[key.asString().c_str()] = value.asUInt();
+
+						}
+						else if (  	 key != "id" 
+							      && key != "led" 
+							 	  && key != "type" ) // FixMe
 						{
 							printf("Gateway Set key : %s  = %s \n",key.asString().c_str(),value.asString().c_str());	
 
@@ -116,25 +129,50 @@ int CVtechIPHub::parser(Json::Value& root)
 					CMyObject *pObject = NULL;
 
 					std::map<unsigned int, CMyObject *>::iterator p;
+					std::map<std::string, CMyObject *>::iterator iterFind;
+
+					iterFind = __allObjects.m_mapObjectsByFWID.find(fwid);
 					
+					if (  iterFind != __allObjects.m_mapObjectsByFWID.end() )
+					{
+						pObject = iterFind->second;
 
-					pObject = __allObjects.m_mapObjectsByFWID[fwid];
-
-
-					if ( pObject == NULL )
+						printf(" found object %s ",pObject->m_attr_str["name"].c_str());
+					}
+					else
 					{
 						//CLocation *pLocation = (CLocation*)__allObjects.m_mapAllObjects[0x13000001]; // Find location
-						printf("New device \n");
+						printf("New device type:%x \n",unitType);
 
-						pObject = new CLightBulb(__allObjects.getID(IDTYPE_ACCESSORY),"IP-Hub Light",__allObjects.getLocationOther(),NULL);
+						if (    unitType == 0x0101   //  wall switch
+							 || unitType == 0xff01 ) //  virtual wireless wall switch
+						{
+							pObject = new CWallSwitch("IP-Hub WallSwitch",__allObjects.getLocationOther());	
+						}
+						else  if ( unitType == 0x0106 ) // power outlet
+						{
+							pObject = new CAccessory(__allObjects.getID(IDTYPE_ACCESSORY),"IP-Hub power outlet",unitType,__allObjects.getLocationOther());
+						}
+						else  if ( unitType == 0x0109 ) // Light bulb
+						{
+							pObject = new CLightBulb("IP-Hub Light",__allObjects.getLocationOther(),NULL);	
+						}
+						else if (    unitType == 0x0201   // Light bulb
+								  || unitType == 0x0202   // Magnetic sensor
+								  || unitType == 0x0203   // motion sensor
+								  || unitType == 0x0206 ) // flood detector 
+						{
+							pObject = new CMyObject("power_outlet",__allObjects.getID(IDTYPE_ACCESSORY),"IP-Hub power outlet",unitType);
+						}
+						else // if 
+						{
+							pObject = new CLightBulb("IP-Hub Light",__allObjects.getLocationOther(),NULL);		
+						}
+
 
 						pObject->m_fwid = fwid;	
 
 						__allObjects.m_mapObjectsByFWID[fwid] = pObject;
-					}
-					else
-					{
-						printf(" found object %s ",pObject->m_attr_str["name"].c_str());
 					}
 
 					
@@ -144,7 +182,23 @@ int CVtechIPHub::parser(Json::Value& root)
 						Json::Value key = itrAttr.key();
 						Json::Value value = (*itrAttr);
 
-						if ( key != "id" )
+						if ( 	key == "ver" )
+						{
+							if ( value.isString() )
+							{
+								printf("Obj Set key : %s  = %s (str) \n",key.asString().c_str(),value.asString().c_str());	
+								pObject->m_about_str[key.asString().c_str()] = value.asString();
+								
+							}
+							else
+							{
+								printf("Obj Set key : %s  = %d (num) \n",key.asString().c_str(),value.asUInt());	
+								pObject->m_about_num[key.asString().c_str()] = value.asUInt();
+							}
+
+						}
+						else if ( 	key != "id" 
+							 && key != "type")
 						{
 							if ( value.isString() )
 							{
@@ -157,7 +211,6 @@ int CVtechIPHub::parser(Json::Value& root)
 								printf("Obj Set key : %s  = %d (num) \n",key.asString().c_str(),value.asUInt());	
 								pObject->m_attr_num[key.asString().c_str()] = value.asUInt();
 							}
-								
 						}
 						
 					}

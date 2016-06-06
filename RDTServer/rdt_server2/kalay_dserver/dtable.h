@@ -79,7 +79,7 @@
 	class CLightBulb : public CAccessory
 	{
 	public:
-		CLightBulb(int id,const char *name,CLocation *pLocation,CGroup *pGroup);
+		CLightBulb(const char *name,CLocation *pLocation,CGroup *pGroup);
 		~CLightBulb();
 
 	public:
@@ -183,6 +183,31 @@
 			return locationOther;
 		}
 
+		CGateway *getGateway()
+		{
+			std::map<unsigned int, CMyObject *>::iterator iterFind;
+
+			iterFind = m_mapAllObjects.find(m_idGateway);
+
+			if ( iterFind != m_mapAllObjects.end() )
+				return (CGateway*) iterFind->second;
+
+			return NULL;
+		}
+
+		CMyObject *getObjectByID(unsigned int id)
+		{
+			std::map<unsigned int, CMyObject *>::iterator iterFind;
+
+			iterFind = m_mapAllObjects.find(id);
+
+			if ( iterFind != m_mapAllObjects.end() )
+				return  iterFind->second;
+
+
+			return  NULL;
+		}
+
 
 
 	public:
@@ -191,6 +216,14 @@
 		std::map<unsigned int, CMyObject *>  m_mapAllGroups;
 		std::map<std::string, CMyObject *>   m_mapObjectsByFWID;
 
+	friend class CMyObject;
+	friend class CGateway;
+	friend class CAccessory;
+	friend class CLocation;
+	friend class CGroup;	
+	friend class CWallSwitch;
+	friend class CSwitch;
+	friend class CSensor;
 
 
 	public:

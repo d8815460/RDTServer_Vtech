@@ -80,37 +80,37 @@ CAllObjects::CAllObjects()
 
 
 	//----------------------------------------------------------------
-	pLightBulb = new CLightBulb(getID(IDTYPE_ACCESSORY),"Bedroom Light-1",pBedroom,NULL);
+	pLightBulb = new CLightBulb("Bedroom Light-1",pBedroom,NULL);
 	pSwitch = new CSwitch("Bedroom Switch 01",pWallSwitchBedroom,pLightBulb);
 
 
 	//----------------------------------------------------------------
-	pLightBulb = new CLightBulb(getID(IDTYPE_ACCESSORY),"Bedroom Light-2",pBedroom,NULL);
+	pLightBulb = new CLightBulb("Bedroom Light-2",pBedroom,NULL);
 	pSwitch = new CSwitch("Bedroom Switch 02",pWallSwitchBedroom,pLightBulb);
 
 
 	//----------------------------------------------------------------
-	pLightBulb = new CLightBulb(getID(IDTYPE_ACCESSORY),"Bedroom Light-3",pBedroom,NULL);
+	pLightBulb = new CLightBulb("Bedroom Light-3",pBedroom,NULL);
 	pSwitch = new CSwitch("Bedroom Switch 03",pWallSwitchBedroom,pLightBulb);
 
 	//----------------------------------------------------------------
-	pLightBulb = new CLightBulb(getID(IDTYPE_ACCESSORY),"Bedroom Light-4",pBedroom,NULL);
+	pLightBulb = new CLightBulb("Bedroom Light-4",pBedroom,NULL);
 	pSwitch = new CSwitch("Bedroom Switch 04",pWallSwitchBedroom,pLightBulb);
 
 
 	//----------------------------------------------------------------
-	pLightBulb = new CLightBulb(getID(IDTYPE_ACCESSORY),"Bedroom Light-5",pBedroom,NULL);
+	pLightBulb = new CLightBulb("Bedroom Light-5",pBedroom,NULL);
 
 	//----------------------------------------------------------------
-	pLightBulb = new CLightBulb(getID(IDTYPE_ACCESSORY),"Bedroom Light-6",pBedroom,NULL);
-
-
-	//----------------------------------------------------------------
-	pLightBulb = new CLightBulb(getID(IDTYPE_ACCESSORY),"Light 81",pBedroom,NULL);
+	pLightBulb = new CLightBulb("Bedroom Light-6",pBedroom,NULL);
 
 
 	//----------------------------------------------------------------
-	pLightBulb = new CLightBulb(getID(IDTYPE_ACCESSORY),"Light 01",pBedroom,NULL);
+	pLightBulb = new CLightBulb("Light 81",pBedroom,NULL);
+
+
+	//----------------------------------------------------------------
+	pLightBulb = new CLightBulb("Light 01",pBedroom,NULL);
 
 
 
@@ -133,38 +133,38 @@ CAllObjects::CAllObjects()
 
 
 	//---------------------------------------------------------
-	pLightBulb = new CLightBulb(getID(IDTYPE_ACCESSORY),"Bathroom Light-1",pBathroom,pGroup01);
+	pLightBulb = new CLightBulb("Bathroom Light-1",pBathroom,pGroup01);
 
 	//---------------------------------------------------------
-	pLightBulb = new CLightBulb(getID(IDTYPE_ACCESSORY),"Bathroom Light-2",pBathroom,pGroup01);
+	pLightBulb = new CLightBulb("Bathroom Light-2",pBathroom,pGroup01);
 
 	//---------------------------------------------------------
-	pLightBulb = new CLightBulb(getID(IDTYPE_ACCESSORY),"Bathroom Light-3",pBathroom,pGroup01);
+	pLightBulb = new CLightBulb("Bathroom Light-3",pBathroom,pGroup01);
 
 	//---------------------------------------------------------
-	pLightBulb = new CLightBulb(getID(IDTYPE_ACCESSORY),"Bathroom Light-4",pBathroom,pGroup01);	
+	pLightBulb = new CLightBulb("Bathroom Light-4",pBathroom,pGroup01);	
 
 
 	//---------------------------------------------------------
-	pLightBulb = new CLightBulb(getID(IDTYPE_ACCESSORY),"Bathroom Light-5",pBathroom,pGroup01);
+	pLightBulb = new CLightBulb("Bathroom Light-5",pBathroom,pGroup01);
 	pSwitch = new CSwitch("Bathroom Switch 01",pWallSwitchBathroom,pLightBulb);
 
 
 	//---------------------------------------------------------
-	pLightBulb = new CLightBulb(getID(IDTYPE_ACCESSORY),"Bathroom Light-6",pBathroom,pGroup01);	
+	pLightBulb = new CLightBulb("Bathroom Light-6",pBathroom,pGroup01);	
 	pSwitch = new CSwitch("Bathroom Switch 02",pWallSwitchBathroom,pLightBulb);
 
 
 	//---------------------------------------------------------
-	pLightBulb = new CLightBulb(getID(IDTYPE_ACCESSORY),"Bathroom Light-7",pBathroom,NULL);
+	pLightBulb = new CLightBulb("Bathroom Light-7",pBathroom,NULL);
 	pSwitch = new CSwitch("Bathroom Switch 03",pWallSwitchBathroom,pLightBulb);
 
 	//---------------------------------------------------------
-	pLightBulb = new CLightBulb(getID(IDTYPE_ACCESSORY),"Bathroom Light-8",pBathroom,NULL);
+	pLightBulb = new CLightBulb("Bathroom Light-8",pBathroom,NULL);
 	pSwitch = new CSwitch("Bathroom Switch 04",pWallSwitchBathroom,pLightBulb);
 
 	//---------------------------------------------------------
-	pLightBulb = new CLightBulb(getID(IDTYPE_ACCESSORY),"Bathroom Light-9",pBathroom,NULL);
+	pLightBulb = new CLightBulb("Bathroom Light-9",pBathroom,NULL);
 
 	
 
@@ -208,26 +208,26 @@ CAllObjects::CAllObjects()
 
 
 //----------------------------------------------------------------
-	pLightBulb = new CLightBulb(getID(IDTYPE_ACCESSORY),"Kitchen Light-1",pKitchen,NULL);
+	pLightBulb = new CLightBulb("Kitchen Light-1",pKitchen,NULL);
 	pSwitch = new CSwitch("Kitchen Switch 01",pWallSwitchKitchen,pLightBulb);
 
 //----------------------------------------------------------------
-	pLightBulb = new CLightBulb(getID(IDTYPE_ACCESSORY),"Kitchen Light-2",pKitchen,NULL);
+	pLightBulb = new CLightBulb("Kitchen Light-2",pKitchen,NULL);
 	pSwitch = new CSwitch("Kitchen Switch 02",pWallSwitchKitchen,pLightBulb);
 
 //----------------------------------------------------------------
-	pLightBulb = new CLightBulb(getID(IDTYPE_ACCESSORY),"Kitchen Light-3",pKitchen,NULL);
+	pLightBulb = new CLightBulb("Kitchen Light-3",pKitchen,NULL);
 	pSwitch = new CSwitch("Kitchen Switch 03",pWallSwitchKitchen,pLightBulb);
 
 //----------------------------------------------------------------
-	pLightBulb = new CLightBulb(getID(IDTYPE_ACCESSORY),"Kitchen Light-4",pKitchen,NULL);
+	pLightBulb = new CLightBulb("Kitchen Light-4",pKitchen,NULL);
 	pSwitch = new CSwitch("Kitchen Switch 04",pWallSwitchKitchen,pLightBulb);
 
 //----------------------------------------------------------------
-	pLightBulb = new CLightBulb(getID(IDTYPE_ACCESSORY),"Kitchen Light-5",pKitchen,NULL);
+	pLightBulb = new CLightBulb("Kitchen Light-5",pKitchen,NULL);
 
 //----------------------------------------------------------------
-	pLightBulb = new CLightBulb(getID(IDTYPE_ACCESSORY),"Kitchen Light-6",pKitchen,NULL);
+	pLightBulb = new CLightBulb("Kitchen Light-6",pKitchen,NULL);
 
 
 
@@ -238,25 +238,25 @@ CAllObjects::CAllObjects()
 
 
 //----------------------------------------------------------------
-	pLightBulb = new CLightBulb(getID(IDTYPE_ACCESSORY),"Kitchen Light-4",pKitchen,pGroup02);
+	pLightBulb = new CLightBulb("Kitchen Light-4",pKitchen,pGroup02);
 
 //----------------------------------------------------------------
-	pLightBulb = new CLightBulb(getID(IDTYPE_ACCESSORY),"Kitchen Light-5",pKitchen,pGroup02);
+	pLightBulb = new CLightBulb("Kitchen Light-5",pKitchen,pGroup02);
 
 
 
 // locationOther
 //---------------------------------------------------------
-	pLightBulb = new CLightBulb(getID(IDTYPE_ACCESSORY),"Light 91",locationOther,pGroup02);
+	pLightBulb = new CLightBulb("Light 91",locationOther,pGroup02);
 
 //---------------------------------------------------------
-	pLightBulb = new CLightBulb(getID(IDTYPE_ACCESSORY),"Light 92",locationOther,pGroup02);
+	pLightBulb = new CLightBulb("Light 92",locationOther,pGroup02);
 
 //---------------------------------------------------------
-	pLightBulb = new CLightBulb(getID(IDTYPE_ACCESSORY),"Light 93",locationOther,NULL);
+	pLightBulb = new CLightBulb("Light 93",locationOther,NULL);
 
 //---------------------------------------------------------
-	pLightBulb = new CLightBulb(getID(IDTYPE_ACCESSORY),"Light 94",locationOther,NULL);
+	pLightBulb = new CLightBulb("Light 94",locationOther,NULL);
 
 
 //----------------------------------------------------------------
@@ -276,29 +276,29 @@ CAllObjects::CAllObjects()
 
 
 //----------------------------------------------------------------
-	pLightBulb = new CLightBulb(getID(IDTYPE_ACCESSORY),"Living room Light-1",pLivingroom,NULL);
+	pLightBulb = new CLightBulb("Living room Light-1",pLivingroom,NULL);
 			
 //----------------------------------------------------------------
-	pLightBulb = new CLightBulb(getID(IDTYPE_ACCESSORY),"Living room Light-2",pLivingroom,NULL);
+	pLightBulb = new CLightBulb("Living room Light-2",pLivingroom,NULL);
 	
 //---------------------------------------------------------
-	pLightBulb = new CLightBulb(getID(IDTYPE_ACCESSORY),"Living room Light-3",pLivingroom,NULL);
+	pLightBulb = new CLightBulb("Living room Light-3",pLivingroom,NULL);
 	pSwitch = new CSwitch("Living room Switch 01",pWallSwitchLivingroom,pLightBulb);
 
 //---------------------------------------------------------
-	pLightBulb = new CLightBulb(getID(IDTYPE_ACCESSORY),"Living room Light-4",pLivingroom,NULL);
+	pLightBulb = new CLightBulb("Living room Light-4",pLivingroom,NULL);
 	pSwitch = new CSwitch("Living room Switch 02",pWallSwitchLivingroom,pLightBulb);
 
 //---------------------------------------------------------
-	pLightBulb = new CLightBulb(getID(IDTYPE_ACCESSORY),"Living room Light-5",pLivingroom,pGroup03);
+	pLightBulb = new CLightBulb("Living room Light-5",pLivingroom,pGroup03);
 	pSwitch = new CSwitch("Living room Switch 03",pWallSwitchLivingroom,pLightBulb);
 
 //---------------------------------------------------------
-	pLightBulb = new CLightBulb(getID(IDTYPE_ACCESSORY),"Living room Light-6",pLivingroom,pGroup03);
+	pLightBulb = new CLightBulb("Living room Light-6",pLivingroom,pGroup03);
 	pSwitch = new CSwitch("Living room Switch 04",pWallSwitchLivingroom,pLightBulb);
 		
 //---------------------------------------------------------
-	pLightBulb = new CLightBulb(getID(IDTYPE_ACCESSORY),"Living room Light-7",pLivingroom,pGroup03);
+	pLightBulb = new CLightBulb("Living room Light-7",pLivingroom,pGroup03);
 	
 
 	pSwitch = pSwitch;
@@ -570,7 +570,7 @@ CGroup::CGroup(const char *name,CLocation *pLocation) : CMyObject("group",__allO
 
 	m_attr_num["fadePower"] = 0;
     m_attr_num["fadeTime"] = 1000;
-	
+
 
 
 
@@ -603,7 +603,12 @@ CGroup::~CGroup()
 
 CLocation::CLocation(const char *name) : CMyObject("location",__allObjects.getID(IDTYPE_LOCATION),name,0xff10)
 {
+printf("eddy test new location 111********* %p id:%x  size:%d \n",this,m_id,__allObjects.m_mapAllLocations.size());
+
+
 	__allObjects.m_mapAllLocations[m_id] = this;
+
+printf("eddy test new location 222********* %p id:%x  size:%d \n",this,m_id,__allObjects.m_mapAllLocations.size());
 }
 
 CLocation::~CLocation()
@@ -631,7 +636,7 @@ CLocation::~CLocation()
 
 
 
-CLightBulb::CLightBulb(int id,const char *name,CLocation *pLocation,CGroup *pGroup) : CAccessory(id,name,0x0109,pLocation)
+CLightBulb::CLightBulb(const char *name,CLocation *pLocation,CGroup *pGroup) : CAccessory(__allObjects.getID(IDTYPE_ACCESSORY),name,0x0109,pLocation)
 {
 	if ( pGroup != NULL)
 		pGroup->add(this);

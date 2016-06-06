@@ -82,6 +82,29 @@ int sendto_rdt_client (int session,unsigned int rdt_ticket,Json::Value& root)
 
 }
 
+
+int __getBaseAttr(CMyObject *pObject,Json::Value& jsonAttr)
+{
+	int count = 0;
+
+	map<string,int>::iterator iNum;
+	map<string,string>::iterator iStr;
+
+	jsonAttr["id"] = pObject->m_id;
+	jsonAttr["type"] = pObject->m_type;
+
+	jsonAttr["name"] 	= pObject->m_attr_str["name"];
+	jsonAttr["icon"] 	= pObject->m_attr_num["icon"];
+	jsonAttr["trigger"] = pObject->m_attr_num["trigger"];
+	jsonAttr["alert"] = pObject->m_attr_num["alert"];
+	jsonAttr["on"] 		= pObject->m_attr_num["on"];
+
+
+	return count;
+}
+
+
+
 int __getAttr(CMyObject *pObject,Json::Value& jsonAttr)
 {
 	int count = 0;
@@ -177,7 +200,7 @@ void deviceapi_get_gateway_about (int session,Json::Value &request)
 
 		rdt_ticket = request["rdt_ticket"].asUInt();
 
-		pGateway  = __allObjects.m_mapAllObjects[__allObjects.m_idGateway];
+		pGateway  = __allObjects.getGateway();
 		
 
 		if ( pGateway != NULL )
@@ -240,7 +263,7 @@ void deviceapi_get_accessory_about (int session,Json::Value &request)
 
 
 	try {
-		CMyObject *pAccessory = __allObjects.m_mapAllObjects[id];
+		CMyObject *pAccessory = __allObjects.getObjectByID(id);
 		
 		if ( pAccessory != NULL )
 		{
@@ -310,7 +333,7 @@ void deviceapi_get_accessory_detail (int session,Json::Value &request)
 
 
 	try {
-		CMyObject *pObject = __allObjects.m_mapAllObjects[id];
+		CMyObject *pObject = __allObjects.getObjectByID(id);
 		
 		if ( pObject != NULL )
 		{
@@ -463,7 +486,7 @@ printf("set_detail request:\n%s\n-------------------\n",(char*)request.toStyledS
 	try {
 		CMyObject *pObject = NULL;
 
-		pObject = __allObjects.m_mapAllObjects[id];
+		pObject = __allObjects.getObjectByID(id);
 
 
 		if ( pObject != NULL )
@@ -476,11 +499,16 @@ printf("set_detail request:\n%s\n-------------------\n",(char*)request.toStyledS
 			// Change Value +++
 			{
 				Json::ValueIterator itr;
+				Json::Value fwObjects;
+				int nfwObjectCnt = 0;
+				int valueChanged = 0;
 
 				for(itr=request.begin();itr != request.end(); itr++)
 				{
 					Json::Value key = itr.key();
 					Json::Value value = (*itr);
+
+					valueChanged = 0;
 
 					if ( 	key.asString() != "api"
 						 && key.asString() != "id"
@@ -488,31 +516,61 @@ printf("set_detail request:\n%s\n-------------------\n",(char*)request.toStyledS
 						 && key.asString() != "rdt_ticket"
 						 && key.asString() != "uid"			)
 					{
-
 						printf("Set key : %s       value:%s \n",key.asString().c_str(),value.asString().c_str());
 
-						if ( value.isString() )
-							pObject->m_attr_str[key.asString().c_str()] = value.asString();
+						valueChanged = 0;
+
+						if ( key.asString() == "location" )
+						{ //#Fix Me
+
+						}
 						else
-							pObject->m_attr_num[key.asString().c_str()] = value.asUInt();
+						{
+							if ( value.isString() )
+							{
+								if ( pObject->m_attr_str[key.asString().c_str()] != value.asString() )
+								{
+									pObject->m_attr_str[key.asString().c_str()] = value.asString();
+									valueChanged = 1;
+								}
+
+							}
+							else
+							{
+								if ( pObject->m_attr_num[key.asString().c_str()] != (int) value.asUInt() )
+								{
+									pObject->m_attr_num[key.asString().c_str()] = value.asUInt();
+									valueChanged = 1;
+								}
+							}
+						}
+
+
+
+						if ( 	 valueChanged != 0
+						     &&  key.asString() != "name"	
+						     &&  key.asString() != "location"	)
+						{
+							if ( value.isString() )
+								fwObjects[nfwObjectCnt][key.asString().c_str()] = value.asString();// #TBD : if we only send change items
+							else
+								fwObjects[nfwObjectCnt][key.asString().c_str()] = value.asUInt();// #TBD : if we only send change items
+						}
 					}
 				}
 
 
 				// Set to FW
 				{
-		    		Json::Value objects;
+		    		
 		    		
 		    		int seq = 0;
 
-		    		objects[0]["id"] = pObject->m_fwid; 
+		    		fwObjects[nfwObjectCnt]["id"] = pObject->m_fwid; 
 		    		
-		    		if ( request["on"].asInt() == 0 )
-		    			objects[0]["on"] = 0;
-		    		else
-		    			objects[0]["on"] = 1;
 
-		    		seq = __ipHub.fwapi_set(objects);
+
+		    		seq = __ipHub.fwapi_set(fwObjects);
 
 		    		if ( seq > 0 )
 		    		{
@@ -834,7 +892,7 @@ void deviceapi_get_gateway (int session,Json::Value &request)
 
 					pObject = *j;
 
-					__getAttr(pObject,accessories[nAccessoryCnt]);
+					__getBaseAttr(pObject,accessories[nAccessoryCnt]);
 
 					nAccessoryCnt++;
 				}
@@ -1152,7 +1210,7 @@ void __get_detail_of_object(int session,Json::Value &request,int idObject)
 			rdt_ticket = request["rdt_ticket"].asUInt();
 
 
-			pObject = (CMyObject*) __allObjects.m_mapAllObjects[idObject];
+			pObject = (CMyObject*) __allObjects.getObjectByID(idObject);
 
 			if ( pObject != NULL )
 			{
@@ -1368,7 +1426,7 @@ void deviceapi_add_an_accessory_to_group (int session,Json::Value &request)
 		{
 			CMyObject *pObject;
 
-			pObject = __allObjects.m_mapAllObjects[idAccessory];
+			pObject = __allObjects.getObjectByID(idAccessory);
 
 			if ( pObject != NULL )
 			{
@@ -1462,13 +1520,14 @@ void deviceapi_get_locations (int session,Json::Value &request)
 			int nLocationCnt = 0;
 
 
+printf("eddy test count:%d \n",__allObjects.m_mapAllLocations.size());
 			for(p = __allObjects.m_mapAllLocations.begin(); p!=__allObjects.m_mapAllLocations.end(); ++p)
 			{
 				CLocation *pLocation;
 
 				
 				pLocation = (CLocation*) p->second;
-
+printf("eddy test *************** id:%x  %p\n",p->first ,pLocation);
 
 				__getAttr(pLocation,locations[nLocationCnt]);
 
@@ -1624,19 +1683,29 @@ void deviceapi_set_a_location (int session,Json::Value &request)
 
 	strLocationName = request["name"].asString();
 
+
 	// location
 	try {
+		std::map<unsigned int, CMyObject *>::iterator iterFind;
 
-		pLocation =  (CLocation *)__allObjects.m_mapAllLocations[id];  // FixMe: We should check it first
 
-		if ( pLocation == NULL )
+		iterFind = __allObjects.m_mapAllLocations.find(id);
+
+
+
+		if ( iterFind == __allObjects.m_mapAllLocations.end() )
 		{
 			pLocation = new CLocation(strLocationName.c_str()); 
 
 			pLocation->m_attr_num["editable"] = 1;
+
+
+
 		}
 		else
 		{
+			pLocation = (CLocation*) iterFind->second;
+
 			if ( pLocation->m_attr_num["editable"] != 0 )
 			{
 				pLocation->m_name = strLocationName;
@@ -1645,7 +1714,7 @@ void deviceapi_set_a_location (int session,Json::Value &request)
 
 		}
 
-			err = 0;
+		err = 0;
 
     } catch (const libsocket::socket_exception& exc)
     {
@@ -1653,12 +1722,10 @@ void deviceapi_set_a_location (int session,Json::Value &request)
 		err_str = exc.mesg;
     }
 
-
-
 	response["uid"] = (char*) __myUID;
 	response["api"] = "set_a_location";
 
-	response["id"] = id;
+	response["id"] = pLocation->m_id;
 	response["name"] = strLocationName;
 
 
@@ -1956,7 +2023,7 @@ void deviceapi_get_switches (int session,Json::Value &request)
 
 
 	try {
-		CMyObject *pAccessory = __allObjects.m_mapAllObjects[id];
+		CMyObject *pAccessory = __allObjects.getObjectByID(id);
 		
 		// pAccessory->m_attr_num["type"] == 0x0101 - physical wireless wall switch
 		if ( pAccessory != NULL )
