@@ -50,6 +50,7 @@
 
 	protected:
 		int addToList (CMyObject *pObject);
+		int removeFromList (CMyObject *pObject);
 		int getIDTYPE();
 	};
 
@@ -105,6 +106,7 @@
 
 	public:
 		int add (CSwitch *pSwitch);
+		int remove (CSwitch *pSwitch);
 	};	
 
 
@@ -128,14 +130,8 @@
 		
 
 	public:
-		int add (CMyObject *pObject)
-		{
-			pObject->m_pGroup = this;
-
-			addToList(pObject);
-
-			return 1;
-		}
+		int add (CMyObject *pObject);
+		int remove (CMyObject *pObject);
 	};
 
 
@@ -149,14 +145,8 @@
 		
 
 	public:
-		int add (CMyObject *pObject)
-		{
-			pObject->m_pLocation = this;
-
-			addToList(pObject);
-
-			return 1;
-		}
+		int add (CMyObject *pObject);
+		int remove (CMyObject *pObject);
 	};
 
 
@@ -207,6 +197,20 @@
 
 			return  NULL;
 		}
+
+		CLocation *getLocationByID(unsigned int id)
+		{
+			std::map<unsigned int, CMyObject *>::iterator iterFind;
+
+			iterFind = m_mapAllLocations.find(id);
+
+			if ( iterFind != m_mapAllLocations.end() )
+				return  (CLocation *)iterFind->second;
+
+
+			return  NULL;
+		}
+
 
 
 

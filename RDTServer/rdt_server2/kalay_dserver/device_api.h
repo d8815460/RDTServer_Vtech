@@ -3,9 +3,8 @@
 
 
 	void deviceapi_get_gateway (int session,Json::Value &request);
-	void deviceapi_get_gateway_about (int session,Json::Value &request);
-	void deviceapi_get_accessory_about (int session,Json::Value &request);
-	void deviceapi_get_accessory_detail (int session,Json::Value &request);
+	void deviceapi_get_about (int session,Json::Value &request);
+	void deviceapi_get_detail (int session,Json::Value &request);
 	void deviceapi_get_group_free_lights (int session,Json::Value &request);
 	void deviceapi_set_detail (int session,Json::Value &request);
 	void deviceapi_remove (int session,Json::Value &request);

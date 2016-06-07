@@ -42,17 +42,13 @@ int device_parser(int session,unsigned char *option,int option_len,unsigned char
 		printf("UID:%s\n",uid.c_str());
 		printf("api:%s\n",api.c_str());
 
-		if ( strcmp(api.c_str(),"get_gateway_about") == 0 ) //
+		if ( strcmp(api.c_str(),"get_about") == 0 ) //
 		{
-			deviceapi_get_gateway_about(session,value);
+			deviceapi_get_about(session,value);
 		}
-		else if ( strcmp(api.c_str(),"get_accessory_about") == 0 ) //
+		else if ( strcmp(api.c_str(),"get_detail") == 0 ) //
 		{
-			deviceapi_get_accessory_about(session,value);
-		}
-		else if ( strcmp(api.c_str(),"get_accessory_detail") == 0 ) //
-		{
-			deviceapi_get_accessory_detail(session,value);
+			deviceapi_get_detail(session,value);
 		}
 		else if ( strcmp(api.c_str(),"get_group_free_lights") == 0 ) //
 		{

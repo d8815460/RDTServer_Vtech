@@ -179,68 +179,7 @@ int __getSubObjects(CMyObject *pObject,Json::Value& subObjects)
 
 
 // Implemente API functions -----------------------------
-
-void deviceapi_get_gateway_about (int session,Json::Value &request)
-{
-
-	Json::Value root;
-	Json::Value response;
-	unsigned int rdt_ticket = 0;
-	int rc;
-	int err = 1;
-	string err_str;
-
-
-	response["uid"] = (char*) __myUID;
-	response["api"] = "get_gateway_about";
-
-
-	try {
-		CMyObject *pGateway;
-
-		rdt_ticket = request["rdt_ticket"].asUInt();
-
-		pGateway  = __allObjects.getGateway();
-		
-
-		if ( pGateway != NULL )
-		{
-			__getAbout(pGateway,response);
-			err = 0;
-		}
-		else
-		{
-			err = -1;
-			err_str = "not found";
-		}
-	
-
-
-    } catch (const libsocket::socket_exception& exc)
-    {
-		std::cerr << exc.mesg;
-		err_str = exc.mesg;
-    }
-
-
-
-	root["error"] = err;
-	if ( err_str.length() != 0 )
-		root["error_str"] = err_str;
-	root["response"] = response;
-
-	rc = sendto_rdt_client(session,rdt_ticket,root);
-
-
-	if ( rc < 0 )
-	{
-
-	}
-
-	return;
-}
-
-void deviceapi_get_accessory_about (int session,Json::Value &request)
+void deviceapi_get_about (int session,Json::Value &request)
 {
 
 	Json::Value root;
@@ -255,112 +194,53 @@ void deviceapi_get_accessory_about (int session,Json::Value &request)
 	rdt_ticket = request["rdt_ticket"].asUInt();
 
 	response["uid"] = (char*) __myUID;;
-	response["api"] = "get_accessory_about";
+	response["api"] = "get_about";
 
 	id = request["id"].asUInt();
 
-	printf("get_accessory_about id :%d \n",id);
+	printf("get_about id :%d \n",id);
 
 
 	try {
-		CMyObject *pAccessory = __allObjects.getObjectByID(id);
-		
-		if ( pAccessory != NULL )
+		if ( id == 0 ) // Get gateway about
 		{
-			map<string,int>::iterator iNum;
-			map<string,string>::iterator iStr;
+			CMyObject *pGateway;
 
-			response["id"] 	= pAccessory->m_id;
-			response["type"] = pAccessory->m_attr_num["type"];
-
-			__getAbout(pAccessory,response);
-
-
-			err = 0;
-		}
-		else
-		{
-			err = -1;
-			err_str = "not found";
-		}
-    } catch (const libsocket::socket_exception& exc)
-    {
-		std::cerr << exc.mesg;
-		err_str = exc.mesg;
-    }
-
-
-
-	root["error"] = err;
-	if ( err_str.length() != 0 )
-		root["error_str"] = err_str;
-
-	root["response"] = response;
-
-	rc = sendto_rdt_client(session,rdt_ticket,root);
-
-
-	if ( rc < 0 )
-	{
-
-	}
-
-	return;
-}
-
-void deviceapi_get_accessory_detail (int session,Json::Value &request)
-{
-	Json::Value root;
-	Json::Value response;
-	Json::Value location;
-
-	unsigned int rdt_ticket;
-	int rc;
-	unsigned int id;
-	int err = 1;
-	string err_str;	
-
-
-	rdt_ticket = request["rdt_ticket"].asUInt();
-
-	response["uid"] = (char*) __myUID;;
-	response["api"] = "get_accessory_detail";
-
-	id = request["id"].asUInt();
-
-	printf("get_accessory_detail id :%d \n",id);
-
-
-
-	try {
-		CMyObject *pObject = __allObjects.getObjectByID(id);
-		
-		if ( pObject != NULL )
-		{
-			map<string,int>::iterator iNum;
-			map<string,string>::iterator iStr;
-			//int accessoryType;
-
-			//accessoryType = pAccessory->m_attr_num["type"];	
-	
-			if ( pObject->m_pLocation != NULL ) 
+			pGateway  = __allObjects.getGateway();
+			
+			if ( pGateway != NULL )
 			{
-				location["id"] = pObject->m_pLocation->m_id;
-				location["name"] = pObject->m_pLocation->m_attr_str["name"];
-
-				response["location"] = location;
+				__getAbout(pGateway,response);
+				err = 0;
 			}
-
-			__getAttr(pObject,response);
-
-
-
-			err = 0;
+			else
+			{
+				err = -1;
+				err_str = "not found";
+			}
 		}
 		else
 		{
-			err = -1;
-			err_str = "not found";
+			CMyObject *pAccessory = __allObjects.getObjectByID(id);
+			
+			if ( pAccessory != NULL )
+			{
+				map<string,int>::iterator iNum;
+				map<string,string>::iterator iStr;
+
+				response["id"] 	= pAccessory->m_id;
+				response["type"] = pAccessory->m_attr_num["type"];
+
+				__getAbout(pAccessory,response);
+
+
+				err = 0;
+			}
+			else
+			{
+				err = -1;
+				err_str = "not found";
+			}
 		}
     } catch (const libsocket::socket_exception& exc)
     {
@@ -376,9 +256,8 @@ void deviceapi_get_accessory_detail (int session,Json::Value &request)
 
 	root["response"] = response;
 
-printf("get_accessory_detail:\n%s\n------------------\n",(char*)root.toStyledString().c_str());
-
 	rc = sendto_rdt_client(session,rdt_ticket,root);
+
 
 	if ( rc < 0 )
 	{
@@ -387,6 +266,7 @@ printf("get_accessory_detail:\n%s\n------------------\n",(char*)root.toStyledStr
 
 	return;
 }
+
 
 void deviceapi_get_group_free_lights (int session,Json::Value &request)
 {
@@ -516,30 +396,58 @@ printf("set_detail request:\n%s\n-------------------\n",(char*)request.toStyledS
 						 && key.asString() != "rdt_ticket"
 						 && key.asString() != "uid"			)
 					{
-						printf("Set key : %s       value:%s \n",key.asString().c_str(),value.asString().c_str());
-
 						valueChanged = 0;
 
 						if ( key.asString() == "location" )
 						{ //#Fix Me
+							int idLocation;
+							
+
+							printf("Set key : %s  ",key.asString().c_str());
+
+
+							idLocation = value["id"].asUInt();
+							printf("eddy test location ID : %d \n",idLocation);
+
+
+							if (    pObject->m_pLocation == NULL 
+								 || pObject->m_pLocation->m_id != idLocation)
+							{
+								CLocation *newLocation;
+
+								newLocation = __allObjects.getLocationByID(idLocation);
+								if ( newLocation != NULL )
+								{
+									newLocation->add(pObject);
+								}
+
+							}
 
 						}
 						else
 						{
-							if ( value.isString() )
+							printf("Set key : %s  ",key.asString().c_str());
+
+							
+							if ( value.isNumeric() )
+								printf("value:%d \n",value.asInt());
+							else  // if ( value.isString() )
+								printf("value:%s \n",value.asString().c_str());
+
+
+							if ( value.isNumeric() )
+							{
+								if ( pObject->m_attr_num[key.asString().c_str()] !=  value.asInt() )
+								{
+									pObject->m_attr_num[key.asString().c_str()] = value.asInt();
+									valueChanged = 1;
+								}								
+							}
+							else // if ( value.isString() )
 							{
 								if ( pObject->m_attr_str[key.asString().c_str()] != value.asString() )
 								{
 									pObject->m_attr_str[key.asString().c_str()] = value.asString();
-									valueChanged = 1;
-								}
-
-							}
-							else
-							{
-								if ( pObject->m_attr_num[key.asString().c_str()] != (int) value.asUInt() )
-								{
-									pObject->m_attr_num[key.asString().c_str()] = value.asUInt();
 									valueChanged = 1;
 								}
 							}
@@ -551,10 +459,10 @@ printf("set_detail request:\n%s\n-------------------\n",(char*)request.toStyledS
 						     &&  key.asString() != "name"	
 						     &&  key.asString() != "location"	)
 						{
-							if ( value.isString() )
+							if ( value.isNumeric() )
+								fwObjects[nfwObjectCnt][key.asString().c_str()] = value.asInt();// #TBD : if we only send change items
+							else // if ( value.isString() )
 								fwObjects[nfwObjectCnt][key.asString().c_str()] = value.asString();// #TBD : if we only send change items
-							else
-								fwObjects[nfwObjectCnt][key.asString().c_str()] = value.asUInt();// #TBD : if we only send change items
 						}
 					}
 				}
@@ -563,30 +471,29 @@ printf("set_detail request:\n%s\n-------------------\n",(char*)request.toStyledS
 				// Set to FW
 				{
 		    		
-		    		
-		    		int seq = 0;
 
-		    		fwObjects[nfwObjectCnt]["id"] = pObject->m_fwid; 
-		    		
-
-
-		    		seq = __ipHub.fwapi_set(fwObjects);
-
-		    		if ( seq > 0 )
+		    		if ( pObject->m_fwid.length() > 0 )
 		    		{
-		    			CTXRecord *txRecord = new CTXRecord();
+		    			int seq = 0;
 
-		    			txRecord->seq = seq;
-		    			txRecord->session = session;
-						txRecord->request = request;
-						//txRecord->response
-						txRecord->sendTime = time(NULL);
+			    		fwObjects[nfwObjectCnt]["id"] = pObject->m_fwid; 
 
-						__ipHub.m_txQueue[seq] = txRecord;
+
+			    		seq = __ipHub.fwapi_set(fwObjects);
+
+			    		if ( seq > 0 )
+			    		{
+			    			CTXRecord *txRecord = new CTXRecord();
+
+			    			txRecord->seq = seq;
+			    			txRecord->session = session;
+							txRecord->request = request;
+							//txRecord->response
+							txRecord->sendTime = time(NULL);
+
+							__ipHub.m_txQueue[seq] = txRecord;
+			    		}
 		    		}
-
-
-		    		
 				}
 
 
@@ -1192,6 +1099,7 @@ printf("deviceapi_get_detail_of_group\n%s\n-------------------\n",(char*)root.to
 }
 
 
+
 void __get_detail_of_object(int session,Json::Value &request,int idObject)
 {
 	Json::Value root;
@@ -1221,6 +1129,28 @@ void __get_detail_of_object(int session,Json::Value &request,int idObject)
 				response["id"] = pObject->m_id;
 
 				__getAttr(pObject,response);
+
+
+				if ( pObject->m_pLocation != NULL ) 
+				{
+					Json::Value location;
+
+					location["id"] = pObject->m_pLocation->m_id;
+					location["name"] = pObject->m_pLocation->m_attr_str["name"];
+
+					response["location"] = location;
+				}	
+				
+
+				if ( pObject->m_pGroup != NULL ) 
+				{
+					Json::Value group;
+
+					group["id"] = pObject->m_pGroup->m_id;
+					group["name"] = pObject->m_pGroup->m_attr_str["name"];
+
+					response["group"] = group;
+				}	
 
 
 				if ( pObject->m_listObject.size() > 0 )

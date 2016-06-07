@@ -83,10 +83,15 @@ CAllObjects::CAllObjects()
 	pLightBulb = new CLightBulb("Bedroom Light-1",pBedroom,NULL);
 	pSwitch = new CSwitch("Bedroom Switch 01",pWallSwitchBedroom,pLightBulb);
 
+	 pLightBulb->m_attr_num["colorMode"] = 0;
+
 
 	//----------------------------------------------------------------
 	pLightBulb = new CLightBulb("Bedroom Light-2",pBedroom,NULL);
 	pSwitch = new CSwitch("Bedroom Switch 02",pWallSwitchBedroom,pLightBulb);
+
+	pLightBulb->m_attr_num["colorMode"] = 0;
+
 
 
 	//----------------------------------------------------------------
@@ -134,9 +139,11 @@ CAllObjects::CAllObjects()
 
 	//---------------------------------------------------------
 	pLightBulb = new CLightBulb("Bathroom Light-1",pBathroom,pGroup01);
+	pLightBulb->m_attr_num["colorMode"] = 0;
 
 	//---------------------------------------------------------
 	pLightBulb = new CLightBulb("Bathroom Light-2",pBathroom,pGroup01);
+	pLightBulb->m_attr_num["colorMode"] = 0;
 
 	//---------------------------------------------------------
 	pLightBulb = new CLightBulb("Bathroom Light-3",pBathroom,pGroup01);
@@ -203,7 +210,7 @@ CAllObjects::CAllObjects()
 	pAccessory->m_attr_num["icon"] = 0;
 	pAccessory->m_attr_num["trigger"] = 0;
 
-	pAccessory->m_fwid = std::to_string(pAccessory->m_id);	
+	//pAccessory->m_fwid = std::to_string(pAccessory->m_id);	
 	pAccessory->m_about_str["ver"] = "1.0.0";		
 
 
@@ -248,9 +255,11 @@ CAllObjects::CAllObjects()
 // locationOther
 //---------------------------------------------------------
 	pLightBulb = new CLightBulb("Light 91",locationOther,pGroup02);
+	pLightBulb->m_attr_num["colorMode"] = 0;
 
 //---------------------------------------------------------
 	pLightBulb = new CLightBulb("Light 92",locationOther,pGroup02);
+	pLightBulb->m_attr_num["colorMode"] = 0;
 
 //---------------------------------------------------------
 	pLightBulb = new CLightBulb("Light 93",locationOther,NULL);
@@ -445,11 +454,10 @@ CMyObject::CMyObject(const char *myClassType,int id,const char *name,int type )
 
 	m_attr_str["name"] = m_name;
 
-	m_fwid = std::to_string(m_id);// FixMe
 
 
 	__allObjects.m_mapAllObjects[m_id] = this;
-	__allObjects.m_mapObjectsByFWID[m_fwid] = this; // ??? should I do that ??
+//	__allObjects.m_mapObjectsByFWID[m_fwid] = this; // ??? should I do that ??
 
 
 }
@@ -529,6 +537,23 @@ int CMyObject::addToList (CMyObject *pObject)
 	return 1;
 }	
 
+int CMyObject::removeFromList (CMyObject *pObject)
+{
+	int ret = 0;
+	list<CMyObject*>::iterator iter2;
+	list<CMyObject*>::iterator j;
+
+	iter2 = std::find(m_listObject.begin(), m_listObject.end(), pObject);
+	if ( iter2 != m_listObject.end() )
+	{
+		m_listObject.erase(iter2);
+		ret = 1;
+	}
+
+
+	return ret;
+}	
+
 int CMyObject::getIDTYPE()
 {
 	return (m_id&0xff000000);
@@ -600,15 +625,29 @@ CGroup::~CGroup()
 
 }
 
+int CGroup::add (CMyObject *pObject)
+{
+	pObject->m_pGroup = this;
+
+	addToList(pObject);
+
+	return 1;
+}
+
+int CGroup::remove (CMyObject *pObject)
+{
+	removeFromList(pObject);
+
+	pObject->m_pGroup = NULL;
+
+	return 1;
+}
+
+
 
 CLocation::CLocation(const char *name) : CMyObject("location",__allObjects.getID(IDTYPE_LOCATION),name,0xff10)
 {
-printf("eddy test new location 111********* %p id:%x  size:%d \n",this,m_id,__allObjects.m_mapAllLocations.size());
-
-
 	__allObjects.m_mapAllLocations[m_id] = this;
-
-printf("eddy test new location 222********* %p id:%x  size:%d \n",this,m_id,__allObjects.m_mapAllLocations.size());
 }
 
 CLocation::~CLocation()
@@ -634,6 +673,29 @@ CLocation::~CLocation()
 }
 
 
+int CLocation::add (CMyObject *pObject)
+{
+	if ( pObject->m_pLocation != NULL )
+	{
+		pObject->m_pLocation->remove(pObject);
+	}
+
+	pObject->m_pLocation = this;
+
+	addToList(pObject);
+
+	return 1;
+}
+
+int CLocation::remove (CMyObject *pObject)
+{
+	removeFromList(pObject);
+
+	pObject->m_pLocation = NULL;
+
+	return 1;
+}
+
 
 
 CLightBulb::CLightBulb(const char *name,CLocation *pLocation,CGroup *pGroup) : CAccessory(__allObjects.getID(IDTYPE_ACCESSORY),name,0x0109,pLocation)
@@ -648,7 +710,7 @@ CLightBulb::CLightBulb(const char *name,CLocation *pLocation,CGroup *pGroup) : C
     m_attr_num["brightness"] = 60;
     m_attr_num["hue"] = 23;
     m_attr_num["saturation"] = 40;
-    m_attr_num["colorMode"] = 0;
+    m_attr_num["colorMode"] = 1;
     m_attr_num["temperature"] = 4500;
     m_attr_num["whiteIntensity"] = 65;
     m_attr_num["fadePower"] = 0;
@@ -748,6 +810,16 @@ int CWallSwitch::add (CSwitch *pSwitch)
 
 	return 1;
 }
+
+int CWallSwitch::remove (CSwitch *pSwitch)
+{
+	removeFromList(pSwitch);
+
+	pSwitch->m_pWallSwitch = NULL;
+
+	return 1;
+}
+
 
 CSwitch::CSwitch(const char *name,CWallSwitch *pWallSwitch,CAccessory *pAccessory) : CMyObject("switch",__allObjects.getID(IDTYPE_SWITCH),name,0xff20)
 {

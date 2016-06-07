@@ -107,7 +107,7 @@ int CVtechIPHub::parser(Json::Value& root)
 							if ( value.isString() )
 								pGateway->m_about_str[key.asString().c_str()] = value.asString();
 							else
-								pGateway->m_about_num[key.asString().c_str()] = value.asUInt();
+								pGateway->m_about_num[key.asString().c_str()] = value.asInt();
 
 						}
 						else if (  	 key != "id" 
@@ -119,7 +119,7 @@ int CVtechIPHub::parser(Json::Value& root)
 							if ( value.isString() )
 								pGateway->m_attr_str[key.asString().c_str()] = value.asString();
 							else
-								pGateway->m_attr_num[key.asString().c_str()] = value.asUInt();
+								pGateway->m_attr_num[key.asString().c_str()] = value.asInt();
 						}
 						
 					}
@@ -192,8 +192,8 @@ int CVtechIPHub::parser(Json::Value& root)
 							}
 							else
 							{
-								printf("Obj Set key : %s  = %d (num) \n",key.asString().c_str(),value.asUInt());	
-								pObject->m_about_num[key.asString().c_str()] = value.asUInt();
+								printf("Obj Set key : %s  = %d (num) \n",key.asString().c_str(),value.asInt());	
+								pObject->m_about_num[key.asString().c_str()] = value.asInt();
 							}
 
 						}
@@ -208,8 +208,8 @@ int CVtechIPHub::parser(Json::Value& root)
 							}
 							else
 							{
-								printf("Obj Set key : %s  = %d (num) \n",key.asString().c_str(),value.asUInt());	
-								pObject->m_attr_num[key.asString().c_str()] = value.asUInt();
+								printf("Obj Set key : %s  = %d (num) \n",key.asString().c_str(),value.asInt());	
+								pObject->m_attr_num[key.asString().c_str()] = value.asInt();
 							}
 						}
 						
