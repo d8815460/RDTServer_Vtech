@@ -664,10 +664,15 @@ CLocation::~CLocation()
 	for(iterX = m_listObject.begin(); iterX!=m_listObject.end(); ++iterX)
 	{
 		CMyObject *pSubObject;
+		CLocation *otherLocation = __allObjects.getLocationOther();
 
 		pSubObject = *iterX;
 
-		pSubObject->m_pLocation = NULL;
+
+		if ( this != otherLocation )
+			pSubObject->m_pLocation = otherLocation;
+		else
+			pSubObject->m_pLocation = NULL;
 	}	
 
 }

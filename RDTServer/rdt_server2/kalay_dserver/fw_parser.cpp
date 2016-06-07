@@ -157,12 +157,21 @@ int CVtechIPHub::parser(Json::Value& root)
 						{
 							pObject = new CLightBulb("IP-Hub Light",__allObjects.getLocationOther(),NULL);	
 						}
-						else if (    unitType == 0x0201   // Light bulb
-								  || unitType == 0x0202   // Magnetic sensor
-								  || unitType == 0x0203   // motion sensor
-								  || unitType == 0x0206 ) // flood detector 
+						else if ( unitType == 0x0201 )  // garage sensor (door)
 						{
-							pObject = new CMyObject("power_outlet",__allObjects.getID(IDTYPE_ACCESSORY),"IP-Hub power outlet",unitType);
+							pObject = new CMyObject("sensor",__allObjects.getID(IDTYPE_ACCESSORY),"IP-Hub Garage sensor",unitType);
+						}
+						else if ( unitType == 0x0202 ) // Magnetic sensor
+						{
+							pObject = new CMyObject("sensor",__allObjects.getID(IDTYPE_ACCESSORY),"IP-Hub Magnetic sensor",unitType);
+						}
+						else if ( unitType == 0x0203 ) // motion sensor
+						{
+							pObject = new CMyObject("sensor",__allObjects.getID(IDTYPE_ACCESSORY),"IP-Hub Motion sensor",unitType);
+						}
+						else if ( unitType == 0x0206 ) // flood detector 
+						{
+							pObject = new CMyObject("sensor",__allObjects.getID(IDTYPE_ACCESSORY),"IP-Hub Flood detector",unitType);
 						}
 						else // if 
 						{
