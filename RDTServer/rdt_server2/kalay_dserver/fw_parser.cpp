@@ -151,7 +151,7 @@ int CVtechIPHub::parser(Json::Value& root)
 						}
 						else  if ( unitType == 0x0106 ) // power outlet
 						{
-							pObject = new CAccessory(__allObjects.getID(IDTYPE_ACCESSORY),"IP-Hub power outlet",unitType,__allObjects.getLocationOther());
+							pObject = new CAccessory("IP-Hub power outlet",unitType,__allObjects.getLocationOther());
 						}
 						else  if ( unitType == 0x0109 ) // Light bulb
 						{
@@ -159,19 +159,19 @@ int CVtechIPHub::parser(Json::Value& root)
 						}
 						else if ( unitType == 0x0201 )  // garage sensor (door)
 						{
-							pObject = new CMyObject("sensor",__allObjects.getID(IDTYPE_ACCESSORY),"IP-Hub Garage sensor",unitType);
+							pObject = new CSensor("IP-Hub Garage sensor",unitType,__allObjects.getLocationOther());
 						}
 						else if ( unitType == 0x0202 ) // Magnetic sensor
 						{
-							pObject = new CMyObject("sensor",__allObjects.getID(IDTYPE_ACCESSORY),"IP-Hub Magnetic sensor",unitType);
+							pObject = new CSensor("IP-Hub Magnetic sensor",unitType,__allObjects.getLocationOther());
 						}
 						else if ( unitType == 0x0203 ) // motion sensor
 						{
-							pObject = new CMyObject("sensor",__allObjects.getID(IDTYPE_ACCESSORY),"IP-Hub Motion sensor",unitType);
+							pObject = new CSensor("IP-Hub Motion sensor",unitType,__allObjects.getLocationOther());
 						}
 						else if ( unitType == 0x0206 ) // flood detector 
 						{
-							pObject = new CMyObject("sensor",__allObjects.getID(IDTYPE_ACCESSORY),"IP-Hub Flood detector",unitType);
+							pObject = new CSensor("IP-Hub Flood detector",unitType,__allObjects.getLocationOther());
 						}
 						else // if 
 						{

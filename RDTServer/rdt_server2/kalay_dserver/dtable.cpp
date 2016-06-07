@@ -186,10 +186,10 @@ CAllObjects::CAllObjects()
 
 
 //----------------------------------------------------------------
-	pSensor = new CSensor(getID(IDTYPE_ACCESSORY),"Garage Door Sensor 01",0x0201,pKitchen);
+	pSensor = new CSensor("Garage Door Sensor 01",0x0201,pKitchen);
 
 //----------------------------------------------------------------
-	pSensor = new CSensor(getID(IDTYPE_ACCESSORY),"Magnetic sensor",0x0202,pKitchen);
+	pSensor = new CSensor("Magnetic sensor",0x0202,pKitchen);
 
 	pSensor->m_attr_num["batLow"] = 1;
 	pSensor->m_attr_num["outLink"] = 1;
@@ -197,14 +197,14 @@ CAllObjects::CAllObjects()
 
 
 //----------------------------------------------------------------
-	pSensor = new CSensor(getID(IDTYPE_ACCESSORY),"motion sensor",0x0203,pKitchen);
+	pSensor = new CSensor("motion sensor",0x0203,pKitchen);
 
 //----------------------------------------------------------------
-	pSensor = new CSensor(getID(IDTYPE_ACCESSORY),"flood detector",0x0206,pKitchen);
+	pSensor = new CSensor("flood detector",0x0206,pKitchen);
 
 
 //----------------------------------------------------------------
-	pAccessory = new CAccessory(getID(IDTYPE_ACCESSORY),"AC power outlet",0x0106,pKitchen);
+	pAccessory = new CAccessory("AC power outlet",0x0106,pKitchen);
 
 	pAccessory->m_attr_num["on"] = 1;
 	pAccessory->m_attr_num["icon"] = 0;
@@ -560,7 +560,7 @@ int CMyObject::getIDTYPE()
 }
 
 
-CAccessory::CAccessory(int id,const char *name,int type,CLocation *pLocation) : CMyObject("accessory",id,name,type)
+CAccessory::CAccessory(const char *name,int type,CLocation *pLocation) : CMyObject("accessory",__allObjects.getID(IDTYPE_ACCESSORY),name,type)
 {
 	if ( pLocation != NULL )
 		pLocation->add(this);	
@@ -703,7 +703,7 @@ int CLocation::remove (CMyObject *pObject)
 
 
 
-CLightBulb::CLightBulb(const char *name,CLocation *pLocation,CGroup *pGroup) : CAccessory(__allObjects.getID(IDTYPE_ACCESSORY),name,0x0109,pLocation)
+CLightBulb::CLightBulb(const char *name,CLocation *pLocation,CGroup *pGroup) : CAccessory(name,0x0109,pLocation)
 {
 	if ( pGroup != NULL)
 		pGroup->add(this);
@@ -730,7 +730,7 @@ CLightBulb::~CLightBulb()
 }
 
 
-CSensor::CSensor(int id,const char *name,int type,CLocation *pLocation): CAccessory(id,name,type,pLocation)
+CSensor::CSensor(const char *name,int type,CLocation *pLocation): CAccessory(name,type,pLocation)
 {
 	m_attr_num["on"] = 2;
 	m_attr_num["icon"] = 0;
