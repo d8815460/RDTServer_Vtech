@@ -1,0 +1,12 @@
+some brief info on running a system demo:
+
+Basic requirement: 32-bit ubuntu, android phone
+
+1) goto folder RDTServer/RDTServer and run script runIPHub.sh
+2) goto folder RDTServer/rdt_server2/kalay_dserver & modify script runServer.sh to the desired UID, then run runServer.sh
+3) now run the android app, use add gateway to scan for the emulator in the same LAN. (refer to AndroidApp to get the current application)
+
+Android app release
+
+10 Jun 2016 - Vtech_1.0.0.6.apk
+
