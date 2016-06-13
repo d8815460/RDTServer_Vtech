@@ -5,6 +5,7 @@
 
 #include <json/json.h>
 
+#include <iostream>
 #include <string>
 
 #include "dserver.h"
@@ -16,10 +17,17 @@
 
 #include "fw_api.h"
 
+int __getAttr(CMyObject *pObject,Json::Value& jsonAttr);
+int sendto_rdt_client (int session,unsigned int rdt_ticket,Json::Value& responseRoot);
+int sendto_all_client (Json::Value& responseRoot);
+
+
+
 
 
 int CVtechIPHub::parser(Json::Value& root)
 {
+	CTXRecord *txRecord = NULL;
 	std::string recv_json;
 	Json::Value objects;
 	std::string func;
@@ -45,22 +53,38 @@ int CVtechIPHub::parser(Json::Value& root)
 
 	objects = root["objects"];
 
+	if ( !objects.isArray() )
+	{
+		objects = root["object"];
+	}
 
-	printf("test received : error:%d isLast:%d seq_no:%d  objects:%d \n",error,isLast,seqNo,objects.size());
+
+	printf("test received : error:%d isLast:%d seq_no:%d  func:%s\n objects:%d \n",error,isLast,seqNo,func.c_str(),objects.size());
 
 
-
-
-{
-	CTXRecord *txRecord;
-
-	txRecord = m_txQueue[seqNo];
-
-	if ( txRecord != NULL )
+	if ( func == "notify" )
 	{
 
+
+
+
 	}
-}
+	else
+	{
+
+		std::map<unsigned int, CTXRecord *>::iterator iterFind;
+
+		iterFind = m_txQueue.find(seqNo);
+
+		if ( iterFind == m_txQueue.end() )
+		{
+
+		}
+		else
+		{
+			txRecord = iterFind->second;
+		}
+	}
 
 
 	// Change Value +++
@@ -137,7 +161,7 @@ int CVtechIPHub::parser(Json::Value& root)
 					{
 						pObject = iterFind->second;
 
-						printf(" found object %s ",pObject->m_attr_str["name"].c_str());
+						printf(" found object %s \n",pObject->m_attr_str["name"].c_str());
 					}
 					else
 					{
@@ -206,6 +230,12 @@ int CVtechIPHub::parser(Json::Value& root)
 							}
 
 						}
+						else if ( 	key == "alert" )
+						{
+							printf("Obj Set key : %s  = %d (num) \n",key.asString().c_str(),value.asInt());	
+							pObject->m_attr_num["trigger"] = value.asInt();
+							pObject->m_attr_num["alert"] = value.asInt();
+						}
 						else if ( 	key != "id" 
 							 && key != "type")
 						{
@@ -228,9 +258,211 @@ int CVtechIPHub::parser(Json::Value& root)
 		}
 	}
 
+	if ( txRecord != NULL )
+	{
+		Json::Value responseRoot;
+		Json::Value response;
+		Json::Value objects;
+		Json::Value location;
+
+		unsigned int rdt_ticket;
+		int rc;
+		unsigned int id;
+		int ntype;
+		int err = 1;
+		string err_str;		
+
+		//int seq;
+		//int session;
+		//Json::Value response;
+		//Json::Value request;
+		//time_t sendTime;
+
+printf("Test TXRecord *****************\n seq:%d  session:%d\nrequest\n%s\n*****************\n\n",txRecord->seq,txRecord->session,txRecord->request.toStyledString().c_str());
+
+		response["uid"] = (char*) __myUID;
+		response["api"] = txRecord->request["api"].asString();
+
+		rdt_ticket = txRecord->request["rdt_ticket"].asUInt();
+
+		id = txRecord->request["id"].asUInt();
+
+		ntype = id & 0xff000000;
+
+		if ( ntype > 0 )
+		{
+
+		}
+
+		try {
+			CMyObject *pObject = NULL;
+
+			pObject = __allObjects.getObjectByID(id);
+
+			if ( pObject != NULL )
+			{
+
+				if ( pObject->m_pLocation != NULL ) 
+				{
+					location["id"] = pObject->m_pLocation->m_id;
+					location["name"] = pObject->m_pLocation->m_attr_str["name"];
+
+					response["location"] = location;
+				}
+				
+				
+				__getAttr(pObject,response);			
+
+				err = 0;
+			}
+
+
+	    } catch (const libsocket::socket_exception& exc)
+	    {
+			std::cerr << exc.mesg;
+			err_str = exc.mesg;
+	    }
+
+
+		responseRoot["error"] = err;
+		if ( err_str.length() != 0 )
+			responseRoot["error_str"] = err_str;
+		responseRoot["response"] = response;
+
+
+		rc = sendto_rdt_client(txRecord->session,rdt_ticket,responseRoot);
+
+
+		if ( rc < 0 )
+		{
+
+		}
+
+				
+
+	}
+	else if ( func == "notify" )
+	{
+		Json::ValueIterator itrObj;
+
+		for(itrObj=objects.begin();itrObj != objects.end(); itrObj++)
+		{
+			Json::ValueIterator itrAttr;
+			Json::Value aObj = (*itrObj);
+			string fwid;
+			unsigned int unitType;
+
+			if ( aObj["id"].isString() )
+			{
+
+				fwid = aObj["id"].asString();
+				unitType = aObj["type"].asUInt();
+
+
+				printf("ID:%s\n",fwid.c_str());
+
+				if ( fwid == "0" || unitType == 0xff00 ) // __GATEWAY__
+				{
+
+				}
+				else
+				{
+					CMyObject *pObject = NULL;
+
+					std::map<unsigned int, CMyObject *>::iterator p;
+					std::map<std::string, CMyObject *>::iterator iterFind;
+
+					iterFind = __allObjects.m_mapObjectsByFWID.find(fwid);
+					
+					if (  iterFind != __allObjects.m_mapObjectsByFWID.end() )
+					{
+						Json::Value responseRoot;
+						Json::Value response;
+						Json::Value objects;
+						Json::Value location;
+
+						//unsigned int rdt_ticket;
+						int rc;
+						unsigned int id;
+						int ntype;
+						int err = 1;
+						string err_str;		
+
+
+						pObject = iterFind->second;
+
+						printf("notify found object %s \n",pObject->m_attr_str["name"].c_str());
+
+
+						response["uid"] = (char*) __myUID;
+						response["api"] = "notify";
+
+						//rdt_ticket = 0;
+
+						id = pObject->m_id;
+
+						ntype = id & 0xff000000;
+
+						if ( ntype > 0 )
+						{
+
+						}
+
+						try {
+							CMyObject *pObject = NULL;
+
+							pObject = __allObjects.getObjectByID(id);
+
+							if ( pObject != NULL )
+							{
+
+								if ( pObject->m_pLocation != NULL ) 
+								{
+									location["id"] = pObject->m_pLocation->m_id;
+									location["name"] = pObject->m_pLocation->m_attr_str["name"];
+
+									response["location"] = location;
+								}
+								
+								
+								__getAttr(pObject,response);			
+
+								err = 0;
+							}
+
+
+					    } catch (const libsocket::socket_exception& exc)
+					    {
+							std::cerr << exc.mesg;
+							err_str = exc.mesg;
+					    }
+
+
+						responseRoot["error"] = err;
+						if ( err_str.length() != 0 )
+							responseRoot["error_str"] = err_str;
+						responseRoot["response"] = response;
+
+
+						printf("notify_detail:\n%s\n-------------------\n",(char*)responseRoot.toStyledString().c_str());
+						rc = sendto_all_client(responseRoot);
+
+
+						if ( rc < 0 )
+						{
+
+						}
+
+
+					}
+				}
+			}
+		}
+	}
 
 
 
 
 	return 1;
 }
+

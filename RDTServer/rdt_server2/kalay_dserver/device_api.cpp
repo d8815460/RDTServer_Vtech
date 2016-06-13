@@ -1,25 +1,90 @@
 #include "../headers/exception.hpp"
-#include <iostream>
+
 #include <string.h>
 #include <unistd.h>
 
 #include <json/json.h>
 
+#include <iostream>
 #include <algorithm>
 #include <string>
-#include <iomanip> 
 
 
 #include "dserver.h"
 #include "dtable.h"
 #include "device_api.h"
 
+#include "rdtcnnt.h"
+
 #include "fw_api.h"
 
 
 using namespace std;
 
-int sendto_rdt_client (int session,unsigned int rdt_ticket,Json::Value& root)
+int sendto_all_client (Json::Value& responseRoot)
+{
+	unsigned char szBuff[1024*32];
+	int send_length;
+	int option_len = 0;
+	int rc;
+	int data_length;
+
+	Json::FastWriter fastWriter;
+	std::string strSendOut;
+
+	unsigned int rdt_ticket = 0;
+
+
+
+	strSendOut = fastWriter.write(responseRoot);
+
+
+	data_length  = strSendOut.length();
+
+
+
+	szBuff[0]= 0xfe;
+	szBuff[1]= 0xef;
+
+	if ( rdt_ticket > 0 )
+	{
+		option_len = 4;
+
+		szBuff[2]= option_len/256;
+		szBuff[3]= option_len%256;
+
+		szBuff[3+1] = 0x00;
+		szBuff[3+2] = 0x01;
+		szBuff[3+3] = ((rdt_ticket&0xff00)>>8);
+		szBuff[3+4] = (rdt_ticket)&0xff;
+	}
+	else
+	{
+		option_len = 0;
+
+		szBuff[2]= 0x00;
+		szBuff[3]= 0x00;
+	}
+
+	szBuff[4+option_len]= (data_length&0xff00)>>8;
+	szBuff[5+option_len]= (data_length&0x00ff);
+	memcpy(&szBuff[6+option_len],strSendOut.c_str(),data_length);
+	send_length = 6+option_len+data_length;
+		
+
+	rc = rdtcnnt_send_data_to_all_client((char*)szBuff,send_length);
+
+
+	if ( rc < 0 )
+	{
+		
+	}
+
+	return rc;
+
+}
+
+int sendto_rdt_client (int session,unsigned int rdt_ticket,Json::Value& responseRoot)
 {
 	unsigned char szBuff[1024*32];
 	int send_length;
@@ -32,7 +97,7 @@ int sendto_rdt_client (int session,unsigned int rdt_ticket,Json::Value& root)
 
 
 
-	strSendOut = fastWriter.write(root);
+	strSendOut = fastWriter.write(responseRoot);
 
 
 	data_length  = strSendOut.length();
@@ -194,7 +259,7 @@ void deviceapi_get_about (int session,Json::Value &request)
 	rdt_ticket = request["rdt_ticket"].asUInt();
 
 	response["uid"] = (char*) __myUID;;
-	response["api"] = "get_about";
+	response["api"] = request["api"].asString();
 
 	id = request["id"].asUInt();
 
@@ -317,7 +382,7 @@ void deviceapi_get_group_free_lights (int session,Json::Value &request)
 
 
 	response["uid"] = (char*) __myUID;
-	response["api"] = "get_group_free_lights";
+	response["api"] = request["api"].asString();
 	response["objects"] = objects;
 
 
@@ -342,25 +407,28 @@ void deviceapi_set_detail (int session,Json::Value &request)
 	Json::Value root;
 	Json::Value response;
 	Json::Value objects;
-
 	Json::Value location;
-
 
 	unsigned int rdt_ticket;
 	int rc;
 	unsigned int id;
 	int err = 1;
 	string err_str;		
+
+	int sendResponse = 0;
 	
-printf("set_detail request:\n%s\n-------------------\n",(char*)request.toStyledString().c_str());
+//printf("set_detail request1111:\n%s\n-------------------\n",(char*)request.toStyledString().c_str());
 	
 
 
 	response["uid"] = (char*) __myUID;;
-	response["api"] = "set_detail";
+	response["api"] = request["api"].asString();
 
 	rdt_ticket = request["rdt_ticket"].asUInt();
+
+
 	id = request["id"].asUInt();
+
 
 
 	try {
@@ -382,6 +450,7 @@ printf("set_detail request:\n%s\n-------------------\n",(char*)request.toStyledS
 				Json::Value fwObjects;
 				int nfwObjectCnt = 0;
 				int valueChanged = 0;
+				int fwChanged = 0;
 
 				for(itr=request.begin();itr != request.end(); itr++)
 				{
@@ -401,14 +470,19 @@ printf("set_detail request:\n%s\n-------------------\n",(char*)request.toStyledS
 						if ( key.asString() == "location" )
 						{ //#Fix Me
 							int idLocation;
-							
+							printf("Set key location : %s  ",key.asString().c_str());
 
-							printf("Set key : %s  ",key.asString().c_str());
+							if ( value.isNumeric() )
+								printf("value:%d \n",value.asInt());
+							else  if ( value.isString() )
+								printf("value:%s \n",value.asString().c_str());							
+							else  if ( value.isString() )
+								printf("value:%s \n",value.toStyledString().c_str());							
 
 
 							idLocation = value["id"].asUInt();
-							printf("eddy test location ID : %d \n",idLocation);
 
+							printf("value: \n id:%d  name:%s \n",value["id"].asUInt(),value["name"].asString().c_str());
 
 							if (    pObject->m_pLocation == NULL 
 								 || pObject->m_pLocation->m_id != idLocation)
@@ -419,14 +493,16 @@ printf("set_detail request:\n%s\n-------------------\n",(char*)request.toStyledS
 								if ( newLocation != NULL )
 								{
 									newLocation->add(pObject);
+
+									valueChanged = 1;
 								}
 
 							}
 
 						}
-						else
+						else if ( key.asString() == "name"	 )
 						{
-							printf("Set key : %s  ",key.asString().c_str());
+							printf("Set key name : %s  ",key.asString().c_str());
 
 							
 							if ( value.isNumeric() )
@@ -451,6 +527,42 @@ printf("set_detail request:\n%s\n-------------------\n",(char*)request.toStyledS
 									valueChanged = 1;
 								}
 							}
+						}						
+						else
+						{
+							printf("Set key others : %s  ",key.asString().c_str());
+
+							
+							if ( value.isNumeric() )
+								printf("value(num):%d \n",value.asInt());
+							else  // if ( value.isString() )
+								printf("value(str):%s \n",value.asString().c_str());
+
+
+							if ( value.isNumeric() )
+							{
+								if ( pObject->m_attr_num[key.asString().c_str()] !=  value.asInt() )
+								{
+									if ( pObject->m_fwid.length() ==  0 ) // Dummy Test Device
+									{
+										pObject->m_attr_num[key.asString().c_str()] = value.asInt();
+
+									}
+									valueChanged = 1;
+								}								
+							}
+							else // if ( value.isString() )
+							{
+								if ( pObject->m_attr_str[key.asString().c_str()] != value.asString() )
+								{
+									 if ( pObject->m_fwid.length() ==  0 ) // Dummy Test Device
+									 {
+										pObject->m_attr_str[key.asString().c_str()] = value.asString();
+									 }
+
+									valueChanged = 1;
+								}
+							}
 						}
 
 
@@ -459,6 +571,7 @@ printf("set_detail request:\n%s\n-------------------\n",(char*)request.toStyledS
 						     &&  key.asString() != "name"	
 						     &&  key.asString() != "location"	)
 						{
+							fwChanged++;
 							if ( value.isNumeric() )
 								fwObjects[nfwObjectCnt][key.asString().c_str()] = value.asInt();// #TBD : if we only send change items
 							else // if ( value.isString() )
@@ -470,9 +583,7 @@ printf("set_detail request:\n%s\n-------------------\n",(char*)request.toStyledS
 
 				// Set to FW
 				{
-		    		
-
-		    		if ( pObject->m_fwid.length() > 0 )
+		    		if ( pObject->m_fwid.length() > 0 && fwChanged > 0 )
 		    		{
 		    			int seq = 0;
 
@@ -488,15 +599,30 @@ printf("set_detail request:\n%s\n-------------------\n",(char*)request.toStyledS
 			    			txRecord->seq = seq;
 			    			txRecord->session = session;
 							txRecord->request = request;
-							//txRecord->response
+							//txRecord->response = response;
 							txRecord->sendTime = time(NULL);
 
 							__ipHub.m_txQueue[seq] = txRecord;
 			    		}
 		    		}
+		    		else //if ( valueChanged != 0 )
+		    		{
+						if ( pObject->m_pLocation != NULL ) 
+						{
+							location["id"] = pObject->m_pLocation->m_id;
+							location["name"] = pObject->m_pLocation->m_attr_str["name"];
+
+							response["location"] = location;
+						}
+						
+						
+						__getAttr(pObject,response);
+
+						sendResponse = 1;		    			
+		    		}
+
 				}
-
-
+ 
 			}
 
 			// Change Value ---
@@ -504,16 +630,7 @@ printf("set_detail request:\n%s\n-------------------\n",(char*)request.toStyledS
 
 			//accessoryType = pAccessory->m_attr_num["type"];	
 						
-			if ( pObject->m_pLocation != NULL ) 
-			{
-				location["id"] = pObject->m_pLocation->m_id;
-				location["name"] = pObject->m_pLocation->m_attr_str["name"];
 
-				response["location"] = location;
-			}
-			
-			
-			__getAttr(pObject,response);
 
 			err = 0;
 		}
@@ -529,22 +646,25 @@ printf("set_detail request:\n%s\n-------------------\n",(char*)request.toStyledS
     }
 
 
+    if ( sendResponse )
+    {
+		root["error"] = err;
+		if ( err_str.length() != 0 )
+			root["error_str"] = err_str;
 
-	root["error"] = err;
-	if ( err_str.length() != 0 )
-		root["error_str"] = err_str;
-
-	root["response"] = response;
+		root["response"] = response;
 
 
-	printf("set_detail:\n%s\n-------------------\n",(char*)root.toStyledString().c_str());
+		printf("set_detail:\n%s\n-------------------\n",(char*)root.toStyledString().c_str());
 
-	rc = sendto_rdt_client(session,rdt_ticket,root);
+		rc = sendto_rdt_client(session,rdt_ticket,root);
 
-	if ( rc < 0 )
-	{
+		if ( rc < 0 )
+		{
 
-	}
+		}
+    }
+
 
 
 	return;
@@ -556,7 +676,7 @@ void deviceapi_remove (int session,Json::Value &request)
 	Json::Value root;
 	Json::Value response;
 	Json::Value objects;
-	Json::Value responseID;
+	Json::Value responseObjects;
 
 	unsigned int rdt_ticket;
 	int rc;
@@ -567,11 +687,14 @@ void deviceapi_remove (int session,Json::Value &request)
 
 	rdt_ticket = request["rdt_ticket"].asUInt();
 
+	printf("remove request:\n%s\n-------------------\n",(char*)request.toStyledString().c_str());
+
+
 
 	try {
 		Json::Value removeObject;
 
-		removeObject = request["id"];
+		removeObject = request["objects"];
 
 		if ( removeObject.isArray() )
 		{
@@ -581,17 +704,18 @@ void deviceapi_remove (int session,Json::Value &request)
 
 			for(i=0;i<removeObject.size();i++)
 			{
-				err = __allObjects.removeByID(removeObject[i].asUInt());
+				err = __allObjects.removeByID(removeObject[i]["id"].asUInt());
 
-				responseID[removeCnt] = removeObject[i].asUInt();
+				responseObjects[removeCnt]["id"] = removeObject[i]["id"].asUInt();
 
 				removeCnt++;
 			}
 		}
 		else 
 		{
-			err = __allObjects.removeByID(removeObject.asUInt());
-			responseID = removeObject.asUInt();
+			err = __allObjects.removeByID(removeObject["id"].asUInt());
+			responseObjects["id"] = removeObject["id"].asUInt();
+
 		}
 
 		if ( err != 0 )
@@ -608,8 +732,8 @@ void deviceapi_remove (int session,Json::Value &request)
 
 
 	response["uid"] = (char*) __myUID;
-	response["api"] = "remove";
-	response["id"] = responseID;
+	response["api"] = request["api"].asString();
+	response["id"] = responseObjects;
 
 
 	root["error"] = err;
@@ -617,6 +741,9 @@ void deviceapi_remove (int session,Json::Value &request)
 		root["error_str"] = err_str;
 	root["response"] = response;
 
+
+
+printf("remove response:\n%s\n-------------------\n",(char*)root.toStyledString().c_str());
 
 	rc = sendto_rdt_client(session,rdt_ticket,root);
 
@@ -729,7 +856,7 @@ void deviceapi_set_light_effects (int session,Json::Value &request)
 	objects[0]["id"] = "e01";
 
 
-	response["api"] = "set_light_effects";
+	response["api"] = request["api"].asString();
 	response["id"] = "a01";
 	response["objects"] = objects;
  
@@ -770,10 +897,19 @@ void deviceapi_get_gateway (int session,Json::Value &request)
 
 
 
+
+
 	try {
 			std::map<unsigned int, CMyObject *>::iterator p;
 			list<CMyObject*>::iterator j;
 			int nLocationCnt = 0;
+			int i;
+
+
+			for(i=0;i<5*1000;i++)
+			{
+				usleep(1000);
+			}
 
 
 			for(p = __allObjects.m_mapAllLocations.begin(); p!=__allObjects.m_mapAllLocations.end(); ++p)
@@ -821,7 +957,7 @@ void deviceapi_get_gateway (int session,Json::Value &request)
 
 
 	response["uid"] = (char*) __myUID;
-	response["api"] = "get_gateway";
+	response["api"] = request["api"].asString();
 	response["name"] = "Getway 01";
 	response["locations"] = locations;
 
@@ -862,7 +998,7 @@ void deviceapi_add_accessories (int session,Json::Value &request)
 	objects[1]["id"] = "a02";
 
 
-	response["api"] = "add_accessories";
+	response["api"] = request["api"].asString();
 	response["objects"] = objects;
  
 	root["error"] = 0;
@@ -896,7 +1032,7 @@ void deviceapi_merge_accessories (int session,Json::Value &request)
 	objects[1]["id"] = "a02";
 
 
-	response["api"] = "merge_accessories";
+	response["api"] = request["api"].asString();
 	response["objects"] = objects;
  
 	root["error"] = 0;
@@ -926,7 +1062,7 @@ void deviceapi_backup_gateway (int session,Json::Value &request)
 
 
 
-	response["api"] = "backup_gateway";
+	response["api"] = request["api"].asString();
  
 	root["error"] = 0;
 	root["response"] = response;
@@ -955,7 +1091,7 @@ void deviceapi_restore_gateway (int session,Json::Value &request)
 
 
 
-	response["api"] = "restore_gateway";
+	response["api"] = request["api"].asString();
  
 	root["error"] = 0;
 	root["response"] = response;
@@ -984,7 +1120,7 @@ void deviceapi_reset_gateway (int session,Json::Value &request)
 
 
 
-	response["api"] = "reset_gateway";
+	response["api"] = request["api"].asString();
  
 	root["error"] = 0;
 	root["response"] = response;
@@ -1013,7 +1149,7 @@ void deviceapi_update_gateway (int session,Json::Value &request)
 
 
 
-	response["api"] = "update_gateway";
+	response["api"] = request["api"].asString();
  
 	root["error"] = 0;
 	root["response"] = response;
@@ -1068,7 +1204,7 @@ void __get_detail_of_group(int session,Json::Value &request,int idGroup)
 
 
 	response["uid"] = (char*) __myUID;
-	response["api"] = "get_detail";
+	response["api"] = request["api"].asString();
 	response["id"] = idGroup;
 
 	response["objects"] = responseObjects;
@@ -1170,7 +1306,7 @@ void __get_detail_of_object(int session,Json::Value &request,int idObject)
 
 
 	response["uid"] = (char*) __myUID;
-	response["api"] = "get_detail";
+	response["api"] = request["api"].asString();
 	response["id"] = idObject;
 
 	response["objects"] = responseObjects;
@@ -1302,7 +1438,7 @@ void deviceapi_get_other_groups (int session,Json::Value &request)
 
 
 	response["uid"] = (char*) __myUID;
-	response["api"] = "get_other_groups";
+	response["api"] = request["api"].asString();
 	response["objects"] = groups;
 
 
@@ -1374,7 +1510,7 @@ void deviceapi_add_an_accessory_to_group (int session,Json::Value &request)
 
 
 	response["uid"] = (char*) __myUID;
-	response["api"] = "add_an_accessory_to_group";
+	response["api"] = request["api"].asString();
 	response["id"] = idGroup;
 
 
@@ -1409,7 +1545,7 @@ void deviceapi_remove_accessories_from_group (int session,Json::Value &request)
 	// group
 
 
-	response["api"] = "remove_accessories_from_group";
+	response["api"] = request["api"].asString();
 
  
 	root["error"] = 0;
@@ -1450,14 +1586,12 @@ void deviceapi_get_locations (int session,Json::Value &request)
 			int nLocationCnt = 0;
 
 
-printf("eddy test count:%d \n",__allObjects.m_mapAllLocations.size());
 			for(p = __allObjects.m_mapAllLocations.begin(); p!=__allObjects.m_mapAllLocations.end(); ++p)
 			{
 				CLocation *pLocation;
 
 				
 				pLocation = (CLocation*) p->second;
-printf("eddy test *************** id:%x  %p\n",p->first ,pLocation);
 
 				__getAttr(pLocation,locations[nLocationCnt]);
 
@@ -1476,7 +1610,7 @@ printf("eddy test *************** id:%x  %p\n",p->first ,pLocation);
 
 
 	response["uid"] = (char*) __myUID;
-	response["api"] = "get_locations";
+	response["api"] = request["api"].asString();
 	response["objects"] = locations;
 
 
@@ -1565,7 +1699,7 @@ void deviceapi_add_accessories_to_location (int session,Json::Value &request)
 
 
 	response["uid"] = (char*) __myUID;
-	response["api"] = "add_accessories_to_location";
+	response["api"] = request["api"].asString();
 
 	response["id"] = idLocation;
 	response["objects"] = responseObjects;
@@ -1653,7 +1787,7 @@ void deviceapi_set_a_location (int session,Json::Value &request)
     }
 
 	response["uid"] = (char*) __myUID;
-	response["api"] = "set_a_location";
+	response["api"] = request["api"].asString();
 
 	response["id"] = pLocation->m_id;
 	response["name"] = strLocationName;
@@ -1692,7 +1826,7 @@ void deviceapi_set_schedule_detail (int session,Json::Value &request)
 	// group
 
 
-	response["api"] = "set_schedule_detail";
+	response["api"] = request["api"].asString();
 
 	
 
@@ -1725,7 +1859,7 @@ void deviceapi_add_a_schedule (int session,Json::Value &request)
 	// group
 
 
-	response["api"] = "add_a_schedule";
+	response["api"] = request["api"].asString();
 
 	
 
@@ -1759,7 +1893,7 @@ void deviceapi_get_accessory_setting (int session,Json::Value &request)
 	// group
 
 
-	response["api"] = "get_accessory_setting";
+	response["api"] = request["api"].asString();
 
 	
 
@@ -1793,7 +1927,7 @@ void deviceapi_get_gateway_setting (int session,Json::Value &request)
 	// group
 
 	response["uid"] = (char*) __myUID;
-	response["api"] = "get_gateway_setting";
+	response["api"] = request["api"].asString();
 	response["home"] = "appl";
 	response["led"] = 0;
 	
@@ -1828,7 +1962,7 @@ void deviceapi_set_accessory_setting (int session,Json::Value &request)
 
 	// group
 
-	response["api"] = "set_accessory_setting";
+	response["api"] = request["api"].asString();
 	response["id"] = "s01";
 	
 	response["objects"] = objects;
@@ -1864,7 +1998,7 @@ void deviceapi_set_gateway_setting (int session,Json::Value &request)
 
 	// group
 
-	response["api"] = "set_gateway_setting";
+	response["api"] = request["api"].asString();
 	
 	response["objects"] = objects;
 
@@ -1982,7 +2116,7 @@ void deviceapi_get_switches (int session,Json::Value &request)
 
 
 	response["uid"] = (char*) __myUID;;
-	response["api"] = "get_switches";
+	response["api"] = request["api"].asString();
 	response["id"] = id;
 	response["objects"] = responseObjects;
 
@@ -2023,7 +2157,7 @@ void deviceapi_remove_a_switch_accessory (int session,Json::Value &request)
 
 	// group
 
-	response["api"] = "remove_a_switch_accessory";
+	response["api"] = request["api"].asString();
 	
 
  
@@ -2102,7 +2236,7 @@ void deviceapi_add_a_task (int session,Json::Value &request)
 
 	// group
 
-	response["api"] = "add_a_task";
+	response["api"] = request["api"].asString();
  
 	root["error"] = 0;
 	root["response"] = response;

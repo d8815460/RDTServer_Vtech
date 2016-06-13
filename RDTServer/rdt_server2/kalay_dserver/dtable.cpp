@@ -451,6 +451,7 @@ CMyObject::CMyObject(const char *myClassType,int id,const char *name,int type )
 
 	m_pLocation = NULL;
 	m_pGroup = NULL;
+	m_pSwitch = NULL;
 
 	m_attr_str["name"] = m_name;
 

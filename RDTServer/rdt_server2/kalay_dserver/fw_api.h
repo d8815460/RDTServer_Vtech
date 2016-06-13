@@ -50,6 +50,7 @@
 		int sendToGateway(Json::Value& payload);
 
 		int parser(Json::Value& root);
+		
 
 	friend void *thread_unixsocket_read(void *arg);
 

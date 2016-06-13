@@ -19,7 +19,7 @@ int device_parser(int session,unsigned char *option,int option_len,unsigned char
 {
 	Json::Reader reader;
 	Json::Value value;
-	
+
 
 
 	if (reader.parse((char*) data, value))
@@ -28,19 +28,29 @@ int device_parser(int session,unsigned char *option,int option_len,unsigned char
 		string api = value["api"].asString();
 
 
+		printf("UID:%s\n",uid.c_str());
+		printf("api:%s\n",api.c_str());
+
 		if ( option != NULL && (option[1]&0x01) )
 		{
+			unsigned int rdt_ticket_no = 0;			
 
-			unsigned int rdt_ticket_no;
+			
 
 			rdt_ticket_no = (((unsigned int)option[2]) << 8 ) | option[3] ;
 
 			value["rdt_ticket"] = rdt_ticket_no;
+
+			printf("rdt_ticket:%d  ******************************\n",rdt_ticket_no);
+
+		}
+		else
+		{
+			value["rdt_ticket"] = 0;			
 		}
 
 
-		printf("UID:%s\n",uid.c_str());
-		printf("api:%s\n",api.c_str());
+
 
 		if ( strcmp(api.c_str(),"get_about") == 0 ) //
 		{
