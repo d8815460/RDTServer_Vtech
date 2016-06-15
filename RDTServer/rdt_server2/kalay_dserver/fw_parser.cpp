@@ -36,8 +36,6 @@ int CVtechIPHub::parser(Json::Value& root)
 
 	recv_json = root.toStyledString().c_str();
 
-	printf("unixsocket receive \n%s\n---------------\n"
-		,recv_json.c_str() );
 
 
 	error  = root["error"].asInt();
@@ -58,18 +56,26 @@ int CVtechIPHub::parser(Json::Value& root)
 	}
 
 
-	printf("test received : error:%d isLast:%d seq_no:%d  func:%s\n objects:%d \n",error,isLast,seqNo,func.c_str(),objects.size());
-
 
 	if ( func == "notify" )
 	{
+/*	printf("unixsocket receive \n%s\n---------------\n"
+		,recv_json.c_str() );
 
-
+	printf("test received : error:%d isLast:%d seq_no:%d  func:%s\n objects:%d \n",error,isLast,seqNo,func.c_str(),objects.size());
+*/
 
 
 	}
 	else
 	{
+
+	printf("unixsocket receive \n%s\n---------------\n"
+		,recv_json.c_str() );
+
+	printf("test received : error:%d isLast:%d seq_no:%d  func:%s\n objects:%d \n",error,isLast,seqNo,func.c_str(),objects.size());
+
+
 
 		std::map<unsigned int, CTXRecord *>::iterator iterFind;
 
@@ -82,6 +88,8 @@ int CVtechIPHub::parser(Json::Value& root)
 		else
 		{
 			txRecord = iterFind->second;
+
+			m_txQueue.erase(iterFind);
 		}
 	}
 
@@ -104,7 +112,7 @@ int CVtechIPHub::parser(Json::Value& root)
 				unitType = aObj["type"].asUInt();
 
 
-				printf("ID:%s\n",fwid.c_str());
+				//printf("ID:%s\n",fwid.c_str());
 
 				if ( fwid == "0" || unitType == 0xff00 ) // __GATEWAY__
 				{
@@ -319,6 +327,7 @@ int CVtechIPHub::parser(Json::Value& root)
 
 printf("Test TXRecord *****************\n seq:%d  session:%d\nrequest\n%s\n*****************\n\n",txRecord->seq,txRecord->session,txRecord->request.toStyledString().c_str());
 
+
 		response["uid"] = (char*) __myUID;
 		response["api"] = txRecord->request["api"].asString();
 
@@ -334,27 +343,41 @@ printf("Test TXRecord *****************\n seq:%d  session:%d\nrequest\n%s\n*****
 		}
 
 		try {
+			Json::Value requestObjects;
 			CMyObject *pObject = NULL;
+			unsigned int i;
 
-			pObject = __allObjects.getObjectByID(id);
 
-			if ( pObject != NULL )
+			requestObjects = txRecord->request["objects"];			
+
+
+			if ( requestObjects.isArray() )
 			{
-
-				if ( pObject->m_pLocation != NULL ) 
+				//int ntype;
+				for(i=0;i<requestObjects.size();i++)
 				{
-					location["id"] = pObject->m_pLocation->m_id;
-					location["name"] = pObject->m_pLocation->m_attr_str["name"];
+					id = requestObjects[i]["id"].asUInt();
 
-					response["location"] = location;
+					pObject = __allObjects.getObjectByID(id);
+
+
+					if ( pObject != NULL )
+					{			
+						if ( pObject->m_pLocation != NULL ) 
+						{
+							location["id"] = pObject->m_pLocation->m_id;
+							location["name"] = pObject->m_pLocation->m_attr_str["name"];
+
+							objects[i]["location"] = location;
+						}
+						
+
+						pObject->getAttr(objects[i]);
+					}
 				}
-				
-				
-				pObject->getAttr(response);			
 
-				err = 0;
+				response["objects"] = objects;
 			}
-
 
 	    } catch (const libsocket::socket_exception& exc)
 	    {
@@ -368,6 +391,7 @@ printf("Test TXRecord *****************\n seq:%d  session:%d\nrequest\n%s\n*****
 			responseRoot["error_str"] = err_str;
 		responseRoot["response"] = response;
 
+		printf("set_detail response(fw):\n%s\n-------------------\n",(char*)responseRoot.toStyledString().c_str());
 
 		rc = sendto_rdt_client(txRecord->session,rdt_ticket,responseRoot);
 
@@ -377,11 +401,14 @@ printf("Test TXRecord *****************\n seq:%d  session:%d\nrequest\n%s\n*****
 
 		}
 
+		delete txRecord;
+
 				
 
 	}
 	else if ( func == "notify" )
 	{
+		/*
 		Json::ValueIterator itrObj;
 
 		for(itrObj=objects.begin();itrObj != objects.end(); itrObj++)
@@ -463,8 +490,10 @@ printf("Test TXRecord *****************\n seq:%d  session:%d\nrequest\n%s\n*****
 									response["location"] = location;
 								}
 								
+
 								
-								pObject->getAttr(response);			
+								pObject->getAttr(objects[0]);			
+								response["objects"] = objects;
 
 								err = 0;
 							}
@@ -496,7 +525,7 @@ printf("Test TXRecord *****************\n seq:%d  session:%d\nrequest\n%s\n*****
 					}
 				}
 			}
-		}
+		}*/
 	}
 
 

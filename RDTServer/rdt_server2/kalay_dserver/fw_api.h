@@ -16,7 +16,6 @@
 	public:
 		int seq;
 		int session;
-		Json::Value response;
 		Json::Value request;
 		time_t sendTime;
 	};
@@ -50,7 +49,7 @@
 		int sendToGateway(Json::Value& payload);
 
 		int parser(Json::Value& root);
-		
+
 
 	friend void *thread_unixsocket_read(void *arg);
 

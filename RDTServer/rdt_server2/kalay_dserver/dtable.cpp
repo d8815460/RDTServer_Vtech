@@ -678,7 +678,8 @@ int CMyObject::getSubObjects(Json::Value& subObjects)
 		pSubObject = *iter;
 
 
-		pSubObject->getAttr(subObjects[cntSubObject]);
+		//pSubObject->getAttr(subObjects[cntSubObject]);
+		pSubObject->getBaseAttr(subObjects[cntSubObject]);
 
 
 		cntSubObject++;
@@ -687,6 +688,72 @@ int CMyObject::getSubObjects(Json::Value& subObjects)
 
 	return cntSubObject;
 }
+
+
+
+int  CMyObject::getDetail(Json::Value &jsonDetail)
+{
+	Json::Value subObjects;
+	int err = 1;
+	string err_str;	
+
+	try {
+			list<CMyObject*>::iterator iter;
+
+	
+			map<string,int>::iterator iNum;
+			map<string,string>::iterator iStr;	
+			
+			//jsonDetail["id"] = m_id;
+
+			getAttr(jsonDetail);
+
+
+			if ( m_pLocation != NULL ) 
+			{
+				Json::Value location;
+
+				location["id"] = m_pLocation->m_id;
+				location["name"] = m_pLocation->m_attr_str["name"];
+
+				jsonDetail["location"] = location;
+			}	
+			
+
+			if ( m_pGroup != NULL ) 
+			{
+				Json::Value group;
+
+				group["id"] = m_pGroup->m_id;
+				group["name"] = m_pGroup->m_attr_str["name"];
+
+				jsonDetail["group"] = group;
+			}	
+
+
+			if ( m_listObject.size() > 0 )
+			{
+				getSubObjects(subObjects);
+				jsonDetail["objects"] = subObjects;
+			}
+
+
+		err = 0;
+
+    } catch (const libsocket::socket_exception& exc)
+    {
+		std::cerr << exc.mesg;
+		err_str = exc.mesg;
+    }
+
+	
+
+
+	return err;
+}
+
+
+
 
 
 

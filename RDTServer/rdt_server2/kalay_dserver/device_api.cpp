@@ -323,7 +323,8 @@ void deviceapi_set_detail (int session,Json::Value &request)
 
 	int sendResponse = 0;
 	
-//printf("set_detail request1111:\n%s\n-------------------\n",(char*)request.toStyledString().c_str());
+
+printf("set_detail request:\n%s\n-------------------\n",(char*)request.toStyledString().c_str());
 	
 
 
@@ -333,242 +334,272 @@ void deviceapi_set_detail (int session,Json::Value &request)
 	rdt_ticket = request["rdt_ticket"].asUInt();
 
 
-	id = request["id"].asUInt();
+	
 
 
 
 	try {
 		CMyObject *pObject = NULL;
+		Json::Value fwObjects;		
+		int nfwObjectCnt = 0;
 
-		pObject = __allObjects.getObjectByID(id);
+		Json::Value requestObjects;
+		unsigned int i;
 
 
-		if ( pObject != NULL )
+		requestObjects = request["objects"];
+
+		if ( requestObjects.isArray() )
 		{
-			map<string,int>::iterator iNum;
-			map<string,string>::iterator iStr;
-			//int accessoryType;
-
-
-			// Change Value +++
+			//int ntype;
+			for(i=0;i<requestObjects.size();i++)
 			{
-				Json::ValueIterator itr;
-				Json::Value fwObjects;
-				int nfwObjectCnt = 0;
-				int valueChanged = 0;
-				int fwChanged = 0;
+				id = requestObjects[i]["id"].asUInt();
 
-				for(itr=request.begin();itr != request.end(); itr++)
+				pObject = __allObjects.getObjectByID(id);
+
+
+				if ( pObject != NULL )
 				{
-					Json::Value key = itr.key();
-					Json::Value value = (*itr);
+					map<string,int>::iterator iNum;
+					map<string,string>::iterator iStr;
+					//int accessoryType;
 
-					valueChanged = 0;
-
-					if ( 	key.asString() != "api"
-						 && key.asString() != "id"
-						 && key.asString() != "type"
-						 && key.asString() != "rdt_ticket"
-						 && key.asString() != "uid"			)
+					// Change Value +++
 					{
-						valueChanged = 0;
-
-						if ( key.asString() == "location" )
-						{ //#Fix Me
-							int idLocation;
-							printf("Set key location : %s  ",key.asString().c_str());
-
-							if ( value.isNumeric() )
-								printf("value:%d \n",value.asInt());
-							else  if ( value.isString() )
-								printf("value:%s \n",value.asString().c_str());							
-							else  if ( value.isString() )
-								printf("value:%s \n",value.toStyledString().c_str());							
+						Json::ValueIterator itr;
 
 
-							idLocation = value["id"].asUInt();
+						int valueChanged = 0;
+						int fwChanged = 0;
 
-							printf("value: \n id:%d  name:%s \n",value["id"].asUInt(),value["name"].asString().c_str());
 
-							if (    pObject->m_pLocation == NULL 
-								 || pObject->m_pLocation->m_id != idLocation)
-							{
-								CLocation *newLocation;
 
-								newLocation = __allObjects.getLocationByID(idLocation);
-								if ( newLocation != NULL )
-								{
-									newLocation->add(pObject);
-
-									valueChanged = 1;
-								}
-
-							}
-
-						}
-						else if ( key.asString() == "order" )
+						for(itr=requestObjects[i].begin();itr != requestObjects[i].end(); itr++)
 						{
-							int newOrder = value.asInt();
+							Json::Value key = itr.key();
+							Json::Value value = (*itr);
 
-							if ( pObject->m_pLocation != NULL )							
+							valueChanged = 0;
+
+							if ( 	key.asString() != "api"
+								 && key.asString() != "id"
+								 && key.asString() != "type"
+								 && key.asString() != "rdt_ticket"
+								 && key.asString() != "uid"			)
 							{
-								pObject->m_pLocation->UpdateOrder(pObject,newOrder);
+								valueChanged = 0;
 
-								valueChanged = 1;
-							}
+								if ( key.asString() == "location" )
+								{ //#Fix Me
+									int idLocation;
+									printf("Set key location : %s  ",key.asString().c_str());
 
-						}
-						else if ( key.asString() == "name"	 )
-						{
-							printf("Set key name : %s  ",key.asString().c_str());
-
-							
-							if ( value.isNumeric() )
-								printf("value:%d \n",value.asInt());
-							else  // if ( value.isString() )
-								printf("value:%s \n",value.asString().c_str());
+									if ( value.isNumeric() )
+										printf("value:%d \n",value.asInt());
+									else  if ( value.isString() )
+										printf("value:%s \n",value.asString().c_str());							
+									else  if ( value.isString() )
+										printf("value:%s \n",value.toStyledString().c_str());							
 
 
-							if ( value.isNumeric() )
-							{
-								if ( pObject->m_attr_num[key.asString().c_str()] !=  value.asInt() )
-								{
-									pObject->m_attr_num[key.asString().c_str()] = value.asInt();
-									valueChanged = 1;
-								}								
-							}
-							else // if ( value.isString() )
-							{
-								if ( pObject->m_attr_str[key.asString().c_str()] != value.asString() )
-								{
-									pObject->m_attr_str[key.asString().c_str()] = value.asString();
-									valueChanged = 1;
-								}
-							}
-						}						
-						else
-						{
-							printf("Set key others : %s  ",key.asString().c_str());
+									idLocation = value["id"].asUInt();
 
-							
-							if ( value.isNumeric() )
-								printf("value(num):%d \n",value.asInt());
-							else  // if ( value.isString() )
-								printf("value(str):%s \n",value.asString().c_str());
+									printf("value: \n id:%d  name:%s \n",value["id"].asUInt(),value["name"].asString().c_str());
 
-
-							if ( value.isNumeric() )
-							{
-								if ( pObject->m_attr_num[key.asString().c_str()] !=  value.asInt() )
-								{
-									if ( pObject->m_fwid.length() ==  0 ) // Dummy Test Device
+									if (    pObject->m_pLocation == NULL 
+										 || pObject->m_pLocation->m_id != idLocation)
 									{
-										pObject->m_attr_num[key.asString().c_str()] = value.asInt();
+										CLocation *newLocation;
+
+										newLocation = __allObjects.getLocationByID(idLocation);
+										if ( newLocation != NULL )
+										{
+											newLocation->add(pObject);
+
+											valueChanged = 1;
+										}
 
 									}
-									valueChanged = 1;
-								}								
-							}
-							else // if ( value.isString() )
-							{
-								if ( pObject->m_attr_str[key.asString().c_str()] != value.asString() )
-								{
-									 if ( pObject->m_fwid.length() ==  0 ) // Dummy Test Device
-									 {
-										pObject->m_attr_str[key.asString().c_str()] = value.asString();
-									 }
 
-									valueChanged = 1;
+								}
+								else if ( key.asString() == "order" )
+								{
+									int newOrder = value.asInt();
+
+									if ( pObject->m_pLocation != NULL )							
+									{
+										pObject->m_pLocation->UpdateOrder(pObject,newOrder);
+
+										valueChanged = 1;
+									}
+
+								}
+								else if ( key.asString() == "name"	 )
+								{
+									printf("Set key name : %s   value:%s \n ",key.asString().c_str(),value.asString().c_str());
+
+									
+									if ( pObject->m_attr_str[key.asString().c_str()] != value.asString() )
+									{
+										pObject->m_attr_str[key.asString().c_str()] = value.asString();
+										valueChanged = 1;
+									}
+								}						
+								else
+								{
+									printf("Set key others : %s  ",key.asString().c_str());
+
+									
+									if ( value.isNumeric() )
+										printf("value(num):%d \n",value.asInt());
+									else  // if ( value.isString() )
+										printf("value(str):%s \n",value.asString().c_str());
+
+
+									if ( value.isNumeric() )
+									{
+										if ( pObject->m_attr_num[key.asString().c_str()] !=  value.asInt() )
+										{
+											if ( pObject->m_fwid.length() ==  0 ) // Dummy Test Device
+											{
+												pObject->m_attr_num[key.asString().c_str()] = value.asInt();
+
+											}
+											valueChanged = 1;
+										}								
+									}
+									else // if ( value.isString() )
+									{
+										if ( pObject->m_attr_str[key.asString().c_str()] != value.asString() )
+										{
+											 if ( pObject->m_fwid.length() ==  0 ) // Dummy Test Device
+											 {
+												pObject->m_attr_str[key.asString().c_str()] = value.asString();
+											 }
+
+											valueChanged = 1;
+										}
+									}
+								}
+
+
+
+								if ( 	 valueChanged != 0
+								     &&  key.asString() != "name"	
+								     &&  key.asString() != "location"
+								     &&  key.asString() != "order"		)
+								{
+
+									if ( key.asString() == "status"	)
+									{
+										fwChanged++;
+
+										fwObjects[nfwObjectCnt]["on"] = value.asInt();// #TBD : if we only send change items
+									}
+									else
+									{
+										fwChanged++;
+										if ( value.isNumeric() )
+											fwObjects[nfwObjectCnt][key.asString().c_str()] = value.asInt();// #TBD : if we only send change items
+										else // if ( value.isString() )
+											fwObjects[nfwObjectCnt][key.asString().c_str()] = value.asString();// #TBD : if we only send change items
+									}
+
 								}
 							}
-						}
-
-
-
-						if ( 	 valueChanged != 0
-						     &&  key.asString() != "name"	
-						     &&  key.asString() != "location"
-						     &&  key.asString() != "order"		)
-						{
-
-							if ( key.asString() == "status"	)
-							{
-								fwChanged++;
-
-								fwObjects[nfwObjectCnt]["on"] = value.asInt();// #TBD : if we only send change items
-							}
-							else
-							{
-								fwChanged++;
-								if ( value.isNumeric() )
-									fwObjects[nfwObjectCnt][key.asString().c_str()] = value.asInt();// #TBD : if we only send change items
-								else // if ( value.isString() )
-									fwObjects[nfwObjectCnt][key.asString().c_str()] = value.asString();// #TBD : if we only send change items
-							}
 
 						}
+
+
+			    		if ( pObject->m_fwid.length() > 0 && fwChanged > 0 )
+			    		{
+				    		fwObjects[nfwObjectCnt]["id"] = pObject->m_fwid; 
+
+				    		nfwObjectCnt++;			
+				    	}
 					}
+
+					// Change Value ---	
+					//accessoryType = pAccessory->m_attr_num["type"];	
+
+					err = 0;
+				}
+				else
+				{
+					err = -1;
+					err_str = "not found";
 				}
 
 
-				// Set to FW
+
+
+
+
+			}
+		}
+
+
+
+
+
+
+
+
+// Set to FW
+			
+
+		if ( nfwObjectCnt > 0 )
+		{
+			int seq = 0;
+
+    		seq = __ipHub.fwapi_set(fwObjects);
+
+    		if ( seq > 0 )
+    		{
+    			CTXRecord *txRecord = new CTXRecord();
+
+    			txRecord->seq = seq;
+    			txRecord->session = session;
+				txRecord->request = request;
+				txRecord->sendTime = time(NULL);
+
+				__ipHub.m_txQueue[seq] = txRecord;
+    		}
+		}
+		else //if ( valueChanged != 0 )
+		{
+			if ( requestObjects.isArray() )
+			{
+				//int ntype;
+				for(i=0;i<requestObjects.size();i++)
 				{
-		    		if ( pObject->m_fwid.length() > 0 && fwChanged > 0 )
-		    		{
-		    			int seq = 0;
+					id = requestObjects[i]["id"].asUInt();
 
-			    		fwObjects[nfwObjectCnt]["id"] = pObject->m_fwid; 
+					pObject = __allObjects.getObjectByID(id);
 
 
-			    		seq = __ipHub.fwapi_set(fwObjects);
-
-			    		if ( seq > 0 )
-			    		{
-			    			CTXRecord *txRecord = new CTXRecord();
-
-			    			txRecord->seq = seq;
-			    			txRecord->session = session;
-							txRecord->request = request;
-							//txRecord->response = response;
-							txRecord->sendTime = time(NULL);
-
-							__ipHub.m_txQueue[seq] = txRecord;
-			    		}
-		    		}
-		    		else //if ( valueChanged != 0 )
-		    		{
+					if ( pObject != NULL )
+					{			
 						if ( pObject->m_pLocation != NULL ) 
 						{
 							location["id"] = pObject->m_pLocation->m_id;
 							location["name"] = pObject->m_pLocation->m_attr_str["name"];
 
-							response["location"] = location;
+							objects[i]["location"] = location;
 						}
 						
-						
-						pObject->getAttr(response);
 
-						sendResponse = 1;		    			
-		    		}
-
+						pObject->getAttr(objects[i]);
+					}
 				}
- 
+
+				response["objects"] = objects;
 			}
 
-			// Change Value ---
-
-
-			//accessoryType = pAccessory->m_attr_num["type"];	
-						
-
-
-			err = 0;
+			sendResponse = 1;		    			
 		}
-		else
-		{
-			err = -1;
-			err_str = "not found";
-		}
+
     } catch (const libsocket::socket_exception& exc)
     {
 		std::cerr << exc.mesg;
@@ -585,7 +616,7 @@ void deviceapi_set_detail (int session,Json::Value &request)
 		root["response"] = response;
 
 
-		printf("set_detail:\n%s\n-------------------\n",(char*)root.toStyledString().c_str());
+		printf("set_detail response:\n%s\n-------------------\n",(char*)root.toStyledString().c_str());
 
 		rc = sendto_rdt_client(session,rdt_ticket,root);
 
@@ -806,12 +837,60 @@ void deviceapi_set_light_effects (int session,Json::Value &request)
 
 
 
+void __get_gateway_detail (Json::Value &locations)
+{
+	std::map<unsigned int, CMyObject *>::iterator p;
+	list<CMyObject*>::iterator j;
+	int nLocationCnt = 0;
+	Json::Value accessories;
+
+
+	for(p = __allObjects.m_mapAllLocations.begin(); p!=__allObjects.m_mapAllLocations.end(); ++p)
+	{
+		CLocation *pLocation;
+		int nAccessoryCnt = 0;
+
+		
+		pLocation = (CLocation*) p->second;
+
+
+		locations[nLocationCnt]["id"] =  pLocation->m_id,
+		locations[nLocationCnt]["type"] =  pLocation->m_type,
+		locations[nLocationCnt]["name"] =  pLocation->m_attr_str["name"].c_str();
+
+		
+		accessories.clear();
+
+		for(j = pLocation->m_listObject.begin(); j!=pLocation->m_listObject.end(); ++j)
+		{
+			CMyObject *pObject;
+			map<string,int>::iterator iNum;
+			map<string,string>::iterator iStr;					
+
+			pObject = *j;
+
+			pObject->getBaseAttr(accessories[nAccessoryCnt]);
+			
+
+			nAccessoryCnt++;
+		}
+
+		locations[nLocationCnt]["objects"] = accessories;	
+
+		nLocationCnt++;
+
+	}
+
+
+	return;
+}
+
 void deviceapi_get_gateway (int session,Json::Value &request)
 {
 	Json::Value root;
 	Json::Value response;
 	Json::Value locations;
-	Json::Value accessories;
+	
 
 	int rc;					
 	unsigned int rdt_ticket;	
@@ -830,52 +909,8 @@ void deviceapi_get_gateway (int session,Json::Value &request)
 
 
 	try {
-			std::map<unsigned int, CMyObject *>::iterator p;
-			list<CMyObject*>::iterator j;
-			int nLocationCnt = 0;
-			int i;
+		__get_gateway_detail(locations);
 
-
-			for(i=0;i<5*1000;i++)
-			{
-				usleep(1000);
-			}
-
-
-			for(p = __allObjects.m_mapAllLocations.begin(); p!=__allObjects.m_mapAllLocations.end(); ++p)
-			{
-				CLocation *pLocation;
-				int nAccessoryCnt = 0;
-
-				
-				pLocation = (CLocation*) p->second;
-
-
-				locations[nLocationCnt]["id"] =  pLocation->m_id,
-				locations[nLocationCnt]["name"] =  pLocation->m_attr_str["name"].c_str();
-
-				
-				accessories.clear();
-
-				for(j = pLocation->m_listObject.begin(); j!=pLocation->m_listObject.end(); ++j)
-				{
-					CMyObject *pObject;
-					map<string,int>::iterator iNum;
-					map<string,string>::iterator iStr;					
-
-					pObject = *j;
-
-					pObject->getBaseAttr(accessories[nAccessoryCnt]);
-					
-
-					nAccessoryCnt++;
-				}
-
-				locations[nLocationCnt]["accessories"] = accessories;	
-
-				nLocationCnt++;
-
-			}
 
 			err = 0;
 
@@ -889,7 +924,15 @@ void deviceapi_get_gateway (int session,Json::Value &request)
 
 	response["uid"] = (char*) __myUID;
 	response["api"] = request["api"].asString();
-	response["name"] = "Getway 01";
+
+	{
+		CGateway *pGateway = __allObjects.getGateway();			
+
+		if ( pGateway != NULL )
+			response["name"] = pGateway->m_name;
+	}
+
+
 	response["locations"] = locations;
 
 
@@ -1097,222 +1140,121 @@ void deviceapi_update_gateway (int session,Json::Value &request)
 }
 
 
-void __get_detail_of_group(int session,Json::Value &request,int idGroup)
-{
-	Json::Value root;
-	Json::Value response;
-	Json::Value responseObjects;
-
-	int rc;					
-	unsigned int rdt_ticket = 0;	
-	int err = 1;
-	string err_str;	
-
-	try {
-			CGroup *pGroup;
-			list<CMyObject*>::iterator iter;
-
-			rdt_ticket = request["rdt_ticket"].asUInt();
-
-			pGroup = (CGroup*) __allObjects.m_mapAllGroups[idGroup];
-
-			if ( pGroup != NULL )
-			{
-				pGroup->getSubObjects(responseObjects);
-				// Attributes of Group
-
-				pGroup->getAttr(response);
-			}
-
-			err = 0;
-
-    } catch (const libsocket::socket_exception& exc)
-    {
-		std::cerr << exc.mesg;
-		err_str = exc.mesg;
-    }
-
-
-
-	response["uid"] = (char*) __myUID;
-	response["api"] = request["api"].asString();
-	response["id"] = idGroup;
-
-	response["objects"] = responseObjects;
-
-
-
-
-	root["error"] = err;
-	if ( err_str.length() != 0 )
-		root["error_str"] = err_str;
-	root["response"] = response;
-
-
-
-printf("deviceapi_get_detail_of_group\n%s\n-------------------\n",(char*)root.toStyledString().c_str());
-
-
-	rc = sendto_rdt_client(session,rdt_ticket,root);
-
-
-	if ( rc < 0 )
-	{
-		
-	}	
-
-
-	return;
-}
-
-
-
-void __get_detail_of_object(int session,Json::Value &request,int idObject)
-{
-	Json::Value root;
-	Json::Value response;
-	Json::Value responseObjects;
-
-	int rc;					
-	unsigned int rdt_ticket = 0;	
-	int err = 1;
-	string err_str;	
-
-	try {
-			CMyObject *pObject;
-			list<CMyObject*>::iterator iter;
-
-			rdt_ticket = request["rdt_ticket"].asUInt();
-
-
-			pObject = (CMyObject*) __allObjects.getObjectByID(idObject);
-
-			if ( pObject != NULL )
-			{
-				map<string,int>::iterator iNum;
-				map<string,string>::iterator iStr;	
-
-				
-				response["id"] = pObject->m_id;
-
-				pObject->getAttr(response);
-
-
-				if ( pObject->m_pLocation != NULL ) 
-				{
-					Json::Value location;
-
-					location["id"] = pObject->m_pLocation->m_id;
-					location["name"] = pObject->m_pLocation->m_attr_str["name"];
-
-					response["location"] = location;
-				}	
-				
-
-				if ( pObject->m_pGroup != NULL ) 
-				{
-					Json::Value group;
-
-					group["id"] = pObject->m_pGroup->m_id;
-					group["name"] = pObject->m_pGroup->m_attr_str["name"];
-
-					response["group"] = group;
-				}	
-
-
-				if ( pObject->m_listObject.size() > 0 )
-				{
-					pObject->getSubObjects(responseObjects);
-				}
-			}
-
-			err = 0;
-
-    } catch (const libsocket::socket_exception& exc)
-    {
-		std::cerr << exc.mesg;
-		err_str = exc.mesg;
-    }
-
-
-
-	response["uid"] = (char*) __myUID;
-	response["api"] = request["api"].asString();
-	response["id"] = idObject;
-
-	response["objects"] = responseObjects;
-
-
-
-
-	root["error"] = err;
-	if ( err_str.length() != 0 )
-		root["error_str"] = err_str;
-	root["response"] = response;
-
-
-printf("deviceapi_get_detail_of_object\n%s\n-------------------\n",(char*)root.toStyledString().c_str());
-
-
-	rc = sendto_rdt_client(session,rdt_ticket,root);
-
-
-	if ( rc < 0 )
-	{
-		
-	}	
-
-
-	return;
-}
-
-
-
 
 void deviceapi_get_detail (int session,Json::Value &request)
 {
 //+++
+	Json::Value root;
+	Json::Value response;
+	Json::Value responseObjects;
 
-	unsigned int id;
-	int ntype;
+	int rc;					
+	unsigned int rdt_ticket = 0;	
+	int err = 1;
+
+	unsigned int idObject;
+	
 	string err_str;
 
 
+printf("deviceapi_get_detail request \n%s\n-------------------\n",(char*)request.toStyledString().c_str());
+
 	try {
-		id = request["id"].asUInt();
 
-		ntype = id & 0xff000000;
+		Json::Value requestObjects;
+		
 
-		if ( ntype == IDTYPE_GROUP )
+		rdt_ticket = request["rdt_ticket"].asUInt();
+		requestObjects = request["objects"];
+
+		if ( requestObjects.isArray() )
 		{
-			__get_detail_of_group(session,request,id);
+			unsigned int i;
+			CMyObject *pObject;
+			//int ntype;
+
+
+
+			for(i=0;i<requestObjects.size();i++)
+			{
+				idObject = requestObjects[i]["id"].asUInt();
+
+				//ntype = idObject & 0xff000000;
+
+				if ( idObject == 0 ) // GetGateway
+				{
+					CGateway *pGateway = __allObjects.getGateway();			
+					Json::Value locations;
+
+
+					if ( pGateway != NULL )
+					{
+						__get_gateway_detail(locations);
+						
+
+						pGateway->getBaseAttr(responseObjects[i]);
+						responseObjects[i]["objects"] = locations;
+					}
+				}
+				else
+				{
+					pObject = (CMyObject*) __allObjects.getObjectByID(idObject);
+
+					if ( pObject != NULL )
+					{
+						pObject->getDetail(responseObjects[i]);
+
+						//if ( ntype == IDTYPE_GROUP )
+						//else if ( ntype == IDTYPE_ACCESSORY )
+						//else if ( ntype == IDTYPE_LOCATION )
+						//else if ( ntype == IDTYPE_GATEWAY )
+						//else if ( ntype == IDTYPE_SWITCH )
+					}
+				}
+			}
 		}
-		else if ( ntype == IDTYPE_ACCESSORY )
-		{
-			__get_detail_of_object(session,request,id);
-		}
-		else if ( ntype == IDTYPE_LOCATION )
-		{
-			__get_detail_of_object(session,request,id);
-		}
-		else if ( ntype == IDTYPE_GATEWAY )
-		{
-			__get_detail_of_object(session,request,id);;
-		}
-		//else if ( ntype == IDTYPE_SWITCH )
-		//{
-		//	deviceapi_get_detail_of_switch(session,request,id);;
-		//}	
-		else
-		{
-			__get_detail_of_object(session,request,id);;	
-		}
+
+
+
+
+
+
+
+		err = 0;
+
 
     } catch (const libsocket::socket_exception& exc)
     {
 		std::cerr << exc.mesg;
 		err_str = exc.mesg;
     }
+
+
+	response["uid"] = (char*) __myUID;
+	response["api"] = request["api"].asString();
+
+
+	response["objects"] = responseObjects;
+
+
+
+
+	root["error"] = err;
+	if ( err_str.length() != 0 )
+		root["error_str"] = err_str;
+	root["response"] = response;
+
+
+printf("deviceapi_get_detail response \n%s\n-------------------\n",(char*)root.toStyledString().c_str());
+
+
+	rc = sendto_rdt_client(session,rdt_ticket,root);
+
+
+	if ( rc < 0 )
+	{
+		
+	}	    
 
 
 
@@ -1948,61 +1890,12 @@ void deviceapi_set_gateway_setting (int session,Json::Value &request)
 	return;
 }
 
-void deviceapi_get_objects (int session,Json::Value &request)
-{
-	Json::Value root;
-	Json::Value response;
-	Json::Value objects;
-
-	unsigned int rdt_ticket;
-	int rc;
-
-
-	rdt_ticket = request["rdt_ticket"].asUInt();
-
-	// group
-
-
-	response["uid"] = (char*) __myUID;
-
-
-	objects[0]["id"] = "s011";
-	objects[0]["name"] = "Switch 1";
-
-
-	objects[1]["id"] = "s012";
-	objects[1]["name"] = "Switch 2";
-
-	objects[2]["id"] = "s013";
-	objects[2]["name"] = "Switch 3";
-
-	objects[3]["id"] = "s014";
-	objects[3]["name"] = "Switch 4";
-
-	
-	response["objects"] = objects;
-
- 
-	root["error"] = 0;
-	root["response"] = response;
-
-	rc = sendto_rdt_client(session,rdt_ticket,root);
-
-
-	if ( rc < 0 )
-	{
-
-	}
-
-	return;
-}
-
 void deviceapi_get_switches (int session,Json::Value &request)
 {
 //+++
 	Json::Value root;
 	Json::Value response;
-	Json::Value responseObjects;
+	Json::Value subObjects;
 	unsigned int rdt_ticket;
 	int rc;
 	int id;
@@ -2030,7 +1923,7 @@ void deviceapi_get_switches (int session,Json::Value &request)
 
 			pAccessory->getAttr(response);
 
-			pAccessory->getSubObjects(responseObjects);
+			pAccessory->getSubObjects(subObjects);
 
 			err = 0;
 		}
@@ -2049,7 +1942,7 @@ void deviceapi_get_switches (int session,Json::Value &request)
 	response["uid"] = (char*) __myUID;;
 	response["api"] = request["api"].asString();
 	response["id"] = id;
-	response["objects"] = responseObjects;
+	response["objects"] = subObjects;
 
 
 	root["error"] = err;

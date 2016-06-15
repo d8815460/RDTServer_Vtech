@@ -28,8 +28,8 @@ int device_parser(int session,unsigned char *option,int option_len,unsigned char
 		string api = value["api"].asString();
 
 
-		printf("UID:%s\n",uid.c_str());
-		printf("api:%s\n",api.c_str());
+		//printf("UID:%s\n",uid.c_str());
+		//printf("api:%s\n",api.c_str());
 
 		if ( option != NULL && (option[1]&0x01) )
 		{
@@ -41,7 +41,7 @@ int device_parser(int session,unsigned char *option,int option_len,unsigned char
 
 			value["rdt_ticket"] = rdt_ticket_no;
 
-			printf("rdt_ticket:%d  ******************************\n",rdt_ticket_no);
+			//printf("rdt_ticket:%d  ******************************\n",rdt_ticket_no);
 
 		}
 		else
@@ -184,10 +184,6 @@ int device_parser(int session,unsigned char *option,int option_len,unsigned char
 		{
 			deviceapi_set_gateway_setting(session,value);
 		}
-		else if ( strcmp(api.c_str(),"get_objects") == 0 ) //
-		{
-			deviceapi_get_objects(session,value);
-		}
 //		else if ( strcmp(api.c_str(),"get_detail") == 0 ) //
 //		{
 //			deviceapi_get_detail(session,value);
@@ -232,7 +228,7 @@ int device_parser(int session,unsigned char *option,int option_len,unsigned char
 	}
 	else
 	{
-		printf("Receive a non-json format string len:%d str:%s \n",data_len,data);
+		printf("Receive a non-json format string len:%d \nstr:%s \n",data_len,data);
 	}
 
 	return 0;

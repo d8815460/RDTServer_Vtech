@@ -64,6 +64,8 @@
 		int getAttr(Json::Value& jsonAttr);
 		int getAbout(Json::Value& jsonAbout);
 		int getSubObjects(Json::Value& subObjects);
+
+		int getDetail(Json::Value &jsonDetail);
 	};
 
 
