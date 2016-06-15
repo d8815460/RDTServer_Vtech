@@ -922,10 +922,10 @@ int CLocation::remove (CMyObject *pObject)
 int CLocation::UpdateOrder (CMyObject *pObject,int newOrder)
 {
 	int ret = 0;
+
 	removeFromList(pObject);
 
-	pObject->m_pLocation = NULL;
-
+	pObject->m_pLocation = this;
 
 	// re-sorting
 	{

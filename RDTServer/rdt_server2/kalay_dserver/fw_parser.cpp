@@ -408,7 +408,6 @@ printf("Test TXRecord *****************\n seq:%d  session:%d\nrequest\n%s\n*****
 	}
 	else if ( func == "notify" )
 	{
-		/*
 		Json::ValueIterator itrObj;
 
 		for(itrObj=objects.begin();itrObj != objects.end(); itrObj++)
@@ -525,7 +524,7 @@ printf("Test TXRecord *****************\n seq:%d  session:%d\nrequest\n%s\n*****
 					}
 				}
 			}
-		}*/
+		}
 	}
 
 
