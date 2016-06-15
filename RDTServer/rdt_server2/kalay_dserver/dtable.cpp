@@ -135,6 +135,7 @@ CAllObjects::CAllObjects()
 	pGroup01 = new CGroup("Group 01",pBathroom);	
 
 	pGroup01->m_attr_num["groupNo"] = 1;
+	pGroup01->m_attr_num["icon"] = 1;
 
 
 	//---------------------------------------------------------
@@ -193,14 +194,17 @@ CAllObjects::CAllObjects()
 
 	pSensor->m_attr_num["batLow"] = 1;
 	pSensor->m_attr_num["outLink"] = 1;
+	pSensor->m_attr_num["icon"] = 2;
 
 
 
 //----------------------------------------------------------------
 	pSensor = new CSensor("motion sensor",0x0203,pKitchen);
+	pSensor->m_attr_num["icon"] = 2;
 
 //----------------------------------------------------------------
 	pSensor = new CSensor("flood detector",0x0206,pKitchen);
+	pSensor->m_attr_num["icon"] = 2;
 
 
 //----------------------------------------------------------------
@@ -211,7 +215,9 @@ CAllObjects::CAllObjects()
 	pAccessory->m_attr_num["trigger"] = 0;
 
 	//pAccessory->m_fwid = std::to_string(pAccessory->m_id);	
-	pAccessory->m_about_str["ver"] = "1.0.0";		
+	pAccessory->m_about_str["ver"] = "1.0.0";	
+
+	pAccessory->m_attr_num["icon"] = 3;	
 
 
 //----------------------------------------------------------------
@@ -242,6 +248,7 @@ CAllObjects::CAllObjects()
 	pGroup02 = new CGroup("Group 02",pBathroom);	
 
 	pGroup02->m_attr_num["groupNo"] = 2;
+	pGroup02->m_attr_num["icon"] = 1;
 
 
 //----------------------------------------------------------------
@@ -281,6 +288,7 @@ CAllObjects::CAllObjects()
 	pGroup03 = new CGroup("Group 03",pLivingroom);	
 
 	pGroup03->m_attr_num["groupNo"] = 3;
+	pGroup03->m_attr_num["icon"] = 1;
 
 
 
@@ -453,9 +461,17 @@ CMyObject::CMyObject(const char *myClassType,int id,const char *name,int type )
 	m_pGroup = NULL;
 	m_pSwitch = NULL;
 
+	m_orderInLocation = 0;
+
 	m_attr_str["name"] = m_name;
 
-
+	if (   m_type == 0x0201   // garage sensor (door)
+		|| m_type == 0x0202   // Magnetic sensor
+	 	|| m_type == 0x0203   // motion sensor
+		|| m_type == 0x0206 ) // flood detector 
+		m_attr_num["status"] = 2;
+	else
+		m_attr_num["status"] = 0;
 
 	__allObjects.m_mapAllObjects[m_id] = this;
 //	__allObjects.m_mapObjectsByFWID[m_fwid] = this; // ??? should I do that ??
@@ -559,6 +575,120 @@ int CMyObject::getIDTYPE()
 {
 	return (m_id&0xff000000);
 }
+
+
+
+int CMyObject::getBaseAttr(Json::Value& jsonAttr)
+{
+	int count = 0;
+
+	map<string,int>::iterator iNum;
+	map<string,string>::iterator iStr;
+
+	jsonAttr["id"] = m_id;
+	jsonAttr["type"] = m_type;
+
+	jsonAttr["name"] 	= m_attr_str["name"];
+	jsonAttr["icon"] 	= m_attr_num["icon"];
+	jsonAttr["trigger"] = m_attr_num["trigger"];
+	//jsonAttr["alert"] 	= m_attr_num["alert"];
+	//jsonAttr["on"] 		= m_attr_num["on"];
+	jsonAttr["status"] 		= m_attr_num["status"];
+
+	if ( m_pLocation != NULL )
+		jsonAttr["order"] = m_orderInLocation;		
+
+
+	return count;
+}
+
+
+
+int CMyObject::getAttr(Json::Value& jsonAttr)
+{
+	int count = 0;
+
+	map<string,int>::iterator iNum;
+	map<string,string>::iterator iStr;
+
+	jsonAttr["id"] = m_id;
+	jsonAttr["type"] = m_type;
+
+	for(iNum = m_attr_num.begin(); iNum!=m_attr_num.end(); ++iNum)
+	{
+		string key;
+
+		key = iNum->first.c_str();
+
+		if ( 	key != "on"
+			 && key != "alert" )
+		{
+			jsonAttr[key.c_str()] = iNum->second;
+			count++;
+		}
+
+	}
+
+	for(iStr = m_attr_str.begin(); iStr!=m_attr_str.end(); ++iStr)
+	{
+		jsonAttr[iStr->first.c_str()] = iStr->second.c_str();
+		count++;
+	}
+
+	if ( m_pLocation != NULL )
+		jsonAttr["order"] = m_orderInLocation;		
+
+	return count;
+}
+
+int CMyObject::getAbout(Json::Value& jsonAbout)
+{
+	int count = 0;
+
+	map<string,int>::iterator iNum;
+	map<string,string>::iterator iStr;
+
+	jsonAbout["type"] = m_type;
+
+	for(iNum = m_about_num.begin(); iNum!=m_about_num.end(); ++iNum)
+	{
+		jsonAbout[iNum->first.c_str()] = iNum->second;
+	}
+
+	for(iStr = m_about_str.begin(); iStr!=m_about_str.end(); ++iStr)
+	{
+		jsonAbout[iStr->first.c_str()] = iStr->second.c_str();
+	}
+	
+
+	return count;
+}
+
+int CMyObject::getSubObjects(Json::Value& subObjects)
+{
+	list<CMyObject*>::iterator iter;
+	map<string,int>::iterator iNum;
+	map<string,string>::iterator iStr;	
+	int cntSubObject = 0;
+
+	for(iter = m_listObject.begin(); iter!=m_listObject.end(); ++iter)
+	{
+		CMyObject *pSubObject;
+
+		pSubObject = *iter;
+
+
+		pSubObject->getAttr(subObjects[cntSubObject]);
+
+
+		cntSubObject++;
+	}
+
+
+	return cntSubObject;
+}
+
+
 
 
 CAccessory::CAccessory(const char *name,int type,CLocation *pLocation) : CMyObject("accessory",__allObjects.getID(IDTYPE_ACCESSORY),name,type)
@@ -687,6 +817,7 @@ int CLocation::add (CMyObject *pObject)
 	}
 
 	pObject->m_pLocation = this;
+	pObject->m_orderInLocation = m_listObject.size()+1;
 
 	addToList(pObject);
 
@@ -699,9 +830,77 @@ int CLocation::remove (CMyObject *pObject)
 
 	pObject->m_pLocation = NULL;
 
+
+	// re-sorting
+	{
+		list<CMyObject*>::iterator iterX;
+		int order = 0;
+
+
+		for(iterX = m_listObject.begin(); iterX!=m_listObject.end(); ++iterX)
+		{
+			CMyObject *pSubObject;
+
+			pSubObject = *iterX;
+
+			pSubObject->m_orderInLocation = ++order;
+		}	
+	}
+
+
 	return 1;
 }
 
+
+int CLocation::UpdateOrder (CMyObject *pObject,int newOrder)
+{
+	int ret = 0;
+	removeFromList(pObject);
+
+	pObject->m_pLocation = NULL;
+
+
+	// re-sorting
+	{
+		list<CMyObject*>::iterator iterX;
+		int order = 0;
+
+		int i,size;
+
+		size = m_listObject.size();
+		iterX = m_listObject.begin();
+
+		for(i=0;i<size;i++)
+		{
+			if ( (i+1) == newOrder )
+			{
+				m_listObject.insert(iterX,pObject);
+				ret = newOrder;
+				break;
+			}
+
+			++iterX;	
+		}
+
+		if ( ret == 0 )
+		{
+			addToList(pObject);
+		}
+
+
+		// re-sorting
+		for(iterX = m_listObject.begin(); iterX!=m_listObject.end(); ++iterX)
+		{
+			CMyObject *pSubObject;
+
+			pSubObject = *iterX;
+
+			pSubObject->m_orderInLocation = ++order;
+		}	
+	}
+
+	return ret;
+}
 
 
 CLightBulb::CLightBulb(const char *name,CLocation *pLocation,CGroup *pGroup) : CAccessory(name,0x0109,pLocation)

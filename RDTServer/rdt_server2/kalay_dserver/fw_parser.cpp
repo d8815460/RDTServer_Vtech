@@ -17,7 +17,6 @@
 
 #include "fw_api.h"
 
-int __getAttr(CMyObject *pObject,Json::Value& jsonAttr);
 int sendto_rdt_client (int session,unsigned int rdt_ticket,Json::Value& responseRoot);
 int sendto_all_client (Json::Value& responseRoot);
 
@@ -114,8 +113,6 @@ int CVtechIPHub::parser(Json::Value& root)
 					if ( pGateway == NULL )
 					{
 						pGateway = new CGateway(__allObjects.getID(IDTYPE_GATEWAY),"V-Tech IP-Hub"); //GateWay
-
-						
 					}
 
 
@@ -160,14 +157,10 @@ int CVtechIPHub::parser(Json::Value& root)
 					if (  iterFind != __allObjects.m_mapObjectsByFWID.end() )
 					{
 						pObject = iterFind->second;
-
-						printf(" found object %s \n",pObject->m_attr_str["name"].c_str());
 					}
 					else
 					{
 						//CLocation *pLocation = (CLocation*)__allObjects.m_mapAllObjects[0x13000001]; // Find location
-						printf("New device type:%x \n",unitType);
-
 						if (    unitType == 0x0101   //  wall switch
 							 || unitType == 0xff01 ) //  virtual wireless wall switch
 						{
@@ -205,6 +198,8 @@ int CVtechIPHub::parser(Json::Value& root)
 
 						pObject->m_fwid = fwid;	
 
+						pObject->m_attr_num["status"] = 0;
+
 						__allObjects.m_mapObjectsByFWID[fwid] = pObject;
 					}
 
@@ -219,25 +214,69 @@ int CVtechIPHub::parser(Json::Value& root)
 						{
 							if ( value.isString() )
 							{
-								printf("Obj Set key : %s  = %s (str) \n",key.asString().c_str(),value.asString().c_str());	
+								//printf("Obj Set key : %s  = %s (str) \n",key.asString().c_str(),value.asString().c_str());	
 								pObject->m_about_str[key.asString().c_str()] = value.asString();
-								
 							}
 							else
 							{
-								printf("Obj Set key : %s  = %d (num) \n",key.asString().c_str(),value.asInt());	
+								//printf("Obj Set key : %s  = %d (num) \n",key.asString().c_str(),value.asInt());	
 								pObject->m_about_num[key.asString().c_str()] = value.asInt();
 							}
 
 						}
-						else if ( 	key == "alert" )
+						else if ( key == "alert" )
 						{
-							printf("Obj Set key : %s  = %d (num) \n",key.asString().c_str(),value.asInt());	
-							pObject->m_attr_num["trigger"] = value.asInt();
-							pObject->m_attr_num["alert"] = value.asInt();
+							int alert = value.asInt();
+
+							//printf("Obj Set key : %s  = %d (num) \n",key.asString().c_str(),value.asInt());	
+
+							if ( alert )
+								pObject->m_attr_num["trigger"] = 1;
+							else
+								pObject->m_attr_num["trigger"] = 0; // FixMe , here should be reset by app
+
+							//pObject->m_attr_num["alert"] = value.asInt();
+
+							if ( alert )
+								pObject->m_attr_num["status"] = 3;
+							else
+								pObject->m_attr_num["status"] = 2;
 						}
-						else if ( 	key != "id" 
-							 && key != "type")
+						else if ( key == "on" )
+						{
+							int on = value.asInt();
+
+
+							//printf("Obj Set key : %s  = %d (num) \n",key.asString().c_str(),value.asInt());	
+
+							if (   pObject->m_type == 0x0201   // garage sensor (door)
+								|| pObject->m_type == 0x0202   // Magnetic sensor
+							 	|| pObject->m_type == 0x0203   // motion sensor
+								|| pObject->m_type == 0x0206 ) // flood detector 
+							{
+								int oldStatus = pObject->m_attr_num["status"];
+								if ( oldStatus != 3 && oldStatus != 255 )
+									pObject->m_attr_num["status"] = 2;
+							}
+							else
+							{
+								if ( on )
+									pObject->m_attr_num["status"] = 1;
+								else
+									pObject->m_attr_num["status"] = 0;
+							}
+
+						}
+						else if ( key == "outLink" )
+						{
+							int outLink = value.asInt();
+							//printf("Obj Set key : %s  = %d (num) \n",key.asString().c_str(),value.asInt());	
+
+							if ( outLink == 1 )
+								pObject->m_attr_num["status"] = 255;
+						}
+						else if ( 	   key != "id" 
+							 		&& key != "type")
 						{
 							if ( value.isString() )
 							{
@@ -311,7 +350,7 @@ printf("Test TXRecord *****************\n seq:%d  session:%d\nrequest\n%s\n*****
 				}
 				
 				
-				__getAttr(pObject,response);			
+				pObject->getAttr(response);			
 
 				err = 0;
 			}
@@ -359,7 +398,7 @@ printf("Test TXRecord *****************\n seq:%d  session:%d\nrequest\n%s\n*****
 				unitType = aObj["type"].asUInt();
 
 
-				printf("ID:%s\n",fwid.c_str());
+				//printf("ID:%s\n",fwid.c_str());
 
 				if ( fwid == "0" || unitType == 0xff00 ) // __GATEWAY__
 				{
@@ -425,7 +464,7 @@ printf("Test TXRecord *****************\n seq:%d  session:%d\nrequest\n%s\n*****
 								}
 								
 								
-								__getAttr(pObject,response);			
+								pObject->getAttr(response);			
 
 								err = 0;
 							}
@@ -444,7 +483,7 @@ printf("Test TXRecord *****************\n seq:%d  session:%d\nrequest\n%s\n*****
 						responseRoot["response"] = response;
 
 
-						printf("notify_detail:\n%s\n-------------------\n",(char*)responseRoot.toStyledString().c_str());
+						//printf("notify_detail:\n%s\n-------------------\n",(char*)responseRoot.toStyledString().c_str());
 						rc = sendto_all_client(responseRoot);
 
 

@@ -148,100 +148,6 @@ int sendto_rdt_client (int session,unsigned int rdt_ticket,Json::Value& response
 }
 
 
-int __getBaseAttr(CMyObject *pObject,Json::Value& jsonAttr)
-{
-	int count = 0;
-
-	map<string,int>::iterator iNum;
-	map<string,string>::iterator iStr;
-
-	jsonAttr["id"] = pObject->m_id;
-	jsonAttr["type"] = pObject->m_type;
-
-	jsonAttr["name"] 	= pObject->m_attr_str["name"];
-	jsonAttr["icon"] 	= pObject->m_attr_num["icon"];
-	jsonAttr["trigger"] = pObject->m_attr_num["trigger"];
-	jsonAttr["alert"] = pObject->m_attr_num["alert"];
-	jsonAttr["on"] 		= pObject->m_attr_num["on"];
-
-
-	return count;
-}
-
-
-
-int __getAttr(CMyObject *pObject,Json::Value& jsonAttr)
-{
-	int count = 0;
-
-	map<string,int>::iterator iNum;
-	map<string,string>::iterator iStr;
-
-	jsonAttr["id"] = pObject->m_id;
-	jsonAttr["type"] = pObject->m_type;
-
-	for(iNum = pObject->m_attr_num.begin(); iNum!=pObject->m_attr_num.end(); ++iNum)
-	{
-		jsonAttr[iNum->first.c_str()] = iNum->second;
-		count++;
-	}
-
-	for(iStr = pObject->m_attr_str.begin(); iStr!=pObject->m_attr_str.end(); ++iStr)
-	{
-		jsonAttr[iStr->first.c_str()] = iStr->second.c_str();
-		count++;
-	}
-
-	return count;
-}
-
-int __getAbout(CMyObject *pObject,Json::Value& jsonAbout)
-{
-	int count = 0;
-
-	map<string,int>::iterator iNum;
-	map<string,string>::iterator iStr;
-
-	jsonAbout["type"] = pObject->m_type;
-
-	for(iNum = pObject->m_about_num.begin(); iNum!=pObject->m_about_num.end(); ++iNum)
-	{
-		jsonAbout[iNum->first.c_str()] = iNum->second;
-	}
-
-	for(iStr = pObject->m_about_str.begin(); iStr!=pObject->m_about_str.end(); ++iStr)
-	{
-		jsonAbout[iStr->first.c_str()] = iStr->second.c_str();
-	}
-	
-
-	return count;
-}
-
-int __getSubObjects(CMyObject *pObject,Json::Value& subObjects)
-{
-	list<CMyObject*>::iterator iter;
-	map<string,int>::iterator iNum;
-	map<string,string>::iterator iStr;	
-	int cntSubObject = 0;
-
-	for(iter = pObject->m_listObject.begin(); iter!=pObject->m_listObject.end(); ++iter)
-	{
-		CMyObject *pSubObject;
-
-		pSubObject = *iter;
-
-
-		__getAttr(pSubObject,subObjects[cntSubObject]);
-
-
-		cntSubObject++;
-	}
-
-
-	return cntSubObject;
-}
-
 
 // Implemente API functions -----------------------------
 void deviceapi_get_about (int session,Json::Value &request)
@@ -275,7 +181,7 @@ void deviceapi_get_about (int session,Json::Value &request)
 			
 			if ( pGateway != NULL )
 			{
-				__getAbout(pGateway,response);
+				pGateway->getAbout(response);
 				err = 0;
 			}
 			else
@@ -296,7 +202,7 @@ void deviceapi_get_about (int session,Json::Value &request)
 				response["id"] 	= pAccessory->m_id;
 				response["type"] = pAccessory->m_attr_num["type"];
 
-				__getAbout(pAccessory,response);
+				pAccessory->getAbout(response);
 
 
 				err = 0;
@@ -500,6 +406,18 @@ void deviceapi_set_detail (int session,Json::Value &request)
 							}
 
 						}
+						else if ( key.asString() == "order" )
+						{
+							int newOrder = value.asInt();
+
+							if ( pObject->m_pLocation != NULL )							
+							{
+								pObject->m_pLocation->UpdateOrder(pObject,newOrder);
+
+								valueChanged = 1;
+							}
+
+						}
 						else if ( key.asString() == "name"	 )
 						{
 							printf("Set key name : %s  ",key.asString().c_str());
@@ -569,13 +487,25 @@ void deviceapi_set_detail (int session,Json::Value &request)
 
 						if ( 	 valueChanged != 0
 						     &&  key.asString() != "name"	
-						     &&  key.asString() != "location"	)
+						     &&  key.asString() != "location"
+						     &&  key.asString() != "order"		)
 						{
-							fwChanged++;
-							if ( value.isNumeric() )
-								fwObjects[nfwObjectCnt][key.asString().c_str()] = value.asInt();// #TBD : if we only send change items
-							else // if ( value.isString() )
-								fwObjects[nfwObjectCnt][key.asString().c_str()] = value.asString();// #TBD : if we only send change items
+
+							if ( key.asString() == "status"	)
+							{
+								fwChanged++;
+
+								fwObjects[nfwObjectCnt]["on"] = value.asInt();// #TBD : if we only send change items
+							}
+							else
+							{
+								fwChanged++;
+								if ( value.isNumeric() )
+									fwObjects[nfwObjectCnt][key.asString().c_str()] = value.asInt();// #TBD : if we only send change items
+								else // if ( value.isString() )
+									fwObjects[nfwObjectCnt][key.asString().c_str()] = value.asString();// #TBD : if we only send change items
+							}
+
 						}
 					}
 				}
@@ -616,7 +546,7 @@ void deviceapi_set_detail (int session,Json::Value &request)
 						}
 						
 						
-						__getAttr(pObject,response);
+						pObject->getAttr(response);
 
 						sendResponse = 1;		    			
 		    		}
@@ -935,7 +865,8 @@ void deviceapi_get_gateway (int session,Json::Value &request)
 
 					pObject = *j;
 
-					__getBaseAttr(pObject,accessories[nAccessoryCnt]);
+					pObject->getBaseAttr(accessories[nAccessoryCnt]);
+					
 
 					nAccessoryCnt++;
 				}
@@ -1187,10 +1118,10 @@ void __get_detail_of_group(int session,Json::Value &request,int idGroup)
 
 			if ( pGroup != NULL )
 			{
-				__getSubObjects(pGroup,responseObjects);
+				pGroup->getSubObjects(responseObjects);
 				// Attributes of Group
 
-				__getAttr(pGroup,response);
+				pGroup->getAttr(response);
 			}
 
 			err = 0;
@@ -1264,7 +1195,7 @@ void __get_detail_of_object(int session,Json::Value &request,int idObject)
 				
 				response["id"] = pObject->m_id;
 
-				__getAttr(pObject,response);
+				pObject->getAttr(response);
 
 
 				if ( pObject->m_pLocation != NULL ) 
@@ -1291,7 +1222,7 @@ void __get_detail_of_object(int session,Json::Value &request,int idObject)
 
 				if ( pObject->m_listObject.size() > 0 )
 				{
-					__getSubObjects(pObject,responseObjects);
+					pObject->getSubObjects(responseObjects);
 				}
 			}
 
@@ -1593,7 +1524,7 @@ void deviceapi_get_locations (int session,Json::Value &request)
 				
 				pLocation = (CLocation*) p->second;
 
-				__getAttr(pLocation,locations[nLocationCnt]);
+				pLocation->getAttr(locations[nLocationCnt]);
 
 				nLocationCnt++;
 
@@ -2097,9 +2028,9 @@ void deviceapi_get_switches (int session,Json::Value &request)
 
 			//response["type"] = pAccessory->m_attr_num["type"];
 
-			__getAttr(pAccessory,response);
+			pAccessory->getAttr(response);
 
-			__getSubObjects(pAccessory,responseObjects);
+			pAccessory->getSubObjects(responseObjects);
 
 			err = 0;
 		}

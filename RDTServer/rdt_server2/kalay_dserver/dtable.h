@@ -6,6 +6,8 @@
 	#include <list>
 	#include <string>
 
+	#include <json/json.h>
+
 	using namespace std;
 
 	#define IDTYPE_GATEWAY		0x00000000
@@ -43,15 +45,25 @@
 
 		string m_fwid;
 
+		int m_orderInLocation;
+
 		CLocation 	*m_pLocation;
 		CGroup		*m_pGroup;
 		CSwitch 	*m_pSwitch;	// for Accessory
+
 
 
 	protected:
 		int addToList (CMyObject *pObject);
 		int removeFromList (CMyObject *pObject);
 		int getIDTYPE();
+
+
+	public:
+		int getBaseAttr(Json::Value& jsonAttr);
+		int getAttr(Json::Value& jsonAttr);
+		int getAbout(Json::Value& jsonAbout);
+		int getSubObjects(Json::Value& subObjects);
 	};
 
 
@@ -147,6 +159,7 @@
 	public:
 		int add (CMyObject *pObject);
 		int remove (CMyObject *pObject);
+		int UpdateOrder (CMyObject *pObject,int newOrder);
 	};
 
 
