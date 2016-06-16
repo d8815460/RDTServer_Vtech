@@ -83,5 +83,7 @@
 	int rdtcnnt_check_new_iotc_request();
 
 	int rdtcnnt_send_data_to_all_client(char *send_data,int send_len);
+	int rdtcnnt_send_data_to_other_client(int session,char *send_data,int send_len);
+
 
 #endif

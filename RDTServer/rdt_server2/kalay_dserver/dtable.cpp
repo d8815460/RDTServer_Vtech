@@ -842,6 +842,28 @@ int CGroup::remove (CMyObject *pObject)
 }
 
 
+CTask::CTask(int id,const char *name): CMyObject("task",id,name,0xff30)
+{
+
+}
+
+CTask::~CTask()
+{
+
+}
+
+CSchedule::CSchedule(int id,const char *name): CMyObject("schedule",id,name,0xff40)
+{
+
+}
+
+CSchedule::~CSchedule()
+{
+	
+}
+
+
+
 
 CLocation::CLocation(const char *name) : CMyObject("location",__allObjects.getID(IDTYPE_LOCATION),name,0xff10)
 {
@@ -1040,6 +1062,10 @@ CGateway::CGateway(int id,const char *name) : CMyObject("gateway",id,name,0xff00
 CGateway::~CGateway()
 {
 }
+
+
+
+
 
 
 

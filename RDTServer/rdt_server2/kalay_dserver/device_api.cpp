@@ -32,7 +32,7 @@ int sendto_all_client (Json::Value& responseRoot)
 	Json::FastWriter fastWriter;
 	std::string strSendOut;
 
-	unsigned int rdt_ticket = 0;
+
 
 
 
@@ -46,20 +46,8 @@ int sendto_all_client (Json::Value& responseRoot)
 	szBuff[0]= 0xfe;
 	szBuff[1]= 0xef;
 
-	if ( rdt_ticket > 0 )
-	{
-		option_len = 4;
 
-		szBuff[2]= option_len/256;
-		szBuff[3]= option_len%256;
-
-		szBuff[3+1] = 0x00;
-		szBuff[3+2] = 0x01;
-		szBuff[3+3] = ((rdt_ticket&0xff00)>>8);
-		szBuff[3+4] = (rdt_ticket)&0xff;
-	}
-	else
-	{
+	{ // rdt_ticket = 0
 		option_len = 0;
 
 		szBuff[2]= 0x00;
@@ -83,6 +71,57 @@ int sendto_all_client (Json::Value& responseRoot)
 	return rc;
 
 }
+
+int sendto_other_client (int session,Json::Value& responseRoot)
+{
+	unsigned char szBuff[1024*32];
+	int send_length;
+	int option_len = 0;
+	int rc;
+	int data_length;
+
+	Json::FastWriter fastWriter;
+	std::string strSendOut;
+
+
+
+
+	strSendOut = fastWriter.write(responseRoot);
+
+
+	data_length  = strSendOut.length();
+
+
+	szBuff[0]= 0xfe;
+	szBuff[1]= 0xef;
+
+	{ // rdt_ticket = 0
+		option_len = 0;
+
+		szBuff[2]= 0x00;
+		szBuff[3]= 0x00;
+	}
+
+
+
+	szBuff[4+option_len]= (data_length&0xff00)>>8;
+	szBuff[5+option_len]= (data_length&0x00ff);
+	memcpy(&szBuff[6+option_len],strSendOut.c_str(),data_length);
+	send_length = 6+option_len+data_length;
+		
+
+	rc = rdtcnnt_send_data_to_other_client(session,(char*)szBuff,send_length);
+
+
+	if ( rc < 0 )
+	{
+		
+	}
+
+	return rc;
+
+}
+
 
 int sendto_rdt_client (int session,unsigned int rdt_ticket,Json::Value& responseRoot)
 {
@@ -310,7 +349,7 @@ void deviceapi_get_group_free_lights (int session,Json::Value &request)
 
 void deviceapi_set_detail (int session,Json::Value &request)
 {
-	Json::Value root;
+	Json::Value responseRoot;
 	Json::Value response;
 	Json::Value objects;
 	Json::Value location;
@@ -320,6 +359,7 @@ void deviceapi_set_detail (int session,Json::Value &request)
 	unsigned int id;
 	int err = 1;
 	string err_str;		
+	int clearTrigger = 0;
 
 	int sendResponse = 0;
 	
@@ -332,7 +372,7 @@ printf("set_detail request:\n%s\n-------------------\n",(char*)request.toStyledS
 	response["api"] = request["api"].asString();
 
 	rdt_ticket = request["rdt_ticket"].asUInt();
-
+	clearTrigger = request["clear_trigger"].asUInt();
 
 	
 
@@ -364,6 +404,11 @@ printf("set_detail request:\n%s\n-------------------\n",(char*)request.toStyledS
 					map<string,int>::iterator iNum;
 					map<string,string>::iterator iStr;
 					//int accessoryType;
+
+					if ( clearTrigger )
+					{
+						
+					}
 
 					// Change Value +++
 					{
@@ -609,16 +654,21 @@ printf("set_detail request:\n%s\n-------------------\n",(char*)request.toStyledS
 
     if ( sendResponse )
     {
-		root["error"] = err;
+		responseRoot["error"] = err;
 		if ( err_str.length() != 0 )
-			root["error_str"] = err_str;
+			responseRoot["error_str"] = err_str;
 
-		root["response"] = response;
+		responseRoot["response"] = response;
 
 
-		printf("set_detail response:\n%s\n-------------------\n",(char*)root.toStyledString().c_str());
+		printf("set_detail response:\n%s\n-------------------\n",(char*)responseRoot.toStyledString().c_str());
 
-		rc = sendto_rdt_client(session,rdt_ticket,root);
+		rc = sendto_rdt_client(session,rdt_ticket,responseRoot);
+
+		response["api"] = "update";
+		responseRoot["response"] = response;
+
+		rc = sendto_other_client(session,responseRoot);
 
 		if ( rc < 0 )
 		{
@@ -634,7 +684,7 @@ printf("set_detail request:\n%s\n-------------------\n",(char*)request.toStyledS
 
 void deviceapi_remove (int session,Json::Value &request)
 {
-	Json::Value root;
+	Json::Value responseRoot;
 	Json::Value response;
 	Json::Value objects;
 	Json::Value responseObjects;
@@ -697,16 +747,16 @@ void deviceapi_remove (int session,Json::Value &request)
 	response["id"] = responseObjects;
 
 
-	root["error"] = err;
+	responseRoot["error"] = err;
 	if ( err_str.length() != 0 )
-		root["error_str"] = err_str;
-	root["response"] = response;
+		responseRoot["error_str"] = err_str;
+	responseRoot["response"] = response;
 
 
 
-printf("remove response:\n%s\n-------------------\n",(char*)root.toStyledString().c_str());
+printf("remove response:\n%s\n-------------------\n",(char*)responseRoot.toStyledString().c_str());
 
-	rc = sendto_rdt_client(session,rdt_ticket,root);
+	rc = sendto_rdt_client(session,rdt_ticket,responseRoot);
 
 
 	if ( rc < 0 )
@@ -720,7 +770,7 @@ printf("remove response:\n%s\n-------------------\n",(char*)root.toStyledString(
 
 void deviceapi_get_activities (int session,Json::Value &request)
 {
-	Json::Value root;
+	Json::Value responseRoot;
 	Json::Value response;
 	Json::Value objects;
 
@@ -742,10 +792,10 @@ void deviceapi_get_activities (int session,Json::Value &request)
 	response["objects"] = objects;
 
 
-	root["error"] = 0;
-	root["response"] = response;
+	responseRoot["error"] = 0;
+	responseRoot["response"] = response;
 
-	rc = sendto_rdt_client(session,rdt_ticket,root);
+	rc = sendto_rdt_client(session,rdt_ticket,responseRoot);
 
 
 	if ( rc < 0 )
@@ -759,7 +809,7 @@ void deviceapi_get_activities (int session,Json::Value &request)
 
 void deviceapi_get_light_effects (int session,Json::Value &request)
 {
-	Json::Value root;
+	Json::Value responseRoot;
 	Json::Value response;
 	Json::Value objects;
 
@@ -786,10 +836,10 @@ void deviceapi_get_light_effects (int session,Json::Value &request)
 	response["uid"] = (char*) __myUID;;
 	response["objects"] = objects;
  
-	root["error"] = 0;
-	root["response"] = response;
+	responseRoot["error"] = 0;
+	responseRoot["response"] = response;
 
-	rc = sendto_rdt_client(session,rdt_ticket,root);
+	rc = sendto_rdt_client(session,rdt_ticket,responseRoot);
 
 
 	if ( rc < 0 )
@@ -803,7 +853,7 @@ void deviceapi_get_light_effects (int session,Json::Value &request)
 
 void deviceapi_set_light_effects (int session,Json::Value &request)
 {
-	Json::Value root;
+	Json::Value responseRoot;
 	Json::Value response;
 	Json::Value objects;
 
@@ -821,10 +871,10 @@ void deviceapi_set_light_effects (int session,Json::Value &request)
 	response["id"] = "a01";
 	response["objects"] = objects;
  
-	root["error"] = 0;
-	root["response"] = response;
+	responseRoot["error"] = 0;
+	responseRoot["response"] = response;
 
-	rc = sendto_rdt_client(session,rdt_ticket,root);
+	rc = sendto_rdt_client(session,rdt_ticket,responseRoot);
 
 
 	if ( rc < 0 )
@@ -887,7 +937,7 @@ void __get_gateway_detail (Json::Value &locations)
 
 void deviceapi_get_gateway (int session,Json::Value &request)
 {
-	Json::Value root;
+	Json::Value responseRoot;
 	Json::Value response;
 	Json::Value locations;
 	
@@ -936,15 +986,15 @@ void deviceapi_get_gateway (int session,Json::Value &request)
 	response["locations"] = locations;
 
 
-	root["error"] = err;
+	responseRoot["error"] = err;
 	if ( err_str.length() != 0 )
-		root["error_str"] = err_str;
-	root["response"] = response;
+		responseRoot["error_str"] = err_str;
+	responseRoot["response"] = response;
 
-printf("get_gateway:\n%s\n----------\n",(char*)root.toStyledString().c_str());
+printf("get_gateway:\n%s\n----------\n",(char*)responseRoot.toStyledString().c_str());
 
 
-	rc = sendto_rdt_client(session,rdt_ticket,root);
+	rc = sendto_rdt_client(session,rdt_ticket,responseRoot);
 
 	if ( rc < 0 )
 	{
@@ -957,7 +1007,7 @@ printf("get_gateway:\n%s\n----------\n",(char*)root.toStyledString().c_str());
 
 void deviceapi_add_accessories (int session,Json::Value &request)
 {
-	Json::Value root;
+	Json::Value responseRoot;
 	Json::Value response;
 	Json::Value objects;
 
@@ -975,10 +1025,10 @@ void deviceapi_add_accessories (int session,Json::Value &request)
 	response["api"] = request["api"].asString();
 	response["objects"] = objects;
  
-	root["error"] = 0;
-	root["response"] = response;
+	responseRoot["error"] = 0;
+	responseRoot["response"] = response;
 
-	rc = sendto_rdt_client(session,rdt_ticket,root);
+	rc = sendto_rdt_client(session,rdt_ticket,responseRoot);
 
 
 	if ( rc < 0 )
@@ -991,7 +1041,7 @@ void deviceapi_add_accessories (int session,Json::Value &request)
 
 void deviceapi_merge_accessories (int session,Json::Value &request)
 {
-	Json::Value root;
+	Json::Value responseRoot;
 	Json::Value response;
 	Json::Value objects;
 
@@ -1009,10 +1059,10 @@ void deviceapi_merge_accessories (int session,Json::Value &request)
 	response["api"] = request["api"].asString();
 	response["objects"] = objects;
  
-	root["error"] = 0;
-	root["response"] = response;
+	responseRoot["error"] = 0;
+	responseRoot["response"] = response;
 
-	rc = sendto_rdt_client(session,rdt_ticket,root);
+	rc = sendto_rdt_client(session,rdt_ticket,responseRoot);
 
 
 	if ( rc < 0 )
@@ -1025,7 +1075,7 @@ void deviceapi_merge_accessories (int session,Json::Value &request)
 
 void deviceapi_backup_gateway (int session,Json::Value &request)
 {
-	Json::Value root;
+	Json::Value responseRoot;
 	Json::Value response;
 
 	unsigned int rdt_ticket;
@@ -1038,10 +1088,10 @@ void deviceapi_backup_gateway (int session,Json::Value &request)
 
 	response["api"] = request["api"].asString();
  
-	root["error"] = 0;
-	root["response"] = response;
+	responseRoot["error"] = 0;
+	responseRoot["response"] = response;
 
-	rc = sendto_rdt_client(session,rdt_ticket,root);
+	rc = sendto_rdt_client(session,rdt_ticket,responseRoot);
 
 
 	if ( rc < 0 )
@@ -1054,7 +1104,7 @@ void deviceapi_backup_gateway (int session,Json::Value &request)
 
 void deviceapi_restore_gateway (int session,Json::Value &request)
 {
-	Json::Value root;
+	Json::Value responseRoot;
 	Json::Value response;
 
 	unsigned int rdt_ticket;
@@ -1067,10 +1117,10 @@ void deviceapi_restore_gateway (int session,Json::Value &request)
 
 	response["api"] = request["api"].asString();
  
-	root["error"] = 0;
-	root["response"] = response;
+	responseRoot["error"] = 0;
+	responseRoot["response"] = response;
 
-	rc = sendto_rdt_client(session,rdt_ticket,root);
+	rc = sendto_rdt_client(session,rdt_ticket,responseRoot);
 
 
 	if ( rc < 0 )
@@ -1083,7 +1133,7 @@ void deviceapi_restore_gateway (int session,Json::Value &request)
 
 void deviceapi_reset_gateway (int session,Json::Value &request)
 {
-	Json::Value root;
+	Json::Value responseRoot;
 	Json::Value response;
 
 	unsigned int rdt_ticket;
@@ -1096,10 +1146,10 @@ void deviceapi_reset_gateway (int session,Json::Value &request)
 
 	response["api"] = request["api"].asString();
  
-	root["error"] = 0;
-	root["response"] = response;
+	responseRoot["error"] = 0;
+	responseRoot["response"] = response;
 
-	rc = sendto_rdt_client(session,rdt_ticket,root);
+	rc = sendto_rdt_client(session,rdt_ticket,responseRoot);
 
 
 	if ( rc < 0 )
@@ -1112,7 +1162,7 @@ void deviceapi_reset_gateway (int session,Json::Value &request)
 
 void deviceapi_update_gateway (int session,Json::Value &request)
 {
-	Json::Value root;
+	Json::Value responseRoot;
 	Json::Value response;
 
 	unsigned int rdt_ticket;
@@ -1125,10 +1175,10 @@ void deviceapi_update_gateway (int session,Json::Value &request)
 
 	response["api"] = request["api"].asString();
  
-	root["error"] = 0;
-	root["response"] = response;
+	responseRoot["error"] = 0;
+	responseRoot["response"] = response;
 
-	rc = sendto_rdt_client(session,rdt_ticket,root);
+	rc = sendto_rdt_client(session,rdt_ticket,responseRoot);
 
 
 	if ( rc < 0 )
@@ -1144,7 +1194,7 @@ void deviceapi_update_gateway (int session,Json::Value &request)
 void deviceapi_get_detail (int session,Json::Value &request)
 {
 //+++
-	Json::Value root;
+	Json::Value responseRoot;
 	Json::Value response;
 	Json::Value responseObjects;
 
@@ -1239,16 +1289,16 @@ printf("deviceapi_get_detail request \n%s\n-------------------\n",(char*)request
 
 
 
-	root["error"] = err;
+	responseRoot["error"] = err;
 	if ( err_str.length() != 0 )
-		root["error_str"] = err_str;
-	root["response"] = response;
+		responseRoot["error_str"] = err_str;
+	responseRoot["response"] = response;
 
 
-printf("deviceapi_get_detail response \n%s\n-------------------\n",(char*)root.toStyledString().c_str());
+printf("deviceapi_get_detail response \n%s\n-------------------\n",(char*)responseRoot.toStyledString().c_str());
 
 
-	rc = sendto_rdt_client(session,rdt_ticket,root);
+	rc = sendto_rdt_client(session,rdt_ticket,responseRoot);
 
 
 	if ( rc < 0 )
@@ -1264,7 +1314,7 @@ printf("deviceapi_get_detail response \n%s\n-------------------\n",(char*)root.t
 
 void deviceapi_get_other_groups (int session,Json::Value &request)
 {
-	Json::Value root;
+	Json::Value responseRoot;
 	Json::Value response;
 	Json::Value groups;
 
@@ -1315,13 +1365,13 @@ void deviceapi_get_other_groups (int session,Json::Value &request)
 	response["objects"] = groups;
 
 
-	root["error"] = err;
+	responseRoot["error"] = err;
 	if ( err_str.length() != 0 )
-		root["error_str"] = err_str;
-	root["response"] = response;
+		responseRoot["error_str"] = err_str;
+	responseRoot["response"] = response;
 
 
-	rc = sendto_rdt_client(session,rdt_ticket,root);
+	rc = sendto_rdt_client(session,rdt_ticket,responseRoot);
 
 
 	if ( rc < 0 )
@@ -1337,7 +1387,7 @@ void deviceapi_get_other_groups (int session,Json::Value &request)
 
 void deviceapi_add_an_accessory_to_group (int session,Json::Value &request)
 {
-	Json::Value root;
+	Json::Value responseRoot;
 	Json::Value object;
 
 	Json::Value response;
@@ -1387,13 +1437,13 @@ void deviceapi_add_an_accessory_to_group (int session,Json::Value &request)
 	response["id"] = idGroup;
 
 
-	root["error"] = err;
+	responseRoot["error"] = err;
 	if ( err_str.length() != 0 )
-		root["error_str"] = err_str;
-	root["response"] = response;
+		responseRoot["error_str"] = err_str;
+	responseRoot["response"] = response;
 
 
-	rc = sendto_rdt_client(session,rdt_ticket,root);
+	rc = sendto_rdt_client(session,rdt_ticket,responseRoot);
 
 
 	if ( rc < 0 )
@@ -1406,7 +1456,7 @@ void deviceapi_add_an_accessory_to_group (int session,Json::Value &request)
 
 void deviceapi_remove_accessories_from_group (int session,Json::Value &request)
 {
-	Json::Value root;
+	Json::Value responseRoot;
 	Json::Value response;
 
 	unsigned int rdt_ticket;
@@ -1421,10 +1471,10 @@ void deviceapi_remove_accessories_from_group (int session,Json::Value &request)
 	response["api"] = request["api"].asString();
 
  
-	root["error"] = 0;
-	root["response"] = response;
+	responseRoot["error"] = 0;
+	responseRoot["response"] = response;
 
-	rc = sendto_rdt_client(session,rdt_ticket,root);
+	rc = sendto_rdt_client(session,rdt_ticket,responseRoot);
 
 
 	if ( rc < 0 )
@@ -1439,7 +1489,7 @@ void deviceapi_get_locations (int session,Json::Value &request)
 {
 
 // ++++
-	Json::Value root;
+	Json::Value responseRoot;
 	Json::Value response;
 	Json::Value locations;
 
@@ -1487,14 +1537,14 @@ void deviceapi_get_locations (int session,Json::Value &request)
 	response["objects"] = locations;
 
 
-	root["error"] = err;
+	responseRoot["error"] = err;
 	if ( err_str.length() != 0 )
-		root["error_str"] = err_str;
-	root["response"] = response;
+		responseRoot["error_str"] = err_str;
+	responseRoot["response"] = response;
 
 // ----
 
-	rc = sendto_rdt_client(session,rdt_ticket,root);
+	rc = sendto_rdt_client(session,rdt_ticket,responseRoot);
 
 
 	if ( rc < 0 )
@@ -1508,7 +1558,7 @@ void deviceapi_get_locations (int session,Json::Value &request)
 void deviceapi_add_accessories_to_location (int session,Json::Value &request)
 {
 // +++
-	Json::Value root;
+	Json::Value responseRoot;
 	Json::Value response;
 	CLocation *pLocation = NULL;
 	string strLocationName;
@@ -1578,12 +1628,12 @@ void deviceapi_add_accessories_to_location (int session,Json::Value &request)
 	response["objects"] = responseObjects;
 
  
-	root["error"] = err;
+	responseRoot["error"] = err;
 	if ( err_str.length() != 0 )
-		root["error_str"] = err_str;
-	root["response"] = response;
+		responseRoot["error_str"] = err_str;
+	responseRoot["response"] = response;
 
-	rc = sendto_rdt_client(session,rdt_ticket,root);
+	rc = sendto_rdt_client(session,rdt_ticket,responseRoot);
 
 
 	if ( rc < 0 )
@@ -1598,7 +1648,7 @@ void deviceapi_add_accessories_to_location (int session,Json::Value &request)
 
 void deviceapi_set_a_location (int session,Json::Value &request)
 {
-	Json::Value root;
+	Json::Value responseRoot;
 	Json::Value response;
 	CLocation *pLocation = NULL;
 	string strLocationName;
@@ -1667,12 +1717,12 @@ void deviceapi_set_a_location (int session,Json::Value &request)
 
 
  
-	root["error"] = err;
+	responseRoot["error"] = err;
 	if ( err_str.length() != 0 )
-		root["error_str"] = err_str;
-	root["response"] = response;
+		responseRoot["error_str"] = err_str;
+	responseRoot["response"] = response;
 
-	rc = sendto_rdt_client(session,rdt_ticket,root);
+	rc = sendto_rdt_client(session,rdt_ticket,responseRoot);
 
 
 	if ( rc < 0 )
@@ -1687,7 +1737,7 @@ void deviceapi_set_a_location (int session,Json::Value &request)
 //void deviceapi_get_detail (int session,Json::Value &request)
 void deviceapi_set_schedule_detail (int session,Json::Value &request)
 {
-	Json::Value root;
+	Json::Value responseRoot;
 	Json::Value response;
 
 	unsigned int rdt_ticket;
@@ -1704,10 +1754,10 @@ void deviceapi_set_schedule_detail (int session,Json::Value &request)
 	
 
  
-	root["error"] = 0;
-	root["response"] = response;
+	responseRoot["error"] = 0;
+	responseRoot["response"] = response;
 
-	rc = sendto_rdt_client(session,rdt_ticket,root);
+	rc = sendto_rdt_client(session,rdt_ticket,responseRoot);
 
 
 	if ( rc < 0 )
@@ -1720,7 +1770,7 @@ void deviceapi_set_schedule_detail (int session,Json::Value &request)
 
 void deviceapi_add_a_schedule (int session,Json::Value &request)
 {
-	Json::Value root;
+	Json::Value responseRoot;
 	Json::Value response;
 
 	unsigned int rdt_ticket;
@@ -1737,10 +1787,10 @@ void deviceapi_add_a_schedule (int session,Json::Value &request)
 	
 
  
-	root["error"] = 0;
-	root["response"] = response;
+	responseRoot["error"] = 0;
+	responseRoot["response"] = response;
 
-	rc = sendto_rdt_client(session,rdt_ticket,root);
+	rc = sendto_rdt_client(session,rdt_ticket,responseRoot);
 
 
 	if ( rc < 0 )
@@ -1754,7 +1804,7 @@ void deviceapi_add_a_schedule (int session,Json::Value &request)
 //void deviceapi_remove_a_schedule (int session,Json::Value &request)
 void deviceapi_get_accessory_setting (int session,Json::Value &request)
 {
-	Json::Value root;
+	Json::Value responseRoot;
 	Json::Value response;
 
 	unsigned int rdt_ticket;
@@ -1771,10 +1821,10 @@ void deviceapi_get_accessory_setting (int session,Json::Value &request)
 	
 
  
-	root["error"] = 0;
-	root["response"] = response;
+	responseRoot["error"] = 0;
+	responseRoot["response"] = response;
 
-	rc = sendto_rdt_client(session,rdt_ticket,root);
+	rc = sendto_rdt_client(session,rdt_ticket,responseRoot);
 
 
 	if ( rc < 0 )
@@ -1787,7 +1837,7 @@ void deviceapi_get_accessory_setting (int session,Json::Value &request)
 
 void deviceapi_get_gateway_setting (int session,Json::Value &request)
 {
-	Json::Value root;
+	Json::Value responseRoot;
 	Json::Value response;
 	Json::Value objects;
 
@@ -1807,10 +1857,10 @@ void deviceapi_get_gateway_setting (int session,Json::Value &request)
 	response["objects"] = objects;
 
  
-	root["error"] = 0;
-	root["response"] = response;
+	responseRoot["error"] = 0;
+	responseRoot["response"] = response;
 
-	rc = sendto_rdt_client(session,rdt_ticket,root);
+	rc = sendto_rdt_client(session,rdt_ticket,responseRoot);
 
 
 	if ( rc < 0 )
@@ -1823,7 +1873,7 @@ void deviceapi_get_gateway_setting (int session,Json::Value &request)
 
 void deviceapi_set_accessory_setting (int session,Json::Value &request)
 {
-	Json::Value root;
+	Json::Value responseRoot;
 	Json::Value response;
 	Json::Value objects;
 
@@ -1841,10 +1891,10 @@ void deviceapi_set_accessory_setting (int session,Json::Value &request)
 	response["objects"] = objects;
 
  
-	root["error"] = 0;
-	root["response"] = response;
+	responseRoot["error"] = 0;
+	responseRoot["response"] = response;
 
-	rc = sendto_rdt_client(session,rdt_ticket,root);
+	rc = sendto_rdt_client(session,rdt_ticket,responseRoot);
 
 
 	if ( rc < 0 )
@@ -1859,7 +1909,7 @@ void deviceapi_set_accessory_setting (int session,Json::Value &request)
 //void deviceapi_set_accessory_setting (int session,Json::Value &request)
 void deviceapi_set_gateway_setting (int session,Json::Value &request)
 {
-	Json::Value root;
+	Json::Value responseRoot;
 	Json::Value response;
 	Json::Value objects;
 
@@ -1876,10 +1926,10 @@ void deviceapi_set_gateway_setting (int session,Json::Value &request)
 	response["objects"] = objects;
 
  
-	root["error"] = 0;
-	root["response"] = response;
+	responseRoot["error"] = 0;
+	responseRoot["response"] = response;
 
-	rc = sendto_rdt_client(session,rdt_ticket,root);
+	rc = sendto_rdt_client(session,rdt_ticket,responseRoot);
 
 
 	if ( rc < 0 )
@@ -1893,7 +1943,7 @@ void deviceapi_set_gateway_setting (int session,Json::Value &request)
 void deviceapi_get_switches (int session,Json::Value &request)
 {
 //+++
-	Json::Value root;
+	Json::Value responseRoot;
 	Json::Value response;
 	Json::Value subObjects;
 	unsigned int rdt_ticket;
@@ -1945,16 +1995,16 @@ void deviceapi_get_switches (int session,Json::Value &request)
 	response["objects"] = subObjects;
 
 
-	root["error"] = err;
+	responseRoot["error"] = err;
 	if ( err_str.length() != 0 )
-		root["error_str"] = err_str;
+		responseRoot["error_str"] = err_str;
 
-	root["response"] = response;
+	responseRoot["response"] = response;
 
 
-printf("get_switches:\n%s\n----------------\n",(char*)root.toStyledString().c_str());
+printf("get_switches:\n%s\n----------------\n",(char*)responseRoot.toStyledString().c_str());
 
-	rc = sendto_rdt_client(session,rdt_ticket,root);
+	rc = sendto_rdt_client(session,rdt_ticket,responseRoot);
 
 
 	if ( rc < 0 )
@@ -1970,7 +2020,7 @@ printf("get_switches:\n%s\n----------------\n",(char*)root.toStyledString().c_st
 //void deviceapi_set_detail (int session,Json::Value &request)
 void deviceapi_remove_a_switch_accessory (int session,Json::Value &request)
 {
-	Json::Value root;
+	Json::Value responseRoot;
 	Json::Value response;
 
 	unsigned int rdt_ticket;
@@ -1985,10 +2035,10 @@ void deviceapi_remove_a_switch_accessory (int session,Json::Value &request)
 	
 
  
-	root["error"] = 0;
-	root["response"] = response;
+	responseRoot["error"] = 0;
+	responseRoot["response"] = response;
 
-	rc = sendto_rdt_client(session,rdt_ticket,root);
+	rc = sendto_rdt_client(session,rdt_ticket,responseRoot);
 
 
 	if ( rc < 0 )
@@ -2000,7 +2050,7 @@ void deviceapi_remove_a_switch_accessory (int session,Json::Value &request)
 
 void deviceapi_get_tasks (int session,Json::Value &request)
 {
-	Json::Value root;
+	Json::Value responseRoot;
 	Json::Value response;
 	Json::Value objects;
 
@@ -2030,10 +2080,10 @@ void deviceapi_get_tasks (int session,Json::Value &request)
 	response["objects"] = objects;
 
  
-	root["error"] = 0;
-	root["response"] = response;
+	responseRoot["error"] = 0;
+	responseRoot["response"] = response;
 
-	rc = sendto_rdt_client(session,rdt_ticket,root);
+	rc = sendto_rdt_client(session,rdt_ticket,responseRoot);
 
 
 	if ( rc < 0 )
@@ -2049,7 +2099,7 @@ void deviceapi_get_tasks (int session,Json::Value &request)
 //void deviceapi_set_detail(session,value);
 void deviceapi_add_a_task (int session,Json::Value &request)
 {
-	Json::Value root;
+	Json::Value responseRoot;
 	Json::Value response;
 
 	unsigned int rdt_ticket;
@@ -2062,10 +2112,10 @@ void deviceapi_add_a_task (int session,Json::Value &request)
 
 	response["api"] = request["api"].asString();
  
-	root["error"] = 0;
-	root["response"] = response;
+	responseRoot["error"] = 0;
+	responseRoot["response"] = response;
 
-	rc = sendto_rdt_client(session,rdt_ticket,root);
+	rc = sendto_rdt_client(session,rdt_ticket,responseRoot);
 
 
 	if ( rc < 0 )
@@ -2083,7 +2133,7 @@ void deviceapi_add_a_task (int session,Json::Value &request)
 
 void deviceapi_api_not_found (int session,Json::Value &request)
 {
-	Json::Value root;
+	Json::Value responseRoot;
 	Json::Value response;
 
 	unsigned int rdt_ticket;
@@ -2107,12 +2157,12 @@ void deviceapi_api_not_found (int session,Json::Value &request)
 	err_str = "api not found";
 
 
-	root["error"] = err;
+	responseRoot["error"] = err;
 	if ( err_str.length() != 0 )
-		root["error_str"] = err_str;
-	root["response"] = response;
+		responseRoot["error_str"] = err_str;
+	responseRoot["response"] = response;
 
-	rc = sendto_rdt_client(session,rdt_ticket,root);
+	rc = sendto_rdt_client(session,rdt_ticket,responseRoot);
 
 
 	if ( rc < 0 )

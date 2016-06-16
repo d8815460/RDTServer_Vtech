@@ -19,6 +19,8 @@
 
 int sendto_rdt_client (int session,unsigned int rdt_ticket,Json::Value& responseRoot);
 int sendto_all_client (Json::Value& responseRoot);
+int sendto_other_client (int session,Json::Value& responseRoot);
+
 
 
 
@@ -131,7 +133,7 @@ int CVtechIPHub::parser(Json::Value& root)
 
 						if ( 	key == "ver" )
 						{
-							printf("Gateway Set about key : %s  = %s \n",key.asString().c_str(),value.asString().c_str());	
+							//printf("Gateway Set about key : %s  = %s \n",key.asString().c_str(),value.asString().c_str());	
 
 							if ( value.isString() )
 								pGateway->m_about_str[key.asString().c_str()] = value.asString();
@@ -143,7 +145,7 @@ int CVtechIPHub::parser(Json::Value& root)
 							      && key != "led" 
 							 	  && key != "type" ) // FixMe
 						{
-							printf("Gateway Set key : %s  = %s \n",key.asString().c_str(),value.asString().c_str());	
+							//printf("Gateway Set key : %s  = %s \n",key.asString().c_str(),value.asString().c_str());	
 
 							if ( value.isString() )
 								pGateway->m_attr_str[key.asString().c_str()] = value.asString();
@@ -395,6 +397,13 @@ printf("Test TXRecord *****************\n seq:%d  session:%d\nrequest\n%s\n*****
 
 		rc = sendto_rdt_client(txRecord->session,rdt_ticket,responseRoot);
 
+		response["api"] = "update";
+		responseRoot["response"] = response;
+
+		rc = sendto_other_client(txRecord->session,responseRoot);
+
+
+
 
 		if ( rc < 0 )
 		{
@@ -456,7 +465,7 @@ printf("Test TXRecord *****************\n seq:%d  session:%d\nrequest\n%s\n*****
 
 						pObject = iterFind->second;
 
-						printf("notify found object %s \n",pObject->m_attr_str["name"].c_str());
+						//printf("notify found object %s \n",pObject->m_attr_str["name"].c_str());
 
 
 						response["uid"] = (char*) __myUID;

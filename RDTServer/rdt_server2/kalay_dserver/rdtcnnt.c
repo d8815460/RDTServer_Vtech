@@ -423,3 +423,25 @@ int rdtcnnt_send_data_to_all_client(char *send_data,int send_len)
 	 return ret;
 }
 
+int rdtcnnt_send_data_to_other_client(int session,char *send_data,int send_len)
+{
+	int i;
+	int ret = 0;
+
+
+	pthread_mutex_lock(&mutex_rdt_cnnt_array);
+	for(i=0;i<MAX_RDT_CONNECTION;i++)
+	{
+		if ( i!= session && __rdt_cnnt[i].action == RDTCNNT_RDT_CONNECTED	)
+		{
+			 RDT_Write(__rdt_cnnt[i].rdt_id,(char*)send_data,send_len); 
+
+			 ret ++;
+		}
+	}
+		
+
+	 pthread_mutex_unlock(&mutex_rdt_cnnt_array);
+
+	 return ret;
+}

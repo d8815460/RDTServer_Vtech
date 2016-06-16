@@ -11,11 +11,18 @@
 	using namespace std;
 
 	#define IDTYPE_GATEWAY		0x00000000
-	#define IDTYPE_WALLSWITCH  	0x01000000
-	#define IDTYPE_SWITCH  		0x20000000
 	#define IDTYPE_LOCATION		0x10000000
 	#define IDTYPE_GROUP		0x11000000
+
+	#define IDTYPE_TASK		  	0x21000000
+	#define IDTYPE_SCHEDULE  	0x22000000
+
+	#define IDTYPE_WALLSWITCH  	0x51000000
+	#define IDTYPE_SWITCH  		0x52000000
+
 	#define IDTYPE_ACCESSORY  	0x70000000
+
+
 
 
 	class CLocation;
@@ -163,6 +170,27 @@
 		int remove (CMyObject *pObject);
 		int UpdateOrder (CMyObject *pObject,int newOrder);
 	};
+
+
+	class CTask : public CMyObject
+	{
+	public:
+		CTask(int id,const char *name);
+		~CTask();
+
+	public:
+
+	};
+
+	class CSchedule : public CMyObject
+	{
+	public:
+		CSchedule(int id,const char *name);
+		~CSchedule();
+
+	public:
+
+	};	
 
 
 
