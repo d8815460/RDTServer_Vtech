@@ -9,7 +9,7 @@ ifeq ("$(platform)","x86")
 endif
 
 SRC=kalay_dserver.cpp dserver.cpp dtable.cpp device_parser.cpp device_api.cpp rdtcnnt.c fw_api.cpp  fw_parser.cpp
-LIB= -lsocket++ -lpthread -ljsoncpp -lIOTCAPIs -lRDTAPIs
+LIB= -lsocket++ -lpthread -ljsoncpp -lIOTCAPIs -lRDTAPIs -lcurl
 
 all:
 	@echo === Target Platform [$(platform)] ===  	
