@@ -136,7 +136,8 @@ int sendto_rdt_client (int session,unsigned int rdt_ticket,Json::Value& response
 
 
 
-	strSendOut = fastWriter.write(responseRoot);
+	strSendOut = //fastWriter.write(responseRoot);
+				responseRoot.toStyledString().c_str();
 
 
 	data_length  = strSendOut.length();
@@ -371,6 +372,11 @@ printf("set_detail request:\n%s\n-------------------\n",(char*)request.toStyledS
 	response["uid"] = (char*) __myUID;;
 	response["api"] = request["api"].asString();
 
+	if(!request["ticket"].isNull()){
+		response["ticket"] = request["ticket"].asUInt();
+
+	}
+
 	rdt_ticket = request["rdt_ticket"].asUInt();
 	clearTrigger = request["clear_trigger"].asUInt();
 
@@ -394,191 +400,279 @@ printf("set_detail request:\n%s\n-------------------\n",(char*)request.toStyledS
 			//int ntype;
 			for(i=0;i<requestObjects.size();i++)
 			{
-				id = requestObjects[i]["id"].asUInt();
-
-				pObject = __allObjects.getObjectByID(id);
-
-
-				if ( pObject != NULL )
-				{
-					map<string,int>::iterator iNum;
-					map<string,string>::iterator iStr;
-					//int accessoryType;
-
-					if ( clearTrigger )
+				printf("before equestObjects[i][id].isNull()\n");
+					if(requestObjects[i]["id"].isNull())
 					{
-						
-					}
+						int ntype;
+						string newname;
+				printf("after equestObjects[i][id].isNull()\n");
+						ntype = requestObjects[i]["type"].asInt();
+						newname = requestObjects[i]["name"].asString();
 
-					// Change Value +++
-					{
-						Json::ValueIterator itr;
-
-
-						int valueChanged = 0;
-						int fwChanged = 0;
-
-
-
-						for(itr=requestObjects[i].begin();itr != requestObjects[i].end(); itr++)
+						if(ntype == 0xff10) //location 
 						{
-							Json::Value key = itr.key();
-							Json::Value value = (*itr);
+							pObject = new CLocation(newname.c_str());
+							requestObjects[i]["id"] =  pObject->m_id;
+							pObject->m_attr_num["editable"]=1;
 
-							valueChanged = 0;
-
-							if ( 	key.asString() != "api"
-								 && key.asString() != "id"
-								 && key.asString() != "type"
-								 && key.asString() != "rdt_ticket"
-								 && key.asString() != "uid"			)
-							{
-								valueChanged = 0;
-
-								if ( key.asString() == "location" )
-								{ //#Fix Me
-									int idLocation;
-									printf("Set key location : %s  ",key.asString().c_str());
-
-									if ( value.isNumeric() )
-										printf("value:%d \n",value.asInt());
-									else  if ( value.isString() )
-										printf("value:%s \n",value.asString().c_str());							
-									else  if ( value.isString() )
-										printf("value:%s \n",value.toStyledString().c_str());							
-
-
-									idLocation = value["id"].asUInt();
-
-									printf("value: \n id:%d  name:%s \n",value["id"].asUInt(),value["name"].asString().c_str());
-
-									if (    pObject->m_pLocation == NULL 
-										 || pObject->m_pLocation->m_id != idLocation)
-									{
-										CLocation *newLocation;
-
-										newLocation = __allObjects.getLocationByID(idLocation);
-										if ( newLocation != NULL )
-										{
-											newLocation->add(pObject);
-
-											valueChanged = 1;
-										}
-
-									}
-
-								}
-								else if ( key.asString() == "order" )
-								{
-									int newOrder = value.asInt();
-
-									if ( pObject->m_pLocation != NULL )							
-									{
-										pObject->m_pLocation->UpdateOrder(pObject,newOrder);
-
-										valueChanged = 1;
-									}
-
-								}
-								else if ( key.asString() == "name"	 )
-								{
-									printf("Set key name : %s   value:%s \n ",key.asString().c_str(),value.asString().c_str());
-
-									
-									if ( pObject->m_attr_str[key.asString().c_str()] != value.asString() )
-									{
-										pObject->m_attr_str[key.asString().c_str()] = value.asString();
-										valueChanged = 1;
-									}
-								}						
-								else
-								{
-									printf("Set key others : %s  ",key.asString().c_str());
-
-									
-									if ( value.isNumeric() )
-										printf("value(num):%d \n",value.asInt());
-									else  // if ( value.isString() )
-										printf("value(str):%s \n",value.asString().c_str());
-
-
-									if ( value.isNumeric() )
-									{
-										if ( pObject->m_attr_num[key.asString().c_str()] !=  value.asInt() )
-										{
-											if ( pObject->m_fwid.length() ==  0 ) // Dummy Test Device
-											{
-												pObject->m_attr_num[key.asString().c_str()] = value.asInt();
-
-											}
-											valueChanged = 1;
-										}								
-									}
-									else // if ( value.isString() )
-									{
-										if ( pObject->m_attr_str[key.asString().c_str()] != value.asString() )
-										{
-											 if ( pObject->m_fwid.length() ==  0 ) // Dummy Test Device
-											 {
-												pObject->m_attr_str[key.asString().c_str()] = value.asString();
-											 }
-
-											valueChanged = 1;
-										}
-									}
-								}
-
-
-
-								if ( 	 valueChanged != 0
-								     &&  key.asString() != "name"	
-								     &&  key.asString() != "location"
-								     &&  key.asString() != "order"		)
-								{
-
-									if ( key.asString() == "status"	)
-									{
-										fwChanged++;
-
-										fwObjects[nfwObjectCnt]["on"] = value.asInt();// #TBD : if we only send change items
-									}
-									else
-									{
-										fwChanged++;
-										if ( value.isNumeric() )
-											fwObjects[nfwObjectCnt][key.asString().c_str()] = value.asInt();// #TBD : if we only send change items
-										else // if ( value.isString() )
-											fwObjects[nfwObjectCnt][key.asString().c_str()] = value.asString();// #TBD : if we only send change items
-									}
-
-								}
-							}
+						}
+						else if(ntype == 0xff11)//group
+						{
+							pObject = new CGroup(newname.c_str(),NULL);
+							requestObjects[i]["id"] =  pObject->m_id;
+							printf("test1\n");
 
 						}
 
-
-			    		if ( pObject->m_fwid.length() > 0 && fwChanged > 0 )
-			    		{
-				    		fwObjects[nfwObjectCnt]["id"] = pObject->m_fwid; 
-
-				    		nfwObjectCnt++;			
-				    	}
 					}
+					else
+					{
+						id = requestObjects[i]["id"].asUInt();
 
-					// Change Value ---	
-					//accessoryType = pAccessory->m_attr_num["type"];	
+						pObject = __allObjects.getObjectByID(id);
 
-					err = 0;
-				}
-				else
-				{
-					err = -1;
-					err_str = "not found";
-				}
+					}	
+
+					if ( pObject != NULL )
+					{
+						map<string,int>::iterator iNum;
+						map<string,string>::iterator iStr;
+						//int accessoryType;
+
+						if ( clearTrigger )
+						{
+							
+						}
+
+						// Change Value +++
+						{
+							Json::ValueIterator itr;
+
+
+							int valueChanged = 0;
+							int fwChanged = 0;
 
 
 
+							for(itr=requestObjects[i].begin();itr != requestObjects[i].end(); itr++)
+							{
+								Json::Value key = itr.key();
+								Json::Value value = (*itr);
 
+								valueChanged = 0;
+
+								if ( 	key.asString() != "api"
+									 && key.asString() != "id"
+									 && key.asString() != "type"
+									 && key.asString() != "rdt_ticket"
+									 && key.asString() != "uid"			)
+								{
+									valueChanged = 0;
+
+									if ( key.asString() == "location" )
+									{ //#Fix Me
+										int idLocation;
+										printf("Set key location : %s  ",key.asString().c_str());
+
+										if ( value.isNumeric() )
+											printf("value:%d \n",value.asInt());
+										else  if ( value.isString() )
+											printf("value:%s \n",value.asString().c_str());							
+										else  if ( value.isString() )
+											printf("value:%s \n",value.toStyledString().c_str());							
+
+
+										idLocation = value["id"].asUInt();
+
+										printf("value: \n id:%d  name:%s \n",value["id"].asUInt(),value["name"].asString().c_str());
+
+										if (    pObject->m_pLocation == NULL 
+											 || pObject->m_pLocation->m_id != idLocation)
+										{
+											CLocation *newLocation;
+
+											newLocation = __allObjects.getLocationByID(idLocation);
+											if ( newLocation != NULL )
+											{
+												newLocation->add(pObject);
+
+												valueChanged = 1;
+											}
+
+										}
+
+									}
+									else if ( key.asString() == "order" )
+									{
+										int newOrder = value.asInt();
+
+										if ( pObject->m_pLocation != NULL )							
+										{
+											pObject->m_pLocation->UpdateOrder(pObject,newOrder);
+
+											valueChanged = 1;
+										}
+
+									}
+									else if ( key.asString() == "name"	 )
+									{
+										printf("Set key name : %s   value:%s \n ",key.asString().c_str(),value.asString().c_str());
+
+										
+										if ( pObject->m_attr_str[key.asString().c_str()] != value.asString() )
+										{
+											pObject->m_attr_str[key.asString().c_str()] = value.asString();
+											valueChanged = 1;
+										}
+									}
+									else if(key.asString() == "add"	 ){
+										int i;
+
+										
+
+										if(value.isArray()){
+											printf("value_size: %d",value.size());
+
+											for(i=0;i< (int)value.size();i++){
+												CMyObject *subobject;
+
+												id = value[i].asUInt();
+												subobject = __allObjects.getObjectByID(id);
+
+												if(pObject->m_type==0xff10){//location
+													((CLocation*)pObject)->add(subobject);
+												}
+												else if(pObject->m_type==0xff11){//group
+													((CGroup*)pObject)->add(subobject);
+												}
+
+											//	else{
+											//		  pObject->addToList(subobject);
+											//	}
+
+											}
+											
+										}
+										valueChanged = 1;
+
+									}
+									else if(key.asString() == "remove"	 ){
+											int i;
+
+
+										if(value.isArray()){
+											printf("value_size: %d",value.size());
+
+											for(i=0;i< (int)value.size() ; i++){
+												CMyObject *subobject;
+
+												id = value[i].asUInt();
+												subobject = __allObjects.getObjectByID(id);
+
+												if(pObject->m_type==0xff10){
+													((CLocation*)pObject)->remove(subobject);
+												}
+												else if(pObject->m_type==0xff11){
+													((CGroup*)pObject)->remove(subobject);
+												}
+											//	else{
+											//		pObject->removeFromList(subobject);
+											//	}
+
+											}
+										}
+										valueChanged = 1;
+
+									}
+
+									else
+									{
+										printf("Set key others : %s  ",key.asString().c_str());
+
+										
+										if ( value.isNumeric() )
+											printf("value(num):%d \n",value.asInt());
+										else  // if ( value.isString() )
+											printf("value(str):%s \n",value.asString().c_str());
+
+
+										if ( value.isNumeric() )
+										{
+											if ( pObject->m_attr_num[key.asString().c_str()] !=  value.asInt() )
+											{
+												if ( pObject->m_fwid.length() ==  0 ) // Dummy Test Device
+												{
+													pObject->m_attr_num[key.asString().c_str()] = value.asInt();
+
+												}
+												valueChanged = 1;
+											}								
+										}
+										else // if ( value.isString() )
+										{
+											if ( pObject->m_attr_str[key.asString().c_str()] != value.asString() )
+											{
+												 if ( pObject->m_fwid.length() ==  0 ) // Dummy Test Device
+												 {
+													pObject->m_attr_str[key.asString().c_str()] = value.asString();
+												 }
+
+												valueChanged = 1;
+											}
+										}
+									}
+
+
+
+									if ( 	 valueChanged != 0
+									     &&  key.asString() != "name"	
+									     &&  key.asString() != "location"
+									     &&  key.asString() != "order"	
+									     &&  key.asString() != "add"	
+									     &&  key.asString() != "remove"	)
+									{
+
+										if ( key.asString() == "status"	)
+										{
+											fwChanged++;
+
+											fwObjects[nfwObjectCnt]["on"] = value.asInt();// #TBD : if we only send change items
+										}
+										else
+										{
+											fwChanged++;
+											if ( value.isNumeric() )
+												fwObjects[nfwObjectCnt][key.asString().c_str()] = value.asInt();// #TBD : if we only send change items
+											else // if ( value.isString() )
+												fwObjects[nfwObjectCnt][key.asString().c_str()] = value.asString();// #TBD : if we only send change items
+										}
+
+									}
+								}
+
+							}
+
+
+				    		if ( pObject->m_fwid.length() > 0 && fwChanged > 0 )
+				    		{
+					    		fwObjects[nfwObjectCnt]["id"] = pObject->m_fwid; 
+
+					    		nfwObjectCnt++;			
+					    	}
+						}
+
+						// Change Value ---	
+						//accessoryType = pAccessory->m_attr_num["type"];	
+
+						err = 0;
+					}
+					else
+					{
+						err = -1;
+						err_str = "not found";
+					}
+			
+								
 
 
 			}
@@ -598,19 +692,24 @@ printf("set_detail request:\n%s\n-------------------\n",(char*)request.toStyledS
 		{
 			int seq = 0;
 
-    		seq = __ipHub.fwapi_set(fwObjects);
-
-    		if ( seq > 0 )
-    		{
-    			CTXRecord *txRecord = new CTXRecord();
-
-    			txRecord->seq = seq;
+				CTXRecord *txRecord = new CTXRecord();
+		
+    			txRecord->seq = 0;
     			txRecord->session = session;
 				txRecord->request = request;
 				txRecord->sendTime = time(NULL);
 
-				__ipHub.m_txQueue[seq] = txRecord;
-    		}
+				
+    		
+    		seq = __ipHub.fwapi_set(fwObjects,txRecord);
+
+    		
+
+    		if( seq <= 0){
+    			delete	txRecord;
+    		} 
+
+    		
 		}
 		else //if ( valueChanged != 0 )
 		{
@@ -620,6 +719,7 @@ printf("set_detail request:\n%s\n-------------------\n",(char*)request.toStyledS
 				for(i=0;i<requestObjects.size();i++)
 				{
 					id = requestObjects[i]["id"].asUInt();
+					//printf("id");
 
 					pObject = __allObjects.getObjectByID(id);
 
@@ -635,7 +735,7 @@ printf("set_detail request:\n%s\n-------------------\n",(char*)request.toStyledS
 						}
 						
 
-						pObject->getAttr(objects[i]);
+						pObject->getDetail(objects[i]);
 					}
 				}
 

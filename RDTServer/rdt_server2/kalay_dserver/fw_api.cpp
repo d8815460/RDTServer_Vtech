@@ -368,7 +368,7 @@ int CVtechIPHub::fwapi_getall()
 
 
 
-int CVtechIPHub::fwapi_set(Json::Value &objects)
+int CVtechIPHub::fwapi_set(Json::Value &objects,CTXRecord *txRecord)
 {
 
 //unsigned char payload[] = {0x74,0x65,0x73,0x74};
@@ -389,6 +389,8 @@ int CVtechIPHub::fwapi_set(Json::Value &objects)
 
 	printf("fwapi_set:sendToGateway\n%s\n",total_payload.c_str());
 
+	txRecord->seq = seq;
+	m_txQueue[seq] = txRecord;
 
 	sendToGateway(root);
 

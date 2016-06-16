@@ -28,8 +28,8 @@ int device_parser(int session,unsigned char *option,int option_len,unsigned char
 		string api = value["api"].asString();
 
 
-		//printf("UID:%s\n",uid.c_str());
-		//printf("api:%s\n",api.c_str());
+		printf("UID:%s\n",uid.c_str());
+		printf("api:%s\n",api.c_str());
 
 		if ( option != NULL && (option[1]&0x01) )
 		{

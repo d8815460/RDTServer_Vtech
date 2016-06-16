@@ -61,7 +61,7 @@
 		int fwapi_cnnt_get_status(); // query status only
 
 		int fwapi_getall();
-		int fwapi_set(Json::Value &objects);
+		int fwapi_set(Json::Value &objects,CTXRecord *txRecord);
 		int fwapi_get(Json::Value &objects);		
 	};
 
