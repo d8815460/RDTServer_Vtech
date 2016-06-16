@@ -8,7 +8,11 @@ ifeq ("$(platform)","x86")
         CFLAGS=-m32
 endif
 
-SRC=kalay_dserver.cpp dserver.cpp dtable.cpp device_parser.cpp device_api.cpp rdtcnnt.c fw_api.cpp  fw_parser.cpp
+SRC=kalay_dserver.cpp dserver.cpp  device_parser.cpp device_api.cpp rdtcnnt.c fw_api.cpp  fw_parser.cpp
+SRC+= myobject.cpp gateway.cpp location.cpp group.cpp schedule.cpp task.cpp accessory.cpp 
+SRC+= dtable.cpp
+
+
 LIB= -lsocket++ -lpthread -ljsoncpp -lIOTCAPIs -lRDTAPIs -lcurl
 
 all:

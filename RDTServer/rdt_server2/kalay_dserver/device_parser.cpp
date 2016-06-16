@@ -84,10 +84,6 @@ int device_parser(int session,unsigned char *option,int option_len,unsigned char
 		{
 			deviceapi_set_light_effects(session,value);
 		}
-		else if ( strcmp(api.c_str(),"get_gateway") == 0 ) //
-		{
-			deviceapi_get_gateway(session,value);
-		}
 		else if ( strcmp(api.c_str(),"add_accessories") == 0 ) //
 		{
 			deviceapi_add_accessories(session,value);
@@ -120,10 +116,6 @@ int device_parser(int session,unsigned char *option,int option_len,unsigned char
 		{
 			deviceapi_get_other_groups(session,value);
 		}
-//		else if ( strcmp(api.c_str(),"set_detail") == 0 ) //
-//		{
-//			deviceapi_set_detail(session,value);
-//		}
 		else if ( strcmp(api.c_str(),"add_an_accessory_to_group") == 0 ) //
 		{
 			deviceapi_add_an_accessory_to_group(session,value);
@@ -147,10 +139,6 @@ int device_parser(int session,unsigned char *option,int option_len,unsigned char
 //		else if ( strcmp(api.c_str(),"remove_locations") == 0 ) //
 //		{
 //			deviceapi_remove_locations(session,value);
-//		}
-//		else if ( strcmp(api.c_str(),"get_detail") == 0 ) //
-//		{
-//			deviceapi_get_detail(session,value);
 //		}
 		else if ( strcmp(api.c_str(),"set_schedule_detail") == 0 ) //
 		{
@@ -184,18 +172,6 @@ int device_parser(int session,unsigned char *option,int option_len,unsigned char
 		{
 			deviceapi_set_gateway_setting(session,value);
 		}
-//		else if ( strcmp(api.c_str(),"get_detail") == 0 ) //
-//		{
-//			deviceapi_get_detail(session,value);
-//		}
-//		else if ( strcmp(api.c_str(),"set_detail") == 0 ) //
-//		{
-//			deviceapi_set_detail(session,value);
-//		}
-		else if ( strcmp(api.c_str(),"get_switches") == 0 ) //
-		{
-			deviceapi_get_switches(session,value);
-		}		
 		else if ( strcmp(api.c_str(),"remove_a_switch_accessory") == 0 ) //
 		{
 			deviceapi_remove_a_switch_accessory(session,value);
@@ -204,22 +180,10 @@ int device_parser(int session,unsigned char *option,int option_len,unsigned char
 		{
 			deviceapi_get_tasks(session,value);
 		}
-//		else if ( strcmp(api.c_str(),"get_detail") == 0 ) //
-//		{
-//			deviceapi_get_detail(session,value);
-//		}
-//		else if ( strcmp(api.c_str(),"set_detail") == 0 ) //
-//		{
-//			deviceapi_set_detail(session,value);
-//		}
 		else if ( strcmp(api.c_str(),"add_a_task") == 0 ) //
 		{
 			deviceapi_add_a_task(session,value);
 		}
-//		else if ( strcmp(api.c_str(),"remove") == 0 ) //
-//		{
-//			deviceapi_remove(session,value);
-//		}
 		else
 		{
 			deviceapi_api_not_found(session,value);

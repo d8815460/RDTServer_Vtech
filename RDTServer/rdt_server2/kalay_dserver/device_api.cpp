@@ -935,76 +935,6 @@ void __get_gateway_detail (Json::Value &locations)
 	return;
 }
 
-void deviceapi_get_gateway (int session,Json::Value &request)
-{
-	Json::Value responseRoot;
-	Json::Value response;
-	Json::Value locations;
-	
-
-	int rc;					
-	unsigned int rdt_ticket;	
-	int err = 1;
-	string err_str;
-
-
-	rdt_ticket = request["rdt_ticket"].asUInt();
-
-
-
-//++++
-
-
-
-
-
-	try {
-		__get_gateway_detail(locations);
-
-
-			err = 0;
-
-    } catch (const libsocket::socket_exception& exc)
-    {
-		std::cerr << exc.mesg;
-		err_str = exc.mesg;
-    }
-
-
-
-	response["uid"] = (char*) __myUID;
-	response["api"] = request["api"].asString();
-
-	{
-		CGateway *pGateway = __allObjects.getGateway();			
-
-		if ( pGateway != NULL )
-			response["name"] = pGateway->m_name;
-	}
-
-
-	response["locations"] = locations;
-
-
-	responseRoot["error"] = err;
-	if ( err_str.length() != 0 )
-		responseRoot["error_str"] = err_str;
-	responseRoot["response"] = response;
-
-printf("get_gateway:\n%s\n----------\n",(char*)responseRoot.toStyledString().c_str());
-
-
-	rc = sendto_rdt_client(session,rdt_ticket,responseRoot);
-
-	if ( rc < 0 )
-	{
-		
-	}
-
-
-	return;
-}
-
 void deviceapi_add_accessories (int session,Json::Value &request)
 {
 	Json::Value responseRoot;
@@ -1344,7 +1274,9 @@ void deviceapi_get_other_groups (int session,Json::Value &request)
 
 			if ( (unsigned int) pGroup->m_id != idGroup )
 			{
-				groups[nGroupCnt]["id"] =  pGroup->m_id,
+				//pGroup->getBaseAttr(groups[nGroupCnt]);
+				groups[nGroupCnt]["id"] =  pGroup->m_id;
+				groups[nGroupCnt]["type"] =  pGroup->m_type;
 				groups[nGroupCnt]["name"] =  pGroup->m_attr_str["name"].c_str();
 
 				nGroupCnt++;

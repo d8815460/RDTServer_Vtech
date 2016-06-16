@@ -2,7 +2,6 @@
 #define __DEVICEAPI_H__
 
 
-	void deviceapi_get_gateway (int session,Json::Value &request);
 	void deviceapi_get_about (int session,Json::Value &request);
 	void deviceapi_get_detail (int session,Json::Value &request);
 	void deviceapi_get_group_free_lights (int session,Json::Value &request);

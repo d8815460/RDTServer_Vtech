@@ -12,6 +12,7 @@
 #include "device_api.h"
 
 #include "dserver.h"
+
 #include "dtable.h"
 
 
@@ -533,7 +534,7 @@ printf("Test TXRecord *****************\n seq:%d  session:%d\nrequest\n%s\n*****
 									location["id"] = pObject->m_pLocation->m_id;
 									location["name"] = pObject->m_pLocation->m_attr_str["name"];
 
-									response["location"] = location;
+									objects[0]["location"] = location;
 								}
 								
 
