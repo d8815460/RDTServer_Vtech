@@ -16,9 +16,13 @@
 
 
 #include "fw_api.h"
+/***** for TPNS *****/
+#include <curl/curl.h>
 
 int sendto_rdt_client (int session,unsigned int rdt_ticket,Json::Value& responseRoot);
 int sendto_all_client (Json::Value& responseRoot);
+
+int TPNS_alert_count=100;
 
 
 
@@ -238,8 +242,42 @@ int CVtechIPHub::parser(Json::Value& root)
 
 							//printf("Obj Set key : %s  = %d (num) \n",key.asString().c_str(),value.asInt());	
 
-							if ( alert )
+							if ( alert ){
 								pObject->m_attr_num["trigger"] = 1;
+								TPNS_alert_count++;
+								//put curl code here to connect TPNS
+								if(TPNS_alert_count>10){
+										printf("---------start TPNS------------ \n");
+										CURL *curl;
+		  								CURLcode res;
+		  								char POST[255] = "";
+		  								//char *POST=NULL;
+		  								curl_global_init(CURL_GLOBAL_DEFAULT);
+
+		 								
+										curl = curl_easy_init();
+										if(curl) {
+										  sprintf(POST,"cmd=event&uid=%s&event_type=100&msg=%s alert",(char*)__myUID,pObject->m_attr_str["name"].c_str());
+										  curl_easy_setopt(curl, CURLOPT_URL, "http://push.iotcplatform.com/tpns");
+										  curl_easy_setopt(curl, CURLOPT_POSTFIELDS,POST);
+										  res = curl_easy_perform(curl);
+
+									    /* Check for errors */ 
+									    if(res != CURLE_OK)
+									      fprintf(stderr, "curl_easy_perform() failed: %s\n",
+									      		curl_easy_strerror(res));
+									 
+									    /* always cleanup */ 
+									    curl_easy_cleanup(curl);
+
+										}
+										curl_global_cleanup();							  
+
+										printf("\n---------end of TPNS------------ \n");
+										TPNS_alert_count=0;
+								}		
+										//end of connect to TPNS
+							}
 							else
 								pObject->m_attr_num["trigger"] = 0; // FixMe , here should be reset by app
 
