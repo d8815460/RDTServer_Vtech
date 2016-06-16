@@ -33,7 +33,6 @@
 	void deviceapi_set_accessory_setting (int session,Json::Value &request);
 	//void deviceapi_set_accessory_setting (int session,Json::Value &request);
 	void deviceapi_set_gateway_setting (int session,Json::Value &request);
-	void deviceapi_get_switches (int session,Json::Value &request);
 	void deviceapi_remove_a_switch_accessory (int session,Json::Value &request);
 	void deviceapi_get_tasks (int session,Json::Value &request);
 	void deviceapi_add_a_task (int session,Json::Value &request);
