@@ -187,10 +187,10 @@ CAllObjects::CAllObjects()
 
 
 //----------------------------------------------------------------
-	pSensor = new CSensor("Garage Door Sensor 01",0x0201,pKitchen);
+	pSensor = new CSensor("Garage Door Sensor 01",0x0201,pKitchen,3);
 
 //----------------------------------------------------------------
-	pSensor = new CSensor("Magnetic sensor",0x0202,pKitchen);
+	pSensor = new CSensor("Magnetic sensor",0x0202,pKitchen,4);
 
 	pSensor->m_attr_num["batLow"] = 1;
 	pSensor->m_attr_num["outLink"] = 1;
@@ -199,19 +199,19 @@ CAllObjects::CAllObjects()
 
 
 //----------------------------------------------------------------
-	pSensor = new CSensor("motion sensor",0x0203,pKitchen);
+	pSensor = new CSensor("motion sensor",0x0203,pKitchen,2);
 	pSensor->m_attr_num["icon"] = 2;
 
 //----------------------------------------------------------------
-	pSensor = new CSensor("flood detector",0x0206,pKitchen);
+	pSensor = new CSensor("flood detector",0x0206,pKitchen,7);
 	pSensor->m_attr_num["icon"] = 2;
 
 
 //----------------------------------------------------------------
-	pAccessory = new CAccessory("AC power outlet",0x0106,pKitchen);
+	pAccessory = new CAccessory("AC power outlet",0x0106,pKitchen,0);
 
 	pAccessory->m_attr_num["on"] = 1;
-	pAccessory->m_attr_num["icon"] = 0;
+	//pAccessory->m_attr_num["icon"] = 0;
 	pAccessory->m_attr_num["trigger"] = 0;
 
 	//pAccessory->m_fwid = std::to_string(pAccessory->m_id);	

@@ -14,7 +14,7 @@
 #include "dtable.h"
 
 
-CLocation::CLocation(const char *name) : CMyObject("location",__allObjects.getID(IDTYPE_LOCATION),name,0xff10)
+CLocation::CLocation(const char *name) : CMyObject("location",__allObjects.getID(IDTYPE_LOCATION),name,0xff10,0)
 {
 	__allObjects.m_mapAllLocations[m_id] = this;
 }

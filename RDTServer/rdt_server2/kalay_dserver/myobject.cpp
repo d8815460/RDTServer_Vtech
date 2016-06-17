@@ -15,7 +15,7 @@
 
 
 
-CMyObject::CMyObject(const char *myClassType,int id,const char *name,int type )
+CMyObject::CMyObject(const char *myClassType,int id,const char *name,int type,int icon)
 {
 	m_id = id;
 	m_type = type;
@@ -29,6 +29,7 @@ CMyObject::CMyObject(const char *myClassType,int id,const char *name,int type )
 	m_orderInLocation = 0;
 
 	m_attr_str["name"] = m_name;
+	m_attr_num["icon"] = icon;
 
 	if (   m_type == 0x0201   // garage sensor (door)
 		|| m_type == 0x0202   // Magnetic sensor

@@ -136,8 +136,8 @@ int sendto_rdt_client (int session,unsigned int rdt_ticket,Json::Value& response
 
 
 
-	strSendOut = //fastWriter.write(responseRoot);
-				responseRoot.toStyledString().c_str();
+	strSendOut = fastWriter.write(responseRoot);
+				//responseRoot.toStyledString().c_str();
 
 
 	data_length  = strSendOut.length();
@@ -174,10 +174,9 @@ int sendto_rdt_client (int session,unsigned int rdt_ticket,Json::Value& response
 		
 
 
-	//printf("Dump RDT json: \n%s\n",payload.c_str());
-
+	//printf("Dump RDT json: \n%s\n",szBuff.c_str());
+	
 	rc =  RDT_Write(__rdt_cnnt[session].rdt_id,(char*)szBuff,send_length); 
-
 	if ( rc < 0 )
 	{
 		
@@ -206,6 +205,10 @@ void deviceapi_get_about (int session,Json::Value &request)
 
 	response["uid"] = (char*) __myUID;;
 	response["api"] = request["api"].asString();
+
+	if(!request["ticket"].isNull()){
+		response["ticket"] = request["ticket"].asUInt();
+	}
 
 	id = request["id"].asUInt();
 
@@ -240,7 +243,7 @@ void deviceapi_get_about (int session,Json::Value &request)
 				map<string,string>::iterator iStr;
 
 				response["id"] 	= pAccessory->m_id;
-				response["type"] = pAccessory->m_attr_num["type"];
+				response["type"] = pAccessory->m_type;
 
 				pAccessory->getAbout(response);
 
@@ -293,6 +296,10 @@ void deviceapi_get_group_free_lights (int session,Json::Value &request)
 
 	rdt_ticket = request["rdt_ticket"].asUInt();
 
+	if(!request["ticket"].isNull()){
+		response["ticket"] = request["ticket"].asUInt();
+	}
+
 	try {
 			std::map<unsigned int, CMyObject *>::iterator p;
 			list<CMyObject*>::iterator j;
@@ -306,7 +313,7 @@ void deviceapi_get_group_free_lights (int session,Json::Value &request)
 				
 				pObject = (CMyObject*) p->second;
 
-				if ( pObject->m_pGroup == NULL && pObject->m_attr_num["type"] == 0 ) // FixMe if light type is 0
+				if ( pObject->m_pGroup == NULL && pObject->m_attr_num["type"] == 0x0109 ) // FixMe if light type is 0
 				{
 					objects[nAccessoryCnt]["id"] =  pObject->m_id,
 					objects[nAccessoryCnt]["name"] =  pObject->m_attr_str["name"].c_str();
@@ -374,7 +381,6 @@ printf("set_detail request:\n%s\n-------------------\n",(char*)request.toStyledS
 
 	if(!request["ticket"].isNull()){
 		response["ticket"] = request["ticket"].asUInt();
-
 	}
 
 	rdt_ticket = request["rdt_ticket"].asUInt();
@@ -400,12 +406,12 @@ printf("set_detail request:\n%s\n-------------------\n",(char*)request.toStyledS
 			//int ntype;
 			for(i=0;i<requestObjects.size();i++)
 			{
-				printf("before equestObjects[i][id].isNull()\n");
+				
 					if(requestObjects[i]["id"].isNull())
 					{
 						int ntype;
 						string newname;
-				printf("after equestObjects[i][id].isNull()\n");
+				
 						ntype = requestObjects[i]["type"].asInt();
 						newname = requestObjects[i]["name"].asString();
 
@@ -418,9 +424,9 @@ printf("set_detail request:\n%s\n-------------------\n",(char*)request.toStyledS
 						}
 						else if(ntype == 0xff11)//group
 						{
-							pObject = new CGroup(newname.c_str(),NULL);
+							pObject = new CGroup(newname.c_str(),__allObjects.getLocationOther());
 							requestObjects[i]["id"] =  pObject->m_id;
-							printf("test1\n");
+							
 
 						}
 
@@ -544,6 +550,7 @@ printf("set_detail request:\n%s\n-------------------\n",(char*)request.toStyledS
 												}
 												else if(pObject->m_type==0xff11){//group
 													((CGroup*)pObject)->add(subobject);
+
 												}
 
 											//	else{
@@ -765,16 +772,18 @@ printf("set_detail request:\n%s\n-------------------\n",(char*)request.toStyledS
 
 		rc = sendto_rdt_client(session,rdt_ticket,responseRoot);
 
+		
 		response["api"] = "update";
 		responseRoot["response"] = response;
-
-		rc = sendto_other_client(session,responseRoot);
-
+		
+		//rc = sendto_other_client(session,responseRoot);  disable for temp need to fix
+		
 		if ( rc < 0 )
 		{
 
 		}
     }
+    
 
 
 
@@ -985,6 +994,103 @@ void deviceapi_set_light_effects (int session,Json::Value &request)
 	return;
 }
 
+void deviceapi_get_all_accessories (int session,Json::Value &request)
+{
+	Json::Value responseRoot;
+	Json::Value response;
+	Json::Value objects;
+
+	int rc;					
+	unsigned int rdt_ticket;	
+	int err = 1;
+	string err_str;
+
+
+	rdt_ticket = request["rdt_ticket"].asUInt();
+	printf("set_detail request:\n%s\n-------------------\n",(char*)request.toStyledString().c_str());
+	
+
+	if(!request["ticket"].isNull()){
+		response["ticket"] = request["ticket"].asUInt();
+	}
+
+    try{
+		std::map<unsigned int, CMyObject *>::iterator p;
+		list<CMyObject*>::iterator j;
+		int nAccessoryCnt = 0;
+		//Json::Value accessories;
+
+		if ( request["type"].asUInt() == 0xff11 ) //for group
+		{	
+			for(p = __allObjects.m_mapAllGroups.begin(); p!=__allObjects.m_mapAllGroups.end(); ++p)
+			{
+				CGroup *pGroup;	
+				pGroup = (CGroup*) p->second;
+
+				objects[nAccessoryCnt]["id"] =  pGroup->m_id,
+				objects[nAccessoryCnt]["type"] =  pGroup->m_type,
+				objects[nAccessoryCnt]["name"] =  pGroup->m_attr_str["name"].c_str();
+
+				nAccessoryCnt++;
+			}
+		}
+
+		else if( request["type"].asUInt() == 0x0109)// for light
+		{
+			for(p = __allObjects.m_mapAllObjects.begin(); p!=__allObjects.m_mapAllObjects.end(); ++p)
+			{
+				CMyObject *pObject;	
+				pObject = (CMyObject*) p->second;
+
+				if ( pObject->m_pGroup == NULL && pObject->m_attr_num["type"] == 0x0109)
+				{
+					objects[nAccessoryCnt]["id"] =  pObject->m_id,
+					objects[nAccessoryCnt]["name"] =  pObject->m_attr_str["name"].c_str();
+					nAccessoryCnt++;
+				}
+				
+
+			}
+
+		}
+		err = 0;	 
+
+
+
+		}catch (const libsocket::socket_exception& exc)
+    	{
+			std::cerr << exc.mesg;
+			err_str = exc.mesg;
+    	}	
+
+		response["uid"] = (char*) __myUID;
+		response["api"] = request["api"].asString();
+
+		response["objects"] = objects;
+
+		responseRoot["error"] = err;
+
+		if ( err_str.length() != 0 )
+			responseRoot["error_str"] = err_str;
+			responseRoot["response"] = response;
+
+
+		printf("deviceapi get_all accessories response:\n%s\n-------------------\n",(char*)responseRoot.toStyledString().c_str());
+		rc = sendto_rdt_client(session,rdt_ticket,responseRoot);
+
+
+		if ( rc < 0 )
+		{
+
+		}
+
+	return;
+
+
+
+
+}
+
 
 
 void __get_gateway_detail (Json::Value &locations)
@@ -1019,10 +1125,11 @@ void __get_gateway_detail (Json::Value &locations)
 
 			pObject = *j;
 
+			if(pObject->m_pGroup == NULL){
 			pObject->getBaseAttr(accessories[nAccessoryCnt]);
-			
-
+		
 			nAccessoryCnt++;
+			}
 		}
 
 		locations[nLocationCnt]["objects"] = accessories;	
@@ -1239,6 +1346,10 @@ void deviceapi_get_detail (int session,Json::Value &request)
 
 printf("deviceapi_get_detail request \n%s\n-------------------\n",(char*)request.toStyledString().c_str());
 
+	if(!request["ticket"].isNull()){
+		response["ticket"] = request["ticket"].asUInt();
+	}
+
 	try {
 
 		Json::Value requestObjects;
@@ -1358,6 +1469,10 @@ void deviceapi_get_other_groups (int session,Json::Value &request)
 	rdt_ticket = request["rdt_ticket"].asUInt();
 
 	idGroup = request["id"].asUInt();
+
+	if(!request["ticket"].isNull()){
+		response["ticket"] = request["ticket"].asUInt();
+	}
 //++++
 
 	try {
@@ -1619,6 +1734,10 @@ void deviceapi_add_accessories_to_location (int session,Json::Value &request)
 
 	strLocationName = request["name"].asString();
 
+	if(!request["ticket"].isNull()){
+		response["ticket"] = request["ticket"].asUInt();
+	}
+
 	// location
 	try {
 
@@ -1701,6 +1820,10 @@ void deviceapi_set_a_location (int session,Json::Value &request)
 
 
 	strLocationName = request["name"].asString();
+
+	if(!request["ticket"].isNull()){
+		response["ticket"] = request["ticket"].asUInt();
+	}
 
 
 	// location

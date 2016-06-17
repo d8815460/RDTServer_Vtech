@@ -17,7 +17,7 @@
 
 
 
-CAccessory::CAccessory(const char *name,int type,CLocation *pLocation) : CMyObject("accessory",__allObjects.getID(IDTYPE_ACCESSORY),name,type)
+CAccessory::CAccessory(const char *name,int type,CLocation *pLocation,int icon) : CMyObject("accessory",__allObjects.getID(IDTYPE_ACCESSORY),name,type,icon)
 {
 	if ( pLocation != NULL )
 		pLocation->add(this);	
@@ -31,15 +31,14 @@ CAccessory::~CAccessory()
 
 
 
-CLightBulb::CLightBulb(const char *name,CLocation *pLocation,CGroup *pGroup) : CAccessory(name,0x0109,pLocation)
+CLightBulb::CLightBulb(const char *name,CLocation *pLocation,CGroup *pGroup) : CAccessory(name,0x0109,pLocation,1)
 {
 	if ( pGroup != NULL)
 		pGroup->add(this);
 
 	m_attr_num["on"] = 1;
-	m_attr_num["icon"] = 0;
 	m_attr_num["trigger"] = 0;
-
+    m_attr_num["type"]=0x0109;
     m_attr_num["brightness"] = 60;
     m_attr_num["hue"] = 23;
     m_attr_num["saturation"] = 40;
@@ -58,10 +57,10 @@ CLightBulb::~CLightBulb()
 }
 
 
-CSensor::CSensor(const char *name,int type,CLocation *pLocation): CAccessory(name,type,pLocation)
+CSensor::CSensor(const char *name,int type,CLocation *pLocation,int icon): CAccessory(name,type,pLocation,icon)
 {
 	m_attr_num["on"] = 2;
-	m_attr_num["icon"] = 0;
+	
 	m_attr_num["trigger"] = 1;
 
 	m_attr_num["alert"] = 0;
@@ -80,13 +79,13 @@ CSensor::~CSensor()
 
 
 
-CWallSwitch::CWallSwitch(const char *name,CLocation *pLocation) : CMyObject("wallswitch",__allObjects.getID(IDTYPE_WALLSWITCH),name,0x0101)
+CWallSwitch::CWallSwitch(const char *name,CLocation *pLocation) : CMyObject("wallswitch",__allObjects.getID(IDTYPE_WALLSWITCH),name,0x0101,5)
 {
 	if ( pLocation != NULL )
 		pLocation->add(this);
 
 
-	m_attr_num["icon"] = 0; // 0 is use default icon
+
 	m_attr_num["trigger"] = 0;
 	m_attr_num["batLow"] = 1;
 
@@ -130,7 +129,7 @@ int CWallSwitch::remove (CSwitch *pSwitch)
 }
 
 
-CSwitch::CSwitch(const char *name,CWallSwitch *pWallSwitch,CAccessory *pAccessory) : CMyObject("switch",__allObjects.getID(IDTYPE_SWITCH),name,0xff20)
+CSwitch::CSwitch(const char *name,CWallSwitch *pWallSwitch,CAccessory *pAccessory) : CMyObject("switch",__allObjects.getID(IDTYPE_SWITCH),name,0xff20,0)
 {
 	m_pWallSwitch = pWallSwitch;
 
@@ -142,7 +141,7 @@ CSwitch::CSwitch(const char *name,CWallSwitch *pWallSwitch,CAccessory *pAccessor
 
 
 	m_attr_num["on"] = 0;
-	m_attr_num["icon"] = 0; // 0 is use default icon
+	
 
 	m_pWallSwitch->add(this);
 

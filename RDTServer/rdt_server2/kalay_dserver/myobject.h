@@ -33,7 +33,7 @@
 	class CMyObject
 	{
 	public:
-		CMyObject(const char *myClassType,int id,const char *name,int type );
+		CMyObject(const char *myClassType,int id,const char *name,int type,int icon);
 		virtual ~CMyObject();
 
 	public:		
@@ -48,6 +48,7 @@
 
 		int m_id;
 		int m_type;
+		int m_icon;
 		string m_name;
 
 		string m_fwid;

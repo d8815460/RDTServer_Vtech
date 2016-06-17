@@ -35,6 +35,7 @@
 	void deviceapi_remove_a_switch_accessory (int session,Json::Value &request);
 	void deviceapi_get_tasks (int session,Json::Value &request);
 	void deviceapi_add_a_task (int session,Json::Value &request);
+	void deviceapi_get_all_accessories (int session,Json::Value &request);
 
 
 	void deviceapi_api_not_found (int session,Json::Value &request);

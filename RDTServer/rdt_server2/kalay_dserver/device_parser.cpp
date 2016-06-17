@@ -184,6 +184,10 @@ int device_parser(int session,unsigned char *option,int option_len,unsigned char
 		{
 			deviceapi_add_a_task(session,value);
 		}
+		else if (strcmp(api.c_str(),"get_all_accessories") == 0 )
+		{
+			deviceapi_get_all_accessories(session,value);	
+		}
 		else
 		{
 			deviceapi_api_not_found(session,value);

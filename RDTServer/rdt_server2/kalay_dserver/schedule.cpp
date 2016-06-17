@@ -13,7 +13,7 @@
 #include "schedule.h"
 
 
-CSchedule::CSchedule(int id,const char *name): CMyObject("schedule",id,name,0xff40)
+CSchedule::CSchedule(int id,const char *name): CMyObject("schedule",id,name,0xff40,0)
 {
 
 }

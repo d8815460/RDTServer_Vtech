@@ -13,7 +13,7 @@
 #include "task.h"
 
 
-CTask::CTask(int id,const char *name): CMyObject("task",id,name,0xff30)
+CTask::CTask(int id,const char *name): CMyObject("task",id,name,0xff30,0)
 {
 
 }

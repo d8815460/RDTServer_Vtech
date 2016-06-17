@@ -17,7 +17,7 @@
 
 
 
-CGateway::CGateway(int id,const char *name) : CMyObject("gateway",id,name,0xff00)
+CGateway::CGateway(int id,const char *name) : CMyObject("gateway",id,name,0xff00,0)
 {
 	m_attr_num["on"] = 1;
 	m_attr_num["led"] = 0x05;

@@ -16,13 +16,13 @@
 
 
 
-CGroup::CGroup(const char *name,CLocation *pLocation) : CMyObject("group",__allObjects.getID(IDTYPE_GROUP),name,0xff11)
+CGroup::CGroup(const char *name,CLocation *pLocation) : CMyObject("group",__allObjects.getID(IDTYPE_GROUP),name,0xff11,6)
 {
 	if ( pLocation != NULL )
 		pLocation->add(this);	
 
 	m_attr_num["on"] = 0;
-	m_attr_num["icon"] = 0;
+	
 	m_attr_num["trigger"] = 0;
 
 	m_attr_num["groupNo"] = 1;
@@ -68,6 +68,11 @@ CGroup::~CGroup()
 
 int CGroup::add (CMyObject *pObject)
 {
+	if(pObject->m_pGroup!=NULL){
+		pObject->m_pGroup->remove(pObject);
+	}
+
+
 	pObject->m_pGroup = this;
 
 	addToList(pObject);

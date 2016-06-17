@@ -6,7 +6,7 @@
 	class CAccessory : public CMyObject
 	{
 	public:
-		CAccessory(const char *name,int type,CLocation *pLocation);
+		CAccessory(const char *name,int type,CLocation *pLocation,int icon);
 		~CAccessory();
 
 	public:
@@ -28,7 +28,7 @@
 	class CSensor : public CAccessory
 	{
 	public:
-		CSensor(const char *name,int type,CLocation *pLocation);
+		CSensor(const char *name,int type,CLocation *pLocation,int icon);
 		~CSensor();
 
 	public:

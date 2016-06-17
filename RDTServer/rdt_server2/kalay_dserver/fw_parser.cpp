@@ -183,7 +183,7 @@ int CVtechIPHub::parser(Json::Value& root)
 						}
 						else  if ( unitType == 0x0106 ) // power outlet
 						{
-							pObject = new CAccessory("IP-Hub power outlet",unitType,__allObjects.getLocationOther());
+							pObject = new CAccessory("IP-Hub power outlet",unitType,__allObjects.getLocationOther(),0);
 						}
 						else  if ( unitType == 0x0109 ) // Light bulb
 						{
@@ -191,19 +191,19 @@ int CVtechIPHub::parser(Json::Value& root)
 						}
 						else if ( unitType == 0x0201 )  // garage sensor (door)
 						{
-							pObject = new CSensor("IP-Hub Garage sensor",unitType,__allObjects.getLocationOther());
+							pObject = new CSensor("IP-Hub Garage sensor",unitType,__allObjects.getLocationOther(),3);
 						}
 						else if ( unitType == 0x0202 ) // Magnetic sensor
 						{
-							pObject = new CSensor("IP-Hub Magnetic sensor",unitType,__allObjects.getLocationOther());
+							pObject = new CSensor("IP-Hub Magnetic sensor",unitType,__allObjects.getLocationOther(),4);
 						}
 						else if ( unitType == 0x0203 ) // motion sensor
 						{
-							pObject = new CSensor("IP-Hub Motion sensor",unitType,__allObjects.getLocationOther());
+							pObject = new CSensor("IP-Hub Motion sensor",unitType,__allObjects.getLocationOther(),2);
 						}
 						else if ( unitType == 0x0206 ) // flood detector 
 						{
-							pObject = new CSensor("IP-Hub Flood detector",unitType,__allObjects.getLocationOther());
+							pObject = new CSensor("IP-Hub Flood detector",unitType,__allObjects.getLocationOther(),6);
 						}
 						else // if 
 						{
@@ -250,7 +250,7 @@ int CVtechIPHub::parser(Json::Value& root)
 								TPNS_alert_count++;
 								//put curl code here to connect TPNS
 								if(TPNS_alert_count>10){
-										printf("---------start TPNS------------ \n");
+										//printf("---------start TPNS------------ \n");
 										CURL *curl;
 		  								CURLcode res;
 		  								char POST[255] = "";
@@ -265,7 +265,7 @@ int CVtechIPHub::parser(Json::Value& root)
 										  curl_easy_setopt(curl, CURLOPT_POSTFIELDS,POST);
 										  res = curl_easy_perform(curl);
 
-									    /* Check for errors */ 
+									    /* Check for errors */
 									    if(res != CURLE_OK)
 									      fprintf(stderr, "curl_easy_perform() failed: %s\n",
 									      		curl_easy_strerror(res));
@@ -276,7 +276,7 @@ int CVtechIPHub::parser(Json::Value& root)
 										}
 										curl_global_cleanup();							  
 
-										printf("\n---------end of TPNS------------ \n");
+										//printf("\n---------end of TPNS------------ \n");
 										TPNS_alert_count=0;
 								}		
 										//end of connect to TPNS
