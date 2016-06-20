@@ -244,7 +244,7 @@ void deviceapi_get_about (int session,Json::Value &request)
 
 				response["id"] 	= pAccessory->m_id;
 				response["type"] = pAccessory->m_type;
-
+ 
 				pAccessory->getAbout(response);
 
 

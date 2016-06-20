@@ -180,14 +180,20 @@ int CMyObject::getAttr(Json::Value& jsonAttr)
 	jsonAttr["id"] = m_id;
 	jsonAttr["type"] = m_type;
 
+	
+
 	for(iNum = m_attr_num.begin(); iNum!=m_attr_num.end(); ++iNum)
 	{
 		string key;
 
 		key = iNum->first.c_str();
+		
 
 		if ( 	key != "on"
-			 && key != "alert" )
+			 && key != "alert" 
+			 && key != "name"
+			 && key != "type"
+			 && key != "id"		)
 		{
 			jsonAttr[key.c_str()] = iNum->second;
 			count++;
