@@ -252,6 +252,7 @@ int CVtechIPHub::connectToGateway()
 		sock.connect(_unixsocket_path);
 
 		getAllDone = 0;
+		sleep(1);
 		fwapi_getall();
 
 		statusSock = 1;
