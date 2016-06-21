@@ -249,7 +249,7 @@ int CVtechIPHub::parser(Json::Value& root)
 								pObject->m_attr_num["trigger"] = 1;
 								TPNS_alert_count++;
 								//put curl code here to connect TPNS
-								if(TPNS_alert_count>10){
+								if(TPNS_alert_count>0){
 										//printf("---------start TPNS------------ \n");
 										CURL *curl;
 		  								CURLcode res;
@@ -263,7 +263,9 @@ int CVtechIPHub::parser(Json::Value& root)
 										  sprintf(POST,"cmd=event&uid=%s&event_type=100&msg=%s alert",(char*)__myUID,pObject->m_attr_str["name"].c_str());
 										  curl_easy_setopt(curl, CURLOPT_URL, "http://push.iotcplatform.com/tpns");
 										  curl_easy_setopt(curl, CURLOPT_POSTFIELDS,POST);
+
 										  res = curl_easy_perform(curl);
+										  printf("\n");
 
 									    /* Check for errors */
 									    if(res != CURLE_OK)

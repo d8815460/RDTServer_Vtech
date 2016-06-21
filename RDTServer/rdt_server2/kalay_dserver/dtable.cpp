@@ -135,7 +135,7 @@ CAllObjects::CAllObjects()
 	pGroup01 = new CGroup("Group 01",pBathroom);	
 
 	pGroup01->m_attr_num["groupNo"] = 1;
-	pGroup01->m_attr_num["icon"] = 1;
+	//pGroup01->m_attr_num["icon"] = 1;
 
 
 	//---------------------------------------------------------
@@ -194,17 +194,17 @@ CAllObjects::CAllObjects()
 
 	pSensor->m_attr_num["batLow"] = 1;
 	pSensor->m_attr_num["outLink"] = 1;
-	pSensor->m_attr_num["icon"] = 2;
+	//Sensor->m_attr_num["icon"] = 2;
 
 
 
 //----------------------------------------------------------------
 	pSensor = new CSensor("motion sensor",0x0203,pKitchen,2);
-	pSensor->m_attr_num["icon"] = 2;
+	//pSensor->m_attr_num["icon"] = 2;
 
 //----------------------------------------------------------------
 	pSensor = new CSensor("flood detector",0x0206,pKitchen,7);
-	pSensor->m_attr_num["icon"] = 2;
+	//pSensor->m_attr_num["icon"] = 2;
 
 
 //----------------------------------------------------------------
@@ -217,7 +217,7 @@ CAllObjects::CAllObjects()
 	//pAccessory->m_fwid = std::to_string(pAccessory->m_id);	
 	pAccessory->m_about_str["ver"] = "1.0.0";	
 
-	pAccessory->m_attr_num["icon"] = 3;	
+	//pAccessory->m_attr_num["icon"] = 3;	
 
 
 //----------------------------------------------------------------
@@ -248,7 +248,7 @@ CAllObjects::CAllObjects()
 	pGroup02 = new CGroup("Group 02",pBathroom);	
 
 	pGroup02->m_attr_num["groupNo"] = 2;
-	pGroup02->m_attr_num["icon"] = 1;
+
 
 
 //----------------------------------------------------------------
@@ -288,7 +288,6 @@ CAllObjects::CAllObjects()
 	pGroup03 = new CGroup("Group 03",pLivingroom);	
 
 	pGroup03->m_attr_num["groupNo"] = 3;
-	pGroup03->m_attr_num["icon"] = 1;
 
 
 

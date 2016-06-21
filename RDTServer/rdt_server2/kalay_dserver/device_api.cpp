@@ -203,7 +203,7 @@ void deviceapi_get_about (int session,Json::Value &request)
 
 	rdt_ticket = request["rdt_ticket"].asUInt();
 
-	response["uid"] = (char*) __myUID;;
+	//response["uid"] = (char*) __myUID;;
 	response["api"] = request["api"].asString();
 
 	if(!request["ticket"].isNull()){
@@ -267,6 +267,9 @@ void deviceapi_get_about (int session,Json::Value &request)
 	root["error"] = err;
 	if ( err_str.length() != 0 )
 		root["error_str"] = err_str;
+
+	response["uid"] = (char*) __myUID;;
+	response["api"] = request["api"].asString();
 
 	root["response"] = response;
 
@@ -1026,10 +1029,19 @@ void deviceapi_get_all_accessories (int session,Json::Value &request)
 			{
 				CGroup *pGroup;	
 				pGroup = (CGroup*) p->second;
+				Json::Value subObjects;
 
 				objects[nAccessoryCnt]["id"] =  pGroup->m_id,
 				objects[nAccessoryCnt]["type"] =  pGroup->m_type,
 				objects[nAccessoryCnt]["name"] =  pGroup->m_attr_str["name"].c_str();
+
+			if (pGroup->m_listObject.size() > 0 )
+			{
+				pGroup->getSubObjects(subObjects);
+				objects[nAccessoryCnt]["objects"] = subObjects;
+			}
+
+				
 
 				nAccessoryCnt++;
 			}
@@ -1046,6 +1058,7 @@ void deviceapi_get_all_accessories (int session,Json::Value &request)
 				{
 					objects[nAccessoryCnt]["id"] =  pObject->m_id,
 					objects[nAccessoryCnt]["name"] =  pObject->m_attr_str["name"].c_str();
+					objects[nAccessoryCnt]["type"] = pObject->m_attr_num["type"];
 					nAccessoryCnt++;
 				}
 				
@@ -1065,7 +1078,6 @@ void deviceapi_get_all_accessories (int session,Json::Value &request)
 
 		response["uid"] = (char*) __myUID;
 		response["api"] = request["api"].asString();
-
 		response["objects"] = objects;
 
 		responseRoot["error"] = err;
@@ -2000,15 +2012,25 @@ void deviceapi_get_gateway_setting (int session,Json::Value &request)
 	int rc;
 
 
+	CGateway *pGateway = __allObjects.getGateway();	
+
+
 	rdt_ticket = request["rdt_ticket"].asUInt();
 
 	// group
 
+
+
 	response["uid"] = (char*) __myUID;
 	response["api"] = request["api"].asString();
+
+	response["name"] =  pGateway->m_name;
+	response["led"] =  pGateway->m_attr_num["led"];
+
+	/*
 	response["home"] = "appl";
 	response["led"] = 0;
-	
+	*/
 	response["objects"] = objects;
 
  
@@ -2039,11 +2061,11 @@ void deviceapi_set_accessory_setting (int session,Json::Value &request)
 	rdt_ticket = request["rdt_ticket"].asUInt();
 
 	// group
-
+	response["uid"] = (char*) __myUID;
 	response["api"] = request["api"].asString();
 	response["id"] = "s01";
 	
-	response["objects"] = objects;
+	//response["objects"] = objects;
 
  
 	responseRoot["error"] = 0;
@@ -2075,10 +2097,24 @@ void deviceapi_set_gateway_setting (int session,Json::Value &request)
 	rdt_ticket = request["rdt_ticket"].asUInt();
 
 	// group
-
+	response["uid"] = (char*) __myUID;
 	response["api"] = request["api"].asString();
+
+	CGateway *pGateway = __allObjects.getGateway();	
+
+	if(!request["name"].isNull()){
+			pGateway->m_name = request["name"].asString();
+	}
+
+	if(!request["led"].isNull()){
+			pGateway->m_attr_num["led"]= request["led"].asUInt();
+	}
+
+	response["name"] =  pGateway->m_name;
+	response["led"] =  pGateway->m_attr_num["led"];
+
 	
-	response["objects"] = objects;
+	//response["objects"] = objects;
 
  
 	responseRoot["error"] = 0;
