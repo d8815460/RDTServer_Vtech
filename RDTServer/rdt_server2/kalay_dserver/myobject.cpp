@@ -120,6 +120,9 @@ int CMyObject::addToList (CMyObject *pObject)
 	return 1;
 }	
 
+
+
+
 int CMyObject::removeFromList (CMyObject *pObject)
 {
 	int ret = 0;
@@ -158,7 +161,7 @@ int CMyObject::getBaseAttr(Json::Value& jsonAttr)
 	jsonAttr["icon"] 	= m_attr_num["icon"];
 	jsonAttr["trigger"] = m_attr_num["trigger"];
 	//jsonAttr["alert"] 	= m_attr_num["alert"];
-	//jsonAttr["on"] 		= m_attr_num["on"];
+	jsonAttr["on"] 		= m_attr_num["on"];
 	jsonAttr["status"] 		= m_attr_num["status"];
 
 	if ( m_pLocation != NULL )
@@ -176,6 +179,7 @@ int CMyObject::getAttr(Json::Value& jsonAttr)
 
 	map<string,int>::iterator iNum;
 	map<string,string>::iterator iStr;
+	
 
 	jsonAttr["id"] = m_id;
 	jsonAttr["type"] = m_type;
@@ -207,6 +211,7 @@ int CMyObject::getAttr(Json::Value& jsonAttr)
 		count++;
 	}
 
+
 	if ( m_pLocation != NULL )
 		jsonAttr["order"] = m_orderInLocation;		
 
@@ -221,15 +226,19 @@ int CMyObject::getAbout(Json::Value& jsonAbout)
 	map<string,string>::iterator iStr;
 
 	jsonAbout["type"] = m_type;
+	string key;
 
 	for(iNum = m_about_num.begin(); iNum!=m_about_num.end(); ++iNum)
 	{
+
 		jsonAbout[iNum->first.c_str()] = iNum->second;
 	}
 
 	for(iStr = m_about_str.begin(); iStr!=m_about_str.end(); ++iStr)
 	{
-		jsonAbout[iStr->first.c_str()] = iStr->second.c_str();
+			
+
+			jsonAbout[iStr->first.c_str()] = iStr->second.c_str();
 	}
 	
 
@@ -275,15 +284,53 @@ int  CMyObject::getDetail(Json::Value &jsonDetail)
 	
 			map<string,int>::iterator iNum;
 			map<string,string>::iterator iStr;	
+			map<string,action *>::iterator iact;	
 			
 			//jsonDetail["id"] = m_id;
 
-			getAttr(jsonDetail);
+			if(this->m_type==0xff40){
+				Json::Value subObjects;
+				Json::Value action;
 
+				jsonDetail["id"] = 		m_id;
+				jsonDetail["name"] = 	m_name;
+				jsonDetail["type"] = 	m_type;
+				jsonDetail["on"] = 		m_attr_num["on"];
+				jsonDetail["effect"] = 	m_attr_num["effect"];
+				jsonDetail["activated"] = m_attr_num["activated"];
+				jsonDetail["repeat"] = 		m_attr_num["repeat"];
+				//need to be ideal
+/*
+				for(iact = (CSchedule*)m_attr_action.begin(); iact!=(CSchedule*)m_attr_action.end(); ++iact)
+				{
+
+					action["on"] = iact->second->m_attr_num["on"];
+					action["time"] = iact->second->m_attr_num["time"];
+					action["duration"] = iact->second->m_attr_num["duration"];
+					subObjects[iact->first.c_str()] = action;
+				}
+*/
+				subObjects["on"] = m_attr_num["pow_on_on"];
+				subObjects["duration"] = m_attr_num["pow_on_duration"];
+				subObjects["time"] = m_attr_num["pow_on_time"];
+				jsonDetail["power_on"] = subObjects;
+
+				subObjects["on"] = m_attr_num["pow_off_on"];
+				subObjects["duration"] = m_attr_num["pow_off_duration"];
+				subObjects["time"] = m_attr_num["pow_off_time"];
+				jsonDetail["power_off"] = subObjects;
+
+
+				
+
+
+			}else{
+				getAttr(jsonDetail);
+			}
 
 			if ( m_pLocation != NULL ) 
 			{
-				Json::Value location;
+				Json::Value location;				
 
 				location["id"] = m_pLocation->m_id;
 				location["name"] = m_pLocation->m_attr_str["name"];

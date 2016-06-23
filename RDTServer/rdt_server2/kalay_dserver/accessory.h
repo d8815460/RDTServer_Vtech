@@ -21,6 +21,8 @@
 		~CLightBulb();
 
 	public:
+		int add (CMyObject *pObject);
+		int remove (CMyObject *pObject);
 
 	};	
 

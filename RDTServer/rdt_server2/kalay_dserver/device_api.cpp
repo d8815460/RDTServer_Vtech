@@ -361,6 +361,7 @@ void deviceapi_get_group_free_lights (int session,Json::Value &request)
 void deviceapi_set_detail (int session,Json::Value &request)
 {
 	Json::Value responseRoot;
+	Json::Value responseObjects;
 	Json::Value response;
 	Json::Value objects;
 	Json::Value location;
@@ -369,6 +370,7 @@ void deviceapi_set_detail (int session,Json::Value &request)
 	int rc;
 	unsigned int id;
 	int err = 1;
+	int setting = 0;
 	string err_str;		
 	int clearTrigger = 0;
 
@@ -397,6 +399,7 @@ printf("set_detail request:\n%s\n-------------------\n",(char*)request.toStyledS
 		CMyObject *pObject = NULL;
 		Json::Value fwObjects;		
 		int nfwObjectCnt = 0;
+		
 
 		Json::Value requestObjects;
 		unsigned int i;
@@ -430,9 +433,55 @@ printf("set_detail request:\n%s\n-------------------\n",(char*)request.toStyledS
 							pObject = new CGroup(newname.c_str(),__allObjects.getLocationOther());
 							requestObjects[i]["id"] =  pObject->m_id;
 							
+						}
+						/*
+						else if(ntype == 0xff40)//schedule
+						{
+							pObject = new CSchedule(newname.c_str());
+							requestObjects[i]["id"] =  pObject->m_id;
+							
+						}*/
+
+					}
+					else if(!requestObjects[i]["req_type"].isNull()){
+
+
+						response["uid"] = (char*) __myUID;
+						response["api"] = request["api"].asString();
+
+						CGateway *pGateway = __allObjects.getGateway();	
+
+						if(!requestObjects[i]["name"].isNull()){
+								pGateway->m_name = requestObjects[i]["name"].asString();
+								pGateway->m_attr_str["name"] = pGateway->m_name;
+
 
 						}
 
+						if(!requestObjects[i]["led"].isNull()){
+								pGateway->m_attr_num["led"]= requestObjects[i]["led"].asUInt();
+						}
+
+						responseObjects[i]["name"] =  pGateway->m_name;
+						responseObjects[i]["led"] =  pGateway->m_attr_num["led"];
+						responseObjects[i]["type"] = pGateway->m_type;
+						responseObjects[i]["id"] = pGateway->m_id;
+
+						response["objects"] = responseObjects;
+
+
+
+						
+						//response["objects"] = objects;
+
+					 
+						responseRoot["error"] = 0;
+						responseRoot["response"] = response;
+
+						rc = sendto_rdt_client(session,rdt_ticket,responseRoot);
+						printf("deviceapi_setting_detail response \n%s\n-------------------\n",(char*)responseRoot.toStyledString().c_str());
+
+						setting = 1;
 					}
 					else
 					{
@@ -457,10 +506,8 @@ printf("set_detail request:\n%s\n-------------------\n",(char*)request.toStyledS
 						{
 							Json::ValueIterator itr;
 
-
 							int valueChanged = 0;
 							int fwChanged = 0;
-
 
 
 							for(itr=requestObjects[i].begin();itr != requestObjects[i].end(); itr++)
@@ -511,6 +558,7 @@ printf("set_detail request:\n%s\n-------------------\n",(char*)request.toStyledS
 										}
 
 									}
+
 									else if ( key.asString() == "order" )
 									{
 										int newOrder = value.asInt();
@@ -531,6 +579,7 @@ printf("set_detail request:\n%s\n-------------------\n",(char*)request.toStyledS
 										if ( pObject->m_attr_str[key.asString().c_str()] != value.asString() )
 										{
 											pObject->m_attr_str[key.asString().c_str()] = value.asString();
+											pObject->m_name = value.asString();
 											valueChanged = 1;
 										}
 									}
@@ -556,9 +605,9 @@ printf("set_detail request:\n%s\n-------------------\n",(char*)request.toStyledS
 
 												}
 
-											//	else{
-											//		  pObject->addToList(subobject);
-											//	}
+												//else{
+												//	  pObject->addToList(subobject);
+												//}
 
 											}
 											
@@ -599,15 +648,16 @@ printf("set_detail request:\n%s\n-------------------\n",(char*)request.toStyledS
 									{
 										printf("Set key others : %s  ",key.asString().c_str());
 
-										
 										if ( value.isNumeric() )
 											printf("value(num):%d \n",value.asInt());
-										else  // if ( value.isString() )
+										else if ( value.isString() )
 											printf("value(str):%s \n",value.asString().c_str());
-
+										else
+											printf("value(obj):\n");
 
 										if ( value.isNumeric() )
 										{
+							
 											if ( pObject->m_attr_num[key.asString().c_str()] !=  value.asInt() )
 											{
 												if ( pObject->m_fwid.length() ==  0 ) // Dummy Test Device
@@ -615,11 +665,28 @@ printf("set_detail request:\n%s\n-------------------\n",(char*)request.toStyledS
 													pObject->m_attr_num[key.asString().c_str()] = value.asInt();
 
 												}
+
+												if(pObject->m_type == 65297 && key.asString() == "status")// group
+												{
+													std::map<unsigned int, CMyObject *>::iterator iterGroup;
+															list<CMyObject*>::iterator iterX;
+
+															for(iterX = pObject->m_listObject.begin(); iterX!=pObject->m_listObject.end(); ++iterX)
+															{
+																CMyObject *pSubObject;
+
+																pSubObject = *iterX;
+
+																pSubObject->m_attr_num[key.asString().c_str()] = value.asInt();
+															}
+
+												}
 												valueChanged = 1;
 											}								
 										}
-										else // if ( value.isString() )
+										else  if ( value.isString() )
 										{
+										
 											if ( pObject->m_attr_str[key.asString().c_str()] != value.asString() )
 											{
 												 if ( pObject->m_fwid.length() ==  0 ) // Dummy Test Device
@@ -629,6 +696,28 @@ printf("set_detail request:\n%s\n-------------------\n",(char*)request.toStyledS
 
 												valueChanged = 1;
 											}
+										}
+										else if( value.isObject() )
+										{	
+											//need to fix
+											if(key.asString() == "power_off")
+											{
+												//printf("%d %d %d",value["on"].asInt(),value["time"].asInt(),value["duration"].asInt());
+												pObject->m_attr_num["pow_off_on"] = value["on"].asInt();
+												pObject->m_attr_num["pow_off_duration"] = value["duration"].asInt();
+												pObject->m_attr_num["pow_off_time"] = value["time"].asInt();
+
+											}
+											else if(key.asString() == "power_on")
+											{
+												//printf("%d %d %d",value["on"].asInt(),value["time"].asInt(),value["duration"].asInt());
+												pObject->m_attr_num["pow_on_on"] = value["on"].asInt();
+												pObject->m_attr_num["pow_on_duration"] = value["duration"].asInt();
+												pObject->m_attr_num["pow_on_time"] = value["time"].asInt();
+											}
+											valueChanged = 1;
+
+
 										}
 									}
 
@@ -723,7 +812,7 @@ printf("set_detail request:\n%s\n-------------------\n",(char*)request.toStyledS
 		}
 		else //if ( valueChanged != 0 )
 		{
-			if ( requestObjects.isArray() )
+			if ( requestObjects.isArray() && setting==0)
 			{
 				//int ntype;
 				for(i=0;i<requestObjects.size();i++)
@@ -762,7 +851,7 @@ printf("set_detail request:\n%s\n-------------------\n",(char*)request.toStyledS
     }
 
 
-    if ( sendResponse )
+    if ( sendResponse  && setting == 0)
     {
 		responseRoot["error"] = err;
 		if ( err_str.length() != 0 )
@@ -811,6 +900,10 @@ void deviceapi_remove (int session,Json::Value &request)
 	rdt_ticket = request["rdt_ticket"].asUInt();
 
 	printf("remove request:\n%s\n-------------------\n",(char*)request.toStyledString().c_str());
+
+	if(!request["ticket"].isNull()){
+		response["ticket"] = request["ticket"].asUInt();
+	}
 
 
 
@@ -997,7 +1090,7 @@ void deviceapi_set_light_effects (int session,Json::Value &request)
 	return;
 }
 
-void deviceapi_get_all_accessories (int session,Json::Value &request)
+void deviceapi_get_list (int session,Json::Value &request)
 {
 	Json::Value responseRoot;
 	Json::Value response;
@@ -1370,57 +1463,99 @@ printf("deviceapi_get_detail request \n%s\n-------------------\n",(char*)request
 		rdt_ticket = request["rdt_ticket"].asUInt();
 		requestObjects = request["objects"];
 
-		if ( requestObjects.isArray() )
-		{
-			unsigned int i;
-			CMyObject *pObject;
-			//int ntype;
 
 
-
-			for(i=0;i<requestObjects.size();i++)
+			if ( requestObjects.isArray() )
 			{
-				idObject = requestObjects[i]["id"].asUInt();
+				unsigned int i;
+				CMyObject *pObject;
+				//int ntype;
 
-				//ntype = idObject & 0xff000000;
-
-				if ( idObject == 0 ) // GetGateway
+				for(i=0;i<requestObjects.size();i++)
 				{
-					CGateway *pGateway = __allObjects.getGateway();			
-					Json::Value locations;
+					idObject = requestObjects[i]["id"].asUInt();
+
+					//ntype = idObject & 0xff000000;
 
 
-					if ( pGateway != NULL )
+					if ( idObject == 0 ) // GetGateway
 					{
-						__get_gateway_detail(locations);
-						
+						CGateway *pGateway = __allObjects.getGateway();			
+						Json::Value locations;
 
-						pGateway->getBaseAttr(responseObjects[i]);
-						responseObjects[i]["objects"] = locations;
+
+						if ( pGateway != NULL )
+						{
+							if(requestObjects[i]["req_type"].asUInt()==0xff50)
+							{
+								printf("test get gateway");
+								response["uid"] = (char*) __myUID;
+								response["api"] = request["api"].asString();
+								responseObjects[i]["name"] =  pGateway->m_name;
+								responseObjects[i]["led"] =  pGateway->m_attr_num["led"];
+								responseObjects[i]["id"] = pGateway->m_id;
+								responseObjects[i]["type"] = pGateway->m_type;
+								responseObjects[i]["req_type"] = requestObjects[i]["req_type"];
+								response["objects"] = responseObjects;
+							}
+							else
+							{
+								__get_gateway_detail(locations);
+								
+
+								pGateway->getBaseAttr(responseObjects[i]);
+								responseObjects[i]["objects"] = locations;
+							}
+						}
 					}
-				}
-				else
-				{
-					pObject = (CMyObject*) __allObjects.getObjectByID(idObject);
-
-					if ( pObject != NULL )
+					else
 					{
-						pObject->getDetail(responseObjects[i]);
+						pObject = (CMyObject*) __allObjects.getObjectByID(idObject);
 
-						//if ( ntype == IDTYPE_GROUP )
-						//else if ( ntype == IDTYPE_ACCESSORY )
-						//else if ( ntype == IDTYPE_LOCATION )
-						//else if ( ntype == IDTYPE_GATEWAY )
-						//else if ( ntype == IDTYPE_SWITCH )
+
+
+						if(requestObjects[i]["req_type"].asUInt()==0xff50) // for setting
+						{
+							Json::Value subObjects;
+
+							responseObjects[i]["req_type"] = requestObjects[i]["req_type"].asUInt();
+							responseObjects[i]["id"] = pObject->m_id;
+							responseObjects[i]["name"] = pObject->m_name;
+							responseObjects[i]["type"] = pObject->m_type;
+							responseObjects[i]["fadePower"] = pObject->m_attr_num["fadePower"];
+
+							if(pObject->m_listObject.size() > 0 ){
+
+								pObject->getSubObjects(subObjects);
+
+								responseObjects[i]["objects"] = subObjects;
+
+
+							}else{
+							}
+
+
+						}
+						else{	
+
+							if ( pObject != NULL )
+							{
+
+								pObject->getDetail(responseObjects[i]);
+
+								//if ( ntype == IDTYPE_GROUP )
+								//else if ( ntype == IDTYPE_ACCESSORY )
+								//else if ( ntype == IDTYPE_LOCATION )
+								//else if ( ntype == IDTYPE_GATEWAY )
+								//else if ( ntype == IDTYPE_SWITCH )
+							}
+						}	
+							
+
+
 					}
 				}
 			}
-		}
-
-
-
-
-
 
 
 		err = 0;
@@ -1660,6 +1795,10 @@ void deviceapi_get_locations (int session,Json::Value &request)
 
 	rdt_ticket = request["rdt_ticket"].asUInt();
 
+	if(!request["ticket"].isNull()){
+		response["ticket"] = request["ticket"].asUInt();
+	}
+
 
 
 	try {
@@ -1889,8 +2028,130 @@ void deviceapi_set_a_location (int session,Json::Value &request)
 		responseRoot["error_str"] = err_str;
 	responseRoot["response"] = response;
 
+	printf("deviceapi_get_detail response \n%s\n-------------------\n",(char*)responseRoot.toStyledString().c_str());
+
 	rc = sendto_rdt_client(session,rdt_ticket,responseRoot);
 
+
+	if ( rc < 0 )
+	{
+
+	}
+
+	return;
+}
+
+
+void deviceapi_put (int session,Json::Value &request)
+{
+	Json::Value responseRoot;
+	Json::Value responseObjects;
+	Json::Value response;
+	CSchedule *pSchedule  = NULL;
+
+
+
+	unsigned int rdt_ticket;
+	int err = 1;
+	string err_str;
+	string schedule_name;
+	int rc;
+	unsigned int idObject;
+
+
+	rdt_ticket = request["rdt_ticket"].asUInt();
+	Json::Value requestObjects;
+	Json::Value subObjects;
+
+	if(!request["ticket"].isNull()){
+		response["ticket"] = request["ticket"].asUInt();
+	}
+
+	requestObjects = request["objects"];
+
+
+
+	printf("deviceapi_put request \n%s\n-------------------\n",(char*)request.toStyledString().c_str());
+
+	// location
+	try {
+
+		if ( requestObjects.isArray() )
+			{
+				unsigned int i;
+				CLightBulb *pObject;
+				//int ntype;
+
+				for(i=0;i<requestObjects.size();i++)
+				{
+
+						idObject = requestObjects[i]["id"].asUInt();
+						pObject = (CLightBulb *)__allObjects.getObjectByID(idObject);
+
+						if( pObject != NULL)
+						{
+
+							if(requestObjects[i]["req_type"].asUInt()==0xff40) // for schedule
+							{
+
+								schedule_name = requestObjects[i]["name"].asString();
+								pSchedule = new CSchedule(schedule_name.c_str());
+								pSchedule->m_attr_num["effect"] = requestObjects[i]["effect"].asInt();
+
+								subObjects = requestObjects[i]["power_on"];
+								pSchedule->m_attr_num["pow_on_on"] = subObjects["on"].asInt();
+								pSchedule->m_attr_num["pow_on_time"] = subObjects["time"].asInt();
+								pSchedule->m_attr_num["pow_on_duration"] = subObjects["duration"].asInt();
+
+								subObjects = requestObjects[i]["power_off"];
+								pSchedule->m_attr_num["pow_off_on"] = subObjects["on"].asInt();
+								pSchedule->m_attr_num["pow_off_time"] = subObjects["time"].asInt();
+								pSchedule->m_attr_num["pow_off_duration"] = subObjects["duration"].asInt();
+
+								responseObjects["id"] = pSchedule->m_id;
+								responseObjects["name"] = pSchedule->m_name;
+								responseObjects["type"] = pSchedule->m_type;
+
+								pObject->add(pSchedule);
+
+
+							}
+							else if(requestObjects[i]["req_type"].asUInt()==0xff30) // for task
+							{
+
+							}
+					
+						}
+
+				}
+			}
+
+
+		err = 0;
+
+    } catch (const libsocket::socket_exception& exc)
+    {
+		std::cerr << exc.mesg;
+		err_str = exc.mesg;
+    }
+
+
+
+	response["uid"] = (char*) __myUID;
+	response["api"] = request["api"].asString();
+
+ 
+	responseRoot["error"] = err;
+	if ( err_str.length() != 0 )
+		responseRoot["error_str"] = err_str;
+
+
+	response["objects"] = responseObjects;
+
+	responseRoot["response"] = response;
+
+	rc = sendto_rdt_client(session,rdt_ticket,responseRoot);
+    printf("deviceput response \n%s\n-------------------\n",(char*)responseRoot.toStyledString().c_str());
 
 	if ( rc < 0 )
 	{
@@ -2023,7 +2284,6 @@ void deviceapi_get_gateway_setting (int session,Json::Value &request)
 
 	response["uid"] = (char*) __myUID;
 	response["api"] = request["api"].asString();
-
 	response["name"] =  pGateway->m_name;
 	response["led"] =  pGateway->m_attr_num["led"];
 
@@ -2032,8 +2292,6 @@ void deviceapi_get_gateway_setting (int session,Json::Value &request)
 	response["led"] = 0;
 	*/
 	response["objects"] = objects;
-
- 
 	responseRoot["error"] = 0;
 	responseRoot["response"] = response;
 

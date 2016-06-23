@@ -184,9 +184,13 @@ int device_parser(int session,unsigned char *option,int option_len,unsigned char
 		{
 			deviceapi_add_a_task(session,value);
 		}
-		else if (strcmp(api.c_str(),"get_all_accessories") == 0 )
+		else if (strcmp(api.c_str(),"get_list") == 0 )
 		{
-			deviceapi_get_all_accessories(session,value);	
+			deviceapi_get_list(session,value);	
+		}
+		else if (strcmp(api.c_str(),"put") == 0 )
+		{
+			deviceapi_put(session,value);	
 		}
 		else
 		{

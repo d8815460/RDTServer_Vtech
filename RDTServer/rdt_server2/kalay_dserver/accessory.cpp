@@ -46,6 +46,7 @@ CLightBulb::CLightBulb(const char *name,CLocation *pLocation,CGroup *pGroup) : C
     m_attr_num["temperature"] = 4500;
     m_attr_num["whiteIntensity"] = 65;
     m_attr_num["fadePower"] = 0;
+    //m_attr_num["fading"] = 1;
     m_attr_num["fadeTime"] = 1000;
 
 	m_about_str["ver"] = "1.0.0";	
@@ -54,6 +55,21 @@ CLightBulb::CLightBulb(const char *name,CLocation *pLocation,CGroup *pGroup) : C
 
 CLightBulb::~CLightBulb()
 {
+}
+
+int CLightBulb::add (CMyObject *pObject)
+{
+
+	addToList(pObject);
+
+	return 1;
+}
+
+int CLightBulb::remove (CMyObject *pObject)
+{
+	removeFromList(pObject);
+
+	return 1;
 }
 
 

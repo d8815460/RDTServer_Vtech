@@ -29,6 +29,7 @@
 	class CGroup;	
 	class CWallSwitch;
 	class CSwitch;
+	class CSchedule;
 
 	class CMyObject
 	{
@@ -43,6 +44,8 @@
 
 		map<string,int> m_about_num;
 		map<string,string> m_about_str;
+		//for m_pSchedule
+		
 
 		list<CMyObject*>  m_listObject;
 
@@ -58,6 +61,7 @@
 		CLocation 	*m_pLocation;
 		CGroup		*m_pGroup;
 		CSwitch 	*m_pSwitch;	// for Accessory
+		CSchedule   *m_pSchedule;
 
 
 

@@ -45,6 +45,8 @@ CAllObjects::CAllObjects()
 
 	CLightBulb *pLightBulb;
 
+	CSchedule *pSchedule;
+
 	Json::Value jsonArray;
 
 	pthread_mutex_init(&mutex_global_id, NULL);
@@ -55,8 +57,10 @@ CAllObjects::CAllObjects()
 
 
 
+
+
 	// insert Gateway
-	pGateway = new CGateway(getID(IDTYPE_GATEWAY),"V-Tech IP-Hub"); //Gateway
+	pGateway = new CGateway(0,"V-Tech IP-Hub"); //Gateway getID(IDTYPE_GATEWAY)
 
 	m_idGateway = pGateway->m_id;
 
@@ -68,6 +72,9 @@ CAllObjects::CAllObjects()
 	locationOther->m_attr_num["editable"] = 0;
 
 
+	//----------------------------------------------------------
+	pSchedule = new CSchedule("schedule1");
+	printf("pSchedule id [%d]\n",pSchedule->m_id);
 
 	//----------------------------------------------------------------
 
@@ -82,6 +89,12 @@ CAllObjects::CAllObjects()
 	//----------------------------------------------------------------
 	pLightBulb = new CLightBulb("Bedroom Light-1",pBedroom,NULL);
 	pSwitch = new CSwitch("Bedroom Switch 01",pWallSwitchBedroom,pLightBulb);
+
+	//pSchedule->add(pLightBulb);
+	pLightBulb->add(pSchedule);
+	pSchedule->add(pLightBulb);
+
+	printf("pLightBulb id [%d]\n",pLightBulb->m_id);
 
 	 pLightBulb->m_attr_num["colorMode"] = 0;
 

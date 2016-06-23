@@ -14,6 +14,7 @@
 	#include "group.h"
 	#include "location.h"
 	#include "accessory.h"
+	#include "schedule.h"
 
 	using namespace std;
 
@@ -85,6 +86,7 @@
 		std::map<unsigned int, CMyObject *>  m_mapAllObjects;
 		std::map<unsigned int, CMyObject *>  m_mapAllLocations;
 		std::map<unsigned int, CMyObject *>  m_mapAllGroups;
+		std::map<unsigned int, CMyObject *>  m_mapAllSchedules;
 		std::map<std::string, CMyObject *>   m_mapObjectsByFWID;
 
 	friend class CMyObject;
@@ -95,6 +97,7 @@
 	friend class CWallSwitch;
 	friend class CSwitch;
 	friend class CSensor;
+	friend class CSchedule;
 
 
 	public:
