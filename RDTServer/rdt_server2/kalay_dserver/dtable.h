@@ -15,6 +15,7 @@
 	#include "location.h"
 	#include "accessory.h"
 	#include "schedule.h"
+	#include "task.h"
 
 	using namespace std;
 
@@ -87,6 +88,7 @@
 		std::map<unsigned int, CMyObject *>  m_mapAllLocations;
 		std::map<unsigned int, CMyObject *>  m_mapAllGroups;
 		std::map<unsigned int, CMyObject *>  m_mapAllSchedules;
+		std::map<unsigned int, CMyObject *>  m_mapAllTasks;
 		std::map<std::string, CMyObject *>   m_mapObjectsByFWID;
 
 	friend class CMyObject;
@@ -98,6 +100,7 @@
 	friend class CSwitch;
 	friend class CSensor;
 	friend class CSchedule;
+	friend class CTask;
 
 
 	public:

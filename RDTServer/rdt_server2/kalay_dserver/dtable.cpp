@@ -44,10 +44,18 @@ CAllObjects::CAllObjects()
 	CSwitch 	*pSwitch;
 
 	CLightBulb *pLightBulb;
+	CLightBulb *pLightBulb01;
+	CLightBulb *pLightBulb02;
+	
 
 	CSchedule *pSchedule;
 
+	CTask *pTask;
+
 	Json::Value jsonArray;
+
+	unsigned int idobject01=0;
+	unsigned int idobject02=0;
 
 	pthread_mutex_init(&mutex_global_id, NULL);
 
@@ -305,11 +313,23 @@ CAllObjects::CAllObjects()
 
 
 //----------------------------------------------------------------
-	pLightBulb = new CLightBulb("Living room Light-1",pLivingroom,NULL);
+	pLightBulb01 = new CLightBulb("Living room Light-1",pLivingroom,NULL);
+	printf("pLightBulb id [%d]\n",pLightBulb01->m_id);
+	
 			
 //----------------------------------------------------------------
-	pLightBulb = new CLightBulb("Living room Light-2",pLivingroom,NULL);
+	pLightBulb02 = new CLightBulb("Living room Light-2",pLivingroom,NULL);
+	printf("pLightBulb id [%d]\n",pLightBulb02->m_id);
 	
+
+//-------------------------------------------------------------------+
+	idobject01 = pLightBulb01->m_id;
+	idobject02 = pLightBulb02->m_id;
+
+   pTask = new CTask("task1",idobject01,idobject02);
+   pLightBulb01->add(pTask);
+   pLightBulb02->add(pTask);
+
 //---------------------------------------------------------
 	pLightBulb = new CLightBulb("Living room Light-3",pLivingroom,NULL);
 	pSwitch = new CSwitch("Living room Switch 01",pWallSwitchLivingroom,pLightBulb);
@@ -328,6 +348,8 @@ CAllObjects::CAllObjects()
 		
 //---------------------------------------------------------
 	pLightBulb = new CLightBulb("Living room Light-7",pLivingroom,pGroup03);
+
+
 	
 
 	pSwitch = pSwitch;

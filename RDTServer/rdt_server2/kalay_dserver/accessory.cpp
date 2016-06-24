@@ -56,7 +56,7 @@ CLightBulb::CLightBulb(const char *name,CLocation *pLocation,CGroup *pGroup) : C
 CLightBulb::~CLightBulb()
 {
 }
-
+/*
 int CLightBulb::add (CMyObject *pObject)
 {
 
@@ -71,7 +71,7 @@ int CLightBulb::remove (CMyObject *pObject)
 
 	return 1;
 }
-
+*/
 
 CSensor::CSensor(const char *name,int type,CLocation *pLocation,int icon): CAccessory(name,type,pLocation,icon)
 {

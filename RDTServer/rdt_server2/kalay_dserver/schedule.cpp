@@ -72,7 +72,7 @@ CSchedule::~CSchedule()
 	{
 		__allObjects.m_mapAllSchedules.erase(iterSchedule);
 	}
-/*
+	printf("remove schedule\n");
 	for(iterX = m_listObject.begin(); iterX!=m_listObject.end(); ++iterX)
 	{
 		CMyObject *pSubObject;
@@ -80,8 +80,10 @@ CSchedule::~CSchedule()
 		pSubObject = *iterX;
 
 		pSubObject->m_pSchedule = NULL;
+		pSubObject->remove(this);
+	
 	}	
-	*/
+	
 }
 
 int CSchedule::add (CMyObject *pObject)

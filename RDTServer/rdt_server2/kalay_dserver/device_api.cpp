@@ -466,6 +466,7 @@ printf("set_detail request:\n%s\n-------------------\n",(char*)request.toStyledS
 						responseObjects[i]["led"] =  pGateway->m_attr_num["led"];
 						responseObjects[i]["type"] = pGateway->m_type;
 						responseObjects[i]["id"] = pGateway->m_id;
+						responseObjects[i]["req_type"] = requestObjects[i]["req_type"].asUInt();
 
 						response["objects"] = responseObjects;
 
@@ -657,13 +658,13 @@ printf("set_detail request:\n%s\n-------------------\n",(char*)request.toStyledS
 
 										if ( value.isNumeric() )
 										{
+											printf("value %d\n",value.asInt());
 							
 											if ( pObject->m_attr_num[key.asString().c_str()] !=  value.asInt() )
 											{
 												if ( pObject->m_fwid.length() ==  0 ) // Dummy Test Device
 												{
 													pObject->m_attr_num[key.asString().c_str()] = value.asInt();
-
 												}
 
 												if(pObject->m_type == 65297 && key.asString() == "status")// group
@@ -686,7 +687,8 @@ printf("set_detail request:\n%s\n-------------------\n",(char*)request.toStyledS
 										}
 										else  if ( value.isString() )
 										{
-										
+											printf("value %s\n",value.asString().c_str());
+
 											if ( pObject->m_attr_str[key.asString().c_str()] != value.asString() )
 											{
 												 if ( pObject->m_fwid.length() ==  0 ) // Dummy Test Device
@@ -699,6 +701,9 @@ printf("set_detail request:\n%s\n-------------------\n",(char*)request.toStyledS
 										}
 										else if( value.isObject() )
 										{	
+											unsigned int idObject;
+											CMyObject *pObject_target = NULL;
+
 											//need to fix
 											if(key.asString() == "power_off")
 											{
@@ -715,10 +720,44 @@ printf("set_detail request:\n%s\n-------------------\n",(char*)request.toStyledS
 												pObject->m_attr_num["pow_on_duration"] = value["duration"].asInt();
 												pObject->m_attr_num["pow_on_time"] = value["time"].asInt();
 											}
-											valueChanged = 1;
+											else if(key.asString() == "if")
+											{
+												printf("%d %d %d",value["id"].asInt(),value["status"].asInt(),value["notify"].asInt());
+												if(!value["id"].isNull())
+												{
+													
+													idObject = value["id"].asUInt();
+													pObject_target = __allObjects.getObjectByID(idObject);
 
+													pObject->m_attr_num["if_id"] = value["id"].asUInt();
+													pObject->m_attr_str["if_name"] = pObject_target->m_name;
+													//printf("name: %s\n ",pObject->m_attr_str["if_name"].c_str());
+												}
+												if(!value["status"].isNull())
+													pObject->m_attr_num["if_status"] = value["status"].asInt();
+												if(!value["time"].isNull())
+													pObject->m_attr_num["if_time"] = value["time"].asInt();
+											}
+											else if(key.asString() == "then")
+											{
+												printf("%d %d %d",value["id"].asInt(),value["status"].asInt(),value["notify"].asInt());
+												if(!value["id"].isNull())
+												{
+													idObject = value["id"].asUInt();
+													pObject_target = __allObjects.getObjectByID(idObject);
+													pObject->m_attr_num["then_id"] = value["id"].asUInt();
+													pObject->m_attr_str["then_name"] = pObject_target->m_name;
+												}
+												if(!value["status"].isNull())
+													pObject->m_attr_num["then_status"] = value["status"].asInt();
+												if(!value["notify"].isNull())
+													pObject->m_attr_num["then_notify"] = value["notify"].asInt();
+											}
+											valueChanged = 1;
+										
 
 										}
+							
 									}
 
 
@@ -742,7 +781,7 @@ printf("set_detail request:\n%s\n-------------------\n",(char*)request.toStyledS
 											fwChanged++;
 											if ( value.isNumeric() )
 												fwObjects[nfwObjectCnt][key.asString().c_str()] = value.asInt();// #TBD : if we only send change items
-											else // if ( value.isString() )
+											else  if ( value.isString() )
 												fwObjects[nfwObjectCnt][key.asString().c_str()] = value.asString();// #TBD : if we only send change items
 										}
 
@@ -949,7 +988,7 @@ void deviceapi_remove (int session,Json::Value &request)
 
 	response["uid"] = (char*) __myUID;
 	response["api"] = request["api"].asString();
-	response["id"] = responseObjects;
+	response["object"] = responseObjects;
 
 
 	responseRoot["error"] = err;
@@ -1100,6 +1139,9 @@ void deviceapi_get_list (int session,Json::Value &request)
 	unsigned int rdt_ticket;	
 	int err = 1;
 	string err_str;
+	unsigned int  idObject;
+
+	idObject = request["id"].asUInt();
 
 
 	rdt_ticket = request["rdt_ticket"].asUInt();
@@ -1116,47 +1158,99 @@ void deviceapi_get_list (int session,Json::Value &request)
 		int nAccessoryCnt = 0;
 		//Json::Value accessories;
 
-		if ( request["type"].asUInt() == 0xff11 ) //for group
+		if ( request["req_type"].asUInt() == 0xff11 ) //for group
 		{	
-			for(p = __allObjects.m_mapAllGroups.begin(); p!=__allObjects.m_mapAllGroups.end(); ++p)
+			if(idObject ==0)
 			{
-				CGroup *pGroup;	
-				pGroup = (CGroup*) p->second;
-				Json::Value subObjects;
+				for(p = __allObjects.m_mapAllGroups.begin(); p!=__allObjects.m_mapAllGroups.end(); ++p)
+				{
+					CGroup *pGroup;	
+					pGroup = (CGroup*) p->second;
+					Json::Value subObjects;
 
-				objects[nAccessoryCnt]["id"] =  pGroup->m_id,
-				objects[nAccessoryCnt]["type"] =  pGroup->m_type,
-				objects[nAccessoryCnt]["name"] =  pGroup->m_attr_str["name"].c_str();
+					objects[nAccessoryCnt]["id"] =  pGroup->m_id,
+					objects[nAccessoryCnt]["type"] =  pGroup->m_type,
+					objects[nAccessoryCnt]["name"] =  pGroup->m_attr_str["name"].c_str();
 
-			if (pGroup->m_listObject.size() > 0 )
-			{
-				pGroup->getSubObjects(subObjects);
-				objects[nAccessoryCnt]["objects"] = subObjects;
-			}
-
-				
-
-				nAccessoryCnt++;
-			}
+					if (pGroup->m_listObject.size() > 0 )
+					{
+						pGroup->getSubObjects(subObjects);
+						objects[nAccessoryCnt]["objects"] = subObjects;
+					}
+						nAccessoryCnt++;
+				}
+			}	
 		}
 
-		else if( request["type"].asUInt() == 0x0109)// for light
+		else if( request["req_type"].asUInt() == 0x0109)// for light
 		{
-			for(p = __allObjects.m_mapAllObjects.begin(); p!=__allObjects.m_mapAllObjects.end(); ++p)
-			{
-				CMyObject *pObject;	
-				pObject = (CMyObject*) p->second;
 
-				if ( pObject->m_pGroup == NULL && pObject->m_attr_num["type"] == 0x0109)
+			if(idObject ==0 )
+			{
+				for(p = __allObjects.m_mapAllObjects.begin(); p!=__allObjects.m_mapAllObjects.end(); ++p)
 				{
-					objects[nAccessoryCnt]["id"] =  pObject->m_id,
-					objects[nAccessoryCnt]["name"] =  pObject->m_attr_str["name"].c_str();
-					objects[nAccessoryCnt]["type"] = pObject->m_attr_num["type"];
+					CMyObject *pObject;	
+					pObject = (CMyObject*) p->second;
+
+					if ( pObject->m_pGroup == NULL && pObject->m_attr_num["type"] == 0x0109)
+					{
+						objects[nAccessoryCnt]["id"] =  pObject->m_id,
+						objects[nAccessoryCnt]["name"] =  pObject->m_attr_str["name"].c_str();
+						objects[nAccessoryCnt]["type"] = pObject->m_attr_num["type"];
+						nAccessoryCnt++;
+					}
+					
+
+				}
+			}	
+
+		}
+		else if(request["req_type"].asUInt() == 0xff30)//task
+		{
+
+			
+			Json::Value subObjects;
+			Json::Value requestObjects;
+			list<CMyObject*>::iterator j;
+			
+#if 0
+			CMyObject *pObject;
+			pObject = __allObjects.getObjectByID(request["id"].asUInt());
+
+			if(pObject->m_listObject_task.size()>0)
+			{
+				
+				for(j = pObject->m_listObject_task.begin(); j!=pObject->m_listObject_task.end(); ++j)
+				{
+					CMyObject *taskpObject;
+					map<string,int>::iterator iNum;
+					map<string,string>::iterator iStr;					
+
+					taskpObject = *j;
+
+					taskpObject->getBaseAttr(objects[nAccessoryCnt]);
 					nAccessoryCnt++;
+
 				}
 				
 
-			}
+
+			}	
+#endif
+				for(p = __allObjects.m_mapAllTasks.begin(); p!=__allObjects.m_mapAllTasks.end(); ++p)
+				{
+					CTask *pTask;	
+					pTask = (CTask*) p->second;
+					Json::Value subObjects;
+
+					pTask->getBaseAttr(objects[nAccessoryCnt]);
+					subObjects["type"] = pTask->m_attr_num["then_type"];
+					subObjects["status"] = pTask->m_attr_num["then_status"];
+					objects[nAccessoryCnt]["then"] = subObjects;
+					nAccessoryCnt++;
+				}
+
+
 
 		}
 		err = 0;	 
@@ -1513,42 +1607,42 @@ printf("deviceapi_get_detail request \n%s\n-------------------\n",(char*)request
 						pObject = (CMyObject*) __allObjects.getObjectByID(idObject);
 
 
-
-						if(requestObjects[i]["req_type"].asUInt()==0xff50) // for setting
-						{
-							Json::Value subObjects;
-
-							responseObjects[i]["req_type"] = requestObjects[i]["req_type"].asUInt();
-							responseObjects[i]["id"] = pObject->m_id;
-							responseObjects[i]["name"] = pObject->m_name;
-							responseObjects[i]["type"] = pObject->m_type;
-							responseObjects[i]["fadePower"] = pObject->m_attr_num["fadePower"];
-
-							if(pObject->m_listObject.size() > 0 ){
-
-								pObject->getSubObjects(subObjects);
-
-								responseObjects[i]["objects"] = subObjects;
-
-
-							}else{
-							}
-
-
-						}
-						else{	
-
-							if ( pObject != NULL )
+						if(pObject != NULL){
+							if(requestObjects[i]["req_type"].asUInt()==0xff50) // for setting
 							{
+								Json::Value subObjects;
 
-								pObject->getDetail(responseObjects[i]);
+								responseObjects[i]["req_type"] = requestObjects[i]["req_type"].asUInt();
+								responseObjects[i]["id"] = pObject->m_id;
+								responseObjects[i]["name"] = pObject->m_name;
+								responseObjects[i]["type"] = pObject->m_type;
+								responseObjects[i]["fadePower"] = pObject->m_attr_num["fadePower"];
 
-								//if ( ntype == IDTYPE_GROUP )
-								//else if ( ntype == IDTYPE_ACCESSORY )
-								//else if ( ntype == IDTYPE_LOCATION )
-								//else if ( ntype == IDTYPE_GATEWAY )
-								//else if ( ntype == IDTYPE_SWITCH )
+								if(pObject->m_listObject.size() > 0 ){
+
+									pObject->getSubObjects(subObjects);
+									responseObjects[i]["objects"] = subObjects;
+
+
+								}else{
+								}
+
+
 							}
+							else{	
+
+								if ( pObject != NULL )
+								{
+
+									pObject->getDetail(responseObjects[i]);
+
+									//if ( ntype == IDTYPE_GROUP )
+									//else if ( ntype == IDTYPE_ACCESSORY )
+									//else if ( ntype == IDTYPE_LOCATION )
+									//else if ( ntype == IDTYPE_GATEWAY )
+									//else if ( ntype == IDTYPE_SWITCH )
+								}
+							}	
 						}	
 							
 
@@ -2047,14 +2141,14 @@ void deviceapi_put (int session,Json::Value &request)
 	Json::Value responseRoot;
 	Json::Value responseObjects;
 	Json::Value response;
-	CSchedule *pSchedule  = NULL;
+
 
 
 
 	unsigned int rdt_ticket;
 	int err = 1;
 	string err_str;
-	string schedule_name;
+	string object_name;
 	int rc;
 	unsigned int idObject;
 
@@ -2081,21 +2175,23 @@ void deviceapi_put (int session,Json::Value &request)
 				unsigned int i;
 				CLightBulb *pObject;
 				//int ntype;
-
-				for(i=0;i<requestObjects.size();i++)
-				{
+				for(i=0;i<requestObjects.size();i++){
+				
 
 						idObject = requestObjects[i]["id"].asUInt();
 						pObject = (CLightBulb *)__allObjects.getObjectByID(idObject);
+					
 
 						if( pObject != NULL)
 						{
+							printf("test2\n");
 
 							if(requestObjects[i]["req_type"].asUInt()==0xff40) // for schedule
 							{
+								CSchedule *pSchedule  = NULL;
 
-								schedule_name = requestObjects[i]["name"].asString();
-								pSchedule = new CSchedule(schedule_name.c_str());
+								object_name = requestObjects[i]["name"].asString();
+								pSchedule = new CSchedule(object_name.c_str());
 								pSchedule->m_attr_num["effect"] = requestObjects[i]["effect"].asInt();
 
 								subObjects = requestObjects[i]["power_on"];
@@ -2118,10 +2214,49 @@ void deviceapi_put (int session,Json::Value &request)
 							}
 							else if(requestObjects[i]["req_type"].asUInt()==0xff30) // for task
 							{
+								printf("test1\n");
+							
+								CTask *pTask  = NULL;
+								CMyObject *accessoryObject;
+								int idObject_if;
+								int idObject_then;
+
+								object_name = requestObjects[i]["name"].asString();
+
+								subObjects = requestObjects[i]["if"];
+								idObject_if = subObjects["id"].asInt();
+								subObjects = requestObjects[i]["then"];
+								idObject_then = subObjects["id"].asInt();
+
+
+								pTask = new CTask(object_name.c_str(),idObject_if,idObject_then);
+								pTask->m_attr_num["effect"] = requestObjects[i]["effect"].asInt();
+
+								subObjects = requestObjects[i]["if"];
+								//accessoryObject = __allObjects.getObjectByID(idObject_if);
+								//pTask->m_attr_str["if_name"] = accessoryObject->m_name;
+								pTask->m_attr_num["if_id"] = subObjects["id"].asInt();
+								pTask->m_attr_num["if_status"] = subObjects["status"].asInt();
+								pTask->m_attr_num["if_time"] = subObjects["time"].asInt();
+
+								subObjects = requestObjects[i]["then"];
+								//accessoryObject = __allObjects.getObjectByID(idObject_then);
+								//pTask->m_attr_str["then_name"] = accessoryObject->m_name;
+								pTask->m_attr_num["then_id"] = subObjects["id"].asInt();
+								pTask->m_attr_num["then_status"] = subObjects["status"].asInt();
+								pTask->m_attr_num["then_notify"] = subObjects["notify"].asInt();
+
+
+								responseObjects["id"] = pTask->m_id;
+								//responseObjects["name"] = pSchedule->m_name;
+								responseObjects["type"] = pTask->m_type;
+								
+
 
 							}
 					
-						}
+						}else
+							printf("test3\n");
 
 				}
 			}

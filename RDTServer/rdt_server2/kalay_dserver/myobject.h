@@ -44,10 +44,10 @@
 
 		map<string,int> m_about_num;
 		map<string,string> m_about_str;
-		//for m_pSchedule
 		
 
 		list<CMyObject*>  m_listObject;
+		list<CMyObject*>  m_listObject_task;
 
 		int m_id;
 		int m_type;
@@ -68,6 +68,9 @@
 	protected:
 		int addToList (CMyObject *pObject);
 		int removeFromList (CMyObject *pObject);
+		int addToListtask (CMyObject *pObject);
+		int removeFromListtask (CMyObject *pObject);
+
 		int getIDTYPE();
 
 
@@ -76,8 +79,10 @@
 		int getAttr(Json::Value& jsonAttr);
 		int getAbout(Json::Value& jsonAbout);
 		int getSubObjects(Json::Value& subObjects);
-
+		int gettasks(Json::Value& subObjects);
 		int getDetail(Json::Value &jsonDetail);
+		int add (CMyObject *pObject);
+		int remove (CMyObject *pObject);
 	};
 
 

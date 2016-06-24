@@ -138,7 +138,57 @@ int CMyObject::removeFromList (CMyObject *pObject)
 
 
 	return ret;
+}
+
+int CMyObject::addToListtask (CMyObject *pObject)
+{
+	m_listObject_task.push_back(pObject);
+
+	return 1;
 }	
+
+
+
+
+int CMyObject::removeFromListtask (CMyObject *pObject)
+{
+	int ret = 0;
+	list<CMyObject*>::iterator iter2;
+	list<CMyObject*>::iterator j;
+
+	iter2 = std::find(m_listObject_task.begin(), m_listObject_task.end(), pObject);
+	if ( iter2 != m_listObject_task.end() )
+	{
+		m_listObject_task.erase(iter2);
+		ret = 1;
+	}
+
+
+	return ret;
+}	
+
+int CMyObject::add (CMyObject *pObject)
+{
+	if(pObject->m_type==65328){
+		printf("task\n");
+		addToListtask(pObject);
+	}	
+	else{
+		printf("object\n");		
+		addToList(pObject);
+	}
+	return 1;
+}
+
+int CMyObject::remove (CMyObject *pObject)
+{
+	if(pObject->m_type==65328)
+		removeFromListtask(pObject);
+	else
+		removeFromList(pObject);
+
+	return 1;
+}
 
 int CMyObject::getIDTYPE()
 {
@@ -154,19 +204,26 @@ int CMyObject::getBaseAttr(Json::Value& jsonAttr)
 	map<string,int>::iterator iNum;
 	map<string,string>::iterator iStr;
 
+
 	jsonAttr["id"] = m_id;
 	jsonAttr["type"] = m_type;
+	jsonAttr["name"] = m_attr_str["name"];
 
-	jsonAttr["name"] 	= m_attr_str["name"];
-	jsonAttr["icon"] 	= m_attr_num["icon"];
-	jsonAttr["trigger"] = m_attr_num["trigger"];
-	//jsonAttr["alert"] 	= m_attr_num["alert"];
-	jsonAttr["on"] 		= m_attr_num["on"];
-	jsonAttr["status"] 		= m_attr_num["status"];
+	if(m_type == 65328 ){
+		jsonAttr["enabled"] = m_attr_num["enabled"];
 
-	if ( m_pLocation != NULL )
-		jsonAttr["order"] = m_orderInLocation;		
+	}
+	else{
+		
+		jsonAttr["icon"] 	= m_attr_num["icon"];
+		jsonAttr["trigger"] = m_attr_num["trigger"];
+		//jsonAttr["alert"] 	= m_attr_num["alert"];
+		jsonAttr["on"] 		= m_attr_num["on"];
+		jsonAttr["status"] 		= m_attr_num["status"];
 
+		if ( m_pLocation != NULL )
+			jsonAttr["order"] = m_orderInLocation;		
+	}
 
 	return count;
 }
@@ -245,6 +302,32 @@ int CMyObject::getAbout(Json::Value& jsonAbout)
 	return count;
 }
 
+int CMyObject::gettasks(Json::Value& subObjects)
+{
+	list<CMyObject*>::iterator iter;
+	map<string,int>::iterator iNum;
+	map<string,string>::iterator iStr;	
+	int cntSubObject = 0;
+
+	for(iter = m_listObject_task.begin(); iter!=m_listObject_task.end(); ++iter)
+	{
+		CMyObject *pSubObject;
+
+		pSubObject = *iter;
+
+
+		//pSubObject->getAttr(subObjects[cntSubObject]);
+		pSubObject->getBaseAttr(subObjects[cntSubObject]);
+
+
+		cntSubObject++;
+	}
+
+
+	return cntSubObject;
+}
+
+
 int CMyObject::getSubObjects(Json::Value& subObjects)
 {
 	list<CMyObject*>::iterator iter;
@@ -288,7 +371,8 @@ int  CMyObject::getDetail(Json::Value &jsonDetail)
 			
 			//jsonDetail["id"] = m_id;
 
-			if(this->m_type==0xff40){
+			if(this->m_type==0xff40)//schedule
+			{ 
 				Json::Value subObjects;
 				Json::Value action;
 
@@ -324,7 +408,32 @@ int  CMyObject::getDetail(Json::Value &jsonDetail)
 				
 
 
-			}else{
+			}
+			else if(this->m_type==0xff30)//task
+			{
+				Json::Value subObjects;
+				Json::Value action;
+
+				getBaseAttr(jsonDetail);
+
+
+				subObjects["id"] = m_attr_num["if_id"];
+				subObjects["name"] = m_attr_str["if_name"];
+				subObjects["time"] = m_attr_num["if_time"];
+				subObjects["status"] = m_attr_num["if_status"];
+				subObjects["type"] = m_attr_num["if_type"];
+				jsonDetail["if"] = subObjects;
+
+				subObjects["id"] = m_attr_num["then_id"];
+				subObjects["name"] = m_attr_str["then_name"];
+				subObjects["notify"] = m_attr_num["then_notify"];
+				subObjects["status"] = m_attr_num["then_status"];
+				subObjects["type"] = m_attr_num["then_type"];
+				jsonDetail["then"] = subObjects;
+
+			}
+
+			else{
 				getAttr(jsonDetail);
 			}
 

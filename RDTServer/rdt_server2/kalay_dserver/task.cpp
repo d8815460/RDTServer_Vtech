@@ -11,10 +11,38 @@
 #include "dserver.h"
 #include "myobject.h"
 #include "task.h"
+#include "dtable.h"
 
 
-CTask::CTask(int id,const char *name): CMyObject("task",id,name,0xff30,0)
+
+CTask::CTask(const char *name,int accessory_id_if,int accessory_id_then): CMyObject("task",__allObjects.getID(IDTYPE_TASK),name,0xff30,0)
 {
+
+	//m_attr_num["activated"] = 1;
+	//m_attr_num["brightness"] = 60;
+	CMyObject *pObject;
+
+	m_attr_num["enabled"] = 0;
+	m_attr_num["effect"] = 1;
+
+
+	pObject = __allObjects.getObjectByID(accessory_id_if);
+	m_attr_num["if_id"] = accessory_id_if;
+	m_attr_num["if_status"] = 5;
+	m_attr_num["if_time"] = 128;
+	m_attr_num["if_type"] = pObject->m_type;
+	m_attr_str["if_name"] = pObject->m_name;
+
+
+	pObject = __allObjects.getObjectByID(accessory_id_then);
+	m_attr_num["then_id"] = accessory_id_then;
+	m_attr_num["then_status"] = 1;
+	m_attr_num["then_notify"] = 0;
+	m_attr_num["then_type"] = pObject->m_type;
+    m_attr_str["then_name"] = pObject->m_name;
+	
+	__allObjects.m_mapAllTasks[m_id] = this;
+	
 
 }
 
