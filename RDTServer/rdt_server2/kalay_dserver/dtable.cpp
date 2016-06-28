@@ -71,6 +71,7 @@ CAllObjects::CAllObjects()
 	pGateway = new CGateway(0,"V-Tech IP-Hub"); //Gateway getID(IDTYPE_GATEWAY)
 
 	m_idGateway = pGateway->m_id;
+	pGateway->m_fwid = "0";
 
 
 	//----------------------------------------------------------
@@ -156,7 +157,7 @@ CAllObjects::CAllObjects()
 	pGroup01 = new CGroup("Group 01",pBathroom);	
 
 	pGroup01->m_attr_num["groupNo"] = 1;
-	pGroup01->m_fwid = "g000000001";
+	
 	//pGroup01->m_attr_num["icon"] = 1;
 
 
@@ -270,7 +271,7 @@ CAllObjects::CAllObjects()
 	pGroup02 = new CGroup("Group 02",pBathroom);	
 
 	pGroup02->m_attr_num["groupNo"] = 2;
-	pGroup01->m_fwid = "g000000002";
+	
 
 
 
@@ -311,8 +312,7 @@ CAllObjects::CAllObjects()
 	pGroup03 = new CGroup("Group 03",pLivingroom);	
 
 	pGroup03->m_attr_num["groupNo"] = 3;
-	pGroup01->m_fwid = "g000000003";
-
+	
 
 
 //----------------------------------------------------------------

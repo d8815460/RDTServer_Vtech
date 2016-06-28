@@ -491,6 +491,9 @@ printf("set_detail request:\n%s\n-------------------\n",(char*)request.toStyledS
 						
 						//response["objects"] = objects;
 
+
+			
+
 					 
 						responseRoot["error"] = 0;
 						responseRoot["response"] = response;
@@ -621,7 +624,9 @@ printf("set_detail request:\n%s\n-------------------\n",(char*)request.toStyledS
 												}
 												else if(pObject->m_type==0xff11){//group
 													((CGroup*)pObject)->add(subobject);
-													fwObjects[0]["id"][i]= value[i].asUInt();
+
+
+													fwObjects[0]["id"][i]= subobject->m_fwid;
 													fwObjects[0]["groupNo"] = pObject->m_attr_num["groupNo"];
 												}
 
@@ -841,6 +846,11 @@ printf("set_detail request:\n%s\n-------------------\n",(char*)request.toStyledS
 
 					    		nfwObjectCnt++;			
 					    	}
+					    	else if (pObject->m_type ==0xff11  && fwChanged > 0)
+					    	{
+					    		fwObjects[nfwObjectCnt]["groupNo"] = pObject->m_attr_num["groupNo"];
+					    		nfwObjectCnt++;		
+					    	}	
 						}
 
 						// Change Value ---	

@@ -215,6 +215,7 @@ int CVtechIPHub::parser(Json::Value& root)
 						pObject->m_fwid = fwid;	
 
 						pObject->m_attr_num["status"] = 0;
+						printf("id[%u] fwid[%s]\n",pObject->m_id,pObject->m_fwid.c_str());
 
 						__allObjects.m_mapObjectsByFWID[fwid] = pObject;
 					}
