@@ -60,6 +60,16 @@
 		CWallSwitch	*m_pWallSwitch;
 		CAccessory 	*m_pAccessory;
 	};		
+
+
+	class CActivity : public CMyObject
+	{
+	public:
+		CActivity(unsigned int time,int status,const char *target_name);
+		~CActivity();
+
+	public:
+	};	
 	
 
 

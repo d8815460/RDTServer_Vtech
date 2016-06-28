@@ -19,6 +19,7 @@
 #include "fw_api.h"
 /***** for TPNS *****/
 #include <curl/curl.h>
+#include <time.h>
 
 int sendto_rdt_client (int session,unsigned int rdt_ticket,Json::Value& responseRoot);
 int sendto_all_client (Json::Value& responseRoot);
@@ -242,6 +243,8 @@ int CVtechIPHub::parser(Json::Value& root)
 						else if ( key == "alert" )
 						{
 							int alert = value.asInt();
+							string message;
+							CMyObject *pactivity;
 
 							//printf("Obj Set key : %s  = %d (num) \n",key.asString().c_str(),value.asInt());	
 
@@ -282,6 +285,15 @@ int CVtechIPHub::parser(Json::Value& root)
 										TPNS_alert_count=0;
 								}		
 										//end of connect to TPNS
+
+								printf("unix time [%u]\n",(unsigned) time(NULL));
+								string target_name;
+								target_name = pObject->m_name;
+								pactivity = new CActivity((unsigned) time(NULL),alert,target_name.c_str());
+								pObject->add(pactivity);
+	
+
+
 							}
 							else
 								pObject->m_attr_num["trigger"] = 0; // FixMe , here should be reset by app

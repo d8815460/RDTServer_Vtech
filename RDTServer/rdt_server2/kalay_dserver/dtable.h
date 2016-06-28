@@ -89,6 +89,7 @@
 		std::map<unsigned int, CMyObject *>  m_mapAllGroups;
 		std::map<unsigned int, CMyObject *>  m_mapAllSchedules;
 		std::map<unsigned int, CMyObject *>  m_mapAllTasks;
+		std::map<unsigned int, CMyObject *>  m_mapAllActivities;
 		std::map<std::string, CMyObject *>   m_mapObjectsByFWID;
 
 	friend class CMyObject;

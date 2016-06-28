@@ -143,7 +143,7 @@ int CMyObject::removeFromList (CMyObject *pObject)
 int CMyObject::addToListtask (CMyObject *pObject)
 {
 	m_listObject_task.push_back(pObject);
-
+    
 	return 1;
 }	
 
@@ -165,16 +165,44 @@ int CMyObject::removeFromListtask (CMyObject *pObject)
 
 
 	return ret;
+}
+int CMyObject::addToListactivity (CMyObject *pObject)
+{
+	m_listObject_task.push_back(pObject);
+    pObject->m_pAccessory = this;
+
+	return 1;
 }	
+
+
+int CMyObject::removeFromListactivity (CMyObject *pObject)
+{
+	int ret = 0;
+	list<CMyObject*>::iterator iter2;
+	list<CMyObject*>::iterator j;
+
+	iter2 = std::find(m_listObject_activity.begin(), m_listObject_activity.end(), pObject);
+	if ( iter2 != m_listObject_activity.end() )
+	{
+		m_listObject_activity.erase(iter2);
+		ret = 1;
+	}
+	
+
+
+	return ret;
+}		
 
 int CMyObject::add (CMyObject *pObject)
 {
 	if(pObject->m_type==65328){
-		printf("task\n");
 		addToListtask(pObject);
+	}
+	else if(pObject->m_type==0) //fix if activity type not equal 0
+	{
+		addToListactivity(pObject);
 	}	
-	else{
-		printf("object\n");		
+	else{	
 		addToList(pObject);
 	}
 	return 1;
@@ -184,6 +212,8 @@ int CMyObject::remove (CMyObject *pObject)
 {
 	if(pObject->m_type==65328)
 		removeFromListtask(pObject);
+	else if(pObject->m_type==0)
+		removeFromListactivity(pObject);
 	else
 		removeFromList(pObject);
 

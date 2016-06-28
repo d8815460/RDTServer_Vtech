@@ -21,6 +21,7 @@
 	#define IDTYPE_SWITCH  		0x52000000
 
 	#define IDTYPE_ACCESSORY  	0x70000000
+	#define IDTYPE_ACTIVITY  	0x80000000
 
 
 
@@ -38,6 +39,8 @@
 		virtual ~CMyObject();
 
 	public:		
+		//map<unsigned int, string>  m_mapActivities;
+
 		string m_sClassType;
 		map<string,int> m_attr_num;
 		map<string,string> m_attr_str;
@@ -48,6 +51,7 @@
 
 		list<CMyObject*>  m_listObject;
 		list<CMyObject*>  m_listObject_task;
+		list<CMyObject*>  m_listObject_activity;
 
 		int m_id;
 		int m_type;
@@ -62,6 +66,7 @@
 		CGroup		*m_pGroup;
 		CSwitch 	*m_pSwitch;	// for Accessory
 		CSchedule   *m_pSchedule;
+		CMyObject	*m_pAccessory; //for activity 
 
 
 
@@ -70,6 +75,8 @@
 		int removeFromList (CMyObject *pObject);
 		int addToListtask (CMyObject *pObject);
 		int removeFromListtask (CMyObject *pObject);
+		int addToListactivity (CMyObject *pObject);
+		int removeFromListactivity (CMyObject *pObject);
 
 		int getIDTYPE();
 

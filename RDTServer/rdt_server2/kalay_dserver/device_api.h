@@ -36,7 +36,7 @@
 	void deviceapi_get_tasks (int session,Json::Value &request);
 	void deviceapi_add_a_task (int session,Json::Value &request);
 	void deviceapi_get_list (int session,Json::Value &request);
-	void deviceapi_put (int session,Json::Value &request);
+	void deviceapi_add (int session,Json::Value &request);
 
 	void deviceapi_api_not_found (int session,Json::Value &request);
 

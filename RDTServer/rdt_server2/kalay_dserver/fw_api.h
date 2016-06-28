@@ -62,6 +62,7 @@
 
 		int fwapi_getall();
 		int fwapi_set(Json::Value &objects,CTXRecord *txRecord);
+		int fwapi_addDev(Json::Value &objects,CTXRecord *txRecord);
 		int fwapi_get(Json::Value &objects);		
 	};
 

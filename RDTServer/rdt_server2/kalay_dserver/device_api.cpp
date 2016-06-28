@@ -430,9 +430,25 @@ printf("set_detail request:\n%s\n-------------------\n",(char*)request.toStyledS
 						}
 						else if(ntype == 0xff11)//group
 						{
+							std::map<unsigned int, CMyObject *>::iterator p;
+							int groupNO=1;
+
+							for(p = __allObjects.m_mapAllGroups.begin(); p!=__allObjects.m_mapAllGroups.end(); ++p)
+							{
+								CGroup *pGroup;
+								pGroup = (CGroup*) p->second;
+
+								if(pGroup->m_attr_num["groupNo"] == groupNO )
+									groupNO++;
+								else
+									break;
+
+
+							}	
 							pObject = new CGroup(newname.c_str(),__allObjects.getLocationOther());
+							pObject->m_attr_num["groupNo"] = groupNO;
 							requestObjects[i]["id"] =  pObject->m_id;
-							
+													
 						}
 						/*
 						else if(ntype == 0xff40)//schedule
@@ -596,6 +612,8 @@ printf("set_detail request:\n%s\n-------------------\n",(char*)request.toStyledS
 												CMyObject *subobject;
 
 												id = value[i].asUInt();
+
+
 												subobject = __allObjects.getObjectByID(id);
 
 												if(pObject->m_type==0xff10){//location
@@ -603,7 +621,8 @@ printf("set_detail request:\n%s\n-------------------\n",(char*)request.toStyledS
 												}
 												else if(pObject->m_type==0xff11){//group
 													((CGroup*)pObject)->add(subobject);
-
+													fwObjects[0]["id"][i]= value[i].asUInt();
+													fwObjects[0]["groupNo"] = pObject->m_attr_num["groupNo"];
 												}
 
 												//else{
@@ -613,6 +632,28 @@ printf("set_detail request:\n%s\n-------------------\n",(char*)request.toStyledS
 											}
 											
 										}
+
+
+										int seq = 0;
+
+										CTXRecord *txRecord = new CTXRecord();
+								
+						    			txRecord->seq = 0;
+						    			txRecord->session = session;
+										txRecord->request = request;
+										txRecord->sendTime = time(NULL);
+
+										
+						    		
+						    			seq = __ipHub.fwapi_addDev(fwObjects,txRecord);
+
+						    		
+
+						    			if( seq <= 0){
+						    				delete	txRecord;
+						    			} 
+
+
 										valueChanged = 1;
 
 									}
@@ -775,14 +816,17 @@ printf("set_detail request:\n%s\n-------------------\n",(char*)request.toStyledS
 											fwChanged++;
 
 											fwObjects[nfwObjectCnt]["on"] = value.asInt();// #TBD : if we only send change items
+											//printf("fw test\n");
 										}
 										else
-										{
+										{   
+											//printf("fw test2\n");
 											fwChanged++;
 											if ( value.isNumeric() )
 												fwObjects[nfwObjectCnt][key.asString().c_str()] = value.asInt();// #TBD : if we only send change items
 											else  if ( value.isString() )
 												fwObjects[nfwObjectCnt][key.asString().c_str()] = value.asString();// #TBD : if we only send change items
+
 										}
 
 									}
@@ -957,14 +1001,55 @@ void deviceapi_remove (int session,Json::Value &request)
 			int removeCnt = 0;
 
 
-			for(i=0;i<removeObject.size();i++)
-			{
-				err = __allObjects.removeByID(removeObject[i]["id"].asUInt());
 
-				responseObjects[removeCnt]["id"] = removeObject[i]["id"].asUInt();
+				for(i=0;i<removeObject.size();i++)
+				{   unsigned int start_time=0;
+					unsigned int end_time=0;
+					std::map<unsigned int, CMyObject *>::iterator p;
 
-				removeCnt++;
-			}
+					if(removeObject[i]["req_type"]!=0x0003)
+					{	
+						err = __allObjects.removeByID(removeObject[i]["id"].asUInt());
+
+						responseObjects[removeCnt]["id"] = removeObject[i]["id"].asUInt();
+
+						removeCnt++;
+					}
+					else
+					{
+						responseObjects[i]["req_type"] = removeObject[i]["req_type"];
+						responseObjects[i]["id"] = removeObject[i]["id"].asUInt();
+						start_time = removeObject[i]["start_time"].asUInt();
+						end_time = removeObject[i]["end_time"].asUInt();
+
+						for(p = __allObjects.m_mapAllActivities.begin(); p!=__allObjects.m_mapAllActivities.end(); ++p)
+						{
+							CActivity *pActivity;
+							CMyObject *pMyObject;	
+							pActivity = (CActivity*) p->second;
+							unsigned int timestamp;
+
+							timestamp = pActivity->m_attr_num["time"];
+
+							if(end_time == 0)
+							{
+								pMyObject = pActivity->m_pAccessory;
+								pMyObject->remove(pActivity);
+								err = __allObjects.removeByID(pActivity->m_id);
+								
+							}
+							else if(timestamp > start_time && timestamp < end_time)
+							{
+								err = __allObjects.removeByID(pActivity->m_id);
+							}
+
+					
+						}
+						removeCnt++;
+					}	
+				}
+
+
 		}
 		else 
 		{
@@ -1205,6 +1290,115 @@ void deviceapi_get_list (int session,Json::Value &request)
 			}	
 
 		}
+		else if(request["req_type"].asUInt()==0x0003)//activity
+		{
+				unsigned int start_time;
+				unsigned int end_time;
+				int nAccessoryCnt =0;
+				printf("test get activity");
+				std::map<unsigned int, CMyObject *>::iterator p;
+				start_time = request["start_time"].asUInt();
+				end_time = request["end_time"].asUInt();
+
+
+				if(request["id"].asUInt()==0)
+				{
+								for(p = __allObjects.m_mapAllActivities.begin(); p!=__allObjects.m_mapAllActivities.end(); ++p)
+								{
+
+									CActivity *pActiviry;	
+									pActiviry = (CActivity*) p->second;
+									Json::Value subObjects;
+									unsigned int timestamp;
+
+									timestamp = pActiviry->m_attr_num["time"];
+
+									//pActiviry->getBaseAttr(objects[nAccessoryCnt]);
+									if(end_time ==0)
+									{
+										objects[nAccessoryCnt]["name"] = pActiviry->m_name;
+										objects[nAccessoryCnt]["time"] = timestamp;
+										objects[nAccessoryCnt]["status"] = pActiviry->m_attr_num["status"];
+										objects[nAccessoryCnt]["req_type"] = request["req_type"];
+										objects[nAccessoryCnt]["index"] = nAccessoryCnt;
+										nAccessoryCnt++;
+
+									}
+									else if(timestamp > start_time && timestamp <end_time)
+									{	
+										objects[nAccessoryCnt]["name"] = pActiviry->m_attr_num["name"];
+										objects[nAccessoryCnt]["time"] = timestamp;
+										objects[nAccessoryCnt]["status"] = pActiviry->m_attr_num["status"];
+										objects[nAccessoryCnt]["req_type"] = request["req_type"];
+										objects[nAccessoryCnt]["index"] = nAccessoryCnt;
+										
+										nAccessoryCnt++;
+
+									}
+
+									
+								}
+
+								response["more"] = 0;
+				}
+				else
+				{
+					
+					CMyObject *pObject;
+					pObject = __allObjects.getObjectByID(idObject);
+
+
+					if(pObject != NULL)
+					{
+						if(pObject->m_listObject_activity.size()>0)
+						{
+							
+							for(j = pObject->m_listObject_activity.begin(); j!=pObject->m_listObject_activity.end(); ++j)
+							{
+							
+								CMyObject *pActiviry;	
+								//pActiviry = (CActivity*) p->second;
+								Json::Value subObjects;
+								unsigned int timestamp;
+
+								pActiviry = *j;
+
+								timestamp = pActiviry->m_attr_num["time"];
+
+									//pActiviry->getBaseAttr(objects[nAccessoryCnt]);
+									if(end_time ==0)
+									{
+										objects[nAccessoryCnt]["name"] = pActiviry->m_name;
+										objects[nAccessoryCnt]["time"] = timestamp;
+										objects[nAccessoryCnt]["status"] = pActiviry->m_attr_num["status"];
+										objects[nAccessoryCnt]["req_type"] = request["req_type"];
+										objects[nAccessoryCnt]["index"] = nAccessoryCnt;
+										nAccessoryCnt++;
+
+									}
+									else if(timestamp > start_time && timestamp <end_time)
+									{	
+										objects[nAccessoryCnt]["name"] = pActiviry->m_attr_num["name"];
+										objects[nAccessoryCnt]["time"] = timestamp;
+										objects[nAccessoryCnt]["status"] = pActiviry->m_attr_num["status"];
+										objects[nAccessoryCnt]["req_type"] = request["req_type"];
+										objects[nAccessoryCnt]["index"] = nAccessoryCnt;
+										
+										nAccessoryCnt++;
+
+									}
+
+							}
+							
+						}
+
+					}	
+
+
+								response["more"] = 0;
+				}				
+
+		}	
 		else if(request["req_type"].asUInt() == 0xff30)//task
 		{
 
@@ -1246,6 +1440,7 @@ void deviceapi_get_list (int session,Json::Value &request)
 					pTask->getBaseAttr(objects[nAccessoryCnt]);
 					subObjects["type"] = pTask->m_attr_num["then_type"];
 					subObjects["status"] = pTask->m_attr_num["then_status"];
+					subObjects["id"] = pTask->m_attr_num["then_id"];
 					objects[nAccessoryCnt]["then"] = subObjects;
 					nAccessoryCnt++;
 				}
@@ -1574,7 +1769,8 @@ printf("deviceapi_get_detail request \n%s\n-------------------\n",(char*)request
 
 					if ( idObject == 0 ) // GetGateway
 					{
-						CGateway *pGateway = __allObjects.getGateway();			
+						CGateway *pGateway = __allObjects.getGateway();
+
 						Json::Value locations;
 
 
@@ -1582,7 +1778,7 @@ printf("deviceapi_get_detail request \n%s\n-------------------\n",(char*)request
 						{
 							if(requestObjects[i]["req_type"].asUInt()==0xff50)
 							{
-								printf("test get gateway");
+								//printf("test get gateway");
 								response["uid"] = (char*) __myUID;
 								response["api"] = request["api"].asString();
 								responseObjects[i]["name"] =  pGateway->m_name;
@@ -1592,6 +1788,57 @@ printf("deviceapi_get_detail request \n%s\n-------------------\n",(char*)request
 								responseObjects[i]["req_type"] = requestObjects[i]["req_type"];
 								response["objects"] = responseObjects;
 							}
+							else if(requestObjects[i]["req_type"].asUInt()==0x0003)//activity
+							{
+								unsigned int start_time;
+								unsigned int end_time;
+								int nAccessoryCnt =0;
+								printf("test get activity");
+								std::map<unsigned int, CMyObject *>::iterator p;
+								start_time = requestObjects[i]["start_time"].asUInt();
+								end_time = requestObjects[i]["end_time"].asUInt();
+
+
+
+								for(p = __allObjects.m_mapAllActivities.begin(); p!=__allObjects.m_mapAllActivities.end(); ++p)
+								{
+
+									CActivity *pActiviry;	
+									pActiviry = (CActivity*) p->second;
+									Json::Value subObjects;
+									unsigned int timestamp;
+
+									timestamp = pActiviry->m_attr_num["time"];
+
+									//pActiviry->getBaseAttr(objects[nAccessoryCnt]);
+									if(end_time ==0)
+									{
+										responseObjects[nAccessoryCnt]["name"] = pActiviry->m_name;
+										responseObjects[nAccessoryCnt]["time"] = timestamp;
+										responseObjects[nAccessoryCnt]["status"] = pActiviry->m_attr_num["status"];
+										responseObjects[nAccessoryCnt]["req_type"] = requestObjects[i]["req_type"];
+										responseObjects[nAccessoryCnt]["index"] = nAccessoryCnt;
+										nAccessoryCnt++;
+
+									}
+									else if(timestamp > start_time && timestamp <end_time)
+									{	
+										responseObjects["name"] = pActiviry->m_attr_num["name"];
+										responseObjects["time"] = timestamp;
+										responseObjects["status"] = pActiviry->m_attr_num["status"];
+										responseObjects["req_type"] = requestObjects[i]["req_type"];
+										responseObjects["index"] = nAccessoryCnt;
+										
+										nAccessoryCnt++;
+
+									}
+
+									
+								}
+
+								response["more"] = 0;
+
+							}	
 							else
 							{
 								__get_gateway_detail(locations);
@@ -1628,8 +1875,9 @@ printf("deviceapi_get_detail request \n%s\n-------------------\n",(char*)request
 								}
 
 
-							}
-							else{	
+							}	
+							else
+							{	
 
 								if ( pObject != NULL )
 								{
@@ -2136,7 +2384,7 @@ void deviceapi_set_a_location (int session,Json::Value &request)
 }
 
 
-void deviceapi_put (int session,Json::Value &request)
+void deviceapi_add (int session,Json::Value &request)
 {
 	Json::Value responseRoot;
 	Json::Value responseObjects;
@@ -2217,7 +2465,7 @@ void deviceapi_put (int session,Json::Value &request)
 								printf("test1\n");
 							
 								CTask *pTask  = NULL;
-								CMyObject *accessoryObject;
+								//CMyObject *accessoryObject;
 								int idObject_if;
 								int idObject_then;
 

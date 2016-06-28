@@ -28,7 +28,7 @@ CTask::CTask(const char *name,int accessory_id_if,int accessory_id_then): CMyObj
 
 	pObject = __allObjects.getObjectByID(accessory_id_if);
 	m_attr_num["if_id"] = accessory_id_if;
-	m_attr_num["if_status"] = 5;
+	m_attr_num["if_status"] = 0;
 	m_attr_num["if_time"] = 128;
 	m_attr_num["if_type"] = pObject->m_type;
 	m_attr_str["if_name"] = pObject->m_name;
@@ -48,5 +48,26 @@ CTask::CTask(const char *name,int accessory_id_if,int accessory_id_then): CMyObj
 
 CTask::~CTask()
 {
+	std::map<unsigned int, CMyObject *>::iterator iterSchedule;
+	list<CMyObject*>::iterator iterX;
+
+	iterSchedule = __allObjects.m_mapAllTasks.find(m_id);
+	if ( iterSchedule != __allObjects.m_mapAllTasks.end() ) // Found it
+	{
+		__allObjects.m_mapAllTasks.erase(iterSchedule);
+	}
+	printf("remove schedule\n");
+	/*
+	for(iterX = m_listObject.begin(); iterX!=m_listObject.end(); ++iterX)
+	{
+		CMyObject *pSubObject;
+
+		pSubObject = *iterX;
+
+		pSubObject->m_pSchedule = NULL;
+		pSubObject->remove(this);
+	
+	}	
+	*/
 
 }

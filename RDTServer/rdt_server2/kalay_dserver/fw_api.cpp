@@ -398,6 +398,35 @@ int CVtechIPHub::fwapi_set(Json::Value &objects,CTXRecord *txRecord)
 	return seq;
 }
 
+int CVtechIPHub::fwapi_addDev(Json::Value &objects,CTXRecord *txRecord)
+{
+
+//unsigned char payload[] = {0x74,0x65,0x73,0x74};
+	int seq = getSeq();
+	string arg = std::to_string(seq);	
+
+
+	Json::Value root;
+	std::string total_payload;
+
+    root["func"] = "addDev";
+
+	root["seq"] = arg.c_str();
+
+	root["objects"] = objects;
+
+	total_payload = root.toStyledString().c_str();
+
+	printf("fwapi_set:sendToGateway\n%s\n",total_payload.c_str());
+
+	txRecord->seq = seq;
+	m_txQueue[seq] = txRecord;
+
+	sendToGateway(root);
+
+	return seq;
+}
+
 
 int CVtechIPHub::fwapi_get(Json::Value &objects)
 {

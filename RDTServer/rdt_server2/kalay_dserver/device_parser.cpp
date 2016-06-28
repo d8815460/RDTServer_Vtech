@@ -188,9 +188,9 @@ int device_parser(int session,unsigned char *option,int option_len,unsigned char
 		{
 			deviceapi_get_list(session,value);	
 		}
-		else if (strcmp(api.c_str(),"put") == 0 )
+		else if (strcmp(api.c_str(),"add") == 0 )
 		{
-			deviceapi_put(session,value);	
+			deviceapi_add(session,value);	
 		}
 		else
 		{

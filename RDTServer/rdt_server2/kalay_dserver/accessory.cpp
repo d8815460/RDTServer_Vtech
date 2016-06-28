@@ -95,6 +95,7 @@ CSensor::~CSensor()
 
 
 
+
 CWallSwitch::CWallSwitch(const char *name,CLocation *pLocation) : CMyObject("wallswitch",__allObjects.getID(IDTYPE_WALLSWITCH),name,0x0101,5)
 {
 	if ( pLocation != NULL )
@@ -181,5 +182,33 @@ CSwitch::~CSwitch()
 			m_pWallSwitch->m_listObject.erase(iter2);
 		}
 	}
+
+}
+
+CActivity::CActivity(unsigned int time,int status,const char *target_name) : CMyObject("activity",__allObjects.getID(IDTYPE_ACTIVITY),target_name,0,0)
+{
+
+
+	m_attr_num["time"] = time;
+	m_attr_num["status"] = status;
+
+
+	__allObjects.m_mapAllActivities[m_id] = this;
+
+
+}
+
+CActivity::~CActivity()
+{
+
+	std::map<unsigned int, CMyObject *>::iterator iteractivity;
+	list<CMyObject*>::iterator iterX;
+
+	iteractivity = __allObjects.m_mapAllActivities.find(m_id);
+	if ( iteractivity != __allObjects.m_mapAllActivities.end() ) // Found it
+	{
+		__allObjects.m_mapAllActivities.erase(iteractivity);
+	}
+	printf("remove CActivity\n");
 
 }
