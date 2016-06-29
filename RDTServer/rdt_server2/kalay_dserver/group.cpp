@@ -20,6 +20,7 @@ CGroup::CGroup(const char *name,CLocation *pLocation) : CMyObject("group",__allO
 {
 	if ( pLocation != NULL )
 		pLocation->add(this);	
+	Effects effect = Default;
 
 	m_attr_num["on"] = 0;
 	
@@ -36,6 +37,7 @@ CGroup::CGroup(const char *name,CLocation *pLocation) : CMyObject("group",__allO
 	m_attr_num["hueLoop1"] = 70;
 	m_attr_num["saturationLoop1"] = 80;
 	m_attr_num["transientLoop1"] = 0x000D2F00;
+	m_attr_num["effect"] = effect;
 
 	m_attr_num["fadePower"] = 0;
     m_attr_num["fadeTime"] = 1000;

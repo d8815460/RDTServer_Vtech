@@ -6,6 +6,7 @@
 #include <json/json.h>
 
 #include <iostream>
+#include <fstream>
 #include <algorithm>
 #include <string>
 
@@ -1020,8 +1021,11 @@ void deviceapi_remove (int session,Json::Value &request)
 					if(removeObject[i]["req_type"]!=0x0003)
 					{	
 						err = __allObjects.removeByID(removeObject[i]["id"].asUInt());
-
 						responseObjects[removeCnt]["id"] = removeObject[i]["id"].asUInt();
+						if ( err != 0 )
+						{
+							printf("err %d\n",err);
+						}
 
 						removeCnt++;
 					}
@@ -1083,7 +1087,7 @@ void deviceapi_remove (int session,Json::Value &request)
 
 	response["uid"] = (char*) __myUID;
 	response["api"] = request["api"].asString();
-	response["object"] = responseObjects;
+	response["objects"] = responseObjects;
 
 
 	responseRoot["error"] = err;
@@ -1310,6 +1314,25 @@ void deviceapi_get_list (int session,Json::Value &request)
 				start_time = request["start_time"].asUInt();
 				end_time = request["end_time"].asUInt();
 
+#if 0
+				ifstream inFile;
+    			inFile.open("autodisk.json");// Open the input file
+    			stringstream strStream;
+    			strStream << inFile.rdbuf();// Read the file
+    			string string = strStream.str();
+
+    			Json::Reader reader;
+				Json::Value activitylog;
+
+				if(reader.parse(string, activitylog)){
+					Json::Value notify;
+
+					notify = activitylog["messages"][0];
+					printf("time[%d]\n",notify["timestamp"].asInt());
+
+
+				}
+#endif
 
 				if(request["id"].asUInt()==0)
 				{
@@ -2468,14 +2491,16 @@ void deviceapi_add (int session,Json::Value &request)
 
 								pObject->add(pSchedule);
 
-
 							}
 							else if(requestObjects[i]["req_type"].asUInt()==0xff30) // for task
 							{
 								printf("test1\n");
 							
 								CTask *pTask  = NULL;
-								//CMyObject *accessoryObject;
+								CMyObject *pObject;
+								Json::Value tasklist;
+								Json::Value tasks;
+								Json::Value fwObjects;
 								int idObject_if;
 								int idObject_then;
 
@@ -2508,6 +2533,52 @@ void deviceapi_add (int session,Json::Value &request)
 								responseObjects["id"] = pTask->m_id;
 								//responseObjects["name"] = pSchedule->m_name;
 								responseObjects["type"] = pTask->m_type;
+
+
+													//send to fw
+								int seq = 0;
+
+
+								fwObjects[0]["id"] = pTask->m_type;
+								fwObjects[0]["action"] = "createTask";
+
+								tasklist["taskID"] = pTask->m_id;
+
+								pObject = __allObjects.getObjectByID(idObject_if);
+								tasklist["id"][0] = pObject->m_fwid;
+
+								pObject = __allObjects.getObjectByID(idObject_then);
+								tasklist["id"][1] = pObject->m_fwid;
+
+								if(pTask->m_attr_num["if_status"]==0)
+									tasklist["if"] = "close";
+								else
+									tasklist["if"] = "open";
+
+
+								tasks["on"] = pTask->m_attr_num["then_status"];
+								tasklist["then"] = tasks;
+
+								fwObjects[0]["tasklist"] = tasklist;
+
+
+								CTXRecord *txRecord = new CTXRecord();
+						
+				    			txRecord->seq = 0;
+				    			txRecord->session = session;
+								txRecord->request = request;
+								txRecord->sendTime = time(NULL);
+
+								
+				    		
+				    			seq = __ipHub.fwapi_set(fwObjects,txRecord);
+
+				    		
+
+					    		if( seq <= 0){
+					    			delete	txRecord;
+					    		} 
+
 								
 
 
@@ -2539,7 +2610,7 @@ void deviceapi_add (int session,Json::Value &request)
 		responseRoot["error_str"] = err_str;
 
 
-	response["objects"] = responseObjects;
+	response["objects"][0] = responseObjects;
 
 	responseRoot["response"] = response;
 

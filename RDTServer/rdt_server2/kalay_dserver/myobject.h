@@ -24,6 +24,16 @@
 	#define IDTYPE_ACTIVITY  	0x80000000
 
 
+	typedef enum
+	{
+	  Default = 0,
+	  Candle_light,
+	  Relax,
+	  Alarm,
+	  Ocean//(3)
+	}Effects;
+
+
 
 
 	class CLocation;

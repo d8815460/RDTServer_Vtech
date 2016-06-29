@@ -239,16 +239,22 @@ int CMyObject::getBaseAttr(Json::Value& jsonAttr)
 	jsonAttr["type"] = m_type;
 	jsonAttr["name"] = m_attr_str["name"];
 
+
 	if(m_type == 65328 ){
 		jsonAttr["enabled"] = m_attr_num["enabled"];
 
 	}
-	else{
-		
+	else
+	{
+		if(m_type ==265 || m_type ==65344  || m_type ==65297)
+		{
+			jsonAttr["effect"] 	= m_attr_num["effect"];
+
+		}	
 		jsonAttr["icon"] 	= m_attr_num["icon"];
 		jsonAttr["trigger"] = m_attr_num["trigger"];
 		//jsonAttr["alert"] 	= m_attr_num["alert"];
-		jsonAttr["on"] 		= m_attr_num["on"];
+		//jsonAttr["on"] 		= m_attr_num["on"];
 		jsonAttr["status"] 		= m_attr_num["status"];
 
 		if ( m_pLocation != NULL )
@@ -284,7 +290,13 @@ int CMyObject::getAttr(Json::Value& jsonAttr)
 			 && key != "alert" 
 			 && key != "name"
 			 && key != "type"
-			 && key != "id"		)
+			 && key != "id"		
+			 && key != "pow_off_duration"
+			 && key != "pow_off_on"
+			 && key != "pow_off_time"
+			 && key != "pow_on_duration"
+			 && key != "pow_on_on"
+			 && key != "pow_on_time")
 		{
 			jsonAttr[key.c_str()] = iNum->second;
 			count++;
@@ -362,7 +374,8 @@ int CMyObject::getSubObjects(Json::Value& subObjects)
 {
 	list<CMyObject*>::iterator iter;
 	map<string,int>::iterator iNum;
-	map<string,string>::iterator iStr;	
+	map<string,string>::iterator iStr;
+	Json::Value Objects;
 	int cntSubObject = 0;
 
 	for(iter = m_listObject.begin(); iter!=m_listObject.end(); ++iter)
@@ -374,6 +387,21 @@ int CMyObject::getSubObjects(Json::Value& subObjects)
 
 		//pSubObject->getAttr(subObjects[cntSubObject]);
 		pSubObject->getBaseAttr(subObjects[cntSubObject]);
+		if(pSubObject->m_type ==0xff40){
+			subObjects[cntSubObject]["on"] = pSubObject->m_attr_num["on"];
+			/*
+			subObjects[cntSubObject]["repeat"] = pSubObject->m_attr_num["repeat"];
+			Objects["on"] = pSubObject->m_attr_num["pow_on_on"];
+			Objects["duration"] = pSubObject->m_attr_num["pow_on_duration"];
+			Objects["time"] = pSubObject->m_attr_num["pow_on_time"];
+			subObjects[cntSubObject]["power_on"] = Objects;
+
+			Objects["on"] = pSubObject->m_attr_num["pow_off_on"];
+			Objects["duration"] = pSubObject->m_attr_num["pow_off_duration"];
+			Objects["time"] = pSubObject->m_attr_num["pow_off_time"];
+			subObjects[cntSubObject]["power_off"] = Objects;
+			*/
+		}
 
 
 		cntSubObject++;
